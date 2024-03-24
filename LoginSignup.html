@@ -1,56 +1,77 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title> Capstone Management System </title>
+    <title>Capstone Management System</title>
     <link rel="stylesheet" href="CMS_Style.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
     <div class="hero">
         <div class="form-box">
-            <div class="profile-box">
-                    <div class="button-box">
-                    <div id ="btn"></div>    
-                    <button type="button" class="toggle-btn" onclick="login()">Log In</button>
-                    <button type="button" class="toggle-btn" onclick="register()">Register</button>        
+            <form id="profile-upload" class="profile">
+                <div class="profile-card">
+                    <img src="login_assets/profile-img.png" alt="profile image" id="profile-pic">
+                    <label for="input-file"></label>
+                    <input type="file" accept="image/jpeg, image/png, image.jpg" id="input-file">
                 </div>
-                <form id="login" class="input-group">
-                    <input type = "email" class="input-field" placeholder=" Email "
-                    required>
-                    <input type = "text" class="input-field" placeholder=" Enter Password "
-                    required>
-                    <button type="submit" class="submit-btn"> Log in </button> 
-                </form>
-                <form id ="register" class="input-group">
-                    <input type = "text" class="input-field" placeholder=" Name "
-                    required>
-                    <input type = "email" class="input-field" placeholder=" Asia Pacific College Email "
-                    required>
-                    <input type = "text" class="input-field" placeholder=" Enter Password "
-                    required>
-                    <input type = "text" class="input-field" placeholder=" Confirm Password "
-                    required>
-                    <button type="submit" class="submit-btn"> Register </button> 
-                </form>
+            </form>
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn"  onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
+            <form id="login" class="input-group">
+                <input type="email" class="input-field" placeholder="Email" required>
+                <input type="password" class="input-field" placeholder="Enter Password" required>
+                <button type="submit" class="submit-btn" onclick="auth()">Log in</button>
+            </form>
+            <form id="register" class="input-group">
+                <input type="text" class="input-field" placeholder="Name" required>
+                <input type="email" class="input-field" placeholder="Asia Pacific College Email" required>
+                <input type="text" class="input-field" placeholder="Enter Password" required>
+                <input type="text" class="input-field" placeholder="Confirm Password" required>
+                <button type="submit" class="submit-btn" onclick="auth()">Register</button>
+            </form>
         </div>
     </div>
-    <script>
-    var x = document.getElementById("login");
-    var y = document.getElementById("register");
-    var z = document.getElementById("btn");
 
-    function register(){
-    x.style.left = "-500px";
-    y.style.left = "212px";
-    z.style.left = "110px";
-    }
-    function login(){
-    x.style.left = "212px";
-    y.style.left = "750px";
-    z.style.left = "0px";
-    }
+    <script>
+        var x = document.getElementById("login");
+        var y = document.getElementById("register");
+        var z = document.getElementById("btn");
+        var w = document.getElementById("profile-upload");
+
+        function auth(){
+            window.location.assign("HomePage.html")
+        }
+
+        function register() {
+            w.style.left = "700px";
+            x.style.left = "-488px";
+            y.style.left = "212px";
+            z.style.left = "110px";
+        }
+
+        function login() {
+            w.style.left = "700px";
+            x.style.left = "212px";
+            y.style.left = "750px";
+            z.style.left = "0px";
+        }
+
+        let profilePic = document.getElementById("profile-pic");
+        let inputFile = document.getElementById("input-file");
+
+        inputFile.addEventListener("change", function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
- 
 </body>
 </html>
