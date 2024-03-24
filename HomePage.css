@@ -16,11 +16,13 @@
 }
 .header{
     background-color: #213B9A;
-    height: 30px;
+    background-image: url(menu_assets/header_logo.png);
+    height: 50px;
     padding: 30px;
     text-align: center;
     font-size: 35px;
     color: white;
+    background-repeat: no-repeat;
 }
 .Lsection{
     background-color: #E2C17B;
@@ -30,7 +32,6 @@
     padding: 0;
 }
 .archives{
-    float: left;
     background-position: center;
     background-color: #FFFFFF;
     position: relative;
@@ -39,5 +40,63 @@
     height: 700px;
     width: 1500px;
     padding: 50px;
+}
+#SectionBtn{
+    top: 20px;
+    left: 50px;
+    position: relative;
+    width: 50px;
+    height: 50xp ;
+    transition:.5s;
     
+}
+.notif{
+    top: 30px;
+    left: 20px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/notif_icon.png);
+    background-repeat: no-repeat;
+}
+.teams{
+    top: 0px;
+    left: 20px;
+    padding: 50px 5px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/team_icon.png);
+    background-repeat: no-repeat;
+}
+.schedule{
+    top: -20px;
+    left: 20px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/schedule_icon.png);
+    
+    background-repeat: no-repeat;
+}
+.capstone{
+    top: -60px;
+    left: 0px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/capstone_icon.png);
+    background-position: 30px 05px;
+    background-repeat: no-repeat;
 }
