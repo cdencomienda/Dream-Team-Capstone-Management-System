@@ -13,7 +13,6 @@
     background-repeat: no-repeat;
     position: absolute;
     background-size:100% 100%;
-
 }
 .form-box{
     width: 607px;   
@@ -25,12 +24,21 @@
     padding: 5px;
     overflow: hidden;  
 }
+#profile-upload{
+    visibility: hidden;
+    margin-top: -10px;
+}
 .profile-card img{
     width: 230px;
     height: 230px;
     border-radius: 50%;
     margin: 15px 190px;
-    
+    z-index: 0;
+}
+#upload-container{
+    z-index: 3;
+    margin-top: -12px;
+    display: block;
 }
 label{
     display: block;
@@ -38,9 +46,11 @@ label{
     height: 20px;
     background-image: url(login_assets/uploadbtn.png);
     margin: -10px 350px;
+    
 }
 #input-file{
     display: none;
+    margin-top: 10px;
 }
 
 .button-box{
@@ -99,12 +109,14 @@ label{
     border-radius: 25px;
     
 }
+
 #login{
     left: 212px;
 }
 #register{
     left: 700px;
 }
-#profile{
+/* #profile{
     left: 700px;
-}
+    outline: #135289 5cm;
+} */
