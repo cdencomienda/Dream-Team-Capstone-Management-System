@@ -24,6 +24,36 @@
     color: white;
     background-repeat: no-repeat;
 }
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+.searchTerm {
+    margin-left: 130px;
+    width: 400px;
+    border: 3px solid #d8b34d;
+    border-right: none;
+    padding: 5px 20px;
+    height: 40px;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    color: #000000;
+  }
+.searchButton {
+    width: 60px;
+    height: 54px;
+    border: 1px solid #d8b34d;
+    background: #d8b34d;
+    text-align: center;
+    color: #000000;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .searchTerm:focus{
+    color: #000000;
+  }
 .Lsection{
     background-color: #E2C17B;
     float: left;

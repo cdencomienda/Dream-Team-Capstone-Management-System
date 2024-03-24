@@ -5,22 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Menu</title>
     <link rel="stylesheet" href="HomePage.css">
-    <div class="header"></div>
+    <div class="header">
+        <div class="wrap">
+            <div class="search">
+               <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+               <button type="submit" class="searchButton">
+                <span>&#128269;</span>
+              </button>
+            </div>
+         </div>
+    </div>
 </head>
 <body>  
     <div class="hero">
-        <div class="Lsection">
-            <div id="sectionBtn"></div>
-            <button type="button" class="notif"  onclick="Notification()">Notification</button>
-            <button type="button" class="teams"  onclick="Teams()">Teams</button>
-            <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-            <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
-        </div>       
-    <div class="archives">
-        <h1>Archives</h1>
-        <p>Test text.</p>
+    <div class="Lsection">
+        <div id="sectionBtn"></div>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+        <button type="button" class="teams"  onclick="Teams()">Teams</button>
+        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+    </div>  
+        <div class="archives">
+            <h1>Archives</h1>
+            <p>Test text.</p>
+        </div>
     </div>
-    
     </div>
+<script src="homepage.js"></script>   
 </body>
 </html>

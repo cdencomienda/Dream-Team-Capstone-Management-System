@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+} 
+.hero{
+    height: 100%;
+    width: 100%;
+    background-image: url(menu_assets/mugshot.png);
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-size:100% 100%;
+}
+.header{
+    background-color: #213B9A;
+    background-image: url(menu_assets/system_logo.png);
+    height: 50px;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    background-repeat: no-repeat;
+}
+.Lsection{
+    background-color: #E2C17B;
+    float: left;
+    height: 100%;
+    width: 100px;
+    padding: 0;
+}
