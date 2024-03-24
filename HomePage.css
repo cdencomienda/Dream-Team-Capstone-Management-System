@@ -6,12 +6,38 @@
 .hero{
     height: 100%;
     width: 100%;
-    background-image: url(login_assets/dave.png);
+    background-color: #CBC4BA;
     background-position: center;
     margin: 0;
     padding: 0;
     background-repeat: no-repeat;
     position: absolute;
     background-size:100% 100%;
-
+}
+.header{
+    background-color: #213B9A;
+    height: 30px;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+}
+.Lsection{
+    background-color: #E2C17B;
+    float: left;
+    height: 100%;
+    width: 100px;
+    padding: 0;
+}
+.archives{
+    float: left;
+    background-position: center;
+    background-color: #FFFFFF;
+    position: relative;
+    margin: 70px 170px;
+    border-radius: 30PX;
+    height: 700px;
+    width: 1500px;
+    padding: 50px;
+    
 }
