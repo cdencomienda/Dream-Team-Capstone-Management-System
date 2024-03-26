@@ -44,12 +44,49 @@
         <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
     </div>  
-        <div class="archives">
-            <h1>Archives</h1>
-            <p>Test text.</p>
-        </div>
-    </div>
-    </div>
+    <main class="table" id="customers_table">
+      <section class="table__header">
+          <h1>Archieve Capstone Projects</h1>
+          <div class="input-group">
+              <input type="search" placeholder="Search Data...">
+              <img src="images/search.png" alt="">
+          </div>
+          <div class="export__file">
+              <label for="export-file" class="export__file-btn" title="Export File"></label>
+              <input type="checkbox" id="export-file">
+              <div class="export__file-options">
+                  <label>Export As &nbsp; &#10140;</label>
+                  <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+              </div>
+          </div>
+      </section>
+      <section class="table__body">
+          <table>
+              <thead>
+                  <tr>
+                      <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                      <th> Group <span class="icon-arrow">&UpArrow;</span></th>
+                      <th> Date <span class="icon-arrow">&UpArrow;</span></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td> 1 </td>
+                      <td> Dream Team</td>
+                      <td> 17 December, 2023 </td>
+                  </tr>
+                <tr>
+                      <td> 2 </td>
+                      <td> Bogart ni alber</td>
+                      <td> 13 MArch, 2024 </td>
+                  </tr>
+                 </tbody>
+          </table>
+      </section>
+  </main>
+  <script src="script.js"></script>
+  </div>
+  </div>
 <script src="homepage.js"></script>   
 </body>
 </html>
