@@ -5,13 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Menu</title>
     <link rel="stylesheet" href="NotificationPage.css">
-    <div class="header"></div>
+    <div class="header">
+        <div class="wrap">
+            <img src="menu_assets/system_logo.png" alt="logo-img">
+            </div> 
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+                <button type="submit" class="searchButton">
+                <span>&#128269;</span>
+                </button>
+            </div>
+        <div class="container">
+            <div class="action">
+              <div class="profile">
+                <img src="menu_assets/mugshot.png" alt="profile-img">
+              </div>
+        <div class="menu">
+            <h3>John Russel<br/><span>useremail@test.com</span></h3>
+            <ul>
+              <li>
+                <a href="#">Edit Profile</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
 </head>
 <body>
     <div class="hero">
         <div class="Lsection">
-    
-        </div>       
+            <div id="sectionBtn"></div>
+            <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+            <button type="button" class="class"  onclick="openClassPage()">Class</button>
+            <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+            <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        </div>        
     </div>
 <script src="homepage.js"></script>   
 </body>

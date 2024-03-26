@@ -302,7 +302,7 @@ thead th.active,tbody td.active {
     transition:.5s;
   }
   .action .menu ul li:hover a{
-    color:#4834d4
+    color:#777777
   }
 .header{
     background-color: #213B9A;
