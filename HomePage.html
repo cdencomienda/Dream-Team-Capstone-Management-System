@@ -8,24 +8,31 @@
     <div class="header">
         <div class="wrap">
             <div class="search">
+              <img src="menu_assets/system_logo.png" alt="logo-img">
                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
                <button type="submit" class="searchButton">
                 <span>&#128269;</span>
               </button>
             </div>
-         </div>
-         <div class="action">
-            <div class="profile">
-                <img src="menu_assets/mugshot.png">
-            </div>
-            <div class="dropdownmenu">
-                <h3>Stupid Ian<br><span>useremail@test.com</span></h3>
-                <ul>
-                    <li><img src="edit.png"><a href="#">Edit Profile</a> </li>
-                    <li><img src="log-out.png"><a href="#">Edit Profile</a> </li>
-                </ul>
-            </div>
-         </div>
+        </div>
+        <div class="container">
+            <div class="action">
+              <div class="profile">
+                <img src="menu_assets/mugshot.png" alt="profile-img">
+              </div>
+        <div class="menu">
+            <h3>John Russel<br/><span>useremail@test.com</span></h3>
+            <ul>
+              <li>
+                <a href="#">Edit Profile</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</div>
     </div>
 </head>
 <body>  
@@ -33,7 +40,7 @@
     <div class="Lsection">
         <div id="sectionBtn"></div>
         <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-        <button type="button" class="teams"  onclick="Teams()">Teams</button>
+        <button type="button" class="class"  onclick="openClassPage()">Class</button>
         <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
     </div>  

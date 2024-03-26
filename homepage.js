@@ -13,3 +13,13 @@ function notification(){
     y.style.left = "212px";
     z.style.left = "110px";
 }
+
+const tap = document.querySelector('.profile');
+  tap.addEventListener('click', function(){
+       const toggleMenu = document.querySelector('.menu');
+  toggleMenu.classList.toggle('active');
+});
+
+function openClassPage(){
+  window.location.assign("CourseCreate.html")
+}
