@@ -35,18 +35,18 @@ main.table {
 }
 
 .table__body {
-  width: 95%;
-  max-height: calc(89% - 1.6rem);
-  background-color: #fffb;
+  width: 96%;
+  max-height: 75%;
+  background-color: #f2f2f2;
   margin: 15px;
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: auto;
   overflow: overlay;
 }
 
 .table__body::-webkit-scrollbar{
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 3px;
+  height: 5xp;
 }
 
 .table__body::-webkit-scrollbar-thumb{
@@ -68,13 +68,12 @@ td img {
   height: 36px;
   margin-right: .5rem;
   border-radius: 50%;
-
   vertical-align: middle;
 }
 
 table, th, td {
   border-collapse: collapse;
-  padding: 1rem;
+  padding: 10px;
   text-align: left;
 }
 
@@ -82,7 +81,7 @@ thead th {
   position: sticky;
   top: 0;
   left: 0;
-  background-color: #d5d1defe;
+  background-color: #FFEBCF;
   cursor: pointer;
   text-transform: capitalize;
 }
@@ -102,14 +101,14 @@ tbody tr.hide {
 }
 
 tbody tr:hover {
-  background-color: #fff6 !important;
+  background-color: #696565 !important;
 }
 
-tbody tr td,
+/* tbody tr td,
 tbody tr td p,
 tbody tr td img {
   transition: .2s ease-in-out;
-}
+} */
 
 tbody tr.hide td,
 tbody tr.hide td p {
@@ -206,7 +205,7 @@ thead th.active,tbody td.active {
 
 .export__file .export__file-btn:hover { 
   background-color: #fff;
-  transform: scale(1.15);
+  transform: scale(1);
   cursor: pointer;
 }
 
@@ -217,12 +216,10 @@ thead th.active,tbody td.active {
 .export__file .export__file-options {
   position: absolute;
   right: 0;
-  width: 12rem;
-  border-radius: 25px;
-  overflow: hidden;
+  width: 10px;
+  border-radius: 15px; 
   text-align: center;
   opacity: 0;
-  transform: scale(.8);
   transform-origin: top right;
   box-shadow: 0 .2rem .5rem #0004;
   transition: .2s;
@@ -273,16 +270,17 @@ thead th.active,tbody td.active {
     background-size:100% 100%;
 }
 .container{
+    position: relative; 
     display:flex;
     align-items:center;
     justify-content:center;
-    height:100vh;
+    height: 0px;
     width:100%;
 }
 .action{
-    position:relative;
-    top: -340px;
-    right: -650px;
+    position: absolute;
+    margin-top: -60px;
+    right: 0px;
 }
 .action .profile{
     position:relative;
@@ -306,11 +304,11 @@ thead th.active,tbody td.active {
   right:-10px;
   padding:10px 20px;
   background: #FFEBCF;
-  border: 3px solid #000000;
-  width:200px;
-  box-sizing: 0 5px 25px rgba(0,0,0,.1);
+  border: 2px solid #000000;
+  width: 250px;
+  box-sizing: 0 5px 5px rgba(0,0,0,.1);
   border-radius:15px;
-  transition:1s;
+  transition:0.5s;
   visibility:visible;
   opacity:0;
 }
@@ -325,18 +323,18 @@ thead th.active,tbody td.active {
     font-size: 18px;
     padding:20px 0;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 15px;
     color:#000000;
-    line-height: 1.2em;
+    line-height: 25px;
   }
   .action .menu h3 span{
-    font-size: 14px;
+    font-size: 15px;
     color:#000000;
     font-weight: 400;
   }
   .action .menu ul li{
     list-style:none;
-    padding:10px 0;
+    padding: 10px 0;
     border-top:1px solid rgba(0,0,0,0.05);
     display:flex;
     align-items:center;
@@ -372,27 +370,26 @@ thead th.active,tbody td.active {
     background-repeat: no-repeat;
 }
 .search {
-    width: 100%;
+    width: 700px;
+    margin-left: 100px;
     position: relative;
     display: flex;
 }
 .wrap{
     position:absolute;
     top: -10px;
-    right: 850px;
+    left: -10px;
 }
 .wrap .logo img{
     position:relative;
-    width:60px;        
-    height:60px;
-    border-radius:50%;
-    overflow:hidden;
-    cursor:pointer;
+    width:5px;        
+    height:5px;
+    border-radius:50%;  
 }
 .searchTerm {
-    margin-left: -20px;
-    margin-top: 30px;
-    width: 400px;
+    margin-left: 0;
+    margin-top: 0;
+    width: 600px;
     border: 3px solid #d8b34d;
     border-right: none;
     padding: 5px 20px;
@@ -402,9 +399,9 @@ thead th.active,tbody td.active {
     color: #000000;
   }
 .searchButton {
-    margin-top: 30px;
+    margin-top: 0px;
     width: 60px;
-    height: 45px;
+    height: 44px;
     border: 1px solid #d8b34d;
     background: #d8b34d;
     text-align: center;
