@@ -62,15 +62,7 @@ main.table {
 table {
   width: 100%;
 }
-
-td img {
-  width: 36px;
-  height: 36px;
-  margin-right: .5rem;
-  border-radius: 50%;
-  vertical-align: middle;
-}
-
+ 
 table, th, td {
   border-collapse: collapse;
   padding: 10px;
@@ -102,82 +94,37 @@ tbody tr.hide {
 
 tbody tr:hover {
   background-color: #696565 !important;
-}
+} 
 
-/* tbody tr td,
-tbody tr td p,
-tbody tr td img {
-  transition: .2s ease-in-out;
-} */
-
-tbody tr.hide td,
-tbody tr.hide td p {
-  padding: 0;
-  font: 0 / 0 sans-serif;
-  transition: .2s ease-in-out .5s;
-}
-
+ 
 tbody tr.hide td img {
   width: 0;
   height: 0;
   transition: .2s ease-in-out .5s;
 }
-
-.status {
-  padding: .4rem 0;
-  border-radius: 2rem;
-  text-align: center;
-}
-
-.status.delivered {
-  background-color: #86e49d;
-  color: #006b21;
-}
-
-.status.cancelled {
-  background-color: #d893a3;
-  color: #b30021;
-}
-
-.status.pending {
-  background-color: #ebc474;
-}
-
-.status.shipped {
-  background-color: #6fcaea;
-}
-
-
-@media (max-width: 1000px) {
-  td:not(:first-of-type) {
-      min-width: 12.1rem;
-  }
-}
-
+ 
 thead th span.icon-arrow {
   display: inline-block;
   width: 1.3rem;
   height: 1.3rem;
   border-radius: 50%;
   border: 1.4px solid transparent;
-  
   text-align: center;
   font-size: 1rem;
-  
   margin-left: .5rem;
   transition: .2s ease-in-out;
 }
 
 thead th:hover span.icon-arrow{
-  border: 1.4px solid #6c00bd;
+  border: 1.4px solid #5a5a5a;
 }
 
 thead th:hover {
-  color: #6c00bd;
+  color: #5a5a5a;
 }
 
 thead th.active span.icon-arrow{
-  background-color: #6c00bd;
+  background-color: #666666;
   color: #fff;
 }
 
@@ -215,11 +162,10 @@ thead th.active,tbody td.active {
 
 .export__file .export__file-options {
   position: absolute;
-  right: 0;
-  width: 10px;
-  border-radius: 15px; 
-  text-align: center;
-  opacity: 0;
+  right: 40px;
+  width: 100px;
+  border-radius: 25px; 
+  text-align: center; 
   transform-origin: top right;
   box-shadow: 0 .2rem .5rem #0004;
   transition: .2s;
@@ -234,13 +180,11 @@ thead th.active,tbody td.active {
 .export__file .export__file-options label{
   display: block;
   width: 100%;
-  padding: .6rem 0;
-  background-color: #f2f2f2;
-  
+  padding: 5px;
+  background-color: #f2f2f2; 
   display: flex;
   justify-content: space-around;
-  align-items: center;
-
+  align-items: center; 
   transition: .2s ease-in-out;
 }
 
@@ -256,7 +200,7 @@ thead th.active,tbody td.active {
 }
 
 .export__file .export__file-options img{
-  width: 2rem;
+  width: 20px;
   height: auto;
 }
 .hero{
