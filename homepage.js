@@ -13,3 +13,7 @@ function notification(){
     y.style.left = "212px";
     z.style.left = "110px";
 }
+
+function openClassPage(){
+    window.location.assign("CourseCreate.html")
+}
