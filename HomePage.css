@@ -51,9 +51,9 @@
     cursor: pointer;
     font-size: 20px;
   }
-  .searchTerm:focus{
+.searchTerm:focus{
     color: #000000;
-  }
+}
 .Lsection{
     background-color: #E2C17B;
     float: left;
@@ -67,8 +67,8 @@
     position: relative;
     margin: 70px 170px;
     border-radius: 30PX;
-    height: 700px;
-    width: 1500px;
+    height: 50%;
+    width: 70%;
     padding: 50px;
 }
 #SectionBtn{
