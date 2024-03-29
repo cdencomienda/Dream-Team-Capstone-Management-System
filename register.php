@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine userType based on email domain
     $domain = substr(strrchr($email, "@"), 1);
     if ($domain == 'student.apc.edu.ph') {
-        $userType = 'student';
+        $userType = 'Student';
     } elseif ($domain == 'apc.edu.ph') {
-        $userType = 'professor';
+        $userType = 'Professor';
     } else {
         $userType = 'other'; // Default userType if domain doesn't match
     }
