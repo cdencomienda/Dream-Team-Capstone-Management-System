@@ -2,7 +2,7 @@
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
-    $conn = mysqli_connect('localhost', 'root', '', 'capstone_management_system');
+    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
     // Check connection
     if (!$conn) {
@@ -15,22 +15,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // Determine userType based on email domain
+    $domain = substr(strrchr($email, "@"), 1);
+    if ($domain == 'student.apc.edu.ph') {
+        $userType = 'student';
+    } elseif ($domain == 'apc.edu.ph') {
+        $userType = 'professor';
+    } else {
+        $userType = 'other'; // Default userType if domain doesn't match
+    }
+
     // Perform basic validation
     if ($password != $confirm_password) {
         echo "Passwords do not match.";
     } else {
         // Check if the user already exists in the database
-        $query = "SELECT * FROM users WHERE email='$email'";
+        $query = "SELECT * FROM users WHERE userEmail='$email'";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
             echo "User already registered.";
         } else {
-            // Insert new user data into the database
+            // Insert new user data into the database with userType
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $insert_query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$hashed_password')";
+            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType) VALUES ('$name', '$email', '$hashed_password', '$userType')";
             if (mysqli_query($conn, $insert_query)) {
                 echo "Registration successful.";
+                header('location:LoginSignup.html');
             } else {
                 echo "Error: " . mysqli_error($conn);
             }

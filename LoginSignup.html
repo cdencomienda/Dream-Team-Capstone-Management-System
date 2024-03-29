@@ -31,12 +31,12 @@
                 <input type="password" class="input-field" placeholder="Enter Password" required>
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
-            <form id="register" class="input-group">
-                <input type="text" class="input-field" placeholder="Name" required>
-                <input type="email" class="input-field" placeholder="Asia Pacific College Email" required>
-                <input type="text" class="input-field" placeholder="Enter Password" required>
-                <input type="text" class="input-field" placeholder="Confirm Password" required>
-                <button type="submit" class="submit-btn" >Register</button>
+            <form id="register" class="input-group" action="register.php" method="POST">
+                <input type="text" class="input-field" placeholder="Name" name="name" required>
+                <input type="email" class="input-field" placeholder="Asia Pacific College Email" name="email" required>
+                <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
+                <input type="password" class="input-field" placeholder="Confirm Password" name="confirm_password" required>
+                <button type="submit" class="submit-btn">Register</button>
             </form>
         </div>
     </div>
