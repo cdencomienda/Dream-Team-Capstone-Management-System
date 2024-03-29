@@ -26,9 +26,9 @@
             </div>
  
             <!-- Login/signup info box -->
-            <form id="login" class="input-group">
-                <input type="email" class="input-field" placeholder="Email" required>
-                <input type="password" class="input-field" placeholder="Enter Password" required>
+            <form id="login" class="input-group" action="login.php" method="POST">
+                <input type="email" class="input-field" placeholder="Email" name="email" required>
+                <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
             <form id="register" class="input-group" action="register.php" method="POST">
