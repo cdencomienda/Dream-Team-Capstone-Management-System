@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Page</title>
+    <title>Professor Main Menu</title>
     <link rel="stylesheet" href="professorStyle.css">
     <div class="header">
         <div class="wrap">
-          <button type="button" class="logobtn"  onclick="archive()"></button> 
+            <img src="menu_assets/system_logo.png" alt="logo-img">
             </div> 
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -18,10 +18,10 @@
         <div class="container">
             <div class="action">
               <div class="profile">
-                <img src="login_assets/dave.png" alt="profile-img">
+                <img src="menu_assets/mugshot.png" alt="profile-img">
               </div>
         <div class="menu">
-            <h3>Dave Russel<br/><span>useremail@test.com</span></h3>
+            <h3>John Russel<br/><span>useremail@test.com</span></h3>
             <ul>
               <li>
                 <a href="#">Edit Profile</a>
@@ -32,11 +32,53 @@
             </ul>
         </div>
     </div>
-    </div>
-    </div>
+</div>
+</div>
 </head>
-<body>
+<body>  
     <div class="hero">
+    <div class="Lsection">
+        <div id="sectionBtn"></div>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+        <button type="button" class="class"  onclick="openClassPage()">Class</button>
+        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+    </div>  
+    <main class="table" id="customers_table">
+      <section class="table__header">
+          <h1>Archive Capstone Projects</h1>
+          <div class="input-group">
+              <input type="search" placeholder="Search Data...">
+              <img src="images/search.png" alt="">
+          </div>
+          <div class="export__file">
+              <label for="export-file" class="export__file-btn" title="Export File"></label>
+              <input type="checkbox" id="export-file">
+              <div class="export__file-options">
+                  <label>Export As &nbsp; &#10140;</label>
+                  <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+              </div>
+          </div>
+      </section>
+      <section class="table__body">
+          <table>
+              <thead>
+                  <tr>
+                      <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                      <th> Group <span class="icon-arrow">&UpArrow;</span></th>
+                      <th> Date <span class="icon-arrow">&UpArrow;</span></th>
+                  </tr>
+              </thead>
+              <tbody>
+                 
+                 </tbody>
+          </table>
+      </section>
+  </main>
+  <!-- <script src="archive.js"></script>
+  </div>
+  </div>
+<script src="homepage.js"></script>    -->
         <div class="Lsection">
             <div id="sectionBtn"></div> 
             <button type="button" class="notif"  onclick="notifAuth()">Notification</button>

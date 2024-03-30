@@ -160,17 +160,6 @@ body{
 .searchTerm:focus{
     color: #000000;
 }
-.logobtn{ 
-  width:100px;
-  height:100px; 
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  outline: none;
-  position: relative;
-  background-image: url(menu_assets/system_logo.png);
-  background-repeat: no-repeat;
-}
 .Lsection{
     background-color: #E2C17B;
     float: left;
