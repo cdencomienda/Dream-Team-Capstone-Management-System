@@ -231,6 +231,17 @@ body{
     background-image: url(menu_assets/capstone_icon.png);
     background-repeat: no-repeat;
 }
+.logobtn{ 
+  width:100px;
+  height:100px; 
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/system_logo.png);
+  background-repeat: no-repeat;
+}
 .notificationContainer{
   width: 350px; 
   margin-top: 50px;

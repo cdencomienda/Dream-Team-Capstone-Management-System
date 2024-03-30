@@ -93,7 +93,7 @@ tbody tr.hide {
 }
 
 tbody tr:hover {
-  background-color: #696565 !important;
+  background-color: #c9c9c9;
 } 
 
  
@@ -116,11 +116,11 @@ thead th span.icon-arrow {
 }
 
 thead th:hover span.icon-arrow{
-  border: 1.4px solid #5a5a5a;
+  border: 1.4px solid #c9c9c9;
 }
 
 thead th:hover {
-  color: #5a5a5a;
+  color: #c9c9c9;
 }
 
 thead th.active span.icon-arrow{
@@ -145,13 +145,14 @@ thead th.active,tbody td.active {
   display: inline-block;
   width: 70px;
   height: 50px;
-  background: #fff6 url(images/export.png) center / 80% no-repeat;
+  overflow: hidden;
+  background: #fff6 url(menu_assets/export.jpg) center / 40% no-repeat;
   border-radius: 15px;
   transition: .2s ease-in-out;
 }
 
 .export__file .export__file-btn:hover { 
-  background-color: #fff;
+  background-color: #c9c9c9;
   transform: scale(1);
   cursor: pointer;
 }
@@ -163,9 +164,13 @@ thead th.active,tbody td.active {
 .export__file .export__file-options {
   position: absolute;
   right: 40px;
-  width: 100px;
-  border-radius: 25px; 
+  width: 120px;
+
+  border-radius: 15px; 
+  overflow: hidden;
   text-align: center; 
+  opacity: 0;
+
   transform-origin: top right;
   box-shadow: 0 .2rem .5rem #0004;
   transition: .2s;
@@ -180,7 +185,7 @@ thead th.active,tbody td.active {
 .export__file .export__file-options label{
   display: block;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   background-color: #f2f2f2; 
   display: flex;
   justify-content: space-around;
@@ -195,7 +200,7 @@ thead th.active,tbody td.active {
 
 .export__file .export__file-options label:hover{
   transform: scale(1.05);
-  background-color: #fff;
+  background-color: #c9c9c9;
   cursor: pointer;
 }
 
@@ -302,7 +307,7 @@ thead th.active,tbody td.active {
     transition:.5s;
   }
   .action .menu ul li:hover a{
-    color:#777777
+    color:#acacac
   }
 .header{
     background-color: #213B9A;
@@ -427,4 +432,15 @@ thead th.active,tbody td.active {
     position: relative;
     background-image: url(menu_assets/capstone_icon.png);
     background-repeat: no-repeat;
+}
+.logobtn{ 
+  width:100px;
+  height:100px; 
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/system_logo.png);
+  background-repeat: no-repeat;
 }

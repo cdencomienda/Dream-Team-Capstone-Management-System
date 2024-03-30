@@ -6,7 +6,12 @@ var w = document.getElementById("capstone");
 function notifAuth(){
     window.location.assign("NotificationPage.html")
 }
-
+function openClassPage(){
+  window.location.assign("CourseCreate.html")
+}
+function archive(){
+  window.location.assign("HomePage.html")
+}
 function notification(){
     w.style.visibility = "visible";
     x.style.left = "-488px";
@@ -20,6 +25,3 @@ const tap = document.querySelector('.profile');
   toggleMenu.classList.toggle('active');
 });
 
-function openClassPage(){
-  window.location.assign("CourseCreate.html")
-}
