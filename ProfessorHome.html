@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor</title>
+    <title>Professor Page</title>
+    <link rel="stylesheet" href="professorStyle.css">
+    <div class="header">
+        <div class="wrap">
+          <button type="button" class="logobtn"  onclick="archive()"></button> 
+            </div> 
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+                <button type="submit" class="searchButton">
+                <span>&#128269;</span>
+                </button>
+            </div>
+        <div class="container">
+            <div class="action">
+              <div class="profile">
+                <img src="login_assets/dave.png" alt="profile-img">
+              </div>
+        <div class="menu">
+            <h3>Dave Russel<br/><span>useremail@test.com</span></h3>
+            <ul>
+              <li>
+                <a href="#">Edit Profile</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
 </head>
 <body>
-    <h1>Professor Page</h1>
+    <div class="hero">
+        <div class="Lsection">
+            <div id="sectionBtn"></div> 
+            <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+            <button type="button" class="class"  onclick="openClassPage()">Class</button>
+            <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+            <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        </div>
+<script src="professorhome.js"></script>    
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="NotificationPage.css">
     <div class="header">
         <div class="wrap">
-            <img src="menu_assets/system_logo.png" alt="logo-img">
+          <button type="button" class="logobtn"  onclick="archive()"></button> 
             </div> 
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -43,7 +43,39 @@
             <button type="button" class="class"  onclick="openClassPage()">Class</button>
             <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
             <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
-        </div>        
+        </div>
+        <div class="containernotif">
+          <div class="notificationContainer">
+
+              <div class="single-box"> 
+                <div class="box-text">
+                  <p class="notifi">
+                    <a href="#" class="name"></a>Ian has joined your group Capstone<a href="#" class="group"></a>
+                      <span class="dot"></span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="single-box"> 
+                <div class="box-text">
+                  <p class="notifi">
+                    <a href="#" class="name"></a>Barit has joined your group Capstone<a href="#" class="group"></a>
+                    <span class="dot"></span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="single-box unseen"> 
+                <div class="box-text">
+                  <p class="notifi">
+                    <a href="#" class="name"></a>Carlos has joined your group Capstone<a href="#" class="group"></a>
+                    <span class="dot"></span>
+                  </p>
+                </div>
+              </div> 
+              
+            </div>
+        </div>    
     </div>
 <script src="homepage.js"></script>   
 </body>
