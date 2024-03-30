@@ -385,6 +385,7 @@ thead th.active,tbody td.active {
     position: relative;
     background-image: url(menu_assets/notif_icon.png);
     background-repeat: no-repeat;
+    color: white;
 }
 .class{
     top: -10px;
@@ -399,6 +400,7 @@ thead th.active,tbody td.active {
     position: relative;
     background-image: url(menu_assets/team_icon.png);
     background-repeat: no-repeat;
+    color: white;
 }
 .schedule{
     top: -25px;
@@ -413,6 +415,7 @@ thead th.active,tbody td.active {
     position: relative;
     background-image: url(menu_assets/schedule_icon.png);
     background-repeat: no-repeat;
+    color: white;
 }
 .capstone{
     top: -45px;
@@ -427,5 +430,36 @@ thead th.active,tbody td.active {
     position: relative;
     background-image: url(menu_assets/capstone_icon.png);
     background-repeat: no-repeat;
+    color: white;
 }
-
+.Users{
+  top: -65px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/users-icon.png);
+  background-repeat: no-repeat;
+  color: white;
+}
+.Defense-Reports{ 
+  top: -85px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/defense-icon.png);
+  background-repeat: no-repeat;
+  font-size:small;
+  color: white;
+} 
