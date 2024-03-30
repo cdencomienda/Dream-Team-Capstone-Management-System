@@ -25,6 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userType = 'other'; // Default userType if domain doesn't match
     }
 
+    // Handle profile picture upload
+    $targetDir = "profile_pics/";
+    $profilePicture = '';
+    if ($_FILES["profile_picture"]["name"]) {
+        $targetFile = $targetDir . basename($_FILES["profile_picture"]["name"]);
+        if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
+            $profilePicture = $targetFile;
+        } else {
+            echo "Sorry, there was an error uploading your profile picture.";
+        }
+    }
+
     // Perform basic validation
     if ($password != $confirm_password) {
         echo "Passwords do not match.";
@@ -36,9 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) > 0) {
             echo "User already registered.";
         } else {
-            // Insert new user data into the database with userType
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType) VALUES ('$name', '$email', '$hashed_password', '$userType')";
+            // Insert new user data into the database with userType, profile picture, and unhashed password
+            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType, profilePicture) VALUES ('$name', '$email', '$password', '$userType', '$profilePicture')";
             if (mysqli_query($conn, $insert_query)) {
                 echo "Registration successful.";
                 header('location:LoginSignup.html');
