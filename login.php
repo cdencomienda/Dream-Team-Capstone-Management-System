@@ -1,5 +1,6 @@
 <?php
-// Check if the form is submitted
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
     $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
@@ -19,13 +20,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['userPassword'])) {
-            // Password is correct, set session and redirect to dashboard or home page
-            session_start();
+        $storedPassword = $row['userPassword'];
+
+        // Verify password
+        if ($password == $storedPassword) {
+            // Password is correct, set session variables
             $_SESSION['user_id'] = $row['userID'];
             $_SESSION['user_email'] = $row['userEmail'];
             $_SESSION['user_type'] = $row['userType'];
-            header('location: HomePage.html'); // Change the URL to your dashboard or home page
+
+            // Redirect based on userType
+            $userType = $row['userType'];
+            if ($userType == "Student") {
+                header("Location: HomePage.html");
+                exit();
+            } elseif ($userType == "Professor") {
+                header("Location: ProfessorHome.html");
+                exit();
+            } elseif ($userType == "Program Director" || $userType == "Admin") {
+                header("Location: AdminHome.html");
+                exit();
+            } else {
+                // Handle invalid userType
+                echo "Invalid user type.";
+                exit();
+            }
         } else {
             // Incorrect password
             echo "Incorrect password.";

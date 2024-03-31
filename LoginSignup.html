@@ -9,12 +9,12 @@
     <div class="hero">
         <div class="form-box">
             <!-- profile picture including upload pic -->
-            <form id="profile-upload" class="profile">
-                <div class="profile-card">  
+            <form id="profile-upload" class="profile" enctype="multipart/form-data" method="POST" action="register.php">
+                <div class="profile-card">   
                     <img src="login_assets/profile-img.png" alt="profile image" id="profile-pic">
                     <div id="upload-btn" class="upload-container"></div>
                     <label for="input-file"></label>
-                    <input type="file" accept="image/jpeg, image/png, image.jpg" id="input-file">
+                    <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" name="profile_picture">
                 </div>
             </form> 
 
