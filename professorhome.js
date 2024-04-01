@@ -1,16 +1,11 @@
-var x = document.getElementById("notification");
-var y = document.getElementById("teams");
-var z = document.getElementById("schedule");
-var w = document.getElementById("capstone");
-
-function notifAuth(){
-    window.location.assign("NotificationPage.html")
+function notifProf(){
+    window.location.assign("NotificationProf.html")
 }
-function studentClass(){
-  window.location.assign("ClassStudent.html")
+function openClassPage(){
+  window.location.assign("CourseCreate.html")
 }
-function mainmenu(){
-  window.location.assign("HomePage.html")
+function archiveProf(){
+  window.location.assign("ProfessorHome.html")
 } 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -35,5 +30,3 @@ tap.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
   toggleMenu.classList.toggle('active');
 });
-
-

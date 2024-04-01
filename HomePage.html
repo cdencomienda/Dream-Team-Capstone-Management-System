@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Menu</title>
+    <title>Archive Menu</title>
     <link rel="stylesheet" href="HomePage.css">
     <div class="header">
         <div class="wrap">
@@ -25,10 +25,12 @@
                     <span>useremail@test.com</span>
                 </h3>
                 <button type="button" class="editprofileBtn" >Edit Profile</button> 
-                <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button> 
+                <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
             </div>
+            
         </div>
-</div>
+        
+    </div>
 </div>
 </head>
 <body>  
@@ -36,10 +38,10 @@
     <div class="Lsection">
         <div id="sectionBtn"></div>
         <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-        <button type="button" class="class"  onclick="openClassPage()">Class</button>
+        <button type="button" class="class"  onclick="studentClass()">Class</button>
         <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
-    </div>  
+    </div> 
     <main class="table" id="customers_table">
       <section class="table__header">
           <h1>Archive Capstone Projects</h1>
@@ -116,7 +118,6 @@
       </section>
   </main>
   <script src="archive.js"></script>
-  </div>
   </div>
 <script src="homepage.js"></script>   
 </body>
