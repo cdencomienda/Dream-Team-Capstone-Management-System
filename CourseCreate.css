@@ -242,9 +242,9 @@ opacity:1;
 }
 .containerCreatecourse{
     margin-left: 130px;
-    margin-top: 50px;
-    width: 700px;
-    height: 500px;
+    margin-top: 20px;
+    width: 420px;
+    height: 300px;
     padding: 25px;
     background-color: #ffff; 
     border-radius: 15px;
@@ -264,16 +264,40 @@ opacity:1;
   }
    
   .createcourseButton{
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-left: 0px;
+    margin-top: 30px;
     width: 190px; 
     padding: 5px 30px;
+    border: 1px solid #000000; 
     height: 45px;
     border-radius: 10px; 
-    background-color: #F8EFE3;
+    background-color: #2fc62a;
   }
   .createcourseButton:hover { 
     background-color: #a8a7a7;
     transform: scale(1);
     cursor: pointer;
   }
+  .courseCreation{
+    margin-left: 120px;
+    margin-top: 20px;
+    width: 210px;
+    height: 65px;  
+  }
+  .containerCreatecourse {
+    display: none;
+}
+.createAButton{ 
+  margin: 10px;
+  width: 190px; 
+  padding: 5px 30px;
+  border: 1px solid #000000; 
+  height: 45px;
+  border-radius: 10px; 
+  background-color: #F8EFE3;
+}
+.createAButton:hover { 
+  background-color: #a8a7a7;
+  transform: scale(1);
+  cursor: pointer;
+}

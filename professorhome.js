@@ -30,3 +30,32 @@ tap.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
   toggleMenu.classList.toggle('active');
 });
+
+function toggleCourseCreation() {
+  const courseCreation = document.querySelector('.containerCreatecourse');
+  courseCreation.style.display = 'block';
+}
+
+function createcourse() {
+  // Get input values
+  const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
+  const courseDescription = document.querySelector('.inputTerm[name="courseDescription"]').value;
+
+  // Create elements to display the course name and description
+  const courseContainer = document.querySelector('.courseCreation');
+  const courseInfo = document.createElement('div');
+  courseInfo.innerHTML = `<h2> ${courseName}</h2> 
+  
+  `;
+
+  // Append the course information to the course container
+  courseContainer.appendChild(courseInfo);
+
+  // Clear input fields
+  document.querySelector('.inputTerm[name="courseName"]').value = '';
+  document.querySelector('.inputTerm[name="courseDescription"]').value = '';
+
+  // Hide the container (optional)
+  document.querySelector('.containerCreatecourse').style.display = 'none';
+}
+
