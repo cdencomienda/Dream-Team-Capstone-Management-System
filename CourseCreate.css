@@ -79,7 +79,7 @@ opacity:1;
   color:#000000;
   font-weight: 400;
 } 
-.menu .logoutBtn{
+.container .menu .logoutBtn{
   width: 170px;
   padding: 10px;
   border-radius: 15px;
@@ -89,7 +89,7 @@ opacity:1;
   transition: background-color 0.3s ease;
   font-size: 15px;
 }     
-.menu .logoutBtn:hover {
+.container .menu .logoutBtn:hover {
   background-color: #707070; 
 }
 .editprofileBtn{
@@ -240,16 +240,6 @@ opacity:1;
     background-image: url(menu_assets/capstone_icon.png);
     background-repeat: no-repeat;
 }
-.containerCreatecourse{
-    margin-left: 130px;
-    margin-top: 20px;
-    width: 420px;
-    height: 300px;
-    padding: 25px;
-    background-color: #ffff; 
-    border-radius: 15px;
-    overflow: hidden;
-} 
 .inputTerm {
     margin-left: 0;
     margin-top: 20px;
@@ -279,7 +269,7 @@ opacity:1;
     cursor: pointer;
   }
   .courseCreation{
-    margin-left: 120px;
+    margin-left: 100px;
     margin-top: 20px;
     width: 210px;
     height: 65px;  
@@ -287,6 +277,16 @@ opacity:1;
   .containerCreatecourse {
     display: none;
 }
+.containerCreatecourse{
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 420px;
+  height: 300px;
+  padding: 25px;
+  background-color: #ffff; 
+  border-radius: 15px;
+  overflow: hidden;
+} 
 .createAButton{ 
   margin: 10px;
   width: 190px; 

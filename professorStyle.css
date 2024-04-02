@@ -11,12 +11,24 @@
 }
 }
 body{
+  width: 100%;
+  height: 100%;
   background: #CBC4BA;
 } 
-.hero{
-  height: 100%;
-  width: 100%;
+.archiveProf{
   background-position: center;
+  margin-left: 0px;
+  margin-top: 0px;
+  padding: 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size:100% 100%;
+}
+.Lsection{
+  background-color: #E2C17B;
+  float: left;
+  height: 100%;
+  width: 80px;
   margin: 0;
   padding: 0;
   background-repeat: no-repeat;
@@ -114,8 +126,8 @@ opacity:1;
 } 
 .header{
   background-color: #213B9A;
-  height: 30px;
-  padding: 30px;
+  height: 90px;
+  padding: 0px;
   text-align: center;
   font-size: 35px;
   color: white;
@@ -123,37 +135,34 @@ opacity:1;
 }
 .search {
   width: 700px;
-  margin-left: 100px;
+  margin-left: 130px;
+  margin-top: auto;
   position: relative;
   display: flex;
 }
 .wrap{
   position:absolute;
-  top: -10px;
-  left: -10px;
-}
-.wrap .logo img{
-  position:relative;
-  width:5px;        
-  height:5px;
-  border-radius:50%;  
+  width: 100px;
+  height: 90px;
 }
 .searchTerm {
   margin-left: 0;
-  margin-top: 0;
+  margin-top: 20px;
   width: 600px;
   border: 3px solid #d8b34d;
-  border-right: none;
-  padding: 5px 20px;
+  border-right: none; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   height: 30px;
   border-radius: 20px 0 0 20px;
   outline: none;
   color: #000000;
 }
 .searchButton {
-  margin-top: 0px;
+  margin-top: 20px;
   width: 60px;
-  height: 44px;
+  height: 45px;
   border: 1px solid #d8b34d;
   background: #d8b34d;
   text-align: center;
@@ -165,14 +174,6 @@ opacity:1;
 .searchTerm:focus{
   color: #000000;
 }
-.Lsection{
-  background-color: #E2C17B;
-  float: left;
-  height: 100%;
-  width: 80px;
-  padding: 0;
-}
-
 #SectionBtn{
   top: 20px;
   left: 50px;
@@ -238,7 +239,9 @@ opacity:1;
 }
 .logobtn{ 
 width:100px;
-height:100px; 
+height:90px;
+top: -10px;
+left: -10px;
 cursor: pointer;
 background: transparent;
 border: 0;
@@ -250,8 +253,8 @@ background-repeat: no-repeat;
 main.table {
 margin-left: 130px;
 margin-top: 50px;
-width: 700px;
-height: 400px;
+width: 1200px;
+height: 600px;
 background-color: #ffff; 
 border-radius: 15px;
 overflow: hidden;
@@ -433,4 +436,54 @@ background-color: #86e49d !important;
 .export__file .export__file-options img{
 width: 20px;
 height: auto;
+}
+
+
+.createcourseButton{
+  margin-left: 0px;
+  margin-top: 30px;
+  width: 190px; 
+  padding: 5px 30px;
+  border: 1px solid #000000; 
+  height: 45px;
+  border-radius: 10px; 
+  background-color: #2fc62a;
+}
+.createcourseButton:hover { 
+  background-color: #a8a7a7;
+  transform: scale(1);
+  cursor: pointer;
+}
+.courseCreation{
+  margin-left: 100px;
+  margin-top: 20px;
+  width: 210px;
+  height: 65px;  
+}
+.containerCreatecourse {
+  display: none;
+}
+.containerCreatecourse{
+margin-left: 10px;
+margin-top: 20px;
+width: 420px;
+height: 300px;
+padding: 25px;
+background-color: #ffff; 
+border-radius: 15px;
+overflow: hidden;
+} 
+.createAButton{ 
+margin: 10px;
+width: 190px; 
+padding: 5px 30px;
+border: 1px solid #000000; 
+height: 45px;
+border-radius: 10px; 
+background-color: #F8EFE3;
+}
+.createAButton:hover { 
+background-color: #a8a7a7;
+transform: scale(1);
+cursor: pointer;
 }

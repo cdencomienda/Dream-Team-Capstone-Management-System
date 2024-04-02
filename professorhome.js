@@ -1,12 +1,12 @@
-function notifProf(){
-    window.location.assign("NotificationProf.html")
-}
+// function notifProf(){
+//     window.location.assign("NotificationProf.html")
+// }
 function openClassPage(){
-  window.location.assign("CourseCreate.html")
+  
 }
-function archiveProf(){
-  window.location.assign("ProfessorHome.html")
-} 
+// function archiveProf(){
+//   window.location.assign("ProfessorHome.html")
+// } 
 
 document.addEventListener('DOMContentLoaded', function () {
   const editProfileBtn = document.querySelector('.editprofileBtn');
@@ -44,9 +44,7 @@ function createcourse() {
   // Create elements to display the course name and description
   const courseContainer = document.querySelector('.courseCreation');
   const courseInfo = document.createElement('div');
-  courseInfo.innerHTML = `<h2> ${courseName}</h2> 
-  
-  `;
+  courseInfo.innerHTML = `<h2> ${courseName}</h2> <h3> ${courseDescription}</h3> `;
 
   // Append the course information to the course container
   courseContainer.appendChild(courseInfo);
