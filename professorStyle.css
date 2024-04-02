@@ -15,15 +15,6 @@ body{
   height: 100%;
   background: #CBC4BA;
 } 
-.archiveProf{
-  background-position: center;
-  margin-left: 0px;
-  margin-top: 0px;
-  padding: 0;
-  background-repeat: no-repeat;
-  position: absolute;
-  background-size:100% 100%;
-}
 .Lsection{
   background-color: #E2C17B;
   float: left;
@@ -40,13 +31,16 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  height: 0px;
-  width:100%;
+  width: 300px;
+  height: 320px;
+  margin-left: 500px; 
 }  
-.action{
-  position: absolute;
-  margin-top: -60px;
-  right: 0px;
+.action{ 
+  position: relative;
+  margin-bottom: 0px;
+  width: 300px;
+  height: 320px; 
+  left:  75%;
 }
 .action .profile{
   position:relative;
@@ -65,23 +59,23 @@ body{
   object-fit:cover;
 }
 .action .menu{
-position:absolute;
-top:75px;
-right:-10px;
-padding: 20px;
-background: #FFEBCF;
-border: 2px solid #000000;
-width: 230px;
-box-sizing: 0 5px 5px rgba(0,0,0,.1);
-border-radius:15px;
-transition:0.5s;
-visibility:visible;
-opacity:0;
+  position:absolute;
+  top:80px;
+  right: 230px; 
+  padding: 20px;
+  background: #FFEBCF;
+  border: 2px solid #000000;
+  width: 230px; 
+  border-radius:15px;
+  transition:0.5s;
+  visibility:visible;
+  opacity:0;
 }
 .action .menu.active{
-top:80px;
-visibility:visible;
-opacity:1;
+  top:80px;
+  right: 230px;
+  visibility:visible;
+  opacity:1;
 }
 .action .menu h3{
   width:100%;
@@ -98,6 +92,7 @@ opacity:1;
   color:#000000;
   font-weight: 400;
 } 
+
 .menu .logoutBtn{
   width: 170px;
   padding: 10px;
@@ -108,9 +103,10 @@ opacity:1;
   transition: background-color 0.3s ease;
   font-size: 15px;
 }     
-.menu .logoutBtn:hover {
+.logoutBtn:hover {
   background-color: #707070; 
 }
+
 .editprofileBtn{
   width: 170px;
   padding: 10px;
@@ -124,10 +120,12 @@ opacity:1;
 .editprofileBtn:hover {
   background-color: #707070; 
 } 
+
 .header{
   background-color: #213B9A;
   height: 90px;
   padding: 0px;
+  width: 100%;
   text-align: center;
   font-size: 35px;
   color: white;
@@ -162,7 +160,7 @@ opacity:1;
 .searchButton {
   margin-top: 20px;
   width: 60px;
-  height: 45px;
+  height: 44px;
   border: 1px solid #d8b34d;
   background: #d8b34d;
   text-align: center;
@@ -250,14 +248,94 @@ position: relative;
 background-image: url(menu_assets/system_logo.png);
 background-repeat: no-repeat;
 }
-main.table {
-margin-left: 130px;
-margin-top: 50px;
-width: 1200px;
-height: 600px;
-background-color: #ffff; 
-border-radius: 15px;
-overflow: hidden;
+
+
+.containerCreatecourse h2{
+  margin: 0px 0px 20px 0px;
+}
+.courseCreation{
+  margin-left: 80px; 
+  width: 100%;
+  height: 100%;  
+  position: absolute;
+  background-size: 100% 100%;
+  visibility: visible;
+}
+.inputTerm{
+  width: 300px;
+  border: 1px solid #000000;
+  border-right: none; 
+  margin: 10px 0 20px 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 30px;
+  border-radius: 10px;
+  outline: none;
+  color: #000000;
+}
+.createcourseButton{
+  margin-left: 0px;
+  margin-top: 30px;
+  width: 190px; 
+  padding: 5px 30px;
+  border: 1px solid #000000; 
+  height: 45px;
+  border-radius: 10px; 
+  background-color: #F8EFE3;
+}
+.createcourseButton:hover { 
+  background-color: #a8a7a7;
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.containerCreatecourse {
+  display: none;
+}
+.containerCreatecourse{
+  margin-left: 40px; 
+  width: 420px;
+  height: 300px;
+  padding: 25px;
+  background-color: #614b4b; 
+  border-radius: 15px;
+  overflow: hidden;
+} 
+.createAButton{ 
+margin: 40px;
+width: 190px; 
+padding: 5px 30px;
+border: 1px solid #000000; 
+height: 45px;
+border-radius: 10px; 
+background-color: #F8EFE3;
+}
+.createAButton:hover { 
+background-color: #a8a7a7;
+transform: scale(1);
+cursor: pointer;
+}
+
+
+.archiveProf{
+  background-position: center;
+  margin-left: 80px; 
+  padding: 0;  
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: 100% 100%;
+  visibility: hidden;
+  
+} 
+
+main.table { 
+  margin: 40px;
+  width: 1200px;
+  height: 600px;
+  background-color: #ffffff; 
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .table__header {
@@ -436,54 +514,4 @@ background-color: #86e49d !important;
 .export__file .export__file-options img{
 width: 20px;
 height: auto;
-}
-
-
-.createcourseButton{
-  margin-left: 0px;
-  margin-top: 30px;
-  width: 190px; 
-  padding: 5px 30px;
-  border: 1px solid #000000; 
-  height: 45px;
-  border-radius: 10px; 
-  background-color: #2fc62a;
-}
-.createcourseButton:hover { 
-  background-color: #a8a7a7;
-  transform: scale(1);
-  cursor: pointer;
-}
-.courseCreation{
-  margin-left: 100px;
-  margin-top: 20px;
-  width: 210px;
-  height: 65px;  
-}
-.containerCreatecourse {
-  display: none;
-}
-.containerCreatecourse{
-margin-left: 10px;
-margin-top: 20px;
-width: 420px;
-height: 300px;
-padding: 25px;
-background-color: #ffff; 
-border-radius: 15px;
-overflow: hidden;
-} 
-.createAButton{ 
-margin: 10px;
-width: 190px; 
-padding: 5px 30px;
-border: 1px solid #000000; 
-height: 45px;
-border-radius: 10px; 
-background-color: #F8EFE3;
-}
-.createAButton:hover { 
-background-color: #a8a7a7;
-transform: scale(1);
-cursor: pointer;
 }

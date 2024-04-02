@@ -1,12 +1,5 @@
-// function notifProf(){
-//     window.location.assign("NotificationProf.html")
-// }
-function openClassPage(){
-  
-}
-// function archiveProf(){
-//   window.location.assign("ProfessorHome.html")
-// } 
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
   const editProfileBtn = document.querySelector('.editprofileBtn');
@@ -20,7 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // window.location.assign("EditProfilePage.html");
   }); 
 });
-
+function openArchive(){
+  window.location.assign("ProfessorHome.html")
+}
+function notifProf(){
+  window.location.assign("NotificationProf.html")
+}
+function openClassPage(){
+  window.location.assign("CourseCreate.html")
+} 
 function logOUT(){
   window.location.assign("LoginSignup.html")
 }
