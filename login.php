@@ -48,11 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Incorrect password
             // echo "Incorrect password.";
-            echo "<p style='color: red;'>Incorrect password.</p>";
+            echo '<script> 
+                alert ("Incorrect password. Please enter the right password.")
+                window.location.href = "LoginSignup.html";
+            </script>';
         }
     } else {
         // User not found
-        echo "User not found.";
+        echo '<script> 
+                alert ("User not found. Please register ")
+                window.location.href = "LoginSignup.html";
+            </script>';
     }
 
     // Close connection
