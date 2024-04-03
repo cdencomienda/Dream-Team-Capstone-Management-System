@@ -3,6 +3,11 @@
     padding: 0;
     font-family: sans-serif;
 }
+body{
+  width: 100%;
+  height: 100%;
+  background: #CBC4BA;
+} 
 @media print {
   .table, .table__body {
    overflow: visible;
@@ -10,277 +15,243 @@
    width: auto !important;
   }
  }
-body{
-    background: #CBC4BA;
-} 
-.hero{
-    height: 100%;
-    width: 100%;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    background-repeat: no-repeat;
-    position: absolute;
-    background-size:100% 100%;
+ .container{
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:280px;
+  width:280px;
+  bottom: 35px;
+  left: 85%;
 }
-.container{
-    position: relative; 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 0px;
-    width:100%;
-}  
 .action{
-    position: absolute;
-    margin-top: -60px;
-    right: 0px;
+  position:relative;  
 }
 .action .profile{
-    position:relative;
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    overflow:hidden;
-    cursor:pointer;
+  position:relative;
+  width:60px;
+  height:60px;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
 }
 .action .profile img{
-    position:absolute;
-    top: 0px; 
-    left: 0px;
-    width: 100%; 
-    height: 100%;
-    object-fit:cover;
-  }
-  .action .menu{
   position:absolute;
+  top: 0px; 
+  left: 0px;
+  width: 100%; 
+  height: 100%;
+  object-fit:cover;
+}
+.action .menu{  
   top:75px;
   right:-10px;
   padding: 20px;
   background: #FFEBCF;
   border: 2px solid #000000;
-  width: 230px;
-  box-sizing: 0 5px 5px rgba(0,0,0,.1);
+  width: 230px; 
   border-radius:15px;
   transition:0.5s;
   visibility:visible;
   opacity:0;
 }
-.action .menu.active{
-  top:80px;
+.action .menu.active{  
   visibility:visible;
   opacity:1;
 }
 .action .menu h3{
-    width:100%;
-    text-align:center;
-    font-size: 18px;
-    padding:20px 0;
-    font-weight: 500;
-    font-size: 15px;
-    color:#000000;
-    line-height: 25px;
-  }
-  .action .menu h3 span{
-    font-size: 15px;
-    color:#000000;
-    font-weight: 400;
-  } 
-  .logoutBtn{
-    width: 170px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #ffffff; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 15px;
-  }     
-  .logoutBtn:hover {
-    background-color: #707070; 
-  }
-  .editprofileBtn{
-    width: 170px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #ffffff; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 15px;
-  }   
-  .editprofileBtn:hover {
-    background-color: #707070; 
-  } 
-.header{
-    background-color: #213B9A;
-    height: 30px;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-    color: white;
-    background-repeat: no-repeat;
+  width:100%;
+  text-align:center;
+  font-size: 18px;
+  padding:20px 0;
+  font-weight: 500;
+  font-size: 15px;
+  color:#000000;
+  line-height: 25px;
 }
-.search {
-    width: 700px;
-    margin-left: 100px;
-    position: relative;
-    display: flex;
-}
-.wrap{
-    position:absolute;
-    top: -10px;
-    left: -10px;
-}
-.wrap .logo img{
-    position:relative;
-    width:5px;        
-    height:5px;
-    border-radius:50%;  
-}
-.searchTerm {
-    margin-left: 0;
-    margin-top: 0;
-    width: 600px;
-    border: 3px solid #d8b34d;
-    border-right: none;
-    padding: 5px 20px;
-    height: 30px;
-    border-radius: 20px 0 0 20px;
-    outline: none;
-    color: #000000;
-  }
-.searchButton {
-    margin-top: 0px;
-    width: 60px;
-    height: 44px;
-    border: 1px solid #d8b34d;
-    background: #d8b34d;
-    text-align: center;
-    color: #000000;
-    border-radius: 0 20px 20px 0;
-    cursor: pointer;
-    font-size: 20px;
-  }
-.searchTerm:focus{
-    color: #000000;
-}
-.Lsection{
-    background-color: #E2C17B;
-    float: left;
-    height: 100%;
-    width: 80px;
-    padding: 0;
+.action .menu h3 span{
+  font-size: 15px;
+  color:#000000;
+  font-weight: 400;
+} 
+
+.logoutBtn{
+  width: 170px;
+  padding: 10px; 
+  border-radius: 15px;
+  background-color: #ffffff; 
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}     
+.logoutBtn:hover {
+  background-color: #707070; 
 }
 
+.editprofileBtn{
+  width: 170px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #ffffff; 
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}   
+.editprofileBtn:hover {
+  background-color: #707070; 
+} 
+
+/* header&search */
+.header{
+  background-color: #213B9A;
+  height: 90px;
+  padding: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  background-repeat: no-repeat;
+}
+.search {
+  width: 700px;
+  margin-left: 130px;
+  margin-top: auto;
+  position: relative;
+  display: flex;
+}
+.wrap{
+  position:absolute;
+  width: 100px;
+  height: 90px;
+}
+.searchTerm { 
+  margin-top: 20px;
+  width: 600px;height: 30px;
+  border: 3px solid #d8b34d;
+  border-right: none; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  
+  border-radius: 20px 0 0 20px;
+  outline: none;
+  color: #000000;
+}
+.searchButton {
+  margin-top: 20px;
+  width: 60px; height: 46px;
+  border: 3px solid #d8b34d;
+  background: #d8b34d;
+  text-align: center;
+  color: #000000;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+.searchTerm:focus{
+  color: #000000;
+}
+
+/* left sidebar */
+.Lsection{
+  background-color: #E2C17B;
+  float: left;
+  height: 130%;
+  width: 80px;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size:100% 100%;
+} 
 #SectionBtn{
-    top: 20px;
-    left: 50px;
-    position: relative;
-    width: 50px;
-    height: 50px ;
-    transition:.5s;
+  top: 20px;
+  left: 50px;
+  position: relative;
+  width: 50px;
+  height: 50px ;
+  transition:.5s;
 }
 .notif{
-    top: 10px;
-    left: 10px;
-    width:50px;
-    height:30px;
-    padding: 60px 0px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    position: relative;
-    background-image: url(menu_assets/notif_icon.png);
-    background-repeat: no-repeat;
+  top: 10px;
+  left: 10px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  position: relative;
+  background-image: url(menu_assets/notif_icon.png);
+  background-repeat: no-repeat;
 }
 .class{
-    top: -10px;
-    left: 15px;
-    width:50px;
-    height:30px;
-    padding: 55px 5px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
-    background-image: url(menu_assets/team_icon.png);
-    background-repeat: no-repeat;
-}
-.schedule{
-    top: -25px;
-    left: 15px;
-    width:50px;
-    height:30px;
-    padding: 60px 0px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
-    background-image: url(menu_assets/schedule_icon.png);
-    background-repeat: no-repeat;
-}
-.capstone{
-    top: -45px;
-    left: 20px;
-    width:50px;
-    height:30px;
-    padding: 60px 0px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
-    background-image: url(menu_assets/capstone_icon.png);
-    background-repeat: no-repeat;
-}
-.logobtn{ 
-  width:100px;
-  height:100px; 
+  top: -10px;
+  left: 15px;
+  width:50px;
+  height:30px;
+  padding: 55px 5px;
   cursor: pointer;
   background: transparent;
   border: 0;
   outline: none;
   position: relative;
-  background-image: url(menu_assets/system_logo.png);
+  background-image: url(menu_assets/team_icon.png);
   background-repeat: no-repeat;
 }
-.notificationContainer{
-  width: 350px; 
-  margin-top: 50px;
-  margin-left: 130px;
-}
-
-.single-box{
-  width: 180px;
-  padding: 20px;
-  margin-top: 40px;
-  margin-left: 120px;
-  text-align: center;
-  background-color: #ffffff;
-  border-radius: 10px;
-  text-decoration: none;
+.schedule{
+  top: -25px;
+  left: 15px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/schedule_icon.png);
+  background-repeat: no-repeat;
 }
-a.read{
-  text-decoration: none;
-  color: hsl(0, 0%, 0%);
-  font-size: 18px;
+.capstone{
+  top: -45px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/capstone_icon.png);
+  background-repeat: no-repeat;
 }
-.single-box:hover {
-  background-color: #0056b3;
+.logobtn{ 
+width:100px;
+height:90px;
+top: -10px;
+left: -10px;
+cursor: pointer;
+background: transparent;
+border: 0;
+outline: none;
+position: relative;
+background-image: url(menu_assets/system_logo.png);
+background-repeat: no-repeat;
 }
-.single-box:active {
-  background-color: #004080;
-}  
+/* END OF LAYOUT OF HTML */
 
+/* ARCHIVE TABLE */
 main.table {
   margin-left: 130px;
   margin-top: 50px;
-  width: 700px;
+  width: 1000px;
   height: 400px;
   background-color: #ffff; 
   border-radius: 15px;

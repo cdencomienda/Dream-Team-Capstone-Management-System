@@ -30,11 +30,11 @@ const tap = document.querySelector('.profile');
 tap.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
   toggleMenu.classList.toggle('active');
-});
+}); 
 
 function toggleCourseCreation() {
-  const courseCreation = document.querySelector('.containerCreatecourse');
-  courseCreation.style.display = 'block';
+  var container = document.querySelector('.containerCreatecourse');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function createcourse() {
@@ -45,7 +45,7 @@ function createcourse() {
   // Create elements to display the course name and description
   const courseContainer = document.querySelector('.courseCreation');
   const courseInfo = document.createElement('div');
-  courseInfo.innerHTML = `<h2> ${courseName}</h2> <h3> ${courseDescription}</h3> `;
+  courseInfo.innerHTML = `<h2coursename> ${courseName}</h2coursename> <h3coursedescription> ${courseDescription}</h3coursedescription> `;
 
   // Append the course information to the course container
   courseContainer.appendChild(courseInfo);
