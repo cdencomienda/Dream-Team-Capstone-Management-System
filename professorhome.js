@@ -17,7 +17,7 @@ function openArchive(){
   window.location.assign("ProfessorHome.html")
 }
 function notifProf(){
-  window.location.assign("NotificationProf.html")
+  window.location.assign("NotificationPage.html")
 }
 function openClassPage(){
   window.location.assign("CourseCreate.html")
@@ -37,24 +37,19 @@ function toggleCourseCreation() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
-function createcourse() {
-  // Get input values
+function createcourse() { 
   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
   const courseDescription = document.querySelector('.inputTerm[name="courseDescription"]').value;
-
-  // Create elements to display the course name and description
+ 
   const courseContainer = document.querySelector('.courseCreation');
   const courseInfo = document.createElement('div');
-  courseInfo.innerHTML = `<h2coursename> ${courseName}</h2coursename> <h3coursedescription> ${courseDescription}</h3coursedescription> `;
-
-  // Append the course information to the course container
+  courseInfo.classList.add('courseInfo');  
+  courseInfo.innerHTML = `<h2coursename> ${courseName}</h2coursename>  `;
+  courseContainer.appendChild(courseInfo);  
+   
   courseContainer.appendChild(courseInfo);
-
-  // Clear input fields
-  document.querySelector('.inputTerm[name="courseName"]').value = '';
-  document.querySelector('.inputTerm[name="courseDescription"]').value = '';
-
-  // Hide the container (optional)
+ 
+  document.querySelector('.inputTerm[name="courseName"]').value = ''; 
   document.querySelector('.containerCreatecourse').style.display = 'none';
 }
 
