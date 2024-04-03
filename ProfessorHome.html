@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="professorStyle.css">
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="archiveProf()"></button> 
+            <button type="button" class="logobtn"  onclick="openArchive()"></button> 
             </div> 
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -16,19 +16,19 @@
                 </button>
             </div>
         <div class="container">
-            <div class="action">
-              <div class="profile">
-                <img src="menu_assets/prof.jpg" alt="profile-img">
-              </div>
-            <div class="menu">
-                <h3>Dave Russel<br/>
-                    <span>useremail@test.com</span>
-                </h3>
-                <button type="button" class="editprofileBtn" >Edit Profile</button> 
-                <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button> 
-            </div>
-        </div>
+  <div class="action">
+    <div class="profile">
+      <img src="menu_assets/prof.jpg" alt="profile-img">
     </div>
+    <div class="menu">
+      <h3>Dave Russel<br/>
+        <span>useremail@test.com</span>
+      </h3>
+      <button type="button" class="editprofileBtn">Edit Profile</button>
+      <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+    </div>
+  </div>
+</div>
 </div>
 </head>
 <body> 
@@ -45,7 +45,7 @@
         <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
 
         <div class="containerCreatecourse" style="display: none;">
-            <h1>Create Course</h1>
+            <h2>Create Course</h2>
             <div> 
                 <h3>Course Name:</h3>
                 <input type="text" class="inputTerm" name="courseName" placeholder="Input Course name"> 
@@ -57,6 +57,9 @@
             <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
         </div> 
     </div>
-<script src="professorhome.js"></script>   
+
+<script 
+    src="professorhome.js"> 
+</script>   
 </body>
 </html>
