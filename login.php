@@ -47,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // Incorrect password
-            echo "Incorrect password.";
+            // echo "Incorrect password.";
+            echo "<p style='color: red;'>Incorrect password.</p>";
         }
     } else {
         // User not found
