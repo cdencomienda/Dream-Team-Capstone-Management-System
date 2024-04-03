@@ -15,20 +15,20 @@
                 <span>&#128269;</span>
                 </button>
             </div>  
-        <div class="container">
-            <div class="action">
-                <div class="profile">
-                <img src="menu_assets/prof.jpg" alt="profile-img">
-                </div>
-                <div class="menu">
-                    <h3>Dave Russel<br/>
-                        <span>useremail@test.com</span>
-                    </h3>
-                    <button type="button" class="editprofileBtn">Edit Profile</button>
-                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+            <div class="container">
+                <div class="action">
+                    <div class="profile">
+                        <img src="menu_assets/prof.jpg" alt="profile-img">
+                    </div>
+                    <div class="menu">
+                        <h3><?php echo $_SESSION['username']; ?><br/>
+                            <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h3>
+                        <button type="button" class="editprofileBtn">Edit Profile</button>
+                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </head>
 <body> 
