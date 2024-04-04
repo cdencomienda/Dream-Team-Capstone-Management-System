@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const editProfileBtn = document.querySelector('.editprofileBtn');
   const logoutBtn = document.querySelector('.logoutBtn');
@@ -13,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // window.location.assign("EditProfilePage.html");
   }); 
 });
+
 function openArchive(){
   window.location.assign("ProfessorHome.html")
 }
