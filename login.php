@@ -26,19 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password == $storedPassword) {
             // Password is correct, set session variables
             $_SESSION['user_id'] = $row['userID'];
+            $_SESSION['username'] = $row['userName']; // Assuming the user's name is stored in the database
             $_SESSION['user_email'] = $row['userEmail'];
             $_SESSION['user_type'] = $row['userType'];
 
             // Redirect based on userType
             $userType = $row['userType'];
             if ($userType == "Student") {
-                header("Location: HomePage.html");
+                header("Location: HomePage.php");
                 exit();
             } elseif ($userType == "Professor") {
-                header("Location: ProfessorHome.html");
+                header("Location: ProfessorHome.php");
                 exit();
             } elseif ($userType == "Program Director" || $userType == "Admin") {
-                header("Location: AdminHome.html");
+                header("Location: AdminHome.php");
                 exit();
             } else {
                 // Handle invalid userType
@@ -47,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // Incorrect password
-            // echo "Incorrect password.";
             echo '<script> 
                 alert ("Incorrect password. Please enter the right password.")
                 window.location.href = "LoginSignup.html";

@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function openArchive(){
-  window.location.assign("ProfessorHome.html")
+  window.location.assign("ProfessorHome.php")
 }
 function notifProf(){
-  window.location.assign("NotificationPage.html")
+  window.location.assign("NotificationPage.php")
 }
 function openClassPage(){
-  window.location.assign("CourseCreate.html")
+  window.location.assign("CourseCreate.php")
 } 
 function logOUT(){
   window.location.assign("LoginSignup.html")

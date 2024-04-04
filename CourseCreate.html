@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Menu</title>
     <link rel="stylesheet" href="CourseCreate.css">
+    <?php include 'login.php'; ?>
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
@@ -15,19 +16,20 @@
                 <span>&#128269;</span>
                 </button>
             </div>
-        <div class="container">
-            <div class="action">
-              <div class="profile">
-                <img src="menu_assets/prof.jpg" alt="profile-img">
-              </div>
-            <div class="menu">
-                <h3>Dave Russel<br/>
-                    <span>useremail@test.com</span>
-                </h3>
-                <button type="button" class="editprofileBtn" >Edit Profile</button> 
-                <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button> 
+            <div class="container">
+                <div class="action">
+                    <div class="profile">
+                        <img src="menu_assets/prof.jpg" alt="profile-img">
+                    </div>
+                    <div class="menu">
+                        <h3><?php echo $_SESSION['username']; ?><br/>
+                            <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h3>
+                        <button type="button" class="editprofileBtn">Edit Profile</button>
+                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                    </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>
 </head>
@@ -39,21 +41,26 @@
         <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
         <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
     </div>   
-    <div class="courseCreation">
-        <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
-
-        <div class="containerCreatecourse" style="display: none;">
-            <h2>Create Course</h2>
-            <div> 
-                <h3>Course Name:</h3>
-                <input type="text" class="inputTerm" name="courseName" placeholder="Input Course name"> 
+    
+    <div class="professorClass">
+        <div class="courseCreation">
+            <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
+            <div class="containerCreatecourse" style="display: none;">
+                <h2>Create Course</h2>
+                <div> 
+                    <h3>Course Name:</h3>
+                    <input type="text" class="inputTerm" name="courseName" placeholder="Input Course name"> 
+                </div>
+                <div> 
+                    <h3>Course Description:</h3>
+                    <input type="text" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
+                </div>
+                <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
             </div>
-            <div> 
-                <h3>Course Description:</h3>
-                <input type="text" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
-            </div>
-            <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
-        </div> 
+        </div>
+        <!-- <div class="groupcontainer">
+            
+        </div> -->
     </div>
 <script 
     src="professorhome.js"> 
