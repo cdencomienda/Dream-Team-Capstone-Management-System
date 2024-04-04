@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_num_rows($result) > 0) {
             echo '<script> 
-                    alert ("Passwords do not match. Please try again.")
+                    alert ("Email already registered. Please try again.")
                     window.location.href = "LoginSignup.html";
                 </script>';
         }
