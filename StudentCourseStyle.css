@@ -12,6 +12,7 @@
  }
 body{
     background: #CBC4BA;
+    overflow-x: hidden;
 } 
 .hero{
     height: 100%;
