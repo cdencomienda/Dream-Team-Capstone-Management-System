@@ -18,8 +18,8 @@ body{
   justify-content:center;
   height:280px;
   width:280px;
-  bottom: 25px;
-  left: 80%;
+  bottom: 35px;
+  left: 84%;
 }
 .action{
   position:relative;  
@@ -157,7 +157,7 @@ body{
 .Lsection{
   background-color: #E2C17B;
   float: left;
-  height: 130%;
+  height: 200%;
   width: 80px;
   margin: 0;
   padding: 0;
@@ -244,8 +244,8 @@ background-repeat: no-repeat;
 
 .professorClass{
   margin-left: 80px; 
-  width: 1059.2px;
-  height: 100%;  
+  width: 1200px;
+  height: 1200px;  
   position:relative; 
 }
 
@@ -314,7 +314,16 @@ background-repeat: no-repeat;
   overflow: hidden;
   transition:0.5s;  
 } 
-
+.courseInfo h2coursename {
+  width:140px;
+  text-align:right;
+  font-size: 18px;
+  padding: 0px;
+  font-weight: 100;
+  font-size: 15px;
+  color:#000000;
+  line-height: 25px;
+} 
 .courseInfo {
   margin-left: 10px; 
   margin-top: 20px; 
@@ -324,35 +333,53 @@ background-repeat: no-repeat;
   background-color: #ffffff;
   height: 30px; 
   text-align: center; 
-}
-
-.courseInfo h2coursename {
-  width:140px;
-  text-align:center;
-  font-size: 18px;
-  padding: 0px;
-  font-weight: 100;
-  font-size: 15px;
-  color:#000000;
-  line-height: 25px;
-  
 } 
-.courseInfo:hover { 
+
+/* coursemelon button */
+.classSet {
+  width:40px; 
+  margin-left: 230px; 
+  text-align:center;
+  font-size: 18px; 
+  font-weight: 100; 
+} 
+.classSet:hover { 
   background-color: #0056b3;
   transform: scale(1);
   cursor: pointer;
+} 
+.dropdown-content{
+  position: relative;
+  left: 140px;
+  top: 10px;
+  margin-top: 10px;
+} 
+.dropdown-content{
+  width:140px;
+  height: 150px;
+  text-align:center;
+  font-size: 18px;
+  padding: 0px;
+  border: 2px #000000;
+  border-radius: 15px;
+  background-color: #F8EFE3;
 }
 
-/*group container */
-/* .groupcontainer{
+/*class container */
+.classcontainer{
   position: relative;
   margin-left: 330px; 
-  margin-top: -420px;
-  width: 600px;
-  height: 400px;
+  width: 800px;
+  height: 600px;
   padding: 25px;
   background-color: #ffffff; 
   border-radius: 15px;
-  overflow: hidden;
-  transition:0.5s; 
-} */
+  overflow:hidden;
+  display: none;
+  transition:1s; 
+}
+
+.sectionClass{
+  width: 800px;
+  height: 600px;
+}

@@ -24,10 +24,10 @@ function logOUT(){
   window.location.assign("LoginSignup.html")
 }
 
-const tap = document.querySelector('.profile');
+const tap = document.querySelector('.profile', 'melonbtn');
 tap.addEventListener('click', function () {
-  const toggleMenu = document.querySelector('.menu');
-  toggleMenu.classList.toggle('active');
+  const toggleMenu = document.querySelector('.menu', '.settingMelon');
+  toggleMenu.classList.toggle('active', 'melonActivate');
 }); 
 
 function toggleCourseCreation() {
@@ -37,17 +37,50 @@ function toggleCourseCreation() {
 
 function createcourse() { 
   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
-  const courseDescription = document.querySelector('.inputTerm[name="courseDescription"]').value;
- 
   const courseContainer = document.querySelector('.courseCreation');
   const courseInfo = document.createElement('div');
   courseInfo.classList.add('courseInfo');  
-  courseInfo.innerHTML = `<h2coursename> ${courseName}</h2coursename>  `;
+  courseInfo.innerHTML = `
+      <h2coursename>${courseName}</h2coursename> 
+      <div class="dropdown">
+          <button type="button" class="classSet" onclick="dropdown()">...</button>
+          <div class="dropdown-content" style="display: none;">
+              <button type="button" onclick="creategroup()">Create Group</button>
+              <button type="button" onclick="viewMembers()">View Members</button>
+              <button type="button" onclick="addMembers()">Add Members</button>
+              <button type="button" onclick="setrequirements()">Requirements</button>
+          </div>
+      </div>`;
   courseContainer.appendChild(courseInfo);  
-   
-  courseContainer.appendChild(courseInfo);
- 
+
   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
   document.querySelector('.containerCreatecourse').style.display = 'none';
 }
+
+function dropdown() {
+  const dropdownContent = document.querySelector('.dropdown-content');
+  dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+}
+
+function creategroup() { 
+  var container = document.querySelector('.classcontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function viewMembers() { 
+  var container = document.querySelector('.classcontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function addMembers() { 
+  var container = document.querySelector('.classcontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function setrequirements() { 
+  var container = document.querySelector('.classcontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+
 

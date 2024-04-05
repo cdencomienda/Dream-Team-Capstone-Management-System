@@ -30,8 +30,7 @@
                     </div>
                 </div>
             </div>
-    </div>
-</div>
+        </div>
 </head>
 <body> 
     <div class="Lsection">
@@ -43,7 +42,7 @@
     </div>   
     
     <div class="professorClass">
-        <div class="courseCreation">
+        <div class="courseCreation" grid>
             <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
             <div class="containerCreatecourse" style="display: none;">
                 <h2>Create Course</h2>
@@ -56,11 +55,27 @@
                     <input type="text" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
                 </div>
                 <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
-            </div>
+            </div> 
+
+            <div class="classcontainer">
+                <div class="sectionClass">
+                    
+                    <div class="creategroup">
+
+                    </div>
+                    <div class="viewgroup">
+
+                    </div>
+                    <div class="addmember">
+
+                    </div>
+                    <div class="setrequirements">
+
+                    </div>
+
+                </div>
+            </div> 
         </div>
-        <!-- <div class="groupcontainer">
-            
-        </div> -->
     </div>
     <script 
         src="professorhome.js"> 
