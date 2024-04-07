@@ -441,6 +441,8 @@ background-repeat: no-repeat;
   height: 500px;
   padding: 25px;
   top: -520px;
+  overflow:hidden;
+  display: none;
   background-color: #ffffff;
   border-radius: 15px;
 }
