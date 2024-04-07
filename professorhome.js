@@ -45,10 +45,11 @@ function createcourse() {
       <div class="dropdown">
           <button type="button" class="classSet" onclick="dropdown()">...</button>
           <div class="dropdown-content" style="display: none;">
-              <button type="button" onclick="creategroup()">Create Group</button>
-              <button type="button" onclick="viewMembers()">View Members</button>
-              <button type="button" onclick="addMembers()">Add Members</button>
-              <button type="button" onclick="setrequirements()">Requirements</button>
+              <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>
+              <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+              <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+              <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+              <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
           </div>
       </div>`;
   courseContainer.appendChild(courseInfo);  
@@ -63,22 +64,27 @@ function dropdown() {
 }
 
 function creategroup() { 
-  var container = document.querySelector('.classcontainer');
+  var container = document.querySelector('.creategroup');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function viewMembers() { 
-  var container = document.querySelector('.classcontainer');
+  var container = document.querySelector('.viewgroup');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function addMembers() { 
-  var container = document.querySelector('.classcontainer');
+  var container = document.querySelector('.addmember');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function setrequirements() { 
-  var container = document.querySelector('.classcontainer');
+  var container = document.querySelector('.setrequirements');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function rubric() { 
+  var container = document.querySelector('.rubric');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
