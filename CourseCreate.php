@@ -40,7 +40,8 @@
         <button type="button" class="class"  onclick="openClassPage()">Class</button>
         <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
         <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
-    </div>   
+    </div>
+
 <!-- courseCreation     -->
     <div class="professorClass">
         <div class="courseCreation" grid>
@@ -70,11 +71,15 @@
                 </div>
             </form>
         </div> 
+
 <!-- creategroup -->
-        <div class="creategroup">
+        <div class="creategroupContainer">
             <h1>Create group</h1>
+            <h3>Group Name:</h3>
+                        <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name"> 
             <form class="addcheckbox">
                 <div class="flex-container">
+                    
                     <div>
                         <h3>Add Student:</h3>
                         <input type="text" class="inputName" name="studentName" placeholder="Input name">
@@ -111,13 +116,21 @@
                     </div>
                 </div>
             </form>
-            <button type="button" class="addgroupbtn" onclick="creategroup()">Add +</button>
+            <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
         </div>
 
 <!-- viewgroup -->
         <div class="viewgroup">
-            
+            <h3>Members:</h3>
+                <div class="membersContainer">
+                    <label for="StudentName"> StudentName</label><br>
+                    <label for="StudentName"> StudentName</label><br>
+                    <label for="StudentName"> StudentName</label><br>
+                    <label for="StudentName"> StudentName</label><br>
+                    <label for="InstructorName"> InstructorName</label><br>
+                </div>
         </div>
+
 <!-- add members -->
         <div class="addmember">
             <form class="addcheckbox">
@@ -134,6 +147,7 @@
                 <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
             </form>
         </div>
+
 <!-- set requirements -->
         <div class="setrequirements">
             <h3>Requirements</h3>

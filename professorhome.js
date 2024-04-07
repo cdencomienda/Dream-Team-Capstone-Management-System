@@ -30,7 +30,7 @@ tap.addEventListener('click', function () {
   toggleMenu.classList.toggle('active', 'melonActivate');
 }); 
 
-function toggleCourseCreation() {
+function toggleCourseCreation() { 
   var container = document.querySelector('.containerCreatecourse');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
@@ -41,7 +41,7 @@ function createcourse() {
   const courseInfo = document.createElement('div');
   courseInfo.classList.add('courseInfo');  
   courseInfo.innerHTML = `
-      <h2coursename>${courseName}</h2coursename> 
+      <button type="button" class="courseNAMEbtn" onclick="courseinfobtn()">${courseName}</button> 
       <div class="dropdown">
           <button type="button" class="classSet" onclick="dropdown()">...</button>
           <div class="dropdown-content" style="display: none;">
@@ -51,12 +51,13 @@ function createcourse() {
               <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
               <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
           </div>
-      </div>`;
+      </div> `;
   courseContainer.appendChild(courseInfo);  
 
   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
   document.querySelector('.containerCreatecourse').style.display = 'none';
 }
+
 
 function dropdown() {
   const dropdownContent = document.querySelector('.dropdown-content');
@@ -64,7 +65,7 @@ function dropdown() {
 }
 
 function creategroup() { 
-  var container = document.querySelector('.creategroup');
+  var container = document.querySelector('.creategroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
@@ -88,5 +89,6 @@ function rubric() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
-
-
+function createGROUP(){
+  
+}
