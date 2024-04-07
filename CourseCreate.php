@@ -56,10 +56,19 @@
                     <h3>Course Description:</h3>
                     <input type="text" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
                 </div>
+                <div> 
+                    <h5> Section: <input type="text" class="inputSection" name=" Section " placeholder="Input Section"> 
+                        AY: <input type="text" class="inputAY" name="AcadYear" placeholder=" Input Academic Year"> 
+                    </h5>
+                        Term: <input type="number" class="Term" name="Term" placeholder="Term" min="1" max="3">
+                        Unit: <input type="number" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4">
+                    </h5>
+                </div> 
                 <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
-            </div> 
+            </div>
+            
             </form>
-
+            
             <div class="classcontainer">
                 <div class="sectionClass">
                     
