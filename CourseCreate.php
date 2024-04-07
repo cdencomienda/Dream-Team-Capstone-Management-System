@@ -6,6 +6,7 @@
     <title>Class Menu</title>
     <link rel="stylesheet" href="CourseCreate.css">
     <?php include 'login.php'; ?>
+    <?php include 'CourseCreated.php'; ?>
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
@@ -44,6 +45,7 @@
     <div class="professorClass">
         <div class="courseCreation" grid>
             <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
+            <form method="post" action="handle_course_creation.php">
             <div class="containerCreatecourse" style="display: none;">
                 <h2>Create Course</h2>
                 <div> 
@@ -56,6 +58,7 @@
                 </div>
                 <button type="button" class="createcourseButton" onclick="createcourse()">Create Course</button>
             </div> 
+            </form>
 
             <div class="classcontainer">
                 <div class="sectionClass">
