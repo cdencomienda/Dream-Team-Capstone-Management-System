@@ -278,11 +278,11 @@ a.read{
   background-color: #004080;
 }  
     
-main.table {
+main.table {  
   margin-left: 430px;
   margin-top: 20px;
   width: 1000px;
-  height: 600px;
+  height: 600px;    
   background-color: #ffff; 
   border-radius: 15px;
   overflow: hidden;
@@ -343,7 +343,16 @@ main.table {
    position: relative;
    border-radius: 20px;
   }
- 
+
+  .Table_default #docx-button{
+    background-color: #F8EFE3;
+    color:#000000;
+    width: 150 px;
+    height: 35 px;
+    position: relative
+    ;
+  }
   
+
   
  
