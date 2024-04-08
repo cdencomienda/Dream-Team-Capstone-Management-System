@@ -38,24 +38,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     mysqli_query($conn, $sqlCourseCreated);
 
-    // Execute the query for course_created
-    // if (mysqli_query($conn, $sqlCourseCreated)) {
-    //     // Query executed successfully
-    //     // You can redirect the user to a success page or display a success message
-    //     header("Location: CourseCreate.php"); // Redirect to success page
-    //     exit(); // Terminate script to prevent further execution
-    // } else {
-    //     // Query execution failed
-    //     // Handle the error, display an error message, or redirect to an error page
-    //     echo "Error: " . mysqli_error($conn); // Display error message
-    //     exit(); // Terminate script to prevent further execution
-    // }
+    //Execute the query for course_created
+    if (mysqli_query($conn, $sqlCourseCreated)) {
+        // Query executed successfully
+        // You can redirect the user to a success page or display a success message
+        header("Location: CourseCreate.php"); // Redirect to success page
+        exit(); // Terminate script to prevent further execution
+    } else {
+        // Query execution failed
+        // Handle the error, display an error message, or redirect to an error page
+        echo "Error: " . mysqli_error($conn); // Display error message
+        exit(); // Terminate script to prevent further execution
+    }
 
     // Insert data into `course_offered` table
 
-    $sqlCourseOffered = "INSERT INTO `course offered` (classID, courseID, section) VALUES ('$courseName', '$courseID', '$section')";
-    // Execute the query for course_offered
-    mysqli_query($conn, $sqlCourseOffered);
+    // $sqlCourseOffered = "INSERT INTO `course offered` (classID, courseID, section) VALUES ('$courseName', '$courseID', '$section')";
+    // // Execute the query for course_offered
+    // mysqli_query($conn, $sqlCourseOffered);
     // if (mysqli_query($conn, $sqlCourseOffered)) {
     //     // Query executed successfully
     //     // You can redirect the user to a success page or display a success message

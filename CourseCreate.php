@@ -55,7 +55,7 @@
                         <h3>Course Description:</h3>
                             <input type="text" id="descriptionID" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
                         <h3> Section: 
-                            <input type="text" id="sectionID" class="inputSection" name=" Section " placeholder="Input Section">   
+                            <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
                         </h3>
                         <h3> AY: 
                             <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year">   
@@ -67,7 +67,7 @@
                             <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4">
                         </h3>
                     </div>  
-                    <button type="button" id="CCbutton" class="createcourseButton" onclick="createcourse()">Create Course</button>
+                    <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
                 </div>
             </form>
         </div> 
