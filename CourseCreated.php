@@ -30,9 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("User ID not found or is empty in session.");
     }
 
-    // Insert data into `course_created` table
-    $courseID = 42025;
-    $capsID = 4;
+        // Insert data into `course_created` table
+        $courseID = 42025;
 
     $sqlCourseCreated = "INSERT INTO `course created` (courseID, professorID, AY, term, Unit) VALUES ($courseID, $userID, '$acadYear', $term, $unit)";
 
@@ -51,25 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit(); // Terminate script to prevent further execution
     }
 
-    // Insert data into `course_offered` table
-
-    // $sqlCourseOffered = "INSERT INTO `course offered` (classID, courseID, section) VALUES ('$courseName', '$courseID', '$section')";
-    // // Execute the query for course_offered
-    // mysqli_query($conn, $sqlCourseOffered);
-    // if (mysqli_query($conn, $sqlCourseOffered)) {
-    //     // Query executed successfully
-    //     // You can redirect the user to a success page or display a success message
-    //     header("Location: CourseCreate.php"); // Redirect to success page
-    //     exit(); // Terminate script to prevent further execution
-    // } else {
-    //     // Query execution failed
-    //     // Handle the error, display an error message, or redirect to an error page
-    //     echo "Error: " . mysqli_error($conn); // Display error message
-    // }
-
-    // Close connection
     mysqli_close($conn);
 }
-
-
 ?>
