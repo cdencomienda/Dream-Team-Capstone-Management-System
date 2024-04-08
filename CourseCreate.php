@@ -52,8 +52,8 @@
                     <div> 
                         <h3>Course Name:</h3>
                             <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name"> 
-                        <h3>Course Description:</h3>
-                            <input type="text" id="descriptionID" class="inputTerm" name="courseDescription" placeholder="Input Course description"> 
+                        <h3>Course Code:</h3>
+                            <input type="text" id="courseCode" class="inputTerm" name="courseDescription" placeholder="Input Course Code"> 
                         <h3> Section: 
                             <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
                         </h3>
