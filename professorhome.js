@@ -23,7 +23,7 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");
   overlay.style.display = "block";
 });
-
+ 
 window.onclick = function(event) {
   var overlay = document.getElementById("editProfileOverlay");
   if (event.target == overlay) {

@@ -31,6 +31,7 @@
                     <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
                 </div> 
             </div>
+            <!-- editprofile -->
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
                     <form id="editProfileForm">
