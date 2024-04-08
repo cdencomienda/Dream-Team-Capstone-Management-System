@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,8 +53,11 @@
                     <div> 
                         <h3>Course Name:</h3>
                             <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name"> 
-                        <h3>Course Code:</h3>
-                            <input type="text" id="courseCode" class="inputTerm" name="courseDescription" placeholder="Input Course Code"> 
+                            <h3>Course Code:</h3>
+                            <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code">
+                            <div id="courseCodeSuggestions"></div> <!-- Add this line for search suggestions -->
+                            <h3>Rubric Code:</h3>
+                            <input type="text" id="courserubric" class="inputTerm" name="rubricCode" placeholder="Input Rubric Code">
                         <h3> Section: 
                             <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
                         </h3>
@@ -162,3 +166,30 @@
     </script>   
 </body>
 </html>
+
+<script>
+    // Function to handle AJAX request for live search
+    function liveSearchCourseCode() {
+    var input = document.getElementById('courseCode').value;
+    var xhr = new XMLHttpRequest();
+    if (input.trim() !== '') { // Check if input is not empty
+        xhr.open('GET', 'LiveSearchCourseCode.php?search=' + input, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('courseCodeSuggestions').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    } else { // If input is empty, hide the suggestions
+        document.getElementById('courseCodeSuggestions').innerHTML = '';
+    }
+}
+
+// Event listener to trigger live search on input change
+document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
+
+// Event listener to hide suggestions when the cursor is not in the field
+document.getElementById('courseCode').addEventListener('blur', function() {
+    document.getElementById('courseCodeSuggestions').innerHTML = '';
+});
+</script>
