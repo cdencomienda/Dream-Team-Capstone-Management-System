@@ -13,6 +13,7 @@
 body{
     background: #CBC4BA;
     overflow-x: hidden;
+    overflow: hidden;
 } 
 .hero{
     height: 100%;
@@ -264,8 +265,10 @@ body{
   border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; 
 }
+
+/* }
 a.read{
   text-decoration: none;
   color: hsl(0, 0%, 0%);
@@ -277,16 +280,18 @@ a.read{
 .single-box:active {
   background-color: #004080;
 }  
-    
+.tableDiv{
+    width: 1000px;
+    height: 00px;
+    margin-top: 50px;
+}
 main.table {  
   margin-left: 430px;
   margin-top: 20px;
-  width: 1000px;
-  height: 600px;    
+  width: 100;
+  height: 800px;    
   background-color: #ffff; 
   border-radius: 15px;
-  overflow: hidden;
-  position: relative;
   }
   
   .table__header {
@@ -295,11 +300,15 @@ main.table {
   background-color: #E2C17B;
   padding: 15px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; */
+  /* align-items: center;
   }
+  .table__body{
+    width: 1000 px;
+    height: 95%;
+  } */
   /* Mali ko  */
-  .mybutton{
+  /* .mybutton{
     outline: 0px;
     transition:backround-color 0.5s ease;
     text-align: center;
@@ -308,11 +317,22 @@ main.table {
   button:hover{
     background-color:#958f87;
   }
+  .group_name{
+    margin-top: 10%;
+    position: center;
+    
+  }
+  .Group_btn{
+    height: 10%;
+    margin-top: 10%;
+    margin: 100px;
+  }
   .Group-nameBtn{
     width: 350px;
     height: 25px;
     margin: 150px;
-    background-color: #F8EFE3;
+   
+    background-color: #F8EFE3; 
     position: relative;
     border-radius: 20px;
     outline: none;
@@ -352,7 +372,155 @@ main.table {
     position: relative
     ;
   }
-  
-
-  
+  #docx-button{
+    position: relative;
+    margin: 150px;
+    margin-top: 100px;
+  }
+  .classBox{
+    background: #0056b3;
+    width: 150 px;
+    height: 35 px;
+    margin: relative; 
+     background-color: #F8EFE3;
+    color:#000000;
+  }
+  .button1{
+    width: 250px;
+    margin-top: -50px;
+    margin-left: 1%;  
+    margin-bottom: 1%;
+  } */
  
+  .StudentClass{
+    margin-left: 80px; 
+    width: 1200px;
+    height: 1200px;  
+    position:relative; 
+  }
+  .S_courseInfo h2 {
+    width:140px;
+    text-align:right;
+    font-size: 18px;
+    padding: 0px 5%;
+    font-weight: 100;
+    font-size: 15px;
+    color:#000000;
+    line-height: 25px;
+  } 
+  .S_courseInfo {
+    margin-left: 10px; 
+    margin-top: 20px; 
+    width: 250px; 
+    padding: 10px 30px;
+    border-top: 0.5px  solid #000000;
+    border-bottom: 0.5px  solid #000000; ;
+    height: 30px; 
+    text-align: center; 
+  } 
+  .StudentDefault{
+    position: relative;
+    margin-left: 400px;
+    width: 1000px;
+    height: 600px;
+    padding: 25px;
+    margin-top: -40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+  }
+  .dashboard_header{
+    background-color: #E2C17B;
+    width: 1050px;
+    margin-left: -25px;
+    margin-top: -35px;
+    height: 50px;
+
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    gap: 10px;
+  }
+  .groupname_container{
+     margin-top: 8px;
+     margin-left: 25px;
+    width: 350px;
+    height: 25px; 
+    grid-column: 1 / 2;
+    display: flex;
+    align-items: center;
+  }
+  .group_name{
+    width: 350px;
+    height: 35px;
+    background-color: #F8EFE3; 
+    position: relative;
+    border-radius: 20px;
+    outline: none;
+    text-align: center;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    
+  }
+  .button-group{
+    grid-column: 2 / 3;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    outline: 0px;
+    transition:backround-color 0.5s ease;
+    text-align: center;
+    margin-top: 13px;
+    margin-right: 135px;
+  }
+  .Rep-FilesBtn, .Submission-Btn, .Members-Btn {
+    width: auto; 
+    height: 25px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    padding: 0 10px; 
+    cursor: pointer;
+    margin: 5px;
+}
+
+.Rep-FilesBtn {
+    width: 50px; 
+}
+
+.Members-Btn {
+    width: 75px; 
+    margin-right: 10px; 
+}
+  /* .Rep-FilesBtn{
+    width: 50px;
+    height: 25px;
+    margin-left: -50px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+  } 
+  .Submission-Btn {
+    width: 100px;
+    height: 25px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+  }
+
+.Members-Btn{
+  border: none;
+  width: 75px;
+  height: 25px;
+  margin-right: 10px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  border: none;
+} */
+  button:hover{
+    background-color:#958f87;
+  }
