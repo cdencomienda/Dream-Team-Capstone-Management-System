@@ -2,6 +2,7 @@
         var y = document.getElementById("register");
         var z = document.getElementById("btn");
         var w = document.getElementById("profile-upload");
+        var logo = document.getElementById("logo")
     
         function auth(){
             window.location.assign("HomePage.html")
@@ -10,6 +11,7 @@
         function register() {
             
             // w.style.left = "700px";
+            logo.style.visibility = "hidden"
             w.style.visibility = "visible";
             x.style.left = "-488px";
             y.style.left = "212px";
@@ -17,6 +19,7 @@
         }
     
         function login() {
+            logo.style.visibility = "visible"
             w.style.visibility ="hidden";
             w.style.left = "700px";
             x.style.left = "212px";
