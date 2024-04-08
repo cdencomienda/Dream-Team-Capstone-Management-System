@@ -1,15 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
+// document.addEventListener('profile', function () {
+//   const editProfileBtn = document.querySelector('.editprofileBtn');
+//   const logoutBtn = document.querySelector('.logoutBtn');
 
-  editProfileBtn.addEventListener('click', function (event) {
-    // Prevent default behavior of anchor tag
-    event.preventDefault();
-    // Execute your edit profile function or redirect to the edit profile page
-    // Example:
-    // window.location.assign("EditProfilePage.html");
-  }); 
-});
+//   editProfileBtn.addEventListener('click', function (event) { 
+//     event.preventDefault(); 
+//   }); 
+// });
 
 function openArchive(){
   window.location.assign("ProfessorHome.php")
@@ -23,10 +19,21 @@ function openClassPage(){
 function logOUT(){
   window.location.assign("LoginSignup.html")
 }
+document.getElementById('editProfileBtn').addEventListener('click', function() {
+  var overlay = document.getElementById("editProfileOverlay");
+  overlay.style.display = "block";
+});
 
-const tap = document.querySelector('.profile', 'melonbtn');
+window.onclick = function(event) {
+  var overlay = document.getElementById("editProfileOverlay");
+  if (event.target == overlay) {
+      overlay.style.display = "none";
+  }
+}
+
+const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
 tap.addEventListener('click', function () {
-  const toggleMenu = document.querySelector('.menu', '.settingMelon');
+  const toggleMenu = document.querySelector('.menu', '.settingMelon', );
   toggleMenu.classList.toggle('active', 'melonActivate');
 }); 
 
