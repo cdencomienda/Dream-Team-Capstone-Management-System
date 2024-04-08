@@ -12,27 +12,44 @@
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
             </div> 
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
-                <button type="submit" class="searchButton">
-                <span>&#128269;</span>
-                </button>
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+            <button type="submit" class="searchButton">
+            <span>&#128269;</span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="action">
+                <div class="profile">
+                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                </div>
+                <div class="menu">
+                    <h3><?php echo $_SESSION['username']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                    </h3>
+                    <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
+                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                </div> 
             </div>
-            <div class="container">
-                <div class="action">
-                    <div class="profile">
-                        <img src="menu_assets/prof.jpg" alt="profile-img">
-                    </div>
-                    <div class="menu">
-                        <h3><?php echo $_SESSION['username']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                        </h3>
-                        <button type="button" class="editprofileBtn">Edit Profile</button>
-                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
-                    </div>
+            <!-- editprofile -->
+            <div id="editProfileOverlay" class="editoverlay">
+                <div class="dropdown-profile">
+                    <form id="editProfileForm">
+                        <div class="profile">
+                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                        </div>
+                        <h5edit><?php echo $_SESSION['username']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h5edit>
+                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Username"> </h3>
+                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3>
+                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newEmail" placeholder="Input new Password"> </h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </head>
 <body> 
     <div class="Lsection">
