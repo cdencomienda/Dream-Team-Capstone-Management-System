@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="CourseCreate.css">
     <?php include 'login.php'; ?>
     <?php include 'CourseCreated.php'; ?>
+    <?php include 'editProfile.php'; ?>
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
@@ -34,16 +35,16 @@
             <!-- editprofile -->
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
-                    <form id="editProfileForm">
+                    <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
                             <img src="menu_assets/prof.jpg" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Username"> </h3>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3>
-                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newEmail" placeholder="Input new Password"> </h3>
+                        <!-- <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3> -->
+                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
+                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn">Save Changes</button>
                     </form>
                 </div>
@@ -64,7 +65,7 @@
     <div class="professorClass">
         <div class="courseCreation" grid>
             <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
-            <form method="post" action="CourseCreated.php">
+            <form method="post" action="CourseCreated.php" method="POST">
                 <div class="containerCreatecourse">
                     <h2>Create Course</h2>
                     <div> 
@@ -72,7 +73,7 @@
                             <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name"> 
                             <h3>Course Code:</h3>
                             <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code">
-                            <div id="courseCodeSuggestions"></div> <!-- Add this line for search suggestions -->
+                            <div id="courseCodeSuggestions"></div>
                             
                         <h3> Section: 
                             <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
