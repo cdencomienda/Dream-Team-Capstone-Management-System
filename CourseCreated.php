@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data after live search
     $courseName = $_POST['courseName'];
     $courseCode = $_POST['courseCode'];
+    $rubricCode = $_POST['rubricCode'];
     $section = $_POST['Section']; // Added to retrieve section input
     $acadYear = $_POST['AcadYear']; // Added to retrieve academic year input
     $term = $_POST['Term']; // Added to retrieve term input
@@ -54,6 +55,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Query execution failed
             // Handle the error, display an error message, or redirect to an error page
             echo "Error: " . mysqli_error($conn); // Display error message
+            exit(); // Terminate script to prevent further execution
+        }
+
+        $sqlCheckCourse = "SELECT courseID FROM `course created` WHERE courseID = $courseID";
+
+        $resultCheckCourse = mysqli_query($conn, $sqlCheckCourse);
+
+        if (mysqli_num_rows($resultCheckCourse) > 0) {
+            // The courseID exists in the course created table, proceed with the insert
+            $sqlCourseOffered = "INSERT INTO `course offered` (classID, rubricsID, courseID, section) VALUES ('$courseName', '$rubricCode', '$courseID', '$section')";
+
+            if (mysqli_query($conn, $sqlCourseOffered)) {
+                // Query executed successfully
+                // You can redirect the user to a success page or display a success message
+                header("Location: CourseCreate.php"); // Redirect to success page
+                exit(); // Terminate script to prevent further execution
+            } else {
+                // Query execution failed
+                // Handle the error, display an error message, or redirect to an error page
+                echo "Error: " . mysqli_error($conn); // Display error message
+                exit(); // Terminate script to prevent further execution
+            }
+        } else {
+            // The courseID does not exist in the course created table
+            echo "Error: CourseID does not exist in the course created table.";
             exit(); // Terminate script to prevent further execution
         }
 
