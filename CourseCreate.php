@@ -73,8 +73,7 @@
                             <h3>Course Code:</h3>
                             <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code">
                             <div id="courseCodeSuggestions"></div> <!-- Add this line for search suggestions -->
-                            <h3>Rubric Code:</h3>
-                            <input type="text" id="courserubric" class="inputTerm" name="rubricCode" placeholder="Input Rubric Code">
+                            
                         <h3> Section: 
                             <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
                         </h3>
@@ -176,6 +175,11 @@
             <h3>Requirements Description</h3>
                 <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description"> 
             <h3>${courseName}</h3>
+        </div>
+<!-- rubric -->
+        <div class="rubriccontainer">
+            <h3>Rubric Code:</h3>
+            <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
         </div>
     </div>
     <script 
