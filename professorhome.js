@@ -92,7 +92,7 @@ function setrequirements() {
 }
 
 function rubric() { 
-  var container = document.querySelector('.rubric');
+  var container = document.querySelector('.rubriccontainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
