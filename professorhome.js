@@ -47,8 +47,36 @@ function createcourse() {
   const courseContainer = document.querySelector('.courseCreation');
   const courseInfo = document.createElement('div');
   courseInfo.classList.add('courseInfo');  
-  courseInfo.innerHTML = `
-      <button type="button" class="courseNAMEbtn" onclick="courseinfobtn()">${courseName}</button> 
+
+  // AJAX request to fetch courses created by the current user
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'CourseCreateContainer.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+              const courses = JSON.parse(xhr.responseText);
+              courses.forEach(course => {
+                  const { courseID, courseName } = course;
+                  const courseBtn = document.createElement('button');
+                  courseBtn.type = 'button';
+                  courseBtn.classList.add('courseNAMEbtn');
+                  courseBtn.textContent = courseName;
+                  courseBtn.onclick = function () {
+                      // Function to handle button click
+                      courseinfobtn(courseID); // Assuming courseID is passed to courseinfobtn
+                  };
+                  courseInfo.appendChild(courseBtn);
+              });
+              courseContainer.appendChild(courseInfo); // Append courseInfo to courseContainer
+          } else {
+              console.error('Failed to fetch courses');
+          }
+      }
+  };
+  xhr.send();
+
+  courseInfo.innerHTML += `
       <div class="dropdown">
           <button type="button" class="classSet" onclick="dropdown()">...</button>
           <div class="dropdown-content" style="display: none;">
@@ -58,12 +86,12 @@ function createcourse() {
               <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
               <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
           </div>
-      </div> `;
-  courseContainer.appendChild(courseInfo);  
+      </div>`;
 
   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
   document.querySelector('.containerCreatecourse').style.display = 'none';
 }
+
 
 
 function dropdown() {

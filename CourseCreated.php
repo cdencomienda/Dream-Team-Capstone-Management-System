@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert data into `course_created` table
 
-        $sqlCourseCreated = "INSERT INTO `course created` (courseID, professorID, CapsID, AY, term, Unit) VALUES ($courseID, $userID, $capsID, '$acadYear', $term, $unit)";
+        $sqlCourseCreated = "INSERT INTO `course created` (courseName, section, professorID, CapsID, AY, term, Unit) VALUES ('$courseName', '$section', $userID, $capsID, '$acadYear', $term, $unit)";
 
         // Execute the query for course_created
         if (mysqli_query($conn, $sqlCourseCreated)) {
             // Query executed successfully
             // You can redirect the user to a success page or display a success message
-            // header("Location: CourseCreate.php"); // Redirect to success page
+            header("Location: CourseCreate.php"); // Redirect to success page
             exit(); // Terminate script to prevent further execution
         } else {
             // Query execution failed

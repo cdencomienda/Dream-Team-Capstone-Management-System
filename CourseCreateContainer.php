@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Check if session is not already active
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session if it's not already active
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
@@ -10,28 +13,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Fetch data from the database
-    $query = "SELECT * FROM `course offered`"; // Replace "your_table_name" with your actual table name
-    $result = mysqli_query($conn, $query);
+    if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+        $userID = mysqli_real_escape_string($conn, $_SESSION['user_id']);
 
-    // Check if there are rows returned
-    if (mysqli_num_rows($result) > 0) {
-        // Output data of each row
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="sectionClass">';
-            echo '<div class="creategroup">';
-            // Display data from the database within your HTML structure
-            echo '<p>Field 1: ' . $row['field1'] . '</p>'; // Replace "field1" with your actual column name
-            echo '<p>Field 2: ' . $row['field2'] . '</p>'; // Replace "field2" with your actual column name
-            // Add more fields as needed
-            echo '</div>';
-            echo '</div>';
+        $sql = "SELECT courseID, courseName FROM course_created WHERE userID = '$userID'";
+        $result = $conn->query($sql);
+
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $courses = array();
+                while ($row = $result->fetch_assoc()) {
+                    $courses[] = $row;
+                }
+                echo json_encode($courses);
+            } else {
+                echo "No courses found.";
+            }
+        } else {
+            echo "Error executing query: " . $conn->error;
         }
-    } else {
-        echo "No data available";
     }
 
-    // Close the connection
-    mysqli_close($conn);
+    $conn->close();
 }
 ?>
