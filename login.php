@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verify password
         if ($password == $storedPassword) {
-            // Password is correct, set session variables
+            // Password is correct, set session variables and redirect
             $_SESSION['user_id'] = $row['userID'];
             $_SESSION['username'] = $row['userName']; // Assuming the user's name is stored in the database
             $_SESSION['user_email'] = $row['userEmail'];
@@ -43,22 +43,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             } else {
                 // Handle invalid userType
-                echo "Invalid user type.";
+                $_SESSION['error_message'] = "Invalid user type.";
+                header("Location: LoginSignup.php");
                 exit();
             }
         } else {
             // Incorrect password
-            echo '<script> 
-                alert ("Incorrect password. Please enter the right password.")
-                window.location.href = "LoginSignup.html";
-            </script>';
+            $_SESSION['error_message'] = "Incorrect password. Please enter the right password.";
+            header("Location: LoginSignup.php");
+            exit();
         }
     } else {
         // User not found
-        echo '<script> 
-                alert ("User not found. Please register ")
-                window.location.href = "LoginSignup.html";
-            </script>';
+        $_SESSION['error_message'] = "User not found. Please register.";
+        header("Location: LoginSignup.php");
+        exit();
     }
 
     // Close connection

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
@@ -39,33 +41,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Perform basic validation
     if ($password != $confirm_password) {
-        echo '<script>
-        alert ("Passwords do not match. Please try again.")
-        window.location.href = "LoginSignup.html";
-        </script>';
+        $_SESSION['error_message'] = "Passwords do not match. Please try again.";
+        header("Location: LoginSignup.php");
+        exit();
     } else {
         // Check if the user already exists in the database
         $query = "SELECT * FROM users WHERE userEmail='$email'";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
-            echo '<script> 
-                    alert ("Email already registered. Please try again.")
-                    window.location.href = "LoginSignup.html";
-                </script>';
-        }
-        
-         else {
+            $_SESSION['error_message'] = "Email already registered. Please try again.";
+            header("Location: LoginSignup.php");
+            exit();
+        } else {
             // Insert new user data into the database with userType, profile picture, and unhashed password
-            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType, profilePicture) VALUES ('$name', '$email', '$password', '$userType', '$profilePicture')";
+            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType) VALUES ('$name', '$email', '$password', '$userType')";
             if (mysqli_query($conn, $insert_query)) {
-                echo '<script> 
-                alert ("Registration successful. Please login.")
-                window.location.href = "LoginSignup.html";
-            </script>';
-                
+                $_SESSION['success_message'] = "Registration successful. Please login.";
+                header("Location: LoginSignup.php");
+                exit();
             } else {
-                echo "Error: " . mysqli_error($conn);
+                $_SESSION['error_message'] = "Error: " . mysqli_error($conn);
+                header("Location: LoginSignup.php");
+                exit();
             }
         }
     }
