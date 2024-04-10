@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert data into `course_created` table
-        $courseID = 42025;
 
         $sqlCourseCreated = "INSERT INTO `course created` (courseID, professorID, CapsID, AY, term, Unit) VALUES ($courseID, $userID, $capsID, '$acadYear', $term, $unit)";
 
@@ -55,31 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Query execution failed
             // Handle the error, display an error message, or redirect to an error page
             echo "Error: " . mysqli_error($conn); // Display error message
-            exit(); // Terminate script to prevent further execution
-        }
-
-        $sqlCheckCourse = "SELECT courseID FROM `course created` WHERE courseID = $courseID";
-
-        $resultCheckCourse = mysqli_query($conn, $sqlCheckCourse);
-
-        if (mysqli_num_rows($resultCheckCourse) > 0) {
-            // The courseID exists in the course created table, proceed with the insert
-            $sqlCourseOffered = "INSERT INTO `course offered` (classID, rubricsID, courseID, section) VALUES ('$courseName', 5000000001, null, '$section')";
-
-            if (mysqli_query($conn, $sqlCourseOffered)) {
-                // Query executed successfully
-                // You can redirect the user to a success page or display a success message
-                header("Location: CourseCreate.php"); // Redirect to success page
-                exit(); // Terminate script to prevent further execution
-            } else {
-                // Query execution failed
-                // Handle the error, display an error message, or redirect to an error page
-                echo "Error: " . mysqli_error($conn); // Display error message
-                exit(); // Terminate script to prevent further execution
-            }
-        } else {
-            // The courseID does not exist in the course created table
-            echo "Error: CourseID does not exist in the course created table.";
             exit(); // Terminate script to prevent further execution
         }
 
