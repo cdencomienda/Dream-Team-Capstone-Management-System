@@ -27,6 +27,8 @@
             z.style.left = "0px";
         }
     
+
+        
         let profilePic = document.getElementById("profile-pic");
         let inputFile = document.getElementById("input-file");
     
@@ -40,3 +42,11 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const registerError = urlParams.get('register_error');
+    
+        // If register_error parameter is present, call the register() function
+        if (registerError === 'true') {
+            register();
+        }
