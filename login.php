@@ -11,7 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve user input from the form
-    $email = $_POST['email'];
+    // $email = $_POST['email'];
+
+    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
     $password = $_POST['password'];
 
     // Fetch user data from the database
@@ -44,21 +46,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 // Handle invalid userType
                 $_SESSION['error_message'] = "Invalid user type.";
-                header("Location: LoginSignup.php");
+                header("Location: LoginSignup.php"); 
                 exit();
             }
         } else {
             // Incorrect password
             $_SESSION['error_message'] = "Incorrect password. Please enter the right password.";
+            $_SESSION['email'] = $email; // Store the entered email in session
+
             header("Location: LoginSignup.php");
+
             exit();
         }
     } else {
         // User not found
+
+        $_SESSION['email'] = $email; // Store the entered email in session
+
         $_SESSION['error_message'] = "User not found. Please register.";
         header("Location: LoginSignup.php");
         exit();
     }
+
+    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
 
     // Close connection
     mysqli_close($conn);

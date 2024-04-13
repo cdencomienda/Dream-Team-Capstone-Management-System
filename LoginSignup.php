@@ -62,7 +62,7 @@
  
             <!-- Login/signup info box -->
             <form id="login" class="input-group" action="login.php" method="POST">
-                <input type="email" class="input-field" placeholder="Email" name="email" required>
+                <input type="email" class="input-field" placeholder="Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
                 <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
@@ -82,12 +82,14 @@
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
             }
+
             </script>
             
             
             <form id="register" class="input-group" action="register.php" method="POST">
-                <input type="text" class="input-field" placeholder="Name" name="name" required>
-                <input type="email" class="input-field" placeholder="Asia Pacific College Email" name="email" required>
+
+                <input type="text" class="input-field" placeholder="Name" name="name" value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ''; ?>" required>
+                <input type="email" class="input-field" placeholder="Asia Pacific College Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
                 <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
                 <input type="password" class="input-field" placeholder="Confirm Password" name="confirm_password" required>
                 <button type="submit" class="submit-btn">Register</button>
@@ -101,14 +103,36 @@
             <?php 
                 unset($_SESSION['error_message']); // Clear the error message after displaying it
             } ?>
+            <script>
+                const urlParams = new URLSearchParams(window.location.search);
+                const registerError = urlParams.get('register_error');
+                 if (registerError === 'true') {
+                    register();
+                }
+                function register() {
+                    var x = document.getElementById("login");
+                    var y = document.getElementById("register");
+                    var z = document.getElementById("btn");
+                    var w = document.getElementById("profile-upload");
+                    var logo = document.getElementById("logo")
+    
+                     // w.style.left = "700px";
+                    logo.style.visibility = "hidden"
+                    w.style.visibility = "visible";
+                    x.style.left = "-488px";
+                    y.style.left = "212px";
+                    z.style.left = "110px";
+            }    
+            </script>    
 
             <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
-            }
+                register();
+            } 
             </script>
-                
+        
         </div>
     </div>
   <script src="login.js"></script>    
