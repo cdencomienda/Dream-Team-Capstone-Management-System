@@ -5,6 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Menu</title>
+    <style>
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px;
+            background-color: #ffcccc;
+            color: #ff0000;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        #error-message.show {
+            display: block;
+        }
+
+        #error-message button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
     <link rel="stylesheet" href="CourseCreate.css">
     <?php include 'login.php'; ?>
     <?php include 'CourseCreated.php'; ?>
@@ -47,6 +76,23 @@
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn">Save Changes</button>
                     </form>
+
+                    <?php if(isset($_SESSION['error_message'])) { ?>
+                <div id="error-message" class="show">
+                    <?php echo $_SESSION['error_message']; ?>
+                    <button onclick="clearErrorMessage()">OK</button>
+                </div>
+            <?php 
+                unset($_SESSION['error_message']); // Clear the error message after displaying it
+            } ?>
+
+            <script>
+            function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+            }
+            </script>
+
                 </div>
             </div>
         </div>
