@@ -34,6 +34,60 @@
     <link rel="stylesheet" type="text/css" href="CMS_Style.css">
     <?php include 'login.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        var x, y, z, w, logo;
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // JavaScript code to be executed after the page is loaded
+            x = document.getElementById("login");
+            y = document.getElementById("register");
+            z = document.getElementById("btn");
+            w = document.getElementById("profile-upload");
+            logo = document.getElementById("logo");
+        });
+
+        function auth(){
+            window.location.assign("HomePage.html");
+        }
+
+        function register() {
+            // w.style.left = "700px";
+            logo.style.visibility = "hidden";
+            w.style.visibility = "visible";
+            x.style.left = "-488px";
+            y.style.left = "212px";
+            z.style.left = "110px";
+        }
+
+        function login() {
+            logo.style.visibility = "visible";
+            w.style.visibility = "hidden";
+            w.style.left = "700px";
+            x.style.left = "212px";
+            y.style.left = "750px";
+            z.style.left = "0px";
+        }
+
+        let profilePic, inputFile;
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            profilePic = document.getElementById("profile-pic");
+            inputFile = document.getElementById("input-file");
+
+            inputFile.addEventListener("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e){
+                        profilePic.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+    
 </head>
 <body>
     <div class="hero">
@@ -107,9 +161,9 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const registerError = urlParams.get('register_error');
                  if (registerError === 'true') {
-                    register();
+                    P_register();
                 }
-                function register() {
+                function P_register() {
                     var x = document.getElementById("login");
                     var y = document.getElementById("register");
                     var z = document.getElementById("btn");
@@ -124,15 +178,12 @@
                     z.style.left = "110px";
             }    
             </script>    
-
             <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
-                register();
             } 
-            </script>
-        
+            </script>        
         </div>
     </div>
   <script src="login.js"></script>    
