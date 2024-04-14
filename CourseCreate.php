@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Menu</title>
     <style>
+        body{
+         background: #CBC4BA;
+         overflow-x: hidden;
+        overflow: hidden;
+        }
         #error-message {
             position: absolute;
             top: 50%;
@@ -64,21 +69,27 @@
             <!-- editprofile -->
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
+
                     <form id="editProfileForm" action="editProfile.php" method="POST">
+                        <!-- <div>
+                        <button class = "close" onclick= "closeEditform()"> X </button>
+                        </div> -->
                         <div class="profile">
                             <img src="menu_assets/prof.jpg" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <!-- <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3> -->
+                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3>
                         <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                        <button type="submit" class="saveEditbtn">Save Changes</button>
+                        <button type="submit" class="saveEditbtn"> Save Changes </button>
+                        
                     </form>
 
                     <?php if(isset($_SESSION['error_message'])) { ?>
                 <div id="error-message" class="show">
+
                     <?php echo $_SESSION['error_message']; ?>
                     <button onclick="clearErrorMessage()">OK</button>
                 </div>
@@ -87,12 +98,29 @@
             } ?>
 
             <script>
+                // JavaScript code to display the form overlay
+                window.onload = function() {
+                    var urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.has('showOverlay')) {
+                        document.getElementById('editProfileOverlay').style.display = 'block';
+                    }
+                    window.onclick = function(event) {
+                        var overlay = document.getElementById('editProfileOverlay');
+
+                        if (event.target == overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
+                }
+            </script>
+
+            <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
             }
             </script>
-
                 </div>
             </div>
         </div>

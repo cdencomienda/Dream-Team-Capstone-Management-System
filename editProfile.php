@@ -21,15 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Update the user's profile in the database
         $sql = "UPDATE users SET userName='$newName', userPassword='$newPassword' WHERE userID='{$_SESSION['user_id']}'";
         if (mysqli_query($conn, $sql)) {
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=false");            
             exit();
         } else {
             $_SESSION['error_message'] = "Error updating profile: " . mysqli_error($conn);
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
         }
     } else {
         $_SESSION['error_message'] = "Please fill in all required fields.";
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
+        exit();
     }
-
     // Redirect back to the edit profile page
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();

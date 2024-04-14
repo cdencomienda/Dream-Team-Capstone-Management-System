@@ -17,13 +17,17 @@ function openClassPage(){
   window.location.assign("CourseCreate.php")
 } 
 function logOUT(){
-  window.location.assign("LoginSignup.html")
+  window.location.assign("LoginSignup.php")
 }
 document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");
   overlay.style.display = "block";
 });
- 
+
+function closeEditform(){
+  document.getElementById('editProfileOverlay').style.display = 'none';
+}
+
 window.onclick = function(event) {
   var overlay = document.getElementById("editProfileOverlay");
   if (event.target == overlay) {

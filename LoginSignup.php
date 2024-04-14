@@ -39,7 +39,6 @@
         var x, y, z, w, logo;
 
         window.addEventListener('DOMContentLoaded', (event) => {
-            // JavaScript code to be executed after the page is loaded
             x = document.getElementById("login");
             y = document.getElementById("register");
             z = document.getElementById("btn");
@@ -169,7 +168,6 @@
                     var z = document.getElementById("btn");
                     var w = document.getElementById("profile-upload");
                     var logo = document.getElementById("logo")
-    
                      // w.style.left = "700px";
                     logo.style.visibility = "hidden"
                     w.style.visibility = "visible";
