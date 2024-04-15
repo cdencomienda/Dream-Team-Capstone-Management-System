@@ -25,6 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if userID is set in the session
     if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         $userID = $_SESSION['user_id'];
+    
+        // Retrieve courses created by the current user
+        $queryCourses = "SELECT * FROM `course created` WHERE professorID = $userID";
+        $resultCourses = mysqli_query($conn, $queryCourses);
+    
+        // Display the courses
+        while ($rowCourse = mysqli_fetch_assoc($resultCourses)) {
+            echo "Course Name: " . $rowCourse['courseName'] . "<br>";
+            // Display other course information as needed
+        }
+    
 
         // Retrieve the CapsID based on the courseCode
         $query = "SELECT CapsID FROM `capstone courses` WHERE courseName = ?";

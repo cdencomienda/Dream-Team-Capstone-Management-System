@@ -13,18 +13,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if the form fields are not empty
-    if (!empty($_POST['newname']) && !empty($_POST['newPassword'])) {
-        // Retrieve the new profile information from the form
+    if (!empty($_POST['userEmail']) && !empty($_POST['newname']) && !empty($_POST['newPassword'])) {
+        // Retrieve the email and new profile information from the form
+        $userEmail = $_POST['userEmail'];
         $newName = $_POST['newname'];
         $newPassword = $_POST['newPassword'];
 
-        // Update the user's profile in the database
-        $sql = "UPDATE users SET userName='$newName', userPassword='$newPassword' WHERE userID='{$_SESSION['user_id']}'";
-        if (mysqli_query($conn, $sql)) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=false");            
-            exit();
+        // Check if the entered email matches the userEmail in the database
+        $emailCheckQuery = "SELECT * FROM users WHERE userEmail='$userEmail'";
+        $result = mysqli_query($conn, $emailCheckQuery);
+        if (mysqli_num_rows($result) == 1) {
+            // Email matches, update the user's profile in the database
+            $sql = "UPDATE users SET userName='$newName', userPassword='$newPassword' WHERE userEmail='$userEmail'";
+            if (mysqli_query($conn, $sql)) {
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=false");            
+                exit();
+            } else {
+                $_SESSION['error_message'] = "Error updating profile: " . mysqli_error($conn);
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
+            }
         } else {
-            $_SESSION['error_message'] = "Error updating profile: " . mysqli_error($conn);
+            $_SESSION['error_message'] = "Enter your correct email.";
             header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
         }
     } else {
@@ -32,8 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
         exit();
     }
-    // Redirect back to the edit profile page
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit();
+
+     // Redirect back to the edit profile page
+     header("Location: " . $_SERVER['HTTP_REFERER']);
+     exit();
+    
 }
 ?>

@@ -80,7 +80,7 @@
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="newEmail" placeholder="Input new Email"> </h3>
+                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
                         <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
