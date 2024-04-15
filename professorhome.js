@@ -26,6 +26,7 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
 
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
+  document.getElementById('menuBtn').style.visibility = 'hidden';
 }
 
 window.onclick = function(event) {

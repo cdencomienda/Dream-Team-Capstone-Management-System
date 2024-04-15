@@ -43,6 +43,7 @@
     <?php include 'login.php'; ?>
     <?php include 'CourseCreated.php'; ?>
     <?php include 'editProfile.php'; ?>
+
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
@@ -53,12 +54,13 @@
             <span>&#128269;</span>
             </button>
         </div>
+
         <div class="container">
             <div class="action">
                 <div class="profile">
                     <img src="menu_assets/prof.jpg" alt="profile-img">
                 </div>
-                <div class="menu">
+                <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
@@ -69,11 +71,11 @@
             <!-- editprofile -->
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
-
-                    <form id="editProfileForm" action="editProfile.php" method="POST">
-                        <!-- <div>
+                    <div>
                         <button class = "close" onclick= "closeEditform()"> X </button>
-                        </div> -->
+                    </div>
+                    <form id="editProfileForm" action="editProfile.php" method="POST">
+                        
                         <div class="profile">
                             <img src="menu_assets/prof.jpg" alt="profile-img">
                         </div>
@@ -86,7 +88,7 @@
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
                         
                     </form>
-
+                    
                     <?php if(isset($_SESSION['error_message'])) { ?>
                 <div id="error-message" class="show">
 
