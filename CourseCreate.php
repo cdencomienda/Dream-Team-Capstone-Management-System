@@ -146,22 +146,22 @@
                     <h2>Create Course</h2>
                     <div> 
                         <h3>Course Name:</h3>
-                            <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name"> 
+                            <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name" required> 
                             <h3>Course Code:</h3>
-                            <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code">
+                            <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code" required>
                             <div id="courseCodeSuggestions"></div>
                             
                         <h3> Section: 
-                            <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section">   
+                            <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section" required>   
                         </h3>
                         <h3> AY: 
-                            <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year">   
+                            <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year" required>   
                         </h3>
                         <h3> Term:     
-                            <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3">
+                            <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3" required>
                         </h3>
                         <h3> Unit: 
-                            <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4">
+                            <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
                         </h3>
                     </div>  
                     <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
