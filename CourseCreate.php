@@ -271,9 +271,14 @@
         </div>
     </div> 
 
-    <script 
+    <script
         src="professorhome.js"> 
-    // Function to handle AJAX request for live search
+    
+    </script>   
+</body>
+</html>
+<script>
+// Function to handle AJAX request for live search
     function liveSearchCourseCode() {
     var input = document.getElementById('courseCode').value;
     var xhr = new XMLHttpRequest();
@@ -297,7 +302,4 @@
     document.getElementById('courseCode').addEventListener('blur', function() {
         document.getElementById('courseCodeSuggestions').innerHTML = '';
 });
-    </script>   
-</body>
-</html>
-
+</script>   
