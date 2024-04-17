@@ -139,35 +139,46 @@
 
 <!-- courseCreation     -->
     <div class="professorClass">
-        <div class="courseCreation" grid>
-            <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
-            <form method="post" action="CourseCreated.php" method="POST">
-                <div class="containerCreatecourse">
-                    <h2>Create Course</h2>
-                    <div> 
-                        <h3>Course Name:</h3>
-                            <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name" required> 
-                            <h3>Course Code:</h3>
-                            <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code" required>
-                            <div id="courseCodeSuggestions"></div>
-                            
-                        <h3> Section: 
-                            <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section" required>   
-                        </h3>
-                        <h3> AY: 
-                            <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year" required>   
-                        </h3>
-                        <h3> Term:     
-                            <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3" required>
-                        </h3>
-                        <h3> Unit: 
-                            <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
-                        </h3>
-                    </div>  
-                    <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
-                </div>
-            </form>
-        </div> 
+    <div class="courseCreation" grid>
+    <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
+    <form method="post" action="CourseCreated.php" method="POST">
+        <div class="containerCreatecourse">
+            <h2>Create Course</h2>
+            <div> 
+                <h3>Course Name:</h3>
+                <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name" required> 
+                <h3>Course Code:</h3>
+                <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code" required>
+                <div id="courseCodeSuggestions"></div>
+                
+                <h3> Section: 
+                    <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section" required>   
+                </h3>
+                <h3> AY: 
+                    <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year" required>   
+                </h3>
+                <h3> Term:     
+                    <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3" required>
+                </h3>
+                <h3> Unit: 
+                    <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
+                </h3>
+            </div>  
+            <button type="button" onclick="createcourse()" id="ccbutton" class="createcourseButton">Create Course</button>
+        </div>
+    </form>
+</div> 
+<div class="dropdown">            
+    <h3 id="courseNameDisplay"></h3>
+    <button type="button" class="classSet" onclick="dropdown()">...</button>
+    <div class="dropdown-content">
+        <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+        <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+    </div>
+</div>
 
 <!-- creategroup -->
         <div class="creategroupContainer">
@@ -258,14 +269,10 @@
             <h3>Rubric Code:</h3>
             <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
         </div>
-    </div>
+    </div> 
+
     <script 
         src="professorhome.js"> 
-    </script>   
-</body>
-</html>
-
-<script>
     // Function to handle AJAX request for live search
     function liveSearchCourseCode() {
     var input = document.getElementById('courseCode').value;
@@ -281,13 +288,16 @@
     } else { // If input is empty, hide the suggestions
         document.getElementById('courseCodeSuggestions').innerHTML = '';
     }
-}
+}   
 
-// Event listener to trigger live search on input change
-document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
+    // Event listener to trigger live search on input change
+    document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
 
-// Event listener to hide suggestions when the cursor is not in the field
-document.getElementById('courseCode').addEventListener('blur', function() {
-    document.getElementById('courseCodeSuggestions').innerHTML = '';
+    // Event listener to hide suggestions when the cursor is not in the field
+    document.getElementById('courseCode').addEventListener('blur', function() {
+        document.getElementById('courseCodeSuggestions').innerHTML = '';
 });
-</script>
+    </script>   
+</body>
+</html>
+

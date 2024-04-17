@@ -47,61 +47,88 @@ function toggleCourseCreation() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
+ 
+// ito un part na nakaka create dpt ng course kaso may problem
+// function createcourse() { 
+//   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
+//   const courseContainer = document.querySelector('.courseCreation');
+//   const courseInfo = document.createElement('div');
+//   courseInfo.classList.add('courseInfo');  
+
+//   // AJAX request to fetch courses created by the current user
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('POST', 'CourseCreateContainer.php', true);
+//   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//   xhr.onreadystatechange = function () {
+//       if (xhr.readyState === XMLHttpRequest.DONE) {
+//           if (xhr.status === 200) {
+//               const courses = JSON.parse(xhr.responseText);
+//               courses.forEach(course => {
+//                   const { courseID, courseName } = course;
+//                   const courseBtn = document.createElement('button');
+//                   courseBtn.type = 'button';
+//                   courseBtn.classList.add('courseNAMEbtn');
+//                   courseBtn.textContent = courseName;
+//                   courseBtn.onclick = function () {
+//                       // Function to handle button click
+//                       courseinfobtn(courseID); // Assuming courseID is passed to courseinfobtn
+//                   };
+//                   courseInfo.appendChild(courseBtn);
+//               });
+//               // Append courseInfo to courseContainer
+//               courseContainer.appendChild(courseInfo);
+              
+//               // Create the dropdown section
+//               const dropdownSection = document.createElement('div');
+//               dropdownSection.classList.add('dropdown');
+//               dropdownSection.innerHTML = `
+//                   <div class="dropdown" >
+//                   <button type="button" class="classSet" onclick="dropdown()">...</button>
+//                   <div class="dropdown-content" >
+//                       <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>
+//                       <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+//                       <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+//                       <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+//                       <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+//                   </div>
+//               </div>
+//               `;
+              
+//               // Append dropdownSection to professorClass div
+//               document.querySelector('.courseCreation').appendChild(dropdownSection);
+//           } else {
+//               console.error('Failed to fetch courses. Error: ' + xhr.status);
+//           }
+//       }
+//   };
+//   xhr.onerror = function() {
+//       console.error('Error occurred during the request.');
+//   };
+//   xhr.send();
+
+//   // Clear input field and hide course creation container
+//   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
+//   document.querySelector('.containerCreatecourse').style.display = 'none';
+// }
+
 function createcourse() { 
+  console.log("createcourse() function called."); // Add this line for debugging
   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
-  const courseContainer = document.querySelector('.courseCreation');
-  const courseInfo = document.createElement('div');
-  courseInfo.classList.add('courseInfo');  
+  document.getElementById('courseNameDisplay').textContent = courseName;
 
-  // AJAX request to fetch courses created by the current user
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'CourseCreateContainer.php', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-              const courses = JSON.parse(xhr.responseText);
-              courses.forEach(course => {
-                  const { courseID, courseName } = course;
-                  const courseBtn = document.createElement('button');
-                  courseBtn.type = 'button';
-                  courseBtn.classList.add('courseNAMEbtn');
-                  courseBtn.textContent = courseName;
-                  courseBtn.onclick = function () {
-                      // Function to handle button click
-                      courseinfobtn(courseID); // Assuming courseID is passed to courseinfobtn
-                  };
-                  courseInfo.appendChild(courseBtn);
-              });
-              courseContainer.appendChild(courseInfo); // Append courseInfo to courseContainer
-          } else {
-              console.error('Failed to fetch courses');
-          }
-      }
-  };
-  xhr.send();
-
-  courseInfo.innerHTML += `
-      <div class="dropdown">
-          <button type="button" class="classSet" onclick="dropdown()">...</button>
-          <div class="dropdown-content" style="display: none;">
-              <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>
-              <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-              <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-              <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-              <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-          </div>
-      </div>`;
-
+  // Clear input field
   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
-  document.querySelector('.containerCreatecourse').style.display = 'none';
 }
 
 
 
+
+
+
+
 function dropdown() {
-  const dropdownContent = document.querySelector('.dropdown-content');
-  dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+  const dropdownContent = document.querySelector('.classSet-content');
+  dropdownContent.style.display = (dropdownContent.style.display === 'none' || dropdownContent.style.display === 'block') ? 'none' : 'block';
 }
 
 function creategroup() { 
