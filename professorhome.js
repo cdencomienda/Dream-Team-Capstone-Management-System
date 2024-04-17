@@ -26,7 +26,11 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
 
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
-  document.getElementById('menuBtn').style.visibility = 'hidden';
+  document.getElementById('menuBtn').style.display = 'none';
+  location.reload();
+}
+function Back(){
+  document.getElementById('menuBtn').style.display = 'none';
 }
 
 window.onclick = function(event) {
@@ -36,11 +40,25 @@ window.onclick = function(event) {
   }
 }
 
-const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
-tap.addEventListener('click', function () {
-  const toggleMenu = document.querySelector('.menu', '.settingMelon', );
-  toggleMenu.classList.toggle('active', 'melonActivate');
-}); 
+const profile = document.querySelector('.profile');
+const melonbtn = document.querySelector('.melonbtn');
+const editprofileBtn = document.querySelector('.editprofileBtn');
+
+profile.addEventListener('click', function () {
+  const toggleMenu = document.querySelector('.menu');
+  toggleMenu.classList.toggle('active');
+});
+
+melonbtn.addEventListener('click', function () {
+  const toggleMelon = document.querySelector('.settingMelon');
+  toggleMelon.classList.toggle('melonActivate');
+});
+
+// const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
+// tap.addEventListener('click', function () {
+//   const toggleMenu = document.querySelector('.menu', '.settingMelon', );
+//   toggleMenu.classList.toggle('active', 'melonActivate');
+// }); 
 
 function toggleCourseCreation() { 
   var container = document.querySelector('.containerCreatecourse');

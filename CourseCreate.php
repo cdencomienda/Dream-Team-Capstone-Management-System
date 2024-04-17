@@ -72,7 +72,8 @@
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
                     <div>
-                        <button class = "close" onclick= "closeEditform()"> X </button>
+                        <button class = "close" onclick= "closeEditform()"> < </button>
+                     
                     </div>
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         
