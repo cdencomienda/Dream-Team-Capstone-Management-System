@@ -24,7 +24,8 @@
             z-index: 1000;
             display: none;
         }
-
+       
+        
         #error-message.show {
             display: block;
         }
@@ -72,9 +73,9 @@
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
                     <div>
-                        <button class = "close" onclick= "closeEditform()"> < </button>
-                     
+                            <button class="closebtn" onclick="closeEditform()">Back</button>
                     </div>
+
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         
                         <div class="profile">
@@ -83,9 +84,9 @@
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
-                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
+                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email" required></h3>
+                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name" required> </h3>
+                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password" required> </h3>
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
                         
                     </form>
@@ -111,13 +112,13 @@
                     window.onclick = function(event) {
                         var overlay = document.getElementById('editProfileOverlay');
 
-                        if (event.target == overlay) {
+                        if (event.target == overlay ) {
                             overlay.style.display = 'none';
                         }
                     }
                 }
             </script>
-
+            
             <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");

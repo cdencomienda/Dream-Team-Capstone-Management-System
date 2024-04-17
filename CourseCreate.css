@@ -686,3 +686,17 @@ h3 {
   border-radius: 10px; 
   background-color: #F8EFE3; 
 }
+.closebtn{
+  position: relative;
+  margin-left: -300px; 
+  margin-top: 25px;
+  width: 70px;
+  height: 40px;
+  padding: 25px;
+  background-image: url(menu_assets/back.png); 
+  border-radius: 15px;
+  transition:0.5s; 
+  background-repeat: no-repeat;
+  transform: translate(0%, -50%);
+}
+.closebtn:hover {background: #bbb;}
