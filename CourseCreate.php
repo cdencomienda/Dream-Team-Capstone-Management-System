@@ -164,14 +164,31 @@
                     <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
                 </h3>
             </div>  
-            <button type="button" onclick="createcourse()" id="ccbutton" class="createcourseButton">Create Course</button>
+            <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
         </div>
     </form>
+                    <!-- Error message display -->
+                    <?php if(isset($_SESSION['error_message'])) { ?>
+                <div id="error-message" class="show">
+                    <?php echo $_SESSION['error_message']; ?>
+                    <button onclick="clearErrorMessage()">OK</button>
+                </div>
+            <?php 
+                unset($_SESSION['error_message']); // Clear the error message after displaying it
+            } ?>
+            <script>
+                function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+            } 
+            </script>
 </div> 
+
+<!-- Course Display Dropdown -->
 <div class="dropdown">            
-    <h3 id="courseNameDisplay"></h3>
+    <h3 id="courseNameDisplay">Courses Created</h3>
     <button type="button" class="classSet" onclick="dropdown()">...</button>
-    <div class="dropdown-content">
+    <div class="dropdown-content" id="courseActions">
         <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
         <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
@@ -179,6 +196,50 @@
         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
     </div>
 </div>
+
+<!-- Script to handle AJAX request for live search -->
+<script>
+    // Function to handle AJAX request for live search
+    function liveSearchCourseCode() {
+        var input = document.getElementById('courseCode').value;
+        var xhr = new XMLHttpRequest();
+        if (input.trim() !== '') { // Check if input is not empty
+            xhr.open('GET', 'LiveSearchCourseCreated.php?search=' + input, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('courseCodeSuggestions').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        } else { // If input is empty, hide the suggestions
+            document.getElementById('courseCodeSuggestions').innerHTML = '';
+        }
+    }   
+
+    // Event listener to trigger live search on input change
+    document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
+
+    // Event listener to hide suggestions when the cursor is not in the field
+    document.getElementById('courseCode').addEventListener('blur', function() {
+        document.getElementById('courseCodeSuggestions').innerHTML = '';
+    });
+
+    // Function to fetch courses created by the professor via AJAX
+    function fetchCourses() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'LiveSearchCourseCreated.php', true); // PHP script to fetch courses
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('courseNameDisplay').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+
+    // Call the function to fetch courses when the page loads or as needed
+    fetchCourses();
+</script>
+
 
 <!-- creategroup -->
         <div class="creategroupContainer">
@@ -269,7 +330,7 @@
             <h3>Rubric Code:</h3>
             <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
         </div>
-    </div> 
+</div> 
 
     <script
         src="professorhome.js"> 

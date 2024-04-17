@@ -30,11 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $queryCourses = "SELECT * FROM `course created` WHERE professorID = $userID";
         $resultCourses = mysqli_query($conn, $queryCourses);
     
-        // Display the courses
-        while ($rowCourse = mysqli_fetch_assoc($resultCourses)) {
-            echo "Course Name: " . $rowCourse['courseName'] . "<br>";
-            // Display other course information as needed
-        }
+        // // Display the courses
+        // while ($rowCourse = mysqli_fetch_assoc($resultCourses)) {
+        //     echo "Course Name: " . $rowCourse['courseName'] . "<br>";
+        //     // Display other course information as needed
+        // }
     
 
         // Retrieve the CapsID based on the courseCode
@@ -48,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row = $result->fetch_assoc()) {
             $capsID = $row['CapsID'];
         } else {
-            die("Error: Course with code '$courseCode' not found.");
+            $_SESSION['error_message'] = "Course with '$courseCode' not found. " . mysqli_error($conn);
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
         }
 
         // Insert data into `course_created` table
