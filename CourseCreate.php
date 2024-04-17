@@ -198,39 +198,55 @@
 </div>
 
 <!-- Script to handle AJAX request for live search -->
+<!-- Course Display Dropdown -->
+<div id="coursesDropdown"></div>
+
 <script>
-    // Function to handle AJAX request for live search
-    function liveSearchCourseCode() {
-        var input = document.getElementById('courseCode').value;
-        var xhr = new XMLHttpRequest();
-        if (input.trim() !== '') { // Check if input is not empty
-            xhr.open('GET', 'LiveSearchCourseCreated.php?search=' + input, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('courseCodeSuggestions').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        } else { // If input is empty, hide the suggestions
-            document.getElementById('courseCodeSuggestions').innerHTML = '';
-        }
-    }   
-
-    // Event listener to trigger live search on input change
-    document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
-
-    // Event listener to hide suggestions when the cursor is not in the field
-    document.getElementById('courseCode').addEventListener('blur', function() {
-        document.getElementById('courseCodeSuggestions').innerHTML = '';
-    });
-
     // Function to fetch courses created by the professor via AJAX
     function fetchCourses() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'LiveSearchCourseCreated.php', true); // PHP script to fetch courses
+        xhr.open('GET', 'LiveSearchCourseCreated.php', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById('courseNameDisplay').innerHTML = xhr.responseText;
+                var courses = JSON.parse(xhr.responseText);
+                var coursesDropdown = document.getElementById('coursesDropdown');
+
+                courses.forEach(function(course) {
+                    var dropdown = document.createElement('div');
+                    dropdown.classList.add('dropdown');
+
+                    var h3 = document.createElement('h3');
+                    h3.textContent = course.courseName;
+
+                    var button = document.createElement('button');
+                    button.type = 'button';
+                    button.classList.add('classSet');
+                    button.textContent = '...';
+                    button.onclick = function() {
+                        dropdown.classList.toggle('active');
+                    };
+
+                    var dropdownContent = document.createElement('div');
+                    dropdownContent.classList.add('dropdown-content');
+
+                    var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
+                    actions.forEach(function(action) {
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.classList.add('dropdownbtn');
+                        btn.textContent = action;
+                        btn.onclick = function() {
+                            // Handle action based on course ID
+                            // createGroup(course.courseID), viewMembers(course.courseID), etc.
+                        };
+                        dropdownContent.appendChild(btn);
+                    });
+
+                    dropdown.appendChild(h3);
+                    dropdown.appendChild(button);
+                    dropdown.appendChild(dropdownContent);
+                    coursesDropdown.appendChild(dropdown);
+                });
             }
         };
         xhr.send();
@@ -239,6 +255,8 @@
     // Call the function to fetch courses when the page loads or as needed
     fetchCourses();
 </script>
+
+
 
 
 <!-- creategroup -->
