@@ -140,218 +140,221 @@
     </div>
 
 <!-- courseCreation     -->
-    <div class="professorClass">
-    <div class="courseCreation" grid>
-    <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
-    <form method="post" action="CourseCreated.php" method="POST">
-        <div class="containerCreatecourse">
-            <h2>Create Course</h2>
-            <div> 
-                <h3>Course Name:</h3>
-                <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name" required> 
-                <h3>Course Code:</h3>
-                <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code" required>
-                <div id="courseCodeSuggestions"></div>
-                
-                <h3> Section: 
-                    <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section" required>   
-                </h3>
-                <h3> AY: 
-                    <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year" required>   
-                </h3>
-                <h3> Term:     
-                    <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3" required>
-                </h3>
-                <h3> Unit: 
-                    <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
-                </h3>
-            </div>  
-            <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
-        </div>
-    </form>
-                    <!-- Error message display -->
-                    <?php if(isset($_SESSION['error_message'])) { ?>
+
+    <div class="wrapper">
+            <div class="professorClass">
+            <div class="courseCreation" grid>
+            <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
+            <form method="post" action="CourseCreated.php" method="POST">
+                <div class="containerCreatecourse">
+                    <h2>Create Course</h2>
+                    <div> 
+                        <h3>Course Name:</h3>
+                        <input type="text" id="coursenameID" class="inputTerm" name="courseName" placeholder="Input Course name" required> 
+                        <h3>Course Code:</h3>
+                        <input type="text" id="courseCode" class="inputTerm" name="courseCode" placeholder="Input Course Code" required>
+                        <div id="courseCodeSuggestions"></div>
+                        
+                        <h3> Section: 
+                            <input type="text" id="sectionID" class="inputSection" name="Section" placeholder="Input Section" required>   
+                        </h3>
+                        <h3> AY: 
+                            <input type="text" id="yearID" class="inputAY" name="AcadYear" placeholder=" Input Academic Year" required>   
+                        </h3>
+                        <h3> Term:     
+                            <input type="number" id="termID" class="Term" name="Term" placeholder="Term" min="1" max="3" required>
+                        </h3>
+                        <h3> Unit: 
+                            <input type="number" id="unitID" class="inputUnits" name="CourseUnit" placeholder="Unit/s" min="1" max="4" required>
+                        </h3>
+                    </div>  
+                    <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
+                </div>
+            </form>
+                <!-- Error message display -->
+                <?php if(isset($_SESSION['error_message'])) { ?>
                 <div id="error-message" class="show">
                     <?php echo $_SESSION['error_message']; ?>
                     <button onclick="clearErrorMessage()">OK</button>
                 </div>
-            <?php 
-                unset($_SESSION['error_message']); // Clear the error message after displaying it
-            } ?>
+                    <?php 
+                    unset($_SESSION['error_message']); // Clear the error message after displaying it
+                    } ?>
             <script>
                 function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
-            } 
+                } 
             </script>
-</div> 
+            <!-- Course Display Dropdown -->
+        <div id="coursesDropdown">
+            <div class="dropdown">            
+                <h3 id="courseNameDisplay">Courses Created</h3>
+                <button type="button" class="classSet" onclick="dropdown()">...</button>
+                <div class="dropdown-content" id="courseActions">
+                    <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                    <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                    <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                    <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                    <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                </div>
+            </div>
+        </div>
+        </div> 
+        
 
-<!-- Course Display Dropdown -->
-<div class="dropdown">            
-    <h3 id="courseNameDisplay">Courses Created</h3>
-    <button type="button" class="classSet" onclick="dropdown()">...</button>
-    <div class="dropdown-content" id="courseActions">
-        <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-        <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-    </div>
-</div>
+        <!-- Script to handle AJAX request for live search -->
+        
 
-<!-- Script to handle AJAX request for live search -->
-<!-- Course Display Dropdown -->
-<div id="coursesDropdown"></div>
+        <script>
+            // Function to fetch courses created by the professor via AJAX
+            function fetchCourses() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'LiveSearchCourseCreated.php', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var courses = JSON.parse(xhr.responseText);
+                        var coursesDropdown = document.getElementById('coursesDropdown');
 
-<script>
-    // Function to fetch courses created by the professor via AJAX
-    function fetchCourses() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'LiveSearchCourseCreated.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var courses = JSON.parse(xhr.responseText);
-                var coursesDropdown = document.getElementById('coursesDropdown');
+                        courses.forEach(function(course) {
+                            var dropdown = document.createElement('div');
+                            dropdown.classList.add('dropdown');
 
-                courses.forEach(function(course) {
-                    var dropdown = document.createElement('div');
-                    dropdown.classList.add('dropdown');
+                            var h3 = document.createElement('h3');
+                            h3.textContent = course.courseName;
 
-                    var h3 = document.createElement('h3');
-                    h3.textContent = course.courseName;
+                            var button = document.createElement('button');
+                            button.type = 'button';
+                            button.classList.add('classSet');
+                            button.textContent = '...';
+                            button.onclick = function() {
+                                dropdown.classList.toggle('active');
+                            };
 
-                    var button = document.createElement('button');
-                    button.type = 'button';
-                    button.classList.add('classSet');
-                    button.textContent = '...';
-                    button.onclick = function() {
-                        dropdown.classList.toggle('active');
-                    };
+                            var dropdownContent = document.createElement('div');
+                            dropdownContent.classList.add('dropdown-content');
 
-                    var dropdownContent = document.createElement('div');
-                    dropdownContent.classList.add('dropdown-content');
+                            var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
+                            actions.forEach(function(action) {
+                                var btn = document.createElement('button');
+                                btn.type = 'button';
+                                btn.classList.add('dropdownbtn');
+                                btn.textContent = action;
+                                btn.onclick = function() {
+                                    // Handle action based on course ID
+                                    // createGroup(course.courseID), viewMembers(course.courseID), etc.
+                                };
+                                dropdownContent.appendChild(btn);
+                            });
 
-                    var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
-                    actions.forEach(function(action) {
-                        var btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.classList.add('dropdownbtn');
-                        btn.textContent = action;
-                        btn.onclick = function() {
-                            // Handle action based on course ID
-                            // createGroup(course.courseID), viewMembers(course.courseID), etc.
-                        };
-                        dropdownContent.appendChild(btn);
-                    });
-
-                    dropdown.appendChild(h3);
-                    dropdown.appendChild(button);
-                    dropdown.appendChild(dropdownContent);
-                    coursesDropdown.appendChild(dropdown);
-                });
+                            dropdown.appendChild(h3);
+                            dropdown.appendChild(button);
+                            dropdown.appendChild(dropdownContent);
+                            coursesDropdown.appendChild(dropdown);
+                        });
+                    }
+                };
+                xhr.send();
             }
-        };
-        xhr.send();
-    }
 
-    // Call the function to fetch courses when the page loads or as needed
-    fetchCourses();
-</script>
+            // Call the function to fetch courses when the page loads or as needed
+            fetchCourses();
+        </script>
 
 
 
 
-<!-- creategroup -->
-        <div class="creategroupContainer">
-            <h1>Create group</h1>
-            <h3>Group Name:</h3>
-                        <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name"> 
-            <form class="addcheckbox">
-                <div class="flex-container">
-                    
-                    <div>
-                        <h3>Add Student:</h3>
-                        <input type="text" class="inputName" name="studentName" placeholder="Input name">
-                    </div>
-                    <div class="checkboxStudent">
-                        <input type="checkbox" id="StudentName" name="student" value="studentID">
-                        <label for="StudentName"> StudentName</label><br>
-                        <input type="checkbox" id="StudentName" name="student" value="studentID">
-                        <label for="StudentName"> StudentName</label><br>
-                    </div>
+        <!-- creategroup -->
+                <div class="creategroupContainer">
+                    <h1>Create group</h1>
+                    <h3>Group Name:</h3>
+                                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name"> 
+                    <form class="addcheckbox">
+                        <div class="flex-container">
+                            
+                            <div>
+                                <h3>Add Student:</h3>
+                                <input type="text" class="inputName" name="studentName" placeholder="Input name">
+                            </div>
+                            <div class="checkboxStudent">
+                                <input type="checkbox" id="StudentName" name="student" value="studentID">
+                                <label for="StudentName"> StudentName</label><br>
+                                <input type="checkbox" id="StudentName" name="student" value="studentID">
+                                <label for="StudentName"> StudentName</label><br>
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div>
+                                <h3>Add Panel:</h3>
+                                <input type="text" class="inputName" name="panelName" placeholder="Input name">
+                            </div>
+                            <div class="checkboxPanel">
+                                <input type="checkbox" id="PanelName" name="panel" value="panelID">
+                                <label for="PanelName"> PanelName</label><br>
+                                <input type="checkbox" id="PanelName" name="panel" value="panelID">
+                                <label for="PanelName"> PanelName</label><br>
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div>
+                                <h3>Add Advisor:</h3>
+                                <input type="text" class="inputName" name="advisorName" placeholder="Input name">
+                            </div>
+                            <div class="checkboxAdvisor">
+                                <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
+                                <label for="AdvisorName"> AdvisorName</label><br>
+                                <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
+                                <label for="AdvisorName"> AdvisorName</label><br>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
                 </div>
-                <div class="flex-container">
-                    <div>
-                        <h3>Add Panel:</h3>
-                        <input type="text" class="inputName" name="panelName" placeholder="Input name">
-                    </div>
-                    <div class="checkboxPanel">
-                        <input type="checkbox" id="PanelName" name="panel" value="panelID">
-                        <label for="PanelName"> PanelName</label><br>
-                        <input type="checkbox" id="PanelName" name="panel" value="panelID">
-                        <label for="PanelName"> PanelName</label><br>
-                    </div>
-                </div>
-                <div class="flex-container">
-                    <div>
-                        <h3>Add Advisor:</h3>
-                        <input type="text" class="inputName" name="advisorName" placeholder="Input name">
-                    </div>
-                    <div class="checkboxAdvisor">
-                        <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
-                        <label for="AdvisorName"> AdvisorName</label><br>
-                        <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
-                        <label for="AdvisorName"> AdvisorName</label><br>
-                    </div>
-                </div>
-            </form>
-            <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
-        </div>
 
-<!-- viewgroup -->
-        <div class="viewgroup">
-            <h3>Members:</h3>
-                <div class="membersContainer">
-                    <label for="StudentName"> StudentName</label><br>
-                    <label for="StudentName"> StudentName</label><br>
-                    <label for="StudentName"> StudentName</label><br>
-                    <label for="StudentName"> StudentName</label><br>
-                    <label for="InstructorName"> InstructorName</label><br>
+        <!-- viewgroup -->
+                <div class="viewgroup">
+                    <h3>Members:</h3>
+                        <div class="membersContainer">
+                            <label for="StudentName"> StudentName</label><br>
+                            <label for="StudentName"> StudentName</label><br>
+                            <label for="StudentName"> StudentName</label><br>
+                            <label for="StudentName"> StudentName</label><br>
+                            <label for="InstructorName"> InstructorName</label><br>
+                        </div>
                 </div>
-        </div>
 
-<!-- add members -->
-        <div class="addmember">
-            <form class="addcheckbox">
-                <div> 
-                    <h3>Add Member:</h3>
-                    <input type="text" class="inputName" name="studentName" placeholder="Input name"> 
+        <!-- add members -->
+                <div class="addmember">
+                    <form class="addcheckbox">
+                        <div> 
+                            <h3>Add Member:</h3>
+                            <input type="text" class="inputName" name="studentName" placeholder="Input name"> 
+                        </div>
+                        <div class="checkboxStudent">
+                            <input type="checkbox" id="StudentName" name="student" value="studentID">
+                            <label for="StudentName"> StudentName</label><br>
+                            <input type="checkbox" id="StudentName" name="student" value="studentID">
+                            <label for="StudentName"> StudentName</label><br>
+                        </div>
+                        <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
+                    </form>
                 </div>
-                <div class="checkboxStudent">
-                    <input type="checkbox" id="StudentName" name="student" value="studentID">
-                    <label for="StudentName"> StudentName</label><br>
-                    <input type="checkbox" id="StudentName" name="student" value="studentID">
-                    <label for="StudentName"> StudentName</label><br>
+
+        <!-- set requirements -->
+                <div class="setrequirements">
+                    <h3>Requirements</h3>
+                        <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
+                    <h3>Requirements Description</h3>
+                        <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description"> 
+                    <h3>${courseName}</h3>
                 </div>
-                <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
-            </form>
-        </div>
-
-<!-- set requirements -->
-        <div class="setrequirements">
-            <h3>Requirements</h3>
-                <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
-            <h3>Requirements Description</h3>
-                <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description"> 
-            <h3>${courseName}</h3>
-        </div>
-<!-- rubric -->
-        <div class="rubriccontainer">
-            <h3>Rubric Code:</h3>
-            <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
-        </div>
-</div> 
-
+        <!-- rubric -->
+                <div class="rubriccontainer">
+                    <h3>Rubric Code:</h3>
+                    <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
+                </div>
+        </div> 
+    </div>
     <script
         src="professorhome.js"> 
     
