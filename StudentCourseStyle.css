@@ -393,7 +393,7 @@ main.table {
   } */
  
   .course_created{
-  width: 250px; 
+  width: 350px; 
   height: 700px; 
   margin-left: 60px;
  }
@@ -484,6 +484,14 @@ main.table {
     text-align: center;
     margin-top: 13px;
     margin-right: 105px;
+    transition: backround-color .3s ease;
+  }
+  .Rep-FilesBtn:hover{
+    background-color: #958f87;
+  }
+ 
+  .Submission-Btn:hover{
+    background-color: #958f87;
   }
   .Rep-FilesBtn, .Submission-Btn, .Members-Btn {
     width: auto; 
@@ -497,10 +505,10 @@ main.table {
     margin: 5px;
 }
 .Rep-FilesBtn {
-    width: 50px; 
+    width: 66px; 
 }
 .Members-Btn {
-    width: 75px; 
+    width: 80px; 
     margin-right: 10px; 
 }
 .Submission-Btn {
@@ -520,7 +528,12 @@ main.table {
   position: relative;
   border-radius: 20px;
   border: none;
-} */
+  transition:backround-color .3s ease;
+} 
+.Members-Btn:hover {
+  background-color: #958f87;
+}
+*/
   button:hover{
     background-color:#958f87;
   }
@@ -546,4 +559,14 @@ main.table {
     transform: translateY(0);
     pointer-events: auto;
   }
- 
+
+  .submissionFrame, .studentFilesR {
+    display: none;
+    background-color: #ffffff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    width: 1000px;
+    height: 600px;
+    margin-left: -25px;
+    margin-top: 0px;
+}

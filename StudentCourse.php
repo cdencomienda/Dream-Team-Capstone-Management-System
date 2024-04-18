@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Course</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-         -->
+        
     <link rel="stylesheet" href="StudentCourseStyle.css">
     <?php include 'login.php'; ?>
     <div class="header">
@@ -65,8 +65,7 @@
                     </div>  
                     <h2>
                         <div class="button-group"> 
-                            <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> Files </button>
-
+                            <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
                             <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                             <div class="mDropdown">  
                             <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
@@ -77,19 +76,19 @@
                         </div>
                     </h2>     
                 </div>
-                <div class="defaultBody" >
+                <div class="defaultBody" id="defaultBody">
                     <div class="recentFiles" >
                         'featured files here'
                     </div >
                 </div>
-                <div class = "submissionFrame">
+                <div class="submissionFrame" id="submissionFrame">
                     <div class="submissionscontainer">
-
+                    submission tab
                     </div>
                 </div>
-                <div class = "studentFilesR">
+                <div class="studentFilesR" id="studentFilesR">
                     <div class = "sFileContainer">
-                        
+                        files repository
                     </div>
                 </div>
             </div>
@@ -106,6 +105,24 @@
             function archive(){
             window.location.assign("HomePage.php")
             } 
+            function showDefaultBody() {
+                document.getElementById("defaultBody").style.display = "block";
+                document.getElementById("submissionFrame").style.display = "none";
+                document.getElementById("studentFilesR").style.display = "none";
+            }
+
+            function submissionBtnAuth() {
+                document.getElementById("defaultBody").style.display = "none";
+                document.getElementById("submissionFrame").style.display = "block";
+                document.getElementById("studentFilesR").style.display = "none";
+            }
+
+            function r_filesBtnAuth() {
+                document.getElementById("defaultBody").style.display = "none";
+                document.getElementById("submissionFrame").style.display = "none";
+                document.getElementById("studentFilesR").style.display = "block";
+            }
+
     </script>   
     </div>
 </body>
