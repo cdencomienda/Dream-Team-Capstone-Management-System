@@ -170,39 +170,40 @@
                     <button type="submit" id="ccbutton" class="createcourseButton">Create Course</button>
                 </div>
             </form>
-                            <!-- Error message display -->
-                            <?php if(isset($_SESSION['error_message'])) { ?>
-                        <div id="error-message" class="show">
-                            <?php echo $_SESSION['error_message']; ?>
-                            <button onclick="clearErrorMessage()">OK</button>
-                        </div>
+                <!-- Error message display -->
+                <?php if(isset($_SESSION['error_message'])) { ?>
+                <div id="error-message" class="show">
+                    <?php echo $_SESSION['error_message']; ?>
+                    <button onclick="clearErrorMessage()">OK</button>
+                </div>
                     <?php 
-                        unset($_SESSION['error_message']); // Clear the error message after displaying it
+                    unset($_SESSION['error_message']); // Clear the error message after displaying it
                     } ?>
-                    <script>
-                        function clearErrorMessage() {
-                        var errorMessage = document.getElementById("error-message");
-                        errorMessage.classList.remove("show");
-                    } 
-                    </script>
-        </div> 
-
-        <!-- Course Display Dropdown -->
-        <!-- <div class="dropdown">            
-            <h3 id="courseNameDisplay">Courses Created</h3>
-            <button type="button" class="classSet" onclick="dropdown()">...</button>
-            <div class="dropdown-content" id="courseActions">
-                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+            <script>
+                function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+                } 
+            </script>
+            <!-- Course Display Dropdown -->
+        <div id="coursesDropdown">
+            <div class="dropdown">            
+                <h3 id="courseNameDisplay">Courses Created</h3>
+                <button type="button" class="classSet" onclick="dropdown()">...</button>
+                <div class="dropdown-content" id="courseActions">
+                    <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                    <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                    <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                    <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                    <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                </div>
             </div>
-        </div> -->
+        </div>
+        </div> 
+        
 
         <!-- Script to handle AJAX request for live search -->
-        <!-- Course Display Dropdown -->
-        <div id="coursesDropdown"></div>
+        
 
         <script>
             // Function to fetch courses created by the professor via AJAX
