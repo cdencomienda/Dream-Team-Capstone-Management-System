@@ -19,10 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newName = $_POST['newname'];
         $newPassword = $_POST['newPassword'];
 
-        // Check if the entered email matches the userEmail in the database
-        $emailCheckQuery = "SELECT * FROM users WHERE userEmail='$userEmail'";
-        $result = mysqli_query($conn, $emailCheckQuery);
-        if (mysqli_num_rows($result) == 1) {
+        // Check if the entered email matches the userEmail of the logged-in user
+        if ($userEmail == $_SESSION['user_email']) {
             // Email matches, update the user's profile in the database
             $sql = "UPDATE users SET userName='$newName', userPassword='$newPassword' WHERE userEmail='$userEmail'";
             if (mysqli_query($conn, $sql)) {
@@ -31,20 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION['error_message'] = "Error updating profile: " . mysqli_error($conn);
                 header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
+                exit();
             }
         } else {
-            $_SESSION['error_message'] = "Enter your correct email.";
+            $_SESSION['error_message'] = "Please enter your correct email.";
             header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
+            exit();
         }
     } else {
         $_SESSION['error_message'] = "Please fill in all required fields.";
         header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=true");
         exit();
     }
-
-     // Redirect back to the edit profile page
-     header("Location: " . $_SERVER['HTTP_REFERER']);
-     exit();
-    
 }
 ?>
