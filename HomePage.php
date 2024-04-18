@@ -8,7 +8,7 @@
     <?php include 'login.php'; ?>
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="archive()"></button> 
+            <button type="button" class="logobtn"  onclick="Studentarchive()"></button> 
             </div> 
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -30,7 +30,6 @@
                     </div>
                 </div>
             </div>
-        
     </div>
 </div>
 </head>
@@ -39,8 +38,8 @@
         <div id="sectionBtn"></div>
         <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
         <button type="button" class="class"  onclick="studentClass()">Class</button>
-        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
     </div> 
 
     <main class="table" id="customers_table">
@@ -77,42 +76,42 @@
                 <tr>
                       <td> 2 </td>
                       <td> Aogart ni albert</td>
-                      <td> 13 MArch, 2024 </td>
+                      <td> 13 March, 2024 </td>
                   </tr>
                   <tr>
                     <td> 3 </td>
                     <td> Bogart ni albert</td>
-                    <td> 19 MArch, 2024 </td>
+                    <td> 19 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 4 </td>
                     <td> Cogart ni albert</td>
-                    <td> 83 MArch, 2024 </td>
+                    <td> 83 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 5 </td>
                     <td> Eogart ni albert</td>
-                    <td> 63 MArch, 2024 </td>
+                    <td> 63 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 6 </td>
                     <td> Fogart ni albert</td>
-                    <td> 43 MArch, 2024 </td>
+                    <td> 43 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 7 </td>
                     <td> Gogart ni albert</td>
-                    <td> 23 MArch, 2024 </td>
+                    <td> 23 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 8 </td>
                     <td> Hogart ni albert</td>
-                    <td> 33 MArch, 2024 </td>
+                    <td> 33 March, 2024 </td>
                 </tr>
                 <tr>
                     <td> 9 </td>
                     <td> Jogart ni albert</td>
-                    <td> 29 MArch, 2024 </td>
+                    <td> 29 March, 2024 </td>
                 </tr>
                  </tbody>
           </table>
@@ -120,5 +119,12 @@
   </main>
   <script src="archive.js"></script>
 <script src="homepage.js"></script>   
+
+<script>
+        function studentClass(){
+            window.location.assign("StudentCourse.php");
+        }
+    </script>
+
 </body>
 </html>
