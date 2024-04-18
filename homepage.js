@@ -4,15 +4,20 @@ var z = document.getElementById("schedule");
 var w = document.getElementById("capstone");
 
 function notifAuth(){
-    window.location.assign("NotificationPage.html")
+    window.location.assign("NotificationPage.php")
 }
 function studentClass(){
-  window.location.assign("ClassStudent.html")
+  window.location.assign("StudentCourse.php")
 }
-function mainmenu(){
-  window.location.assign("HomePage.html")
+function Studentarchive(){
+  window.location.assign("HomePage.php")
 } 
-
+function StudentSchedule(){
+  
+} 
+function StudentCapstone(){
+  
+} 
 document.addEventListener('DOMContentLoaded', function () {
   const editProfileBtn = document.querySelector('.editprofileBtn');
   const logoutBtn = document.querySelector('.logoutBtn');
@@ -27,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function logOUT(){
-  window.location.assign("LoginSignup.html")
+  window.location.assign("LoginSignup.php")
 }
 
 const tap = document.querySelector('.profile');
