@@ -184,7 +184,7 @@
             </script>        
         </div>
     </div>
-  <script src="login.js"></script>    
+  <script src="LoginSignupModule/login.js"></script>    
     
 </body>
 </html>

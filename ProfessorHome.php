@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Main Menu</title>
     <link rel="stylesheet" href="professorStyle.css">
-    <?php include 'login.php'; ?>
+    <?php include '../LoginSignupModule/login.php'; ?>
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button> 
@@ -119,4 +119,4 @@
         src="professorhome.js"> 
     </script>   
 </body>
-</html>
+</html> 
