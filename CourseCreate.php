@@ -228,7 +228,7 @@
             </div>
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
-            <!-- <div id="coursesDropdown">
+            <div id="coursesDropdown">
                 <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
@@ -241,7 +241,7 @@
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
-  -->
+ 
 <!-- Script to handle AJAX request for live search -->
 
 <div id="coursesDropdown"></div>
@@ -260,10 +260,13 @@
                     var dropdown = document.createElement('div');
                     dropdown.classList.add('dropdown');
 
+                    var courseContainer = document.createElement('div'); // Container for course and button
+                    courseContainer.classList.add('course-container');
+
                     var h3 = document.createElement('h3');
                     h3.textContent = course.courseName;
 
-                    var button = document.createElement('h3', 'button');
+                    var button = document.createElement('button');
                     button.type = 'button';
                     button.classList.add('classSet');
                     button.textContent = '•••';
@@ -286,8 +289,9 @@
                         dropdownContent.appendChild(btn);
                     });
 
-                    dropdown.appendChild(h3);
-                    dropdown.appendChild(button);
+                    courseContainer.appendChild(h3);
+                    courseContainer.appendChild(button);
+                    dropdown.appendChild(courseContainer);
                     dropdown.appendChild(dropdownContent);
                     coursesDropdown.appendChild(dropdown);
                 });
@@ -298,6 +302,14 @@
 
     // Event delegation to handle dropdown toggle
     document.addEventListener('click', function (event) {
+        var classSetButtons = document.querySelectorAll('.classSet');
+        classSetButtons.forEach(function (button) {
+            var target = document.getElementById(button.dataset.target);
+            if (target && target.style.display !== 'none' && button !== event.target) {
+                target.style.display = 'none'; // Close the active dropdown
+            }
+        });
+
         if (event.target.classList.contains('classSet')) {
             var target = document.getElementById(event.target.dataset.target);
             if (target) {
@@ -332,6 +344,7 @@
     // Call the function to fetch courses when the page loads or as needed
     fetchCourses();
 </script>
+
 
 
 

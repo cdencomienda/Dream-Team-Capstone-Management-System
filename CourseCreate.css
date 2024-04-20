@@ -522,6 +522,16 @@ background-repeat: no-repeat;
   cursor: pointer;
 }   
 
+.course-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust margin as needed */
+}
+.course-container h3 {
+  margin-right: 10px; /* Adjust margin between course name and button */
+  margin-left: 30px; 
+}
+
 /* creategroup */
 .creategroupContainer {
   position: relative;
