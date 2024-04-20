@@ -326,7 +326,7 @@ background-image: url(menu_assets/system_logo.png);
 background-repeat: no-repeat;
 }
 
-.professorClass{
+.professorClass{ 
   margin-left: 80px; 
   width: 1200px;
   height: 1200px;  
@@ -539,7 +539,7 @@ background-repeat: no-repeat;
   width: 700px;
   height: 530px;
   padding: 25px;
-  top: -300px;
+  top: -400px;
   overflow:hidden;
   display: none;
   background-color: #ffffff;
@@ -625,7 +625,7 @@ h3 {
   grid-template-columns: 1fr auto; 
   gap: 10px;
 }
-.membersContainer{
+.GroupmembersContainer{
   position: absolute;
   left: 0;
   top: calc(100% + .25rem);
@@ -693,7 +693,7 @@ h3 {
   .mDropdown{
     position: relative;
   }
-.mDropdown > .Members-Btn:focus + .membersContainer{
+.mDropdown > .Members-Btn:focus + .GroupmembersContainer{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;

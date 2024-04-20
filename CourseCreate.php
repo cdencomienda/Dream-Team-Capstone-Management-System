@@ -228,7 +228,7 @@
             </div>
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
-            <div id="coursesDropdown">
+            <!-- <div id="coursesDropdown">
                 <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div>
+            </div> -->
  
 <!-- Script to handle AJAX request for live search -->
 
@@ -364,7 +364,7 @@
                                 <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                                 <div class="mDropdown">  
                                 <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                    <div class="membersContainer"> 
+                                    <div class="GroupmembersContainer"> 
                                         member 1 
                                      </div>
                                 </div>
@@ -437,14 +437,19 @@
                 </div>
 
 <!-- viewgroup -->
-            <div class="viewgroup">
+            <div class="viewgroup" id="viewGRP">
                 <h3>Members:</h3>
                     <div class="membersContainer">
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>InstructorName</h4>
+                        <!-- <text for="StudentName"> StudentName</label><br>
                         <label for="StudentName"> StudentName</label><br>
                         <label for="StudentName"> StudentName</label><br>
                         <label for="StudentName"> StudentName</label><br>
-                        <label for="StudentName"> StudentName</label><br>
-                        <label for="InstructorName"> InstructorName</label><br>
+                        <label for="InstructorName"> InstructorName</label><br> -->
                     </div>
             </div>
  

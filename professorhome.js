@@ -179,16 +179,22 @@ function createGROUP() {
 function newGroupCreated() {
   var container = document.querySelector('.GroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    
 }
 
 function viewMembers() { 
-  var container = document.querySelector('.viewgroup');
+  var container = document.querySelector('.viewgroup'); 
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+//   var hideGroup = document.getElementById("viewGRP")
+//   if (container) {
+//       hideGroup.style.display = "none";
+//   } 
 }
 
 function addMembers() { 
   var container = document.querySelector('.addmember');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+  
 }
 
 function setrequirements() { 
