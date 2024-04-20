@@ -229,7 +229,7 @@
 <!-- Course Display Dropdown --> 
         
             <div id="coursesDropdown">
-                <div class="dropdownmelon">            
+                <!-- <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
                         <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
@@ -238,15 +238,14 @@
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
-                </div>
+                </div> -->
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
  
 <!-- Script to handle AJAX request for live search -->
         
 <script>
-            // Function to fetch courses created by the professor via AJAX
-            // Function to fetch courses created by the professor via AJAX
+            // Function to fetch courses created by the professor via AJAX 
             function fetchCourses() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', 'LiveSearchCourseCreated.php', true);

@@ -146,8 +146,11 @@ function dropdownMelon() {
 function creategroup() { 
   var container = document.querySelector('.creategroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-  
 }
+
+
+// PANG CREATE NG GROUP UNDER COURSE CREATE
+
 function createGROUP() {
   // Get input values
   var groupName = document.querySelector('.inputgroupName').value;
