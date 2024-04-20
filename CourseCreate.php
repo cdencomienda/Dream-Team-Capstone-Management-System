@@ -227,9 +227,9 @@
             </script>
             </div>
 <!-- Course Display Dropdown --> 
-        
-            <div id="coursesDropdown">
-                <!-- <div class="dropdownmelon">            
+        <!-- WAG DELETE PLS -->
+            <!-- <div id="coursesDropdown">
+                <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
                         <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
@@ -238,112 +238,104 @@
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
-                </div> -->
+                </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
- 
+  -->
 <!-- Script to handle AJAX request for live search -->
-        
+
+<div id="coursesDropdown"></div>
+
 <script>
-            // Function to fetch courses created by the professor via AJAX 
-            function fetchCourses() {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'LiveSearchCourseCreated.php', true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        var courses = JSON.parse(xhr.responseText);
-                        var coursesDropdown = document.getElementById('coursesDropdown');
+    // Function to fetch courses created by the professor via AJAX
+    function fetchCourses() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'LiveSearchCourseCreated.php', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var courses = JSON.parse(xhr.responseText);
+                var coursesDropdown = document.getElementById('coursesDropdown');
 
+                courses.forEach(function (course) {
+                    var dropdown = document.createElement('div');
+                    dropdown.classList.add('dropdown');
 
-                        courses.forEach(function(course) {
-                            var dropdown = document.createElement('div');
-                            dropdown.classList.add('dropdown');
+                    var h3 = document.createElement('h3');
+                    h3.textContent = course.courseName;
 
+                    var button = document.createElement('h3', 'button');
+                    button.type = 'button';
+                    button.classList.add('classSet');
+                    button.textContent = '•••';
+                    button.dataset.target = 'dropdown-' + course.courseID; // Set a unique target for each button
 
-                            var h3 = document.createElement('h3');
-                            h3.textContent = course.courseName;
+                    var dropdownContent = document.createElement('div');
+                    dropdownContent.classList.add('dropdown-content');
+                    dropdownContent.id = 'dropdown-' + course.courseID; // Set a unique ID for each dropdown content
+                    dropdownContent.style.display = 'none'; // Initially hide the dropdown content
 
+                    var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
+                    actions.forEach(function (action) {
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.classList.add('dropdownbtn');
+                        btn.textContent = action;
+                        btn.onclick = function () {
+                            handleAction(action, course.courseID);
+                        };
+                        dropdownContent.appendChild(btn);
+                    });
 
-                            var button = document.createElement('button');
-                            button.type = 'button';
-                            button.classList.add('classSet');
-                            button.textContent = '...';
-                            button.onclick = function() {
-                                dropdown.classList.toggle('active');
-                            };
-
-
-                            var dropdownContent = document.createElement('div');
-                            dropdownContent.classList.add('dropdown-content');
-
-
-                            var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
-                            actions.forEach(function(action) {
-                                var btn = document.createElement('button');
-                                btn.type = 'button';
-                                btn.classList.add('dropdownbtn');
-                                btn.textContent = action;
-                                btn.onclick = function() {
-                                    // Handle action based on course ID
-                                    switch (action) {
-                                        case 'Create Group':
-                                            creategroup(course.courseID);
-                                            break;
-                                        case 'View Members':
-                                            viewMembers(course.courseID);
-                                            break;
-                                        case 'Add Members':
-                                            addMembers(course.courseID);
-                                            break;
-                                        case 'Requirements':
-                                            setrequirements(course.courseID);
-                                            break;
-                                        case 'Rubric':
-                                            rubric(course.courseID);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    switch (action) {
-                                        case 'Create Group':
-                                            creategroup(course.courseID);
-                                            break;
-                                        case 'View Members':
-                                            viewMembers(course.courseID);
-                                            break;
-                                        case 'Add Members':
-                                            addMembers(course.courseID);
-                                            break;
-                                        case 'Requirements':
-                                            setrequirements(course.courseID);
-                                            break;
-                                        case 'Rubric':
-                                            rubric(course.courseID);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                };
-                                dropdownContent.appendChild(btn);
-                            });
-
-
-                            dropdown.appendChild(h3);
-                            dropdown.appendChild(button);
-                            dropdown.appendChild(dropdownContent);
-                            coursesDropdown.appendChild(dropdown);
-                        });
-                    }
-                };
-                xhr.send();
+                    dropdown.appendChild(h3);
+                    dropdown.appendChild(button);
+                    dropdown.appendChild(dropdownContent);
+                    coursesDropdown.appendChild(dropdown);
+                });
             }
+        };
+        xhr.send();
+    }
+
+    // Event delegation to handle dropdown toggle
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('classSet')) {
+            var target = document.getElementById(event.target.dataset.target);
+            if (target) {
+                target.style.display = target.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    });
+
+    // Function to handle actions based on the selected course ID
+    function handleAction(action, courseID) {
+        switch (action) {
+            case 'Create Group':
+                creategroup(courseID);
+                break;
+            case 'View Members':
+                viewMembers(courseID);
+                break;
+            case 'Add Members':
+                addMembers(courseID);
+                break;
+            case 'Requirements':
+                setrequirements(courseID);
+                break;
+            case 'Rubric':
+                rubric(courseID);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Call the function to fetch courses when the page loads or as needed
+    fetchCourses();
+</script>
 
 
-            // Call the function to fetch courses when the page loads or as needed
-            fetchCourses();
 
 
-        </script>
 
 <!-- group created -->
                 <div class="GroupContainer">
