@@ -68,7 +68,7 @@
                         <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                         <div class="mDropdown">  
                         <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                            <div class="membersContainer"> 
+                            <div class="GroupmembersContainer"> 
                                 member 1 
                              </div>
                         </div>
