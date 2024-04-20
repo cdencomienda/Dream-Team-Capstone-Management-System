@@ -230,26 +230,13 @@
                 }
             </script>
             <!-- Course Display Dropdown -->
-        <div id="coursesDropdown">
-            <div class="dropdown">            
-                <h3 id="courseNameDisplay">Courses Created</h3>
-                <button type="button" class="classSet" onclick="dropdown()">...</button>
-                <div class="dropdown-content" id="courseActions">
-                    <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                    <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                    <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                    <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                    <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                </div>
-            </div>
-        </div>
+            <div id="coursesDropdown"></div>
         </div>
        
  
         <!-- Script to handle AJAX request for live search -->
-       
- 
         <script>
+            // Function to fetch courses created by the professor via AJAX
             // Function to fetch courses created by the professor via AJAX
             function fetchCourses() {
                 var xhr = new XMLHttpRequest();
@@ -258,14 +245,14 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var courses = JSON.parse(xhr.responseText);
                         var coursesDropdown = document.getElementById('coursesDropdown');
- 
+
                         courses.forEach(function(course) {
                             var dropdown = document.createElement('div');
                             dropdown.classList.add('dropdown');
- 
+
                             var h3 = document.createElement('h3');
                             h3.textContent = course.courseName;
- 
+
                             var button = document.createElement('button');
                             button.type = 'button';
                             button.classList.add('classSet');
@@ -273,10 +260,10 @@
                             button.onclick = function() {
                                 dropdown.classList.toggle('active');
                             };
- 
+
                             var dropdownContent = document.createElement('div');
                             dropdownContent.classList.add('dropdown-content');
- 
+
                             var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
                             actions.forEach(function(action) {
                                 var btn = document.createElement('button');
@@ -285,11 +272,29 @@
                                 btn.textContent = action;
                                 btn.onclick = function() {
                                     // Handle action based on course ID
-                                    // createGroup(course.courseID), viewMembers(course.courseID), etc.
+                                    switch (action) {
+                                        case 'Create Group':
+                                            creategroup(course.courseID);
+                                            break;
+                                        case 'View Members':
+                                            viewMembers(course.courseID);
+                                            break;
+                                        case 'Add Members':
+                                            addMembers(course.courseID);
+                                            break;
+                                        case 'Requirements':
+                                            setrequirements(course.courseID);
+                                            break;
+                                        case 'Rubric':
+                                            rubric(course.courseID);
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 };
                                 dropdownContent.appendChild(btn);
                             });
- 
+
                             dropdown.appendChild(h3);
                             dropdown.appendChild(button);
                             dropdown.appendChild(dropdownContent);
@@ -299,9 +304,10 @@
                 };
                 xhr.send();
             }
- 
+
             // Call the function to fetch courses when the page loads or as needed
             fetchCourses();
+
         </script>
  
  

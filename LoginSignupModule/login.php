@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: http://localhost/Dream-Team-Capstone-Management-System/HomePage.php");
                 exit();
             } elseif ($userType == "Professor") {
-                header("Location: http://localhost/Dream-Team-Capstone-Management-System/CourseCModule/ProfessorHome.php");
+                header("Location: http://localhost/Dream-Team-Capstone-Management-System/ProfessorHome.php");
                 exit();
             } elseif ($userType == "Program Director" || $userType == "Admin") {
                 header("Location: http://localhost/Dream-Team-Capstone-Management-System/AdminHome.php");
