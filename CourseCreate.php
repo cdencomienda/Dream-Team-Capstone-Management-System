@@ -255,12 +255,15 @@
                         var courses = JSON.parse(xhr.responseText);
                         var coursesDropdown = document.getElementById('coursesDropdown');
 
+
                         courses.forEach(function(course) {
                             var dropdown = document.createElement('div');
                             dropdown.classList.add('dropdown');
 
+
                             var h3 = document.createElement('h3');
                             h3.textContent = course.courseName;
+
 
                             var button = document.createElement('button');
                             button.type = 'button';
@@ -270,8 +273,10 @@
                                 dropdown.classList.toggle('active');
                             };
 
+
                             var dropdownContent = document.createElement('div');
                             dropdownContent.classList.add('dropdown-content');
+
 
                             var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
                             actions.forEach(function(action) {
@@ -300,9 +305,29 @@
                                         default:
                                             break;
                                     }
+                                    switch (action) {
+                                        case 'Create Group':
+                                            creategroup(course.courseID);
+                                            break;
+                                        case 'View Members':
+                                            viewMembers(course.courseID);
+                                            break;
+                                        case 'Add Members':
+                                            addMembers(course.courseID);
+                                            break;
+                                        case 'Requirements':
+                                            setrequirements(course.courseID);
+                                            break;
+                                        case 'Rubric':
+                                            rubric(course.courseID);
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 };
                                 dropdownContent.appendChild(btn);
                             });
+
 
                             dropdown.appendChild(h3);
                             dropdown.appendChild(button);
@@ -314,8 +339,10 @@
                 xhr.send();
             }
 
+
             // Call the function to fetch courses when the page loads or as needed
             fetchCourses();
+
 
         </script>
 
