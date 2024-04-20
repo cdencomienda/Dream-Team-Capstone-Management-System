@@ -341,6 +341,27 @@
         }
     }
 
+    // Function to handle viewing members for a selected course
+    function viewMembers(courseID) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'LiveSearchCourseMember.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var students = JSON.parse(xhr.responseText);
+                if (students.length > 0) {
+                    var membersList = students.map(function (student) {
+                        return student.userName; // Assuming the user name is stored in the students array
+                    }).join(', ');
+                    alert('Members enrolled in this course: ' + membersList);
+                } else {
+                    alert('No members enrolled in this course.');
+                }
+            }
+        };
+        xhr.send('courseID=' + courseID);
+    }
+
     // Call the function to fetch courses when the page loads or as needed
     fetchCourses();
 </script>
