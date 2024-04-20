@@ -17,6 +17,9 @@ body{
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+.containerMenu{
+  margin-left: 50px;
+}
 /* dropdown edit profile */
 .container{
   position: relative;
@@ -328,7 +331,7 @@ background-repeat: no-repeat;
 
 .professorClass{ 
   margin-left: 80px; 
-  width: 1200px;
+  width: 330px;
   height: 1200px;  
   position:relative; 
 }
@@ -535,11 +538,11 @@ background-repeat: no-repeat;
 /* creategroup */
 .creategroupContainer {
   position: relative;
-  margin-left: 330px;
+  margin-left: 400px;
+  top: -1100px;
   width: 700px;
   height: 530px;
   padding: 25px;
-  top: -400px;
   overflow:hidden;
   display: none;
   background-color: #ffffff;
@@ -748,12 +751,12 @@ h3 {
 
 /* addmember */
 .addmember{
-  position: relative;
-  margin-left: 330px; 
+  position: relative; 
+  margin-left: 400px;
+  top: -1100px;
   width: 800px;
   height: 300px;
-  padding: 25px;
-  top: -300px;
+  padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
   overflow:hidden;
@@ -771,11 +774,11 @@ h3 {
 /* viewmembers */
 .viewgroup{
   position: relative;
-  margin-left: 330px; 
+  margin-left: 400px;
+  top: -1100px;
   width: 600px;
   height: 300px;
-  padding: 25px;
-  top: -300px;
+  padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
   overflow:hidden;
@@ -792,12 +795,12 @@ h3 {
 }
 /* setrequirements */
 .setrequirements{
-  position: relative;
-  margin-left: 330px; 
+  position: relative; 
+  margin-left: 400px;
+  top: -1100px;
   width: 800px;
   height: 300px;
-  padding: 25px;
-  top: -300px;
+  padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
   overflow:hidden;
@@ -826,12 +829,12 @@ h3 {
 }
 /* rubric */
 .rubriccontainer{
-  position: relative;
-  margin-left: 330px; 
+  position: relative; 
+  margin-left: 400px;
+  top: -1100px;
   width: 800px;
   height: 300px;
-  padding: 25px;
-  top: -300px;
+  padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
   overflow:hidden;

@@ -9,7 +9,6 @@
     <title>Class Menu</title>
     <style>
         
-
         body{
          background: #CBC4BA;
          overflow-x: hidden;
@@ -54,6 +53,7 @@
         margin-left: 350px;
         overflow: hidden; 
     }
+    
 
   
     /* CSS for the icon inside the button */
@@ -228,7 +228,7 @@
             </div>
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
-            <!-- <div id="coursesDropdown">
+            <div id="coursesDropdown">
                 <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
@@ -240,12 +240,12 @@
                     </div>
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div> -->
+            </div>
  
 <!-- Script to handle AJAX request for live search -->
 
-<div id="coursesDropdown"></div>
-
+            <div id="coursesDropdown"></div>
+        </div>
 <script>
     // Function to fetch courses created by the professor via AJAX
     function fetchCourses() {
@@ -349,7 +349,7 @@
 
 
 
-
+            <div class="containerMenu">
 <!-- group created -->
                 <div class="GroupContainer">
                     <div class="dashboard_header">
