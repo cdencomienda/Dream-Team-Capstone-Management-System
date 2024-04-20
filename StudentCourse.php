@@ -56,40 +56,38 @@
             </div>
         </div>
         <div class="StudentDefault">
-            <div>
-                <div class="dashboard_header">
-                    <div class="groupname_container"> 
-                    <h3> 
+            <div class="dashboard_header">
+                <div class="groupname_container"> 
+                <h3> 
                     <p class="group_name"> Test Group Name </p>    
-                    </h3>
-                    </div>  
-                    <h2>
-                        <div class="button-group"> 
-                            <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
-                            <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
-                            <div class="mDropdown">  
-                            <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                <div class="membersContainer"> 
-                                    member 1 
-                                </div>
-                            </div>
+                </h3>
+                </div>  
+                <h2>
+                    <div class="button-group"> 
+                        <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
+                        <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
+                        <div class="mDropdown">  
+                        <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
+                            <div class="membersContainer"> 
+                                member 1 
+                             </div>
                         </div>
-                    </h2>     
-                </div>
-                <div class="defaultBody" id="defaultBody">
-                    <div class="recentFiles" >
-                        'featured files here'
-                    </div >
-                </div>
-                <div class="submissionFrame" id="submissionFrame">
-                    <div class="submissionscontainer">
-                    submission tab
                     </div>
+                </h2>     
+            </div>
+            <div class="defaultBody" id="defaultBody">
+                <div class="recentFiles" >
+                    'featured files here'
+                </div >
+            </div>
+            <div class="submissionFrame" id="submissionFrame">
+                <div class="submissionscontainer">
+                submission tab
                 </div>
-                <div class="studentFilesR" id="studentFilesR">
-                    <div class = "sFileContainer">
-                        files repository
-                    </div>
+            </div>
+            <div class="studentFilesR" id="studentFilesR">
+                <div class = "sFileContainer">
+                files repository
                 </div>
             </div>
         </div>

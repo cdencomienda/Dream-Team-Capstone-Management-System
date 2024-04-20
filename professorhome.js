@@ -1,11 +1,11 @@
-// document.addEventListener('profile', function () {
-//   const editProfileBtn = document.querySelector('.editprofileBtn');
-//   const logoutBtn = document.querySelector('.logoutBtn');
+document.addEventListener('profile', function () {
+  const editProfileBtn = document.querySelector('.editprofileBtn');
+  const logoutBtn = document.querySelector('.logoutBtn');
 
-//   editProfileBtn.addEventListener('click', function (event) { 
-//     event.preventDefault(); 
-//   }); 
-// });
+  editProfileBtn.addEventListener('click', function (event) { 
+    event.preventDefault(); 
+  }); 
+});
 
 function openArchive(){
   window.location.assign("ProfessorHome.php")
@@ -54,11 +54,11 @@ melonbtn.addEventListener('click', function () {
   toggleMelon.classList.toggle('melonActivate');
 });
 
-// const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
-// tap.addEventListener('click', function () {
-//   const toggleMenu = document.querySelector('.menu', '.settingMelon', );
-//   toggleMenu.classList.toggle('active', 'melonActivate');
-// }); 
+const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
+tap.addEventListener('click', function () {
+  const toggleMenu = document.querySelector('.menu', '.settingMelon', );
+  toggleMenu.classList.toggle('active', 'melonActivate');
+}); 
 
 function toggleCourseCreation() { 
   var container = document.querySelector('.containerCreatecourse');
@@ -138,19 +138,43 @@ function createcourse() {
   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
 }
 
-
-
-
-
-
-
-function dropdown() {
-  const dropdownContent = document.querySelector('.classSet-content');
-  dropdownContent.style.display = (dropdownContent.style.display === 'none' || dropdownContent.style.display === 'block') ? 'none' : 'block';
+function dropdownMelon() {
+  var container = document.querySelector('.dropdown-content');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function creategroup() { 
   var container = document.querySelector('.creategroupContainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+  
+}
+function createGROUP() {
+  // Get input values
+  var groupName = document.querySelector('.inputgroupName').value;
+  var studentName = document.querySelector('.inputName[name="studentName"]').value;
+  var panelName = document.querySelector('.inputName[name="panelName"]').value;
+  var advisorName = document.querySelector('.inputName[name="advisorName"]').value;
+
+  // Create a new div element for the group
+  var newGroupDiv = document.createElement('div');
+  newGroupDiv.className = 'groupDiv';
+
+  // Create a new button element inside the group div
+  var newButton = document.createElement('button');
+  newButton.type = 'button';
+  newButton.className = 'groupButton';
+  newButton.textContent = groupName + ' Group'; // You can customize the button text here
+
+  // Append the button to the group div
+  newGroupDiv.appendChild(newButton);
+
+  // Append the group div to the coursesDropdown section
+  var coursesDropdown = document.getElementById('coursesDropdown');
+  coursesDropdown.appendChild(newGroupDiv);
+}
+
+function newGroupCreated() {
+  var container = document.querySelector('.GroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 

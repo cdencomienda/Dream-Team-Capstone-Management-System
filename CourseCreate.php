@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -54,9 +52,7 @@
         border-radius: 5px;
         cursor: pointer;
         margin-left: 350px;
-        overflow: hidden;
-        
-        
+        overflow: hidden; 
     }
 
   
@@ -185,7 +181,7 @@
 <!-- courseCreation     -->
  
     <div class="wrapper">
-            <div class="professorClass">
+        <div class="professorClass">
             <div class="courseCreation" grid>
             <button type="button" class="createAButton" onclick="toggleCourseCreation()">Create a Course</button>
             <form method="post" action="CourseCreated.php" method="POST">
@@ -229,27 +225,27 @@
                 errorMessage.classList.remove("show");
                 }
             </script>
-            <!-- Course Display Dropdown -->
-        <div id="coursesDropdown">
-            <div class="dropdown">            
-                <h3 id="courseNameDisplay">Courses Created</h3>
-                <button type="button" class="classSet" onclick="dropdown()">...</button>
-                <div class="dropdown-content" id="courseActions">
-                    <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                    <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                    <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                    <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                    <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                </div>
             </div>
-        </div>
-        </div>
-       
+<!-- Course Display Dropdown --> 
+        
+            <div id="coursesDropdown">
+                <div class="dropdownmelon">            
+                    <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
+                    <div class="dropdown-content" id="courseActions">
+                        <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                    </div>
+                </div>
+                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+            </div>
  
-        <!-- Script to handle AJAX request for live search -->
-       
- 
-        <script>
+<!-- Script to handle AJAX request for live search -->
+        
+<script>
+            // Function to fetch courses created by the professor via AJAX
             // Function to fetch courses created by the professor via AJAX
             function fetchCourses() {
                 var xhr = new XMLHttpRequest();
@@ -258,14 +254,14 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var courses = JSON.parse(xhr.responseText);
                         var coursesDropdown = document.getElementById('coursesDropdown');
- 
+
                         courses.forEach(function(course) {
                             var dropdown = document.createElement('div');
                             dropdown.classList.add('dropdown');
- 
+
                             var h3 = document.createElement('h3');
                             h3.textContent = course.courseName;
- 
+
                             var button = document.createElement('button');
                             button.type = 'button';
                             button.classList.add('classSet');
@@ -273,10 +269,10 @@
                             button.onclick = function() {
                                 dropdown.classList.toggle('active');
                             };
- 
+
                             var dropdownContent = document.createElement('div');
                             dropdownContent.classList.add('dropdown-content');
- 
+
                             var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
                             actions.forEach(function(action) {
                                 var btn = document.createElement('button');
@@ -285,11 +281,29 @@
                                 btn.textContent = action;
                                 btn.onclick = function() {
                                     // Handle action based on course ID
-                                    // createGroup(course.courseID), viewMembers(course.courseID), etc.
+                                    switch (action) {
+                                        case 'Create Group':
+                                            creategroup(course.courseID);
+                                            break;
+                                        case 'View Members':
+                                            viewMembers(course.courseID);
+                                            break;
+                                        case 'Add Members':
+                                            addMembers(course.courseID);
+                                            break;
+                                        case 'Requirements':
+                                            setrequirements(course.courseID);
+                                            break;
+                                        case 'Rubric':
+                                            rubric(course.courseID);
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 };
                                 dropdownContent.appendChild(btn);
                             });
- 
+
                             dropdown.appendChild(h3);
                             dropdown.appendChild(button);
                             dropdown.appendChild(dropdownContent);
@@ -299,19 +313,56 @@
                 };
                 xhr.send();
             }
- 
+
             // Call the function to fetch courses when the page loads or as needed
             fetchCourses();
+
         </script>
- 
- 
- 
- 
-        <!-- creategroup -->
+
+<!-- group created -->
+                <div class="GroupContainer">
+                    <div class="dashboard_header">
+                        <div class="groupname_container"> 
+                        <h3> 
+                            <p class="group_name">Group Name </p>    
+                        </h3>
+                        </div>  
+                        <h2>
+                            <div class="button-group"> 
+                                <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
+                                <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
+                                <div class="mDropdown">  
+                                <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
+                                    <div class="membersContainer"> 
+                                        member 1 
+                                     </div>
+                                </div>
+                            </div>
+                        </h2>     
+                    </div>
+                    <div class="defaultBody" id="defaultBody">
+                        <div class="recentFiles" >
+                            'featured files here'
+                        </div >
+                    </div>
+                    <div class="submissionFrame" id="submissionFrame">
+                        <div class="submissionscontainer">
+                        submission tab
+                        </div>
+                    </div>
+                    <div class="studentFilesR" id="studentFilesR">
+                        <div class = "sFileContainer">
+                        files repository
+                        </div>
+                    </div>
+                </div>
+               
+
+<!-- creategroup -->
                 <div class="creategroupContainer">
                     <h1>Create group</h1>
                     <h3>Group Name:</h3>
-                                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                    <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
                     <form class="addcheckbox">
                         <div class="flex-container">
                            
@@ -353,20 +404,20 @@
                     </form>
                     <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
                 </div>
+
+<!-- viewgroup -->
+            <div class="viewgroup">
+                <h3>Members:</h3>
+                    <div class="membersContainer">
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="InstructorName"> InstructorName</label><br>
+                    </div>
+            </div>
  
-        <!-- viewgroup -->
-                <div class="viewgroup">
-                    <h3>Members:</h3>
-                        <div class="membersContainer">
-                            <label for="StudentName"> StudentName</label><br>
-                            <label for="StudentName"> StudentName</label><br>
-                            <label for="StudentName"> StudentName</label><br>
-                            <label for="StudentName"> StudentName</label><br>
-                            <label for="InstructorName"> InstructorName</label><br>
-                        </div>
-                </div>
- 
-        <!-- add members -->
+<!-- add members -->
                 <div class="addmember">
                     <form class="addcheckbox">
                         <div>
@@ -383,7 +434,7 @@
                     </form>
                 </div>
  
-        <!-- set requirements -->
+<!-- set requirements -->
                 <div class="setrequirements">
                     <h3>Requirements</h3>
                         <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
@@ -391,16 +442,15 @@
                         <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
                     <h3>${courseName}</h3>
                 </div>
-        <!-- rubric -->
-                <div class="rubriccontainer">
-                    <h3>Rubric Code:</h3>
-                    <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
-                </div>
+<!-- rubric -->
+            <div class="rubriccontainer">
+                <h3>Rubric Code:</h3>
+                <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
+            </div>
         </div>
     </div>
     <script
         src="professorhome.js">
-   
     </script>  
 </body>
 </html>
