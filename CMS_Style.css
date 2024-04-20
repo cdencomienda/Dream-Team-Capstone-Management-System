@@ -6,7 +6,7 @@
 .hero{
     height: 100%;
     width: 100%;
-    background-image: url(LoginSignupModule/login_assets/LoginBg.png);
+    background-image: url(login_assets/LoginBg.png);
     background-position: center;
     margin: 0;
     padding: 0;
@@ -50,7 +50,7 @@ label{
     display: block;
     width: 20px;
     height: 20px;
-    background-image: url(LoginSignupModule/login_assets/uploadbtn.png);
+    background-image: url(login_assets/uploadbtn.png);
     margin: -10px 350px;
     
 }
@@ -109,7 +109,7 @@ label{
     cursor: pointer;
     display: block;
     margin: 5px 144px;
-    background-image: url(LoginSignupModule/login_assets/loginBtn.png);
+    background-image: url(loginBtn.png);
     border: 0;
     outline: none;
     border-radius: 25px;

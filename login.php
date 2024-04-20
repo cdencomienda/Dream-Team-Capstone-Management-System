@@ -35,18 +35,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect based on userType
             $userType = $row['userType'];
             if ($userType == "Student") {
-                header("Location: http://localhost/Dream-Team-Capstone-Management-System/HomePage.php");
+                header("Location: HomePage.php");
                 exit();
             } elseif ($userType == "Professor") {
-                header("Location: http://localhost/Dream-Team-Capstone-Management-System/ProfessorHome.php");
+                header("Location: ProfessorHome.php");
                 exit();
             } elseif ($userType == "Program Director" || $userType == "Admin") {
-                header("Location: http://localhost/Dream-Team-Capstone-Management-System/AdminHome.php");
+                header("Location: AdminHome.php");
                 exit();
             } else {
                 // Handle invalid userType
                 $_SESSION['error_message'] = "Invalid user type.";
-                header("Location: http://localhost/Dream-Team-Capstone-Management-System/LoginSignupModule/LoginSignup.php");
+                header("Location: LoginSignup.php");
                 exit();
             }
         } else {
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error_message'] = "Incorrect password. Please enter the right password.";
             $_SESSION['email'] = $email; // Store the entered email in session
 
-            header("Location: LoginSignupModule/LoginSignup.php");
+            header("Location: LoginSignup.php");
 
             exit();
         }
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['email'] = $email; // Store the entered email in session
 
         $_SESSION['error_message'] = "User not found. Please register.";
-        header("Location:LoginSignupModule/LoginSignup.php");
+        header("Location:LoginSignup.php");
         exit();
     }
 
