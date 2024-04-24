@@ -82,8 +82,13 @@
             </div>
             <div class="submissionFrame" id="submissionFrame">
                 <div class="submissionscontainer">
-                submission tab
+                <div class= "requirement-list">
+                    <div class="requirement-name">
+                        this requirement
+                    </div>
                 </div>
+                <div class= "requirement-details">
+                    this requirement
             </div>
             <div class="studentFilesR" id="studentFilesR">
                 <div class = "sFileContainer">
@@ -92,6 +97,7 @@
             </div>
         </div>
     </div>
+    
     <!-- <script src="StudentCourse.js"></script> -->
     <script> 
         function notifAuth(){
@@ -111,14 +117,14 @@
 
             function submissionBtnAuth() {
                 document.getElementById("defaultBody").style.display = "none";
-                document.getElementById("submissionFrame").style.display = "block";
+                document.getElementById("submissionFrame").style.display = "flex";
                 document.getElementById("studentFilesR").style.display = "none";
             }
 
             function r_filesBtnAuth() {
                 document.getElementById("defaultBody").style.display = "none";
                 document.getElementById("submissionFrame").style.display = "none";
-                document.getElementById("studentFilesR").style.display = "block";
+                document.getElementById("studentFilesR").style.display = "flex";
             }
 
     </script>   

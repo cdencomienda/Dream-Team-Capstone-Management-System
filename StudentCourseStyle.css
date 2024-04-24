@@ -443,6 +443,7 @@ main.table {
     gap: 10px;
   }
   .defaultBody{
+    
     background-color: #ffffff;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -450,6 +451,7 @@ main.table {
     height: 600px;
     margin-left: -25px;
     margin-top: 0px;
+    display: flex;
   }
 
   .groupname_container{
@@ -552,6 +554,7 @@ main.table {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out;
+    z-index: 1000;
   }
 
   .mDropdown > .Members-Btn:focus + .GroupmembersContainer{
@@ -562,11 +565,52 @@ main.table {
 
   .submissionFrame, .studentFilesR {
     display: none;
-    background-color: #ffffff;
+    background-color: transparent;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     width: 1000px;
     height: 600px;
     margin-left: -25px;
     margin-top: 0px;
+    display: flex;
+    flex-direction: row; /* Display children elements in a row */
+}
+
+.requirement-list{
+  
+  background-color: white; 
+  border-radius: 35px;
+  width: 350px;
+  height: 580px;
+  margin-top: 8px;
+  
+}
+.submissionscontainer{
+  width: 1000px;
+  height: 600px;
+  
+  margin-top: 0px;
+  display: flex;
+  flex-direction: row; /* Display children elements in a row */
+}
+
+.requirement-name{
+
+  position: relative;
+  background-color: #F8EFE3;
+  border-radius: 25px;
+  width: 250px;
+  height: 75px;
+  margin-left: 50px;
+  text-align: center;
+}
+.requirement-details{
+  position: relative;
+  background-color: white; 
+  border-radius: 35px;
+  width: 600px;
+  height: 580px;
+  margin-top: 8px;
+  margin-left: 15px;
+  text-align: center;
 }
