@@ -57,10 +57,14 @@
         </div>
         <div class="StudentDefault">
             <div class="dashboard_header">
+
+                    <!-- Group Name Box               -->
                 <div class="groupname_container"> 
-                <h3> 
-                    <p class="group_name"> Test Group Name </p>    
-                </h3>
+                    <div class="group_name" id="group_name"> 
+                        <h3> 
+                            <p class="group_name"> Test Group Name </p>    
+                        </h3>       
+                    </div>   
                 </div>  
                 <h2>
                     <div class="button-group"> 
@@ -127,6 +131,14 @@
                 document.getElementById("studentFilesR").style.display = "flex";
             }
 
+            // Get the element with the class "group_name"
+            const groupDiv = document.getElementById('group_name');
+
+            // Add an event listener to the element
+            groupDiv.addEventListener('click', function() {
+                // Call the showDefaultBody function
+                showDefaultBody();
+        });
     </script>   
     </div>
 </body>
