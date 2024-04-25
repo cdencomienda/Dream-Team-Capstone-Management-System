@@ -596,7 +596,6 @@ main.table {
 }
 
 .requirement-name{
-
   position: relative;
   background-color: #F8EFE3;
   border-radius: 25px;
@@ -614,4 +613,83 @@ main.table {
   margin-top: 8px;
   margin-left: 15px;
   text-align: center;
+}
+
+/* start */
+.requirement-title{
+  text-align: left;
+  margin: 15px;
+  margin-top: 50px;
+}
+.requirement-due{
+  text-align: left;
+  margin: 15px;
+  margin-top: -15px;
+}
+.requirement-descriptionCont{
+  text-align: left;
+  margin: 15px;
+
+  width: 475px;
+  height: 235px;
+}
+.requirement-descBox{
+  width: 475px;
+  height: 135px;
+  background-color:#F8EFE3;
+  margin-left: 0;
+  margin-top: 40px;
+  text-align: center;
+  border-radius: 15px;
+}
+.reqfile-version{
+  text-align: left;
+  margin: 15px;
+  margin-top: -40px;
+}
+
+.Attach-Files{
+  text-align: left;
+  margin: 15px;
+  margin-top: -20px;
+}
+.file-attachbtn{
+  background-color: transparent;
+  border: none;
+}
+.button.file-attachbtn i {
+  font-size: 324px; /* Adjust the size as needed */
+}
+.Attached-FileCont{
+  width: 475px;
+  height: 95px;  
+  
+  margin-left: 15px;
+  margin-top: 30px  ;
+}
+.req-submitbtnCont{
+  margin-left: 435px;
+  margin-top: 15px;
+}
+.reqbtn{
+  height: 25px;
+  width: 95px;
+  border-radius: 15px;
+  border: none;
+  background-color: #FFEBCF;
+}
+
+label{
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-image: url(course_assets/plus.png);
+  margin: -23px 120px;     
+}
+#input-file{
+  display: none;
+  /* margin-top: 10px; */
+}
+#attach-btn{
+  display: none;
 }
