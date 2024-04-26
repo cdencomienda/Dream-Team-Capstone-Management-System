@@ -97,41 +97,8 @@
                     </div>
                 </div>
                 <div class= "requirement-details">
-                    <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
-                    <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
-                    
-                    <div class="requirement-descriptionCont"> Requirement Description: 
-                        <div class="requirement-descBox" id="req_description"> 
-                            ?????
-                        </div>        
-                    </div>
-                    <div class="reqfile-version" id="reqfile_version"> <h4>Version: ?????</h4> 
-                    </div> <br>   
-                    <!-- idk kung san lalagay ung file attached id -->
-                    <div class="Attach-Files"> 
-                            <form id="file-upload" class="requirement-file">
-                                <div class="atchFiles">   
-                                    <h3>Attach Files   </h3> 
-                                    <!-- Replace img tag with the i tag -->
-                                    <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
-                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
-                                    <div id="upload-btn" class="upload-container"></div>
-                                    <label for="input-file"></label>
-                                    <input type="file" accept="pdf" id="input-file" name="profile_picture">
-                                </div>
-                            </form> 
-                        </div>   
-                        <div class="Attached-FileCont">
-                            <!-- attached files go here -->
-                        </div>        
-
-                    <div class="req-submitbtnCont"> 
-                        
-                        <button class="reqbtn" type="button">
-                            submit
-                        </button>
-                    </div>
-                </div>
+                    this requirement
+            </div>
             <div class="studentFilesR" id="studentFilesR">
                 <div class = "sFileContainer">
                 files repository
@@ -168,14 +135,68 @@
                 document.getElementById("submissionFrame").style.display = "none";
                 document.getElementById("studentFilesR").style.display = "flex";
             }
+
             // Get the element with the class "group_name"
             const groupDiv = document.getElementById('group_name');
+
             // Add an event listener to the element
             groupDiv.addEventListener('click', function() {
                 // Call the showDefaultBody function
                 showDefaultBody();
         });
-    </script>   
+        // Function to fetch and display the student's courses
+        function fetchStudentCourses() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'LiveSearchStudentCourses.php', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var courses = JSON.parse(xhr.responseText);
+                        var coursesList = document.getElementById('coursesList');
+
+                        // Clear any previous courses list
+                        coursesList.innerHTML = '';
+
+                        // Display each course in the list
+                        courses.forEach(function(course) {
+                            // Create a container for each course
+                            var courseContainer = document.createElement('div');
+                            courseContainer.classList.add('course-container');
+
+                            // Create an element to display the course name
+                            var courseName = document.createElement('h4');
+                            courseName.textContent = course.courseName;
+
+                            // Create a button for course actions (e.g., view details)
+                            var courseButton = document.createElement('button');
+                            courseButton.type = 'button';
+                            courseButton.textContent = 'View Details';
+
+                            // Add an event listener to the button to handle course actions
+                            courseButton.addEventListener('click', function() {
+                                handleCourseAction(course.courseID);
+                            });
+
+                            // Append the course name and button to the course container
+                            courseContainer.appendChild(courseName);
+                            courseContainer.appendChild(courseButton);
+
+                            // Append the course container to the list
+                            coursesList.appendChild(courseContainer);
+                        });
+                    }
+                };
+                xhr.send();
+            }
+
+            // Function to handle course actions (e.g., view details, materials)
+            function handleCourseAction(courseID) {
+                // Define what to do when a course is selected
+                // For example, you could redirect to a course details page or display course materials
+            }
+
+            // Call the function to fetch student courses when the page loads
+            window.onload = fetchStudentCourses;
+        </script>
     </div>
 </body>
 </html>
