@@ -52,6 +52,11 @@
             <div class="S_courseInfo">
                 <h2> Test Course </h2>
             </div>
+            <!-- Container for student's courses -->
+            <div id="studentCoursesDropdown">
+                    <h3>My Courses</h3>
+                    <div id="coursesList"></div> <!-- This will be populated with the list of courses -->
+                </div>
             <div class="dropdown">
             </div>
         </div>
@@ -139,7 +144,59 @@
                 // Call the showDefaultBody function
                 showDefaultBody();
         });
-    </script>   
+        // Function to fetch and display the student's courses
+        function fetchStudentCourses() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'LiveSearchStudentCourses.php', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var courses = JSON.parse(xhr.responseText);
+                        var coursesList = document.getElementById('coursesList');
+
+                        // Clear any previous courses list
+                        coursesList.innerHTML = '';
+
+                        // Display each course in the list
+                        courses.forEach(function(course) {
+                            // Create a container for each course
+                            var courseContainer = document.createElement('div');
+                            courseContainer.classList.add('course-container');
+
+                            // Create an element to display the course name
+                            var courseName = document.createElement('h4');
+                            courseName.textContent = course.courseName;
+
+                            // Create a button for course actions (e.g., view details)
+                            var courseButton = document.createElement('button');
+                            courseButton.type = 'button';
+                            courseButton.textContent = 'View Details';
+
+                            // Add an event listener to the button to handle course actions
+                            courseButton.addEventListener('click', function() {
+                                handleCourseAction(course.courseID);
+                            });
+
+                            // Append the course name and button to the course container
+                            courseContainer.appendChild(courseName);
+                            courseContainer.appendChild(courseButton);
+
+                            // Append the course container to the list
+                            coursesList.appendChild(courseContainer);
+                        });
+                    }
+                };
+                xhr.send();
+            }
+
+            // Function to handle course actions (e.g., view details, materials)
+            function handleCourseAction(courseID) {
+                // Define what to do when a course is selected
+                // For example, you could redirect to a course details page or display course materials
+            }
+
+            // Call the function to fetch student courses when the page loads
+            window.onload = fetchStudentCourses;
+        </script>
     </div>
 </body>
 </html>
