@@ -132,21 +132,22 @@
             <?php
                 unset($_SESSION['error_message']); // Clear the error message after displaying it
             } ?>
- <script>
-        window.onload = function() {
-            var urlParams = new URLSearchParams(window.location.search);
- 
-            if (urlParams.has('showOverlay')) {
-                document.getElementById('editProfileOverlay').style.display = 'block';
-            }
-            window.onclick = function(event) {
-                if (event.target == overlay) {
-                    overlay.style.display = 'none';
+            
+        <script>
+                window.onload = function() {
+                    var urlParams = new URLSearchParams(window.location.search);
+        
+                    if (urlParams.has('showOverlay')) {
+                        document.getElementById('editProfileOverlay').style.display = 'block';
+                    }
+                    window.onclick = function(event) {
+                        if (event.target == overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
                 }
-            }
-        }
 
-    </script>
+        </script>
             <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");

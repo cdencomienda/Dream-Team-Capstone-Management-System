@@ -27,8 +27,9 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
 // emerson gudito start
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
-  document.getElementById('menuBtn').style.display = 'none';
+  document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
 }
+
 // emerson gudito end
 function Back(){
   document.getElementById('menuBtn').style.display = 'none';
