@@ -24,11 +24,12 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
   overlay.style.display = "block";
 });
 
+// emerson gudito start
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
   document.getElementById('menuBtn').style.display = 'none';
-  location.reload();
 }
+// emerson gudito end
 function Back(){
   document.getElementById('menuBtn').style.display = 'none';
 }

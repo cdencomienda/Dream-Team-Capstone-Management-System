@@ -102,14 +102,15 @@
                 </div>
             </div>
             <!-- editprofile -->
+            <!-- emerson gudito start -->
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
+        
                     <div>
                         <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
                     </div>
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
-                       
                         <div class="profile">
                             <img src="menu_assets/prof.jpg" alt="profile-img">
                         </div>
@@ -125,14 +126,12 @@
                    
                     <?php if(isset($_SESSION['error_message'])) { ?>
                 <div id="error-message" class="show">
- 
                     <?php echo $_SESSION['error_message']; ?>
                     <button onclick="clearErrorMessage()">OK</button>
                 </div>
             <?php
                 unset($_SESSION['error_message']); // Clear the error message after displaying it
             } ?>
- 
  <script>
         window.onload = function() {
             var urlParams = new URLSearchParams(window.location.search);
@@ -145,18 +144,8 @@
                     overlay.style.display = 'none';
                 }
             }
-
-            // Add event listener to the close button
-            var closeButton = document.querySelector('.close');
-            closeButton.addEventListener('click', closeEditform);
         }
 
-        // Define closeEditform function
-        function closeEditform() {
-            document.getElementById('editProfileOverlay').style.display = 'none';
-            document.getElementById('menuBtn').style.display = 'none';
-            location.reload();
-        }
     </script>
             <script>
             function clearErrorMessage() {
@@ -164,6 +153,7 @@
                 errorMessage.classList.remove("show");
             }
             </script>
+         <!-- emerson gudito end -->
                 </div>
             </div>
         </div>
@@ -226,6 +216,7 @@
                 }
             </script>
             </div>
+
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
             <div id="coursesDropdown">
@@ -243,10 +234,10 @@
             </div>
  
 <!-- Script to handle AJAX request for live search -->
-
             <div id="coursesDropdown"></div>
         </div>
-<script>   
+<script>
+   
 // Function to fetch courses created by the professor via Fetch API
 function fetchCourses() {
     fetch('LiveSearchCourseCreated.php')
