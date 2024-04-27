@@ -49,12 +49,10 @@ profile.addEventListener('click', function () {
   toggleMenu.classList.toggle('active');
 });
 
-var overlay;
-overlay = document.getElementById('overlay');
-// melonbtn.addEventListener('click', function () {
-//   const toggleMelon = document.querySelector('.settingMelon');
-//   toggleMelon.classList.toggle('melonActivate');
-// });
+melonbtn.addEventListener('click', function () {
+  const toggleMelon = document.querySelector('.settingMelon');
+  toggleMelon.classList.toggle('melonActivate');
+});
 
 const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
 tap.addEventListener('click', function () {

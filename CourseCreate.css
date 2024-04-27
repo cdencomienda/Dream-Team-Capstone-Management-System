@@ -18,9 +18,7 @@ body{
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 .containerMenu{
-  margin-left: 80px;
-  top: -1000px;
-  position: relative;
+  margin-left: 50px;
 }
 /* dropdown edit profile */
 .container{
@@ -789,9 +787,9 @@ h3 {
 }
 .membersContainer{
   padding: 8px;
-  width: 530px;
+  width: 230px;
   border: 1px solid #000000;
-  height: 300px;
+  height: 85px;
   border-radius: 10px;
   background-color: #f8efe3;
 }
@@ -853,4 +851,3 @@ h3 {
   border-radius: 10px; 
   background-color: #F8EFE3; 
 }
-

@@ -62,7 +62,7 @@
         color: black; /* Example color */
         font-size: 25px;
         margin:-3px
-        transition opacity 0.3s ease; /* Add transition for background color */
+        transition: opacity 0.3s ease; /* Add transition for background color */
     }
       /* Change background color on hover */
       .close i:hover {
@@ -135,38 +135,28 @@
  
  <script>
         window.onload = function() {
-    var urlParams = new URLSearchParams(window.location.search);
+            var urlParams = new URLSearchParams(window.location.search);
+ 
+            if (urlParams.has('showOverlay')) {
+                document.getElementById('editProfileOverlay').style.display = 'block';
+            }
+            window.onclick = function(event) {
+                if (event.target == overlay) {
+                    overlay.style.display = 'none';
+                }
+            }
 
-    // Check if the 'showOverlay' parameter is present in the URL
-    if (urlParams.has('showOverlay')) {
-        // Assuming 'editProfileOverlay' is the ID of your overlay element
-        document.getElementById('editProfileOverlay').style.display = 'block';
-    }
-
-    // Declare and initialize the overlay variable
-    var overlay = document.getElementById('editProfileOverlay');
-
-    // Attach a click event listener to the window
-    window.onclick = function(event) {
-        // Check if the clicked element is the overlay
-        if (event.target == overlay) {
-            // Hide the overlay when clicked outside
-            overlay.style.display = 'none';
+            // Add event listener to the close button
+            var closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', closeEditform);
         }
-    };
 
-    // Add event listener to the close button
-    var closeButton = document.querySelector('.close');
-    closeButton.addEventListener('click', closeEditform);
-};
-
-// Define closeEditform function
-function closeEditform() {
-    document.getElementById('editProfileOverlay').style.display = 'none';
-    document.getElementById('menuBtn').style.display = 'none';
-    location.reload();
-}
-
+        // Define closeEditform function
+        function closeEditform() {
+            document.getElementById('editProfileOverlay').style.display = 'none';
+            document.getElementById('menuBtn').style.display = 'none';
+            location.reload();
+        }
     </script>
             <script>
             function clearErrorMessage() {
@@ -243,7 +233,7 @@ function closeEditform() {
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
                         <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                        <button type="button" class="dropdownbtn" >View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
                         <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
@@ -256,7 +246,7 @@ function closeEditform() {
 
             <div id="coursesDropdown"></div>
         </div>
-        <script>
+<script>
     // Function to fetch courses created by the professor via AJAX
     function fetchCourses() {
         var xhr = new XMLHttpRequest();
@@ -295,7 +285,6 @@ function closeEditform() {
                         btn.textContent = action;
                         btn.onclick = function () {
                             handleAction(action, course.courseID);
-                            console.log('Clicked ' + action + ' for courseID ' + course.courseID);
                         };
                         dropdownContent.appendChild(btn);
                     });
@@ -352,38 +341,9 @@ function closeEditform() {
         }
     }
 
-    // Function to handle the "View Members" action
-    function viewMembers(courseID) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'LiveSearchCourseMember.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var memberList = JSON.parse(xhr.responseText);
-                console.log('Received member list:', memberList); // Log the received member list
-                if (memberList && memberList.length > 0) {
-                    var memberNames = memberList.map(function (member) {
-                        return '<h4>' + member.studentID + '</h4>';
-                    }).join('');
-                    var viewGRP = document.getElementById('viewGRP');
-                    var membersContainer = viewGRP.querySelector('.membersContainer');
-                    membersContainer.innerHTML = '<h3>Members:</h3>' + memberNames;
-                } else {
-                    var viewGRP = document.getElementById('viewGRP');
-                    var membersContainer = viewGRP.querySelector('.membersContainer');
-                    membersContainer.innerHTML = '<h3>No members enrolled in this course.</h3>';
-                }
-            }
-        };
-        xhr.send('courseID=' + courseID);
-    }
-
     // Call the function to fetch courses when the page loads or as needed
     fetchCourses();
 </script>
-
-
-
 
 
 
@@ -485,6 +445,11 @@ function closeEditform() {
                         <h4>StudentName</h4>
                         <h4>StudentName</h4>
                         <h4>InstructorName</h4>
+                        <!-- <text for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="StudentName"> StudentName</label><br>
+                        <label for="InstructorName"> InstructorName</label><br> -->
                     </div>
             </div>
  
