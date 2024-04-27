@@ -25,6 +25,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         if ($result->num_rows > 0) {
             // Output data of each row
             while ($row = $result->fetch_assoc()) {
+                // Store courseID in the session array
+                $_SESSION['courses'][$row['courseID']] = $row['courseName'];
+
                 $courses[] = $row;
             }
         }

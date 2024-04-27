@@ -246,104 +246,150 @@
 
             <div id="coursesDropdown"></div>
         </div>
-<script>
-    // Function to fetch courses created by the professor via AJAX
-    function fetchCourses() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'LiveSearchCourseCreated.php', true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var courses = JSON.parse(xhr.responseText);
-                var coursesDropdown = document.getElementById('coursesDropdown');
+<script>   
+// Function to fetch courses created by the professor via Fetch API
+function fetchCourses() {
+    fetch('LiveSearchCourseCreated.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(courses => {
+            const coursesDropdown = document.getElementById('coursesDropdown');
 
-                courses.forEach(function (course) {
-                    var dropdown = document.createElement('div');
-                    dropdown.classList.add('dropdown');
+            courses.forEach(course => {
+                const dropdown = document.createElement('div');
+                dropdown.classList.add('dropdown');
 
-                    var courseContainer = document.createElement('div'); // Container for course and button
-                    courseContainer.classList.add('course-container');
+                const courseContainer = document.createElement('div'); // Container for course and button
+                courseContainer.classList.add('course-container');
 
-                    var h3 = document.createElement('h3');
-                    h3.textContent = course.courseName;
+                const h3 = document.createElement('h3');
+                h3.textContent = course.courseName;
 
-                    var button = document.createElement('button');
-                    button.type = 'button';
-                    button.classList.add('classSet');
-                    button.textContent = '•••';
-                    button.dataset.target = 'dropdown-' + course.courseID; // Set a unique target for each button
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.classList.add('classSet');
+                button.textContent = '•••';
+                button.dataset.target = 'dropdown-' + course.courseID; // Set a unique target for each button
 
-                    var dropdownContent = document.createElement('div');
-                    dropdownContent.classList.add('dropdown-content');
-                    dropdownContent.id = 'dropdown-' + course.courseID; // Set a unique ID for each dropdown content
-                    dropdownContent.style.display = 'none'; // Initially hide the dropdown content
+                const dropdownContent = document.createElement('div');
+                dropdownContent.classList.add('dropdown-content');
+                dropdownContent.id = 'dropdown-' + course.courseID; // Set a unique ID for each dropdown content
+                dropdownContent.style.display = 'none'; // Initially hide the dropdown content
 
-                    var actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
-                    actions.forEach(function (action) {
-                        var btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.classList.add('dropdownbtn');
-                        btn.textContent = action;
-                        btn.onclick = function () {
-                            handleAction(action, course.courseID);
-                        };
-                        dropdownContent.appendChild(btn);
-                    });
-
-                    courseContainer.appendChild(h3);
-                    courseContainer.appendChild(button);
-                    dropdown.appendChild(courseContainer);
-                    dropdown.appendChild(dropdownContent);
-                    coursesDropdown.appendChild(dropdown);
+                const actions = ['Create Group', 'View Members', 'Add Members', 'Requirements', 'Rubric'];
+                actions.forEach(action => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.classList.add('dropdownbtn');
+                    btn.textContent = action;
+                    btn.onclick = () => handleAction(action, course.courseID);
+                    dropdownContent.appendChild(btn);
                 });
-            }
-        };
-        xhr.send();
-    }
 
-    // Event delegation to handle dropdown toggle
-    document.addEventListener('click', function (event) {
-        var classSetButtons = document.querySelectorAll('.classSet');
-        classSetButtons.forEach(function (button) {
-            var target = document.getElementById(button.dataset.target);
-            if (target && target.style.display !== 'none' && button !== event.target) {
-                target.style.display = 'none'; // Close the active dropdown
-            }
-        });
+                courseContainer.appendChild(h3);
+                courseContainer.appendChild(button);
+                dropdown.appendChild(courseContainer);
+                dropdown.appendChild(dropdownContent);
+                coursesDropdown.appendChild(dropdown);
 
-        if (event.target.classList.contains('classSet')) {
-            var target = document.getElementById(event.target.dataset.target);
-            if (target) {
-                target.style.display = target.style.display === 'none' ? 'block' : 'none';
-            }
+                // Fetch additional course data if needed
+                fetch('LiveSearchCourseCreated.php?courseID=' + course.courseID)
+                    .then(response => response.text())
+                    .then(data => console.log('Response from LiveSearchCourseCreated.php:', data))
+                    .catch(error => console.error('Error fetching course data:', error));
+
+                // Log the course ID here after it's assigned
+                console.log('Selected course ID:', course.courseID);
+            });
+
+            // Log the course IDs when courses are fetched
+            console.log(courses.map(course => course.courseID));
+        })
+        .catch(error => console.error('Error fetching courses:', error));
+}
+
+// Event delegation to handle dropdown toggle
+document.addEventListener('click', event => {
+    const classSetButtons = document.querySelectorAll('.classSet');
+    classSetButtons.forEach(button => {
+        const target = document.getElementById(button.dataset.target);
+        if (target && target.style.display !== 'none' && button !== event.target) {
+            target.style.display = 'none'; // Close the active dropdown
         }
     });
 
-    // Function to handle actions based on the selected course ID
-    function handleAction(action, courseID) {
-        switch (action) {
-            case 'Create Group':
-                creategroup(courseID);
-                break;
-            case 'View Members':
-                viewMembers(courseID);
-                break;
-            case 'Add Members':
-                addMembers(courseID);
-                break;
-            case 'Requirements':
-                setrequirements(courseID);
-                break;
-            case 'Rubric':
-                rubric(courseID);
-                break;
-            default:
-                break;
+    if (event.target.classList.contains('classSet')) {
+        const target = document.getElementById(event.target.dataset.target);
+        if (target) {
+            target.style.display = target.style.display === 'none' ? 'block' : 'none';
         }
     }
+});
 
-    // Call the function to fetch courses when the page loads or as needed
-    fetchCourses();
+// Function to fetch and display student IDs and corresponding usernames for a specific course ID
+function fetchStudentIDs(courseID) {
+    const membersContainer = document.querySelector('.membersContainer');
+    membersContainer.innerHTML = ''; // Clear previous content
+
+    fetch('fetchStudentIDs.php?courseID=' + courseID)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the raw response text
+        })
+        .then(responseText => {
+            console.log('Raw Response:', responseText); // Log the raw response
+            return JSON.parse(responseText); // Parse the response as JSON
+        })
+        .then(data => {
+            const students = data.students;
+
+            students.forEach(student => {
+                const memberDiv = document.createElement('div');
+                memberDiv.textContent = `${student.userName}`;
+                membersContainer.appendChild(memberDiv);
+            });
+        })
+        .catch(error => console.error('Error fetching student IDs:', error));
+}
+
+// Update the handleAction function to call fetchStudentIDs for 'View Members' action
+function handleAction(action, courseID) {
+    console.log('Clicked:', courseID);
+    switch (action) {
+        case 'Create Group':
+            creategroup(courseID);
+            break;
+        case 'View Members':
+            viewMembers(courseID);
+            fetchStudentIDs(courseID); // Call fetchStudentIDs when 'View Members' is clicked
+            break;
+        case 'Add Members':
+            addMembers(courseID);
+            break;
+        case 'Requirements':
+            setrequirements(courseID);
+            break;
+        case 'Rubric':
+            rubric(courseID);
+            break;
+        default:
+            break;
+    }
+}
+
+
+// Call the function to fetch courses when the page loads or as needed
+fetchCourses();
+fetchStudentIDs(courseID);
 </script>
+
+
 
 
 
@@ -445,13 +491,37 @@
                         <h4>StudentName</h4>
                         <h4>StudentName</h4>
                         <h4>InstructorName</h4>
-                        <!-- <text for="StudentName"> StudentName</label><br>
-                        <label for="StudentName"> StudentName</label><br>
-                        <label for="StudentName"> StudentName</label><br>
-                        <label for="StudentName"> StudentName</label><br>
-                        <label for="InstructorName"> InstructorName</label><br> -->
                     </div>
             </div>
+
+<!-- <script>
+// Function to fetch and display student IDs
+function fetchStudentIDs(courseID) {
+    fetch(`fetchStudentIDs.php?courseID=${courseID}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const membersContainer = document.querySelector('.membersContainer');
+        membersContainer.innerHTML = ''; // Clear previous content
+
+        // Add student IDs to the container
+        data.forEach(studentID => {
+            const studentIDElement = document.createElement('h4');
+            studentIDElement.textContent = studentID;
+            membersContainer.appendChild(studentIDElement);
+        });
+    })
+    .catch(error => console.error('Error fetching student IDs:', error));
+}
+
+// Example usage: fetch student IDs for course ID 12024
+fetchStudentIDs(12024);
+
+</script> -->
  
 <!-- add members -->
                 <div class="addmember">
