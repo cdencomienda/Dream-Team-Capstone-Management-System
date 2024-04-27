@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Main Menu</title>
+    <title>Admin Main Menu</title>
     <style>
         
         body{
@@ -68,7 +68,7 @@
     <link rel="stylesheet" href="AdminHomeStyle.css">
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
-    <?php include 'useradmin.php'; ?>
+
  
     <div class="header">
         <div class="wrap">

@@ -12,10 +12,17 @@ $sql = "SELECT userID, userType, userName, userEmail FROM users";
 $result = $conn->query($sql);
 
 $users = array();
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;
+if ($result) {
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
     }
+    // Free result set
+    $result->free();
+} else {
+    // Error handling for query execution
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 // Close the connection

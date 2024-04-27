@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Main Menu</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
         
         body{
@@ -67,7 +69,7 @@
     <link rel="stylesheet" href="AdminHomeStyle.css">
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
-    <?php include 'useradmin.php'; ?>
+    
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button>
@@ -171,28 +173,57 @@
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
     </div> 
     <div class="wrapper">
-        <div class="adminClass">
+        <div class="adminClass">  
+        <main class="table" id="customers_table">
+            <section class="table__header">
+                <h1> User Accounts </h1> 
+                <!-- Popup/Modal Structure -->
+                <div id="editDeleteModal" class="modal">
+                    <div class="modal-content">
+                        
+                        <h4>Edit/Delete User</h2>
+                        <label for="userId">User ID:</label>
+                        <input type="text" id="userId" name="userId"><br>
 
-        <h2>User Data</h2>
-        <table id="user-table">
-            <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>User Type</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Existing table body where new data will be appended -->
-            </tbody>
-        </table>
+                        <label for="userType">User Type:</label>
+                        <input type="text" id="userType" name="userType"><br>
 
+                        <button id="saveEditBtn">Save Changes</button>
+                        <button id="deleteUserBtn">Delete User</button>
+                        <button class="close-modal-btn">Close</button>
+                    </div>
+                </div>
+            </section>
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> User ID <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> User Type <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> User Name <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> User Email <span class="icon-arrow">&UpArrow;</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="user_table_body">
+                        <!-- User data will be dynamically appended here -->
+                    </tbody>
+                </table>
+            </section>
+        </main> 
+        <?php include 'editProfile.php'; ?>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="useradmin.js"></script>
+                         <!-- <tr>
+                        <td> "userID":"20240001 </td>
+                        <td> "userType":"Student"</td>
+                        <td> "userName":"Austria, Jose" </td>
+                        <td> "userEmail":"jaustria@student.apc.edu.ph"</td>
+                        </tr> -->
         <script>
-        $(document).ready(function(){
+            $(document).ready(function(){
             // AJAX request to fetch user data
             $.ajax({
-                url: 'get_users.php',
+                url: 'useradmin.php',
                 type: 'GET',
                 success: function(response){
                     // Parse JSON response
@@ -201,14 +232,17 @@
                     users.forEach(function(user){
                         var newRow = '<tr>';
                         newRow += '<td>' + user.userID + '</td>';
+                        newRow += '<td>' + user.userType + '</td>';
                         newRow += '<td>' + user.userName + '</td>';
                         newRow += '<td>' + user.userEmail + '</td>';
                         newRow += '</tr>';
-                        $('#user-table tbody').append(newRow);
+                        $('#user_table_body').append(newRow); // Use the id attribute to select the table body
                     });
                 }
             });
-        });
+        }); 
+        </script>
+
         </script>
         </div>
     </div>
