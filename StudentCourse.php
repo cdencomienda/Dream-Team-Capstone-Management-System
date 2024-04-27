@@ -49,18 +49,27 @@
     </div>
     <div class="StudentClass">
         <div class="course_created" grid>
-            <div class="S_courseInfo">
-                <h2> Test Course </h2>
-            </div>
+            <!-- <div class="S_courseInfo">
+                
+            </div> -->
+            <!-- Container for student's courses -->
+            <div class = "studentCourseDropdown" id="studentCoursesDropdown">
+                    <h3>My Courses</h3>
+                    <div id="coursesList"></div> <!-- This will be populated with the list of courses -->
+                </div>
             <div class="dropdown">
             </div>
         </div>
         <div class="StudentDefault">
             <div class="dashboard_header">
+
+                    <!-- Group Name Box               -->
                 <div class="groupname_container"> 
-                <h3> 
-                    <p class="group_name"> Test Group Name </p>    
-                </h3>
+                    <div class="group_name" id="group_name"> 
+                        <h3> 
+                            <p class="group_name"> Test Group Name </p>    
+                        </h3>       
+                    </div>   
                 </div>  
                 <h2>
                     <div class="button-group"> 
@@ -83,13 +92,49 @@
             <div class="submissionFrame" id="submissionFrame">
                 <div class="submissionscontainer">
                 <div class= "requirement-list">
-                    <div class="requirement-name">
+                    <div class = "req-nameCont"> 
+                        <div class="requirement-name">
                         this requirement
+                        </div>
                     </div>
+                    
                 </div>
                 <div class= "requirement-details">
-                    this requirement
-            </div>
+                    <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
+                    <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
+                    
+                    <div class="requirement-descriptionCont"> Requirement Description: 
+                        <div class="requirement-descBox" id="req_description"> 
+                            ?????
+                        </div>        
+                    </div>
+                    <div class="reqfile-version" id="reqfile_version"> <h4>Version: ?????</h4> 
+                    </div> <br>   
+                    <!-- idk kung san lalagay ung file attached id -->
+                    <div class="Attach-Files"> 
+                            <form id="file-upload" class="requirement-file">
+                                <div class="atchFiles">   
+                                    <h3>Attach Files   </h3> 
+                                    <!-- Replace img tag with the i tag -->
+                                    <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
+                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
+                                    <div id="upload-btn" class="upload-container"></div>
+                                    <label for="input-file"></label>
+                                    <input type="file" accept="pdf" id="input-file" name="profile_picture">
+                                </div>
+                            </form> 
+                        </div>   
+                        <div class="Attached-FileCont">
+                            <!-- attached files go here -->
+                        </div>        
+
+                    <div class="req-submitbtnCont"> 
+                        
+                        <button class="reqbtn" type="button">
+                            submit
+                        </button>
+                    </div>
+                </div>
             <div class="studentFilesR" id="studentFilesR">
                 <div class = "sFileContainer">
                 files repository
@@ -98,6 +143,13 @@
         </div>
     </div>
     
+    <style>
+        
+        .submissionFrame {
+            display: none;
+        }
+
+    </style>
     <!-- <script src="StudentCourse.js"></script> -->
     <script> 
         function notifAuth(){
@@ -127,7 +179,113 @@
                 document.getElementById("studentFilesR").style.display = "flex";
             }
 
-    </script>   
+            // Get the element with the class "group_name"
+            const groupDiv = document.getElementById('group_name');
+
+            // Add an event listener to the element
+            groupDiv.addEventListener('click', function() {
+                // Call the showDefaultBody function
+                showDefaultBody();
+        });
+        // Function to fetch and display the student's courses
+        function fetchStudentCourses() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'LiveSearchStudentCourses.php', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var courses = JSON.parse(xhr.responseText);
+            var coursesList = document.getElementById('coursesList');
+
+            // Clear any previous courses list
+            coursesList.innerHTML = '';
+
+            // Display each course in the list
+            courses.forEach(function(course) {
+                // Create a container for each course
+                var courseContainer = document.createElement('div');
+                courseContainer.classList.add('course-container');
+
+                // Create a button for course actions (e.g., view details)
+                var courseButton = document.createElement('button');
+                courseButton.type = 'button';
+                courseButton.textContent = course.courseName;
+
+                courseButton.classList.add('S_courseInfo');
+
+                // Add an event listener to the button to handle course actions
+                courseButton.addEventListener('click', function() {
+                    handleCourseAction(course.courseID);
+                });
+
+                // Append the button to the course container
+                courseContainer.appendChild(courseButton);
+
+                // Append the course container to the list
+                coursesList.appendChild(courseContainer);
+            });
+        }
+    };
+    xhr.send();
+}
+            // Function to handle course actions (e.g., view details, materials)
+            function handleCourseAction(courseID) {
+                // Define what to do when a course is selected
+                // For example, you could redirect to a course details page or display course materials
+            }
+
+            // Call the function to fetch student courses when the page loads
+            window.onload = fetchStudentCourses;
+
+
+            document.getElementById('input-file').addEventListener('change', function() {
+        var files = this.files; // Get the selected files
+
+        var fileList = document.createElement('ul'); // Create a list to hold file details
+        for (var i = 0; i < files.length; i++) {
+            // Check if the file is a PDF
+            if (files[i].type === 'application/pdf') {
+                var listItem = document.createElement('li'); // Create list item for each file
+                listItem.style.backgroundColor = '#F8EFE3'; // Set background color
+                listItem.style.borderRadius = '15px';
+                listItem.style.width = '245px';
+                listItem.style.height = '25px';
+
+                if (i > 0) {
+                    listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
+                } else {
+                    listItem.style.marginTop = "3px";
+                }
+
+                // Create icon element
+                var fileIcon = document.createElement('i');
+                fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
+
+                // Create anchor element
+                var fileLink = document.createElement('a');
+                fileLink.textContent = files[i].name; // Set text content to file name
+                fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
+                fileLink.download = files[i].name; // Set the download attribute to force download
+
+                // Append icon and anchor elements to list item
+                listItem.appendChild(fileIcon);
+                listItem.appendChild(fileLink);
+
+                // Append list item to list
+                fileList.appendChild(listItem);
+            } else {
+                alert("Only PDF files are allowed.");
+            }
+        }
+        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
+        if (!attachedFileCont) {
+            attachedFileCont = document.createElement('ul');
+            attachedFileCont.style.padding = '.5px'; // Add padding to the list
+            attachedFileCont.style.listStyleType = 'none'; // Remove default list style
+            document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
+        }
+        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
+    });        
+        </script>
     </div>
 </body>
 </html>
