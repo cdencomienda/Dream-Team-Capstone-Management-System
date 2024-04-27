@@ -49,10 +49,8 @@ profile.addEventListener('click', function () {
   toggleMenu.classList.toggle('active');
 });
 
-melonbtn.addEventListener('click', function () {
-  const toggleMelon = document.querySelector('.settingMelon');
-  toggleMelon.classList.toggle('melonActivate');
-});
+
+//melonbtn removed
 
 const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
 tap.addEventListener('click', function () {
@@ -210,3 +208,4 @@ function rubric() {
 function createGROUP(){
   
 }
+
