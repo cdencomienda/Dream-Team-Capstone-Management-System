@@ -101,8 +101,7 @@
                     <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
                 </div>
             </div>
-            <!-- editprofile -->
-            <!-- emerson gudito start -->
+            <!-- editprofile --> 
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
         
