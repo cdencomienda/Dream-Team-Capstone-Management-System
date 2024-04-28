@@ -475,6 +475,9 @@ fetchStudentIDs(courseID);
 
 <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
+                <div>
+                    <button class = "closeViewGroup" onclick= "clsViewGrp()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                 </div>
                 <h3>Members:</h3>
                     <div class="membersContainer">
                         <h4>StudentName</h4>
