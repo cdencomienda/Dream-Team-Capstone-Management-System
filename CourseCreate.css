@@ -20,6 +20,7 @@ body{
 .containerMenu{
   margin-left: 50px;
 }
+
 /* dropdown edit profile */
 .container{
   position: relative;
@@ -31,7 +32,6 @@ body{
   bottom: 35px;
   left: 84%;
 }
-
 .editoverlay{
   display: none;
   position: fixed;
@@ -42,7 +42,6 @@ body{
   background-color: rgba(0, 0, 0, 0.5);
   
 }   
-
 .dropdown-profile{
   position: absolute;
     background-color: #FFEBCF;

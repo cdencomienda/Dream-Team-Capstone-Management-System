@@ -8,7 +8,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Class Menu</title>
     <style>
-        
+         
+         
         body{
          background: #CBC4BA;
          overflow-x: hidden;
