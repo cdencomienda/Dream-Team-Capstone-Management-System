@@ -28,6 +28,7 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
   document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
+  
 }
 
 // emerson gudito end
@@ -143,6 +144,7 @@ function dropdownMelon() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
+
 function creategroup() { 
   var container = document.querySelector('.creategroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
@@ -182,13 +184,31 @@ function newGroupCreated() {
     
 }
 
+// function viewMembers() { 
+//   var container = document.querySelector('.viewgroup'); 
+//   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+  
+// //   var hideGroup = document.getElementById("viewGRP")
+// //   if (container) {
+// //       hideGroup.style.display = "none";
+// //   } 
+// }
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-//   var hideGroup = document.getElementById("viewGRP")
-//   if (container) {
-//       hideGroup.style.display = "none";
-//   } 
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
+  
+  // // Check if close button already exists
+  // if (!container.querySelector('.closeButton')) {
+  //   // Adding the close button
+  //   var closeButton = document.createElement('button');
+  //   closeButton.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
+  //   closeButton.setAttribute('type', 'button');
+  //   closeButton.setAttribute('class', 'closeButton');
+  //   closeButton.onclick = function() {
+  //     container.style.display = 'none';
+  //   };
+  //   container.appendChild(closeButton);
+  // }
 }
 
 function addMembers() { 
@@ -211,3 +231,8 @@ function createGROUP(){
   
 }
 
+
+function clsViewGrp(){
+  var container = document.querySelector('.addmember');
+  container.style.display = 'none';
+}
