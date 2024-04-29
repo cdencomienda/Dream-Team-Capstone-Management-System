@@ -60,6 +60,111 @@
             <div class="dropdown">
             </div>
         </div>
+
+<script>
+
+// Function to fetch and display the student's courses
+function fetchStudentCourses() {
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'LiveSearchStudentCourses.php', true);
+xhr.onreadystatechange = function() {
+if (xhr.readyState == 4 && xhr.status == 200) {
+    var courses = JSON.parse(xhr.responseText);
+    var coursesList = document.getElementById('coursesList');
+
+    // Clear any previous courses list
+    coursesList.innerHTML = '';
+
+    // Display each course in the list
+    courses.forEach(function(course) {
+        // Create a container for each course
+        var courseContainer = document.createElement('div');
+        courseContainer.classList.add('course-container');
+
+        // Create a button for course actions (e.g., view details)
+        var courseButton = document.createElement('button');
+        courseButton.type = 'button';
+        courseButton.textContent = course.courseName;
+
+        courseButton.classList.add('S_courseInfo');
+
+        // Add an event listener to the button to handle course actions
+        courseButton.addEventListener('click', function() {
+            handleCourseAction(course.courseID);
+        });
+
+        // Append the button to the course container
+        courseContainer.appendChild(courseButton);
+
+        // Append the course container to the list
+        coursesList.appendChild(courseContainer);
+    });
+}
+};
+xhr.send();
+}
+
+// Function to fetch and display group members
+function fetchGroupMembers() {
+    // Obtain group ID dynamically (you may want to replace the following line with your own logic)
+    const groupID = /* Obtain group ID dynamically */;
+
+    // Create a new XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    
+    // Open a GET request to the LiveSearchGroupMembers.php endpoint
+    xhr.open('GET', `LiveSearchGroupMembers.php?groupID=${groupID}`, true);
+    
+    // Define a function to handle the state changes of the request
+    xhr.onreadystatechange = function() {
+        // Check if the request is completed and successful
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Parse the JSON response from the server
+            const response = JSON.parse(xhr.responseText);
+            
+            // Get the element where the group members will be displayed
+            const groupMembersContainer = document.getElementById('groupMembersContainer');
+            
+            // Clear previous group members list
+            groupMembersContainer.innerHTML = '';
+            
+            // Check if there is an error in the response
+            if (response.error) {
+                // Display the error message
+                groupMembersContainer.textContent = response.error;
+            } else {
+                // Display group members
+                response.forEach(member => {
+                    const memberElement = document.createElement('div');
+                    memberElement.textContent = member.userName;
+                    groupMembersContainer.appendChild(memberElement);
+                });
+            }
+        }
+    };
+    
+    // Send the request
+    xhr.send();
+}
+
+// Add an event listener to the "Members" button
+document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembers);
+
+
+
+
+    // Call the function to fetch student courses when the page loads
+fetchStudentCourses();
+fetchGroupMembers();
+
+
+
+
+
+
+</script>
+
+
         <div class="StudentDefault">
             <div class="dashboard_header">
 
@@ -76,14 +181,15 @@
                         <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
                         <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                         <div class="mDropdown">  
-                        <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                            <div class="GroupmembersContainer"> 
-                                member 1 
-                             </div>
+                        <button type="button" class="Members-Btn" onclick="fetchGroupMembers()">
+                                    Members
+                                </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer"></div>
+                            </div>
                         </div>
-                    </div>
-                </h2>     
-            </div>
+                    </h2>
+                </div>
             <div class="defaultBody" id="defaultBody">
                 <div class="recentFiles" >
                     'featured files here'
@@ -187,54 +293,7 @@
                 // Call the showDefaultBody function
                 showDefaultBody();
         });
-        // Function to fetch and display the student's courses
-        function fetchStudentCourses() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'LiveSearchStudentCourses.php', true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var courses = JSON.parse(xhr.responseText);
-            var coursesList = document.getElementById('coursesList');
 
-            // Clear any previous courses list
-            coursesList.innerHTML = '';
-
-            // Display each course in the list
-            courses.forEach(function(course) {
-                // Create a container for each course
-                var courseContainer = document.createElement('div');
-                courseContainer.classList.add('course-container');
-
-                // Create a button for course actions (e.g., view details)
-                var courseButton = document.createElement('button');
-                courseButton.type = 'button';
-                courseButton.textContent = course.courseName;
-
-                courseButton.classList.add('S_courseInfo');
-
-                // Add an event listener to the button to handle course actions
-                courseButton.addEventListener('click', function() {
-                    handleCourseAction(course.courseID);
-                });
-
-                // Append the button to the course container
-                courseContainer.appendChild(courseButton);
-
-                // Append the course container to the list
-                coursesList.appendChild(courseContainer);
-            });
-        }
-    };
-    xhr.send();
-}
-            // Function to handle course actions (e.g., view details, materials)
-            function handleCourseAction(courseID) {
-                // Define what to do when a course is selected
-                // For example, you could redirect to a course details page or display course materials
-            }
-
-            // Call the function to fetch student courses when the page loads
-            window.onload = fetchStudentCourses;
 
 
             document.getElementById('input-file').addEventListener('change', function() {
@@ -284,8 +343,16 @@
             document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
         }
         attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
-    });        
+    });      
+    
         </script>
+
+
+
+
+
+
+
     </div>
 </body>
 </html>
