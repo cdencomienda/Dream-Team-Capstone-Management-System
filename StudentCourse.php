@@ -118,7 +118,6 @@ fetchStudentCourses();
 
 <script>
 // Function to fetch and display group members
-// Function to fetch and display group members
 function fetchGroupMembers() {
     // Fetch the group ID based on the logged-in user
     fetch('GetUserGroupID.php')
@@ -181,7 +180,7 @@ document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembe
                         </h3>       
                     </div>   
                 </div>  
-                <h2>
+                <h4>
                     <div class="button-group"> 
                         <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
                         <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
@@ -193,7 +192,7 @@ document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembe
                                 <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                             </div>
                         </div>
-                    </h2>
+                    </h4>
                 </div>
             <div class="defaultBody" id="defaultBody">
                 <div class="recentFiles" >

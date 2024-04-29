@@ -547,7 +547,7 @@ main.table {
   .GroupmembersContainer{
     position: absolute;
     width: 170px;
-    height: 75px;
+    height: 125px;
     left: -100px;
     top: calc(100% + .25rem);
     background-color: white;
@@ -559,6 +559,8 @@ main.table {
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out;
     z-index: 1000;
+    overflow: auto;
+    text-align: left;
   }
 
   .mDropdown > .Members-Btn:focus + .GroupmembersContainer{
