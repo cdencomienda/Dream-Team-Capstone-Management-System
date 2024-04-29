@@ -62,107 +62,100 @@
         </div>
 
 <script>
-
 // Function to fetch and display the student's courses
 function fetchStudentCourses() {
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'LiveSearchStudentCourses.php', true);
-xhr.onreadystatechange = function() {
-if (xhr.readyState == 4 && xhr.status == 200) {
-    var courses = JSON.parse(xhr.responseText);
-    var coursesList = document.getElementById('coursesList');
+    fetch('LiveSearchStudentCourses.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(courses => {
+            var coursesList = document.getElementById('coursesList');
 
-    // Clear any previous courses list
-    coursesList.innerHTML = '';
+            // Clear any previous courses list
+            coursesList.innerHTML = '';
 
-    // Display each course in the list
-    courses.forEach(function(course) {
-        // Create a container for each course
-        var courseContainer = document.createElement('div');
-        courseContainer.classList.add('course-container');
+            // Display each course in the list
+            courses.forEach(course => {
+                // Create a container for each course
+                var courseContainer = document.createElement('div');
+                courseContainer.classList.add('course-container');
 
-        // Create a button for course actions (e.g., view details)
-        var courseButton = document.createElement('button');
-        courseButton.type = 'button';
-        courseButton.textContent = course.courseName;
+                // Create a button for course actions (e.g., view details)
+                var courseButton = document.createElement('button');
+                courseButton.type = 'button';
+                courseButton.textContent = course.courseName;
 
-        courseButton.classList.add('S_courseInfo');
+                courseButton.classList.add('S_courseInfo');
 
-        // Add an event listener to the button to handle course actions
-        courseButton.addEventListener('click', function() {
-            handleCourseAction(course.courseID);
+                // Add an event listener to the button to handle course actions
+                courseButton.addEventListener('click', function () {
+                    handleCourseAction(course.courseID);
+                });
+
+                // Append the button to the course container
+                courseContainer.appendChild(courseButton);
+
+                // Append the course container to the list
+                coursesList.appendChild(courseContainer);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching student courses:', error);
         });
-
-        // Append the button to the course container
-        courseContainer.appendChild(courseButton);
-
-        // Append the course container to the list
-        coursesList.appendChild(courseContainer);
-    });
-}
-};
-xhr.send();
 }
 
+
+
+// Call the function to fetch student courses when the page loads
+fetchStudentCourses();
+
+
+</script>
+
+
+<script>
 // Function to fetch and display group members
 function fetchGroupMembers() {
-    // Obtain group ID dynamically (you may want to replace the following line with your own logic)
-    const groupID = /* Obtain group ID dynamically */;
+    const groupID = 654321;
 
-    // Create a new XMLHttpRequest
-    const xhr = new XMLHttpRequest();
-    
-    // Open a GET request to the LiveSearchGroupMembers.php endpoint
-    xhr.open('GET', `LiveSearchGroupMembers.php?groupID=${groupID}`, true);
-    
-    // Define a function to handle the state changes of the request
-    xhr.onreadystatechange = function() {
-        // Check if the request is completed and successful
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Parse the JSON response from the server
-            const response = JSON.parse(xhr.responseText);
-            
-            // Get the element where the group members will be displayed
+    fetch(`LiveSearchGroupMembers.php?groupID=${groupID}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(response => {
             const groupMembersContainer = document.getElementById('groupMembersContainer');
-            
-            // Clear previous group members list
-            groupMembersContainer.innerHTML = '';
-            
-            // Check if there is an error in the response
+            groupMembersContainer.innerHTML = ''; // Clear previous content
+
             if (response.error) {
-                // Display the error message
+                // Display error message if server returns an error
                 groupMembersContainer.textContent = response.error;
             } else {
                 // Display group members
                 response.forEach(member => {
                     const memberElement = document.createElement('div');
-                    memberElement.textContent = member.userName;
+                    memberElement.textContent = member.username; // Changed to 'username' to match the PHP script
                     groupMembersContainer.appendChild(memberElement);
                 });
             }
-        }
-    };
-    
-    // Send the request
-    xhr.send();
+        })
+        .catch(error => {
+            console.error('Error fetching group members:', error);
+            const groupMembersContainer = document.getElementById('groupMembersContainer');
+            groupMembersContainer.textContent = 'Error fetching group members. Please try again later.';
+        });
 }
 
 // Add an event listener to the "Members" button
 document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembers);
 
-
-
-
-    // Call the function to fetch student courses when the page loads
-fetchStudentCourses();
-fetchGroupMembers();
-
-
-
-
-
-
 </script>
+
 
 
         <div class="StudentDefault">

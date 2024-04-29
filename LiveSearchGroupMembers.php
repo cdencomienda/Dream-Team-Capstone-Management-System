@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id'])) {
         $groupMembers[] = [
             'groupID' => $row['groupID'],
             'groupname' => $row['groupname'],
-            'studentID' => $row['studentID'],
+            'studentID' => $row['userID'], // Changed to 'userID' to match the SELECT statement
             'username' => $row['username'],
         ];
     }
@@ -55,6 +55,9 @@ if (isset($_SESSION['user_id'])) {
 
     // Return the group members as a JSON response
     echo json_encode($groupMembers);
+
+    // Log the group members to the console
+    echo "<script>console.log('Group Members:', " . json_encode($groupMembers) . ");</script>";
 } else {
     // If the user is not logged in, return an error message
     header('HTTP/1.1 401 Unauthorized');
