@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+    <script src = "studentcourse.js"></script>    
     <link rel="stylesheet" href="StudentCourseStyle.css">
     <?php include 'login.php'; ?>
     <div class="header">
@@ -60,134 +60,65 @@
             <div class="dropdown">
             </div>
         </div>
-
-<script>
-// Function to fetch and display the student's courses
-function fetchStudentCourses() {
-    fetch('LiveSearchStudentCourses.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(courses => {
-            var coursesList = document.getElementById('coursesList');
-
-            // Clear any previous courses list
-            coursesList.innerHTML = '';
-
-            // Display each course in the list
-            courses.forEach(course => {
-                // Create a container for each course
-                var courseContainer = document.createElement('div');
-                courseContainer.classList.add('course-container');
-
-                // Create a button for course actions (e.g., view details)
-                var courseButton = document.createElement('button');
-                courseButton.type = 'button';
-                courseButton.textContent = course.courseName;
-
-                courseButton.classList.add('S_courseInfo');
-
-                // Add an event listener to the button to handle course actions
-                courseButton.addEventListener('click', function () {
-                    handleCourseAction(course.courseID);
-                });
-
-                // Append the button to the course container
-                courseContainer.appendChild(courseButton);
-
-                // Append the course container to the list
-                coursesList.appendChild(courseContainer);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching student courses:', error);
-        });
-}
-
-
-
-// Call the function to fetch student courses when the page loads
-fetchStudentCourses();
-
-
-</script>
-
-
-<script>
-// Function to fetch and display group members
-function fetchGroupMembers() {
-    // Fetch the group ID based on the logged-in user
-    fetch('GetUserGroupID.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('Error obtaining group ID:', data.error);
-                return;
-            }
-
-            // Get the group ID from the response
-            const groupID = data.groupID;
-
-            // Use the group ID to fetch and display group members
-            fetch(`LiveSearchGroupMembers.php?groupID=${groupID}`)
-                .then(response => response.json())
-                .then(response => {
-                    const groupMembersContainer = document.getElementById('groupMembersContainer');
-                    groupMembersContainer.innerHTML = ''; // Clear previous content
-
-                    if (response.error) {
-                        // Display error message if server returns an error
-                        groupMembersContainer.textContent = response.error;
-                    } else {
-                        // Display group members
-                        response.forEach(member => {
-                            const memberElement = document.createElement('div');
-                            memberElement.textContent = member.username; // Display member's username
-                            groupMembersContainer.appendChild(memberElement);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching group members:', error);
-                    const groupMembersContainer = document.getElementById('groupMembersContainer');
-                    groupMembersContainer.textContent = 'Error fetching group members. Please try again later.';
-                });
-        })
-        .catch(error => {
-            console.error('Error obtaining group ID:', error);
-        });
-}
-
-// Add an event listener to the "Members" button
-document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembers);
-
-
-</script>
-
-
-
         <div class="StudentDefault">
             <div class="dashboard_header">
 
                     <!-- Group Name Box               -->
+
                 <div class="groupname_container"> 
                     <div class="group_name" id="group_name"> 
                         <h3> 
                             <p class="group_name"> Test Group Name </p>    
                         </h3>       
                     </div>   
-                </div>  
+                </div>
+                <script> 
+                    // Get the element with the class "group_name"
+                    const groupDiv = document.getElementById('group_name');
+
+                    // Function to decrease opacity by 70%
+                    function decreaseOpacity() {
+                        groupDiv.style.opacity = '0.85'; // 30% opacity
+                    }
+
+                    // Function to reset opacity to default
+                    function resetOpacity() {
+                        groupDiv.style.opacity = '1'; // 100% opacity
+                    }
+
+                    // Add event listeners for mouseover and mouseout
+                    groupDiv.addEventListener('mouseover', decreaseOpacity);
+                    groupDiv.addEventListener('mouseout', resetOpacity);
+
+                    // Function to handle click event
+                    groupDiv.addEventListener('click', function() {
+                        // Call the showDefaultBody function
+                        showDefaultBody();
+                    });
+                    
+                </script>  
+
                 <h4>
                     <div class="button-group"> 
-                        <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
-                        <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
+                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+
+                            <div class = "flsDropdown">
+                            <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">
+                                    Advisor Recomendation Sheet: <br>
+                                    <div class = "advRecomendation">
+                                    </div>
+                                </div> 
+                            </div>          
+                        </div>    
                         <div class="mDropdown">  
-                        <button type="button" class="Members-Btn" onclick="fetchGroupMembers()">
-                                    Members
-                                </button>
+                        <button type="button" class="Members-Btn" onclick="fetchGroupMembers()"> <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                             </div>
@@ -244,119 +175,69 @@ document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembe
                             submit
                         </button>
                     </div>
+                    <script>
+                        
+                        document.getElementById('input-file').addEventListener('change', function() {
+                        var files = this.files; // Get the selected files
+
+                        var fileList = document.createElement('ul'); // Create a list to hold file details
+                        for (var i = 0; i < files.length; i++) {
+                        // Check if the file is a PDF
+                        if (files[i].type === 'application/pdf') {
+                            var listItem = document.createElement('li'); // Create list item for each file
+                            listItem.style.backgroundColor = '#F8EFE3'; // Set background color
+                            listItem.style.borderRadius = '15px';
+                            listItem.style.width = '245px';
+                            listItem.style.height = '45px';
+                           
+                            
+                            if (i > 0) {
+                                listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
+                            } else {
+                                listItem.style.marginTop = "5px";
+                            }
+
+                            // Create icon element
+                            var fileIcon = document.createElement('i');
+                            fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
+                            
+                            // Create anchor element
+                            var fileLink = document.createElement('a');
+                            fileLink.textContent = files[i].name; // Set text content to file name
+                            fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
+                            fileLink.download = files[i].name; // Set the download attribute to force download
+
+                            // Append icon and anchor elements to list item
+                            listItem.appendChild(fileIcon);
+                            listItem.appendChild(fileLink);
+
+                            // Append list item to list
+                            fileList.appendChild(listItem);
+                        } else {
+                            alert("Only PDF files are allowed.");
+                        }
+                        }
+                        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
+                        if (!attachedFileCont) {
+                        attachedFileCont = document.createElement('ul');
+                        attachedFileCont.style.padding = '1px'; // Add padding to the list
+                        attachedFileCont.style.listStyleType = 'none'; // Remove default list style
+                        document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
+                        }
+                        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
+                        });      
+                    </script>    
                 </div>
-            <div class="studentFilesR" id="studentFilesR">
-                <div class = "sFileContainer">
-                files repository
-                </div>
-            </div>
+            
         </div>
     </div>
     
-    <style>
-        
+        <style>
         .submissionFrame {
             display: none;
         }
 
-    </style>
-    <!-- <script src="StudentCourse.js"></script> -->
-    <script> 
-        function notifAuth(){
-                window.location.assign("NotificationPage.php")
-            }
-            function studentClass(){
-            window.location.assign("StudentCourse.php")
-            }
-            function archive(){
-            window.location.assign("HomePage.php")
-            } 
-            function showDefaultBody() {
-                document.getElementById("defaultBody").style.display = "block";
-                document.getElementById("submissionFrame").style.display = "none";
-                document.getElementById("studentFilesR").style.display = "none";
-            }
-
-            function submissionBtnAuth() {
-                document.getElementById("defaultBody").style.display = "none";
-                document.getElementById("submissionFrame").style.display = "flex";
-                document.getElementById("studentFilesR").style.display = "none";
-            }
-
-            function r_filesBtnAuth() {
-                document.getElementById("defaultBody").style.display = "none";
-                document.getElementById("submissionFrame").style.display = "none";
-                document.getElementById("studentFilesR").style.display = "flex";
-            }
-
-            // Get the element with the class "group_name"
-            const groupDiv = document.getElementById('group_name');
-
-            // Add an event listener to the element
-            groupDiv.addEventListener('click', function() {
-                // Call the showDefaultBody function
-                showDefaultBody();
-        });
-
-
-
-            document.getElementById('input-file').addEventListener('change', function() {
-        var files = this.files; // Get the selected files
-
-        var fileList = document.createElement('ul'); // Create a list to hold file details
-        for (var i = 0; i < files.length; i++) {
-            // Check if the file is a PDF
-            if (files[i].type === 'application/pdf') {
-                var listItem = document.createElement('li'); // Create list item for each file
-                listItem.style.backgroundColor = '#F8EFE3'; // Set background color
-                listItem.style.borderRadius = '15px';
-                listItem.style.width = '245px';
-                listItem.style.height = '25px';
-
-                if (i > 0) {
-                    listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
-                } else {
-                    listItem.style.marginTop = "3px";
-                }
-
-                // Create icon element
-                var fileIcon = document.createElement('i');
-                fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
-
-                // Create anchor element
-                var fileLink = document.createElement('a');
-                fileLink.textContent = files[i].name; // Set text content to file name
-                fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
-                fileLink.download = files[i].name; // Set the download attribute to force download
-
-                // Append icon and anchor elements to list item
-                listItem.appendChild(fileIcon);
-                listItem.appendChild(fileLink);
-
-                // Append list item to list
-                fileList.appendChild(listItem);
-            } else {
-                alert("Only PDF files are allowed.");
-            }
-        }
-        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
-        if (!attachedFileCont) {
-            attachedFileCont = document.createElement('ul');
-            attachedFileCont.style.padding = '.5px'; // Add padding to the list
-            attachedFileCont.style.listStyleType = 'none'; // Remove default list style
-            document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
-        }
-        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
-    });      
-    
-        </script>
-
-
-
-
-
-
-
+        </style>
     </div>
 </body>
 </html>
