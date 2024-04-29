@@ -63,7 +63,7 @@
         color: black; /* Example color */
         font-size: 25px;
         margin:-3px
-        transition: opacity 0.3s ease; /* Add transition for background color */
+        transition opacity 0.3s ease; /* Add transition for background color */
     }
       /* Change background color on hover */
       .close i:hover {
