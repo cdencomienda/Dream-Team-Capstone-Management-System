@@ -9,11 +9,19 @@ if (isset($_SESSION['user_id'])) {
 
     // Check the database connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        http_response_code(500);
+        echo json_encode(['error' => 'Database connection failed']);
+        exit();
     }
 
     // Get the group ID from the request (passed as a query parameter)
     $groupID = isset($_GET['groupID']) ? intval($_GET['groupID']) : 0;
+
+    // Ensure group ID is valid
+    if ($groupID <= 0) {
+        echo json_encode(['error' => 'Invalid group ID']);
+        exit();
+    }
 
     // Prepare the SQL query to fetch the group members
     $sql = "SELECT g.groupID, g.groupname, u.userID, u.username
@@ -25,10 +33,18 @@ if (isset($_SESSION['user_id'])) {
     $stmt = $conn->prepare($sql);
 
     // Bind the group ID parameter to the query
+    if (!$stmt) {
+        echo json_encode(['error' => 'Failed to prepare the query']);
+        exit();
+    }
+
     $stmt->bind_param('i', $groupID);
 
     // Execute the query
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        echo json_encode(['error' => 'Failed to execute the query']);
+        exit();
+    }
 
     // Fetch the results
     $result = $stmt->get_result();
@@ -41,7 +57,7 @@ if (isset($_SESSION['user_id'])) {
         $groupMembers[] = [
             'groupID' => $row['groupID'],
             'groupname' => $row['groupname'],
-            'studentID' => $row['userID'], // Changed to 'userID' to match the SELECT statement
+            'studentID' => $row['userID'],
             'username' => $row['username'],
         ];
     }
@@ -55,9 +71,6 @@ if (isset($_SESSION['user_id'])) {
 
     // Return the group members as a JSON response
     echo json_encode($groupMembers);
-
-    // Log the group members to the console
-    echo "<script>console.log('Group Members:', " . json_encode($groupMembers) . ");</script>";
 } else {
     // If the user is not logged in, return an error message
     header('HTTP/1.1 401 Unauthorized');
