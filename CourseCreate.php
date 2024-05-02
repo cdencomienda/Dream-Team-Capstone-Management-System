@@ -239,8 +239,7 @@
         </div>
 <script>
    
-// Function to fetch courses created by the professor via Fetch API
-function fetchCourses() {
+   function fetchCourses() {
     fetch('LiveSearchCourseCreated.php')
         .then(response => {
             if (!response.ok) {
@@ -288,21 +287,59 @@ function fetchCourses() {
                 dropdown.appendChild(dropdownContent);
                 coursesDropdown.appendChild(dropdown);
 
-                // Fetch additional course data if needed
-                fetch('LiveSearchCourseCreated.php?courseID=' + course.courseID)
-                    .then(response => response.text())
-                    .then(data => console.log('Response from LiveSearchCourseCreated.php:', data))
-                    .catch(error => console.error('Error fetching course data:', error));
+                // Fetch groups for the current courseID
+                fetchGroups(course.courseID, newGroupButton => {
+                    coursesDropdown.appendChild(newGroupButton); // Append the button once it's created
+                });
 
                 // Log the course ID here after it's assigned
-                console.log('Selected course ID:', course.courseID);
+                console.log('Created createdgroupBTN for course ID:', course.courseID);
             });
 
             // Log the course IDs when courses are fetched
-            console.log(courses.map(course => course.courseID));
+            console.log('Fetched course IDs:', courses.map(course => course.courseID));
         })
         .catch(error => console.error('Error fetching courses:', error));
 }
+
+function fetchGroups(courseID, callback) {
+    fetch('FetchGroups.php?courseID=' + courseID) // Include courseID in the URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(groups => {
+            console.log('Parsed Groups:', groups); // Log the parsed groups
+            groups.forEach(groupID => { // Iterate over group IDs directly
+                const newGroupButton = document.createElement('button');
+                newGroupButton.type = 'button';
+                newGroupButton.classList.add('createdgroupBTN');
+                newGroupButton.textContent = groupID; // Display the groupID
+                newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
+                newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+
+                if (callback && typeof callback === 'function') {
+                    callback(newGroupButton); // Call the callback function with the newGroupButton
+                }
+
+                // Log the group ID here after it's assigned
+                console.log('Created createdgroupBTN for group ID:', groupID);
+
+                // Log the courseID
+                console.log('Course ID in fetchGroups:', courseID);
+            });
+        })
+        .catch(error => console.error('Error fetching groups:', error));
+}
+
+
+
+
+
+
+
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
@@ -350,6 +387,7 @@ function fetchStudentIDs(courseID) {
         .catch(error => console.error('Error fetching student IDs:', error));
 }
 
+
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
     console.log('Clicked:', courseID);
@@ -379,6 +417,7 @@ function handleAction(action, courseID) {
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
 fetchStudentIDs(courseID);
+// fetchGroups(course.courseID);
 </script>
 
 
@@ -488,35 +527,6 @@ fetchStudentIDs(courseID);
                         <h4>InstructorName</h4>
                     </div>
             </div>
-
-<!-- <script>
-// Function to fetch and display student IDs
-function fetchStudentIDs(courseID) {
-    fetch(`fetchStudentIDs.php?courseID=${courseID}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        const membersContainer = document.querySelector('.membersContainer');
-        membersContainer.innerHTML = ''; // Clear previous content
-
-        // Add student IDs to the container
-        data.forEach(studentID => {
-            const studentIDElement = document.createElement('h4');
-            studentIDElement.textContent = studentID;
-            membersContainer.appendChild(studentIDElement);
-        });
-    })
-    .catch(error => console.error('Error fetching student IDs:', error));
-}
-
-// Example usage: fetch student IDs for course ID 12024
-fetchStudentIDs(12024);
-
-</script> -->
  
 <!-- add members -->
                 <div class="addmember">
