@@ -9,6 +9,13 @@ if (!$conn) {
 
 // Fetch user data from the database
 $sql = "SELECT userID, userType, userName, userEmail FROM users";
+
+// Check if search query is provided
+if(isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
+    $sql .= " WHERE userName LIKE '%$search%' OR userEmail LIKE '%$search%'";
+}
+
 $result = $conn->query($sql);
 
 $users = array();
