@@ -66,36 +66,35 @@
                     <!-- Group Name Box               -->
 
                 <div class="groupname_container"> 
-                    <div class="group_name" id="group_name"> 
-                        <h3> 
-                            <p class="group_name"> Test Group Name </p>    
-                        </h3>       
+                    <div class="group_name" id="group_name">     
                     </div>   
                 </div>
                 <script> 
-                    // Get the element with the class "group_name"
-                    const groupDiv = document.getElementById('group_name');
+                    document.addEventListener('DOMContentLoaded', function() {
+                // Function to fetch group information for the logged-in student
+                function fetchGroupInfo() {
+                fetch('fetchGroupName.php')
+                    .then(response => response.json())
+                    .then(groupInfo => {
+                const groupname_container = document.getElementById('group_name');
 
-                    // Function to decrease opacity by 70%
-                    function decreaseOpacity() {
-                        groupDiv.style.opacity = '0.85'; // 30% opacity
-                    }
+                // Check if there is a group
+                if (groupInfo.error) {
+                    groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
+                } else {
+                    // Display the group name in the container
+                    groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
+                }
+             })
+            .catch(error => {
+                console.error('Error fetching group information:', error);
+                groupname_container.innerHTML = '<h3>Error loading group information</h3>';
+            });
+    }
 
-                    // Function to reset opacity to default
-                    function resetOpacity() {
-                        groupDiv.style.opacity = '1'; // 100% opacity
-                    }
-
-                    // Add event listeners for mouseover and mouseout
-                    groupDiv.addEventListener('mouseover', decreaseOpacity);
-                    groupDiv.addEventListener('mouseout', resetOpacity);
-
-                    // Function to handle click event
-                    groupDiv.addEventListener('click', function() {
-                        // Call the showDefaultBody function
-                        showDefaultBody();
-                    });
-                    
+    // Fetch group information when the page loads
+    fetchGroupInfo();
+});   
                 </script>  
 
                 <h4>
