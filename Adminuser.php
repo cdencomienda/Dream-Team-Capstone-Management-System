@@ -177,11 +177,14 @@
         <main class="table" id="customers_table">
             <section class="table__header">
                 <h1> User Accounts </h1> 
+                <div class="input-group">
+                    <input type="search" placeholder="Search Data...">
+                    <img src="images/search.png" alt="">
+                </div>
                 <!-- Popup/Modal Structure -->
                 <div id="editDeleteModal" class="modal">
                     <div class="modal-content">
-                        
-                        <h4>Edit/Delete User</h2>
+                        <h4>Edit/Delete User</h4>
                         <label for="userId">User ID:</label>
                         <input type="text" id="userId" name="userId"><br>
 
@@ -221,26 +224,114 @@
                         </tr> -->
         <script>
             $(document).ready(function(){
-            // AJAX request to fetch user data
+    // Function to load users based on search query
+    function loadUsers(searchQuery = '') {
+        $.ajax({
+            url: 'useradmin.php',
+            type: 'GET',
+            data: {search: searchQuery},
+            success: function(response){
+                // Parse JSON response
+                var users = JSON.parse(response);
+                // Clear existing rows
+                $('#user_table_body').empty();
+                // Append user data to the table
+                users.forEach(function(user){
+                    var newRow = '<tr>';
+                    newRow += '<td>' + user.userID + '</td>';
+                    newRow += '<td>' + user.userType + '</td>';
+                    newRow += '<td>' + user.userName + '</td>';
+                    newRow += '<td>' + user.userEmail + '</td>';
+                    newRow += '</tr>';
+                    $('#user_table_body').append(newRow);
+                });
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Initial load of users
+    loadUsers();
+
+    // Handles search in users
+    const search = document.querySelector('.input-group input');
+    search.addEventListener('input', function() {
+        loadUsers(search.value);
+    });
+
+    // Handle click on edit button
+    $('#user_table_body').on('click', '.edit-btn', function() {
+        // Retrieve user data from the row
+        var rowData = $(this).closest('tr').find('td').map(function(){
+            return $(this).text();
+        }).get();
+
+        // Populate the modal/popup with user data for editing
+        $('#userId').text(rowData[0]); // Display user ID
+        $('#userType').val(rowData[1]); // Set user type in input field 
+
+        // Display the modal/popup
+        $('#editDeleteModal').show();
+    });
+
+    // Handle click on delete button
+    $('#user_table_body').on('click', '.delete-btn', function() {
+        // Retrieve user ID from the row
+        var userId = $(this).closest('tr').find('td:first').text();
+
+        // Confirm deletion with user
+        if (confirm("Are you sure you want to delete this user?")) {
+            // Perform delete operation using AJAX
             $.ajax({
-                url: 'useradmin.php',
-                type: 'GET',
+                url: 'delete&edituser.php',
+                type: 'POST',
+                data: {userId: userId},
                 success: function(response){
-                    // Parse JSON response
-                    var users = JSON.parse(response);
-                    // Append user data to the table
-                    users.forEach(function(user){
-                        var newRow = '<tr>';
-                        newRow += '<td>' + user.userID + '</td>';
-                        newRow += '<td>' + user.userType + '</td>';
-                        newRow += '<td>' + user.userName + '</td>';
-                        newRow += '<td>' + user.userEmail + '</td>';
-                        newRow += '</tr>';
-                        $('#user_table_body').append(newRow); // Use the id attribute to select the table body
-                    });
+                    // Reload users after successful deletion
+                    loadUsers(search.value);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
                 }
             });
-        }); 
+        }
+    });
+
+    // Handle click on save changes button
+    $('#saveEditBtn').click(function(){
+        // Retrieve edited user data
+        var userId = $('#userId').text();
+        var userType = $('#userType').val(); 
+
+        // Perform update operation using AJAX
+        $.ajax({
+            url: 'delete&edituser.php',
+            type: 'POST',
+            data: {
+                userId: userId,
+                userType: userType 
+            },
+            success: function(response){
+                // Reload users after successful edit
+                loadUsers(search.value);
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Close modal/popup when close button is clicked
+    $('.close-modal-btn').click(function(){
+        $('#editDeleteModal').hide();
+    });
+});
+
         </script>
 
         </script>

@@ -136,6 +136,35 @@
                         <div class="requirement-name">
                         this requirement
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+    // Function to fetch requirements information for the logged-in student's group
+    function fetchRequirementsInfo() {
+        fetch('fetchRequirements.php')
+            .then(response => response.json())
+            .then(requirements => {
+                const reqNameContainer = document.querySelector('.req-nameCont');
+
+                // Clear existing content
+                reqNameContainer.innerHTML = '';
+
+                // Populate the container with the group's requirements
+                requirements.forEach(requirement => {
+                    const div = document.createElement('div');
+                    div.className = 'requirement-name';
+                    div.textContent = requirement;
+                    reqNameContainer.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching requirements information:', error);
+            });
+    }
+
+    // Fetch requirements information when the page loads
+    fetchRequirementsInfo();
+});
+</script>
                     </div>
                     
                 </div>

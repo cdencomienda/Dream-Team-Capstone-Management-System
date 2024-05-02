@@ -7,6 +7,41 @@ document.addEventListener('profile', function () {
     }); 
   });
 
+  const table_rows = document.querySelectorAll('tbody tr');
+  const table_headings = document.querySelectorAll('thead th');
+
+  
+  // 2. Sorting | Ordering data of HTML table
+  
+  table_headings.forEach((head, i) => {
+      let sort_asc = true;
+      head.addEventListener('click', () => {
+          table_headings.forEach(head => head.classList.remove('active'));
+          head.classList.add('active');
+  
+          document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+          table_rows.forEach(row => {
+              row.querySelectorAll('td')[i].classList.add('active');
+          });
+  
+          head.classList.toggle('asc', sort_asc);
+          sort_asc = head.classList.contains('asc') ? false : true;
+  
+          sortTable(i, sort_asc);
+      });
+  });
+  
+  
+  function sortTable(column, sort_asc) {
+      const sortedRows = [...table_rows].sort((a, b) => {
+          const first_row = a.querySelectorAll('td')[column].textContent.toLowerCase();
+          const second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+  
+          return sort_asc ? (first_row > second_row ? 1 : -1) : (first_row < second_row ? 1 : -1);
+      });
+  
+      sortedRows.forEach(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+  }
 
   function Users(){
     window.location.assign("Adminuser.php")
@@ -19,78 +54,56 @@ document.addEventListener('profile', function () {
     window.location.assign("LoginSignup.php")
   }
 
-// pang delete ng gago
-$(document).ready(function(){
-  // Handle click on edit button
-  $('.edit-btn').click(function(){
-      // Retrieve user data from the row
-      var rowData = $(this).closest('tr').find('td').map(function(){
-          return $(this).text();
-      }).get();
+//   $(document).ready(function(){
+//     // Handle click on delete button
+//     $('.delete-btn').click(function(){
+//         // Retrieve user ID from the row
+//         var userId = $(this).closest('tr').find('td:first').text();
 
-      // Populate the modal/popup with user data for editing
-      $('#userId').text(rowData[0]); // Display user ID
-      $('#userType').val(rowData[1]); // Set user type in input field 
+//         // Confirm deletion with user
+//         if (confirm("Are you sure you want to delete this user?")) {
+//             // Perform delete operation using AJAX
+//             $.ajax({
+//                 url: 'delete&edituser.php',
+//                 type: 'POST',
+//                 data: {userId: userId},
+//                 success: function(response){
+//                     // Reload the page after successful deletion
+//                     window.location.reload();
+//                 },
+//                 error: function(xhr, status, error) {
+//                     // Handle errors
+//                     console.error(xhr.responseText);
+//                 }
+//             });
+//         }
+//     });
 
-      // Display the modal/popup
-      $('#editDeleteModal').show();
-  });
+//     // Handle click on save changes button
+//     $('#saveEditBtn').click(function(){
+//         // Retrieve edited user data
+//         var userId = $('#userId').val(); // Assuming this is an input field for editing
+//         var userType = $('#userType').val(); 
 
-  // Handle click on delete button
-  $('.delete-btn').click(function(){
-      // Retrieve user ID from the row
-      var userId = $(this).closest('tr').find('td:first').text();
-
-      // Confirm deletion with user
-      if (confirm("Are you sure you want to delete this user?")) {
-          // Perform delete operation using AJAX
-          $.ajax({
-              url: 'delete_user.php',
-              type: 'POST',
-              data: {userId: userId},
-              success: function(response){
-                  // Reload the page or update the table as needed
-                  // Example: window.location.reload();
-              },
-              error: function(xhr, status, error) {
-                  // Handle errors
-                  console.error(xhr.responseText);
-              }
-          });
-      }
-  });
-
-  // Handle click on save changes button
-  $('#saveEditBtn').click(function(){
-      // Retrieve edited user data
-      var userId = $('#userId').text();
-      var userType = $('#userType').val(); 
-
-      // Perform update operation using AJAX
-      $.ajax({
-          url: 'edit_user.php',
-          type: 'POST',
-          data: {
-              userId: userId,
-              userType: userType 
-          },
-          success: function(response){
-              // Handle success response
-              // Example: window.location.reload();
-          },
-          error: function(xhr, status, error) {
-              // Handle errors
-              console.error(xhr.responseText);
-          }
-      });
-  });
-
-  // Close modal/popup when close button is clicked
-  $('.close-modal-btn').click(function(){
-      $('#editDeleteModal').hide();
-  });
-});
-
+//         // Perform update operation using AJAX
+//         $.ajax({
+//             url: 'delete&edituser.php',
+//             type: 'POST',
+//             data: {
+//                 userId: userId,
+//                 userType: userType 
+//             },
+//             success: function(response){
+//                 // Reload the page after successful edit
+//                 window.location.reload();
+//             },
+//             error: function(xhr, status, error) {
+//                 // Handle errors
+//                 console.error(xhr.responseText);
+//             }
+//         });
+//     });
+// });
 
 
   document.getElementById('editProfileBtn').addEventListener('click', function() {
