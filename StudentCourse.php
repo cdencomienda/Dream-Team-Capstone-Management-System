@@ -140,7 +140,7 @@
                             document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch requirements information for the logged-in student's group
     function fetchRequirementsInfo() {
-        fetch('fetchR   equirements.php')
+        fetch('fetchRequirements.php')
             .then(response => response.json())
             .then(requirements => {
                 const reqNameContainer = document.querySelector('.req-nameCont');
