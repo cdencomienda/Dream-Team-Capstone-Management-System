@@ -644,6 +644,7 @@ main.table {
   width: 350px;
   height: 580px; 
   display: flex;  
+  flex-direction: column;
   margin-top: 25px;
 }
 
@@ -659,7 +660,7 @@ main.table {
 .submissionscontainer{
   width: 1000px;
   height: 600px;
-  
+
   margin-top: 0px;
   display: flex;
   flex-direction: row; /* Display children elements in a row */
@@ -673,7 +674,8 @@ main.table {
   margin-left: 50px;
   text-align  : center;
   padding-top: 40px;
-
+  display: block;
+  margin-bottom: 5px;
 }
 .requirement-details{
   position: relative;
@@ -743,8 +745,7 @@ main.table {
   margin: 15px;
   margin-top: -75px;
   width: 295px;
-
-  height: 75px;
+  height: 100px;
   overflow: auto;
 }
 label{

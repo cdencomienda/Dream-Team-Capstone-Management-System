@@ -134,7 +134,7 @@
                 <div class= "requirement-list">
                     <div class = "req-nameCont"> 
                         <div class="requirement-name">
-                        this requirement
+                        
                         </div>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
@@ -144,7 +144,7 @@
             .then(response => response.json())
             .then(requirements => {
                 const reqNameContainer = document.querySelector('.req-nameCont');
-
+                
                 // Clear existing content
                 reqNameContainer.innerHTML = '';
 
@@ -253,8 +253,32 @@
                         document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
                         }
                         attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
-                        });      
-                    </script>    
+                        });    
+                        
+                          // Get the element with the class "group_name"
+                         const groupDiv = document.getElementById('group_name');
+
+                            // Function to decrease opacity by 70%
+                            function decreaseOpacity() {
+                                groupDiv.style.opacity = '0.80'; // 30% opacity
+                            }
+
+                            // Function to reset opacity to default
+                            function resetOpacity() {
+                                groupDiv.style.opacity = '1'; // 100% opacity
+                            }
+
+                            // Add event listeners for mouseover and mouseout
+                            groupDiv.addEventListener('mouseover', decreaseOpacity);
+                            groupDiv.addEventListener('mouseout', resetOpacity);
+
+                            // Function to handle click event
+                            groupDiv.addEventListener('click', function() {
+                                // Call the showDefaultBody function
+                                showDefaultBody();
+                            });
+                    </script> 
+                    >   
                 </div>
             
         </div>
