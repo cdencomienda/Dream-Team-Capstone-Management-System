@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Main Menu</title>
+    <title>Admin User Edit Menu</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 
     <style>
@@ -14,7 +14,7 @@
         overflow: hidden;
         }
         #error-message {
-            position: absol ute;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -187,15 +187,20 @@
                         <h4>Edit/Delete User</h4>
                         <label for="userId">User ID:</label>
                         <input type="text" id="userId" name="userId"><br>
-
+                        
                         <label for="userType">User Type:</label>
-                        <input type="text" id="userType" name="userType"><br>
-
+                        <select id="userType" name="userType">
+                            <option value="Student">Student</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Program Director">Program Director</option>
+                            <option value="Admin">Admin</option>
+                        </select><br>
+                        
                         <button id="saveEditBtn">Save Changes</button>
                         <button id="deleteUserBtn">Delete User</button>
                         <button class="close-modal-btn">Close</button>
                     </div>
-                </div>
+                </div> 
             </section>
             <section class="table__body">
                 <table>
@@ -223,7 +228,8 @@
                         <td> "userEmail":"jaustria@student.apc.edu.ph"</td>
                         </tr> -->
         <script>
-            $(document).ready(function(){
+
+    $(document).ready(function(){
     // Function to load users based on search query
     function loadUsers(searchQuery = '') {
         $.ajax({
@@ -237,7 +243,7 @@
                 $('#user_table_body').empty();
                 // Append user data to the table
                 users.forEach(function(user){
-                    var newRow = '<tr>';
+                    var newRow = '<tr class="user-row" data-user-id="' + user.userID + '">';
                     newRow += '<td>' + user.userID + '</td>';
                     newRow += '<td>' + user.userType + '</td>';
                     newRow += '<td>' + user.userName + '</td>';
@@ -262,51 +268,64 @@
         loadUsers(search.value);
     });
 
-    // Handle click on edit button
-    $('#user_table_body').on('click', '.edit-btn', function() {
-        // Retrieve user data from the row
-        var rowData = $(this).closest('tr').find('td').map(function(){
-            return $(this).text();
-        }).get();
-
-        // Populate the modal/popup with user data for editing
-        $('#userId').text(rowData[0]); // Display user ID
-        $('#userType').val(rowData[1]); // Set user type in input field 
-
-        // Display the modal/popup
-        $('#editDeleteModal').show();
+    // Handle click on user row
+    $('#user_table_body').on('click', '.user-row', function() {
+        var userId = $(this).data('user-id');
+        var modal = $('#editDeleteModal');
+        // Populate modal with user data
+        modal.find('#userId').val(userId);
+        // Display the modal
+        modal.show();
     });
 
-    // Handle click on delete button
-    $('#user_table_body').on('click', '.delete-btn', function() {
-        // Retrieve user ID from the row
-        var userId = $(this).closest('tr').find('td:first').text();
+    // Close modal/popup when close button is clicked
+    $('.close-modal-btn').click(function(){
+        $('#editDeleteModal').hide();
+    });
 
-        // Confirm deletion with user
-        if (confirm("Are you sure you want to delete this user?")) {
-            // Perform delete operation using AJAX
-            $.ajax({
-                url: 'delete&edituser.php',
-                type: 'POST',
-                data: {userId: userId},
-                success: function(response){
-                    // Reload users after successful deletion
-                    loadUsers(search.value);
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors
-                    console.error(xhr.responseText);
-                }
-            });
-        }
+    // Handle click on delete user button
+    $('#deleteUserBtn').click(function(){
+        var userId = $('#userId').val();
+        // Perform delete operation using AJAX
+        $.ajax({
+            url: 'delete&edituser.php',
+            type: 'POST',
+            data: {userId: userId},
+            success: function(response){
+                // Reload users after successful deletion
+                loadUsers(search.value);
+                // Close modal
+                $('#editDeleteModal').hide();
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Handle click on user row
+    $('#user_table_body').on('click', '.user-row', function() {
+        var userId = $(this).data('user-id');
+        var modal = $('#editDeleteModal');
+        
+        // Populate modal with user data
+        modal.find('#userId').val(userId);
+        
+        // Get user type for selected user
+        var userType = $(this).find('td:eq(1)').text().trim();
+        
+        // Set selected option in dropdown
+        modal.find('#userType').val(userType);
+        
+        // Display the modal
+        modal.show();
     });
 
     // Handle click on save changes button
     $('#saveEditBtn').click(function(){
-        // Retrieve edited user data
-        var userId = $('#userId').text();
+        var userId = $('#userId').val();
         var userType = $('#userType').val(); 
-
         // Perform update operation using AJAX
         $.ajax({
             url: 'delete&edituser.php',
@@ -318,6 +337,8 @@
             success: function(response){
                 // Reload users after successful edit
                 loadUsers(search.value);
+                // Close modal
+                $('#editDeleteModal').hide();
             },
             error: function(xhr, status, error) {
                 // Handle errors
@@ -325,12 +346,8 @@
             }
         });
     });
-
-    // Close modal/popup when close button is clicked
-    $('.close-modal-btn').click(function(){
-        $('#editDeleteModal').hide();
-    });
 });
+
 
         </script>
 
