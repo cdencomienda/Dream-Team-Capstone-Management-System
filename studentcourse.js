@@ -2,6 +2,22 @@
 //     var container = document.querySelector('.containerCreatecourse');
 //     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 //   }
+document.addEventListener('click', e =>{
+    const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
+    if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
+    return
+    
+    let currentflsDropdown
+    if(isflsDropdowButton){
+        currentflsDropdown = e.target.closest('[data-flsDropdown]')
+        currentflsDropdown.classList.toggle('active')
+    }
+    
+    document.querySelectorAll("[data-flsDropdown].active").forEach(flsDropdown => {
+        if (flsDropdown === currentflsDropdown) return
+        flsDropdown.classList.remove("active")
+    });
+    }) 
 
 
 // Function to fetch and display the student's courses
@@ -123,6 +139,22 @@ function submissionBtnAuth() {
 
 }
 
+// document.addEventListener('click', e =>{
+// const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
+// if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
+// return
+
+// let currentflsDropdown
+// if(isflsDropdowButton){
+//     currentflsDropdown = e.target.closest('[data-flsDropdown]')
+//     currentflsDropdown.classList.toggle('active')
+// }
+
+// document.querySelectorAll("[data-flsDropdown].active").forEach(flsDropdown => {
+//     if (flsDropdown === currentflsDropdown) return
+//     flsDropdown.classList.remove("active")
+// });
+// }) 
 
 
 

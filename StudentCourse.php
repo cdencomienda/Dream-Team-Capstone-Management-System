@@ -101,25 +101,34 @@
                     <div class="button-group"> 
                     <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
 
-                            <div class = "flsDropdown">
-                            <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class = "filesContainer"> 
                                 <div class = "documentationCont">
                                     Document Requirement: <br>
                                     <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button></div>
                                     </div>     
                                 </div>   
                                 <div class = "AdvCont">
-                                    Advisor Recomendation Sheet: <br>
+                                    Advisor Recomendation Sheet: 
                                     <div class = "advRecomendation">
+                                    <div class = "attachedAdvRecom"> attached file here </div>    
+                                    <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button> </div>
                                     </div>
                                 </div> 
-                            </div>          
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
                         </div>    
-                        <div class="mDropdown">  
-                        <button type="button" class="Members-Btn" onclick="fetchGroupMembers()"> <i class="fa-solid fa-user-group"></i> Members </button>
+                        <div class="mDropdown" data-flsDropdown>  
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
-                                <div class="GroupmembersContainer" id="groupMembersContainer"></div>
+                                <div class="GroupmembersContainer" id="groupMembersContainer" ></div>
                             </div>
                         </div>
                     </h4>
@@ -217,8 +226,7 @@
                             listItem.style.borderRadius = '15px';
                             listItem.style.width = '245px';
                             listItem.style.height = '45px';
-                           
-                            
+                                   
                             if (i > 0) {
                                 listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
                             } else {
@@ -277,13 +285,11 @@
                                 // Call the showDefaultBody function
                                 showDefaultBody();
                             });
-                    </script> 
-                    >   
+                    
                 </div>
             
         </div>
     </div>
-    
         <style>
         .submissionFrame {
             display: none;

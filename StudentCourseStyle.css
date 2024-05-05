@@ -490,6 +490,46 @@ main.table {
     margin-right: 105px;
     transition: backround-color .3s ease;
   }
+  .attachedAdvRecom,
+  .divAdvLogs,
+  .attachedDocumentation,
+  .divDocuReqLogs {
+      display: flex;
+      flex-direction: row; /* Display as rows */
+      align-items: center; /* Center items vertically */
+      width: 1s50px;
+      height: 30px;
+      background-color: #213B9A;
+  } 
+  .DocuReqLogs{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    font-size: 20px; /* Increase the font size */
+    width: 20px; /* Set a custom width */
+    height: 20px; /* Set a custom height */
+    padding: 6px; /* Add padding to increase clickable area */
+    margin-left: 400px;
+
+    background-color: transparent;
+    border: none;
+  }
+  .AdvLogs {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    font-size: 20px; /* Increase the font size */
+    width: 20; /* Set a custom width */
+    height: 20px; /* Set a custom height */
+    padding: 6px; /* Add padding to increase clickable area */
+    margin-left: 400px;
+
+    background-color: transparent;
+    border: none;
+}
+  .flsDropdown{
+    position: relative;
+  }
   .Rep-FilesBtn:hover{
     background-color: #958f87;
   }
@@ -540,8 +580,8 @@ main.table {
 */
   button:hover{
     background-color:#958f87;
-  }
-  .flsDropdown{
+  } 
+  .flsDropdown.active{
     position: relative;
   }
   .filesContainer{
@@ -562,7 +602,7 @@ main.table {
     
     text-align: left;
   }
-  .flsDropdown > .Rep-FilesBtn:focus + .filesContainer{
+  .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -597,7 +637,7 @@ main.table {
   border-radius: 25px;
 }
 
-  .mDropdown{
+  .mDropdown.active{
     position: relative;
   }
   .GroupmembersContainer{
@@ -620,7 +660,7 @@ main.table {
   }
 
 
-  .mDropdown > .Members-Btn:focus + .GroupmembersContainer{
+  .mDropdown.active > .Members-Btn + .GroupmembersContainer{
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
