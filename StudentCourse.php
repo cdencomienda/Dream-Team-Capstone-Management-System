@@ -177,6 +177,11 @@
                     </div>
                     
                 </div>
+         <style> 
+           .submissionFrame {
+                display: none;
+            }
+         </style>
                 <div class= "requirement-details">
                     <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
                     <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
@@ -290,10 +295,7 @@
             
         </div>
     </div>
-        <style>
-        .submissionFrame {
-            display: none;
-        }
+     
 
         </style>
     </div>

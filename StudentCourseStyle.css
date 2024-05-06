@@ -399,8 +399,8 @@ main.table {
  }
   .StudentClass{
     margin-left: 80px; 
-    width: 1200px;
-    height: 1200px;  
+    width: 1000px;
+    height: 1000px;  
     position:relative; 
   }
   .S_courseInfo h2 {
@@ -497,7 +497,7 @@ main.table {
       display: flex;
       flex-direction: row; /* Display as rows */
       align-items: center; /* Center items vertically */
-      width: 1s50px;
+      width: 1s 50px;
       height: 30px;
       background-color: #213B9A;
   } 
@@ -665,9 +665,7 @@ main.table {
     transform: translateY(0);
     pointer-events: auto;
   }
-  .submissionFrame {
-    display: none;
-}
+
   .submissionFrame, .studentFilesR {
     display: none;
     background-color: transparent;
