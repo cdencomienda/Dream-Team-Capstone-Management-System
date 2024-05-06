@@ -128,7 +128,7 @@
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
-                                <div class="GroupmembersContainer" id="groupMembersContainer" ></div>
+                                <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                             </div>
                         </div>
                     </h4>
