@@ -108,15 +108,22 @@
                                     Document Requirement: <br>
                                     <div class = "ReqDocumentation">
                                         <div class ="attachedDocumentation"> here attached file </div>
-
-                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button></div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
                                     </div>     
                                 </div>   
-                                <div class = "AdvCont">
+                                <div class = "AdvCont">          
                                     Advisor Recomendation Sheet: 
                                     <div class = "advRecomendation">
-                                    <div class = "attachedAdvRecom"> attached file here </div>    
-                                    <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button> </div>
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div> 
                             </div>  
@@ -268,8 +275,8 @@
                         attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
                         });    
                         
-                          // Get the element with the class "group_name"
-                         const groupDiv = document.getElementById('group_name');
+                            // Get the element with the class "group_name"
+                            const groupDiv = document.getElementById('group_name');
 
                             // Function to decrease opacity by 70%
                             function decreaseOpacity() {
@@ -290,7 +297,7 @@
                                 // Call the showDefaultBody function
                                 showDefaultBody();
                             });
-                    
+                    </script>
                 </div>
             
         </div>

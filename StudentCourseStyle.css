@@ -490,6 +490,7 @@ main.table {
     margin-right: 105px;
     transition: backround-color .3s ease;
   }
+
   .attachedAdvRecom,
   .divAdvLogs,
   .attachedDocumentation,
@@ -497,10 +498,21 @@ main.table {
       display: flex;
       flex-direction: row; /* Display as rows */
       align-items: center; /* Center items vertically */
-      width: 1s 50px;
       height: 30px;
-      background-color: #213B9A;
+     
   } 
+  .divDocuReqLogs{
+    width: 40px;
+  }
+  .attachedDocumentation{
+    width: 150px;
+    margin-left: 10px;
+  }
+  .attachedAdvRecom{
+    width: 150px;
+    margin-left: 10px;
+  }
+
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -509,8 +521,7 @@ main.table {
     width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 400px;
-
+    margin-left: 250px;
     background-color: transparent;
     border: none;
   }
@@ -519,10 +530,10 @@ main.table {
     justify-content: center; /* Center horizontally */
     align-items: center;
     font-size: 20px; /* Increase the font size */
-    width: 20; /* Set a custom width */
+    width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 400px;
+    margin-left: 250px;
 
     background-color: transparent;
     border: none;
@@ -623,6 +634,9 @@ main.table {
 }
 
 .ReqDocumentation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-top: 15px;
   width: 100%;
   height: 55px;
@@ -635,9 +649,13 @@ main.table {
   width: 100%;
   background-color: #F8EFE3;
   border-radius: 25px;
+  display: flex;
+  
+  flex-direction: row;
+  align-items: center;
 }
 
-  .mDropdown.active{
+  .mDropdown{
     position: relative;
   }
   .GroupmembersContainer{
