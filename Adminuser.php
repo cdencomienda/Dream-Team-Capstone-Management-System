@@ -64,7 +64,9 @@
         .close i:hover {
             opacity: 50%; /* Example background color on hover */
             border-radius:25px;
-    }
+        }
+        
+
     </style>
     <link rel="stylesheet" href="AdminHomeStyle.css">
     <?php include 'login.php'; ?>
@@ -178,38 +180,38 @@
             <section class="table__header">
                 <h1> User Accounts </h1> 
                 <div class="input-group">
-                    <input type="search" placeholder="Search Data...">
+                    <input type="search" placeholder="Search User...">
                     <img src="images/search.png" alt="">
                 </div>
+                <h4>Edit User/Delete User</h4>
                 <!-- Popup/Modal Structure -->
                 <div id="editDeleteModal" class="modal">
+                    
                     <div class="modal-content">
-                        <h4>Edit/Delete User</h4>
                         <label for="userId">User ID:</label>
                         <input type="text" id="userId" name="userId"><br>
                         
                         <label for="userType">User Type:</label>
-                        <select id="userType" name="userType">
-                            <option value="Student">Student</option>
-                            <option value="Professor">Professor</option>
-                            <option value="Program Director">Program Director</option>
-                            <option value="Admin">Admin</option>
-                        </select><br>
-                        
-                        <button id="saveEditBtn">Save Changes</button>
-                        <button id="deleteUserBtn">Delete User</button>
+                            <select id="userType" name="userType">
+                                <option value="Student">Student</option>
+                                <option value="Professor">Professor</option>
+                                <option value="Program Director">Program Director</option>
+                                <option value="Admin">Admin</option>
+                            </select><br>
+                        <button class = saveeditbtn id="saveEditBtn">Save</button>
+                        <button class = deleteuserbtn id="deleteUserBtn">Delete</button>
                         <button class="close-modal-btn">Close</button>
-                    </div>
+                    </div>  
                 </div> 
             </section>
             <section class="table__body">
                 <table>
                     <thead>
                         <tr>
-                            <th> User ID <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> User Type <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> User Name <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> User Email <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> User ID </th>
+                            <th> User Type </th>
+                            <th> User Name </th>
+                            <th> User Email </th>
                         </tr>
                     </thead>
                     <tbody id="user_table_body">
