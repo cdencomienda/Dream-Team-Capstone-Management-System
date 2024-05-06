@@ -372,17 +372,59 @@ main.table {
   border-radius: 15px;
   overflow: hidden;
   }
-  
+.input-group{
+  margin-left: 20px;
+  margin-right: 150px;
+  width: 175px;height: 20px;
+  border: 3px solid #d8b34d;
+  border-radius: 20px; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;       
+}
+.modal-content{
+  margin-left: 20px;
+}
   .table__header {
   width: 100%;
   height: 10%;
   background-color: #E2C17B;
   padding: 15px;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   }
-  
+  .saveeditbtn{
+    width: 70px;
+    height: 20px;
+    margin-top: 5px;
+    border-radius: 15px;
+    background-color: #ffffff; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }
+  .deleteuserbtn{
+    width: 70px;
+    height: 20px;
+    border-radius: 15px;
+    background-color: #ffffff; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }
+  .close-modal-btn{
+    width: 70px;
+    height: 20px;
+    border-radius: 15px;
+    background-color: #ffffff; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }
+
   .table__body {
   width: 96%;
   max-height: 75%;
