@@ -268,129 +268,7 @@ body{
   transition: background-color 0.3s ease; 
 }
 
-/* }
-a.read{
-  text-decoration: none;
-  color: hsl(0, 0%, 0%);
-  font-size: 18px;
-}
-.single-box:hover {
-  background-color: #0056b3;
-}
-.single-box:active {
-  background-color: #004080;
-}  
-.tableDiv{
-    width: 1000px;
-    height: 00px;
-    margin-top: 50px;
-}
-main.table {  
-  margin-left: 430px;
-  margin-top: 20px;
-  width: 100;
-  height: 800px;    
-  background-color: #ffff; 
-  border-radius: 15px;
-  }
-  
-  .table__header {
-  width: 100%;
-  height: 5%;
-  background-color: #E2C17B;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between; */
-  /* align-items: center;
-  }
-  .table__body{
-    width: 1000 px;
-    height: 95%;
-  } */
-  /* Mali ko  */
-  /* .mybutton{
-    outline: 0px;
-    transition:backround-color 0.5s ease;
-    text-align: center;
-    margin: 2px;
-  }
-  button:hover{
-    background-color:#958f87;
-  }
-  .group_name{
-    margin-top: 10%;
-    position: center;
-    
-  }
-  .Group_btn{
-    height: 10%;
-    margin-top: 10%;
-    margin: 100px;
-  }
-  .Group-nameBtn{
-    width: 350px;
-    height: 25px;
-    margin: 150px;
-   
-    background-color: #F8EFE3; 
-    position: relative;
-    border-radius: 20px;
-    outline: none;
-    text-align: center;
-  }
 
-  .Rep-FilesBtn{
-    width: 50px;
-    height: 25px;
-    margin-left: -50px;
-    background-color: #F8EFE3;
-    position: relative;
-    border-radius: 20px;
-    outline: none;
-  } 
-  .Submission-Btn {
-    width: 100px;
-    height: 25px;
-    background-color: #F8EFE3;
-    position: relative;
-    border-radius: 20px;
-}
-  .Members-Btn{
-    width: 75px;
-    height: 25px;
-    margin-right: 30px;
-   background-color: #F8EFE3;
-   position: relative;
-   border-radius: 20px;
-  }
-
-  .Table_default #docx-button{
-    background-color: #F8EFE3;
-    color:#000000;
-    width: 150 px;
-    height: 35 px;
-    position: relative
-    ;
-  }
-  #docx-button{
-    position: relative;
-    margin: 150px;
-    margin-top: 100px;
-  }
-  .classBox{
-    background: #0056b3;
-    width: 150 px;
-    height: 35 px;
-    margin: relative; 
-     background-color: #F8EFE3;
-    color:#000000;
-  }
-  .button1{
-    width: 250px;
-    margin-top: -50px;
-    margin-left: 1%;  
-    margin-bottom: 1%;
-  } */
  
   .course_created{
   width: 350px; 
@@ -399,8 +277,8 @@ main.table {
  }
   .StudentClass{
     margin-left: 80px; 
-    width: 1200px;
-    height: 1200px;  
+    width: 1000px;
+    height: 1000px;  
     position:relative; 
   }
   .S_courseInfo h2 {
@@ -490,6 +368,7 @@ main.table {
     margin-right: 105px;
     transition: backround-color .3s ease;
   }
+
   .attachedAdvRecom,
   .divAdvLogs,
   .attachedDocumentation,
@@ -497,10 +376,21 @@ main.table {
       display: flex;
       flex-direction: row; /* Display as rows */
       align-items: center; /* Center items vertically */
-      width: 1s50px;
       height: 30px;
-      background-color: #213B9A;
+     
   } 
+  .divDocuReqLogs{
+    width: 40px;
+  }
+  .attachedDocumentation{
+    width: 150px;
+    margin-left: 10px;
+  }
+  .attachedAdvRecom{
+    width: 150px;
+    margin-left: 10px;
+  }
+
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -509,8 +399,7 @@ main.table {
     width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 400px;
-
+    margin-left: 250px;
     background-color: transparent;
     border: none;
   }
@@ -519,10 +408,10 @@ main.table {
     justify-content: center; /* Center horizontally */
     align-items: center;
     font-size: 20px; /* Increase the font size */
-    width: 20; /* Set a custom width */
+    width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 400px;
+    margin-left: 250px;
 
     background-color: transparent;
     border: none;
@@ -623,6 +512,9 @@ main.table {
 }
 
 .ReqDocumentation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-top: 15px;
   width: 100%;
   height: 55px;
@@ -635,9 +527,13 @@ main.table {
   width: 100%;
   background-color: #F8EFE3;
   border-radius: 25px;
+  display: flex;
+  
+  flex-direction: row;
+  align-items: center;
 }
 
-  .mDropdown.active{
+  .mDropdown{
     position: relative;
   }
   .GroupmembersContainer{
@@ -665,9 +561,7 @@ main.table {
     transform: translateY(0);
     pointer-events: auto;
   }
-  .submissionFrame {
-    display: none;
-}
+
   .submissionFrame, .studentFilesR {
     display: none;
     background-color: transparent;

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DefenseSchedule</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src = "studentcourse.js"></script>   
+
+    <link rel="stylesheet" href="Defensechedule.css">
+    <?php include 'login.php'; ?>
+
+    <div class="header">
+        <div class="wrap">
+            <button type="button" class="logobtn" onclick="archive()"></button> 
+            </div> 
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+                <button type="submit" class="searchButton">
+                <span>&#128269;</span>
+                </button>
+            </div>
+            <div class="container">
+                <div class="action">
+                    <div class="profile">
+                        <img src="menu_assets/prof.jpg" alt="profile-img">
+                    </div>
+                    <div class="menu">
+                        <h3><?php echo $_SESSION['username']; ?><br/>
+                            <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h3>
+                        <button type="button" class="editprofileBtn">Edit Profile</button>
+                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</head>
+
+<body>  
+    <div class="hero">
+        <div class="Lsection">
+            <div id="sectionBtn"></div>
+            <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+            <button type="button" class="class"  onclick="studentClass1()">Class</button>
+            <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
+            <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        </div>
+
+        <div class="MainScheduleCont">
+            <div class= "Schedule">
+                <div class="DefenseScheduleCont">
+                    <div class="SchedTitle" id= "SchedTitle">
+                        <h2>Capstone 1-2</h2>
+                    </div>
+                    <div class="SchedDetails" id= "SchedDetails">
+                        day: ???? <br> 
+                        time:??:?? ?? <br>
+                        date: ??/??/????  <br> 
+                    </div>    
+                    <div class="DocumentStatus" id= "DocumentStatus">
+                        Status : ????
+                    </div>
+                </div>
+            </div>
+            <div class="divButton">
+                <button class="CreateSched">
+                    Schedule +
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

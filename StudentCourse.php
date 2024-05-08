@@ -108,15 +108,22 @@
                                     Document Requirement: <br>
                                     <div class = "ReqDocumentation">
                                         <div class ="attachedDocumentation"> here attached file </div>
-
-                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button></div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
                                     </div>     
                                 </div>   
-                                <div class = "AdvCont">
+                                <div class = "AdvCont">          
                                     Advisor Recomendation Sheet: 
                                     <div class = "advRecomendation">
-                                    <div class = "attachedAdvRecom"> attached file here </div>    
-                                    <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button> </div>
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div> 
                             </div>  
@@ -128,7 +135,7 @@
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
-                                <div class="GroupmembersContainer" id="groupMembersContainer" ></div>
+                                <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                             </div>
                         </div>
                     </h4>
@@ -177,6 +184,11 @@
                     </div>
                     
                 </div>
+         <style> 
+           .submissionFrame {
+                display: none;
+            }
+         </style>
                 <div class= "requirement-details">
                     <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
                     <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
@@ -263,8 +275,8 @@
                         attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
                         });    
                         
-                          // Get the element with the class "group_name"
-                         const groupDiv = document.getElementById('group_name');
+                            // Get the element with the class "group_name"
+                            const groupDiv = document.getElementById('group_name');
 
                             // Function to decrease opacity by 70%
                             function decreaseOpacity() {
@@ -285,15 +297,12 @@
                                 // Call the showDefaultBody function
                                 showDefaultBody();
                             });
-                    
+                    </script>
                 </div>
             
         </div>
     </div>
-        <style>
-        .submissionFrame {
-            display: none;
-        }
+     
 
         </style>
     </div>
