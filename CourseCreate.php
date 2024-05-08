@@ -315,43 +315,39 @@ function fetchGroups(courseID, callback) {
             }
             return response.json(); // Parse the response as JSON
         })
-        .then(groups => {
-            console.log('Parsed Groups:', groups); // Log the parsed groups
-            const addedGroups = []; // Array to store added group IDs for this course
+        .then(data => {
+            console.log('Parsed Groups:', data); // Log the parsed data
+            const addedGroups = {}; // Object to store added group IDs for this course
 
-            groups.forEach(groupID => { // Iterate over group IDs directly
-                // Check if the groupID has already been added for this course
-                if (!addedGroups.includes(groupID)) {
-                    const newGroupButton = document.createElement('button');
-                    newGroupButton.type = 'button';
-                    newGroupButton.classList.add('createdgroupBTN');
-                    newGroupButton.textContent = groupID; // Display the groupID
-                    newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
-                    newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+            // Iterate over courseIDs in the data object
+            for (const course in data) {
+                data[course].forEach(groupName => { // Iterate over group names
+                    // Check if the groupID has already been added for this course
+                    if (!(groupName in addedGroups)) {
+                        const newGroupButton = document.createElement('button');
+                        newGroupButton.type = 'button';
+                        newGroupButton.classList.add('createdgroupBTN');
+                        newGroupButton.textContent = groupName; // Display the groupName
+                        newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
+                        newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
 
-                    if (callback && typeof callback === 'function') {
-                        callback(newGroupButton); // Call the callback function with the newGroupButton
+                        if (callback && typeof callback === 'function') {
+                            callback(newGroupButton); // Call the callback function with the newGroupButton
+                        }
+
+                        addedGroups[groupName] = true; // Add the groupName to the addedGroups object
+
+                        // Log the groupName here after it's assigned
+                        console.log('Created createdgroupBTN for group Name:', groupName);
+
+                        // Log the courseID
+                        console.log('Course ID in fetchGroups:', courseID);
                     }
-
-                    addedGroups.push(groupID); // Add the groupID to the addedGroups array
-
-                    // Log the group ID here after it's assigned
-                    console.log('Created createdgroupBTN for group ID:', groupID);
-
-                    // Log the courseID
-                    console.log('Course ID in fetchGroups:', courseID);
-                }
-            });
+                });
+            }
         })
         .catch(error => console.error('Error fetching groups:', error));
 }
-
-
-
-
-
-
-
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
@@ -400,6 +396,10 @@ function fetchStudentIDs(courseID) {
 }
 
 
+
+
+
+
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
     console.log('Clicked:', courseID);
@@ -426,17 +426,24 @@ function handleAction(action, courseID) {
 }
 
 
+
+
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
 fetchStudentIDs(courseID);
 // fetchGroups(course.courseID);
-</script>
+</script>  
 
-
-
-
-
-
+<!-- add members -->
+<div class="addmember">
+                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                        <div>
+                            <h3>Add Member:</h3>
+                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
+                        </div>
+                        <button type="submit" class="addmemberbtn">Add +</button>
+                    </form>
+                </div>
 
             <div class="containerMenu">
 <!-- group created -->
@@ -453,30 +460,51 @@ fetchStudentIDs(courseID);
                                 <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                                 <div class="mDropdown">  
                                 <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                    <div class="GroupmembersContainer"> 
+                                    <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                                         member 1 
                                      </div>
                                 </div>
                             </div>
                         </h2>     
                     </div>
+
+                    <!-- files -->
                     <div class="defaultBody" id="defaultBody">
                         <div class="recentFiles" >
                             'featured files here'
                         </div >
                     </div>
+                    
+                    <!-- submissions -->
                     <div class="submissionFrame" id="submissionFrame">
                         <div class="submissionscontainer">
-                        submission tab
+                            <div class= "requirement-list">
+                                <div class = "req-nameCont"> 
+                                    <div class="requirement-name">
+                            
+                                    </div> 
+                                </div> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="studentFilesR" id="studentFilesR">
+
+                    <!-- file repo -->
+                    <div class="professorFilesR" id="profFilesR">
                         <div class = "sFileContainer">
                         files repository
                         </div>
                     </div>
                 </div>
                
+<!-- add members
+                <div class="addmember">
+                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                        <div>
+                            <h3>Add Member:</h3>
+                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
+                        </div>
+                        <button type="submit" class="addmemberbtn">Add +</button>
+                    </form>
+                </div> -->
 
 <!-- creategroup -->
                 <div class="creategroupContainer">
@@ -491,9 +519,7 @@ fetchStudentIDs(courseID);
                                 <input type="text" class="inputName" name="studentName" placeholder="Input name">
                             </div>
                             <div class="checkboxStudent">
-                                <input type="checkbox" id="StudentName" name="student" value="studentID">
                                 <label for="StudentName"> StudentName</label><br>
-                                <input type="checkbox" id="StudentName" name="student" value="studentID">
                                 <label for="StudentName"> StudentName</label><br>
                             </div>
                         </div>
@@ -539,24 +565,7 @@ fetchStudentIDs(courseID);
                         <h4>InstructorName</h4>
                     </div>
             </div>
- 
-<!-- add members -->
-                <div class="addmember">
-                    <form class="addcheckbox">
-                        <div>
-                            <h3>Add Member:</h3>
-                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
-                        </div>
-                        <div class="checkboxStudent">
-                            <input type="checkbox" id="StudentName" name="student" value="studentID">
-                            <label for="StudentName"> StudentName</label><br>
-                            <input type="checkbox" id="StudentName" name="student" value="studentID">
-                            <label for="StudentName"> StudentName</label><br>
-                        </div>
-                        <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
-                    </form>
-                </div>
- 
+   
 <!-- set requirements -->
                 <div class="setrequirements">
                     <h3>Requirements</h3>
