@@ -23,7 +23,9 @@ if (!empty($courseIDs)) {
 
     foreach ($courseIDs as $id) {
         // Prepare and execute SQL query to fetch groupIDs for the given courseID from the group table
-        $sqlGroups = "SELECT DISTINCT groupName FROM `group` WHERE studentID IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID = $id) AND studentID NOT IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID != $id)";
+        $sqlGroups = "SELECT DISTINCT groupName FROM `group` WHERE courseID = $id 
+                        AND studentID IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID = $id) 
+                        AND studentID IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID = $id)";
 
         $resultGroups = $conn->query($sqlGroups);
 
@@ -57,6 +59,4 @@ if (!empty($courseIDs)) {
 }
 
 $conn->close();
-
-
 ?>

@@ -349,14 +349,6 @@ function fetchGroups(courseID, callback) {
         .catch(error => console.error('Error fetching groups:', error));
 }
 
-
-
-
-
-
-
-
-
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
     const classSetButtons = document.querySelectorAll('.classSet');
@@ -404,6 +396,10 @@ function fetchStudentIDs(courseID) {
 }
 
 
+
+
+
+
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
     console.log('Clicked:', courseID);
@@ -430,11 +426,28 @@ function handleAction(action, courseID) {
 }
 
 
+
+
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
 fetchStudentIDs(courseID);
-// fetchGroups(course.courseID);
-</script> 
+</script>
+
+
+
+<!-- add members -->
+                <div class="addmember">
+                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                        <div>
+                            <h3>Add Member:</h3>
+                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
+                        </div>
+                        <button type="submit" class="addmemberbtn">Add +</button>
+                    </form>
+                </div>
+
+
+
 
             <div class="containerMenu">
 <!-- group created -->
@@ -500,9 +513,7 @@ fetchStudentIDs(courseID);
                                 <input type="text" class="inputName" name="studentName" placeholder="Input name">
                             </div>
                             <div class="checkboxStudent">
-                                <input type="checkbox" id="StudentName" name="student" value="studentID">
                                 <label for="StudentName"> StudentName</label><br>
-                                <input type="checkbox" id="StudentName" name="student" value="studentID">
                                 <label for="StudentName"> StudentName</label><br>
                             </div>
                         </div>
@@ -549,22 +560,7 @@ fetchStudentIDs(courseID);
                     </div>
             </div>
  
-<!-- add members -->
-                <div class="addmember">
-                    <form class="addmemberbox">
-                        <div>
-                            <h3>Add Member:</h3>
-                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
-                        </div>
-                        <div class="addmembers">
-                            
-                            <label id="StudentName" name="student" value="studentID" for="StudentName"> StudentName</label><br>
-                            <label id="StudentName" name="student" value="studentID" for="StudentName"> StudentName</label><br>
-                        
-                        </div>
-                        <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
-                    </form>
-                </div>
+
  
 <!-- set requirements -->
                 <div class="setrequirements">

@@ -789,6 +789,11 @@ h3 {
   border-radius: 10px; 
   background-color: #F8EFE3; 
 }
+.addmemberbtn:hover { 
+  background-color: #a8a8a8;
+  transform: scale(1);
+  cursor: pointer;
+}
 /* viewmembers */
 .closeViewGroup{
   margin-left: 90%;
