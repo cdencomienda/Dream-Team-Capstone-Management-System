@@ -434,13 +434,7 @@ function handleAction(action, courseID) {
 fetchCourses();
 fetchStudentIDs(courseID);
 // fetchGroups(course.courseID);
-</script>
-
-
-
-
-
-
+</script> 
 
             <div class="containerMenu">
 <!-- group created -->
@@ -457,24 +451,35 @@ fetchStudentIDs(courseID);
                                 <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
                                 <div class="mDropdown">  
                                 <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                    <div class="GroupmembersContainer"> 
+                                    <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                                         member 1 
                                      </div>
                                 </div>
                             </div>
                         </h2>     
                     </div>
+
+                    <!-- files -->
                     <div class="defaultBody" id="defaultBody">
                         <div class="recentFiles" >
                             'featured files here'
                         </div >
                     </div>
+                    
+                    <!-- submissions -->
                     <div class="submissionFrame" id="submissionFrame">
                         <div class="submissionscontainer">
-                        submission tab
+                            <div class= "requirement-list">
+                                <div class = "req-nameCont"> 
+                                    <div class="requirement-name">
+                            
+                                    </div> 
+                                </div> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="studentFilesR" id="studentFilesR">
+
+                    <!-- file repo -->
+                    <div class="professorFilesR" id="profFilesR">
                         <div class = "sFileContainer">
                         files repository
                         </div>
@@ -546,16 +551,16 @@ fetchStudentIDs(courseID);
  
 <!-- add members -->
                 <div class="addmember">
-                    <form class="addcheckbox">
+                    <form class="addmemberbox">
                         <div>
                             <h3>Add Member:</h3>
                             <input type="text" class="inputName" name="studentName" placeholder="Input name">
                         </div>
-                        <div class="checkboxStudent">
-                            <input type="checkbox" id="StudentName" name="student" value="studentID">
-                            <label for="StudentName"> StudentName</label><br>
-                            <input type="checkbox" id="StudentName" name="student" value="studentID">
-                            <label for="StudentName"> StudentName</label><br>
+                        <div class="addmembers">
+                            
+                            <label id="StudentName" name="student" value="studentID" for="StudentName"> StudentName</label><br>
+                            <label id="StudentName" name="student" value="studentID" for="StudentName"> StudentName</label><br>
+                        
                         </div>
                         <button type="button" class="addmemberbtn" onclick="addmem()">Add +</button>
                     </form>

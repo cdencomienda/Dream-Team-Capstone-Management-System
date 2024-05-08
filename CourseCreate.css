@@ -549,6 +549,14 @@ background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 15px;
 }
+.inputgroupName{
+  margin-top: 10px; 
+  width: 230px;
+  border: 1px solid #000000;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #f8efe3;
+}
 h3 {
   margin-top: 10px;
 }
@@ -569,6 +577,15 @@ h3 {
   justify-content:space-around;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.addmembers{
+  padding: 8px;
+  width: 330px;
+  border: 1px solid #000000;
+  height: 250px;
+  border-radius: 10px;
+  background-color: #f8efe3;
 }
 
 .checkboxStudent,
@@ -702,7 +719,7 @@ h3 {
   transform: translateY(0);
   pointer-events: auto;
 }
-.submissionFrame, .studentFilesR {
+.submissionFrame, .professorFilesR {
   display: none;
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
@@ -756,7 +773,7 @@ h3 {
   margin-left: 400px;
   top: -1100px;
   width: 800px;
-  height: 300px;
+  height: 500px;
   padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
@@ -776,10 +793,9 @@ h3 {
 .closeViewGroup{
   margin-left: 90%;
   background-color: transparent; /* Example background color */
-  height: 35px;
-  width:  35px;
-  border: none;
-  padding: 5px;
+  height: 25px;
+  width:  25px;
+  border: none; 
   border-radius: 5px;
   cursor: pointer;
   overflow: hidden; 
@@ -791,7 +807,7 @@ h3 {
   top: -1100px;
   width: 250px;
   height: 300px;
-  padding: 25px; 
+  padding: 15px; 
   background-color: #ffffff; 
   border-radius: 15px;
   overflow:hidden;
