@@ -431,12 +431,11 @@ function handleAction(action, courseID) {
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
 fetchStudentIDs(courseID);
-</script>
-
-
+// fetchGroups(course.courseID);
+</script>  
 
 <!-- add members -->
-                <div class="addmember">
+<div class="addmember">
                     <form class="addcheckbox" method="POST" action="addCourseMember.php">
                         <div>
                             <h3>Add Member:</h3>
@@ -445,9 +444,6 @@ fetchStudentIDs(courseID);
                         <button type="submit" class="addmemberbtn">Add +</button>
                     </form>
                 </div>
-
-
-
 
             <div class="containerMenu">
 <!-- group created -->
@@ -499,6 +495,16 @@ fetchStudentIDs(courseID);
                     </div>
                 </div>
                
+<!-- add members
+                <div class="addmember">
+                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                        <div>
+                            <h3>Add Member:</h3>
+                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
+                        </div>
+                        <button type="submit" class="addmemberbtn">Add +</button>
+                    </form>
+                </div> -->
 
 <!-- creategroup -->
                 <div class="creategroupContainer">
@@ -559,9 +565,7 @@ fetchStudentIDs(courseID);
                         <h4>InstructorName</h4>
                     </div>
             </div>
- 
-
- 
+   
 <!-- set requirements -->
                 <div class="setrequirements">
                     <h3>Requirements</h3>
