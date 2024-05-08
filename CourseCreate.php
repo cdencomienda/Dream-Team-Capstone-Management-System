@@ -315,36 +315,40 @@ function fetchGroups(courseID, callback) {
             }
             return response.json(); // Parse the response as JSON
         })
-        .then(groups => {
-            console.log('Parsed Groups:', groups); // Log the parsed groups
-            const addedGroups = []; // Array to store added group IDs for this course
+        .then(data => {
+            console.log('Parsed Groups:', data); // Log the parsed data
+            const addedGroups = {}; // Object to store added group IDs for this course
 
-            groups.forEach(groupID => { // Iterate over group IDs directly
-                // Check if the groupID has already been added for this course
-                if (!addedGroups.includes(groupID)) {
-                    const newGroupButton = document.createElement('button');
-                    newGroupButton.type = 'button';
-                    newGroupButton.classList.add('createdgroupBTN');
-                    newGroupButton.textContent = groupID; // Display the groupID
-                    newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
-                    newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+            // Iterate over courseIDs in the data object
+            for (const course in data) {
+                data[course].forEach(groupName => { // Iterate over group names
+                    // Check if the groupID has already been added for this course
+                    if (!(groupName in addedGroups)) {
+                        const newGroupButton = document.createElement('button');
+                        newGroupButton.type = 'button';
+                        newGroupButton.classList.add('createdgroupBTN');
+                        newGroupButton.textContent = groupName; // Display the groupName
+                        newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
+                        newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
 
-                    if (callback && typeof callback === 'function') {
-                        callback(newGroupButton); // Call the callback function with the newGroupButton
+                        if (callback && typeof callback === 'function') {
+                            callback(newGroupButton); // Call the callback function with the newGroupButton
+                        }
+
+                        addedGroups[groupName] = true; // Add the groupName to the addedGroups object
+
+                        // Log the groupName here after it's assigned
+                        console.log('Created createdgroupBTN for group Name:', groupName);
+
+                        // Log the courseID
+                        console.log('Course ID in fetchGroups:', courseID);
                     }
-
-                    addedGroups.push(groupID); // Add the groupID to the addedGroups array
-
-                    // Log the group ID here after it's assigned
-                    console.log('Created createdgroupBTN for group ID:', groupID);
-
-                    // Log the courseID
-                    console.log('Course ID in fetchGroups:', courseID);
-                }
-            });
+                });
+            }
         })
         .catch(error => console.error('Error fetching groups:', error));
 }
+
 
 
 
