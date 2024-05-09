@@ -785,7 +785,7 @@ h3 {
   margin-top: 30px;
   width: 130px;  
   border: 1px solid #000000; 
-  height: 35px;
+  height: 25px;
   border-radius: 10px; 
   background-color: #F8EFE3; 
 }
@@ -794,26 +794,42 @@ h3 {
   transform: scale(1);
   cursor: pointer;
 }
+.inputNameMember{ 
+  margin-left: 10px;
+  width: 330px;
+  border: 1px solid #000000;
+  height: 35px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f8efe3;
+}
+.table__header{
+  width: 670px;
+  height: 40px;
+  border-radius: 20px; 
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
 .table_Addmember{
-  width: 96%;
-  max-height: 75%;
-  background-color: #f2f2f2;
-  margin: 15px;
+  width: 670px;
+  max-height: 100px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #f2f2f2; 
   border-radius: 10px;
   overflow: auto;
   overflow: overlay;
 }
 .table_Addmember::-webkit-scrollbar{
   width: 3px;
-  height: 5xp;
-  }
-  
+  height: 5px;
+  } 
   .table_Addmember::-webkit-scrollbar-thumb{
   border-radius: .5rem;
   background-color: #0004;
   visibility: hidden;
-  }
-  
+  } 
   .table_Addmember:hover::-webkit-scrollbar-thumb{ 
   visibility: visible;
   }
