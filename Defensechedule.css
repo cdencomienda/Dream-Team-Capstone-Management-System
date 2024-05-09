@@ -272,7 +272,8 @@ body{
 .MainScheduleCont{
   height: 650px;
   width: 1250px;
-  background-color: gray;
+  background-color: wheat;
+
   margin-left: 200px;
   margin-top: 35px;
 }
@@ -294,9 +295,10 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+  box-shadow: 0 5px 5px 3px rgba(0,0,0,.1);
   flex-shrink: 0; /* Prevent containers from shrinking */
   padding: 20px;
+  border-radius: 15px;
 }
 .ScheduleRow {
   display: flex;
@@ -305,7 +307,6 @@ body{
    /* Distribute items evenly */
   margin-bottom: 20px;
   width: 1200px;
-  background-color: #707070;
   border: #000;
   height: 250px;
   margin: 20px 10px;
@@ -342,6 +343,12 @@ body{
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+#addScheduleBtn{
+  margin: 5px;
+  margin-left: 10px;
+  width: 150px;
+  height: 40px;
+}
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
@@ -352,7 +359,7 @@ body{
 }
 
 /* The Close Button */
-.close {
+.close {  
   color: #aaaaaa;
   float: right;
   font-size: 28px;
