@@ -283,24 +283,33 @@ body{
   position: relative;
   display: flex;
   overflow: auto;
+  flex-direction: column;
 }
 .DefenseScheduleCont {
   height: 200px; /* Adjust height as needed */
   width: 200px; /* Adjust width as needed */
   background-color: whitesmoke;
-  margin: 20px 10px; /* Adjust margin as needed */
+  margin: 5px 30px; /* Adjust margin as needed */
   padding: 20px; /* Add padding as needed */
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
   flex-shrink: 0; /* Prevent containers from shrinking */
+  padding: 20px;
 }
 .ScheduleRow {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Distribute items evenly */
+  flex-direction: row;
+   /* Distribute items evenly */
   margin-bottom: 20px;
+  width: 1200px;
+  background-color: #707070;
+  border: #000;
+  height: 250px;
+  margin: 20px 10px;
+  
 }
 .SchedTitle{
   height: 50px;
@@ -315,7 +324,7 @@ body{
 }
 
 .SchedDetails, .DocumentStatus {
-  display: inline-block;
+  display: flex;
   text-align: center;
   margin: 0 10px; /* Adjust the margin as needed */
 }

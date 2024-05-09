@@ -23,39 +23,42 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
 function createDefenseContainer() {
-    // Gather input values
-    const schedTitle = document.getElementById('schedTitle').value;
-    const time = document.getElementById('time').value;
-    const date = document.getElementById('date').value;
-    const day = document.getElementById('day').value;
+  // Gather input values
+  const schedTitle = document.getElementById('schedTitle').value;
+  const time = document.getElementById('time').value;
+  const date = document.getElementById('date').value;
+  const day = document.getElementById('day').value;
 
-    // Create new defense schedule container
-    const defenseContainer = document.createElement('div');
-    defenseContainer.classList.add('DefenseScheduleCont');
-    defenseContainer.innerHTML = `
-        <div class="SchedTitle">
-            <h2>${schedTitle}</h2>
-        </div>
-        <div class="SchedDetails">
-            day: ${day}<br>
-            time: ${time}<br>
-            date: ${date}<br>
-        </div>
-        <div class="DocumentStatus">
-            Status: Pending
-        </div>
-    `;
+  // Create new defense schedule container
+  const defenseContainer = document.createElement('div');
+  defenseContainer.classList.add('DefenseScheduleCont');
+  defenseContainer.innerHTML = `
+      <div class="SchedTitle">
+          <h2>${schedTitle}</h2>
+      </div>
+      <div class="SchedDetails">
+          day: ${day}<br>
+          time: ${time}<br>
+          date: ${date}<br>
+      </div>
+      <div class="DocumentStatus">
+          Status: Pending
+      </div>
+  `;
 
-    // Check if a new row needs to be created
-    let lastRow = document.querySelector('.ScheduleRow:last-child');
-    if (!lastRow || lastRow.children.length === 4) {
-        lastRow = document.createElement('div');
-        lastRow.classList.add('ScheduleRow');
-        document.getElementById('scheduleContainer').appendChild(lastRow);
-    }
+  // Check if a new row needs to be created
+  let lastRow = document.querySelector('.ScheduleRow:last-child');
+  if (!lastRow || lastRow.children.length === 4) {
+      lastRow = document.createElement('div');
+      lastRow.classList.add('ScheduleRow');
+      document.getElementById('scheduleContainer').appendChild(lastRow);
+  }
 
-    // Append the new container to the last row
-    lastRow.appendChild(defenseContainer);
+  // Append the new container to the last row
+  lastRow.appendChild(defenseContainer);
+
+  // Scroll to the bottom to show the newly added row
+  
 }   
+ 
