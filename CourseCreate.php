@@ -435,15 +435,46 @@ fetchStudentIDs(courseID);
 </script>  
 
 <!-- add members -->
-<div class="addmember">
-                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
-                        <div>
-                            <h3>Add Member:</h3>
-                            <input type="text" class="inputName" name="studentName" placeholder="Input name">
-                        </div>
-                        <button type="submit" class="addmemberbtn">Add +</button>
-                    </form>
-                </div>
+        <div class="addmember">
+                <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                    <div> 
+                        <main class="table" id="customers_table">
+                            <section class="table__header">
+                                <label for="userName">User Name:</label>
+                                <input type="text" class="inputName" id="userName" name="studentName" placeholder="User name">
+                            </section>
+                            <section class="table_Addmember">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th> User Name </th>   
+                                        </tr>       
+                                    </thead>
+                                    <tbody id="addUser_body">
+                                        <tr>
+                                            <td onclick="updateUserName(this)">Austria, Jose</td>
+                                        </tr>
+                                        <tr>
+                                            <td onclick="updateUserName(this)">Austria, Jose</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>    
+                                </table>
+                            </section>
+                        </main>
+                    </div>
+                    <div class="CourseMemberContainer"> 
+                    </div>
+                    <button type="submit" class="addmemberbtn">Add +</button>
+                </form> 
+            </div>
+
+            <script>
+                function updateUserName(row) {
+                    var userNameInput = document.getElementById("userName");
+                    userNameInput.value = row.innerText.trim();
+                }
+            </script>
 
             <div class="containerMenu">
 <!-- group created -->
