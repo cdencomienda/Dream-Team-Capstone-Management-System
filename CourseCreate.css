@@ -542,7 +542,7 @@ background-repeat: no-repeat;
   margin-left: 400px;
   top: -1100px;
   width: 700px;
-  height: 530px;
+  height: 580px;
   padding: 25px;
   overflow:hidden;
   display: none;
@@ -551,23 +551,22 @@ background-repeat: no-repeat;
 }
 .inputgroupName{
   margin-top: 10px; 
+  margin-left: 30px;
   width: 230px;
   border: 1px solid #000000;
-  height: 25px;
+  height: 35px;
+  padding: 5px;
   border-radius: 5px;
   background-color: #f8efe3;
 }
 h3 {
   margin-top: 10px;
 }
-.inputName {
-  margin-top: 10px;
-  margin-bottom: 20px;
+.inputName { 
   padding: 5px;
   width: 330px;
   border: 1px solid #000000;
-  height: 35px;
-  border-radius: 10px;
+  height: 85px; 
   background-color: #f8efe3;
 }
 .flex-container {
@@ -812,11 +811,11 @@ h3 {
   align-items: center;
 }
 .table_Addmember{
-  width: 670px;
+  width: 470px;
   max-height: 100px;
   margin-top: 10px;
   padding: 15px;
-  background-color: #f2f2f2; 
+  background-color: #F8EFE3; 
   border-radius: 10px;
   overflow: auto;
   overflow: overlay;
@@ -833,6 +832,17 @@ h3 {
   .table_Addmember:hover::-webkit-scrollbar-thumb{ 
   visibility: visible;
   }
+  .selected {
+    background-color: rgb(139, 139, 139);
+    border-radius: 15px;
+}
+  .removeButton {
+    background-color: #b13232; 
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
 
 /* viewmembers */
 .closeViewGroup{
@@ -987,4 +997,4 @@ body{
 .close i:hover {
  opacity: 50%; /* Example background color on hover */
  border-radius:25px;
-}
+} 

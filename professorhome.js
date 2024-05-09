@@ -23,15 +23,13 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");
   overlay.style.display = "block";
 });
-
-// emerson gudito start
+ 
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
   document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
   
 }
-
-// emerson gudito end
+ 
 function Back(){
   document.getElementById('menuBtn').style.display = 'none';
 }
@@ -51,10 +49,7 @@ profile.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
   toggleMenu.classList.toggle('active');
 });
-
-
-//melonbtn removed
-
+ 
 const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
 tap.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu', '.settingMelon', );
@@ -66,70 +61,7 @@ function toggleCourseCreation() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
- 
-// ito un part na nakaka create dpt ng course kaso may problem
-// function createcourse() { 
-//   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
-//   const courseContainer = document.querySelector('.courseCreation');
-//   const courseInfo = document.createElement('div');
-//   courseInfo.classList.add('courseInfo');  
-
-//   // AJAX request to fetch courses created by the current user
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('POST', 'CourseCreateContainer.php', true);
-//   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//   xhr.onreadystatechange = function () {
-//       if (xhr.readyState === XMLHttpRequest.DONE) {
-//           if (xhr.status === 200) {
-//               const courses = JSON.parse(xhr.responseText);
-//               courses.forEach(course => {
-//                   const { courseID, courseName } = course;
-//                   const courseBtn = document.createElement('button');
-//                   courseBtn.type = 'button';
-//                   courseBtn.classList.add('courseNAMEbtn');
-//                   courseBtn.textContent = courseName;
-//                   courseBtn.onclick = function () {
-//                       // Function to handle button click
-//                       courseinfobtn(courseID); // Assuming courseID is passed to courseinfobtn
-//                   };
-//                   courseInfo.appendChild(courseBtn);
-//               });
-//               // Append courseInfo to courseContainer
-//               courseContainer.appendChild(courseInfo);
-              
-//               // Create the dropdown section
-//               const dropdownSection = document.createElement('div');
-//               dropdownSection.classList.add('dropdown');
-//               dropdownSection.innerHTML = `
-//                   <div class="dropdown" >
-//                   <button type="button" class="classSet" onclick="dropdown()">...</button>
-//                   <div class="dropdown-content" >
-//                       <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>
-//                       <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-//                       <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-//                       <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-//                       <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-//                   </div>
-//               </div>
-//               `;
-              
-//               // Append dropdownSection to professorClass div
-//               document.querySelector('.courseCreation').appendChild(dropdownSection);
-//           } else {
-//               console.error('Failed to fetch courses. Error: ' + xhr.status);
-//           }
-//       }
-//   };
-//   xhr.onerror = function() {
-//       console.error('Error occurred during the request.');
-//   };
-//   xhr.send();
-
-//   // Clear input field and hide course creation container
-//   document.querySelector('.inputTerm[name="courseName"]').value = ''; 
-//   document.querySelector('.containerCreatecourse').style.display = 'none';
-// }
-
+  
 function createcourse() { 
   console.log("createcourse() function called."); // Add this line for debugging
   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
@@ -149,8 +81,7 @@ function creategroup() {
   var container = document.querySelector('.creategroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
-
-
+ 
 // PANG CREATE NG GROUP UNDER COURSE CREATE
 
 function createGROUP() {
@@ -230,9 +161,49 @@ function rubric() {
 function createGROUP(){
   
 }
-
-
+ 
 function clsViewGrp(){
   var container = document.querySelector('.addmember');
   container.style.display = 'none';
 }
+ 
+// for the creating group users (student, panel, advisor)
+function updateSelectedUsers() {
+  const selectedPanelsDropdown = document.getElementById('selectedPanels');
+  const selectedStudentsDropdown = document.getElementById('selectedStudents');
+  const selectedAdvisorsDropdown = document.getElementById('selectedAdvisors');
+
+  selectedPanelsDropdown.innerHTML = '';
+  selectedStudentsDropdown.innerHTML = '';
+  selectedAdvisorsDropdown.innerHTML = '';
+
+  const selectedPanels = document.querySelectorAll('input[name="panel"]:checked');
+  const selectedStudents = document.querySelectorAll('input[name="student"]:checked');
+  const selectedAdvisors = document.querySelectorAll('input[name="advisor"]:checked');
+
+  selectedPanels.forEach(panel => {
+      const option = document.createElement('option');
+      option.text = panel.nextElementSibling.textContent.trim();
+      selectedPanelsDropdown.add(option);
+  });
+
+  selectedStudents.forEach(student => {
+      const option = document.createElement('option');
+      option.text = student.nextElementSibling.textContent.trim();
+      selectedStudentsDropdown.add(option);
+  });
+
+  selectedAdvisors.forEach(advisor => {
+      const option = document.createElement('option');
+      option.text = advisor.nextElementSibling.textContent.trim();
+      selectedAdvisorsDropdown.add(option);
+  });
+}
+
+// Event listener for checkboxes to update the selected panels, students, and advisors
+  document.querySelectorAll('input[name="panel"], input[name="student"], input[name="advisor"]').forEach(checkbox => {
+  checkbox.addEventListener('change', updateSelectedUsers);
+});
+
+
+

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <title>Class Menu</title>
     <style>
          
@@ -304,9 +304,7 @@
         })
         .catch(error => console.error('Error fetching courses:', error));
 }
-
-
-
+ 
 function fetchGroups(courseID, callback) {
     fetch('FetchGroups.php?courseID=' + courseID) // Include courseID in the URL
         .then(response => {
@@ -393,12 +391,7 @@ function fetchStudentIDs(courseID) {
             });
         })
         .catch(error => console.error('Error fetching student IDs:', error));
-}
-
-
-
-
-
+} 
 
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
@@ -423,10 +416,7 @@ function handleAction(action, courseID) {
         default:
             break;
     }
-}
-
-
-
+} 
 
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
@@ -485,92 +475,114 @@ fetchStudentIDs(courseID);
                 </div> 
 
 <!-- add members -->
-        <div class="addmember">
-                <form class="addcheckbox" method="POST" action="addCourseMember.php">
-                    <div> 
-                        <main class="addmembertable" id="addmember_table">
-                            <section class="table__header">
-                                <label for="userName">User Name:</label>
-                                <input type="text" class="inputNameMember" id="userName" name="studentName" placeholder="User name">
-                            </section>
-                            <section class="table_Addmember">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th> User Name </th>   
-                                        </tr>       
-                                    </thead>
-                                    <tbody id="addUser_body">
-                                        <tr>
-                                            <td onclick="updateUserName(this)">Austria, Jose</td>
-                                        </tr>
-                                        <tr>
-                                            <td onclick="updateUserName(this)">Austria, Jose</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>    
-                                </table>
-                            </section>
-                        </main>
-                    </div>
-                    <div class="CourseMemberContainer"> 
-                    </div>
-                    <button type="submit" class="addmemberbtn">Add +</button>
-                </form> 
-            </div>
-
-            <script>
-                function updateUserName(row) {
-                    var userNameInput = document.getElementById("userName");
-                    userNameInput.value = row.innerText.trim();
-                }
-            </script>
-
-<!-- creategroup -->
-                <div class="creategroupContainer">
-                    <h1>Create group</h1>
-                    <h3>Group Name:</h3>
-                    <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
-                    <form class="addcheckbox">
-                        <div class="flex-container">
-                           
-                            <div>
-                                <h3>Add Student:</h3>
-                                <input type="text" class="inputName" name="studentName" placeholder="Input name">
-                            </div>
-                            <div class="checkboxStudent">
-                                <input type="checkbox" id="StudentName" name="student" value="studentID">
-                                <label for="StudentName"> StudentName</label><br>
-                                <label for="StudentName"> StudentName</label><br>
-                            </div>
+                <div class="addmember">
+                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                        <div>
+                            <main class="addmembertable" id="addmember_table">
+                                <section class="table__header">
+                                    <label for="userName">User Name:</label>
+                                    <input type="text" class="inputNameMember" id="userName" name="studentName" placeholder="User name">
+                                </section>
+                                <section class="table_Addmember">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>User Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="addUser_body">
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Austria, Jose</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Austria, Maria</td>
+                                            </tr>
+                                            <!-- Add more rows dynamically if needed -->
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </main>
                         </div>
-                        <div class="flex-container">
-                            <div>
-                                <h3>Add Panel:</h3>
-                                <input type="text" class="inputName" name="panelName" placeholder="Input name">
-                            </div>
-                            <div class="checkboxPanel">
-                                <input type="checkbox" id="PanelName" name="panel" value="panelID">
-                                <label for="PanelName"> PanelName</label><br>
-                                <input type="checkbox" id="PanelName" name="panel" value="panelID">
-                                <label for="PanelName"> PanelName</label><br>
-                            </div>
-                        </div>
-                        <div class="flex-container">
-                            <div>
-                                <h3>Add Advisor:</h3>
-                                <input type="text" class="inputName" name="advisorName" placeholder="Input name">
-                            </div>
-                            <div class="checkboxAdvisor">
-                                <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
-                                <label for="AdvisorName"> AdvisorName</label><br>
-                                <input type="checkbox" id="AdvisorName" name="advisor" value="advisorID">
-                                <label for="AdvisorName"> AdvisorName</label><br>
-                            </div>
-                        </div>
+                        <div class="CourseMemberContainer"></div>
+                        <button type="submit" class="addmemberbtn">Add +</button>
                     </form>
-                    <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
                 </div>
+
+                <script>
+                    function updateUserName(row) {
+                        var userNameInput = document.getElementById("userName");
+                        var userName = row.innerText.trim();
+                        if (!userNameInput.value.includes(userName)) {
+                            userNameInput.value += '[' + userName + ']';
+                            var xButton = document.createElement('button');
+                            xButton.textContent = 'x';
+                            xButton.classList.add('removeButton');
+                            xButton.onclick = function() {
+                                userNameInput.value = userNameInput.value.replace(userName, '');
+                                row.classList.remove('selected');
+                                xButton.remove();
+                            };
+                            row.appendChild(xButton);
+                            row.classList.add('selected');
+                        }
+                    }
+                </script>  
+                
+<!-- creategroup -->
+            <div class="creategroupContainer">
+                <h1>Create group</h1>
+                <h3>Group Name:</h3>
+                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                <form class="addcheckbox">
+
+                    <div class="flex-container">
+                        <!-- student -->
+                        <div>
+                            <h3>Selected Student:</h3>
+                            <select type="text" class="inputName" name="studentName" id="selectedStudents" multiple></select>
+                        </div>
+                        <div class="checkboxStudent">
+                            <input type="checkbox" id="StudentName1" name="student" value="studentID1">
+                            <label for="StudentName1">StudentName 1</label><br>
+                            <input type="checkbox" id="StudentName2" name="student" value="studentID2">
+                            <label for="StudentName2">StudentName 2</label><br>
+                            <input type="checkbox" id="StudentName3" name="student" value="studentID3">
+                            <label for="StudentName3">StudentName 3</label><br>
+                        </div>
+                    </div>
+                    <!-- panel -->
+                    <div class="flex-container">
+                        <div>
+                            <h3>Selected Panel:</h3>
+                            <select type="text" class="inputName" name="panelName" id="selectedPanels" multiple></select>
+                        </div>
+                        <div class="checkboxPanel">
+                            <input type="checkbox" id="Panel1" name="panel" value="panelID1">
+                            <label for="Panel1">Panel 1</label><br>
+                            <input type="checkbox" id="Panel2" name="panel" value="panelID2">
+                            <label for="Panel2">Panel 2</label><br>
+                            <input type="checkbox" id="Panel3" name="panel" value="panelID3">
+                            <label for="Panel3">Panel 3</label><br>
+                        </div>
+                    </div>
+                    <!-- advisor -->
+                    <div class="flex-container">
+                        <div>
+                            <h3>Selected Advisor:</h3>
+                            <select type="text" class="inputName" name="advisorName" id="selectedAdvisors" multiple></select>
+                        </div>
+                        <div class="checkboxAdvisor">
+                            <input type="checkbox" id="AdvisorName1" name="advisor" value="advisorID1">
+                            <label for="AdvisorName1">AdvisorName 1</label><br>
+                            <input type="checkbox" id="AdvisorName2" name="advisor" value="advisorID2">
+                            <label for="AdvisorName2">AdvisorName 2</label><br>
+                            <input type="checkbox" id="AdvisorName3" name="advisor" value="advisorID3">
+                            <label for="AdvisorName3">AdvisorName 3</label><br>
+                        </div>
+                    </div>
+                </form>
+                <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
+            </div>
 
 <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
@@ -605,8 +617,9 @@ fetchStudentIDs(courseID);
     <script
         src="professorhome.js">
     </script>  
+
 </body>
-</html>
+</html> 
 <script>
 // Function to handle AJAX request for live search
     function liveSearchCourseCode() {
