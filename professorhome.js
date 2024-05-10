@@ -114,6 +114,34 @@ function newGroupCreated() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
     
 }
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdownBtns = document.querySelectorAll('.dropdownbtn');
+
+  dropdownBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+          var allDropdowns = document.querySelectorAll('.dropdown-content');
+          allDropdowns.forEach(function(dropdown) {
+              dropdown.style.display = 'none';
+          }); 
+      });
+  });
+});
+
+function addMembers() { 
+  var container = document.querySelector('.addmember');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function setrequirements() { 
+  var container = document.querySelector('.setrequirements');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function rubric() { 
+  var container = document.querySelector('.rubriccontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
 
 // function viewMembers() { 
 //   var container = document.querySelector('.viewgroup'); 
@@ -124,6 +152,7 @@ function newGroupCreated() {
 // //       hideGroup.style.display = "none";
 // //   } 
 // }
+
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
@@ -142,24 +171,7 @@ function viewMembers() {
   // }
 }
 
-function addMembers() { 
-  var container = document.querySelector('.addmember');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-  
-}
-
-function setrequirements() { 
-  var container = document.querySelector('.setrequirements');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
-
-function rubric() { 
-  var container = document.querySelector('.rubriccontainer');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
-
-function createGROUP(){
-  
+function createGROUP(){ 
 }
  
 function clsViewGrp(){
@@ -167,43 +179,9 @@ function clsViewGrp(){
   container.style.display = 'none';
 }
  
+ 
+
+// IAN DITO ITO FUNCTIONS EDIT MO NLNG
 // for the creating group users (student, panel, advisor)
-function updateSelectedUsers() {
-  const selectedPanelsDropdown = document.getElementById('selectedPanels');
-  const selectedStudentsDropdown = document.getElementById('selectedStudents');
-  const selectedAdvisorsDropdown = document.getElementById('selectedAdvisors');
-
-  selectedPanelsDropdown.innerHTML = '';
-  selectedStudentsDropdown.innerHTML = '';
-  selectedAdvisorsDropdown.innerHTML = '';
-
-  const selectedPanels = document.querySelectorAll('input[name="panel"]:checked');
-  const selectedStudents = document.querySelectorAll('input[name="student"]:checked');
-  const selectedAdvisors = document.querySelectorAll('input[name="advisor"]:checked');
-
-  selectedPanels.forEach(panel => {
-      const option = document.createElement('option');
-      option.text = panel.nextElementSibling.textContent.trim();
-      selectedPanelsDropdown.add(option);
-  });
-
-  selectedStudents.forEach(student => {
-      const option = document.createElement('option');
-      option.text = student.nextElementSibling.textContent.trim();
-      selectedStudentsDropdown.add(option);
-  });
-
-  selectedAdvisors.forEach(advisor => {
-      const option = document.createElement('option');
-      option.text = advisor.nextElementSibling.textContent.trim();
-      selectedAdvisorsDropdown.add(option);
-  });
-}
-
-// Event listener for checkboxes to update the selected panels, students, and advisors
-  document.querySelectorAll('input[name="panel"], input[name="student"], input[name="advisor"]').forEach(checkbox => {
-  checkbox.addEventListener('change', updateSelectedUsers);
-});
-
-
-
+ 
+ 
