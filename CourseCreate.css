@@ -550,8 +550,7 @@ background-repeat: no-repeat;
   border-radius: 15px;
 }
 .inputgroupName{
-  margin-top: 10px; 
-  margin-left: 30px;
+  margin-top: 10px;  
   width: 230px;
   border: 1px solid #000000;
   height: 35px;
@@ -562,11 +561,13 @@ background-repeat: no-repeat;
 h3 {
   margin-top: 10px;
 }
-.inputName { 
-  padding: 5px;
+.inputName {  
+  margin-top: 10px;
   width: 330px;
   border: 1px solid #000000;
-  height: 85px; 
+  height: 35px;
+  padding: 5px;
+  border-radius: 10px;
   background-color: #f8efe3;
 }
 .flex-container {
@@ -587,11 +588,11 @@ h3 {
   background-color: #f8efe3;
 }
 
-.checkboxStudent,
-.checkboxPanel,
-.checkboxAdvisor {
+.studentList,
+.panelList,
+.advisorList {
   padding: 8px;
-  width: 230px;
+  width: 180px;
   border: 1px solid #000000;
   height: 85px;
   border-radius: 10px;
@@ -607,8 +608,21 @@ h3 {
 }
 .addgroupbtn:hover{
   background-color: #afafaf;
-}
+} 
 
+.table_selectingusers{
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 200px;
+  height: 70px;
+  margin-top: 10px; 
+  border: 1px solid #000000;
+  padding: 15px;
+  background-color: #F8EFE3; 
+  border-radius: 10px;
+  overflow: auto;
+  overflow: overlay;
+} 
 
 /* new group created */
 .createdgroupBTN{
@@ -815,6 +829,7 @@ h3 {
   max-height: 100px;
   margin-top: 10px;
   padding: 15px;
+  border: 1px solid #000000;
   background-color: #F8EFE3; 
   border-radius: 10px;
   overflow: auto;
@@ -833,8 +848,8 @@ h3 {
   visibility: visible;
   }
   .selected {
-    background-color: rgb(139, 139, 139);
-    border-radius: 15px;
+    background-color: #a8a8a8;
+    border-radius: 35px;
 }
   .removeButton {
     background-color: #b13232; 

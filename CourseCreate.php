@@ -484,18 +484,28 @@ fetchStudentIDs(courseID);
                                     <input type="text" class="inputNameMember" id="userName" name="studentName" placeholder="User name">
                                 </section>
                                 <section class="table_Addmember">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>User Name</th>
-                                            </tr>
-                                        </thead>
+                                    <table> 
                                         <tbody id="addUser_body">
                                             <tr onclick="updateUserName(this)">
-                                                <td>Austria, Jose</td>
+                                                <td>Naito</td>
                                             </tr>
                                             <tr onclick="updateUserName(this)">
-                                                <td>Austria, Maria</td>
+                                                <td>Prince</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Mac</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Barit</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Carlos</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Emerson</td>
+                                            </tr>
+                                            <tr onclick="updateUserName(this)">
+                                                <td>Ian</td>
                                             </tr>
                                             <!-- Add more rows dynamically if needed -->
                                         </tbody>
@@ -509,80 +519,207 @@ fetchStudentIDs(courseID);
                 </div>
 
                 <script>
-                    function updateUserName(row) {
-                        var userNameInput = document.getElementById("userName");
-                        var userName = row.innerText.trim();
-                        if (!userNameInput.value.includes(userName)) {
-                            userNameInput.value += '[' + userName + ']';
-                            var xButton = document.createElement('button');
-                            xButton.textContent = 'x';
-                            xButton.classList.add('removeButton');
-                            xButton.onclick = function() {
-                                userNameInput.value = userNameInput.value.replace(userName, '');
-                                row.classList.remove('selected');
-                                xButton.remove();
-                            };
-                            row.appendChild(xButton);
-                            row.classList.add('selected');
-                        }
+                    function selectedUserName(row) {
+                    var userNameInput = document.getElementById("userName");
+                    var selectedUserName = row.innerText.trim();
+                    if (!userNameInput.value.includes(selectedUserName)) {
+                        userNameInput.value += selectedUserName + ' ';
+                        var xButton = document.createElement('button');
+                        xButton.textContent = 'x';
+                        xButton.classList.add('removeButton');
+                        xButton.onclick = function() {
+                            userNameInput.value = userNameInput.value.replace(selectedUserName, '');
+                            xButton.parentElement.remove();
+                        };
+                        row.classList.add('selected');
+                        userNameInput.parentElement.appendChild(xButton);
                     }
+                }
                 </script>  
                 
 <!-- creategroup -->
-            <div class="creategroupContainer">
-                <h1>Create group</h1>
-                <h3>Group Name:</h3>
-                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
-                <form class="addcheckbox">
+                <div class="creategroupContainer">
+                    <h1>Create group</h1>
+                    <h3>Group Name:</h3>
+                    <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                    <form class="selectcontainer">
+                        <div class="flex-container">
+                            <!-- student -->
+                            <div>
+                                <label for="selectedStudents">Selected Students:</label>
+                                <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody id="selectUserstudents">
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Naito</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Prince</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Mac</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Ian</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Carlos</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Barit</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+                        <div class="flex-container">
+                            <!-- panel -->
+                            <div>
+                                <label for="selectedPanelists">Selected Panel:</label>
+                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody id="selectUserpanelists">
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Yong</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Stan</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Serge</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Sam</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Luigi</td>
+                                        </tr>
 
-                    <div class="flex-container">
-                        <!-- student -->
-                        <div>
-                            <h3>Selected Student:</h3>
-                            <select type="text" class="inputName" name="studentName" id="selectedStudents" multiple></select>
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
                         </div>
-                        <div class="checkboxStudent">
-                            <input type="checkbox" id="StudentName1" name="student" value="studentID1">
-                            <label for="StudentName1">StudentName 1</label><br>
-                            <input type="checkbox" id="StudentName2" name="student" value="studentID2">
-                            <label for="StudentName2">StudentName 2</label><br>
-                            <input type="checkbox" id="StudentName3" name="student" value="studentID3">
-                            <label for="StudentName3">StudentName 3</label><br>
+                        <!-- advisor -->
+                        <div class="flex-container">
+                            <div>
+                                <label for="selectedAdvisors">Selected Advisor:</label>
+                                <input type="text" class="inputName" id="selectedAdvisors" name="advisorName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody id="selectUseradvisors">
+                                        <tr onclick="selectedUserName(this, 'advisor')">
+                                            <td>222</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'advisor')">
+                                            <td>uuu</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'advisor')">
+                                            <td>Sgegege</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
                         </div>
-                    </div>
-                    <!-- panel -->
-                    <div class="flex-container">
-                        <div>
-                            <h3>Selected Panel:</h3>
-                            <select type="text" class="inputName" name="panelName" id="selectedPanels" multiple></select>
-                        </div>
-                        <div class="checkboxPanel">
-                            <input type="checkbox" id="Panel1" name="panel" value="panelID1">
-                            <label for="Panel1">Panel 1</label><br>
-                            <input type="checkbox" id="Panel2" name="panel" value="panelID2">
-                            <label for="Panel2">Panel 2</label><br>
-                            <input type="checkbox" id="Panel3" name="panel" value="panelID3">
-                            <label for="Panel3">Panel 3</label><br>
-                        </div>
-                    </div>
-                    <!-- advisor -->
-                    <div class="flex-container">
-                        <div>
-                            <h3>Selected Advisor:</h3>
-                            <select type="text" class="inputName" name="advisorName" id="selectedAdvisors" multiple></select>
-                        </div>
-                        <div class="checkboxAdvisor">
-                            <input type="checkbox" id="AdvisorName1" name="advisor" value="advisorID1">
-                            <label for="AdvisorName1">AdvisorName 1</label><br>
-                            <input type="checkbox" id="AdvisorName2" name="advisor" value="advisorID2">
-                            <label for="AdvisorName2">AdvisorName 2</label><br>
-                            <input type="checkbox" id="AdvisorName3" name="advisor" value="advisorID3">
-                            <label for="AdvisorName3">AdvisorName 3</label><br>
-                        </div>
-                    </div>
-                </form>
-                <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
-            </div>
+                    </form>
+                    <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
+                </div>
+
+            <script>
+            function selectedUserName(row) {
+                var selectedStudentsInput = document.getElementById("selectedStudents");
+                var selectedPanelistsInput = document.getElementById("selectedPanelists");
+                var selectedAdvisorsInput = document.getElementById("selectedAdvisors");
+                var selectedUser = row.innerText.trim();
+                
+                // Function to add highlight effect
+                function highlightSelectedInput(input) {
+                    input.classList.add('highlight');
+                }
+                
+                // Function to remove highlight effect
+                function removeHighlight(input) {
+                    input.classList.remove('highlight');
+                }
+                
+                // Check if the user is already selected
+                if (selectedStudentsInput.value.includes(selectedUser) ||
+                    selectedPanelistsInput.value.includes(selectedUser) ||
+                    selectedAdvisorsInput.value.includes(selectedUser)) {
+                    // If selected, remove from the corresponding input field
+                    selectedStudentsInput.value = selectedStudentsInput.value.replace('(' + selectedUser + ')', '');
+                    selectedPanelistsInput.value = selectedPanelistsInput.value.replace('(' + selectedUser + ')', '');
+                    selectedAdvisorsInput.value = selectedAdvisorsInput.value.replace('(' + selectedUser + ')', '');
+                    
+                    // Remove highlight from the corresponding input
+                    if (row.parentElement.id === "selectUserstudents") {
+                        removeHighlight(selectedStudentsInput);
+                    } else if (row.parentElement.id === "selectUserpanelists") {
+                        removeHighlight(selectedPanelistsInput);
+                    } else if (row.parentElement.id === "selectUseradvisors") {
+                        removeHighlight(selectedAdvisorsInput);
+                    }
+                    
+                    // Remove 'x' button and class
+                    row.querySelector('.removeButton').remove();
+                    row.classList.remove('selected');
+                    
+                    // Re-enable clicking on the row
+                    row.onclick = function() {
+                        selectedUserName(row);
+                    };
+                } else {
+                    // If not selected, add to the corresponding input field with brackets
+                    var userWithBrackets = '(' + selectedUser + ')';
+                    if (row.parentElement.id === "selectUserstudents") {
+                        selectedStudentsInput.value += userWithBrackets + ' ';
+                        highlightSelectedInput(selectedStudentsInput);
+                    } else if (row.parentElement.id === "selectUserpanelists") {
+                        selectedPanelistsInput.value += userWithBrackets + ' ';
+                        highlightSelectedInput(selectedPanelistsInput);
+                    } else if (row.parentElement.id === "selectUseradvisors") {
+                        selectedAdvisorsInput.value += userWithBrackets + ' ';
+                        highlightSelectedInput(selectedAdvisorsInput);
+                    }
+                    
+                    // Add 'x' button and class
+                    var xButton = document.createElement('button');
+                    xButton.textContent = 'x';
+                    xButton.classList.add('removeButton');
+                    xButton.onclick = function() {
+                        // Remove user from corresponding input field when 'x' is clicked
+                        if (row.parentElement.id === "selectUserstudents") {
+                            selectedStudentsInput.value = selectedStudentsInput.value.replace(userWithBrackets + ' ', '');
+                            removeHighlight(selectedStudentsInput);
+                        } else if (row.parentElement.id === "selectUserpanelists") {
+                            selectedPanelistsInput.value = selectedPanelistsInput.value.replace(userWithBrackets + ' ', '');
+                            removeHighlight(selectedPanelistsInput);
+                        } else if (row.parentElement.id === "selectUseradvisors") {
+                            selectedAdvisorsInput.value = selectedAdvisorsInput.value.replace(userWithBrackets + ' ', '');
+                            removeHighlight(selectedAdvisorsInput);
+                        }
+                        // Remove 'x' button and class
+                        row.querySelector('.removeButton').remove();
+                        row.classList.remove('selected');
+                    };
+                    row.appendChild(xButton);
+                    row.classList.add('selected');
+                    
+                    // Disable clicking on the row
+                    row.onclick = null;
+                }
+            }
+
+            </script>
+
+
 
 <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
