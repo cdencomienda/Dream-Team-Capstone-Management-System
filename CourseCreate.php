@@ -238,6 +238,10 @@
             <div id="coursesDropdown"></div>
         </div>
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetchCourses();
+});
    
    function fetchCourses() {
     fetch('LiveSearchCourseCreated.php')
@@ -393,6 +397,88 @@ function fetchStudentIDs(courseID) {
         .catch(error => console.error('Error fetching student IDs:', error));
 } 
 
+function storeCourseID(courseID) {
+
+    console.log(courseID);
+
+    varCourse = courseID;
+
+    console.log(varCourse);
+
+    fetch('storeCourseID.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'varCourse=' + encodeURIComponent(varCourse),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the raw response text
+        })
+        .then(responseText => {
+            console.log('Raw Response:', responseText); // Log the raw response
+            return JSON.parse(responseText); // Parse the response as JSON if needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function getStudents() {
+    const studentContainer = document.querySelector('.studentContainer');
+
+    // Fetch student data from the server
+    fetch('userTypeStudent.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(students => {
+            console.log('Fetched students:', students); // Log the fetched students for debugging
+
+            // Clear previous content in studentContainer
+            studentContainer.innerHTML = '';
+
+            // Create HTML elements for each student and append them to studentContainer
+            students.forEach(student => {
+                if (student && student.userType === 'Student' && student.userName) {
+                    const studentRow = document.createElement('tr');
+                    const studentNameCell = document.createElement('td');
+                    studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
+                    studentRow.appendChild(studentNameCell);
+                    studentContainer.appendChild(studentRow);
+
+                    // Set onclick event to updateUserName function
+                    studentRow.onclick = () => updateUserName(student.userName.trim());
+                } else {
+                    console.warn('Invalid student data:', student); // Log invalid student data
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching students:', error));
+}
+
+
+
+
+
+
+
+
+
+document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const courseID = varCourse; // Assuming varCourse contains the courseID
+    storeCourseID(courseID); // Call storeCourseID to store the courseID in the session
+    this.submit(); // Now submit the form
+});
+
+
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
     console.log('Clicked:', courseID);
@@ -406,6 +492,9 @@ function handleAction(action, courseID) {
             break;
         case 'Add Members':
             addMembers(courseID);
+            storeCourseID(courseID);
+            getStudents();
+            
             break;
         case 'Requirements':
             setrequirements(courseID);
@@ -421,7 +510,7 @@ function handleAction(action, courseID) {
 // Call the function to fetch courses when the page loads or as needed
 fetchCourses();
 fetchStudentIDs(courseID);
-// fetchGroups(course.courseID);
+
 </script>  
 
             <div class="containerMenu">
@@ -476,7 +565,7 @@ fetchStudentIDs(courseID);
 
 <!-- add members -->
                 <div class="addmember">
-                    <form class="addcheckbox" method="POST" action="addCourseMember.php">
+                   <form class="addcheckbox" method="POST" action="addCourseMember.php">
                         <div>
                             <main class="addmembertable" id="addmember_table">
                                 <section class="table__header">
@@ -490,7 +579,7 @@ fetchStudentIDs(courseID);
                                                 <th>User Name</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="addUser_body">
+                                        <tbody class="studentContainer" id="addUser_body">
                                             <tr onclick="updateUserName(this)">
                                                 <td>Austria, Jose</td>
                                             </tr>
