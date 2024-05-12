@@ -47,6 +47,7 @@
         <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
     </div>
+    <!-- Ian -->
     <div class="StudentClass">
         <div class="course_created" grid>
             <!-- <div class="S_courseInfo">
@@ -302,9 +303,10 @@
             
         </div>
     </div>
-     
-
+    
         </style>
+        
     </div>
+    <!-- ian end -->
 </body>
 </html>
