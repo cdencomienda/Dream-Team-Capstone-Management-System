@@ -28,7 +28,7 @@ function createDefenseContainer() {
   const schedTitle = document.getElementById('schedTitle').value;
   const time = document.getElementById('time').value;
   const date = document.getElementById('date').value;
-  const day = document.getElementById('day').value;
+  
   const groupName = document.getElementById('GroupName').value;
   // Create new defense schedule container
   const defenseContainer = document.createElement('div');
@@ -38,7 +38,6 @@ function createDefenseContainer() {
           <h2>${schedTitle}</h2>
       </div>
       <div class="SchedDetails">
-          day: ${day}<br>
           time: ${time}<br>
           date: ${date}<br>
           group name: ${groupName}<br>

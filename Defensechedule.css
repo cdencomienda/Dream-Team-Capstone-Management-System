@@ -278,7 +278,7 @@ body{
   margin-top: 35px;
 }
 .Schedule{
-  height: 600px;
+  height: 570px;
   width: 1250px;
   background-color: wheat;
   position: relative;
@@ -326,7 +326,7 @@ body{
 
 .SchedDetails, .DocumentStatus {
   display: flex;
-  text-align: center;
+  text-align: justify;
   margin: 0 10px; /* Adjust the margin as needed */
 }
 .modal {
@@ -342,16 +342,23 @@ body{
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
+.divButton{
+  height: 50px;
+  margin-top: 15px;
+}
 #addScheduleBtn{
   margin: 4px;
-  margin-left: 10px;
+  margin-left: 40px;
   width: 150px;
   height: 40px;
-  background-color: solid #888;;
+  background-color: solid #888;
   border-radius: 25px;
+  border: none;
+  transition:backround-color .3s ease;
 
-
+}
+#addScheduleBtn:hover{
+  background-color: #958f87;
 }
 /* Modal Content */
 .modal-content {
@@ -359,7 +366,7 @@ body{
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 45%;
   height: 40%;
 }
 
@@ -377,4 +384,54 @@ body{
   text-decoration: none;
   cursor: pointer;
 }
+.SchedDetails{
+  display: flex;
+  justify-content: space-around;
+  margin: 30px;
+}
 
+.DetailsFlex,
+.groupFlex{
+  max-width: 70%;
+  background-color: #FEE3BC;
+  padding: 15px;
+  border-radius: 25px;
+}
+.timeDateflexcont {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; /* Adjust spacing between items */
+}
+.dateDetails,
+.timeDetails {
+  margin-right: 20px; /* Add more space between time and date */
+}
+.textBox{
+  display: block; /* Display labels as block elements */
+  font-weight: bold; /* Make labels bold */
+  font-size: 16px; /* Increase font size */
+  margin-bottom: 5px; /* Add margin below labels */
+}
+.input-field {
+  width: 200px; /* Adjust width as needed */
+  padding: 10px; /* Add padding as needed */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+  
+}
+.SchedSbmit{
+  width: 140px;
+  height: 30px;
+  border-radius: 10px;
+  margin-left: 670px;
+  background-color: #FEE3BC;
+  border: none;
+  transition:backround-color .3s ease;
+}
+.SchedSbmit:hover{
+  background-color: #958f87;
+
+}

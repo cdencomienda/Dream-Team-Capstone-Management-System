@@ -58,25 +58,35 @@
                     <span class="close">&times;</span>
                     <h1>Create Defense Schedule</h1>
                     <form id="scheduleForm" action="/submit_schedule" method="POST">
-                        <div>
-                            
-                            <label for="schedTitle">Sched Title:</label>
-                            <input type="text" id="schedTitle" name="schedTitle"><br>
-        
-                            <label for="time">Time:</label>
-                            <input type="time" id="time" name="time"><br>
-        
-                            <label for="date">Date:</label>
-                            <input type="date" id="date" name="date"><br>
-        
-                            <label for="day">Day:</label>
-                            <input type="text" id="day" name="day"><br>
-                            
-                            
-                            <label for="GroupName">Group Name:</label>
-                            <input type="text" id="GroupName" name="GroupName"><br>
-                  
-                        </div>
+                        <!-- First primary container -->
+                        <div class="SchedDetails"> 
+                            <!-- secondary Flex -->
+                            <div class="DetailsFlex"> 
+                                <!-- 1st flexBox -->
+                                <div class="titleFLex">
+                                    <div class="titleDetails">
+                                        <label class="textBox" for="schedTitle">Sched Title:</label>
+                                        <input type="text" id="schedTitle" name="schedTitle" class="input-field"><br>
+                                    </div>  
+                                 </div>
+                                <div class="timeDateflexcont">
+                                        <!-- second flexBox -->
+                                        <div class="dateDetails">
+                                            <label  class="textBox" for="date">Date:</label>
+                                            <input type="date" id="date" name="date" class="input-field"><br>
+                                        </div>
+                                        <div class="timeDetails">
+                                            <label  class="textBox" for="time">Time:</label>
+                                            <input type="time" id="time" name="time" class="input-field"><br>
+                                        </div>
+                                </div>      
+                            </div>
+                            <!-- Second primary container -->
+                            <div class="groupFlex">
+                            <label  class="textBox" for="GroupName">Group Name:</label>
+                            <input type="text" id="GroupName" name="GroupName" class="input-field"><br>
+                            </div>
+                        </div>    
                         <button class="SchedSbmit"  type="button" onclick="createDefenseContainer()">Submit</button>
                     </form>
                 </div>
