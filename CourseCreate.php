@@ -7,6 +7,8 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <title>Class Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
     <style>
          
          
@@ -461,15 +463,7 @@ function getStudents() {
             });
         })
         .catch(error => console.error('Error fetching students:', error));
-}
-
-
-
-
-
-
-
-
+} 
 
 document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -828,7 +822,7 @@ fetchStudentIDs(courseID);
                 <div class="rubriccontainerv2">
                     <div class="select-box">
                         <h3>Rubric Code:</h3>
-                            <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code" hidden />
+                            <input type="text" id="courserubric" class="tags_input" name="rubricCode" placeholder="Input Rubric Code" hidden />
                             <div class="selected-options">
                                 <!-- <span class="tag">Rubric1
                                     <span class="remove-tag">&times;</span></span>
@@ -839,23 +833,25 @@ fetchStudentIDs(courseID);
                                 <span class="tag">Rubric4
                                     <span class="remove-tag">&times;</span></span>
                                 <span class="tag">Rubric5
-                                    <span class="remove-tag">&times;</span></span> -->
+                                    <span class="remove-tag">&times;</span></span>  -->
                             </div>
                         <div class="arrow">
                             <i class="fa fa-angle-down"></i>
                         </div>
                             <div class="options">
                                 <div class="option-search-tag">
-                                    <input type="text" class="search-tag" placeholder="Search rubric code..."/>
-                                    <button type="button" class="clear"><i class="fa fa-close"></i></button>
+                                    <input type="text" class="search-tag" 
+                                    placeholder="Search rubric code..."/>
+                                    <button type="button" class="clear"><i 
+                                    class="fa fa-close"></i></button>
                                 </div>
-                                <div class="options all-tags" data-value="All">Select All</div>
-                                <div class="options" data-value="rubric01">Rubric1</div>
-                                <div class="options" data-value="rubric02">Rubric2</div>
-                                <div class="options" data-value="rubric03">Rubric3</div>
-                                <div class="options" data-value="rubric04">Rubric4</div>
-                                <div class="options" data-value="rubric05">Rubric5</div>
-                                <div class="no-result" style="display none;">No result</div>
+                                <div class="option all-tags" data-value="All">Select All</div>
+                                <div class="option" data-value="rubric01">Rubric1</div>
+                                <div class="option" data-value="rubric02">Rubric2</div>
+                                <div class="option" data-value="rubric03">Rubric3</div>
+                                <div class="option" data-value="rubric04">Rubric4</div>
+                                <div class="option" data-value="rubric05">Rubric5</div>
+                                <div class="no-result-message" style="display none;">No result match</div>
                             </div>
                         <span class="tag_error_msg error"></span>
                     </div>
@@ -864,9 +860,8 @@ fetchStudentIDs(courseID);
             </div>
         </div>
     </div>
-    <script
-        src="professorhome.js">
-    </script>  
+    <script src="professorHome.js"></script>   
+    
 
 </body>
 </html> 

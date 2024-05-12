@@ -1013,17 +1013,17 @@ h3 {
   font: 15px;
 }
 .clear{
-position: absolute;
-border: none;
-background-color: transparent;
-cursor: pointer;
-font-size: 14px;
-font-weight: 600;
-padding: 0;
-color: #000000;
-top: 26px;
-left: auto;
-right: 15px;
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  color: #000000;
+  top: 26px;
+  left: auto;
+  right: 15px;
 }
  .options{
   padding: 12px;
@@ -1056,6 +1056,10 @@ right: 15px;
  .btn_submit:hover{
   background-color: #4caf50;
  }       
+
+
+
+ 
 /* ewna ko sino gumawa neto brt yata */
 body{
   background: #CBC4BA;
