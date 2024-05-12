@@ -72,30 +72,30 @@
                 </div>
                 <script> 
                     document.addEventListener('DOMContentLoaded', function() {
-                // Function to fetch group information for the logged-in student
-                function fetchGroupInfo() {
-                fetch('fetchGroupName.php')
-                    .then(response => response.json())
-                    .then(groupInfo => {
-                const groupname_container = document.getElementById('group_name');
+                    // Function to fetch group information for the logged-in student
+                    function fetchGroupInfo() {
+                    fetch('fetchGroupName.php')
+                        .then(response => response.json())
+                        .then(groupInfo => {
+                    const groupname_container = document.getElementById('group_name');
 
-                // Check if there is a group
-                if (groupInfo.error) {
-                    groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
-                } else {
-                    // Display the group name in the container
-                    groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
-                }
-             })
-            .catch(error => {
-                console.error('Error fetching group information:', error);
-                groupname_container.innerHTML = '<h3>Error loading group information</h3>';
-            });
-    }
+                    // Check if there is a group
+                    if (groupInfo.error) {
+                        groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
+                        } else {
+                            // Display the group name in the container
+                            groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
+                        }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching group information:', error);
+                            groupname_container.innerHTML = '<h3>Error loading group information</h3>';
+                        });
+                        }
 
-    // Fetch group information when the page loads
-    fetchGroupInfo();
-});   
+                    // Fetch group information when the page loads
+                    fetchGroupInfo();
+                    });    
                 </script>  
 
                 <h4>
@@ -155,33 +155,33 @@
                         </div>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
-    // Function to fetch requirements information for the logged-in student's group
-    function fetchRequirementsInfo() {
-        fetch('fetchRequirements.php')
-            .then(response => response.json())
-            .then(requirements => {
-                const reqNameContainer = document.querySelector('.req-nameCont');
-                
-                // Clear existing content
-                reqNameContainer.innerHTML = '';
+                        // Function to fetch requirements information for the logged-in student's group
+                        function fetchRequirementsInfo() {
+                            fetch('fetchRequirements.php')
+                                .then(response => response.json())
+                                .then(requirements => {
+                                    const reqNameContainer = document.querySelector('.req-nameCont');
+                                    
+                                    // Clear existing content
+                                    reqNameContainer.innerHTML = '';
 
-                // Populate the container with the group's requirements
-                requirements.forEach(requirement => {
-                    const div = document.createElement('div');
-                    div.className = 'requirement-name';
-                    div.textContent = requirement;
-                    reqNameContainer.appendChild(div);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching requirements information:', error);
-            });
-    }
+                                    // Populate the container with the group's requirements
+                                    requirements.forEach(requirement => {
+                                        const div = document.createElement('div');
+                                        div.className = 'requirement-name';
+                                        div.textContent = requirement;
+                                        reqNameContainer.appendChild(div);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching requirements information:', error);
+                                });
+                        }
 
-    // Fetch requirements information when the page loads
-    fetchRequirementsInfo();
-});
-</script>
+                        // Fetch requirements information when the page loads
+                        fetchRequirementsInfo();
+                    });
+                    </script>
                     </div>
                     
                 </div>

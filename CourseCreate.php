@@ -7,6 +7,8 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <title>Class Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
     <style>
          
          
@@ -501,15 +503,7 @@ function getStudents() {
             });
         })
         .catch(error => console.error('Error fetching students:', error));
-}
-
-
-
-
-
-
-
-
+} 
 
 document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -567,23 +561,57 @@ fetchStudentIDs(courseID);
                 <div class="GroupContainer">
                     <div class="dashboard_header">
                         <div class="groupname_container"> 
-                        <h3> 
-                            <p class="group_name">Group Name </p>    
-                        </h3>
-                        </div>  
-                        <h2>
-                            <div class="button-group"> 
-                                <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
-                                <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
-                                <div class="mDropdown">  
-                                <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                    <div class="GroupmembersContainer" id="groupMembersContainer"></div>
-                                        member 1 
-                                     </div>
+                            <div class="group_name" id="group_name">     
+                            </div>   
+                                </div>
+                                <script> 
+                                    
+                                </script> 
+                            <h4>
+                    <div class="button-group"> 
+                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">          
+                                    Advisor Recomendation Sheet: 
+                                    <div class = "advRecomendation">
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
+                        </div>    
+                        <div class="mDropdown" data-flsDropdown>  
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                    member1 niger
                                 </div>
                             </div>
-                        </h2>     
-                    </div>
+                        </div>
+                    </h4>
+                    </div> 
 
                     <!-- files -->
                     <div class="defaultBody" id="defaultBody">
@@ -598,11 +626,43 @@ fetchStudentIDs(courseID);
                             <div class= "requirement-list">
                                 <div class = "req-nameCont"> 
                                     <div class="requirement-name">
-                            
-                                    </div> 
-                                </div> 
+                                    
+                                    </div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                    // Function to fetch requirements information for the logged-in student's group
+                                    function fetchRequirementsInfo() {
+                                        fetch('fetchRequirements.php')
+                                            .then(response => response.json())
+                                            .then(requirements => {
+                                                const reqNameContainer = document.querySelector('.req-nameCont');
+                                                
+                                                // Clear existing content
+                                                reqNameContainer.innerHTML = '';
+            
+                                                // Populate the container with the group's requirements
+                                                requirements.forEach(requirement => {
+                                                    const div = document.createElement('div');
+                                                    div.className = 'requirement-name';
+                                                    div.textContent = requirement;
+                                                    reqNameContainer.appendChild(div);
+                                                });
+                                            })
+                                            .catch(error => {
+                                                console.error('Error fetching requirements information:', error);
+                                            });
+                                    }
+            
+                                    // Fetch requirements information when the page loads
+                                    fetchRequirementsInfo();
+                                });
+                                </script>
+                                </div>
+                                
                             </div>
                         </div>
+                        <script> 
+                        </script>
 
                     <!-- file repo -->
                     <div class="professorFilesR" id="profFilesR">
@@ -611,6 +671,10 @@ fetchStudentIDs(courseID);
                         </div>
                     </div>
                 </div> 
+                <!-- file requirement -->
+            </div> 
+
+
 
 <!-- add members -->
                 <div class="addmember">
@@ -876,17 +940,52 @@ fetchStudentIDs(courseID);
                         <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
                     <h3>${courseName}</h3>
                 </div>
-<!-- rubric -->
-            <div class="rubriccontainer">
-                <h3>Rubric Code:</h3>
-                <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
+<!-- rubric --> 
+                <div class="rubriccontainer">
+                    <div class="rubriccontainerv2">
+                        <div class="select-box">
+                            <h3>Rubric Code:</h3>
+                                <input type="text" id="courserubric" class="tags_input" name="rubricCode" placeholder="Input Rubric Code" hidden />
+                                <div class="selected-options">
+                                    <!-- <span class="tag">Rubric1
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric2
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric3
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric4
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric5
+                                        <span class="remove-tag">&times;</span></span> 
+                                </div> -->
+                            <div class="arrow">
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                                <div class="options">
+                                    <div class="option-search-tag">
+                                        <input type="text" class="search-tag" 
+                                        placeholder="Search rubric code..."/>
+                                        <button type="button" class="clear"><i 
+                                        class="fa fa-close"></i></button>
+                                    </div>
+                                    <div class="option all-tags" data-value="All">Select All</div>
+                                    <div class="option" data-value="rubric01">Rubric1</div>
+                                    <div class="option" data-value="rubric02">Rubric2</div>
+                                    <div class="option" data-value="rubric03">Rubric3</div>
+                                    <div class="option" data-value="rubric04">Rubric4</div>
+                                    <div class="option" data-value="rubric05">Rubric5</div>
+                                    <div class="no-result-message" style="display none;">No result match</div>
+                                </div>
+                            <span class="tag_error_msg error"></span>
+                        </div>
+                    </div>
+                    <input type="button" class="btn_submit" value="submit" />
+                </div>
             </div>
         </div>
-    </div>
-    <script
-        src="professorhome.js">
-    </script>  
-
+     
+    <script src="professorhome.js"></script>   
+     
 </body>
 </html> 
 <script>
