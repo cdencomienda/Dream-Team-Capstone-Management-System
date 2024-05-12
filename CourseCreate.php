@@ -746,8 +746,42 @@ fetchStudentIDs(courseID);
                 </div>
 <!-- rubric -->
             <div class="rubriccontainer">
-                <h3>Rubric Code:</h3>
-                <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
+                <div class="rubriccontainerv2">
+                    <div class="select-box">
+                        <h3>Rubric Code:</h3>
+                            <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code" hidden />
+                            <div class="selected-options">
+                                <!-- <span class="tag">Rubric1
+                                    <span class="remove-tag">&times;</span></span>
+                                <span class="tag">Rubric2
+                                    <span class="remove-tag">&times;</span></span>
+                                <span class="tag">Rubric3
+                                    <span class="remove-tag">&times;</span></span>
+                                <span class="tag">Rubric4
+                                    <span class="remove-tag">&times;</span></span>
+                                <span class="tag">Rubric5
+                                    <span class="remove-tag">&times;</span></span> -->
+                            </div>
+                        <div class="arrow">
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                            <div class="options">
+                                <div class="option-search-tag">
+                                    <input type="text" class="search-tag" placeholder="Search rubric code..."/>
+                                    <button type="button" class="clear"><i class="fa fa-close"></i></button>
+                                </div>
+                                <div class="options all-tags" data-value="All">Select All</div>
+                                <div class="options" data-value="rubric01">Rubric1</div>
+                                <div class="options" data-value="rubric02">Rubric2</div>
+                                <div class="options" data-value="rubric03">Rubric3</div>
+                                <div class="options" data-value="rubric04">Rubric4</div>
+                                <div class="options" data-value="rubric05">Rubric5</div>
+                                <div class="no-result" style="display none;">No result</div>
+                            </div>
+                        <span class="tag_error_msg error"></span>
+                    </div>
+                </div>
+                <input type="button" class="btn_submit" value="submit" />
             </div>
         </div>
     </div>

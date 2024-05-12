@@ -179,9 +179,31 @@ function clsViewGrp(){
   container.style.display = 'none';
 }
  
- 
+document.addEventListener("DOMContentLoaded", function (){
+      const customSelects = document.querySelectorA11(".custom-select");
+      
+      function updateSelectedOptions (customSelect){
+      const selectedOptions = Array.from(customSelect.
+      querySelectorAll(".option.active")).filter(option => 
+        option !== customSelect.querySelector(".option.all-tags")).map(function (option){
+          return {
+              value: option. getAttribute("data-value"), 
+              text: option.textContent.trim()
+          };
+      });
 
-// IAN DITO ITO FUNCTIONS EDIT MO NLNG
-// for the creating group users (student, panel, advisor)
- 
- 
+      const selectedValues = selectedOptions.map (function
+      (option){
+        return option. value;
+      });
+
+      customSelect.querySelector ("tags_input") .value = 
+      selectedValues. join(', ');
+      
+      let tagsHTML = "";
+
+      if(selectedOptions.length === 0){
+      tagsHTML = '‹span class="placeholder"›Select the tags‹/span>';
+      }
+    }
+});
