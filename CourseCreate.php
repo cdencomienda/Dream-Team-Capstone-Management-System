@@ -330,8 +330,14 @@ function fetchGroups(courseID, callback) {
                         newGroupButton.type = 'button';
                         newGroupButton.classList.add('createdgroupBTN');
                         newGroupButton.textContent = groupName; // Display the groupName
-                        newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
                         newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+
+                        newGroupButton.onclick = () => {
+                        console.log('Clicked group:', groupName); // Log the clicked group name
+                        newGroupCreated(courseID); // Call the newGroupCreated function with courseID
+                        storeGroupName(groupName);
+                    };
+
 
                         if (callback && typeof callback === 'function') {
                             callback(newGroupButton); // Call the callback function with the newGroupButton
@@ -350,6 +356,38 @@ function fetchGroups(courseID, callback) {
         })
         .catch(error => console.error('Error fetching groups:', error));
 }
+
+
+
+function storeGroupName(groupName){
+
+        group = groupName;
+        console.log('groupName to be stored: ', group);
+
+        fetch('storeGroupName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'group=' + encodeURIComponent(group),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the raw response text
+        })
+        .then(responseText => {
+            console.log('Raw Response:', responseText); // Log the raw response
+            return JSON.parse(responseText); // Parse the response as JSON if needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+}
+
+
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
@@ -395,6 +433,8 @@ function fetchStudentIDs(courseID) {
             });
         })
         .catch(error => console.error('Error fetching student IDs:', error));
+
+        
 } 
 
 function storeCourseID(courseID) {
@@ -478,6 +518,13 @@ document.querySelector('.addcheckbox').addEventListener('submit', function(event
     this.submit(); // Now submit the form
 });
 
+document.querySelector('.selectcontainer').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const courseID = varCourse; // Assuming varCourse contains the courseID
+    storeCourseID(courseID); // Call storeCourseID to store the courseID in the session
+    this.submit(); // Now submit the form
+});
+
 
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
@@ -485,6 +532,8 @@ function handleAction(action, courseID) {
     switch (action) {
         case 'Create Group':
             creategroup(courseID);
+            storeCourseID(courseID);
+
             break;
         case 'View Members':
             viewMembers(courseID);
@@ -570,7 +619,7 @@ fetchStudentIDs(courseID);
                             <main class="addmembertable" id="addmember_table">
                                 <section class="table__header">
                                     <label for="userName">User Name:</label>
-                                    <input type="text" class="inputNameMember" id="userName" name="studentName" placeholder="User name">
+                                    <input type="text" class="inputNameMember" id="userName" name="studentNames" placeholder="User name">
                                 </section>
                                 <section class="table_Addmember">
                                     <table>
@@ -619,11 +668,14 @@ fetchStudentIDs(courseID);
 <!-- creategroup -->
                 <div class="creategroupContainer">
                     <h1>Create group</h1>
-                    <h3>Group Name:</h3>
-                    <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
-                    <form class="selectcontainer">
+
+                    <form class="selectcontainer" method="POST" action="createGroup.php">
                         <div class="flex-container">
-                            <!-- student -->
+                            <div>
+                                <h3>Group Name:</h3>
+                                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                            </div>
+                                                <!-- student -->
                             <div>
                                 <label for="selectedStudents">Selected Students:</label>
                                 <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
@@ -707,8 +759,9 @@ fetchStudentIDs(courseID);
                                 </table>
                             </section>
                         </div>
+                        <button type="submit" class="addgroupbtn">Add +</button>
                     </form>
-                    <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
+
                 </div>
 
             <script>

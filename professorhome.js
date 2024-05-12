@@ -175,7 +175,7 @@ function createGROUP(){
 }
  
 function clsViewGrp(){
-  var container = document.querySelector('.addmember');
+  var container = document.querySelector('.viewgroup');
   container.style.display = 'none';
 }
  

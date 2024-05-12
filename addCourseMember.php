@@ -7,11 +7,14 @@ if (isset($_SESSION['varCourseID'])) {
     // Use the stored courseID from the session
     $courseID = $_SESSION['varCourseID'];
 
-    // Check if the student name is set in the form data
-    if (isset($_POST["studentName"])) {
-        // Retrieve the student name from the form and sanitize it
-        $studentName = $_POST["studentName"];
-        $escapedStudentName = htmlspecialchars($studentName);
+    // Check if the student names are set in the form data
+    if (isset($_POST["studentNames"])) {
+        // Retrieve the student names from the form and sanitize them
+        $studentNames = $_POST["studentNames"];
+        $escapedStudentNames = htmlspecialchars($studentNames);
+
+        // Split the student names into an array using ","
+        $students = array_map('trim', explode(",", $escapedStudentNames));
 
         // Create connection
         $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
@@ -31,17 +34,15 @@ if (isset($_SESSION['varCourseID'])) {
         if ($result) {
             // Loop through the results to find similar names
             while ($row = $result->fetch_assoc()) {
-                // Calculate similarity percentage
-                similar_text($escapedStudentName, $row["userName"], $similarityPercentage);
-
-                // You can adjust the similarity threshold as needed
-                if ($similarityPercentage >= 80) { // Adjust threshold as needed
+                // Check if the student name is in the submitted list
+                if (in_array($row["userName"], $students)) {
                     // If a similar name is found, fetch the userID
                     $userID = $row["userID"];
 
                     // Insert userID and courseID into enrolled_students table
                     $insertQuery = "INSERT INTO `enrolled students` (studentID, courseID) VALUES ('$userID', '$courseID')";
                     if ($conn->query($insertQuery) === TRUE) {
+                        // Handle successful insertion (e.g., redirect or echo success message)
                         header("Location: " . $_SERVER['HTTP_REFERER']);
                     } else {
                         echo "Error inserting into enrolled_students table: " . $conn->error;
@@ -56,8 +57,8 @@ if (isset($_SESSION['varCourseID'])) {
         // Close database connection
         $conn->close();
     } else {
-        // Handle case where student name is not set
-        echo "Error: Student name not provided.";
+        // Handle case where student names are not set
+        echo "Error: Student names not provided.";
     }
 } else {
     // Handle case where addMemberCourseID is not set in the session
