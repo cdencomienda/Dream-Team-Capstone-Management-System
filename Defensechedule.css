@@ -333,7 +333,7 @@ body{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 225px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -344,10 +344,14 @@ body{
 }
 
 #addScheduleBtn{
-  margin: 5px;
+  margin: 4px;
   margin-left: 10px;
   width: 150px;
   height: 40px;
+  background-color: solid #888;;
+  border-radius: 25px;
+
+
 }
 /* Modal Content */
 .modal-content {
@@ -355,7 +359,8 @@ body{
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
+  height: 40%;
 }
 
 /* The Close Button */
