@@ -411,8 +411,7 @@ body{
     width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px;
-
+    margin-left: 250px; 
     background-color: transparent;
     border: none;
 }
@@ -487,8 +486,7 @@ body{
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out;
-    z-index: 1000;
-    
+    z-index: 1000; 
     text-align: left;
   }
   .flsDropdown.active> .Rep-FilesBtn + .filesContainer{

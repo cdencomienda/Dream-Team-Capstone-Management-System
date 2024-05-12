@@ -174,51 +174,71 @@ function viewMembers() {
 function createGROUP(){ 
 }
  
+// js fucntion of group submission members requ files 
+document.addEventListener('click', e =>{
+  const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
+  if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
+  return
+  
+  let currentflsDropdown
+  if(isflsDropdowButton){
+      currentflsDropdown = e.target.closest('[data-flsDropdown]')
+      currentflsDropdown.classList.toggle('active')
+  }
+  
+  document.querySelectorAll("[data-flsDropdown].active").forEach(flsDropdown => {
+      if (flsDropdown === currentflsDropdown) return
+      flsDropdown.classList.remove("active")
+  });
+  }) 
+  function showDefaultBody() {
+    document.getElementById("defaultBody").style.display = "block";
+    document.getElementById("submissionFrame").style.display = "none";
+  
+}
+
+function submissionBtnAuth() {
+    document.getElementById("defaultBody").style.display = "none";
+    document.getElementById("submissionFrame").style.display = "flex";
+
+}
+
+
 function clsViewGrp(){
   var container = document.querySelector('.addmember');
   container.style.display = 'none';
 }
- 
+  
     // RUBRIC JS PUTANIGGA MO IAN
     document.addEventListener("DOMContentLoaded", function (){
       const customSelects = document.querySelectorAll(".custom-select");
       
       function updateSelectedOptions(customSelect) {
-          const selectedOptions = Array.from(customSelect.querySelectorAll(".option.active")).filter(option => option !== customSelect.querySelector(".option.all-tags")).map(function(option) {
-              return {
-                  value: option.getAttribute("data-value"),
-                  text: option.textContent.trim()
-              };
-          });
-  
-          const selectedValues = selectedOptions.map(function(option) {
-              return option.value;
-          });
-  
-          customSelect.querySelector(".tags_input").value = selectedValues.join(', ');
-  
-          let tagsHTML = "";
-  
-          if(selectedOptions.length === 0) {
-              tagsHTML = '<span class="placeholder">Select the tags</span>';
-          } else {
-              const maxTagsToShow = 3;
-              let additionalTagsCount = 0;
-  
-              selectedOptions.forEach(function(option, index) {
-                  if(index < maxTagsToShow) {
-                      tagsHTML += '<span class="tag">' + option.text + '<span class="remove-tag" data-value="' + option.value + '">&times;</span></span>';
-                  } else {
-                      additionalTagsCount++;
-                  }
-              });
-  
-              if(additionalTagsCount > 0) {
-                  tagsHTML += '<span class="tag">+' + additionalTagsCount + '</span>';
-              }
-          }
-          customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
-      } 
+    const selectedOptions = Array.from(customSelect.querySelectorAll(".option.active")).filter(option => option !== customSelect.querySelector(".option.all-tags")).map(function(option) {
+        return {
+            value: option.getAttribute("data-value"),
+            text: option.textContent.trim()
+        };
+    });
+
+    const selectedValues = selectedOptions.map(function(option) {
+        return option.value;
+    });
+
+    customSelect.querySelector(".tags_input").value = selectedValues.join(', ');
+
+    let tagsHTML = "";
+
+    if(selectedOptions.length === 0) {
+        tagsHTML = '<span class="placeholder">Select the tags</span>';
+    } else {
+        selectedOptions.forEach(function(option) {
+            tagsHTML += `<span class="tag">${option.text}<span class="remove-tag" data-value="${option.value}">&times;</span></span>`;
+        });
+    }
+    customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
+}
+
   
       customSelects.forEach(function(customSelect) {
           const searchInput = customSelect.querySelector(".search-tag");
