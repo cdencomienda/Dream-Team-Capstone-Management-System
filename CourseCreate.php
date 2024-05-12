@@ -389,6 +389,146 @@ function storeGroupName(groupName){
 
 }
 
+function getCourseMember(){
+
+    const studentList = document.querySelector('.studentList');
+    studentList.innerHTML = ''; // Clear previous content
+
+// Fetch student data from the server using the stored courseID
+fetch('courseMember.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(students => {
+            console.log('Fetched students:', students); // Log the fetched students for debugging
+
+            // Clear previous content in studentContainer
+            studentList.innerHTML = '';
+
+            // Check if any students were fetched
+            if (students.length > 0) {
+                students.forEach(student => {
+                    if (student && student.userName) {
+                        const studentRow = document.createElement('tr');
+                        const studentNameCell = document.createElement('td');
+                        studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
+                        studentRow.appendChild(studentNameCell);
+                        studentList.appendChild(studentRow);
+
+                        // Set onclick event to updateUserName function
+                        studentRow.onclick = () => updateUserName(student.userName.trim());
+                    } else {
+                        console.warn('Invalid student data:', student); // Log invalid student data
+                    }
+                });
+            } else {
+                const noStudentsRow = document.createElement('tr');
+                const noStudentsCell = document.createElement('td');
+                noStudentsCell.textContent = 'No students found';
+                noStudentsRow.appendChild(noStudentsCell);
+                studentList.appendChild(noStudentsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching students:', error));
+}
+
+function getProfessors() {
+    const professorList = document.querySelector('.professorList');
+    professorList.innerHTML = ''; // Clear previous content
+
+    // Fetch professor data from the server using the stored courseID
+    fetch('getProfessors.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(professors => {
+            console.log('Fetched professors:', professors); // Log the fetched professors for debugging
+
+            // Clear previous content in professorList
+            professorList.innerHTML = '';
+
+            // Check if any professors were fetched
+            if (professors.length > 0) {
+                professors.forEach(professor => {
+                    if (professor && professor.userName) {
+                        const professorRow = document.createElement('tr');
+                        const professorNameCell = document.createElement('td');
+                        professorNameCell.textContent = professor.userName.trim(); // Trim the userName if it's defined
+                        professorRow.appendChild(professorNameCell);
+                        professorList.appendChild(professorRow);
+
+                        // Set onclick event to updateUserName function
+                        professorRow.onclick = () => updateUserName(professor.userName.trim());
+                    } else {
+                        console.warn('Invalid professor data:', professor); // Log invalid professor data
+                    }
+                });
+            } else {
+                const noProfessorsRow = document.createElement('tr');
+                const noProfessorsCell = document.createElement('td');
+                noProfessorsCell.textContent = 'No professors found';
+                noProfessorsRow.appendChild(noProfessorsCell);
+                professorList.appendChild(noProfessorsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching professors:', error));
+}
+
+function getAdviser() {
+    const adviserList = document.querySelector('.adviserList');
+    adviserList.innerHTML = ''; // Clear previous content
+
+    // Fetch professor data from the server using the stored courseID
+    fetch('getProfessors.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(professors => {
+            console.log('Fetched professors as Adviser:', professors); // Log the fetched professors for debugging
+
+            // Clear previous content in professorList
+            adviserList.innerHTML = '';
+
+            // Check if any professors were fetched
+            if (professors.length > 0) {
+                professors.forEach(professor => {
+                    if (professor && professor.userName) {
+                        const professorRow = document.createElement('tr');
+                        const professorNameCell = document.createElement('td');
+                        professorNameCell.textContent = professor.userName.trim(); // Trim the userName if it's defined
+                        professorRow.appendChild(professorNameCell);
+                        adviserList.appendChild(professorRow);
+
+                        // Set onclick event to updateUserName function
+                        professorRow.onclick = () => updateUserName(professor.userName.trim());
+                    } else {
+                        console.warn('Invalid professor data:', professor); // Log invalid professor data
+                    }
+                });
+            } else {
+                const noProfessorsRow = document.createElement('tr');
+                const noProfessorsCell = document.createElement('td');
+                noProfessorsCell.textContent = 'No professors found';
+                noProfessorsRow.appendChild(noProfessorsCell);
+                adviserList.appendChild(noProfessorsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching professors:', error));
+}
+
+
+
+
+
 
 
 // Event delegation to handle dropdown toggle
@@ -527,6 +667,9 @@ function handleAction(action, courseID) {
         case 'Create Group':
             creategroup(courseID);
             storeCourseID(courseID);
+            getCourseMember();
+            getProfessors();
+            getAdviser();
 
             break;
         case 'View Members':
@@ -746,7 +889,7 @@ fetchStudentIDs(courseID);
                             </div>
                             <section class="table_selectingusers">
                                 <table>
-                                    <tbody id="selectUserstudents">
+                                    <tbody class="studentList" id="selectUserstudents">
                                         <tr onclick="selectedUserName(this, 'student')">
                                             <td>Naito</td>
                                         </tr>
@@ -778,7 +921,7 @@ fetchStudentIDs(courseID);
                             </div>
                             <section class="table_selectingusers">
                                 <table>
-                                    <tbody id="selectUserpanelists">
+                                    <tbody class="professorList" id="selectUserpanelists">
                                         <tr onclick="selectedUserName(this, 'panelist')">
                                             <td>Yong</td>
                                         </tr>
@@ -808,7 +951,7 @@ fetchStudentIDs(courseID);
                             </div>
                             <section class="table_selectingusers">
                                 <table>
-                                    <tbody id="selectUseradvisors">
+                                    <tbody class="adviserList" id="selectUseradvisors">
                                         <tr onclick="selectedUserName(this, 'advisor')">
                                             <td>222</td>
                                         </tr>
