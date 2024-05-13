@@ -389,13 +389,15 @@ function storeGroupName(groupName){
 
 }
 
-function getCourseMember(){
-
+function getCourseMember() {
     const studentList = document.querySelector('.studentList');
     studentList.innerHTML = ''; // Clear previous content
 
-// Fetch student data from the server using the stored courseID
-fetch('courseMember.php')
+    const selectedStudentsInput = document.getElementById('selectedStudents');
+    let selectedStudents = []; // Array to track selected students
+
+    // Fetch student data from the server using the stored courseID
+    fetch('courseMember.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -404,9 +406,6 @@ fetch('courseMember.php')
         })
         .then(students => {
             console.log('Fetched students:', students); // Log the fetched students for debugging
-
-            // Clear previous content in studentContainer
-            studentList.innerHTML = '';
 
             // Check if any students were fetched
             if (students.length > 0) {
@@ -418,8 +417,18 @@ fetch('courseMember.php')
                         studentRow.appendChild(studentNameCell);
                         studentList.appendChild(studentRow);
 
-                        // Set onclick event to updateUserName function
-                        studentRow.onclick = () => updateUserName(student.userName.trim());
+                        // Set onclick event to toggle selected students and highlight the row
+                        studentRow.onclick = () => {
+                            const index = selectedStudents.indexOf(student.userName.trim());
+                            if (index === -1) {
+                                selectedStudents.push(student.userName.trim());
+                                studentRow.classList.add('selected');
+                            } else {
+                                selectedStudents.splice(index, 1);
+                                studentRow.classList.remove('selected');
+                            }
+                            selectedStudentsInput.value = selectedStudents.join(', ');
+                        };
                     } else {
                         console.warn('Invalid student data:', student); // Log invalid student data
                     }
@@ -435,9 +444,15 @@ fetch('courseMember.php')
         .catch(error => console.error('Error fetching students:', error));
 }
 
+
+
+
 function getProfessors() {
     const professorList = document.querySelector('.professorList');
     professorList.innerHTML = ''; // Clear previous content
+
+    const selectedPanelistsInput = document.getElementById('selectedPanelists');
+    let selectedPanelists = []; // Array to track selected panelists
 
     // Fetch professor data from the server using the stored courseID
     fetch('getProfessors.php')
@@ -463,8 +478,18 @@ function getProfessors() {
                         professorRow.appendChild(professorNameCell);
                         professorList.appendChild(professorRow);
 
-                        // Set onclick event to updateUserName function
-                        professorRow.onclick = () => updateUserName(professor.userName.trim());
+                        // Set onclick event to toggle selected panelists and highlight the row
+                        professorRow.onclick = () => {
+                            const index = selectedPanelists.indexOf(professor.userName.trim());
+                            if (index === -1) {
+                                selectedPanelists.push(professor.userName.trim());
+                                professorRow.classList.add('selected');
+                            } else {
+                                selectedPanelists.splice(index, 1);
+                                professorRow.classList.remove('selected');
+                            }
+                            selectedPanelistsInput.value = selectedPanelists.join(', ');
+                        };
                     } else {
                         console.warn('Invalid professor data:', professor); // Log invalid professor data
                     }
@@ -480,11 +505,15 @@ function getProfessors() {
         .catch(error => console.error('Error fetching professors:', error));
 }
 
+
 function getAdviser() {
     const adviserList = document.querySelector('.adviserList');
     adviserList.innerHTML = ''; // Clear previous content
 
-    // Fetch professor data from the server using the stored courseID
+    const selectedAdvisorsInput = document.getElementById('selectedAdvisors');
+    let selectedAdvisors = []; // Array to track selected advisors
+
+    // Fetch advisor data from the server using the stored courseID (assuming getProfessors.php also retrieves advisor data)
     fetch('getProfessors.php')
         .then(response => {
             if (!response.ok) {
@@ -492,38 +521,49 @@ function getAdviser() {
             }
             return response.json(); // Parse the response as JSON
         })
-        .then(professors => {
-            console.log('Fetched professors as Adviser:', professors); // Log the fetched professors for debugging
+        .then(advisors => {
+            console.log('Fetched advisors:', advisors); // Log the fetched advisors for debugging
 
-            // Clear previous content in professorList
+            // Clear previous content in adviserList
             adviserList.innerHTML = '';
 
-            // Check if any professors were fetched
-            if (professors.length > 0) {
-                professors.forEach(professor => {
-                    if (professor && professor.userName) {
-                        const professorRow = document.createElement('tr');
-                        const professorNameCell = document.createElement('td');
-                        professorNameCell.textContent = professor.userName.trim(); // Trim the userName if it's defined
-                        professorRow.appendChild(professorNameCell);
-                        adviserList.appendChild(professorRow);
+            // Check if any advisors were fetched
+            if (advisors.length > 0) {
+                advisors.forEach(advisor => {
+                    if (advisor && advisor.userName) {
+                        const advisorRow = document.createElement('tr');
+                        const advisorNameCell = document.createElement('td');
+                        advisorNameCell.textContent = advisor.userName.trim(); // Trim the userName if it's defined
+                        advisorRow.appendChild(advisorNameCell);
+                        adviserList.appendChild(advisorRow);
 
-                        // Set onclick event to updateUserName function
-                        professorRow.onclick = () => updateUserName(professor.userName.trim());
+                        // Set onclick event to toggle selected advisors and highlight the row
+                        advisorRow.onclick = () => {
+                            const index = selectedAdvisors.indexOf(advisor.userName.trim());
+                            if (index === -1) {
+                                selectedAdvisors.push(advisor.userName.trim());
+                                advisorRow.classList.add('selected');
+                            } else {
+                                selectedAdvisors.splice(index, 1);
+                                advisorRow.classList.remove('selected');
+                            }
+                            selectedAdvisorsInput.value = selectedAdvisors.join(', ');
+                        };
                     } else {
-                        console.warn('Invalid professor data:', professor); // Log invalid professor data
+                        console.warn('Invalid advisor data:', advisor); // Log invalid advisor data
                     }
                 });
             } else {
-                const noProfessorsRow = document.createElement('tr');
-                const noProfessorsCell = document.createElement('td');
-                noProfessorsCell.textContent = 'No professors found';
-                noProfessorsRow.appendChild(noProfessorsCell);
-                adviserList.appendChild(noProfessorsRow);
+                const noAdvisorsRow = document.createElement('tr');
+                const noAdvisorsCell = document.createElement('td');
+                noAdvisorsCell.textContent = 'No advisors found';
+                noAdvisorsRow.appendChild(noAdvisorsCell);
+                adviserList.appendChild(noAdvisorsRow);
             }
         })
-        .catch(error => console.error('Error fetching professors:', error));
+        .catch(error => console.error('Error fetching advisors:', error));
 }
+
 
 
 
@@ -611,6 +651,8 @@ function storeCourseID(courseID) {
 
 function getStudents() {
     const studentContainer = document.querySelector('.studentContainer');
+    const selectedStudentsInput = document.getElementById('userName');
+    let selectedStudents = []; // Array to track selected students
 
     // Fetch student data from the server
     fetch('userTypeStudent.php')
@@ -635,15 +677,26 @@ function getStudents() {
                     studentRow.appendChild(studentNameCell);
                     studentContainer.appendChild(studentRow);
 
-                    // Set onclick event to updateUserName function
-                    studentRow.onclick = () => updateUserName(student.userName.trim());
+                    // Set onclick event to toggle selected students and highlight the row
+                    studentRow.onclick = () => {
+                        const index = selectedStudents.indexOf(student.userName.trim());
+                        if (index === -1) {
+                            selectedStudents.push(student.userName.trim());
+                            studentRow.classList.add('selected');
+                        } else {
+                            selectedStudents.splice(index, 1);
+                            studentRow.classList.remove('selected');
+                        }
+                        selectedStudentsInput.value = selectedStudents.join(', ');
+                    };
                 } else {
                     console.warn('Invalid student data:', student); // Log invalid student data
                 }
             });
         })
         .catch(error => console.error('Error fetching students:', error));
-} 
+}
+
 
 document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -943,6 +996,102 @@ fetchStudentIDs(courseID);
                                 </table>
                             </section>
                         </div>
+
+                        <div class="flex-container">
+                            <!-- panel -->
+                            <div>
+                                <label for="selectedPanelists">Selected Panel:</label>
+                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody class="professorList" id="selectUserpanelists">
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Yong</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Stan</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Serge</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Sam</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Luigi</td>
+                                        </tr>
+
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+
+
+                        <div class="flex-container">
+                            <!-- panel -->
+                            <div>
+                                <label for="selectedPanelists">Selected Panel:</label>
+                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody class="professorList" id="selectUserpanelists">
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Yong</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Stan</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Serge</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Sam</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Luigi</td>
+                                        </tr>
+
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+
+
+                        <div class="flex-container">
+                            <!-- panel -->
+                            <div>
+                                <label for="selectedPanelists">Selected Panel:</label>
+                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
+                            </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody class="professorList" id="selectUserpanelists">
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Yong</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Stan</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Serge</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Sam</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'panelist')">
+                                            <td>Luigi</td>
+                                        </tr>
+
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+
                         <!-- advisor -->
                         <div class="flex-container">
                             <div>
@@ -1084,6 +1233,10 @@ fetchStudentIDs(courseID);
                     <h3>${courseName}</h3>
                 </div>
 <!-- rubric --> 
+
+                <style> .rubriccontainer{
+                    display: none;
+                }</style>
                 <div class="rubriccontainer">
                     <div class="rubriccontainerv2">
                         <div class="select-box">
@@ -1117,7 +1270,7 @@ fetchStudentIDs(courseID);
                                     <div class="option" data-value="rubric03">Rubric3</div>
                                     <div class="option" data-value="rubric04">Rubric4</div>
                                     <div class="option" data-value="rubric05">Rubric5</div>
-                                    <div class="no-result-message" style="display none;">No result match</div>
+                                    <div class="no-result-message" style="display : none;">No result match</div>
                                 </div>
                             <span class="tag_error_msg error"></span>
                         </div>
