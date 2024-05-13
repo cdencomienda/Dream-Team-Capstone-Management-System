@@ -273,9 +273,9 @@ body{
   height: 650px;
   width: 1250px;
   background-color: wheat;
-
-  margin-left: 200px;
-  margin-top: 35px;
+  border-radius: 20px;
+  margin-left: 250px;
+  margin-top: 40px;
 }
 .Schedule{
   height: 570px;
@@ -285,6 +285,8 @@ body{
   display: flex;
   overflow: auto;
   flex-direction: column;
+  border-radius: 20px;
+
 }
 .DefenseScheduleCont {
   height: 200px; /* Adjust height as needed */
@@ -364,10 +366,11 @@ body{
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  padding: 25px;
   border: 1px solid #888;
   width: 45%;
-  height: 40%;
+  height: 45%;
+  border-radius: 20px;
 }
 
 /* The Close Button */
@@ -386,7 +389,7 @@ body{
 }
 .SchedDetails{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: 30px;
 }
 
@@ -399,6 +402,7 @@ body{
 }
 .timeDateflexcont {
   margin-top: 30px;
+  width: -50%;
   display: flex;
   flex-direction: row;
   justify-content: space-around; /* Adjust spacing between items */
@@ -413,21 +417,41 @@ body{
   font-size: 16px; /* Increase font size */
   margin-bottom: 5px; /* Add margin below labels */
 }
+
 .input-field {
-  width: 200px; /* Adjust width as needed */
+  width: 65%; /* Adjust width as needed */
   padding: 10px; /* Add padding as needed */
   border: 1px solid #ccc; /* Add border */
   border-radius: 10px; /* Add border radius for rounded corners */
   margin-bottom: 10px; /* Add margin between input fields */
-  transition: border-color 0.3s ease; /* Smooth transition for border color */
-  
+  transition: border-color 0.3s ease; /* Smooth transition for border color */  
 }
+.input-field2{
+  width: 80%; /* Adjust width as needed */
+  padding: 10px; /* Add padding as needed */
+  font-size: large;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; 
+}
+.input-field3{
+  width: 60%;
+  padding: 10px; /* Add padding as needed */
+  font-size: large;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; 
+}
+
 .SchedSbmit{
-  width: 140px;
+  width: 15%;
   height: 30px;
+  margin-top:25px;
   border-radius: 10px;
-  margin-left: 670px;
-  background-color: #FEE3BC;
+  float: right;
+  background-color: #fcd497;
   border: none;
   transition:backround-color .3s ease;
 }
