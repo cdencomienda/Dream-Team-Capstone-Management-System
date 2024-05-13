@@ -7,6 +7,8 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <title>Class Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
     <style>
          
          
@@ -330,8 +332,14 @@ function fetchGroups(courseID, callback) {
                         newGroupButton.type = 'button';
                         newGroupButton.classList.add('createdgroupBTN');
                         newGroupButton.textContent = groupName; // Display the groupName
-                        newGroupButton.onclick = () => newGroupCreated(courseID); // Assign the onclick event to call newGroupCreated function with courseID
                         newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+
+                        newGroupButton.onclick = () => {
+                        console.log('Clicked group:', groupName); // Log the clicked group name
+                        newGroupCreated(courseID); // Call the newGroupCreated function with courseID
+                        storeGroupName(groupName);
+                    };
+
 
                         if (callback && typeof callback === 'function') {
                             callback(newGroupButton); // Call the callback function with the newGroupButton
@@ -350,6 +358,218 @@ function fetchGroups(courseID, callback) {
         })
         .catch(error => console.error('Error fetching groups:', error));
 }
+
+
+
+function storeGroupName(groupName){
+
+        group = groupName;
+        console.log('groupName to be stored: ', group);
+
+        fetch('storeGroupName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'group=' + encodeURIComponent(group),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the raw response text
+        })
+        .then(responseText => {
+            console.log('Raw Response:', responseText); // Log the raw response
+            return JSON.parse(responseText); // Parse the response as JSON if needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+}
+
+function getCourseMember() {
+    const studentList = document.querySelector('.studentList');
+    studentList.innerHTML = ''; // Clear previous content
+
+    const selectedStudentsInput = document.getElementById('selectedStudents');
+    let selectedStudents = []; // Array to track selected students
+
+    // Fetch student data from the server using the stored courseID
+    fetch('courseMember.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(students => {
+            console.log('Fetched students:', students); // Log the fetched students for debugging
+
+            // Check if any students were fetched
+            if (students.length > 0) {
+                students.forEach(student => {
+                    if (student && student.userName) {
+                        const studentRow = document.createElement('tr');
+                        const studentNameCell = document.createElement('td');
+                        studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
+                        studentRow.appendChild(studentNameCell);
+                        studentList.appendChild(studentRow);
+
+                        // Set onclick event to toggle selected students and highlight the row
+                        studentRow.onclick = () => {
+                            const index = selectedStudents.indexOf(student.userName.trim());
+                            if (index === -1) {
+                                selectedStudents.push(student.userName.trim());
+                                studentRow.classList.add('selected');
+                            } else {
+                                selectedStudents.splice(index, 1);
+                                studentRow.classList.remove('selected');
+                            }
+                            selectedStudentsInput.value = selectedStudents.join(', ');
+                        };
+                    } else {
+                        console.warn('Invalid student data:', student); // Log invalid student data
+                    }
+                });
+            } else {
+                const noStudentsRow = document.createElement('tr');
+                const noStudentsCell = document.createElement('td');
+                noStudentsCell.textContent = 'No students found';
+                noStudentsRow.appendChild(noStudentsCell);
+                studentList.appendChild(noStudentsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching students:', error));
+}
+
+
+
+
+function getProfessors() {
+    const professorList = document.querySelector('.professorList');
+    professorList.innerHTML = ''; // Clear previous content
+
+    const selectedPanelistsInput = document.getElementById('selectedPanelists');
+    let selectedPanelists = []; // Array to track selected panelists
+
+    // Fetch professor data from the server using the stored courseID
+    fetch('getProfessors.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(professors => {
+            console.log('Fetched professors:', professors); // Log the fetched professors for debugging
+
+            // Clear previous content in professorList
+            professorList.innerHTML = '';
+
+            // Check if any professors were fetched
+            if (professors.length > 0) {
+                professors.forEach(professor => {
+                    if (professor && professor.userName) {
+                        const professorRow = document.createElement('tr');
+                        const professorNameCell = document.createElement('td');
+                        professorNameCell.textContent = professor.userName.trim(); // Trim the userName if it's defined
+                        professorRow.appendChild(professorNameCell);
+                        professorList.appendChild(professorRow);
+
+                        // Set onclick event to toggle selected panelists and highlight the row
+                        professorRow.onclick = () => {
+                            const index = selectedPanelists.indexOf(professor.userName.trim());
+                            if (index === -1) {
+                                selectedPanelists.push(professor.userName.trim());
+                                professorRow.classList.add('selected');
+                            } else {
+                                selectedPanelists.splice(index, 1);
+                                professorRow.classList.remove('selected');
+                            }
+                            selectedPanelistsInput.value = selectedPanelists.join(', ');
+                        };
+                    } else {
+                        console.warn('Invalid professor data:', professor); // Log invalid professor data
+                    }
+                });
+            } else {
+                const noProfessorsRow = document.createElement('tr');
+                const noProfessorsCell = document.createElement('td');
+                noProfessorsCell.textContent = 'No professors found';
+                noProfessorsRow.appendChild(noProfessorsCell);
+                professorList.appendChild(noProfessorsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching professors:', error));
+}
+
+
+function getAdviser() {
+    const adviserList = document.querySelector('.adviserList');
+    adviserList.innerHTML = ''; // Clear previous content
+
+    const selectedAdvisorsInput = document.getElementById('selectedAdvisors');
+    let selectedAdvisors = []; // Array to track selected advisors
+
+    // Fetch advisor data from the server using the stored courseID (assuming getProfessors.php also retrieves advisor data)
+    fetch('getProfessors.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(advisors => {
+            console.log('Fetched advisors:', advisors); // Log the fetched advisors for debugging
+
+            // Clear previous content in adviserList
+            adviserList.innerHTML = '';
+
+            // Check if any advisors were fetched
+            if (advisors.length > 0) {
+                advisors.forEach(advisor => {
+                    if (advisor && advisor.userName) {
+                        const advisorRow = document.createElement('tr');
+                        const advisorNameCell = document.createElement('td');
+                        advisorNameCell.textContent = advisor.userName.trim(); // Trim the userName if it's defined
+                        advisorRow.appendChild(advisorNameCell);
+                        adviserList.appendChild(advisorRow);
+
+                        // Set onclick event to toggle selected advisors and highlight the row
+                        advisorRow.onclick = () => {
+                            const index = selectedAdvisors.indexOf(advisor.userName.trim());
+                            if (index === -1) {
+                                selectedAdvisors.push(advisor.userName.trim());
+                                advisorRow.classList.add('selected');
+                            } else {
+                                selectedAdvisors.splice(index, 1);
+                                advisorRow.classList.remove('selected');
+                            }
+                            selectedAdvisorsInput.value = selectedAdvisors.join(', ');
+                        };
+                    } else {
+                        console.warn('Invalid advisor data:', advisor); // Log invalid advisor data
+                    }
+                });
+            } else {
+                const noAdvisorsRow = document.createElement('tr');
+                const noAdvisorsCell = document.createElement('td');
+                noAdvisorsCell.textContent = 'No advisors found';
+                noAdvisorsRow.appendChild(noAdvisorsCell);
+                adviserList.appendChild(noAdvisorsRow);
+            }
+        })
+        .catch(error => console.error('Error fetching advisors:', error));
+}
+
+
+
+
+
+
+
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
@@ -395,6 +615,8 @@ function fetchStudentIDs(courseID) {
             });
         })
         .catch(error => console.error('Error fetching student IDs:', error));
+
+        
 } 
 
 function storeCourseID(courseID) {
@@ -429,6 +651,8 @@ function storeCourseID(courseID) {
 
 function getStudents() {
     const studentContainer = document.querySelector('.studentContainer');
+    const selectedStudentsInput = document.getElementById('userName');
+    let selectedStudents = []; // Array to track selected students
 
     // Fetch student data from the server
     fetch('userTypeStudent.php')
@@ -453,8 +677,18 @@ function getStudents() {
                     studentRow.appendChild(studentNameCell);
                     studentContainer.appendChild(studentRow);
 
-                    // Set onclick event to updateUserName function
-                    studentRow.onclick = () => updateUserName(student.userName.trim());
+                    // Set onclick event to toggle selected students and highlight the row
+                    studentRow.onclick = () => {
+                        const index = selectedStudents.indexOf(student.userName.trim());
+                        if (index === -1) {
+                            selectedStudents.push(student.userName.trim());
+                            studentRow.classList.add('selected');
+                        } else {
+                            selectedStudents.splice(index, 1);
+                            studentRow.classList.remove('selected');
+                        }
+                        selectedStudentsInput.value = selectedStudents.join(', ');
+                    };
                 } else {
                     console.warn('Invalid student data:', student); // Log invalid student data
                 }
@@ -464,14 +698,14 @@ function getStudents() {
 }
 
 
-
-
-
-
-
-
-
 document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const courseID = varCourse; // Assuming varCourse contains the courseID
+    storeCourseID(courseID); // Call storeCourseID to store the courseID in the session
+    this.submit(); // Now submit the form
+});
+
+document.querySelector('.selectcontainer').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
     const courseID = varCourse; // Assuming varCourse contains the courseID
     storeCourseID(courseID); // Call storeCourseID to store the courseID in the session
@@ -485,6 +719,11 @@ function handleAction(action, courseID) {
     switch (action) {
         case 'Create Group':
             creategroup(courseID);
+            storeCourseID(courseID);
+            getCourseMember();
+            getProfessors();
+            getAdviser();
+
             break;
         case 'View Members':
             viewMembers(courseID);
@@ -518,23 +757,57 @@ fetchStudentIDs(courseID);
                 <div class="GroupContainer">
                     <div class="dashboard_header">
                         <div class="groupname_container"> 
-                        <h3> 
-                            <p class="group_name">Group Name </p>    
-                        </h3>
-                        </div>  
-                        <h2>
-                            <div class="button-group"> 
-                                <button type="button" class=" Rep-FilesBtn" onclick="r_filesBtnAuth()"> <i class="fa-solid fa-file"></i> Files </button>
-                                <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> Submissions </button>
-                                <div class="mDropdown">  
-                                <button type="button" class=" Members-Btn" onclick="TogglegroupMembers()"> Members </button>                  
-                                    <div class="GroupmembersContainer" id="groupMembersContainer"></div>
-                                        member 1 
-                                     </div>
+                            <div class="group_name" id="group_name">     
+                            </div>   
+                                </div>
+                                <script> 
+                                    
+                                </script> 
+                            <h4>
+                    <div class="button-group"> 
+                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">          
+                                    Advisor Recomendation Sheet: 
+                                    <div class = "advRecomendation">
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
+                        </div>    
+                        <div class="mDropdown" data-flsDropdown>  
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                    member1 niger
                                 </div>
                             </div>
-                        </h2>     
-                    </div>
+                        </div>
+                    </h4>
+                    </div> 
 
                     <!-- files -->
                     <div class="defaultBody" id="defaultBody">
@@ -549,11 +822,43 @@ fetchStudentIDs(courseID);
                             <div class= "requirement-list">
                                 <div class = "req-nameCont"> 
                                     <div class="requirement-name">
-                            
-                                    </div> 
-                                </div> 
+                                    
+                                    </div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                    // Function to fetch requirements information for the logged-in student's group
+                                    function fetchRequirementsInfo() {
+                                        fetch('fetchRequirements.php')
+                                            .then(response => response.json())
+                                            .then(requirements => {
+                                                const reqNameContainer = document.querySelector('.req-nameCont');
+                                                
+                                                // Clear existing content
+                                                reqNameContainer.innerHTML = '';
+            
+                                                // Populate the container with the group's requirements
+                                                requirements.forEach(requirement => {
+                                                    const div = document.createElement('div');
+                                                    div.className = 'requirement-name';
+                                                    div.textContent = requirement;
+                                                    reqNameContainer.appendChild(div);
+                                                });
+                                            })
+                                            .catch(error => {
+                                                console.error('Error fetching requirements information:', error);
+                                            });
+                                    }
+            
+                                    // Fetch requirements information when the page loads
+                                    fetchRequirementsInfo();
+                                });
+                                </script>
+                                </div>
+                                
                             </div>
                         </div>
+                        <script> 
+                        </script>
 
                     <!-- file repo -->
                     <div class="professorFilesR" id="profFilesR">
@@ -562,6 +867,10 @@ fetchStudentIDs(courseID);
                         </div>
                     </div>
                 </div> 
+                <!-- file requirement -->
+            </div> 
+
+
 
 <!-- add members -->
                 <div class="addmember">
@@ -570,7 +879,7 @@ fetchStudentIDs(courseID);
                             <main class="addmembertable" id="addmember_table">
                                 <section class="table__header">
                                     <label for="userName">User Name:</label>
-                                    <input type="text" class="inputNameMember" id="userName" name="studentName" placeholder="User name">
+                                    <input type="text" class="inputNameMember" id="userName" name="studentNames" placeholder="User name">
                                 </section>
                                 <section class="table_Addmember">
                                     <table>
@@ -619,96 +928,104 @@ fetchStudentIDs(courseID);
 <!-- creategroup -->
                 <div class="creategroupContainer">
                     <h1>Create group</h1>
-                    <h3>Group Name:</h3>
-                    <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
-                    <form class="selectcontainer">
+                        <div>
+                            <h3>Group Name:</h3>
+                            <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                        </div>
+                    <form class="selectcontainer" method="POST" action="createGroup.php">
+                        
                         <div class="flex-container">
-                            <!-- student -->
-                            <div>
+                                <!-- student -->
+                                <div>
                                 <label for="selectedStudents">Selected Students:</label>
-                                <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
+                                <select id="selectedStudents" name="studentName" class="inputName" onchange="selectedUserName(this.value, 'student')">
+                                    <option value="" selected disabled>Select a student</option>
+                                    <option value="Naito">Naito</option>
+                                    <option value="Prince">Prince</option>
+                                    <option value="Mac">Mac</option>
+                                    <option value="Ian">Ian</option>
+                                    <option value="Carlos">Carlos</option>
+                                    <option value="Barit">Barit</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
                             </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody id="selectUserstudents">
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Naito</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Prince</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Mac</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Ian</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Carlos</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Barit</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
                         </div>
-                        <div class="flex-container">
-                            <!-- panel -->
-                            <div>
-                                <label for="selectedPanelists">Selected Panel:</label>
-                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody id="selectUserpanelists">
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Yong</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Stan</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Serge</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Sam</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Luigi</td>
-                                        </tr>
 
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
-                        <!-- advisor -->
                         <div class="flex-container">
+                            <!-- lead panel -->
+                            <div>
+                            <label for="selectedPanelists">Selected Lead Panel:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="flex-container">
+                            <!-- panel1 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 1:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option> 
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="flex-container">
+                            <!-- panel2 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 2:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option> 
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div> 
+
+                        <div class="flex-container">
+                            <!-- panel3 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 3:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option> 
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>  
+
+                        
+                        <div class="flex-container">
+                            <!-- advisor -->
                             <div>
                                 <label for="selectedAdvisors">Selected Advisor:</label>
-                                <input type="text" class="inputName" id="selectedAdvisors" name="advisorName" placeholder="User name"> 
+                                <select id="selectedAdvisors" name="advisorName" class="inputName" onchange="selectedUserName(this.value, 'advisor')">
+                                    <option value="" selected disabled>Select an advisor</option>
+                                    <option value="222">222</option>
+                                    <option value="uuu">uuu</option>
+                                    <option value="Sgegege">Sgegege</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
                             </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody id="selectUseradvisors">
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>222</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>uuu</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>Sgegege</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
+                        </div> 
+
+                        <button type="submit" class="addgroupbtn">Add +</button>
                     </form>
-                    <button type="button" class="addgroupbtn" onclick="createGROUP()">Add +</button>
                 </div>
 
             <script>
@@ -796,9 +1113,7 @@ fetchStudentIDs(courseID);
                 }
             }
 
-            </script>
-
-
+            </script> 
 
 <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
@@ -822,18 +1137,58 @@ fetchStudentIDs(courseID);
                     <h3>Requirements Description</h3>
                         <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
                     <h3>${courseName}</h3>
+                    <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
                 </div>
-<!-- rubric -->
-            <div class="rubriccontainer">
-                <h3>Rubric Code:</h3>
-                <input type="text" id="courserubric" class="inputRubricID" name="rubricCode" placeholder="Input Rubric Code">
+<!-- rubric --> 
+
+                <style> .rubriccontainer{
+                    display: none;
+                }</style>
+                <div class="rubriccontainer">
+                    <div class="rubriccontainerv2">
+                        <div class="select-box">
+                            <h3>Rubric Code:</h3>
+                                <input type="text" id="courserubric" class="tags_input" name="rubricCode" placeholder="Input Rubric Code" hidden />
+                                <div class="selected-options">
+                                    <!-- <span class="tag">Rubric1
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric2
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric3
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric4
+                                        <span class="remove-tag">&times;</span></span>
+                                    <span class="tag">Rubric5
+                                        <span class="remove-tag">&times;</span></span> 
+                                </div> -->
+                            <div class="arrow">
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                                <div class="options">
+                                    <div class="option-search-tag">
+                                        <input type="text" class="search-tag" 
+                                        placeholder="Search rubric code..."/>
+                                        <button type="button" class="clear"><i 
+                                        class="fa fa-close"></i></button>
+                                    </div>
+                                    <div class="option all-tags" data-value="All">Select All</div>
+                                    <div class="option" data-value="rubric01">Rubric1</div>
+                                    <div class="option" data-value="rubric02">Rubric2</div>
+                                    <div class="option" data-value="rubric03">Rubric3</div>
+                                    <div class="option" data-value="rubric04">Rubric4</div>
+                                    <div class="option" data-value="rubric05">Rubric5</div>
+                                    <div class="no-result-message" style="display : none;">No result match</div>
+                                </div>
+                            <span class="tag_error_msg error"></span>
+                        </div>
+                    </div>
+                    <input type="button" class="btn_submit" value="submit" />
+                </div>
             </div>
         </div>
-    </div>
-    <script
-        src="professorhome.js">
-    </script>  
-
+     
+    <script src="professorhome.js"></script>   
+     
 </body>
 </html> 
 <script>
