@@ -928,196 +928,104 @@ fetchStudentIDs(courseID);
 <!-- creategroup -->
                 <div class="creategroupContainer">
                     <h1>Create group</h1>
-
+                        <div>
+                            <h3>Group Name:</h3>
+                            <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
+                        </div>
                     <form class="selectcontainer" method="POST" action="createGroup.php">
+                        
                         <div class="flex-container">
-                            <div>
-                                <h3>Group Name:</h3>
-                                <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
-                            </div>
-                                                <!-- student -->
-                            <div>
+                                <!-- student -->
+                                <div>
                                 <label for="selectedStudents">Selected Students:</label>
-                                <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
+                                <select id="selectedStudents" name="studentName" class="inputName" onchange="selectedUserName(this.value, 'student')">
+                                    <option value="" selected disabled>Select a student</option>
+                                    <option value="Naito">Naito</option>
+                                    <option value="Prince">Prince</option>
+                                    <option value="Mac">Mac</option>
+                                    <option value="Ian">Ian</option>
+                                    <option value="Carlos">Carlos</option>
+                                    <option value="Barit">Barit</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
                             </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="studentList" id="selectUserstudents">
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Naito</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Prince</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Mac</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Ian</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Carlos</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Barit</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
                         </div>
+
                         <div class="flex-container">
-                            <!-- panel -->
+                            <!-- lead panel -->
                             <div>
-                                <label for="selectedPanelists">Selected Panel:</label>
-                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="professorList" id="selectUserpanelists">
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Yong</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Stan</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Serge</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Sam</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Luigi</td>
-                                        </tr>
-
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
+                            <label for="selectedPanelists">Selected Lead Panel:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
                         </div>
 
                         <div class="flex-container">
-                            <!-- panel -->
+                            <!-- panel1 -->
                             <div>
-                                <label for="selectedPanelists">Selected Panel:</label>
-                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="professorList" id="selectUserpanelists">
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Yong</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Stan</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Serge</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Sam</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Luigi</td>
-                                        </tr>
-
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
+                            <label for="selectedPanelists">Selected Panel 1:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option> 
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
                         </div>
 
-
                         <div class="flex-container">
-                            <!-- panel -->
+                            <!-- panel2 -->
                             <div>
-                                <label for="selectedPanelists">Selected Panel:</label>
-                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="professorList" id="selectUserpanelists">
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Yong</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Stan</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Serge</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Sam</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Luigi</td>
-                                        </tr>
-
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
-
+                            <label for="selectedPanelists">Selected Panel 2:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option> 
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div> 
 
                         <div class="flex-container">
-                            <!-- panel -->
+                            <!-- panel3 -->
                             <div>
-                                <label for="selectedPanelists">Selected Panel:</label>
-                                <input type="text" class="inputName" id="selectedPanelists" name="panelistName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="professorList" id="selectUserpanelists">
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Yong</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Stan</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Serge</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Sam</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'panelist')">
-                                            <td>Luigi</td>
-                                        </tr>
+                            <label for="selectedPanelists">Selected Panel 3:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option> 
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>  
 
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
-
-                        <!-- advisor -->
+                        
                         <div class="flex-container">
+                            <!-- advisor -->
                             <div>
                                 <label for="selectedAdvisors">Selected Advisor:</label>
-                                <input type="text" class="inputName" id="selectedAdvisors" name="advisorName" placeholder="User name"> 
+                                <select id="selectedAdvisors" name="advisorName" class="inputName" onchange="selectedUserName(this.value, 'advisor')">
+                                    <option value="" selected disabled>Select an advisor</option>
+                                    <option value="222">222</option>
+                                    <option value="uuu">uuu</option>
+                                    <option value="Sgegege">Sgegege</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
                             </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="adviserList" id="selectUseradvisors">
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>222</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>uuu</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'advisor')">
-                                            <td>Sgegege</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
+                        </div> 
+
                         <button type="submit" class="addgroupbtn">Add +</button>
                     </form>
-
                 </div>
 
             <script>
