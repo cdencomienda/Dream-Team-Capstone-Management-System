@@ -791,7 +791,7 @@ h3 {
   margin-left: 400px;
   top: -1100px;
   width: 700px;
-  height: 380px;
+  height: 480px;
   padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
@@ -800,13 +800,17 @@ h3 {
   transition:1s; 
 }
 .addmemberbtn{
-  margin-top: 30px;
-  width: 130px;  
-  border: 1px solid #000000; 
-  height: 25px;
-  border-radius: 10px; 
-  background-color: #F8EFE3; 
+  margin-top: 30px; 
+  padding: 10px 10px;
+  width: 150px;
+  background-color: #4caf50;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 15px;
 }
+
 .addmemberbtn:hover { 
   background-color: #a8a8a8;
   transform: scale(1);
@@ -831,7 +835,7 @@ h3 {
 }
 .table_Addmember{
   width: 470px;
-  max-height: 100px;
+  max-height: 300px;
   margin-top: 10px;
   padding: 15px;
   border: 1px solid #000000;
@@ -933,6 +937,21 @@ h3 {
   border-radius: 10px; 
   background-color: #F8EFE3; 
 }
+.addreqbtn{
+  margin-top: 10px;
+  padding: 10px 10px;
+  width: 150px;
+  background-color: #4caf50;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 15px;
+}
+.addreqbtn:hover{
+  background-color: #aeaeaeae;
+}
+
 /* rubric */
 .rubriccontainer{
   position: relative; 

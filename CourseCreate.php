@@ -1113,9 +1113,7 @@ fetchStudentIDs(courseID);
                 }
             }
 
-            </script>
-
-
+            </script> 
 
 <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
@@ -1139,6 +1137,7 @@ fetchStudentIDs(courseID);
                     <h3>Requirements Description</h3>
                         <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
                     <h3>${courseName}</h3>
+                    <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
                 </div>
 <!-- rubric --> 
 
