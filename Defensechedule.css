@@ -329,6 +329,7 @@ body{
 .SchedDetails, .DocumentStatus {
   display: flex;
   text-align: justify;
+  justify-content: flex-start;
   margin: 0 10px; /* Adjust the margin as needed */
 }
 .modal {
