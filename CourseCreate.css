@@ -538,7 +538,7 @@ background-repeat: no-repeat;
 
 /* creategroup */
 .selectcontainer{
-  width: 400px;
+  width: 600px;
 }
 .creategroupContainer {
   position: relative;
@@ -579,7 +579,7 @@ h3 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-around;
+  justify-content:space-between;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -618,7 +618,7 @@ h3 {
 .table_selectingusers{
   margin-left: 10px;
   margin-top: 10px;
-  width: 200px;
+  width: 300px;
   height: 70px;
   margin-top: 10px; 
   border: 1px solid #000000;

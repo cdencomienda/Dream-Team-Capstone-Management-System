@@ -938,18 +938,34 @@ fetchStudentIDs(courseID);
                                 <!-- student -->
                                 <div>
                                 <label for="selectedStudents">Selected Students:</label>
-                                <select id="selectedStudents" name="studentName" class="inputName" onchange="selectedUserName(this.value, 'student')">
-                                    <option value="" selected disabled>Select a student</option>
-                                    <option value="Naito">Naito</option>
-                                    <option value="Prince">Prince</option>
-                                    <option value="Mac">Mac</option>
-                                    <option value="Ian">Ian</option>
-                                    <option value="Carlos">Carlos</option>
-                                    <option value="Barit">Barit</option>
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
+                                <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
                             </div>
-                        </div>
+                            <section class="table_selectingusers">
+                                <table>
+                                    <tbody class="studentList" id="selectUserstudents">
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Naito</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Prince</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Mac</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Ian</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Carlos</td>
+                                        </tr>
+                                        <tr onclick="selectedUserName(this, 'student')">
+                                            <td>Barit</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically if needed -->
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div> 
 
                         <div class="flex-container">
                             <!-- lead panel -->
