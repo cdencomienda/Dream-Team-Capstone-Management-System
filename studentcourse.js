@@ -68,6 +68,11 @@ function fetchStudentCourses() {
 // Call the function to fetch student courses when the page loads
 fetchStudentCourses();
 
+function newGroupCreated() {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+      
+  }
 
 // Function to fetch and display group members
 function fetchGroupMembers() {
@@ -138,6 +143,27 @@ function submissionBtnAuth() {
     document.getElementById("submissionFrame").style.display = "flex";
 
 }
+
+function newGroupCreated() {
+    // Inner function to toggle display of elements with the StudentDefault class
+    function toggleStudentDefaultDisplay() {
+        const studentDefaults = document.querySelectorAll('.StudentDefault');
+        studentDefaults.forEach(element => {
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+    }
+
+    // Call the inner function to toggle display
+    toggleStudentDefaultDisplay();
+}
+
+// Example call to the newGroupCreated function
+newGroupCreated();
+
 
 // document.addEventListener('click', e =>{
 // const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")

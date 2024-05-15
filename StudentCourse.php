@@ -50,13 +50,14 @@
     <!-- Ian -->
     <div class="StudentClass">
         <div class="course_created" grid>
-            <!-- <div class="S_courseInfo">
-                
-            </div> -->
+
             <!-- Container for student's courses -->
             <div class = "studentCourseDropdown" id="studentCoursesDropdown">
                     <h3>My Courses</h3>
-                    <div id="coursesList"></div> <!-- This will be populated with the list of courses -->
+                    <div id="coursesList">
+                    </div> <!-- This will be populated with the list of courses -->
+                    <button type="button" id = "group_name1" class="createdgroupBTN" onclick="newGroupCreated()"></button>
+
                 </div>
             <div class="dropdown">
             </div>
@@ -67,11 +68,36 @@
                     <!-- Group Name Box               -->
 
                 <div class="groupname_container"> 
-                    <div class="group_name" id="group_name">     
-                    </div>   
+                    <div class="group_name" id="group_name"></div>   
                 </div>
                 <script> 
                     document.addEventListener('DOMContentLoaded', function() {
+                    // Function to fetch group information for the logged-in student
+                    function fetchGroupInfo() {
+                    fetch('fetchGroupName.php')
+                        .then(response => response.json())
+                        .then(groupInfo => {
+                    const groupname_container = document.getElementById('group_name1');
+
+                    // Check if there is a group
+                    if (groupInfo.error) {
+                        groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
+                        } else {
+                            // Display the group name in the container
+                            groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
+                        }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching group information:', error);
+                            groupname_container.innerHTML = '<h3>Error loading group information</h3>';
+                        });
+                        }
+
+                    // Fetch group information when the page loads
+                    fetchGroupInfo();
+                    });    
+
+                       document.addEventListener('DOMContentLoaded', function() {
                     // Function to fetch group information for the logged-in student
                     function fetchGroupInfo() {
                     fetch('fetchGroupName.php')
@@ -92,7 +118,6 @@
                             groupname_container.innerHTML = '<h3>Error loading group information</h3>';
                         });
                         }
-
                     // Fetch group information when the page loads
                     fetchGroupInfo();
                     });    
