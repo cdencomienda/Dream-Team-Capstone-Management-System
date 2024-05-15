@@ -726,6 +726,35 @@ document.querySelector('.selectcontainer').addEventListener('submit', function(e
     this.submit(); // Now submit the form
 });
 
+function fetchRubricNames() {
+    fetch('fetchRubricName.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(data => {
+            console.log('Fetched Rubric Names:', data); // Debugging: Check if data is as expected
+            $("#courserubric").autocomplete({
+                source: data.map(rubric => rubric.trim()),
+                select: function(event, ui) {
+                    $(this).val(ui.item.value);
+                    return false; // Prevent the form from submitting on selection
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching rubric names:', error);
+        });
+}
+
+// Call fetchRubricNames to initialize the autocomplete
+$(document).ready(function() {
+    fetchRubricNames();
+});
+
+
 
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
@@ -736,7 +765,6 @@ function handleAction(action, courseID) {
             storeCourseID(courseID);
             getCourseMember();
             getProfessors();
-            getAdviser();
 
             break;
         case 'View Members':
@@ -754,6 +782,8 @@ function handleAction(action, courseID) {
             break;
         case 'Rubric':
             rubric(courseID);
+            fetchRubricNames();
+            storeCourseID(courseID);
             break;
         default:
             break;
@@ -1131,48 +1161,14 @@ fetchStudentIDs(courseID);
                 <style> .rubriccontainer{
                     display: none;
                 }</style>
-                <div class="rubriccontainer">
-                    <div class="rubriccontainerv2">
-                        <div class="select-box">
-                            <h3>Rubric Code:</h3>
-                                <input type="text" id="courserubric" class="tags_input" name="rubricCode" placeholder="Input Rubric Code" hidden />
-                                <div class="selected-options">
-                                    <!-- <span class="tag">Rubric1
-                                        <span class="remove-tag">&times;</span></span>
-                                    <span class="tag">Rubric2
-                                        <span class="remove-tag">&times;</span></span>
-                                    <span class="tag">Rubric3
-                                        <span class="remove-tag">&times;</span></span>
-                                    <span class="tag">Rubric4
-                                        <span class="remove-tag">&times;</span></span>
-                                    <span class="tag">Rubric5
-                                        <span class="remove-tag">&times;</span></span> 
-                                </div> -->
-                            <div class="arrow">
-                                <i class="fa fa-angle-down"></i>
-                            </div>
-                                <div class="options">
-                                    <div class="option-search-tag">
-                                        <input type="text" class="search-tag" 
-                                        placeholder="Search rubric code..."/>
-                                        <button type="button" class="clear"><i 
-                                        class="fa fa-close"></i></button>
-                                    </div>
-                                    <div class="option all-tags" data-value="All">Select All</div>
-                                    <div class="option" data-value="rubric01">Rubric1</div>
-                                    <div class="option" data-value="rubric02">Rubric2</div>
-                                    <div class="option" data-value="rubric03">Rubric3</div>
-                                    <div class="option" data-value="rubric04">Rubric4</div>
-                                    <div class="option" data-value="rubric05">Rubric5</div>
-                                    <div class="no-result-message" style="display : none;">No result match</div>
-                                </div>
-                            <span class="tag_error_msg error"></span>
-                        </div>
-                    </div>
-                    <input type="button" class="btn_submit" value="submit" />
-                </div>
-            </div>
+    <div class="rubriccontainer">
+        <div class="rubriccontainerv2">
+            <form class="addRubric" method="POST" action="addRubric.php">
+                <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
+                <input type="submit" class="btn_submit" value="Submit" />
+            </form>
         </div>
+    </div>
      
     <script src="professorhome.js"></script>   
      
