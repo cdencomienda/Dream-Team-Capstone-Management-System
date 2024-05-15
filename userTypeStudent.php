@@ -1,4 +1,7 @@
 <?php
+// Start the session to access session variables
+session_start();
+
 // Create connection to MySQL database
 $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
@@ -7,8 +10,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Define the SQL query to fetch students with userType 'Student'
-$sql = "SELECT userName, userType FROM users WHERE userType = 'Student'";
+// Check if varCourseID is set in the session
+if (isset($_SESSION['varCourseID'])) {
+    $varCourseID = $_SESSION['varCourseID'];
+
+    // Fetch student IDs enrolled in the specified course
+    $enrolledStudentsQuery = "SELECT studentID FROM `enrolled students` WHERE courseID = $varCourseID";
+    $enrolledStudentsResult = $conn->query($enrolledStudentsQuery);
+
+    // Initialize an array to store enrolled student IDs
+    $enrolledStudentIDs = [];
+
+    if ($enrolledStudentsResult->num_rows > 0) {
+        while ($row = $enrolledStudentsResult->fetch_assoc()) {
+            $enrolledStudentIDs[] = $row['studentID'];
+        }
+    }
+
+    // Exclude enrolled student IDs from the SQL query
+    $enrolledStudentIDsString = implode(',', $enrolledStudentIDs);
+    $sql = "SELECT userName, userType FROM users WHERE userType = 'Student' AND userID NOT IN ($enrolledStudentIDsString)";
+} else {
+    // If varCourseID is not set, fetch all students
+    $sql = "SELECT userName, userType FROM users WHERE userType = 'Student'";
+}
 
 // Execute the query
 $result = $conn->query($sql);

@@ -41,7 +41,7 @@ if (isset($_SESSION['varCourseID'])) {
             $insertStmt->execute();
 
             // Echo a success message
-            echo "Form submitted successfully. Rubric ID: " . $rubricID . " applied to Course ID: " . $courseID;
+            header("Location: " . $_SERVER['HTTP_REFERER']);
         } else {
             // Rubric code not found
             echo "Rubric code not found in the database.";

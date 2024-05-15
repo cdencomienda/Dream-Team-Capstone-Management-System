@@ -637,6 +637,31 @@ function storeCourseID(courseID) {
         });
 }
 
+// Function to initialize autocomplete for the input field
+function initAutocomplete() {
+    const selectedStudentsInput = $('#userName');
+
+    selectedStudentsInput.autocomplete({
+        source: function(request, response) {
+            // Filter the fetched students based on user input
+            const term = request.term.toLowerCase();
+            const filteredStudents = students.filter(student =>
+                student.userType === 'Student' && student.userName.toLowerCase().includes(term)
+            );
+            response(filteredStudents.map(student => student.userName.trim()));
+        },
+        minLength: 2, // Minimum characters to trigger autocomplete
+        select: function(event, ui) {
+            // Handle selection of autocomplete suggestion
+            selectedStudentsInput.val(ui.item.value);
+            return false;
+        }
+    });
+}
+
+// Call initAutocomplete after fetching students and storing them in the 'students' variable
+let students = []; // Array to store fetched students
+
 function getStudents() {
     const studentContainer = document.querySelector('.studentContainer');
     const selectedStudentsInput = document.getElementById('userName');
@@ -664,23 +689,38 @@ function getStudents() {
                     studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
                     studentRow.appendChild(studentNameCell);
                     studentContainer.appendChild(studentRow);
-
-                    // Set onclick event to toggle selected students and highlight the row
-                    studentRow.onclick = () => {
-                        const index = selectedStudents.indexOf(student.userName.trim());
-                        if (index === -1) {
-                            selectedStudents.push(student.userName.trim());
-                            studentRow.classList.add('selected');
-                        } else {
-                            selectedStudents.splice(index, 1);
-                            studentRow.classList.remove('selected');
-                        }
-                        selectedStudentsInput.value = selectedStudents.join(', ');
-                    };
+                    
                 } else {
                     console.warn('Invalid student data:', student); // Log invalid student data
                 }
             });
+
+            let studentNames = students.map(student => student.userName.trim());
+
+            // Initialize autocomplete for multiple inputs
+            $('.inputNameMember').autocomplete({
+                source: function(request, response) {
+                    const term = request.term.split(/,\s*/).pop();
+                    response($.ui.autocomplete.filter(studentNames, term));
+                },
+                focus: function() {
+                    return false;
+                },
+                select: function(event, ui) {
+                    let terms = this.value.split(/,\s*/);
+                    terms.pop();
+                    terms.push(ui.item.value);
+                    terms.push('');
+                    this.value = terms.join(', ');
+                    updateSelectedStudents(); // Update the selected students array
+                    return false;
+                }
+            });
+
+            // Function to update the selected students input
+            function updateSelectedStudents() {
+                selectedStudentsInput.value = $('.inputNameMember').val();
+            }
         })
         .catch(error => console.error('Error fetching students:', error));
 }
@@ -709,6 +749,15 @@ function fetchRubricNames() {
         })
         .then(data => {
             console.log('Fetched Rubric Names:', data); // Debugging: Check if data is as expected
+            
+            // Clear the existing content in rubricList
+            $('#selectedRubric').empty();
+
+            // Append each rubric name to the rubricList table
+            data.forEach(rubric => {
+                $('#selectedRubric').append('<tr><td>' + rubric.trim() + '</td></tr>');
+            });
+
             $("#courserubric").autocomplete({
                 source: data.map(rubric => rubric.trim()),
                 select: function(event, ui) {
@@ -750,6 +799,8 @@ function handleAction(action, courseID) {
             break;
         case 'Requirements':
             setrequirements(courseID);
+            storeCourseID(courseID);
+
             break;
         case 'Rubric':
             rubric(courseID);
@@ -1115,14 +1166,16 @@ fetchStudentIDs(courseID);
             </div>
    
 <!-- set requirements -->
-                <div class="setrequirements">
-                    <h3>Requirements</h3>
-                        <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
-                    <h3>Requirements Description</h3>
-                        <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
-                    <h3>${courseName}</h3>
-                    <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
-                </div>
+<div class="setrequirements">
+    <h3>Requirements</h3>
+    <form class="Requirements" method="POST" action="test.php">
+        <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
+        <h3>Requirements Description</h3>
+        <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
+        <div></div>
+        <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+    </form>
+</div>  
 <!-- rubric --> 
 
                 <style> .rubriccontainer{
