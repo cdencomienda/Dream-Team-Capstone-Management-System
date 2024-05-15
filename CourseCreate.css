@@ -941,7 +941,7 @@ h3 {
   margin-top: 10px;
   padding: 10px 10px;
   width: 150px;
-  background-color: #4caf50;
+  background-color: #F8EFE3;
   color: #FFFFFF;
   border: none;
   cursor: pointer;
@@ -966,37 +966,42 @@ h3 {
   transition:1s; 
   display: flex;
   gap: 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
-
- .rubriccontainerv2{
+.table_selectrubric{
+  margin-top: 10px;
+  width: 380px;
+  height: 70px;
+  margin-top: 10px; 
+  border: 1px solid #000000;
+  padding: 15px;
+  background-color: #F8EFE3; 
+  border-radius: 10px;
+  overflow: auto;
+  overflow: overlay;
+}
+ /* .rubriccontainerv2{
   position: relative;
   width: 400px;
-
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
+ } */
  .select-box{
-  background-color: #FFFFFF;
+  background-color: #F8EFE3;
   border: 1px solid #000000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 50px;
   cursor: pointer;
-
   width: 380px;
   padding: 10px;
   margin-bottom: 10px;
- 
-  border-radius: 4px;
+  border-radius: 10px;
  }
  .selected-options{
   display: flex;
@@ -1085,14 +1090,15 @@ h3 {
  }
  .btn_submit{
   padding: 17px 24px;
-  background-color: #4caf50;
-  color: #FFFFFF;
+  background-color: #F8EFE3; 
   border: none;
   cursor: pointer;
+  border: 1px solid #000000;
   font-size: 16px;
+  border-radius: 15px;
  }
  .btn_submit:hover{
-  background-color: #4caf50;
+  background-color: #dbd3c9;
  }       
 
 /* start of group file,submission, and member css  */

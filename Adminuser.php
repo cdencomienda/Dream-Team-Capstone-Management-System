@@ -182,10 +182,9 @@
                 <div class="input-group">
                     <input type="search" placeholder="Search User...">
                     <img src="images/search.png" alt="">
-                </div>
-                <h4>Edit User/Delete User</h4>
+                </div> 
                 <!-- Popup/Modal Structure -->
-                <div id="editDeleteModal" class="modal">
+                <div id="editDeleteModal" class="modal" style="display: none;">
                     
                     <div class="modal-content">
                         <label for="userId">User ID:</label>
@@ -229,7 +228,7 @@
                         <td> "userName":"Austria, Jose" </td>
                         <td> "userEmail":"jaustria@student.apc.edu.ph"</td>
                         </tr> -->
-        <script>
+    <script>
 
     $(document).ready(function(){
     // Function to load users based on search query
@@ -246,10 +245,11 @@
                 // Append user data to the table
                 users.forEach(function(user){
                     var newRow = '<tr class="user-row" data-user-id="' + user.userID + '">';
-                    newRow += '<td>' + user.userID + '</td>';
+                    newRow += '<td class="user-name">' + user.userID + '</td>';
                     newRow += '<td>' + user.userType + '</td>';
                     newRow += '<td>' + user.userName + '</td>';
                     newRow += '<td>' + user.userEmail + '</td>';
+                    newRow += '<td><button class="show-modal-btn">Edit</button></td>'; // Add button for modal
                     newRow += '</tr>';
                     $('#user_table_body').append(newRow);
                 });
@@ -270,15 +270,37 @@
         loadUsers(search.value);
     });
 
-    // Handle click on user row
-    $('#user_table_body').on('click', '.user-row', function() {
-        var userId = $(this).data('user-id');
+    // Handle click on button to show modal
+    $('#user_table_body').on('click', '.show-modal-btn', function(event) {
+        event.stopPropagation(); // Prevent row click event from triggering
+        var userId = $(this).closest('.user-row').data('user-id'); // Get user ID from closest '.user-row'
         var modal = $('#editDeleteModal');
-        // Populate modal with user data
-        modal.find('#userId').val(userId);
-        // Display the modal
-        modal.show();
+        var isChangesSaved = true; // Flag to track if changes are saved
+
+        // Check if changes are saved
+        // Example: Check if the user type has been modified
+        if ($('#userId').val() !== userId || $('#userType').val() !== $(this).closest('tr').find('td:eq(2)').text().trim()) {
+            isChangesSaved = confirm('You have unsaved changes. Are you sure you want to select a new user?');
+        }
+
+        // If changes are saved or user confirms, proceed
+        if (isChangesSaved) {
+            // Populate modal with user data
+            modal.find('#userId').val(userId);
+            // Display the modal
+            modal.show();
+        }
     });
+
+    // // Handle click on user row
+    // $('#user_table_body').on('click', '.user-row', function() {
+    //     var userId = $(this).data('user-id');
+    //     var modal = $('#editDeleteModal');
+    //     // Populate modal with user data
+    //     modal.find('#userId').val(userId);
+    //     // Display the modal
+    //     modal.show();
+    // });
 
     // Close modal/popup when close button is clicked
     $('.close-modal-btn').click(function(){

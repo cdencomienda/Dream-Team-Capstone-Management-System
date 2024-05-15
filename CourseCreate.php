@@ -11,14 +11,9 @@
     <title>Class Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-
-
-
 
     <style>
          
@@ -370,8 +365,6 @@ function fetchGroups(courseID, callback) {
         .catch(error => console.error('Error fetching groups:', error));
 }
 
-
-
 function storeGroupName(groupName){
 
         group = groupName;
@@ -475,13 +468,6 @@ function getCourseMember() {
         .catch(error => console.error('Error fetching students:', error));
 }
 
-
-
-
-
-
-
-
 let professorNames = [];
 
 function getProfessors() {
@@ -514,11 +500,6 @@ function getProfessors() {
 $(document).ready(function() {
     getProfessors();
 });
-
-
-
-
-
 
 function getAdviser() {
     const adviserList = document.querySelector('.adviserList');
@@ -577,13 +558,6 @@ function getAdviser() {
         })
         .catch(error => console.error('Error fetching advisors:', error));
 }
-
-
-
-
-
-
-
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {
@@ -711,7 +685,6 @@ function getStudents() {
         .catch(error => console.error('Error fetching students:', error));
 }
 
-
 document.querySelector('.addcheckbox').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
     const courseID = varCourse; // Assuming varCourse contains the courseID
@@ -753,8 +726,6 @@ function fetchRubricNames() {
 $(document).ready(function() {
     fetchRubricNames();
 });
-
-
 
 // Update the handleAction function to call fetchStudentIDs for 'View Members' action
 function handleAction(action, courseID) {
@@ -981,68 +952,64 @@ fetchStudentIDs(courseID);
                         </div>
 
 
-<div id="selectedStudentsContainer" class="selected-container"></div>
-<div class="flex-container">
-    <!-- student -->
-    <div>
-        <label for="selectedStudents">Selected Students:</label>
-        <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name">
-    </div>
-    <section class="table_selectingusers">
-        <table>
-            <tbody class="studentList" id="selectUserstudents">
-                <!-- Your student list rows will be dynamically populated here -->
-            </tbody>
-        </table>
-    </section>
-</div>
+                    <div id="selectedStudentsContainer" class="selected-container"></div>
+                    <div class="flex-container">
+                        <!-- student -->
+                        <div>
+                            <label for="selectedStudents">Selected Students:</label>
+                            <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name">
+                        </div>
+                        <section class="table_selectingusers">
+                            <table>
+                                <tbody class="studentList" id="selectUserstudents">
+                                    <!-- Your student list rows will be dynamically populated here -->
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
 
-    <div class="flex-container">
-        <!-- Chair Panel -->
-        <div>
-            <label for="selectedPanelistsChair">Selected Chair Panel:</label>
-            <input type="text" id="selectedPanelistsChair" name="panelistNameChair" class="inputName panelAdvisorOptions" placeholder="Select Chair Panel">
-        </div>
-    </div>
+                        <div class="flex-container">
+                            <!-- Chair Panel -->
+                            <div>
+                                <label for="selectedPanelistsChair">Selected Chair Panel:</label>
+                                <input type="text" id="selectedPanelistsChair" name="panelistNameChair" class="inputName panelAdvisorOptions" placeholder="Select Chair Panel">
+                            </div>
+                        </div>
 
-    <div class="flex-container">
-        <!-- Lead Panel -->
-        <div>
-            <label for="selectedPanelistsLead">Selected Lead Panel:</label>
-            <input type="text" id="selectedPanelistsLead" name="panelistNameLead" class="inputName panelAdvisorOptions" placeholder="Select Lead Panel">
-        </div>
-    </div>
+                        <div class="flex-container">
+                            <!-- Lead Panel -->
+                            <div>
+                                <label for="selectedPanelistsLead">Selected Lead Panel:</label>
+                                <input type="text" id="selectedPanelistsLead" name="panelistNameLead" class="inputName panelAdvisorOptions" placeholder="Select Lead Panel">
+                            </div>
+                        </div>
 
-    <div class="flex-container">
-        <!-- Panel Member 1 -->
-        <div>
-            <label for="selectedPanelists1">Selected Panel Member 1:</label>
-            <input type="text" id="selectedPanelists1" name="panelistName1" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 1">
-        </div>
-    </div>
+                        <div class="flex-container">
+                            <!-- Panel Member 1 -->
+                            <div>
+                                <label for="selectedPanelists1">Selected Panel Member 1:</label>
+                                <input type="text" id="selectedPanelists1" name="panelistName1" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 1">
+                            </div>
+                        </div>
 
-    <div class="flex-container">
-        <!-- Panel Member 2 -->
-        <div>
-            <label for="selectedPanelists2">Selected Panel Member 2:</label>
-            <input type="text" id="selectedPanelists2" name="panelistName2" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 2">
-        </div>
-    </div>
+                        <div class="flex-container">
+                            <!-- Panel Member 2 -->
+                            <div>
+                                <label for="selectedPanelists2">Selected Panel Member 2:</label>
+                                <input type="text" id="selectedPanelists2" name="panelistName2" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 2">
+                            </div>
+                        </div>
 
-    <div class="flex-container">
-        <!-- Adviser -->
-        <div>
-            <label for="selectedAdvisers">Selected Adviser:</label>
-            <input type="text" id="selectedAdvisers" name="adviserName" class="inputName panelAdvisorOptions" placeholder="Select Adviser">
-        </div>
-    </div>
+                        <div class="flex-container">
+                            <!-- Adviser -->
+                            <div>
+                                <label for="selectedAdvisers">Selected Adviser:</label>
+                                <input type="text" id="selectedAdvisers" name="adviserName" class="inputName panelAdvisorOptions" placeholder="Select Adviser">
+                            </div>
+                        </div>
 
-    <button type="submit" class="addgroupbtn">Add +</button>
-</form>
-
-
-
-
+                        <button type="submit" class="addgroupbtn">Add +</button>
+                    </form>
                 </div>
 
             <script>
@@ -1161,14 +1128,24 @@ fetchStudentIDs(courseID);
                 <style> .rubriccontainer{
                     display: none;
                 }</style>
-    <div class="rubriccontainer">
-        <div class="rubriccontainerv2">
-            <form class="addRubric" method="POST" action="addRubric.php">
-                <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
-                <input type="submit" class="btn_submit" value="Submit" />
-            </form>
+
+        <div class="rubriccontainer">
+            <!-- <div class="rubriccontainerv2"> -->
+                <form class="addRubric" method="POST" action="addRubric.php">
+                    <div>
+                        <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
+                        <input type="submit" class="btn_submit" value="Submit" />
+                    </div>
+                    <section class="table_selectrubric">
+                        <table>
+                            <tbody class="rubricList" id="selectedRubric">
+                            <!-- Your student list rows will be dynamically populated here -->
+                            </tbody>
+                        </table>
+                    </section>
+                </form>
+            <!-- </div> -->
         </div>
-    </div>
      
     <script src="professorhome.js"></script>   
      
