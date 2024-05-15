@@ -868,7 +868,7 @@ fetchStudentIDs(courseID);
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer">
-                                    member1 niger
+                                    member1
                                 </div>
                             </div>
                         </div>
