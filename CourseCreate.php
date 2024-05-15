@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -9,6 +11,15 @@
     <title>Class Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+
+
     <style>
          
          
@@ -416,23 +427,43 @@ function getCourseMember() {
                         studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
                         studentRow.appendChild(studentNameCell);
                         studentList.appendChild(studentRow);
-
-                        // Set onclick event to toggle selected students and highlight the row
-                        studentRow.onclick = () => {
-                            const index = selectedStudents.indexOf(student.userName.trim());
-                            if (index === -1) {
-                                selectedStudents.push(student.userName.trim());
-                                studentRow.classList.add('selected');
-                            } else {
-                                selectedStudents.splice(index, 1);
-                                studentRow.classList.remove('selected');
-                            }
-                            selectedStudentsInput.value = selectedStudents.join(', ');
-                        };
                     } else {
                         console.warn('Invalid student data:', student); // Log invalid student data
                     }
                 });
+
+                // Array to store student names for autocomplete
+                let studentNames = students.map(student => student.userName.trim());
+
+                // Initialize autocomplete
+                $('#selectedStudents').autocomplete({
+                    source: function(request, response) {
+                        // Split the input by commas
+                        const term = request.term.split(/,\s*/).pop();
+                        // Filter the student names based on the last segment
+                        response($.ui.autocomplete.filter(studentNames, term));
+                    },
+                    focus: function() {
+                        // Prevent the value from being inserted on focus
+                        return false;
+                    },
+                    select: function(event, ui) {
+                        let terms = this.value.split(/,\s*/);
+                        // Remove the current input
+                        terms.pop();
+                        // Add the selected item
+                        terms.push(ui.item.value);
+                        // Add placeholder to get the comma-and-space at the end
+                        terms.push('');
+                        this.value = terms.join(', ');
+                        return false;
+                    }
+                });
+
+                // Function to update the selected students input
+                function updateSelectedStudents() {
+                    selectedStudentsInput.value = selectedStudents.join(', ');
+                }
             } else {
                 const noStudentsRow = document.createElement('tr');
                 const noStudentsCell = document.createElement('td');
@@ -447,63 +478,46 @@ function getCourseMember() {
 
 
 
+
+
+
+
+let professorNames = [];
+
 function getProfessors() {
-    const professorList = document.querySelector('.professorList');
-    professorList.innerHTML = ''; // Clear previous content
-
-    const selectedPanelistsInput = document.getElementById('selectedPanelists');
-    let selectedPanelists = []; // Array to track selected panelists
-
-    // Fetch professor data from the server using the stored courseID
     fetch('getProfessors.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json(); // Parse the response as JSON
+            return response.json();
         })
         .then(professors => {
-            console.log('Fetched professors:', professors); // Log the fetched professors for debugging
+            professorNames = professors.map(prof => prof.userName.trim());
 
-            // Clear previous content in professorList
-            professorList.innerHTML = '';
+            // Apply autocomplete to all relevant inputs
+            $(".panelAdvisorOptions").autocomplete({
+                source: professorNames,
+                select: function(event, ui) {
+                    // Remove the selected name from the array
+                    professorNames = professorNames.filter(name => name !== ui.item.value);
 
-            // Check if any professors were fetched
-            if (professors.length > 0) {
-                professors.forEach(professor => {
-                    if (professor && professor.userName) {
-                        const professorRow = document.createElement('tr');
-                        const professorNameCell = document.createElement('td');
-                        professorNameCell.textContent = professor.userName.trim(); // Trim the userName if it's defined
-                        professorRow.appendChild(professorNameCell);
-                        professorList.appendChild(professorRow);
-
-                        // Set onclick event to toggle selected panelists and highlight the row
-                        professorRow.onclick = () => {
-                            const index = selectedPanelists.indexOf(professor.userName.trim());
-                            if (index === -1) {
-                                selectedPanelists.push(professor.userName.trim());
-                                professorRow.classList.add('selected');
-                            } else {
-                                selectedPanelists.splice(index, 1);
-                                professorRow.classList.remove('selected');
-                            }
-                            selectedPanelistsInput.value = selectedPanelists.join(', ');
-                        };
-                    } else {
-                        console.warn('Invalid professor data:', professor); // Log invalid professor data
-                    }
-                });
-            } else {
-                const noProfessorsRow = document.createElement('tr');
-                const noProfessorsCell = document.createElement('td');
-                noProfessorsCell.textContent = 'No professors found';
-                noProfessorsRow.appendChild(noProfessorsCell);
-                professorList.appendChild(noProfessorsRow);
-            }
+                    // Update the autocomplete source for all relevant inputs
+                    $(".panelAdvisorOptions").autocomplete("option", "source", professorNames);
+                }
+            });
         })
         .catch(error => console.error('Error fetching professors:', error));
 }
+
+// Call getProfessors to initialize the autocomplete
+$(document).ready(function() {
+    getProfessors();
+});
+
+
+
+
 
 
 function getAdviser() {
@@ -928,120 +942,77 @@ fetchStudentIDs(courseID);
 <!-- creategroup -->
                 <div class="creategroupContainer">
                     <h1>Create group</h1>
-                        <div>
+
+                    <!-- <form class="selectcontainer" method="POST" action="createGroup.php"> -->
+                    <form class="selectcontainer" method="POST" action="createGroup.php">
+                    <div>
                             <h3>Group Name:</h3>
                             <input type="text" class="inputgroupName" name="groupName" placeholder="Input group name">
                         </div>
-                    <form class="selectcontainer" method="POST" action="createGroup.php">
-                        
-                        <div class="flex-container">
-                                <!-- student -->
-                                <div>
-                                <label for="selectedStudents">Selected Students:</label>
-                                <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name"> 
-                            </div>
-                            <section class="table_selectingusers">
-                                <table>
-                                    <tbody class="studentList" id="selectUserstudents">
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Naito</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Prince</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Mac</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Ian</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Carlos</td>
-                                        </tr>
-                                        <tr onclick="selectedUserName(this, 'student')">
-                                            <td>Barit</td>
-                                        </tr>
-                                        <!-- Add more rows dynamically if needed -->
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div> 
 
-                        <div class="flex-container">
-                            <!-- lead panel -->
-                            <div>
-                            <label for="selectedPanelists">Selected Lead Panel:</label>
-                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
-                                    <option value="" selected disabled>Select a panelist</option>
-                                    <option value="Yong">Yong</option>
-                                    <option value="Stan">Stan</option>
-                                    <option value="Serge">Serge</option>
-                                    <option value="Sam">Sam</option>
-                                    <option value="Luigi">Luigi</option>
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
-                            </div> 
-                        </div>
 
-                        <div class="flex-container">
-                            <!-- panel1 -->
-                            <div>
-                            <label for="selectedPanelists">Selected Panel 1:</label>
-                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
-                                    <option value="" selected disabled>Select a panelist</option>
-                                    <option value="Yong">Yong</option> 
-                                    <option value="Sam">Sam</option>
-                                    <option value="Luigi">Luigi</option>
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
-                            </div> 
-                        </div>
+<div id="selectedStudentsContainer" class="selected-container"></div>
+<div class="flex-container">
+    <!-- student -->
+    <div>
+        <label for="selectedStudents">Selected Students:</label>
+        <input type="text" class="inputName" id="selectedStudents" name="studentName" placeholder="User name">
+    </div>
+    <section class="table_selectingusers">
+        <table>
+            <tbody class="studentList" id="selectUserstudents">
+                <!-- Your student list rows will be dynamically populated here -->
+            </tbody>
+        </table>
+    </section>
+</div>
 
-                        <div class="flex-container">
-                            <!-- panel2 -->
-                            <div>
-                            <label for="selectedPanelists">Selected Panel 2:</label>
-                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
-                                    <option value="" selected disabled>Select a panelist</option> 
-                                    <option value="Serge">Serge</option>
-                                    <option value="Sam">Sam</option>
-                                    <option value="Luigi">Luigi</option>
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
-                            </div> 
-                        </div> 
+    <div class="flex-container">
+        <!-- Chair Panel -->
+        <div>
+            <label for="selectedPanelistsChair">Selected Chair Panel:</label>
+            <input type="text" id="selectedPanelistsChair" name="panelistNameChair" class="inputName panelAdvisorOptions" placeholder="Select Chair Panel">
+        </div>
+    </div>
 
-                        <div class="flex-container">
-                            <!-- panel3 -->
-                            <div>
-                            <label for="selectedPanelists">Selected Panel 3:</label>
-                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
-                                    <option value="" selected disabled>Select a panelist</option>
-                                    <option value="Yong">Yong</option>
-                                    <option value="Stan">Stan</option>
-                                    <option value="Serge">Serge</option> 
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
-                            </div> 
-                        </div>  
+    <div class="flex-container">
+        <!-- Lead Panel -->
+        <div>
+            <label for="selectedPanelistsLead">Selected Lead Panel:</label>
+            <input type="text" id="selectedPanelistsLead" name="panelistNameLead" class="inputName panelAdvisorOptions" placeholder="Select Lead Panel">
+        </div>
+    </div>
 
-                        
-                        <div class="flex-container">
-                            <!-- advisor -->
-                            <div>
-                                <label for="selectedAdvisors">Selected Advisor:</label>
-                                <select id="selectedAdvisors" name="advisorName" class="inputName" onchange="selectedUserName(this.value, 'advisor')">
-                                    <option value="" selected disabled>Select an advisor</option>
-                                    <option value="222">222</option>
-                                    <option value="uuu">uuu</option>
-                                    <option value="Sgegege">Sgegege</option>
-                                    <!-- Add more options dynamically if needed -->
-                                </select>
-                            </div>
-                        </div> 
+    <div class="flex-container">
+        <!-- Panel Member 1 -->
+        <div>
+            <label for="selectedPanelists1">Selected Panel Member 1:</label>
+            <input type="text" id="selectedPanelists1" name="panelistName1" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 1">
+        </div>
+    </div>
 
-                        <button type="submit" class="addgroupbtn">Add +</button>
-                    </form>
+    <div class="flex-container">
+        <!-- Panel Member 2 -->
+        <div>
+            <label for="selectedPanelists2">Selected Panel Member 2:</label>
+            <input type="text" id="selectedPanelists2" name="panelistName2" class="inputName panelAdvisorOptions" placeholder="Select Panel Member 2">
+        </div>
+    </div>
+
+    <div class="flex-container">
+        <!-- Adviser -->
+        <div>
+            <label for="selectedAdvisers">Selected Adviser:</label>
+            <input type="text" id="selectedAdvisers" name="adviserName" class="inputName panelAdvisorOptions" placeholder="Select Adviser">
+        </div>
+    </div>
+
+    <button type="submit" class="addgroupbtn">Add +</button>
+</form>
+
+
+
+
                 </div>
 
             <script>
