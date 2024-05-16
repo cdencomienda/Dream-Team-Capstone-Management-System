@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive Menu</title>
-    <link rel="stylesheet" href="HomePage.css">
+    <title>DefenseSchedule</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src = "studentcourse.js"></script>   
+
+    <link rel="stylesheet" href="Defensechedule.css">
     <?php include 'login.php'; ?>
+    <?php include 'editProfile.php'; ?>
+
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
@@ -88,93 +96,72 @@
     </div>
 </div>
 </head>
+
 <body>  
-    <div class="Lsection">
-        <div id="sectionBtn"></div>
-        <button type="button" class="notif"  onclick="studentnotifAuth()">Notification</button>
-        <button type="button" class="class"  onclick="studentClass()">Class</button>
-        <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
-        <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
-    </div> 
+    <div class="hero">
+        <div class="Lsection">
+            <div id="sectionBtn"></div>
+            <button type="button" class="notif"  onclick="studentnotifAuth()">Notification</button>
+            <button type="button" class="class"  onclick="studentClass()">Class</button>
+            <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
+            <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+        </div>
 
-    <main class="table" id="customers_table">
-      <section class="table__header">
-          <h1>Archive Capstone Projects</h1>
-          <div class="input-group">
-              <input type="search" placeholder="Search Data...">
-              <img src="images/search.png" alt="">
-          </div>
-          <div class="export__file">
-              <label for="export-file" class="export__file-btn" title="Export File"></label>
-              <input type="checkbox" id="export-file">
-              <div class="export__file-options">
-                  <label>Export As &nbsp; &#10140;</label>
-                  <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
-              </div>
-          </div>
-      </section>
-      <section class="table__body">
-          <table>
-              <thead>
-                  <tr>
-                      <th> Id <span class="icon-arrow">&UpArrow;</span></th>
-                      <th> Group <span class="icon-arrow">&UpArrow;</span></th>
-                      <th> Date <span class="icon-arrow">&UpArrow;</span></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td> 1 </td>
-                      <td> Dream Team</td>
-                      <td> 17 December, 2023 </td>
-                  </tr>
-                <tr>
-                      <td> 2 </td>
-                      <td> Table Acad</td>
-                      <td> 13 March, 2024 </td>
-                  </tr>
-                  <tr>
-                    <td> 3 </td>
-                    <td> TaNum</td>
-                    <td> 19 March, 2024 </td>
-                </tr>
-                <tr>
-                    <td> 4 </td>
-                    <td> TeamPack</td>
-                    <td> 13 March, 2024 </td>
-                </tr>
-                <tr>
-                    <td> 5 </td>
-                    <td> XAcademy</td>
-                    <td> 23 March, 2024 </td>
-                </tr>
-                <tr>
-                    <td> 6 </td>
-                    <td> Aira Team</td>
-                    <td> 13 March, 2024 </td>
-                </tr>
-                <tr>
-                    <td> 7 </td>
-                    <td> SillyBuddies</td>
-                    <td> 23 March, 2024 </td>
-                </tr>
-                <tr>
-                    <td> 8 </td>
-                    <td> Hogart ni albert</td>
-                    <td> 30 March, 2024 </td>
-                </tr>
-                 </tbody>
-          </table>
-      </section>
-  </main>
-  <script src="archive.js"></script>
-<script src="homepage.js"></script>   
+        <div class="MainScheduleCont">
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Create Defense Schedule</h1>
+                    <form id="scheduleForm" action="/submit_schedule" method="POST">
+                        <!-- First primary container -->
+                        <div class="SchedDetails"> 
+                            <!-- secondary Flex -->
+                            <div class="DetailsFlex"> 
+                                <!-- 1st flexBox -->
+                                <div class="titleFLex">
+                                    <div class="titleDetails">
+                                        <label class="textBox" for="schedTitle">Sched Title:</label>
+                                        <input type="text" id="schedTitle" name="schedTitle" class="input-field"><br>
+                                    </div>  
+                                 </div>
+                                <div class="timeDateflexcont">
+                                        <!-- second flexBox -->
+                                        <div class="dateDetails">
+                                            <label  class="textBox" for="date">Date:</label>
+                                            <input type="date" id="date" name="date" class="input-field2"><br>
+                                        </div>
+                                        <div class="timeDetails">
+                                            <label  class="textBox" for="time">Time:</label>
+                                            <input type="time" id="time" name="time" class="input-field3"><br>
+                                        </div>
+                                </div>      
+                            </div>
+                            <!-- Second primary container -->
+                            <div class="groupFlex">
+                            <label  class="textBox" for="GroupName">Group Name:</label>
+                            <input type="text" id="GroupName" name="GroupName" class="input-field"><br>
+                            </div>
+                        </div>    
+                        <button class="SchedSbmit"  type="button" onclick="createDefenseContainer()">Create <i class="fa-solid fa-plus"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class= "Schedule" id="scheduleContainer">
+             
+            </div>
+            
+            <div class="divButton">
+                <button class="CreateSched" id = "addScheduleBtn">
+                   Add Schedule <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
 
-<script>
-        function studentClass(){
-            window.location.assign("StudentCourse.php");
-        }
-    </script>
-
+    </div>
+    <script src="DefenseSchedule.js"></script>
 </body>
 </html>
+   
+           

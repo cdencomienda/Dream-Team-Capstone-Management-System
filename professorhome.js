@@ -11,7 +11,7 @@ function openArchive(){
   window.location.assign("ProfessorHome.php")
 }
 function notifProf(){
-  window.location.assign("NotificationPage.php")
+  window.location.assign("ProfNotificationPage.php")
 }
 function openClassPage(){
   window.location.assign("CourseCreate.php")

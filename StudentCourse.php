@@ -12,28 +12,83 @@
     <?php include 'login.php'; ?>
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn" onclick="archive()"></button> 
-            </div> 
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
-                <button type="submit" class="searchButton">
-                <span>&#128269;</span>
-                </button>
+            <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
             </div>
-            <div class="container">
-                <div class="action">
-                    <div class="profile">
-                        <img src="menu_assets/prof.jpg" alt="profile-img">
-                    </div>
-                    <div class="menu">
-                        <h3><?php echo $_SESSION['username']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                        </h3>
-                        <button type="button" class="editprofileBtn">Edit Profile</button>
-                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
-                    </div>
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+            <button type="submit" class="searchButton">
+            <span>&#128269;</span>
+            </button>
+        </div>
+ 
+        <div class="container">
+            <div class="action">
+                <div class="profile">
+                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                </div>
+                <div class="menu" id ="menuBtn">
+                    <h3><?php echo $_SESSION['username']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                    </h3>
+                    <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
+                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
                 </div>
             </div>
+            <!-- editprofile --> 
+            <div id="editProfileOverlay" class="editoverlay">
+                <div class="dropdown-profile">
+        
+                    <div>
+                        <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                    </div>
+                    
+                    <form id="editProfileForm" action="editProfile.php" method="POST">
+                        <div class="profile">
+                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                        </div>
+                        <h5edit><?php echo $_SESSION['username']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h5edit>
+                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
+                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
+                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
+                        <button type="submit" class="saveEditbtn"> Save Changes </button>
+                       
+                    </form>
+                   
+                    <?php if(isset($_SESSION['error_message'])) { ?>
+                <div id="error-message" class="show">
+                    <?php echo $_SESSION['error_message']; ?>
+                    <button onclick="clearErrorMessage()">OK</button>
+                </div>
+            <?php
+                unset($_SESSION['error_message']); // Clear the error message after displaying it
+            } ?>
+            
+        <script>
+                window.onload = function() {
+                    var urlParams = new URLSearchParams(window.location.search);
+        
+                    if (urlParams.has('showOverlay')) {
+                        document.getElementById('editProfileOverlay').style.display = 'block';
+                    }
+                    window.onclick = function(event) {
+                        if (event.target == overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
+                }
+
+        </script>
+            <script>
+            function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+            }
+            </script> 
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </head>
@@ -42,10 +97,10 @@
     <div class="hero">
     <div class="Lsection">
         <div id="sectionBtn"></div>
-        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-        <button type="button" class="class"  onclick="studentClass1()">Class</button>
+        <button type="button" class="notif"  onclick="studentnotifAuth()">Notification</button>
+        <button type="button" class="class"  onclick="studentClass()">Class</button>
         <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
-        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
     </div>
     <!-- Ian -->
     <div class="StudentClass">
@@ -70,36 +125,9 @@
                 <div class="groupname_container"> 
                     <div class="group_name" id="group_name"></div>   
                 </div>
-                <script> 
-                    document.addEventListener('DOMContentLoaded', function() {
-                    // Function to fetch group information for the logged-in student
-                    function fetchGroupInfo() {
-                    fetch('fetchGroupName.php')
-                        .then(response => response.json())
-                        .then(groupInfo => {
-                    const groupname_container = document.getElementById('group_name1');
-
-                    // Check if there is a group
-                    if (groupInfo.error) {
-                        groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
-                        } else {
-                            // Display the group name in the container
-                            groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
-                        }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching group information:', error);
-                            groupname_container.innerHTML = '<h3>Error loading group information</h3>';
-                        });
-                        }
-
-                    // Fetch group information when the page loads
-                    fetchGroupInfo();
-                    });    
-
-                       document.addEventListener('DOMContentLoaded', function() {
-                    // Function to fetch group information for the logged-in student
-                    function fetchGroupInfo() {
+                <script>
+     // Function to fetch group information for the logged-in student
+                function fetchGroupInfo() {
                     fetch('fetchGroupName.php')
                         .then(response => response.json())
                         .then(groupInfo => {
@@ -118,9 +146,108 @@
                             groupname_container.innerHTML = '<h3>Error loading group information</h3>';
                         });
                         }
+                       document.addEventListener('DOMContentLoaded', function() {  
                     // Fetch group information when the page loads
                     fetchGroupInfo();
                     });    
+
+                    // Function to fetch and display the student's courses
+function fetchStudentCourses() {
+    fetch('LiveSearchStudentCourses.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(courses => {
+            var coursesList = document.getElementById('coursesList');
+
+            // Clear any previous courses list
+            coursesList.innerHTML = '';
+
+            // Display each course in the list
+            courses.forEach(course => {
+                // Create a container for each course
+                var courseContainer = document.createElement('div');
+                courseContainer.classList.add('course-container');
+
+                // Create a button for course actions (e.g., view details)
+                var courseButton = document.createElement('button');
+                courseButton.type = 'button';
+                courseButton.textContent = course.courseName;
+
+                courseButton.classList.add('S_courseInfo');
+
+                // Add an event listener to the button to handle course actions
+                courseButton.addEventListener('click', function () {
+                    handleCourseAction(course.courseID);
+                });
+
+                // Append the button to the course container
+                courseContainer.appendChild(courseButton);
+
+                // Append the course container to the list
+                coursesList.appendChild(courseContainer);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching student courses:', error);
+        });
+}
+
+// Call the function to fetch student courses when the page loads
+fetchStudentCourses();
+
+function newGroupCreated() {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+      
+  }
+
+// Function to fetch and display group members
+function fetchGroupMembers() {
+    // Fetch the group ID based on the logged-in user
+    fetch('GetUserGroupID.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error obtaining group ID:', data.error);
+                return;
+            }
+
+            // Get the group ID from the response
+            const groupID = data.groupID;
+
+            // Use the group ID to fetch and display group members
+            fetch(`LiveSearchGroupMembers.php?groupID=${groupID}`)
+                .then(response => response.json())
+                .then(response => {
+                    const groupMembersContainer = document.getElementById('groupMembersContainer');
+                    groupMembersContainer.innerHTML = ''; // Clear previous content
+
+                    if (response.error) {
+                        // Display error message if server returns an error
+                        groupMembersContainer.textContent = response.error;
+                    } else {
+                        // Display group members
+                        response.forEach(member => {
+                            const memberElement = document.createElement('div');
+                            memberElement.textContent = member.username; // Display member's username
+                            groupMembersContainer.appendChild(memberElement);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching group members:', error);
+                    const groupMembersContainer = document.getElementById('groupMembersContainer');
+                    groupMembersContainer.textContent = 'Error fetching group members. Please try again later.';
+                });
+        })
+        .catch(error => {
+            console.error('Error obtaining group ID:', error);
+        });
+}
                 </script>  
 
                 <h4>

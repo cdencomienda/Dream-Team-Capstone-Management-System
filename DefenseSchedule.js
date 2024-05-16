@@ -23,6 +23,21 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+function studentnotifAuth(){
+  window.location.assign("studentnotifAuth.php")
+}
+function studentClass(){
+window.location.assign("studentClass.php")
+}
+function Studentarchive(){
+window.location.assign("HomePage.php")
+} 
+function StudentSchedule(){
+  window.location.assign("DefenseSchedule.php")
+} 
+function StudentCapstone(){
+
+} 
 function createDefenseContainer() {
   // Gather input values
   const schedTitle = document.getElementById('schedTitle').value;
