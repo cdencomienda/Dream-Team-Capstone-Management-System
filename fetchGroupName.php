@@ -3,66 +3,44 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('HTTP/1.1 401 Unauthorized');
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     echo json_encode(['error' => 'User not logged in']);
     exit();
 }
 
-// Database connection details
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'dreamteam';
+// Check if the course ID is set in the session
+if (isset($_SESSION['varCourseID'])) {
+    // Retrieve the course ID from the session
+    $courseID = $_SESSION['varCourseID'];
+    
+    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
-$conn = new mysqli($host, $username, $password, $database);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-if ($conn->connect_error) {
-    header('HTTP/1.1 500 Internal Server Error');
-    echo json_encode(['error' => 'Database connection failed']);
-    exit();
-}
+    // Escape variables for security
+    $userID = $conn->real_escape_string($_SESSION['user_id']);
+    $courseID = $conn->real_escape_string($courseID);
 
-// Retrieve the user ID from the session
-$userID = $_SESSION['user_id'];
+    // Prepare and execute SQL query to fetch groupName based on courseID and userID
+    $sql = "SELECT groupName FROM `group` WHERE courseID = '$courseID' AND studentID = '$userID'";
+    $result = $conn->query($sql);
 
-// Prepare and execute the query to get the student's group information
-$sql = "SELECT g.groupID, g.groupname
-        FROM `group` g
-        JOIN `users` u ON g.studentID = u.userID
-        WHERE u.userID = ?";
+    if ($result->num_rows > 0) {
+        // Fetch group name and encode as JSON
+        $row = $result->fetch_assoc();
+        $groupName = $row["groupName"];
+        $response = ['groupName' => $groupName];
+        echo json_encode($response);
+    } else {
+        echo json_encode(['error' => 'No group found for this course']);
+    }
 
-$stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    header('HTTP/1.1 500 Internal Server Error');
-    echo json_encode(['error' => 'Failed to prepare the query']);
-    exit();
-}
-
-$stmt->bind_param('i', $userID);
-
-if (!$stmt->execute()) {
-    header('HTTP/1.1 500 Internal Server Error');
-    echo json_encode(['error' => 'Failed to execute the query']);
-    exit();
-}
-
-$result = $stmt->get_result();
-
-// Check if a group was found for the user
-$groupInfo = $result->fetch_assoc();
-
-$stmt->close();
-$conn->close();
-
-// Set the content type to JSON
-header('Content-Type: application/json');
-
-// Return the group information as a JSON response
-if ($groupInfo) {
-    echo json_encode($groupInfo);
+    // Close database connection
+    $conn->close();
 } else {
-    echo json_encode(['error' => 'Group not found']);
+    echo json_encode(['error' => 'Course ID not set in session']);
 }
 ?>
