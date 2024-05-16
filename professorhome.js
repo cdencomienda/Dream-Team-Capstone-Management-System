@@ -19,6 +19,9 @@ function openClassPage(){
 function logOUT(){
   window.location.assign("LoginSignup.php")
 }
+function scheduleProf(){
+  window.location.assign("DefenseSchedule.php")
+}
 document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");
   overlay.style.display = "block";
@@ -27,7 +30,6 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
   document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
-  
 }
  
 function Back(){

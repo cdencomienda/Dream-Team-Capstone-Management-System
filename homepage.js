@@ -50,9 +50,13 @@ document.addEventListener('profile', function () {
     event.preventDefault(); 
   }); 
 });
-window.onclick = function(event) {
+
+document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");
-  if (event.target == overlay) {
-      overlay.style.display = "none";
-  }
+  overlay.style.display = "block";
+});
+ 
+function closeEditform(){
+  document.getElementById('editProfileOverlay').style.display = 'none';
+  document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
 }

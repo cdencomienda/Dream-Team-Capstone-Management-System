@@ -40,7 +40,7 @@ body{
   width: 500;
   height: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  
+  z-index: 20000;
 }   
 .dropdown-profile{
   position: absolute;
@@ -1265,7 +1265,7 @@ body{
  overflow: hidden;
  }
  #error-message {
-     position: absol ute;
+     position: absolute;
      top: 50%;
      left: 50%;
      transform: translate(-50%, -50%);

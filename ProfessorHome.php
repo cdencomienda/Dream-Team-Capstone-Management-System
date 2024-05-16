@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Main Menu</title>
     <link rel="stylesheet" href="professorStyle.css">
+    
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    
 
     <style>
          
@@ -44,15 +50,16 @@
          }
          .close {
          /* Add your button styles here */
-         background-color: transparent; /* Example background color */
-         height: 30px;
-         width:  30px;
-         border: none;
-         padding: 5px;
-         border-radius: 5px;
-         cursor: pointer;
-         margin-left: 350px;
-         overflow: hidden; 
+        background-color: transparent; 
+         
+        height: 30px;
+        width:  30px;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 350px;
+        overflow: hidden; 
      }
      
  
@@ -105,7 +112,9 @@
                 <div class="dropdown-profile">
         
                     <div>
-                        <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                        <button class="close" onclick="closeEditform()">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        </button>
                     </div>
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
@@ -227,5 +236,6 @@
     <script 
         src="professorhome.js"> 
     </script>   
+    
 </body>
 </html> 
