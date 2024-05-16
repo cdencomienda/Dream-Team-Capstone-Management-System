@@ -413,20 +413,21 @@ function getCourseMember() {
 
             // Check if any students were fetched
             if (students.length > 0) {
-                students.forEach(student => {
-                    if (student && student.userName) {
+                let studentNames = []; // Array to store student names for autocomplete
+
+                students.forEach(studentName => {
+                    if (studentName) {
                         const studentRow = document.createElement('tr');
                         const studentNameCell = document.createElement('td');
-                        studentNameCell.textContent = student.userName.trim(); // Trim the userName if it's defined
+                        studentNameCell.textContent = studentName.trim(); // Trim the student name
                         studentRow.appendChild(studentNameCell);
                         studentList.appendChild(studentRow);
+
+                        studentNames.push(studentName.trim()); // Add the student name to the array
                     } else {
-                        console.warn('Invalid student data:', student); // Log invalid student data
+                        console.warn('Invalid student data:', studentName); // Log invalid student data
                     }
                 });
-
-                // Array to store student names for autocomplete
-                let studentNames = students.map(student => student.userName.trim());
 
                 // Initialize autocomplete
                 $('#selectedStudents').autocomplete({
@@ -457,6 +458,7 @@ function getCourseMember() {
                 function updateSelectedStudents() {
                     selectedStudentsInput.value = selectedStudents.join(', ');
                 }
+
             } else {
                 const noStudentsRow = document.createElement('tr');
                 const noStudentsCell = document.createElement('td');
@@ -501,63 +503,6 @@ $(document).ready(function() {
     getProfessors();
 });
 
-function getAdviser() {
-    const adviserList = document.querySelector('.adviserList');
-    adviserList.innerHTML = ''; // Clear previous content
-
-    const selectedAdvisorsInput = document.getElementById('selectedAdvisors');
-    let selectedAdvisors = []; // Array to track selected advisors
-
-    // Fetch advisor data from the server using the stored courseID (assuming getProfessors.php also retrieves advisor data)
-    fetch('getProfessors.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Parse the response as JSON
-        })
-        .then(advisors => {
-            console.log('Fetched advisors:', advisors); // Log the fetched advisors for debugging
-
-            // Clear previous content in adviserList
-            adviserList.innerHTML = '';
-
-            // Check if any advisors were fetched
-            if (advisors.length > 0) {
-                advisors.forEach(advisor => {
-                    if (advisor && advisor.userName) {
-                        const advisorRow = document.createElement('tr');
-                        const advisorNameCell = document.createElement('td');
-                        advisorNameCell.textContent = advisor.userName.trim(); // Trim the userName if it's defined
-                        advisorRow.appendChild(advisorNameCell);
-                        adviserList.appendChild(advisorRow);
-
-                        // Set onclick event to toggle selected advisors and highlight the row
-                        advisorRow.onclick = () => {
-                            const index = selectedAdvisors.indexOf(advisor.userName.trim());
-                            if (index === -1) {
-                                selectedAdvisors.push(advisor.userName.trim());
-                                advisorRow.classList.add('selected');
-                            } else {
-                                selectedAdvisors.splice(index, 1);
-                                advisorRow.classList.remove('selected');
-                            }
-                            selectedAdvisorsInput.value = selectedAdvisors.join(', ');
-                        };
-                    } else {
-                        console.warn('Invalid advisor data:', advisor); // Log invalid advisor data
-                    }
-                });
-            } else {
-                const noAdvisorsRow = document.createElement('tr');
-                const noAdvisorsCell = document.createElement('td');
-                noAdvisorsCell.textContent = 'No advisors found';
-                noAdvisorsRow.appendChild(noAdvisorsCell);
-                adviserList.appendChild(noAdvisorsRow);
-            }
-        })
-        .catch(error => console.error('Error fetching advisors:', error));
-}
 
 // Event delegation to handle dropdown toggle
 document.addEventListener('click', event => {

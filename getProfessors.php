@@ -8,14 +8,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_SESSION['varCourseID']) && isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+if (isset($_SESSION['varCourseID']) && !empty($_SESSION['varCourseID'])) {
     // Use the stored courseID from the session
     $courseID = $_SESSION['varCourseID'];
     // Get the userID to exclude
-    $creatorID = $_SESSION['user_id'];
 
     // Define the SQL query to fetch professors and program directors, excluding the creator
-    $professorsQuery = "SELECT userName FROM `users` WHERE (userType = 'Professor' OR userType = 'Program Director') AND userID != '$creatorID'";
+    $professorsQuery = "SELECT userName FROM `users` WHERE (userType = 'Professor' OR userType = 'Program Director')";
 
     // Perform the query and get the result
     $result = $conn->query($professorsQuery);

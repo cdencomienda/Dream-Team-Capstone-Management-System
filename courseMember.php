@@ -14,6 +14,17 @@ if (isset($_SESSION['varCourseID'])) {
     // Use the stored courseID from the session
     $courseID = $_SESSION['varCourseID'];
 
+    // Query to get student IDs in a group
+    $inAGroupQuery = "SELECT studentID FROM `group` WHERE courseID = $courseID";
+    $inAGroupResult = $conn->query($inAGroupQuery);
+
+    $inAGroupIDs = [];
+    if ($inAGroupResult->num_rows > 0) {
+        while ($row = $inAGroupResult->fetch_assoc()) {
+            $inAGroupIDs[] = $row['studentID'];
+        }
+    }
+
     // Define the SQL query to fetch studentIDs for the given courseID from enrolled_students table
     $enrolledStudentsQuery = "SELECT studentID FROM `enrolled students` WHERE courseID = $courseID";
 
@@ -31,35 +42,44 @@ if (isset($_SESSION['varCourseID'])) {
             $userIDs[] = $enrolledStudentRow['studentID'];
         }
 
+        // Exclude students who are in a group
+        $userIDs = array_diff($userIDs, $inAGroupIDs);
+
         // Convert the array of userIDs into a comma-separated string for the SQL query
-        $userIDsString = implode(',', $userIDs);
+        if (!empty($userIDs)) {
+            $userIDsString = implode(',', $userIDs);
 
-        // Define the SQL query to fetch students with userType 'Student' and matching userIDs
-        $sql = "SELECT userID, userName FROM users WHERE userType = 'Student' AND userID IN ($userIDsString)";
+            // Define the SQL query to fetch students with userType 'Student' and matching userIDs
+            $sql = "SELECT userID, userName FROM users WHERE userType = 'Student' AND userID IN ($userIDsString)";
 
-        // Execute the query to fetch student data
-        $result = $conn->query($sql);
+            // Execute the query to fetch student data
+            $result = $conn->query($sql);
 
-        // Initialize an empty array to store student data
-        $students = [];
+            // Initialize an empty array to store student data
+            $students = [];
 
-        // Check if the query returned any results
-        if ($result->num_rows > 0) {
-            // Fetch each row of the result as an associative array
-            while ($row = $result->fetch_assoc()) {
-                // Add each student's data to the $students array
-                $students[] = $row;
+            // Check if the query returned any results
+            if ($result->num_rows > 0) {
+                // Fetch each row of the result as an associative array
+                while ($row = $result->fetch_assoc()) {
+                    // Add each student's data to the $students array
+                    $students[] = $row['userName'];
+                }
             }
-        }
 
-        // Send the student data as JSON response
-        header('Content-Type: application/json');
-        echo json_encode($students);
+            // Send the student data as JSON response
+            header('Content-Type: application/json');
+            echo json_encode($students);
+        } else {
+            // No students to display
+            echo json_encode([]);
+        }
     } else {
-        echo "No enrolled students found for courseID: $courseID";
+        // No enrolled students found for courseID
+        echo json_encode([]);
     }
 } else {
-    echo "Error: CourseID not set in session.";
+    echo json_encode([]);
 }
 
 // Close the database connection
