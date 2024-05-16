@@ -36,7 +36,8 @@
                 </div>
             </div>
             <!-- editprofile --> 
-            <div id="editProfileOverlay" class="editoverlay">
+           <!-- editprofile --> 
+           <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
         
                     <div>
@@ -201,9 +202,8 @@ function fetchStudentCourses() {
 fetchStudentCourses();
 
 function newGroupCreated() {
-    var container = document.querySelector('.GroupContainer');
+    var container = document.querySelector('.StudentDefault');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-      
   }
 
 // Function to fetch and display group members
@@ -418,6 +418,7 @@ function fetchGroupMembers() {
                         } else {
                             alert("Only PDF files are allowed.");
                         }
+
                         }
                         var attachedFileCont = document.querySelector('.Attached-FileCont ul');
                         if (!attachedFileCont) {

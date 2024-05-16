@@ -48,27 +48,12 @@ function submissionBtnAuth() {
 
 }
 
+
 function newGroupCreated() {
-    // Inner function to toggle display of elements with the StudentDefault class
-    function toggleStudentDefaultDisplay() {
-        const studentDefaults = document.querySelectorAll('.StudentDefault');
-        studentDefaults.forEach(element => {
-            if (element.style.display === 'none') {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
-            }
-        });
-    }
-
-    // Call the inner function to toggle display
-    toggleStudentDefaultDisplay();
-}
-
-// Example call to the newGroupCreated function
-newGroupCreated();
-
-
+    var container = document.querySelector('.student');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+      
+  }
 // document.addEventListener('click', e =>{
 // const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
 // if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
@@ -86,5 +71,32 @@ newGroupCreated();
 // });
 // }) 
 
-
-
+document.addEventListener('profile', function () {
+    const editProfileBtn = document.querySelector('.StudentDefault');
+    const logoutBtn = document.querySelector('.logoutBtn');
+  
+    editProfileBtn.addEventListener('click', function (event) { 
+      event.preventDefault(); 
+    }); 
+  });
+  
+  function openArchive(){
+    window.location.assign("ProfessorHome.php")
+  }
+  function notifProf(){
+    window.location.assign("ProfNotificationPage.php")
+  }
+  function openClassPage(){
+    window.location.assign("CourseCreate.php")
+  } 
+  function logOUT(){
+    window.location.assign("LoginSignup.php")
+  }
+  function scheduleProf(){
+    window.location.assign("Defenseschedule.php")
+  }
+  document.getElementById('editProfileBtn').addEventListener('click', function() {
+    var overlay = document.getElementById("editProfileOverlay");
+    overlay.style.display = "block";
+  });
+   

@@ -20,7 +20,7 @@ function logOUT(){
   window.location.assign("LoginSignup.php")
 }
 function scheduleProf(){
-  window.location.assign("DefenseSchedule.php")
+  window.location.assign("Defenseschedule.php")
 }
 document.getElementById('editProfileBtn').addEventListener('click', function() {
   var overlay = document.getElementById("editProfileOverlay");

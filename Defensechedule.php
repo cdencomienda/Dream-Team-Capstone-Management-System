@@ -11,9 +11,10 @@
     <script src = "studentcourse.js"></script>   
 
     <link rel="stylesheet" href="Defensechedule.css">
-    <?php include 'login.php'; ?>
-    <?php include 'editProfile.php'; ?>
 
+    <?php include 'login.php'; ?>
+    <?php include 'editProfile.php'; ?> 
+    
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
