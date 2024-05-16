@@ -25,95 +25,177 @@ body{
     position: absolute;
     background-size:100% 100%;
 }
+/* dropdown edit profile */
 .container{
-    position: relative; 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 0px;
-    width:100%;
-}  
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:280px;
+  width:280px;
+  bottom: 35px;
+  left: 84%;
+}
+
+.editoverlay{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500;
+  height: 400;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}   
+
+.dropdown-profile{
+  position: absolute;
+    background-color: #FFEBCF;
+    width: 400px;
+    height: 500px;
+    padding: 15px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} 
+.dropdown-profile h5edit{
+  color: #000000;
+  size: 5px;
+  padding: 10px;
+}
+.dropdown-profile .profile{
+  position:relative;
+  width:120px;
+  height:120px;
+  margin-top: 30px;
+  margin-left: 150px; 
+  border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
+}
+.dropdown-profile  .profile img{
+  position:absolute;
+  top: 0px; 
+  left: 0px;
+  width: 100%; 
+  height: 100%;
+  object-fit:cover;
+}
+ 
+.inputname,
+.inputEmail,
+.inputPassword{
+  width: 200px;
+  border: 1px solid #000000; 
+  margin: 10px 0 5px 0;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  outline: none; 
+}
 .action{
-    position: absolute;
-    margin-top: -60px;
-    right: 0px;
+  position:relative;  
 }
 .action .profile{
-    position:relative;
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    overflow:hidden;
-    cursor:pointer;
+  position:relative;
+  width:60px;
+  height:60px;
+  margin-top: 10px;
+  margin-left: 200px;
+  margin-bottom: 40px;
+  border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
 }
 .action .profile img{
-    position:absolute;
-    top: 0px; 
-    left: 0px;
-    width: 100%; 
-    height: 100%;
-    object-fit:cover;
-  }
-  .action .menu{
   position:absolute;
+  top: 0px; 
+  left: 0px;
+  width: 100%; 
+  height: 100%;
+  object-fit:cover;
+}
+.action .menu{  
   top:75px;
-  right:-10px;
+  right:-130px;
   padding: 20px;
   background: #FFEBCF;
   border: 2px solid #000000;
-  width: 230px;
-  box-sizing: 0 5px 5px rgba(0,0,0,.1);
+  width: 230px; 
   border-radius:15px;
   transition:0.5s;
   visibility:visible;
   opacity:0;
 }
-.action .menu.active{
-  top:80px;
+.action .menu.active{  
   visibility:visible;
   opacity:1;
 }
 .action .menu h3{
-    width:100%;
-    text-align:center;
-    font-size: 18px;
-    padding:20px 0;
-    font-weight: 500;
-    font-size: 15px;
-    color:#000000;
-    line-height: 25px;
-  }
-  .action .menu h3 span{
-    font-size: 15px;
-    color:#000000;
-    font-weight: 400;
-  } 
-  .logoutBtn{
-    width: 170px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #ffffff; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 15px;
-  }     
-  .logoutBtn:hover {
-    background-color: #707070; 
-  }
-  .editprofileBtn{
-    width: 170px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #ffffff; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 15px;
-  }   
-  .editprofileBtn:hover {
-    background-color: #707070; 
-  } 
+  width:100%;
+  text-align:center;
+  font-size: 18px;
+  padding:20px 0;
+  font-weight: 500;
+  font-size: 15px;
+  color:#000000;
+  line-height: 25px;
+}
+.action .menu h3 span{
+  font-size: 15px;
+  color:#000000;
+  font-weight: 400;
+} 
+
+.logoutBtn{
+  width: 170px;
+  padding: 10px; 
+  border-radius: 15px;
+  background-color: #ffffff; 
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}     
+.logoutBtn:hover {
+  background-color: #707070; 
+}
+
+.editprofileBtn{
+  width: 170px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #ffffff; 
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}   
+.editprofileBtn:hover {
+  background-color: #707070; 
+} 
+.saveEditbtn{
+  width: 170px;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: #ffffff; 
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px #000000;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}
+.saveEditbtn:hover {
+  background-color: #707070; 
+} 
+
+/* header and search */
 .header{
     background-color: #213B9A;
     height: 30px;

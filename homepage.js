@@ -3,7 +3,7 @@ var y = document.getElementById("teams");
 var z = document.getElementById("schedule");
 var w = document.getElementById("capstone");
 
-function notifAuth(){
+function studentnotifAuth(){
     window.location.assign("NotificationPage.php")
 }
 function studentClass(){
@@ -12,12 +12,14 @@ function studentClass(){
 function Studentarchive(){
   window.location.assign("HomePage.php")
 } 
-function StudentSchedule(){
-  
+function StudentSchedule(){ 
+  window.location.assign("DefenseSchedule.php")
 } 
-function StudentCapstone(){
-  
+function StudentCapstone(){ 
 } 
+ 
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const editProfileBtn = document.querySelector('.editprofileBtn');
   const logoutBtn = document.querySelector('.logoutBtn');
@@ -40,5 +42,17 @@ tap.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
   toggleMenu.classList.toggle('active');
 });
+document.addEventListener('profile', function () {
+  const editProfileBtn = document.querySelector('.editprofileBtn');
+  const logoutBtn = document.querySelector('.logoutBtn');
 
-
+  editProfileBtn.addEventListener('click', function (event) { 
+    event.preventDefault(); 
+  }); 
+});
+window.onclick = function(event) {
+  var overlay = document.getElementById("editProfileOverlay");
+  if (event.target == overlay) {
+      overlay.style.display = "none";
+  }
+}

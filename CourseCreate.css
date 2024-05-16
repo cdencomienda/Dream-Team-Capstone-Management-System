@@ -1291,9 +1291,71 @@ body{
      border-radius: 5px;
      cursor: pointer;
  }
+
+/* notif */
+.hero{
+  margin-left: 80px;
+  height: 200%;
+  width: 100%;
+}
+.notificationContainer{
+  width: 350px; 
+}
+.single-box{
+  width: 330px;
+  padding: 30px;
+  margin: 40px 0 0 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+a.read{
+  text-decoration: none;
+  color: hsl(0, 0%, 0%);
+  font-size: 18px;
+}
+.single-box:hover {
+  background-color: #0056b3;
+}
+.single-box:active {
+  background-color: #004080;
+}  
+
+.single-box.unseen{
+  width: 330px;
+  padding: 30px;
+  margin: 40px 0 0 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} 
+.unseen:hover {
+  background-color: #0056b3;  
+}
+.unseen:active {
+  background-color: #495057;  
+}
+.post{
+  color: hsl(219, 12%, 42%);
+  font-weight: 800;
+} 
+span.dot{
+  display: inline-block;
+  background-color: hsl(1, 90%, 64%);
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  margin-left: 7px;
+} 
+  
+
+
  .close {
- /* Add your button styles here */
- background-color: transparent; /* Example background color */
+ background-color: transparent; /
  height: 30px;
  width:  30px;
  border: none;
@@ -1303,18 +1365,13 @@ body{
  margin-left: 350px;
  overflow: hidden; 
 }
-
-
-/* CSS for the icon inside the button */
 .close i {
- /* Add your icon styles here */
- color: black; /* Example color */
+ color: black; 
  font-size: 25px;
  transition: opacity 0.3s ease;
  margin:-3px
 }
-/* Change background color on hover */
 .close i:hover {
- opacity: 50%; /* Example background color on hover */
+ opacity: 50%; 
  border-radius:25px;
 } 
