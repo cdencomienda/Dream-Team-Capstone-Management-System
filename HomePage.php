@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive Menu</title>
     <link rel="stylesheet" href="HomePage.css">
+
+
+
+    
     <?php include 'login.php'; ?>
     <div class="header">
         <div class="wrap">
@@ -20,7 +24,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                    <img src="menu_assets/users-icon.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -40,7 +44,7 @@
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
-                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                            <img src="menu_assets/users-icon.png" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>

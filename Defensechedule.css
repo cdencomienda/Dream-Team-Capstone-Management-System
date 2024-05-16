@@ -460,3 +460,25 @@ body{
   background-color: #958f87;
 
 }
+
+.close {
+  background-color: transparent;
+  height: 30px;
+  width:  30px;
+  border: none;
+  padding: 5px;
+  border-radius: 5px; 
+  cursor: pointer;
+  margin-left: 350px;
+  overflow: hidden; 
+ }
+ .close i {
+  color: black; 
+  font-size: 25px;
+  transition: opacity 0.3s ease;
+  margin:-3px
+ }
+ .close i:hover {
+  opacity: 50%; 
+  border-radius:25px;
+ } 
