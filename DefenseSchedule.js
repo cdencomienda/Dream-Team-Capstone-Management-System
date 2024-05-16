@@ -5,7 +5,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("addScheduleBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("closeM")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
@@ -23,21 +23,70 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-function studentnotifAuth(){
-  window.location.assign("studentnotifAuth.php")
-}
-function studentClass(){
-window.location.assign("studentClass.php")
-}
-function Studentarchive(){
-window.location.assign("HomePage.php")
-} 
-function StudentSchedule(){
-  window.location.assign("DefenseSchedule.php")
-} 
-function StudentCapstone(){
 
-} 
+
+document.addEventListener('DOMContentLoaded', function () {
+  const editProfileBtn = document.querySelector('.editprofileBtn');
+  const logoutBtn = document.querySelector('.logoutBtn');
+
+  editProfileBtn.addEventListener('click', function (event) {
+    // Prevent default behavior of anchor tag
+    event.preventDefault();
+    // Execute your edit profile function or redirect to the edit profile page
+    // Example:
+    // window.location.assign("EditProfilePage.html");
+  }); 
+});
+
+function logOUT(){
+  window.location.assign("LoginSignup.php")
+}
+
+const tap = document.querySelector('.profile');
+tap.addEventListener('click', function () {
+  const toggleMenu = document.querySelector('.menu');
+  toggleMenu.classList.toggle('active');
+});
+document.addEventListener('profile', function () {
+  const editProfileBtn = document.querySelector('.editprofileBtn');
+  const logoutBtn = document.querySelector('.logoutBtn');
+
+  editProfileBtn.addEventListener('click', function (event) { 
+    event.preventDefault(); 
+  }); 
+});
+
+document.getElementById('editProfileBtn').addEventListener('click', function() {
+  var overlay = document.getElementById("editProfileOverlay");
+  overlay.style.display = "block";
+});
+ 
+function closeEditform(){
+  document.getElementById('editProfileOverlay').style.display = 'none';
+  document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
+}
+
+  
+  function openArchive(){
+    window.location.assign("ProfessorHome.php")
+  }
+  function notifProf(){
+    window.location.assign("ProfNotificationPage.php")
+  }
+  function openClassPage(){
+    window.location.assign("CourseCreate.php")
+  } 
+  function logOUT(){
+    window.location.assign("LoginSignup.php")
+  }
+  function scheduleProf(){
+    window.location.assign("Defenschedule.php")
+  }
+  document.getElementById('editProfileBtn').addEventListener('click', function() {
+    var overlay = document.getElementById("editProfileOverlay");
+    overlay.style.display = "block";
+  });
+   
 function createDefenseContainer() {
   // Gather input values
   const schedTitle = document.getElementById('schedTitle').value;

@@ -93,7 +93,7 @@ document.addEventListener('profile', function () {
     window.location.assign("LoginSignup.php")
   }
   function scheduleProf(){
-    window.location.assign("Defenseschedule.php")
+    window.location.assign("Defenschedule.php")
   }
   document.getElementById('editProfileBtn').addEventListener('click', function() {
     var overlay = document.getElementById("editProfileOverlay");

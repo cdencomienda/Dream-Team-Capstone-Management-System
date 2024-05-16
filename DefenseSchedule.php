@@ -10,7 +10,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "studentcourse.js"></script>   
 
-    <link rel="stylesheet" href="Defensechedule.css">
+    <link rel="stylesheet" href="DefenseSchedule.css">
 
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?> 
@@ -71,19 +71,17 @@
             } ?>
             
         <script>
-                window.onload = function() {
-                    var urlParams = new URLSearchParams(window.location.search);
-        
-                    if (urlParams.has('showOverlay')) {
-                        document.getElementById('editProfileOverlay').style.display = 'block';
+        window.onload = function() {
+          var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('showOverlay')) {
+              document.getElementById('editProfileOverlay').style.display = 'block';
+              }
+                window.onclick = function(event) {
+                  if (event.target == overlay) {
+                    overlay.style.display = 'none';
                     }
-                    window.onclick = function(event) {
-                        if (event.target == overlay) {
-                            overlay.style.display = 'none';
-                        }
-                    }
+                  }
                 }
-
         </script>
             <script>
             function clearErrorMessage() {
@@ -112,7 +110,7 @@
             <div id="myModal" class="modal">
                 <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="close">&times;</span>
+                    <span class="closeM">&times;</span>
                     <h1>Create Defense Schedule</h1>
                     <form id="scheduleForm" action="/submit_schedule" method="POST">
                         <!-- First primary container -->

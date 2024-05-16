@@ -43,7 +43,7 @@ body{
 }   
 
 .dropdown-profile{
-  position: absolute;
+    position: absolute;
     background-color: #FFEBCF;
     width: 400px;
     height: 500px;
