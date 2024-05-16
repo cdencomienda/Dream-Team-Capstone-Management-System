@@ -70,36 +70,9 @@
                 <div class="groupname_container"> 
                     <div class="group_name" id="group_name"></div>   
                 </div>
-                <script> 
-                    document.addEventListener('DOMContentLoaded', function() {
-                    // Function to fetch group information for the logged-in student
-                    function fetchGroupInfo() {
-                    fetch('fetchGroupName.php')
-                        .then(response => response.json())
-                        .then(groupInfo => {
-                    const groupname_container = document.getElementById('group_name1');
-
-                    // Check if there is a group
-                    if (groupInfo.error) {
-                        groupname_container.innerHTML = '<h3>Error: ' + groupInfo.error + '</h3>';
-                        } else {
-                            // Display the group name in the container
-                            groupname_container.innerHTML = '<h3>' + groupInfo.groupname + '</h3>';
-                        }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching group information:', error);
-                            groupname_container.innerHTML = '<h3>Error loading group information</h3>';
-                        });
-                        }
-
-                    // Fetch group information when the page loads
-                    fetchGroupInfo();
-                    });    
-
-                       document.addEventListener('DOMContentLoaded', function() {
-                    // Function to fetch group information for the logged-in student
-                    function fetchGroupInfo() {
+                <script>
+     // Function to fetch group information for the logged-in student
+                function fetchGroupInfo() {
                     fetch('fetchGroupName.php')
                         .then(response => response.json())
                         .then(groupInfo => {
@@ -118,9 +91,108 @@
                             groupname_container.innerHTML = '<h3>Error loading group information</h3>';
                         });
                         }
+                       document.addEventListener('DOMContentLoaded', function() {  
                     // Fetch group information when the page loads
                     fetchGroupInfo();
                     });    
+
+                    // Function to fetch and display the student's courses
+function fetchStudentCourses() {
+    fetch('LiveSearchStudentCourses.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(courses => {
+            var coursesList = document.getElementById('coursesList');
+
+            // Clear any previous courses list
+            coursesList.innerHTML = '';
+
+            // Display each course in the list
+            courses.forEach(course => {
+                // Create a container for each course
+                var courseContainer = document.createElement('div');
+                courseContainer.classList.add('course-container');
+
+                // Create a button for course actions (e.g., view details)
+                var courseButton = document.createElement('button');
+                courseButton.type = 'button';
+                courseButton.textContent = course.courseName;
+
+                courseButton.classList.add('S_courseInfo');
+
+                // Add an event listener to the button to handle course actions
+                courseButton.addEventListener('click', function () {
+                    handleCourseAction(course.courseID);
+                });
+
+                // Append the button to the course container
+                courseContainer.appendChild(courseButton);
+
+                // Append the course container to the list
+                coursesList.appendChild(courseContainer);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching student courses:', error);
+        });
+}
+
+// Call the function to fetch student courses when the page loads
+fetchStudentCourses();
+
+function newGroupCreated() {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+      
+  }
+
+// Function to fetch and display group members
+function fetchGroupMembers() {
+    // Fetch the group ID based on the logged-in user
+    fetch('GetUserGroupID.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error obtaining group ID:', data.error);
+                return;
+            }
+
+            // Get the group ID from the response
+            const groupID = data.groupID;
+
+            // Use the group ID to fetch and display group members
+            fetch(`LiveSearchGroupMembers.php?groupID=${groupID}`)
+                .then(response => response.json())
+                .then(response => {
+                    const groupMembersContainer = document.getElementById('groupMembersContainer');
+                    groupMembersContainer.innerHTML = ''; // Clear previous content
+
+                    if (response.error) {
+                        // Display error message if server returns an error
+                        groupMembersContainer.textContent = response.error;
+                    } else {
+                        // Display group members
+                        response.forEach(member => {
+                            const memberElement = document.createElement('div');
+                            memberElement.textContent = member.username; // Display member's username
+                            groupMembersContainer.appendChild(memberElement);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching group members:', error);
+                    const groupMembersContainer = document.getElementById('groupMembersContainer');
+                    groupMembersContainer.textContent = 'Error fetching group members. Please try again later.';
+                });
+        })
+        .catch(error => {
+            console.error('Error obtaining group ID:', error);
+        });
+}
                 </script>  
 
                 <h4>
