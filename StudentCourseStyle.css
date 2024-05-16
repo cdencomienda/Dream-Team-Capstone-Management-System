@@ -408,7 +408,7 @@ body{
     height: 600px;
     padding: 25px;
     margin-top: -700px;
-   display:block;
+   display:none;
   }
   .dashboard_header{
     background-color: #E2C17B;
