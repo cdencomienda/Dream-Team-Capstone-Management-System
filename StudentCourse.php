@@ -155,21 +155,32 @@
 
                     // Function to fetch and display the student's courses
 function fetchStudentCourses() {
+    console.log('Fetching student courses...');
+    
     fetch('LiveSearchStudentCourses.php')
         .then(response => {
+            console.log('Received response:', response);
+            
             if (!response.ok) {
+                console.error('Network response was not ok');
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(courses => {
+            console.log('Parsed JSON data:', courses);
+
             var coursesList = document.getElementById('coursesList');
+            console.log('Found courses list element:', coursesList);
 
             // Clear any previous courses list
             coursesList.innerHTML = '';
+            console.log('Cleared previous courses list');
 
             // Display each course in the list
             courses.forEach(course => {
+                console.log('Processing course:', course);
+
                 // Create a container for each course
                 var courseContainer = document.createElement('div');
                 courseContainer.classList.add('course-container');
@@ -178,25 +189,45 @@ function fetchStudentCourses() {
                 var courseButton = document.createElement('button');
                 courseButton.type = 'button';
                 courseButton.textContent = course.courseName;
-
                 courseButton.classList.add('S_courseInfo');
+                console.log('Created course button for:', course.courseName);
 
                 // Add an event listener to the button to handle course actions
                 courseButton.addEventListener('click', function () {
+                    console.log('Course button clicked:', course.courseID);
                     handleCourseAction(course.courseID);
                 });
 
-                // Append the button to the course container
+                // Append the course button to the course container
                 courseContainer.appendChild(courseButton);
+                console.log('Appended course button to course container');
+
+                // Create a new button for each courseID
+                var groupButton = document.createElement('button');
+                groupButton.type = 'button';
+                groupButton.id = `group_name_${course.courseID}`;
+                groupButton.classList.add('createdgroupBTN');
+                groupButton.textContent = `Group for ${course.courseID}`;
+                groupButton.onclick = function() {
+                    console.log('Group button clicked for courseID:', course.courseID);
+                    newGroupCreated(course.courseID);
+                };
+                console.log('Created group button for courseID:', course.courseID);
+
+                // Append the group button to the course container
+                courseContainer.appendChild(groupButton);
+                console.log('Appended group button to course container');
 
                 // Append the course container to the list
                 coursesList.appendChild(courseContainer);
+                console.log('Appended course container to courses list');
             });
         })
         .catch(error => {
             console.error('Error fetching student courses:', error);
         });
 }
+
 
 // Call the function to fetch student courses when the page loads
 fetchStudentCourses();
