@@ -148,21 +148,21 @@
             </div>
             
             <div class= "Schedule" id="scheduleContainer">
-            <div class ="Schedule Row">
+            
                     <div class ="DefenseScheduleCont">
                         <div class ="SchedTitle">
-                            <h2>1st Defense</h2>
+                            <h5>syllabus managemen</h5>
                         </div>
                     <div class="SchedDetails">
-                        time: 04:21<br>
-                        date: 2024-05-25<br>
-                        group name: 123<br>
+                        Time: 04:21<br>
+                        Date: 2024-05-25<br>
+                        Group-name: Syllabuddies<br>
                     </div>
                     <div class="DocumentStatus">
                         Status: ?????
                      </div>
                 </div>
-            </div>
+                
             
             <div class="divButton">
                 <!-- <button class="CreateSched" id = "addScheduleBtn">
