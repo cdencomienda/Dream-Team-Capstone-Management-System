@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Course</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <title>Class Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+
     <script src = "studentcourse.js"></script>    
+    
     <link rel="stylesheet" href="StudentCourseStyle.css">
+   
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
+   
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
@@ -25,7 +36,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                    <img src="menu_assets/users-icon.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -36,8 +47,7 @@
                 </div>
             </div>
             <!-- editprofile --> 
-           <!-- editprofile --> 
-           <div id="editProfileOverlay" class="editoverlay">
+            <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
         
                     <div>
@@ -46,7 +56,7 @@
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
-                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                            <img src="menu_assets/users-icon.png" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
@@ -80,7 +90,6 @@
                         }
                     }
                 }
-
         </script>
             <script>
             function clearErrorMessage() {
@@ -88,6 +97,8 @@
                 errorMessage.classList.remove("show");
             }
             </script> 
+            
+            <script src = "homepage.js"></script>
                 </div>
             </div>
         </div>
@@ -146,13 +157,6 @@
         
 
 }
-
-
-
-
-
-
-
                     // Function to fetch and display the student's courses
                     function fetchStudentCourses() {
     console.log('Fetching student courses...');
@@ -365,8 +369,7 @@ function fetchGroupMembers() {
         });
 }
 
-fetchStudentCourses();
-
+fetchStudentCourses()
                 </script>  
 
                 <h4>
@@ -579,6 +582,7 @@ fetchStudentCourses();
         </style>
         
     </div>
-    <!-- ian end -->
+    <!-- ian end -->    
 </body>
+
 </html>

@@ -100,12 +100,33 @@
     <div class="hero">
         <div class="Lsection">
             <div id="sectionBtn"></div>
-            <button type="button" class="notif"  onclick="notifProf()">Notification</button>
-            <button type="button" class="class"  onclick="openClassPage()">Class</button>
-            <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
-            <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
+            <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+      <button type="button" class="class"  onclick="studentClass()">Class</button>
+      <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+      <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+      <button type="button" class="Users"  onclick="Users()">Users</button>
+      <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
         </div>
-
+<script>
+    function notifAuth(){
+    window.location.assign("AdminNotifications.php")
+  }
+  function openClassPage(){
+    window.location.assign("CourseCreate.php")
+  } 
+  function logOUT(){
+    window.location.assign("LoginSignup.php")
+  }
+  function Schedule(){
+    window.location.assign("AdminDefenseschedule.php")
+  }
+  function Users(){
+    window.location.assign("Adminuser.php")
+  }
+  function openArchive(){
+    window.location.assign("AdminHome.php")
+  }
+    </script>
         <div class="MainScheduleCont">
             <div id="myModal" class="modal">
                 <!-- Modal content -->

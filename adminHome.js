@@ -54,6 +54,26 @@ document.addEventListener('profile', function () {
     window.location.assign("LoginSignup.php")
   }
 
+ 
+  function notifAuth(){
+    window.location.assign("AdminNotifications.php")
+  }
+  function openClassPage(){
+    window.location.assign("CourseCreate.php")
+  } 
+  function logOUT(){
+    window.location.assign("LoginSignup.php")
+  }
+  function Schedule(){
+    window.location.assign("AdminDefenseschedule.php")
+  }
+  
+
+  document.getElementById('editProfileBtn').addEventListener('click', function() {
+    var overlay = document.getElementById("editProfileOverlay");
+    overlay.style.display = "block";
+  });
+
 //   $(document).ready(function(){
 //     // Handle click on delete button
 //     $('.delete-btn').click(function(){
@@ -113,9 +133,9 @@ document.addEventListener('profile', function () {
   
   function closeEditform(){
     document.getElementById('editProfileOverlay').style.display = 'none';
-    document.getElementById('menuBtn').style.display = 'block';
-    location.reload();
+    document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
   }
+   
   function Back(){
     document.getElementById('menuBtn').style.display = 'none';
   }

@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src = "studentcourse.js"></script>   
-
+     
+    <script src = "studentcourse.js"></script> 
     <link rel="stylesheet" href="DefenseSchedule.css">
 
     <?php include 'login.php'; ?>
@@ -148,18 +148,31 @@
             </div>
             
             <div class= "Schedule" id="scheduleContainer">
-           
+            <div class ="Schedule Row">
+                    <div class ="DefenseScheduleCont">
+                        <div class ="SchedTitle">
+                            <h2>1st Defense</h2>
+                        </div>
+                    <div class="SchedDetails">
+                        time: 04:21<br>
+                        date: 2024-05-25<br>
+                        group name: 123<br>
+                    </div>
+                    <div class="DocumentStatus">
+                        Status: ?????
+                     </div>
+                </div>
             </div>
             
             <div class="divButton">
-                <button class="CreateSched" id = "addScheduleBtn">
+                <!-- <button class="CreateSched" id = "addScheduleBtn">
                    Add Schedule <i class="fa-solid fa-plus"></i>
-                </button>
+                </button> -->
             </div>
         </div>
 
     </div>
-    <script src="DefenseSchedule.js"></script>
+    <script src="studentSchedule.js"></script>
 </body>
 </html>
    

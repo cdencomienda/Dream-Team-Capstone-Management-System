@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DefenseSchedule</title>
-
+    <title>Notification Menu</title>
+    <link rel="stylesheet" href="NotificationPage.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src = "studentcourse.js"></script>   
-
-    <link rel="stylesheet" href="DefenseSchedule.css">
 
     <?php include 'login.php'; ?>
-    <?php include 'editProfile.php'; ?> 
-    
+    <?php include 'editProfile.php'; ?>
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="openArchive()"></button>
+            <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
             </div>
         <div class="search">
             <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -29,7 +28,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/prof.png" alt="profile-img">
+                    <img src="menu_assets/prof.jpg" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -49,7 +48,7 @@
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
-                            <img src="menu_assets/prof.png" alt="profile-img">
+                            <img src="menu_assets/prof.jpg" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
@@ -95,72 +94,49 @@
     </div>
 </div>
 </head>
-
-<body>  
-    <div class="hero">
-        <div class="Lsection">
-            <div id="sectionBtn"></div>
-            <button type="button" class="notif"  onclick="notifProf()">Notification</button>
-            <button type="button" class="class"  onclick="openClassPage()">Class</button>
-            <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
-            <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
-        </div>
-
-        <div class="MainScheduleCont">
-            <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="closeM">&times;</span>
-                    <h1>Create Defense Schedule</h1>
-                    <form id="scheduleForm" action="/submit_schedule" method="POST">
-                        <!-- First primary container -->
-                        <div class="SchedDetails"> 
-                            <!-- secondary Flex -->
-                            <div class="DetailsFlex"> 
-                                <!-- 1st flexBox -->
-                                <div class="titleFLex">
-                                    <div class="titleDetails">
-                                        <label class="textBox" for="schedTitle">Sched Title:</label>
-                                        <input type="text" id="schedTitle" name="schedTitle" class="input-field"><br>
-                                    </div>  
-                                 </div>
-                                <div class="timeDateflexcont">
-                                        <!-- second flexBox -->
-                                        <div class="dateDetails">
-                                            <label  class="textBox" for="date">Date:</label>
-                                            <input type="date" id="date" name="date" class="input-field2"><br>
-                                        </div>
-                                        <div class="timeDetails">
-                                            <label  class="textBox" for="time">Time:</label>
-                                            <input type="time" id="time" name="time" class="input-field3"><br>
-                                        </div>
-                                </div>      
-                            </div>
-                            <!-- Second primary container -->
-                            <div class="groupFlex">
-                            <label  class="textBox" for="GroupName">Group Name:</label>
-                            <input type="text" id="GroupName" name="GroupName" class="input-field"><br>
-                            </div>
-                        </div>    
-                        <button class="SchedSbmit"  type="button" onclick="createDefenseContainer()">Create <i class="fa-solid fa-plus"></i></button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class= "Schedule" id="scheduleContainer">
-           
-            </div>
-            
-            <div class="divButton">
-                <button class="CreateSched" id = "addScheduleBtn">
-                   Add Schedule <i class="fa-solid fa-plus"></i>
-                </button>
-            </div>
-        </div>
-
+<body>
+  <div class="Lsection">
+    <div id="sectionBtn"></div>
+      <button type="button" class="notif"  onclick="AdminNotif()">Notification</button>
+      <button type="button" class="class"  onclick="studentClass()">Class</button>
+      <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+      <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+      <button type="button" class="Users"  onclick="Users()">Users</button>
+      <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
     </div>
-    <script src="DefenseSchedule.js"></script>
+    <script>
+       
+        </script>
+  <div class="hero">
+    <div class="single-box">
+      <div class="box-text">
+        <p class="notifi">
+          <a href="#" class="name"></a>Ian has joined your group DreamTeam
+          <a href="#" class="group"></a>
+          <span class="dot"></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="single-box">
+      <div class="box-text">
+        <p class="notifi">
+          <a href="#" class="name"></a>Barit has joined your group DreamTeam
+          <a href="#" class="group"></a>
+          <span class="dot"></span>
+        </p>
+      </div>
+    </div>
+    
+    <div class="single-box unseen">
+      <div class="box-text">
+        <p class="notifi">
+          <a href="#" class="name"></a>Carlos has joined your group DreamTeam
+          <a href="#" class="group"></a>
+          <span class="dot"></span>
+        </p>
+      </div>
+    </div>          
+  </div>
+<script src="adminHome.js"></script>   
 </body>
-</html>
-   
-           

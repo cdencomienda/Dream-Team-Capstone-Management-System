@@ -316,6 +316,8 @@ body{
   background-image: url(menu_assets/capstone_icon.png);
   background-repeat: no-repeat;
 }
+
+
 .logobtn{ 
 width:100px;
 height:90px;
@@ -548,3 +550,20 @@ main.table {
     opacity: 50%; 
     border-radius:25px;
    } 
+
+   
+.show-modal-btn {  
+  color: #000000;
+  float: right;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+
+.show-modal-btn:hover,
+.show-modal-btn:focus {
+  color: #787272;
+  text-decoration: none;
+  cursor: pointer;
+}

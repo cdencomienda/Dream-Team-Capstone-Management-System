@@ -2,6 +2,8 @@
 //     var container = document.querySelector('.containerCreatecourse');
 //     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 //   }
+
+
 document.addEventListener('click', e =>{
     const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
     if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
@@ -24,6 +26,7 @@ document.addEventListener('click', e =>{
 // Add an event listener to the "Members" button
 document.querySelector('.Members-Btn').addEventListener('click', fetchGroupMembers);
 
+
 function studentnotifAuth(){
     window.location.assign("NotificationPage.php")
 }
@@ -34,8 +37,9 @@ function archive(){
 window.location.assign("HomePage.php")
 } 
 function StudentSchedule(){ 
-    window.location.assign("DefenseSchedule.php")
+    window.location.assign("studentSchedule.php")
   } 
+  
 function showDefaultBody() {
     document.getElementById("defaultBody").style.display = "block";
     document.getElementById("submissionFrame").style.display = "none";
@@ -48,12 +52,14 @@ function submissionBtnAuth() {
 
 }
 
-
 function newGroupCreated() {
     var container = document.querySelector('.student');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-      
   }
+
+
+    
+
 // document.addEventListener('click', e =>{
 // const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
 // if(!isflsDropdowButton && e.target.closest('[data-flsDropdown]') != null)
@@ -71,32 +77,8 @@ function newGroupCreated() {
 // });
 // }) 
 
-document.addEventListener('profile', function () {
-    const editProfileBtn = document.querySelector('.StudentDefault');
-    const logoutBtn = document.querySelector('.logoutBtn');
   
-    editProfileBtn.addEventListener('click', function (event) { 
-      event.preventDefault(); 
-    }); 
-  });
-  
-  function openArchive(){
-    window.location.assign("ProfessorHome.php")
-  }
-  function notifProf(){
-    window.location.assign("ProfNotificationPage.php")
-  }
-  function openClassPage(){
-    window.location.assign("CourseCreate.php")
-  } 
-  function logOUT(){
-    window.location.assign("LoginSignup.php")
-  }
-  function scheduleProf(){
-    window.location.assign("Defenschedule.php")
-  }
-  document.getElementById('editProfileBtn').addEventListener('click', function() {
-    var overlay = document.getElementById("editProfileOverlay");
-    overlay.style.display = "block";
-  });
    
+
+
+  

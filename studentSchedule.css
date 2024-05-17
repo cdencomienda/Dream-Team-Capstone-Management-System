@@ -336,38 +336,6 @@ body{
   background-image: url(menu_assets/schedule_icon.png);
   background-repeat: no-repeat;
 }
-.Users{
-  top: -65px;
-  left: 20px;
-  width:50px;
-  height:30px;
-  padding: 60px 0px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  outline: none;
-  position: relative;
-  background-image: url(menu_assets/users-icon.png);
-  background-repeat: no-repeat;
-  /* color: white; */
-}
-.Defense-Reports{ 
-  top: -85px;
-  left: 20px;
-  width:50px;
-  height:30px;
-  padding: 60px 0px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  outline: none;
-  position: relative;
-  background-image: url(menu_assets/defense-icon.png);
-  background-repeat: no-repeat;
-  font-size:small;
-  /* color: white; */
-} 
-
 .capstone{
   top: -45px;
   left: 20px;
@@ -532,7 +500,6 @@ body{
   text-decoration: none;
   cursor: pointer;
 }
-
 .SchedDetails{
   display: flex;
   justify-content: space-evenly;
@@ -582,9 +549,9 @@ body{
   transition: border-color 0.3s ease; 
 }
 .input-field3{
-  width: 90%;
+  width: 60%;
   padding: 10px; /* Add padding as needed */
-  font-size: medium;
+  font-size: large;
   border: 1px solid #ccc; /* Add border */
   border-radius: 10px; /* Add border radius for rounded corners */
   margin-bottom: 10px; /* Add margin between input fields */

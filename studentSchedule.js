@@ -68,19 +68,19 @@ function closeEditform(){
 
   
   function openArchive(){
-    window.location.assign("ProfessorHome.php")
+    window.location.assign("homepage.php")
   }
   function notifProf(){
-    window.location.assign("ProfNotificationPage.php")
+    window.location.assign("NotificationPage.php")
   }
   function openClassPage(){
-    window.location.assign("CourseCreate.php")
+    window.location.assign("StudentCourse.php")
   } 
   function logOUT(){
     window.location.assign("LoginSignup.php")
   }
   function scheduleProf(){
-    window.location.assign("Defenseschedule.php")
+    window.location.assign("studentSchdule.php")
   }
   document.getElementById('editProfileBtn').addEventListener('click', function() {
     var overlay = document.getElementById("editProfileOverlay");

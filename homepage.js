@@ -13,7 +13,7 @@ function Studentarchive(){
   window.location.assign("HomePage.php")
 } 
 function StudentSchedule(){ 
-  window.location.assign("DefenseSchedule.php")
+  window.location.assign("studentSchedule.php")
 } 
 function StudentCapstone(){ 
 } 

@@ -252,7 +252,7 @@
                     newRow += '<td>' + user.userType + '</td>';
                     newRow += '<td>' + user.userName + '</td>';
                     newRow += '<td>' + user.userEmail + '</td>';
-                    newRow += '<td><button class="show-modal-btn">Edit</button></td>'; // Add button for modal
+                    newRow += '<td><button class="show-modal-btn"><i class="fa-regular fa-pen-to-square"></i></button></td>'; // Add button for modal
                     newRow += '</tr>';
                     $('#user_table_body').append(newRow);
                 });
