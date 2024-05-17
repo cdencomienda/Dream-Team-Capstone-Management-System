@@ -17,7 +17,7 @@
     
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
+            <button type="button" class="logobtn"  onclick="openArchive()"></button>
             </div>
         <div class="search">
             <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -29,7 +29,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                    <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -49,7 +49,7 @@
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
-                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                            <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
@@ -100,10 +100,10 @@
     <div class="hero">
         <div class="Lsection">
             <div id="sectionBtn"></div>
-            <button type="button" class="notif"  onclick="studentnotifAuth()">Notification</button>
-            <button type="button" class="class"  onclick="studentClass()">Class</button>
-            <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
-            <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+            <button type="button" class="notif"  onclick="notifProf()">Notification</button>
+            <button type="button" class="class"  onclick="openClassPage()">Class</button>
+            <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
+            <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
         </div>
 
         <div class="MainScheduleCont">

@@ -101,7 +101,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/babay.png" alt="profile-img">
+                    <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -121,7 +121,7 @@
                     
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
-                            <img src="menu_assets/babay.png" alt="profile-img">
+                            <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
