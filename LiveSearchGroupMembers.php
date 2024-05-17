@@ -4,6 +4,15 @@ session_start();
 
 // Check if the user is logged in
 if (isset($_SESSION['user_id'])) {
+    // Check if the group name is stored in the session
+    if (!isset($_SESSION['groupName'])) {
+        echo json_encode(['error' => 'Group name not stored in session']);
+        exit();
+    }
+
+    // Retrieve the stored group name
+    $groupName = $_SESSION['groupName'];
+
     // Connect to the database
     $conn = new mysqli('localhost', 'root', '', 'dreamteam');
 
@@ -14,31 +23,22 @@ if (isset($_SESSION['user_id'])) {
         exit();
     }
 
-    // Get the group ID from the request (passed as a query parameter)
-    $groupID = isset($_GET['groupID']) ? intval($_GET['groupID']) : 0;
-
-    // Ensure group ID is valid
-    if ($groupID <= 0) {
-        echo json_encode(['error' => 'Invalid group ID']);
-        exit();
-    }
-
     // Prepare the SQL query to fetch the group members
     $sql = "SELECT g.groupID, g.groupname, u.userID, u.username
             FROM `group` g
             JOIN `users` u ON g.studentID = u.userID
-            WHERE g.groupID = ?";
+            WHERE g.groupname = ?";
 
     // Prepare the statement
     $stmt = $conn->prepare($sql);
 
-    // Bind the group ID parameter to the query
+    // Bind the group name parameter to the query
     if (!$stmt) {
         echo json_encode(['error' => 'Failed to prepare the query']);
         exit();
     }
 
-    $stmt->bind_param('i', $groupID);
+    $stmt->bind_param('s', $groupName);
 
     // Execute the query
     if (!$stmt->execute()) {

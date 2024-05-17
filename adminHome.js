@@ -59,7 +59,7 @@ document.addEventListener('profile', function () {
     window.location.assign("AdminNotifications.php")
   }
   function openClassPage(){
-    window.location.assign("CourseCreate.php")
+    window.location.assign("AdminCourseCreate.php")
   } 
   function logOUT(){
     window.location.assign("LoginSignup.php")

@@ -683,3 +683,32 @@ transition opacity 0.3s ease; /* Add transition for background color */
 opacity: 50%; /* Example background color on hover */
 border-radius:25px;
 }
+
+
+#error-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  background-color: #ffcccc;
+  color: #ff0000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+
+#error-message.show {
+  display: block;
+}
+
+#error-message button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
