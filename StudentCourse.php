@@ -154,7 +154,7 @@
 
 
                     // Function to fetch and display the student's courses
-function fetchStudentCourses() {
+                    function fetchStudentCourses() {
     console.log('Fetching student courses...');
 
     fetch('LiveSearchStudentCourses.php')
@@ -206,36 +206,73 @@ function fetchStudentCourses() {
                 courseContainer.appendChild(courseButton);
                 console.log('Appended course button to course container');
 
-                // Create a new button for each courseID
-                var groupButton = document.createElement('button');
-                groupButton.type = 'button';
-                groupButton.id = `group_name_${course.courseID}`;
-                groupButton.classList.add('createdgroupBTN');
-                groupButton.textContent = `Group for ${course.courseID}`;
-                groupButton.onclick = function() {
-                    console.log('Group button clicked for courseID:', course.courseID);
-                    newGroupCreated(course.courseID);
-                    storeCourseID(course.courseID);
-                    
-                    // Call fetchGroupInfo() when the groupButton is clicked
-                    fetchGroupInfo();
-                };
-                console.log('Created group button for courseID:', course.courseID);
-
-                // Append the group button to the course container
-                courseContainer.appendChild(groupButton);
-                console.log('Appended group button to course container');
+                // Fetch and append groups for the current course
+                fetchGroups(course.courseID, newGroupButton => {
+                    const groupContainer = document.createElement('div');
+                    groupContainer.classList.add('group-container');
+                    groupContainer.appendChild(newGroupButton);
+                    courseContainer.appendChild(groupContainer); // Append the group container inside the course container
+                });
 
                 // Append the course container to the list
                 coursesList.appendChild(courseContainer);
                 console.log('Appended course container to courses list');
-                
             });
         })
         .catch(error => {
             console.error('Error fetching student courses:', error);
         });
 }
+
+function fetchGroups(courseID, callback) {
+    fetch('getGroupNameforButton.php?courseID=' + courseID) // Include courseID in the URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then(data => {
+            console.log('Parsed Groups:', data); // Log the parsed data
+            const addedGroups = {}; // Object to store added group IDs for this course
+
+            // Iterate over courseIDs in the data object
+            for (const course in data) {
+                data[course].forEach(groupName => { // Iterate over group names
+                    // Check if the groupID has already been added for this course
+                    if (!(groupName in addedGroups)) {
+                        const newGroupButton = document.createElement('button');
+                        newGroupButton.type = 'button';
+                        newGroupButton.classList.add('createdgroupBTN');
+                        newGroupButton.textContent = groupName; // Display the groupName
+                        newGroupButton.dataset.courseId = courseID; // Store the courseID as a data attribute
+
+                        newGroupButton.onclick = () => {
+                            console.log('Clicked group: ', groupName, ' and Clicked stored courseID', courseID); // Log the clicked group name
+                            newGroupCreated(courseID); // Call the newGroupCreated function with courseID
+                            storeCourseID(courseID);
+                            fetchGroupInfo();
+
+                        };
+
+                        if (callback && typeof callback === 'function') {
+                            callback(newGroupButton); // Call the callback function with the newGroupButton
+                        }
+
+                        addedGroups[groupName] = true; // Add the groupName to the addedGroups object
+
+                        // Log the groupName here after it's assigned
+                        console.log('Created createdgroupBTN for group Name:', groupName);
+
+                        // Log the courseID
+                        console.log('Course ID in fetchGroups:', courseID);
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching groups:', error));
+}
+
 
 
 
@@ -276,9 +313,9 @@ function storeCourseID(courseID) {
 
 
 
+
+
 // Call the function to fetch student courses when the page loads
-
-
 function newGroupCreated() {
     var container = document.querySelector('.StudentDefault');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
