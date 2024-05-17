@@ -2,6 +2,11 @@
 // Start the session to access session variables
 session_start();
 
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Create connection to MySQL database
 $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
@@ -27,9 +32,13 @@ if (isset($_SESSION['varCourseID'])) {
         }
     }
 
-    // Exclude enrolled student IDs from the SQL query
-    $enrolledStudentIDsString = implode(',', $enrolledStudentIDs);
-    $sql = "SELECT userName, userType FROM users WHERE userType = 'Student' AND userID NOT IN ($enrolledStudentIDsString)";
+    // Prepare the SQL query
+    if (!empty($enrolledStudentIDs)) {
+        $enrolledStudentIDsString = implode(',', $enrolledStudentIDs);
+        $sql = "SELECT userName, userType FROM users WHERE userType = 'Student' AND userID NOT IN ($enrolledStudentIDsString)";
+    } else {
+        $sql = "SELECT userName, userType FROM users WHERE userType = 'Student'";
+    }
 } else {
     // If varCourseID is not set, fetch all students
     $sql = "SELECT userName, userType FROM users WHERE userType = 'Student'";

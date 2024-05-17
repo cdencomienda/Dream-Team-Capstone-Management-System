@@ -9,68 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-    <style>
-        
-        body{
-         background: #CBC4BA;
-         overflow-x: hidden;
-        overflow: hidden;
-        }
-        #error-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 15px;
-            background-color: #ffcccc;
-            color: #ff0000;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: none;
-        }
- 
-        #error-message.show {
-            display: block;
-        }
- 
-        #error-message button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #ff0000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .close {
-        /* Add your button styles here */
-        background-color: transparent; /* Example background color */
-        height: 30px;
-        width:  30px;
-        border: none;
-        padding: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 350px;
-        overflow: hidden; 
-        }
-        /* CSS for the icon inside the button */
-        .close i {
-            /* Add your icon styles here */
-            color: black; /* Example color */
-            font-size: 25px;
-            margin:-3px
-            /* transition: opacity 0.3s ease; Add transition for background color */
-        }
-        /* Change background color on hover */
-        .close i:hover {
-            opacity: 50%; /* Example background color on hover */
-            border-radius:25px;
-        }
-        
 
-    </style>
     <link rel="stylesheet" href="AdminHomeStyle.css">
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
@@ -89,7 +28,7 @@
         <div class="container">
             <div class="action">
                 <div class="profile">
-                    <img src="menu_assets/prof.jpg" alt="profile-img">
+                    <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
                     <h3><?php echo $_SESSION['username']; ?><br/>
@@ -109,7 +48,7 @@
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                        
                         <div class="profile">
-                            <img src="menu_assets/prof.jpg" alt="profile-img">
+                            <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
                         <h5edit><?php echo $_SESSION['username']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>

@@ -80,7 +80,7 @@ function closeEditform(){
     window.location.assign("LoginSignup.php")
   }
   function scheduleProf(){
-    window.location.assign("studentSchdule.php")
+    window.location.assign("studentSchedule.php")
   }
   document.getElementById('editProfileBtn').addEventListener('click', function() {
     var overlay = document.getElementById("editProfileOverlay");

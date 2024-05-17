@@ -172,10 +172,12 @@
 <body>
     <div class="Lsection">
         <div id="sectionBtn"></div>
-        <button type="button" class="notif"  onclick="notifProf()">Notification</button>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
         <button type="button" class="class"  onclick="openClassPage()">Class</button>
-        <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
-        <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
+        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="Users"  onclick="Users()">Users</button>
+        <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
     </div>
  
 <!-- courseCreation     -->
@@ -1114,7 +1116,7 @@ fetchStudentIDs(courseID);
 <!-- set requirements -->
 <div class="setrequirements">
     <h3>Requirements</h3>
-    <form class="Requirements" method="POST" action="addRequirements.php">
+    <form class="Requirements" method="POST" action="test.php">
         <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
         <h3>Requirements Description</h3>
         <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
@@ -1146,7 +1148,7 @@ fetchStudentIDs(courseID);
             <!-- </div> -->
         </div>
      
-    <script src="professorhome.js"></script>   
+    <script src="adminHome.js"></script>   
      
 </body>
 </html> 

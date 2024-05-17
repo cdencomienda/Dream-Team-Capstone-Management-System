@@ -158,7 +158,7 @@
 
 }
                     // Function to fetch and display the student's courses
-                    function fetchStudentCourses() {
+function fetchStudentCourses() {
     console.log('Fetching student courses...');
 
     fetch('LiveSearchStudentCourses.php')
@@ -255,7 +255,9 @@ function fetchGroups(courseID, callback) {
                             console.log('Clicked group: ', groupName, ' and Clicked stored courseID', courseID); // Log the clicked group name
                             newGroupCreated(courseID); // Call the newGroupCreated function with courseID
                             storeCourseID(courseID);
+                            storeGroupName(groupName);
                             fetchGroupInfo();
+                            populateGroupMembers();
 
                         };
 
@@ -276,6 +278,31 @@ function fetchGroups(courseID, callback) {
         })
         .catch(error => console.error('Error fetching groups:', error));
 }
+
+function storeGroupName(groupName) {
+    console.log('groupName to be stored: ', groupName);
+
+    fetch('storeGroupName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'group=' + encodeURIComponent(groupName),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Assume the response is JSON
+    })
+    .then(data => {
+        console.log('Response from server:', data); // Log the server response
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
 
 
 
@@ -335,39 +362,52 @@ function fetchGroupMembers() {
                 console.error('Error obtaining group ID:', data.error);
                 return;
             }
-
-            // Get the group ID from the response
-            const groupID = data.groupID;
-
-            // Use the group ID to fetch and display group members
-            fetch(`LiveSearchGroupMembers.php?groupID=${groupID}`)
-                .then(response => response.json())
-                .then(response => {
-                    const groupMembersContainer = document.getElementById('groupMembersContainer');
-                    groupMembersContainer.innerHTML = ''; // Clear previous content
-
-                    if (response.error) {
-                        // Display error message if server returns an error
-                        groupMembersContainer.textContent = response.error;
-                    } else {
-                        // Display group members
-                        response.forEach(member => {
-                            const memberElement = document.createElement('div');
-                            memberElement.textContent = member.username; // Display member's username
-                            groupMembersContainer.appendChild(memberElement);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching group members:', error);
-                    const groupMembersContainer = document.getElementById('groupMembersContainer');
-                    groupMembersContainer.textContent = 'Error fetching group members. Please try again later.';
-                });
         })
         .catch(error => {
             console.error('Error obtaining group ID:', error);
         });
 }
+
+
+function populateGroupMembers() {
+    fetch('LiveSearchGroupMembers.php')
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            const container = document.getElementById('groupMembersContainer');
+            container.innerHTML = ''; // Clear any existing content
+
+            if (status === 200) {
+                if (body.length === 0) {
+                    container.innerHTML = '<p>No group members found.</p>';
+                    return;
+                }
+
+                body.forEach(member => {
+                    const memberDiv = document.createElement('div');
+                    memberDiv.className = 'group-member';
+                    memberDiv.innerHTML = `
+                        <p>${member.username}</p>
+                    `;
+                    container.appendChild(memberDiv);
+                });
+            } else {
+                container.innerHTML = `<p>Error: ${body.error}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching group members:', error);
+            const container = document.getElementById('groupMembersContainer');
+            container.innerHTML = `<p>Error fetching group members. Please try again later.</p>`;
+        });
+}
+
+
+
+
+// Call the function to populate the group members
+populateGroupMembers();
+
+
 
 fetchStudentCourses()
                 </script>  

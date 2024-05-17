@@ -17,7 +17,7 @@
     
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="openArchive()"></button>
+            <button type="button" class="logobtn"  onclick="openArchive1()"></button>
             </div>
         <div class="search">
             <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -101,7 +101,7 @@
         <div class="Lsection">
             <div id="sectionBtn"></div>
             <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-      <button type="button" class="class"  onclick="studentClass()">Class</button>
+      <button type="button" class="class"  onclick="openClassPage1()">Class</button>
       <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
       <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
       <button type="button" class="Users"  onclick="Users()">Users</button>
@@ -111,8 +111,8 @@
     function notifAuth(){
     window.location.assign("AdminNotifications.php")
   }
-  function openClassPage(){
-    window.location.assign("CourseCreate.php")
+  function openClassPage1(){
+    window.location.assign("AdminCourseCreate.php")
   } 
   function logOUT(){
     window.location.assign("LoginSignup.php")
@@ -123,7 +123,7 @@
   function Users(){
     window.location.assign("Adminuser.php")
   }
-  function openArchive(){
+  function openArchive1(){
     window.location.assign("AdminHome.php")
   }
     </script>
