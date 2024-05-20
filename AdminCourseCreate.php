@@ -2,13 +2,12 @@
 <html lang="en">
 <head> 
 
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-    <title>Class Menu</title>
+    <title>Admin Classmenu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
@@ -17,7 +16,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
     <style>
-         
          
         body{
          background: #CBC4BA;
@@ -52,8 +50,7 @@
             cursor: pointer;
         }
         .close {
-        /* Add your button styles here */
-        background-color: transparent; /* Example background color */
+        background-color: transparent; 
         height: 30px;
         width:  30px;
         border: none;
@@ -62,26 +59,24 @@
         cursor: pointer;
         margin-left: 350px;
         overflow: hidden; 
-    }
+        }
     
+        .close i {
+            color: black; 
+            font-size: 25px;
+            margin:-3px
+            transition opacity 0.3s ease; 
+        }
+       
+        .close i:hover {
+            opacity: 50%; 
+            border-radius:25px;
 
-  
-    /* CSS for the icon inside the button */
-    .close i {
-        /* Add your icon styles here */
-        color: black; /* Example color */
-        font-size: 25px;
-        margin:-3px
-        transition opacity 0.3s ease; /* Add transition for background color */
-    }
-      /* Change background color on hover */
-      .close i:hover {
-        opacity: 50%; /* Example background color on hover */
-        border-radius:25px;
-
-    }
+        }
 
     </style>
+
+
     <link rel="stylesheet" href="CourseCreate.css">
     <?php include 'login.php'; ?>
     <?php include 'CourseCreated.php'; ?>
@@ -169,6 +164,7 @@
         </div>
     </div>
 </head>
+
 <body>
     <div class="Lsection">
         <div id="sectionBtn"></div>
@@ -231,7 +227,7 @@
 
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
-            <!-- <div id="coursesDropdown">
+            <div id="coursesDropdown">
                 <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
@@ -243,7 +239,7 @@
                     </div>
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div> -->
+            </div>
  
 <!-- Script to handle AJAX request for live search -->
             <div id="coursesDropdown"></div>
