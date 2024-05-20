@@ -38,7 +38,7 @@ body {
   position: relative;
   width: 60px;
   height: 60px;
-  margin-left: 200px;
+  margin-left: 130px;
   margin-bottom: 10px;
   border-radius: 50%;
   overflow: hidden;
@@ -257,7 +257,7 @@ body {
 
 .Defense-Page{
  
-  width: 70%; /* Set width */
+  width: 85%; /* Set width */
   height: 500px; /* Set height */
   overflow: auto; 
   padding: 10px;
