@@ -173,8 +173,7 @@ function viewMembers() {
   // }
 }
 
-function createGROUP(){ 
-}
+ 
  
 // js fucntion of group submission members requ files 
 document.addEventListener('click', e =>{
