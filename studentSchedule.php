@@ -173,6 +173,7 @@
 
     </div>
     <script src="studentSchedule.js"></script>
+    
 </body>
 </html>
    

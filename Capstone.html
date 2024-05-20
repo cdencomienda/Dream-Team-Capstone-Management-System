@@ -1,49 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone Defense</title>
     <link rel="stylesheet" href="Capstone.css">
-    
-    <!-- link ng fontawsme -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-
-    <div class="header">
-      <div class="wrap">
-          <button type="button" class="logobtn"  onclick="archive()"></button> 
-          </div> 
-          <div class="search">
-              <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
-              <button type="submit" class="searchButton">
-              <span>&#128269;</span>
-              </button>
-          </div>
-      <div class="container">
-          <div class="action">
-            <div class="profile">
-              <img src="menu_assets/mugshot.png" alt="profile-img">
-            </div>
-          <div class="menu">
-              <h3>John Russel<br/>
-                  <span>useremail@test.com</span>
-              </h3>
-              <button type="button" class="editprofileBtn" >Edit Profile</button> 
-              <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
-          </div>
-      </div>
-  </div>
-</div>
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <div class="Lsection">
-    <div id="sectionBtn"></div>
-      <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-      <button type="button" class="class"  onclick="studentClass()">Class</button>
-      <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-      <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+
+    <div class="header">
+        <div class="wrap">
+            <button type="button" class="logobtn" onclick="archive()"></button>
+        </div>
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
+            <button type="submit" class="searchButton">
+                <span>&#128269;</span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="action">
+                <div class="profile">
+                    <img src="menu_assets/mugshot.png" alt="profile-img">
+                </div>
+                <div class="menu">
+                    <h3>John Russel<br />
+                        <span>useremail@test.com</span>
+                    </h3>
+                    <button type="button" class="editprofileBtn">Edit Profile</button>
+                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                </div>
+            </div>
+        </div>
     </div>
-<script src="homepage.js"></script>   
+
+    <div class="Lsection">
+        <button type="button" class="notif" onclick="notifAuth()">Notification</button>
+        <button type="button" class="class" onclick="studentClass()">Class</button>
+        <button type="button" class="schedule" onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone" onclick="Capstone()">Capstone Defense</button>
+    </div>
+    <div class="Defense-Page">
+    <div class="rubric-container">
+        <div class="rubric-header">
+            <h1>Written Communication</h1>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="description-column">Description</th>
+                    <th class="grades-column">Grades</th>
+                    <th class="remarks-column">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B1. Executive Summary</strong><br>
+                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                   
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B2. Prototyping and Proofing Design</strong><br>
+                        Fully describes the methods used including any technique, measurements and/or calculation in an organized, scientific, accurate, logical, and coherent way.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                     
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B3. Results & Discussion</strong><br>
+                        Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                    </td>
+                    <td class="score-column">
+                        <select>
+            
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                  <td class="description">
+                      <strong>B3. Results & Discussion</strong><br>
+                      Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                  </td>
+                  <td class="score-column">
+                      <select>
+          
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                          <option value="1">1</option>
+                          <option value="0">0</option>
+                      </select>
+                  </td>
+                  <td>
+                      <textarea class="remarks-box"></textarea>
+                      
+                  </td>
+              </tr>
+              <tr class="criteria">
+                <td class="description">
+                    <strong>B3. Results & Discussion</strong><br>
+                    Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                </td>
+                <td class="score-column">
+                    <select>
+        
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                    </select>
+                </td>
+                <td>
+                    <textarea class="remarks-box"></textarea>
+                </td>
+            </tr>
+           
+         
+             
+            </tbody>
+        </table>
+
+        <div class="rubric-header">
+            <h1>Presentation</h1>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="description-column">Description</th>
+                    <th class="grades-column">Grades</th>
+                    <th class="remarks-column">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B1. Executive Summary</strong><br>
+                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                   
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B2. Prototyping and Proofing Design</strong><br>
+                        Fully describes the methods used including any technique, measurements and/or calculation in an organized, scientific, accurate, logical, and coherent way.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                     
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B3. Results & Discussion</strong><br>
+                        Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                    </td>
+                    <td class="score-column">
+                        <select>
+            
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                  <td class="description">
+                      <strong>B3. Results & Discussion</strong><br>
+                      Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                  </td>
+                  <td class="score-column">
+                      <select>
+          
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                          <option value="1">1</option>
+                          <option value="0">0</option>
+                      </select>
+                  </td>
+                  <td>
+                      <textarea class="remarks-box"></textarea>
+                      
+                  </td>
+              </tr>
+              <tr class="criteria">
+                <td class="description">
+                    <strong>B3. Results & Discussion</strong><br>
+                    Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                </td>
+                <td class="score-column">
+                    <select>
+        
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                    </select>
+                </td>
+                <td>
+                    <textarea class="remarks-box"></textarea>
+                </td>
+            </tr>
+           
+         
+             
+            </tbody>
+        </table>
+        <div class="rubric-header">
+            <h1>Documentation</h1>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="description-column">Description</th>
+                    <th class="grades-column">Grades</th>
+                    <th class="remarks-column">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B1. Executive Summary</strong><br>
+                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                   
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B2. Prototyping and Proofing Design</strong><br>
+                        Fully describes the methods used including any technique, measurements and/or calculation in an organized, scientific, accurate, logical, and coherent way.
+                    </td>
+                    <td class="score-column">
+                        <select>
+                     
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                    <td class="description">
+                        <strong>B3. Results & Discussion</strong><br>
+                        Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                    </td>
+                    <td class="score-column">
+                        <select>
+            
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td>
+                        <textarea class="remarks-box"></textarea>
+                    </td>
+                </tr>
+                <tr class="criteria">
+                  <td class="description">
+                      <strong>B3. Results & Discussion</strong><br>
+                      Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                  </td>
+                  <td class="score-column">
+                      <select>
+          
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                          <option value="1">1</option>
+                          <option value="0">0</option>
+                      </select>
+                  </td>
+                  <td>
+                      <textarea class="remarks-box"></textarea>
+                      
+                  </td>
+              </tr>
+              <tr class="criteria">
+                <td class="description">
+                    <strong>B3. Results & Discussion</strong><br>
+                    Objective metrics were used in the assessment and evaluation of the design objectives, while functional or procedural specifications for the functions.
+                </td>
+                <td class="score-column">
+                    <select>
+        
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                    </select>
+                </td>
+                <td>
+                    <textarea class="remarks-box"></textarea>
+                </td>
+            </tr>
+           
+         
+             
+            </tbody>
+        </table>
+    </div>
+</div>
+    <script src="homepage.js"></script>
 </body>
+</html>
