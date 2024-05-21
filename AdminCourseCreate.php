@@ -178,44 +178,110 @@
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
     </div>
 
-    <div class="class-Dropdown">
-    <div class="classListDropdown">                              
-        <div class="listClass">  
-            <h4>COURSES AY 2023-2024</h4>
-            <span class="selectedClass">Select a Term</span> 
-            <div class="coursesListed"></div>                        
-        </div>
-        <ul class="menuCourses"> 
-            <li class="term" data-term="term1">Term 1</li>
-            <li class="term" data-term="term2">Term 2</li>
-            <li class="term" data-term="term3">Term 3</li>
-        </ul>
-    </div>  
+    <div class="wrapper"><!-- start of wrapper scroll -->
+        <div class="class-Dropdown">
+            <div class="classListDropdown">                              
+                <div class="listClass">  
+                    <h4>COURSES AY 2023-2024</h4>
+                    <span class="selectedClass">Select a Term</span> 
+                    <div class="coursesListed"></div>                        
+                </div>
+                <ul class="menuCourses"> 
+                    <li class="term" data-term="term1">Term 1</li>
+                    <li class="term" data-term="term2">Term 2</li>
+                    <li class="term" data-term="term3">Term 3</li>
+                </ul>
+            </div>  
 
-    <div class="coursesDetails" id="term1">
-        <h3 class="termh3">Courses for Term 1</h3>
-        <div class="coursesButtons">
-            <h3 id="courseNameDisplay"> CPEDRAF <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
-            <button>DATAMNGT</button>
+            <div class="coursesDetails" id="term1">
+                <h3 class="termh3">Courses for Term 1</h3>
+                    <div id="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 id="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
+                            <div class="dropdown-content" id="courseActions">
+                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    </div>
+
+                    <div id="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 id="courseNameDisplay"> CPEDRAF <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
+                            <div class="dropdown-content" id="courseActions">
+                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    </div> 
+
+            </div>
+            
+            <div class="coursesDetails" id="term2">
+                <h3 class="termh3">Courses for Term 2</h3>
+                <div id="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 id="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
+                            <div class="dropdown-content" id="courseActions">
+                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    </div>
+
+            </div>
+
+            <div class="coursesDetails" id="term3">
+                <h3 class="termh3" >Courses for Term 3</h3>
+                <div id="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 id="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
+                            <div class="dropdown-content" id="courseActions">
+                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    </div>
+
+            </div>
+            
         </div>
-    </div>
-    
-    <div class="coursesDetails" id="term2">
-        <h3 class="termh3">Courses for Term 2</h3>
-        <div class="coursesButtons">
-            <button>LOGICDES</button>
-            <button>FDCONS</button>
-        </div>
-    </div>
-    
-    <div class="coursesDetails" id="term3">
-        <h3 class="termh3" >Courses for Term 3</h3>
-        <div class="coursesButtons">
-            <button>MIXSIGS</button>
-            <button>ROBPROA</button>
-        </div>
-    </div>
-</div>
+
+        <div class="adminClass">
+            <!-- viewgroup -->
+            <div class="viewgroup" id="viewGRP">
+                <div>
+                    <button class = "closeViewGroup" onclick= "clsViewGrp()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                 </div>
+                <h3>Members:</h3>
+                    <div class="membersContainer">
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>StudentName</h4>
+                        <h4>InstructorName</h4>
+                    </div>
+                </div>
+        </div>   
+
+    </div><!-- end of wrapper scroll -->
+
 
 
 <script src="adminHome.js"></script>   

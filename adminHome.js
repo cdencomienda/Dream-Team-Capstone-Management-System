@@ -68,6 +68,14 @@ document.addEventListener('profile', function () {
     window.location.assign("AdminDefenseschedule.php")
   }
 
+// action of melonbtns
+function viewMembers() { 
+  var container = document.querySelector('.viewgroup'); 
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
+ 
+}
+
+
   // profile
 
   document.addEventListener('profile', function () {

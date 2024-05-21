@@ -484,11 +484,13 @@ background-repeat: no-repeat;
   font-weight: 100; 
   border: #000000;
   background-color: transparent;
+  z-index: -1000000px;
 } 
 .classSet:hover { 
   background-color: #0056b3;
   transform: scale(1);
   cursor: pointer;
+  z-index: -1000000px;
 }  
 .coursesDropdown{
   height: 700px;
