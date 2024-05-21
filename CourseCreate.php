@@ -229,7 +229,7 @@
 
 <!-- Course Display Dropdown --> 
         <!-- WAG DELETE PLS -->
-            <!-- <div id="coursesDropdown">
+            <div id="coursesDropdown">
                 <div class="dropdownmelon">            
                     <h3 id="courseNameDisplay">Courses Created <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
                     <div class="dropdown-content" id="courseActions">
@@ -241,7 +241,7 @@
                     </div>
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div> -->
+            </div>
  
 <!-- Script to handle AJAX request for live search -->
             <div id="coursesDropdown"></div>
