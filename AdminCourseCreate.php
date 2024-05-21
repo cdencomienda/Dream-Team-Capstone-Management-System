@@ -182,7 +182,7 @@
         <div class="class-Dropdown">
             <div class="classListDropdown">                              
                 <div class="listClass">  
-                    <h4>COURSES AY 2023-2024</h4>
+                    <h5>COURSES AY 2023-2024</h5>
                     <span class="selectedClass">Select a Term</span> 
                     <div class="coursesListed"></div>                        
                 </div>
@@ -207,21 +207,7 @@
                             </div>
                         </div>
                         <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-                    </div>
-
-                    <div id="coursesDropdown">
-                        <div class="dropdownmelon">            
-                            <h3 id="courseNameDisplay"> CPEDRAF <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
-                            <div class="dropdown-content" id="courseActions">
-                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                            </div>
-                        </div>
-                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-                    </div> 
+                    </div>  
 
             </div>
             
@@ -264,25 +250,140 @@
         </div>
 
         <div class="adminClass">
-            <!-- viewgroup -->
+        <!-- viewgroup -->
             <div class="viewgroup" id="viewGRP">
                 <div>
                     <button class = "closeViewGroup" onclick= "clsViewGrp()">  <i class="fa-regular fa-circle-xmark"></i> </button>
-                 </div>
-                <h3>Members:</h3>
-                    <div class="membersContainer">
-                        <h4>StudentName</h4>
-                        <h4>StudentName</h4>
-                        <h4>StudentName</h4>
-                        <h4>StudentName</h4>
-                        <h4>InstructorName</h4>
-                    </div>
                 </div>
+                <h3>Members:</h3>
+                <div class="membersContainer">
+                    <h4>StudentName</h4>
+                    <h4>StudentName</h4>
+                    <h4>StudentName</h4>
+                    <h4>StudentName</h4>
+                    <h4>InstructorName</h4>
+                </div>
+            </div>
+        <!-- group class  -->
+            <div class="GroupContainer">
+                    <div class="dashboard_header">
+                        <div class="groupname_container"> 
+                            <div class="group_name" id="group_name">     
+                            </div>   
+                                </div>
+                                <script> 
+                                    
+                                </script> 
+                            <h4>
+                    <div class="button-group"> 
+                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">          
+                                    Advisor Recomendation Sheet: 
+                                    <div class = "advRecomendation">
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
+                        </div>    
+                        <div class="mDropdown" data-flsDropdown>  
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                    member1
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
+                    </div> 
+
+                    <!-- files -->
+                    <div class="defaultBody" id="defaultBody">
+                        <div class="recentFiles" >
+                            'featured files here'
+                        </div >
+                    </div>
+                    
+                    <!-- submissions -->
+                    <div class="submissionFrame" id="submissionFrame">
+                        <div class="submissionscontainer">
+                            <div class= "requirement-list">
+                                <div class = "req-nameCont"> 
+                                    <div class="requirement-name">
+                                    
+                                    </div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                    // Function to fetch requirements information for the logged-in student's group
+                                    function fetchRequirementsInfo() {
+                                        fetch('fetchRequirements.php')
+                                            .then(response => response.json())
+                                            .then(requirements => {
+                                                const reqNameContainer = document.querySelector('.req-nameCont');
+                                                
+                                                // Clear existing content
+                                                reqNameContainer.innerHTML = '';
+            
+                                                // Populate the container with the group's requirements
+                                                requirements.forEach(requirement => {
+                                                    const div = document.createElement('div');
+                                                    div.className = 'requirement-name';
+                                                    div.textContent = requirement;
+                                                    reqNameContainer.appendChild(div);
+                                                });
+                                            })
+                                            .catch(error => {
+                                                console.error('Error fetching requirements information:', error);
+                                            });
+                                    }
+            
+                                    // Fetch requirements information when the page loads
+                                    fetchRequirementsInfo();
+                                });
+                                </script>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <script> 
+                        </script>
+
+                    <!-- file repo -->
+                    <div class="professorFilesR" id="profFilesR">
+                        <div class = "sFileContainer">
+                        files repository
+                        </div>
+                    </div>
+                </div> 
+                <!-- file requirement -->
+
+            
         </div>   
 
-    </div><!-- end of wrapper scroll -->
-
-
+    </div><!-- end of wrapper scroll --> 
 
 <script src="adminHome.js"></script>   
 </body>

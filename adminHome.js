@@ -42,37 +42,33 @@ document.addEventListener('profile', function () {
       sortedRows.forEach(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
   }
 
-  // left section action js
-
-  function Users(){
-    window.location.assign("Adminuser.php")
-  }
-  function openArchive(){
-    window.location.assign("AdminHome.php")
-  }
-
-  function logOUT(){
-    window.location.assign("LoginSignup.php")
-  }
- 
-  function notifAuth(){
-    window.location.assign("AdminNotifications.php")
-  }
-  function openClassPage(){
-    window.location.assign("AdminCourseCreate.php")
-  } 
-  function logOUT(){
-    window.location.assign("LoginSignup.php")
-  }
-  function Schedule(){
-    window.location.assign("AdminDefenseschedule.php")
-  }
+  // left section action js 
+    function Users(){
+      window.location.assign("Adminuser.php")
+    }
+    function openArchive(){
+      window.location.assign("AdminHome.php")
+    } 
+    function logOUT(){
+      window.location.assign("LoginSignup.php")
+    } 
+    function notifAuth(){
+      window.location.assign("AdminNotifications.php")
+    }
+    function openClassPage(){
+      window.location.assign("AdminCourseCreate.php")
+    } 
+    function logOUT(){
+      window.location.assign("LoginSignup.php")
+    }
+    function Schedule(){
+      window.location.assign("AdminDefenseschedule.php")
+    }
 
 // action of melonbtns
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
- 
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';  
 }
 
 
@@ -105,6 +101,11 @@ function viewMembers() {
     if (event.target == overlay) {
         overlay.style.display = "none";
     }
+  }
+  function newGroupCreated() {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+      
   }
 // for class dropdown
 
