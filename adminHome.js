@@ -71,6 +71,15 @@ function viewMembers() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';  
 }
 
+function dropdownMelon(button) {
+  var content = button.closest('.dropdownmelon').querySelector('.dropdown-content');
+  if (content.style.display === 'block') {
+      content.style.display = 'none';
+  } else {
+      content.style.display = 'block';
+  }
+}
+
 
   // profile
 
@@ -148,6 +157,8 @@ dropdownsClass.forEach(dropdown => {
 });
 
   // for course create
+
+
  
 const profile = document.querySelector('.profile');
 const melonbtn = document.querySelector('.melonbtn');
@@ -171,7 +182,7 @@ function toggleCourseCreation() {
 
   
 function createcourse() { 
-  console.log("createcourse() function called."); // Add this line for debugging
+  console.log("createcourse() function called.");
   const courseName = document.querySelector('.inputTerm[name="courseName"]').value;
   document.getElementById('courseNameDisplay').textContent = courseName;
 

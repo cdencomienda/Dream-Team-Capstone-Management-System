@@ -738,30 +738,27 @@ main.table {
   cursor: pointer;
   z-index: 0px;
 }   
-.dropdown-content{
-  position: relative;
-  left: 140px;
-  top: 10px;
-  overflow:hidden;
+.dropdown-content {
+  position: absolute;
+  left: 97px;
+  top: 160px;
+  overflow: hidden;
   display: none;
-  margin-top: 10px;
   z-index: 1000;
-
-} 
-.dropdown-content{
-  width:120px;
-  height: 110px;
-  text-align:center;
+  width: 140px;
+  text-align: center;
   font-size: 18px;
   padding: 5px;
-  border: 2px #000000;
+  border: 1px solid #000000;
   border-radius: 15px;
   background-color: #F8EFE3;
 }
 .dropdownbtn{
-  width: 100px;  
+  width: 100px; 
   border: 1px solid #000000; 
-  height: 20px;
+  height: 24px;
+  margin-bottom: 5px;
+  padding: 5px;
   border-radius: 10px; 
   background-color: #FFFFFF;
 }
@@ -937,10 +934,9 @@ main.table {
 }
 /* setrequirements */
 .setrequirements{
-  position: relative; 
-  margin-left: 400px;
+  position: relative;  
   top: -1100px;
-  width: 800px;
+  width: 400px;
   height: 300px;
   padding: 25px; 
   background-color: #ffffff; 
@@ -986,10 +982,9 @@ main.table {
 
 /* rubric */
 .rubriccontainer{
-  position: relative; 
-  margin-left: 400px;
+  position: relative;  
   top: -1100px;
-  width: 800px;
+  width: 500px;
   height: 300px;
   padding: 25px; 
   background-color: #ffffff; 
