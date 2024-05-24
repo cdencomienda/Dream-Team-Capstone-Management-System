@@ -127,7 +127,8 @@
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
                         <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
+                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
+                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
                        
@@ -162,8 +163,7 @@
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
             }
-            </script>
-         <!-- emerson gudito end -->
+            </script> 
                 </div>
             </div>
         </div>
