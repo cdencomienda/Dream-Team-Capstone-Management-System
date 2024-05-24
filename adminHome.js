@@ -71,16 +71,6 @@ function viewMembers() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';  
 }
 
-function dropdownMelon(button) {
-  var content = button.closest('.dropdownmelon').querySelector('.dropdown-content');
-  if (content.style.display === 'block') {
-      content.style.display = 'none';
-  } else {
-      content.style.display = 'block';
-  }
-}
-
-
   // profile
 
   document.addEventListener('profile', function () {

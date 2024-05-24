@@ -379,17 +379,18 @@
                 <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
                 <h3>Requirements Description</h3>
                 <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
-                <div></div>
+                <div class="createdReq" id="selectedRequire">
+
+                </div>
                 <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
             </form>
         </div> 
 
         <!-- Rubric div -->
         <div class="rubriccontainer" style="display: none"> 
+        <h3>Rubric</h3>
                 <form class="addRubric" method="POST" action="addRubric.php">
-                    <div>
-                        <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
-                        <input type="submit" class="btn_submit" value="Submit" />
+                    <div>  
                     </div>
                     <section class="table_selectrubric">
                         <table>
