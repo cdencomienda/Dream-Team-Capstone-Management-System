@@ -117,6 +117,46 @@ function newGroupCreated() {
     
 }
  
+// for class dropdown
+
+const dropdownsClass = document.querySelectorAll('.classListDropdown');
+
+dropdownsClass.forEach(dropdown => {
+    const listClass = dropdown.querySelector('.listClass');
+    const coursesListed = dropdown.querySelector('.coursesListed');
+    const menuCourses = dropdown.querySelector('.menuCourses');
+    const options = dropdown.querySelectorAll('.menuCourses > .term'); // Select term list items
+    const selectedClass = dropdown.querySelector('.selectedClass');
+
+    listClass.addEventListener('click', () => {
+        listClass.classList.toggle('listClass-clicked');
+        coursesListed.classList.toggle('coursesListed-rotate');
+        menuCourses.classList.toggle('menuCourses-open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Update the selected class text
+            selectedClass.innerText = option.innerText;
+
+            // Hide all course details
+            document.querySelectorAll('.coursesDetails').forEach(detail => {
+                detail.style.display = 'none';
+            });
+
+            // Show the selected term's courses
+            const term = option.getAttribute('data-term');
+            const coursesDetail = document.getElementById(term);
+            if (coursesDetail) {
+                coursesDetail.style.display = 'block';
+            }
+
+            // Hide the main menuCourses
+            menuCourses.classList.remove('menuCourses-open');
+        });
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   var dropdownBtns = document.querySelectorAll('.dropdownbtn');
 
