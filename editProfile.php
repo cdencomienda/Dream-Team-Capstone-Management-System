@@ -13,18 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if the form fields are not empty
-    if (!empty($_POST['userEmail']) && !empty($_POST['newname']) && !empty($_POST['newPassword'])) {
+    if (!empty($_POST['userEmail']) && !empty($_POST['newFname']) && !empty($_POST['newLname']) && !empty($_POST['newPassword'])) {
         // Retrieve the email and new profile information from the form
         $userEmail = $_POST['userEmail'];
-        $newName = $_POST['newname'];
+        $newFname = $_POST['newFname'];
+        $newLname = $_POST['newLname'];
         $newPassword = $_POST['newPassword'];
 
         // Check if the entered email matches the userEmail of the logged-in user
         if ($userEmail == $_SESSION['user_email']) {
             // Email matches, update the user's profile in the database
-            $sql = "UPDATE users SET userName='$newName', userPassword='$newPassword' WHERE userEmail='$userEmail'";
+            $sql = "UPDATE users SET firstName='$newFname', lastName='$newLname', userPassword='$newPassword' WHERE userEmail='$userEmail'";
             if (mysqli_query($conn, $sql)) {
-                header("Location: " . $_SERVER['HTTP_REFERER'] . "?showOverlay=false");            
+                header("Location: " . $_SERVER['HTTP_REFERER']);            
                 exit();
             } else {
                 $_SESSION['error_message'] = "Error updating profile: " . mysqli_error($conn);
