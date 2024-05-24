@@ -104,7 +104,7 @@
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
-                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
@@ -123,7 +123,7 @@
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
-                        <h5edit><?php echo $_SESSION['fName'] + ' ' + $_SESSION['lName']; ?><br/>
+                        <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
                         <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
