@@ -28,9 +28,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password == $storedPassword) {
             // Password is correct, set session variables and redirect
             $_SESSION['user_id'] = $row['userID'];
-            $_SESSION['username'] = $row['userName']; // Assuming the user's name is stored in the database
+            $_SESSION['fName'] = $row['firstName'];
+            $_SESSION['lname'] = $row['lastName'];
             $_SESSION['user_email'] = $row['userEmail'];
             $_SESSION['user_type'] = $row['userType'];
+
+            echo "Session Variables Set: <br/>";
+            echo "User ID: " . $_SESSION['user_id'] . "<br/>";
+            echo "First Name: " . $_SESSION['fName'] . "<br/>";
+            echo "Last Name: " . $_SESSION['lname'] . "<br/>";
+            echo "User Email: " . $_SESSION['user_email'] . "<br/>";
+            echo "User Type: " . $_SESSION['user_type'] . "<br/>";
 
             // Redirect based on userType
             $userType = $row['userType'];

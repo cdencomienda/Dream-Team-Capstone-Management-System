@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve user input from the form
-    $name = $_POST['name'];
+    $Fname = $_POST['Fname'];
+    $Lname = $_POST['Lname'];
     $email = $_POST['email'];
     $idnum = $_POST['idnum'];
     $password = $_POST['password'];
@@ -52,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Insert new user data into the database with userType, profile picture, and unhashed password
-            $insert_query = "INSERT INTO users (userID, userName, userEmail, userPassword, userType) VALUES ('$idnum', '$name', '$email', '$password', '$userType')";
+            $insert_query = "INSERT INTO users (userID, firstName, lastName, userEmail, userPassword, userType) VALUES ('$idnum', '$Fname', '$Lname', '$email', '$password', '$userType')";
             if (mysqli_query($conn, $insert_query)) {
                 $_SESSION['success_message'] = "Registration successful. Please login.";
                 header("Location: LoginSignup.php");
