@@ -32,7 +32,7 @@
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
-                    <h3><?php echo $_SESSION['username']; ?><br/>
+                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
@@ -51,11 +51,12 @@
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
-                        <h5edit><?php echo $_SESSION['username']; ?><br/>
+                        <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
                         <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
+                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
+                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
                        
