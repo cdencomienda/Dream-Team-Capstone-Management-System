@@ -117,26 +117,23 @@ function newGroupCreated() {
     
 }
  
-// for class dropdown
-
+// for class dropdown 
 const dropdownsClass = document.querySelectorAll('.classListDropdown');
 
 dropdownsClass.forEach(dropdown => {
     const listClass = dropdown.querySelector('.listClass');
     const coursesListed = dropdown.querySelector('.coursesListed');
     const menuCourses = dropdown.querySelector('.menuCourses');
-    const options = dropdown.querySelectorAll('.menuCourses > .term'); // Select term list items
+    const options = dropdown.querySelectorAll('.menuCourses > .term');
     const selectedClass = dropdown.querySelector('.selectedClass');
 
-    listClass.addEventListener('click', () => {
-        listClass.classList.toggle('listClass-clicked');
-        coursesListed.classList.toggle('coursesListed-rotate');
+    selectedClass.addEventListener('click', () => {
         menuCourses.classList.toggle('menuCourses-open');
     });
 
     options.forEach(option => {
         option.addEventListener('click', () => {
-            // Update the selected class text
+            // Update the button text
             selectedClass.innerText = option.innerText;
 
             // Hide all course details
@@ -151,7 +148,7 @@ dropdownsClass.forEach(dropdown => {
                 coursesDetail.style.display = 'block';
             }
 
-            // Hide the main menuCourses
+            // Hide the menuCourses
             menuCourses.classList.remove('menuCourses-open');
         });
     });

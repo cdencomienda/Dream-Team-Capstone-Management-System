@@ -183,7 +183,7 @@
             <div class="classListDropdown">                              
                 <div class="listClass">  
                     <h5>COURSES AY 2023-2024</h5>
-                    <span class="selectedClass">Select a Term</span> 
+                    <button class="selectedClass">Select a Term</button> 
                     <div class="coursesListed"></div>                        
                 </div>
                 <ul class="menuCourses"> 
@@ -191,7 +191,21 @@
                     <li class="term" data-term="term2">Term 2</li>
                     <li class="term" data-term="term3">Term 3</li>
                 </ul>
+            </div>    
+        <div class="coursesDetails" id="term1">
+            <h3 class="termh3">Courses for Term 1</h3>
+            <div class="coursesDropdown">
+                <div class="dropdownmelon">            
+                    <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                    <div class="dropdown-content">
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                    </div>
+                </div>
+                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>  
+<<<<<<< HEAD
 
             
 
@@ -240,7 +254,57 @@
                 </div>
             </div>
             
+=======
+>>>>>>> f5915354aa4cc4ff95024e184b7d23d3cc087a79
         </div>
+
+        <div class="coursesDetails" id="term2">
+            <h3 class="termh3">Courses for Term 2</h3>
+            <div class="coursesDropdown">
+                <div class="dropdownmelon">            
+                    <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                    <div class="dropdown-content">
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                    </div>
+                </div>
+                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+            </div>
+        </div>
+
+        <div class="coursesDetails" id="term3">
+            <h3 class="termh3">Courses for Term 3</h3>
+            <div class="coursesDropdown">
+                <div class="dropdownmelon">            
+                    <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                    <div class="dropdown-content">          
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                    </div>
+                </div>
+                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+            </div>
+        </div>
+
+        <div class="classListDropdown">                              
+            <div class="listClass">  
+                <h5>COURSES AY 2023-2024</h5>
+                <button class="selectedClass">Select a Term</button> 
+                <div class="coursesListed"></div>                        
+            </div>
+            <ul class="menuCourses"> 
+                <li class="term" data-term="term1">Term 1</li>
+                <li class="term" data-term="term2">Term 2</li>
+                <li class="term" data-term="term3">Term 3</li>
+            </ul>
+        </div> 
+        
+
+    </div>
+
+        
 
         <div class="adminClass">
         <!-- viewgroup div -->
