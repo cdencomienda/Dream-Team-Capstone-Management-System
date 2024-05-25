@@ -181,11 +181,11 @@
     <div class="wrapper"><!-- start of wrapper scroll -->
         <div class="class-Dropdown">
             <div class="classListDropdown">                              
-                <div class="listClass">  
-                    <h5>COURSES AY 2023-2024</h5>
-                    <button class="selectedClass">Select a Term</button> 
+                <button class="listClass">  
+                    <h4>COURSES AY 2023-2024</h4>
+                    <span class="selectedClass"></span> 
                     <div class="coursesListed"></div>                        
-                </div>
+                </button>
                 <ul class="menuCourses"> 
                     <li class="term" data-term="term1">Term 1</li>
                     <li class="term" data-term="term2">Term 2</li>
@@ -235,21 +235,7 @@
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
-        </div>
-
-        <div class="classListDropdown">                              
-            <div class="listClass">  
-                <h5>COURSES AY 2023-2024</h5>
-                <button class="selectedClass">Select a Term</button> 
-                <div class="coursesListed"></div>                        
-            </div>
-            <ul class="menuCourses"> 
-                <li class="term" data-term="term1">Term 1</li>
-                <li class="term" data-term="term2">Term 2</li>
-                <li class="term" data-term="term3">Term 3</li>
-            </ul>
         </div> 
-        
 
     </div>
 

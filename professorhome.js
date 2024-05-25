@@ -127,13 +127,13 @@ dropdownsClass.forEach(dropdown => {
     const options = dropdown.querySelectorAll('.menuCourses > .term');
     const selectedClass = dropdown.querySelector('.selectedClass');
 
-    selectedClass.addEventListener('click', () => {
+    listClass.addEventListener('click', () => {
         menuCourses.classList.toggle('menuCourses-open');
     });
 
     options.forEach(option => {
         option.addEventListener('click', () => {
-            // Update the button text
+            // Update the selected class text
             selectedClass.innerText = option.innerText;
 
             // Hide all course details
@@ -148,11 +148,12 @@ dropdownsClass.forEach(dropdown => {
                 coursesDetail.style.display = 'block';
             }
 
-            // Hide the menuCourses
+            // Hide the main menuCourses
             menuCourses.classList.remove('menuCourses-open');
         });
     });
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
   var dropdownBtns = document.querySelectorAll('.dropdownbtn');
