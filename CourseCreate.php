@@ -193,6 +193,8 @@
                 </ul>
             </div>  
 
+            
+
             <div class="coursesDetails" id="term1">
                 <h3 class="termh3">Courses for Term 1</h3>
                 <div class="coursesDropdown">
@@ -408,29 +410,54 @@
      
 </body>
 </html> 
+
+
 <script>
-    // Function to handle AJAX request for live search
-        function liveSearchCourseCode() {
-        var input = document.getElementById('courseCode').value;
-        var xhr = new XMLHttpRequest();
-        if (input.trim() !== '') { // Check if input is not empty
-            xhr.open('GET', 'LiveSearchCourseCode.php?search=' + input, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('courseCodeSuggestions').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        } else { // If input is empty, hide the suggestions
-            document.getElementById('courseCodeSuggestions').innerHTML = '';
-        }
-    }  
-    
-        // Event listener to trigger live search on input change
-        document.getElementById('courseCode').addEventListener('input', liveSearchCourseCode);
-    
-        // Event listener to hide suggestions when the cursor is not in the field
-        document.getElementById('courseCode').addEventListener('blur', function() {
-            document.getElementById('courseCodeSuggestions').innerHTML = '';
-    });
-</script>  
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('fetchProfessorSession.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.match) {
+                console.log("Session user matches the database.");
+                console.log("Account ID:", data.account_id);
+            } else {
+                console.log("Session user does not match the database.");
+                // Handle the case where there is no match
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+
+function fetchAcademicYears() {
+    fetch('fetchAcademicYears.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+            } else {
+                // Assuming data is an array of academic years
+                console.log('Fetched academic years:', data);
+            }
+        })
+        .catch(error => console.error('Error fetching academic years:', error));
+}
+
+// Call fetchAcademicYears when your page is ready
+document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
+
+
+
+
+
+
+
+
+</script>
