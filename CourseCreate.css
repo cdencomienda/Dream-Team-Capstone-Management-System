@@ -485,10 +485,14 @@ background-repeat: no-repeat;
 }
 .classListDropdown{ 
   width: 320px;
+  margin-bottom: 30px;
   position: relative; 
+  z-index: 0px;
 }
 .classListDropdown *{
-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  /* display: inline-block; */
 }
 
 .listClass{
@@ -535,7 +539,7 @@ transform: translateX(-50%);
 opacity: 0px;
 display: none;
 transition: 0.2s; 
-z-index: 100000px;
+z-index: 1000; 
 }
 
 .menuCourses li{
@@ -543,23 +547,24 @@ padding: 0.7em 0.5em;
 margin: 1px;
 border-radius: 5px;
 cursor: pointer;
-z-index: 100000px;
+z-index: 1px;
 } 
 .activeClass{ 
 background: #b6b6b6;
 border-radius: 15px;
 }
 .menuCourses li:hover{
-z-index: 100000px;
+  z-index: 1px;
 background: #b6b6b6;
 }
 .menuCourses-open{
 display: block;
 opacity: 1;
-z-index: 1000000000000px;
+z-index: 1px;
 }
 .coursesDetails {
 display: none;
+height: 170px;
 }
 
 .coursesButtons {
