@@ -205,7 +205,6 @@
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>  
-<<<<<<< HEAD
 
             
 
@@ -254,8 +253,6 @@
                 </div>
             </div>
             
-=======
->>>>>>> f5915354aa4cc4ff95024e184b7d23d3cc087a79
         </div>
 
         <div class="coursesDetails" id="term2">
@@ -494,6 +491,42 @@ function fetchAcademicYears() {
             } else {
                 // Assuming data is an array of academic years
                 console.log('Fetched academic years:', data);
+                const container = document.querySelector('.class-Dropdown');
+
+                data.forEach(year => {
+                    const classListDropdown = document.createElement('div');
+                    classListDropdown.className = 'classListDropdown';
+
+                    const button = document.createElement('button');
+                    button.className = 'listClass';
+                    button.innerHTML = `<h4>COURSES AY ${year}</h4>
+                                        <span class="selectedClass"></span>
+                                        <div class="coursesListed"></div>`;
+                    
+                    const ul = document.createElement('ul');
+                    ul.className = 'menuCourses';
+                    ul.style.display = 'none'; // Initially hide the ul
+                    ['Term 1', 'Term 2', 'Term 3'].forEach(term => {
+                        const li = document.createElement('li');
+                        li.className = 'term';
+                        li.dataset.term = term.toLowerCase().replace(' ', '');
+                        li.textContent = term;
+
+                        ul.appendChild(li);
+                    });
+
+                    button.addEventListener('click', () => {
+                        // Toggle the display of the ul element
+                        ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
+                        // Record the clicked year
+                        console.log(`Button for AY ${year} clicked`);
+                    });
+
+                    classListDropdown.appendChild(button);
+                    classListDropdown.appendChild(ul);
+
+                    container.appendChild(classListDropdown);
+                });
             }
         })
         .catch(error => console.error('Error fetching academic years:', error));
@@ -501,6 +534,10 @@ function fetchAcademicYears() {
 
 // Call fetchAcademicYears when your page is ready
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
+
+
+
 
 
 
