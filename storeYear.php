@@ -1,26 +1,26 @@
 <?php
 session_start(); // Start the session
 
-if (isset($_POST['selectedTerm'])) {
-    $selectedTerm = intval($_POST['selectedTerm']); // Cast to integer
+if (isset($_POST['acYear'])) {
+    $acYear = $_POST['acYear'];
 
-    // Store the selected term (as an integer) in the session
-    $_SESSION['selectedTerm'] = $selectedTerm;
+    // Store the courseID in a session variable
+    $_SESSION['acYear'] = $acYear;
 
     // Construct a JSON response
     $response = [
         'status' => 'success',
-        'message' => 'Selected term stored in session: ' . $selectedTerm,
+        'message' => 'Received acYear: ' . $acYear,
     ];
 
     // Send the JSON response
     header('Content-Type: application/json');
     echo json_encode($response);
 } else {
-    // Handle case where selectedTerm is not received
+    // Handle case where acYear is not set
     $response = [
         'status' => 'error',
-        'message' => 'selectedTerm not received.',
+        'message' => 'acYear not received.',
     ];
 
     // Send the JSON error response

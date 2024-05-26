@@ -493,23 +493,28 @@ function fetchAcademicYears() {
                 console.log('Fetched academic years:', data);
                 const container = document.querySelector('.class-Dropdown');
 
-                data.forEach(year => {
+                data.forEach(yearStr => {
+                    // Parse year as an integer
+                    const year = parseInt(yearStr, 10);
+                    const displayName = `${year}-${year + 1}`;
+
                     const classListDropdown = document.createElement('div');
                     classListDropdown.className = 'classListDropdown';
 
                     const button = document.createElement('button');
                     button.className = 'listClass';
-                    button.innerHTML = `<h4>COURSES AY ${year}</h4>
+                    button.innerHTML = `<h4>COURSES AY ${displayName}</h4>
                                         <span class="selectedClass"></span>
                                         <div class="coursesListed"></div>`;
                     
                     const ul = document.createElement('ul');
                     ul.className = 'menuCourses';
                     ul.style.display = 'none'; // Initially hide the ul
-                    ['Term 1', 'Term 2', 'Term 3'].forEach(term => {
+
+                    ['Term 1', 'Term 2', 'Term 3'].forEach((term, index) => {
                         const li = document.createElement('li');
                         li.className = 'term';
-                        li.dataset.term = term.toLowerCase().replace(' ', '');
+                        li.dataset.term = (index + 1).toString(); // Set the dataset value as 1, 2, 3
                         li.textContent = term;
 
                         ul.appendChild(li);
@@ -519,7 +524,22 @@ function fetchAcademicYears() {
                         // Toggle the display of the ul element
                         ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
                         // Record the clicked year
-                        console.log(`Button for AY ${year} clicked`);
+                        console.log(`Button for AY ${displayName} clicked`);
+                        acy_Stored(year);
+                        acy_idStored(year);
+                    });
+
+                    // Event listener for terms
+                    ul.addEventListener('click', (event) => {
+                    const selectedTerm = event.target.dataset.term; // Get the dataset value
+
+                    if (selectedTerm) {
+                        console.log(`Selected term: ${selectedTerm}`);
+
+                        // Store the selected term in the session
+                        storeSelectedTerm(selectedTerm);
+                        courses();
+                    }
                     });
 
                     classListDropdown.appendChild(button);
@@ -535,6 +555,174 @@ function fetchAcademicYears() {
 // Call fetchAcademicYears when your page is ready
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
+
+
+function acy_Stored(year){
+    console.log('current:' + year);
+
+    acYear = year; 
+
+    console.log('stored acYear: ' + acYear);
+
+    fetch('storeYear.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'acYear=' + encodeURIComponent(acYear),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the raw response text
+        })
+        .then(responseText => {
+            console.log('Raw Response:', responseText); // Log the raw response
+            return JSON.parse(responseText); // Parse the response as JSON if needed
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function acy_idStored(acy_id) {
+    fetch('storeacy_id.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'acYear=' + encodeURIComponent(acy_id),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse the response as JSON
+    })
+    .then(data => {
+        console.log('Received acy_id:', data.acy_id); // Log the received acy_id
+        // Use the received acy_id as needed
+        return data.acy_id; // Return acy_id for further use if needed
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+function storeSelectedTerm(selectedTerm) {
+    const termValue = parseInt(selectedTerm); // Parse the selectedTerm as an integer
+
+    fetch('storeSelectedTerm.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            selectedTerm: termValue // Send the integer value
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response from storeSelectedTerm:', data);
+        if (data.status === 'success') {
+            // Handle success message if needed
+            console.log('Selected term stored successfully:', termValue);
+        } else {
+            // Handle error message if needed
+            console.error('Error storing selected term:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error storing selected term:', error);
+    });
+}
+
+function courses() {
+    // Fetch courses based on acy_id, selectedTerm, and account_id
+    fetch('fetchCourses.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            acy_id: parseInt(sessionStorage.getItem('acy_id')), // Assuming acy_id is stored in sessionStorage
+            selectedTerm: parseInt(sessionStorage.getItem('selectedTerm')), // Assuming selectedTerm is stored in sessionStorage
+            account_id: parseInt(sessionStorage.getItem('account_id')), // Assuming account_id is stored in sessionStorage
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Fetched courses:', data);
+        if (data.error) {
+            console.error(data.error);
+        } else {
+            // Assuming data is an array of course objects with properties course_code and section
+            data.forEach(course => {
+                const termId = `term${course.selectedTerm}`; // Get the corresponding term section ID
+                const termSection = document.getElementById(termId);
+                if (termSection) {
+                    const coursesDropdown = termSection.querySelector('.coursesDropdown');
+
+                    const dropdownmelon = document.createElement('div');
+                    dropdownmelon.className = 'dropdownmelon';
+
+                    const courseNameDisplay = document.createElement('h3');
+                    courseNameDisplay.className = 'courseNameDisplay';
+                    courseNameDisplay.textContent = `${course.course_code} ${course.section}`;
+
+                    const classSetBtn = document.createElement('button');
+                    classSetBtn.type = 'button';
+                    classSetBtn.className = 'classSet';
+                    classSetBtn.textContent = '•••';
+                    classSetBtn.onclick = () => dropdownMelon(classSetBtn);
+
+                    const dropdownContent = document.createElement('div');
+                    dropdownContent.className = 'dropdown-content';
+
+                    const viewMembersBtn = document.createElement('button');
+                    viewMembersBtn.type = 'button';
+                    viewMembersBtn.className = 'dropdownbtn';
+                    viewMembersBtn.textContent = 'View Members';
+                    viewMembersBtn.onclick = viewMembers;
+
+                    const setRequirementsBtn = document.createElement('button');
+                    setRequirementsBtn.type = 'button';
+                    setRequirementsBtn.className = 'dropdownbtn';
+                    setRequirementsBtn.textContent = 'Requirements';
+                    setRequirementsBtn.onclick = setrequirements;
+
+                    const rubricBtn = document.createElement('button');
+                    rubricBtn.type = 'button';
+                    rubricBtn.className = 'dropdownbtn';
+                    rubricBtn.textContent = 'Rubric';
+                    rubricBtn.onclick = rubric;
+
+                    dropdownContent.appendChild(viewMembersBtn);
+                    dropdownContent.appendChild(setRequirementsBtn);
+                    dropdownContent.appendChild(rubricBtn);
+
+                    dropdownmelon.appendChild(courseNameDisplay);
+                    dropdownmelon.appendChild(classSetBtn);
+                    dropdownmelon.appendChild(dropdownContent);
+
+                    coursesDropdown.appendChild(dropdownmelon);
+                }
+            });
+        }
+    })
+    .catch(error => console.error('Error fetching courses:', error));
+}
 
 
 
