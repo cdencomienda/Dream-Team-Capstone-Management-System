@@ -101,7 +101,7 @@
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
                 <div class="menu" id ="menuBtn">
-                    <h3><?php echo $_SESSION['username']; ?><br/>
+                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
@@ -120,11 +120,12 @@
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
-                        <h5edit><?php echo $_SESSION['username']; ?><br/>
+                        <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
                         <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profilenameID" class="inputname" name="newname" placeholder="Input new Name"> </h3>
+                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
+                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
                         <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
                         <button type="submit" class="saveEditbtn"> Save Changes </button>
                        
@@ -195,62 +196,53 @@
 
             <div class="coursesDetails" id="term1">
                 <h3 class="termh3">Courses for Term 1</h3>
-                    <div id="coursesDropdown">
-                        <div class="dropdownmelon">            
-                            <h3 id="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
-                            <div class="dropdown-content" id="courseActions">
-                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                            </div>
+                <div class="coursesDropdown">
+                    <div class="dropdownmelon">            
+                        <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                        <div class="dropdown-content">
+                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
-                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-                    </div>  
-
+                    </div>
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                </div>  
             </div>
-            
+
             <div class="coursesDetails" id="term2">
                 <h3 class="termh3">Courses for Term 2</h3>
-                <div id="coursesDropdown">
-                        <div class="dropdownmelon">            
-                            <h3 id="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
-                            <div class="dropdown-content" id="courseActions">
-                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                            </div>
+                <div class="coursesDropdown">
+                    <div class="dropdownmelon">            
+                        <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                        <div class="dropdown-content">
+                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
-                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
                     </div>
-
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                </div>
             </div>
 
             <div class="coursesDetails" id="term3">
-                <h3 class="termh3" >Courses for Term 3</h3>
-                <div id="coursesDropdown">
-                        <div class="dropdownmelon">            
-                            <h3 id="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon()">•••</button></h3>
-                            <div class="dropdown-content" id="courseActions">
-                                <button type="button" class="dropdownbtn" onclick="creategroup()">Create Group</button>          
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                                <button type="button" class="dropdownbtn" onclick="addMembers()">Add Members</button>
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                            </div>
+                <h3 class="termh3">Courses for Term 3</h3>
+                <div class="coursesDropdown">
+                    <div class="dropdownmelon">            
+                        <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                        <div class="dropdown-content">          
+                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
-                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
                     </div>
-
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                </div>
             </div>
             
         </div>
 
         <div class="adminClass">
-        <!-- viewgroup -->
+        <!-- viewgroup div -->
             <div class="viewgroup" id="viewGRP">
                 <div>
                     <button class = "closeViewGroup" onclick= "clsViewGrp()">  <i class="fa-regular fa-circle-xmark"></i> </button>
@@ -264,7 +256,7 @@
                     <h4>InstructorName</h4>
                 </div>
             </div>
-        <!-- group class  -->
+        <!-- group class div -->
             <div class="GroupContainer">
                     <div class="dashboard_header">
                         <div class="groupname_container"> 
@@ -379,9 +371,36 @@
                     </div>
                 </div> 
                 <!-- file requirement -->
-
             
-        </div>   
+        </div>  
+        <!-- Requirement div -->
+        <div class="setrequirements">
+            <h3>Requirements</h3>
+            <form class="Requirements" method="POST" action="addRequirements.php">
+                <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
+                <h3>Requirements Description</h3>
+                <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
+                <div></div>
+                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+            </form>
+        </div> 
+
+        <!-- Rubric div -->
+        <div class="rubriccontainer" style="display: none"> 
+                <form class="addRubric" method="POST" action="addRubric.php">
+                    <div>
+                        <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
+                        <input type="submit" class="btn_submit" value="Submit" />
+                    </div>
+                    <section class="table_selectrubric">
+                        <table>
+                            <tbody class="rubricList" id="selectedRubric">
+                            <!-- Your student list rows will be dynamically populated here -->
+                            </tbody>
+                        </table>
+                    </section>
+                </form> 
+        </div>
 
     </div><!-- end of wrapper scroll --> 
 

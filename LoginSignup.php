@@ -141,10 +141,12 @@
             
             <form id="register" class="input-group" action="register.php" method="POST">
 
-                <input type="text" class="input-field" placeholder="Name" name="name" value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ''; ?>" required>
+                <!-- <input type="text" class="input-field" placeholder="Name" name="name" value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ''; ?>" required> -->
+                <input type="text" class="input-field" placeholder="First Name" name="Fname" value="" required>
+                <input type="text" class="input-field" placeholder="Last Name" name="Lname" value="" required>
                 <input type="email" class="input-field" placeholder="Asia Pacific College Email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
+                <input type="text" class="input-field" placeholder="Enter ID no." name="idnum" required>
                 <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
-                <input type="password" class="input-field" placeholder="Enter ID no." name="password" required>
                 <input type="password" class="input-field" placeholder="Confirm Password" name="confirm_password" required>
                 <button type="submit" class="submit-btn">Register</button>
                 </form>

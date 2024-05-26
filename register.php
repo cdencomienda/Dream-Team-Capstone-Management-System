@@ -12,8 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve user input from the form
-    $name = $_POST['name'];
+    $Fname = $_POST['Fname'];
+    $Lname = $_POST['Lname'];
     $email = $_POST['email'];
+    $idnum = $_POST['idnum'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -24,27 +26,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($domain == 'apc.edu.ph') {
         $userType = 'Professor';
     } else {
-        $userType = 'other'; // Default userType if domain doesn't match
+        $_SESSION['error_message'] = "Please use an APC email.";
+        $_SESSION['name'] = $name; // Save the entered name in session
+        $_SESSION['email'] = $email; // Save the entered email in session
+        header("Location: LoginSignup.php?register_error=true");
+        exit();
     }
-
-    // Handle profile picture upload
-    // $targetDir = "profile_pics/";
-    // $profilePicture = '';
-    // if ($_FILES["profile_picture"]["name"]) {
-    //     $targetFile = $targetDir . basename($_FILES["profile_picture"]["name"]);
-    //     if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
-    //         $profilePicture = $targetFile;
-    //     } else {
-    //         echo "Sorry, there was an error uploading your profile picture.";
-    //     }
-    // }
 
     // Perform basic validation
     if ($password != $confirm_password) {
         $_SESSION['error_message'] = "Passwords do not match. Please try again.";
         $_SESSION['name'] = $name; // Save the entered name in session
         $_SESSION['email'] = $email; // Save the entered email in session
-        // header("Location: LoginSignup.php");
         header("Location: LoginSignup.php?register_error=true");
         exit();
     } else {
@@ -56,13 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error_message'] = "Email already registered. Please try again.";
             $_SESSION['name'] = $name; // Save the entered name in session
             $_SESSION['email'] = $email; // Save the entered email in session
-            // header("Location: LoginSignup.php");
             header("Location: LoginSignup.php?register_error=true");
-            echo '<script type="text/javascript">register();</script>';
             exit();
         } else {
             // Insert new user data into the database with userType, profile picture, and unhashed password
-            $insert_query = "INSERT INTO users (userName, userEmail, userPassword, userType) VALUES ('$name', '$email', '$password', '$userType')";
+            $insert_query = "INSERT INTO users (userID, firstName, lastName, userEmail, userPassword, userType) VALUES ('$idnum', '$Fname', '$Lname', '$email', '$password', '$userType')";
             if (mysqli_query($conn, $insert_query)) {
                 $_SESSION['success_message'] = "Registration successful. Please login.";
                 header("Location: LoginSignup.php");
@@ -71,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['error_message'] = "Error: " . mysqli_error($conn);
                 $_SESSION['name'] = $name; // Save the entered name in session
                 $_SESSION['email'] = $email; // Save the entered email in session
-                // header("Location: LoginSignup.php");
                 header("Location: LoginSignup.php?register_error=true");
                 exit();
             }
