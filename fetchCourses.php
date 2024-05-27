@@ -1,51 +1,49 @@
 <?php
 session_start(); // Start the session
 
-if (
-    isset($_POST['acy_id']) &&
-    isset($_POST['selectedTerm']) &&
-    isset($_POST['account_id'])
-) {
-    $acy_id = $_POST['acy_id'];
-    $selectedTerm = $_POST['selectedTerm'];
-    $account_id = $_POST['account_id'];
+// Check if session variables are set
+if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SESSION['account_id'])) {
+    $acy_id = $_SESSION['acy_id'];
+    $selectedTerm = $_SESSION['selectedTerm'];
+    $account_id = $_SESSION['account_id'];
 
+    // Connect to the database
     $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
+    // Check connection
     if (!$conn) {
-        $response = [
-            'error' => 'Database connection failed.'
-        ];
-    } else {
-        // Use prepared statement to prevent SQL injection
-        $query = "SELECT course_code, section FROM your_courses_table WHERE acy_id = ? AND term = ? AND professor = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "iii", $acy_id, $selectedTerm, $account_id);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        if ($result) {
-            $courses = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $courses[] = $row;
-            }
-            $response = $courses;
-        } else {
-            $response = [
-                'error' => 'No courses found for the specified criteria.'
-            ];
-        }
-
-        mysqli_stmt_close($stmt);
+        die("Connection failed: " . mysqli_connect_error());
     }
 
+    // Construct the SQL query
+    $query = "SELECT course_code, section, professor FROM `course` WHERE acy_id = $acy_id AND term = '$selectedTerm' AND professor = $account_id";
+
+    // Execute the query
+    $result = mysqli_query($conn, $query);
+
+    // Check if any data is returned
+    if (mysqli_num_rows($result) > 0) {
+        // Initialize an array to store the fetched data
+        $courses = [];
+
+        // Fetch and store data in the array
+        while ($row = mysqli_fetch_assoc($result)) {
+            $courses[] = $row;
+        }
+
+        // Display the data from the array
+        foreach ($courses as $course) {
+            echo "Course Code: " . htmlspecialchars($course['course_code']) . "<br>";
+            echo "Section: " . htmlspecialchars($course['section']) . "<br>";
+            echo "Professor: " . htmlspecialchars($course['professor']) . "<br><br>";
+        }
+    } else {
+        echo "No courses found.";
+    }
+
+    // Close the connection
     mysqli_close($conn);
 } else {
-    $response = [
-        'error' => 'Missing parameters.'
-    ];
+    echo "Required session variables are missing.";
 }
-
-header('Content-Type: application/json');
-echo json_encode($response);
 ?>
