@@ -199,43 +199,31 @@
                     <tr>
                         <th> Id <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Group <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Date <span class="icson-arrow">&UpArrow;</span></th>
+                        <th> Date <span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> 1 </td>
-                        <td> Dream Team</td>
-                        <td> 17 December, 2023 </td>
+                    <tr data-file="archived_files/dreamteamfinal.pdf">
+                        <td>1</td>
+                        <td>Dream Team</td>
+                        <td>17 December, 2023</td>
                     </tr>
-                    <tr>
-                        <td> 2 </td>
-                        <td> Sillykid</td>
-                        <td> 13 March, 2024 </td>
-                    </tr>
-                    <tr>
-                      <td> 3 </td>
-                      <td> AcademyX</td>
-                      <td> 9 April, 2024 </td>
-                  </tr>
-                  <tr>
-                      <td> 4 </td>
-                      <td> Cogart ni albert</td>
-                      <td> 3 August, 2024 </td>
-                  </tr>
-                  <tr>
-                      <td> 5 </td>
-                      <td> Eogart ni albert</td>
-                      <td> 6 September, 2024 </td>
-                  </tr>
-                   </tbody>
+                </tbody>
             </table>
         </section>
     </main>
+
+    <!-- Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="closeM">&times;</span>
+            <iframe id="pdf-frame" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
     <script src="archive.js"></script>
-    <script 
-        src="professorhome.js"> 
-    </script>   
+    <script src="professorhome.js"></script>
+
     
 </body>
 </html> 

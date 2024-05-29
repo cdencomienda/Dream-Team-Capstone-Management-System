@@ -81,3 +81,31 @@ const toPDF = function (customers_table) {
 pdf_btn.addEventListener('click', () => {
     toPDF(customers_table);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = document.querySelectorAll('tbody tr');
+    const modal = document.getElementById('pdfModal');
+    const modalContent = document.querySelector('.modal-content');
+    const pdfFrame = document.getElementById('pdf-frame');
+    const span = document.getElementsByClassName('closeM')[0];
+
+    rows.forEach(row => {
+        row.addEventListener('click', function() {
+            const filePath = row.getAttribute('data-file');
+            pdfFrame.src = filePath;
+            modal.style.display = 'block';
+        });
+    });
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+        pdfFrame.src = '';  // Clear the src to stop the PDF from loading
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+            pdfFrame.src = '';  // Clear the src to stop the PDF from loading
+        }
+    };
+});
