@@ -307,14 +307,16 @@
         <!-- group class div -->
             <div class="GroupContainer">
                     <div class="dashboard_header">
+                        <!-- Group Name Box -->
                         <div class="groupname_container"> 
-                            <div class="group_name" id="group_name">     
+                            <!-- ian mojica  group name -->
+                            <div class="group_name" id="group_name"> 
+                                sample     
                             </div>   
-                                </div>
-                                <script> 
+                        </div>
+                        <script> 
                                     
-                                </script> 
-                            <h4>
+                        </script> 
                     <div class="button-group"> 
                     <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
 
