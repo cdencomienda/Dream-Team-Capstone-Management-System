@@ -57,8 +57,25 @@ function newGroupCreated() {
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
   }
 
+  function openModal(filePath) {
+    document.getElementById('fileFrame').src = filePath;
+    document.getElementById('fileModal').style.display = "block";
+}
 
-    
+function closeModal() {
+    document.getElementById('fileFrame').src = "";
+    document.getElementById('fileModal').style.display = "none";
+}
+
+// Close the modal when the user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+    var modal = document.getElementById('fileModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+
 
 // document.addEventListener('click', e =>{
 // const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")

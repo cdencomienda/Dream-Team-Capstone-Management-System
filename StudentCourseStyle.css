@@ -253,9 +253,7 @@ body{
     display: grid;
     grid-template-columns: 1fr auto; 
     gap: 10px;
-  }
-  .defaultBody{
-    
+  }.defaultBody {
     background-color: #ffffff;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -264,7 +262,109 @@ body{
     margin-left: -25px;
     margin-top: 0px;
     display: flex;
-  }
+    flex-direction: column;
+}
+
+.recentFiles {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fileMessage {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    max-width: 70%;
+    cursor: pointer;
+}
+
+.fileMessage.left {
+    align-self: flex-start;
+}
+
+.fileMessage.right {
+    align-self: flex-end;
+    background-color: #e0f7fa;
+}
+
+.fileInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fileIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.fileDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.fileDetails strong {
+    font-size: 16px;
+}
+
+.fileDetails span {
+    font-size: 12px;
+    color: #666;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 500 ;
+}
+
+.modalContent {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    height: 75%;
+    position: relative;
+    z-index: 500 ;
+}
+
+.closeButton {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 500 ;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 500 ;
+}
+
+#fileFrame {
+    width: 100%;
+    height: 96%;
+    z-index: 500 ;
+}
+
+
 
   .groupname_container{
      margin-top: 8px;
@@ -664,7 +764,7 @@ label{
   width:280px;
   bottom: 35px;
   left: 84%;
-  z-index: 100;
+  z-index: 50;
 }
 .editoverlay{
   display: none;
