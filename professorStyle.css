@@ -542,9 +542,8 @@ main.table {
       margin: 2% auto;
       padding: 20px;
       border: 1px solid #888;
-      width: 100%;
-      max-width: 800px;
-    
+      width: 150%;
+      max-width: 1000px;
   }
 
   .closeM {
