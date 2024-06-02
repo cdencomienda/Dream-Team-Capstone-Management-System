@@ -670,6 +670,7 @@ margin-left: 15px;
 margin-bottom: 20px; 
 border-radius : 10px;
 background-color: #f8efe3; 
+
 }
 .createdgroupBTN:hover { 
 background-color: #a8a8a8;
@@ -683,7 +684,7 @@ cursor: pointer;
   height: 600px;
   padding: 25px;
   margin-top: -500px;
-  display: block;
+  display: none;
   z-index: 0; /* Set a lower z-index */
 }
 .dashboard_header{
