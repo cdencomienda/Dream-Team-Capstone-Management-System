@@ -7,6 +7,11 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
     $selectedTerm = $_SESSION['selectedTerm'];
     $account_id = $_SESSION['account_id'];
 
+    // Echo the variables
+    echo "acy_id: $acy_id<br>";
+    echo "selectedTerm: $selectedTerm<br>";
+    echo "account_id: $account_id<br>";
+
     // Connect to the database
     $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
@@ -15,35 +20,25 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Construct the SQL query
+    // SQL query
     $query = "SELECT course_code, section, professor FROM `course` WHERE acy_id = $acy_id AND term = '$selectedTerm' AND professor = $account_id";
 
     // Execute the query
     $result = mysqli_query($conn, $query);
 
-    // Check if any data is returned
-    if (mysqli_num_rows($result) > 0) {
-        // Initialize an array to store the fetched data
-        $courses = [];
-
-        // Fetch and store data in the array
+    // Check if query executed successfully
+    if ($result) {
+        // Fetch and echo the result
         while ($row = mysqli_fetch_assoc($result)) {
-            $courses[] = $row;
-        }
-
-        // Display the data from the array
-        foreach ($courses as $course) {
-            echo "Course Code: " . htmlspecialchars($course['course_code']) . "<br>";
-            echo "Section: " . htmlspecialchars($course['section']) . "<br>";
-            echo "Professor: " . htmlspecialchars($course['professor']) . "<br><br>";
+            echo "Course Code: " . $row['course_code'] . "<br>";
+            echo "Section: " . $row['section'] . "<br>";
+            echo "Professor: " . $row['professor'] . "<br>";
         }
     } else {
-        echo "No courses found.";
+        echo "Error executing query: " . mysqli_error($conn);
     }
 
     // Close the connection
     mysqli_close($conn);
-} else {
-    echo "Required session variables are missing.";
 }
 ?>

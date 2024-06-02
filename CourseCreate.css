@@ -595,7 +595,8 @@ margin: 15px;
 
 /* for the courses inside the term css  */
 .coursesDropdown{
-height: 700px;
+height: 200px;
+overflow: auto;
 
 }
 .dropdownmelon{
