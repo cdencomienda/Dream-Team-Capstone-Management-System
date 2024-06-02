@@ -495,7 +495,8 @@ function fetchAcademicYears() {
                 console.log('Fetched academic years:', data);
                 const container = document.querySelector('.class-Dropdown');
 
-                data.forEach(yearStr => {
+                // Process the data array in reverse order
+                data.reverse().forEach(yearStr => {
                     // Parse year as an integer
                     const year = parseInt(yearStr, 10);
                     const displayName = `${year}-${year + 1}`;
@@ -533,15 +534,40 @@ function fetchAcademicYears() {
 
                     // Event listener for terms
                     ul.addEventListener('click', (event) => {
-                    const selectedTerm = event.target.dataset.term; // Get the dataset value
+                        const selectedTerm = event.target.dataset.term; // Get the dataset value
 
-                    if (selectedTerm) {
-                        console.log(`Selected term: ${selectedTerm}`);
+                        if (selectedTerm) {
+                            console.log(`Selected term: ${selectedTerm}`);
 
-                        // Store the selected term in the session
-                        storeSelectedTerm(selectedTerm);
-                        courses();
-                    }
+                            // Store the selected term in the session
+                            storeSelectedTerm(selectedTerm);
+                            courses();
+
+                            // Check if coursesDropdown already exists
+                            let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
+                            if (coursesDropdown) {
+                                // Toggle visibility
+                                coursesDropdown.style.display = coursesDropdown.style.display === 'none' ? 'block' : 'none';
+                            } else {
+                                // Create and show coursesDropdown if it doesn't exist
+                                coursesDropdown = document.createElement('div');
+                                coursesDropdown.className = 'coursesDropdown';
+                                coursesDropdown.innerHTML = `
+                                    <div class="dropdownmelon">            
+                                        <h3 class="courseNameDisplay">DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                                        <div class="dropdown-content">
+                                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                                `;
+
+                                // Append coursesDropdown below the button
+                                button.parentNode.appendChild(coursesDropdown);
+                            }
+                        }
                     });
 
                     classListDropdown.appendChild(button);
@@ -556,6 +582,9 @@ function fetchAcademicYears() {
 
 // Call fetchAcademicYears when your page is ready
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
+
+
 
 
 
