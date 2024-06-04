@@ -389,4 +389,22 @@ function clsViewGrp(){
           }
       });
   });
-  
+// viewfiles  
+  function openModal(filePath) {
+    document.getElementById('fileFrame').src = filePath;
+    document.getElementById('fileModal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('fileFrame').src = "";
+    document.getElementById('fileModal').style.display = "none";
+}
+
+// Close the modal when the user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+    var modal = document.getElementById('fileModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+

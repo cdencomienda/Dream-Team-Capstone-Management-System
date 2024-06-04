@@ -363,11 +363,39 @@
                     </div> 
 
                     <!-- files -->
-                    <div class="defaultBody" id="defaultBody">
-                        <div class="recentFiles" >
-                            'featured files here'
-                        </div >
+            <div class="defaultBody" id="defaultBody">
+                <div class="recentFiles">
+                    <!-- File posted by another person -->
+                    <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                        <div class="fileInfo">
+                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                            <div class="fileDetails">
+                                <strong>DREAM TEAM - Recommendation</strong>
+                                <span>26 KB</span>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- File posted by you -->
+                    <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                        <div class="fileInfo">
+                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                             <div class="fileDetails">
+                                 <strong>Final Documentation</strong>
+                                 <span>12 KB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Structure -->
+            <div id="fileModal" class="modal">
+                <div class="modalContent">
+                    <span class="closeButton" onclick="closeModal()">&times;</span>
+                    <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                </div>
+            </div>
+
                     
                     <!-- submissions -->
                     <div class="submissionFrame" id="submissionFrame">
