@@ -7,11 +7,6 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
     $selectedTerm = $_SESSION['selectedTerm'];
     $account_id = $_SESSION['account_id'];
 
-    // Echo the variables
-    echo "acy_id: $acy_id<br>";
-    echo "selectedTerm: $selectedTerm<br>";
-    echo "account_id: $account_id<br>";
-
     // Connect to the database
     $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
@@ -28,14 +23,18 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
 
     // Check if query executed successfully
     if ($result) {
-        // Fetch and echo the result
+        $courses = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "Course Code: " . $row['course_code'] . "<br>";
-            echo "Section: " . $row['section'] . "<br>";
-            echo "Professor: " . $row['professor'] . "<br>";
+            $courses[] = [
+                'course_code' => $row['course_code'],
+                'section' => $row['section']
+            ];
         }
+        // Return the courses as JSON
+        header('Content-Type: application/json');
+        echo json_encode($courses);
     } else {
-        echo "Error executing query: " . mysqli_error($conn);
+        echo json_encode(['error' => mysqli_error($conn)]);
     }
 
     // Close the connection

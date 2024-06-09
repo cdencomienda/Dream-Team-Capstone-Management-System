@@ -180,7 +180,7 @@
  
     <div class="wrapper"><!-- start of wrapper scroll -->
         <div class="class-Dropdown">
-            <div class="classListDropdown">                              
+            <!-- <div class="classListDropdown">                              
                 <button class="listClass">  
                     <h4>COURSES AY 2023-2024</h4>
                     <span class="selectedClass"></span> 
@@ -191,7 +191,7 @@
                     <li class="term" data-term="term2">Term 2</li>
                     <li class="term" data-term="term3">Term 3</li>
                 </ul>
-            </div>    
+            </div>     -->
         <div class="coursesDetails" id="term1">
             <h3 class="termh3">Courses for Term 1</h3>
             <div class="coursesDropdown">
@@ -363,54 +363,196 @@
                     </div> 
 
                     <!-- files -->
-                    <div class="defaultBody" id="defaultBody">
-                        <div class="recentFiles" >
-                            'featured files here'
-                        </div >
-                    </div>
-                    
-                    <!-- submissions -->
-                    <div class="submissionFrame" id="submissionFrame">
-                        <div class="submissionscontainer">
-                            <div class= "requirement-list">
-                                <div class = "req-nameCont"> 
-                                    <div class="requirement-name">
-                                    
-                                    </div>
-                                    <script>
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                    // Function to fetch requirements information for the logged-in student's group
-                                    function fetchRequirementsInfo() {
-                                        fetch('fetchRequirements.php')
-                                            .then(response => response.json())
-                                            .then(requirements => {
-                                                const reqNameContainer = document.querySelector('.req-nameCont');
-                                                
-                                                // Clear existing content
-                                                reqNameContainer.innerHTML = '';
-            
-                                                // Populate the container with the group's requirements
-                                                requirements.forEach(requirement => {
-                                                    const div = document.createElement('div');
-                                                    div.className = 'requirement-name';
-                                                    div.textContent = requirement;
-                                                    reqNameContainer.appendChild(div);
-                                                });
-                                            })
-                                            .catch(error => {
-                                                console.error('Error fetching requirements information:', error);
-                                            });
-                                    }
-            
-                                    // Fetch requirements information when the page loads
-                                    fetchRequirementsInfo();
-                                });
-                                </script>
-                                </div>
-                                
+            <div class="defaultBody" id="defaultBody">
+                <div class="recentFiles">
+                    <!-- File posted by another person -->
+                    <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                        <div class="fileInfo">
+                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                            <div class="fileDetails">
+                                <strong>DREAM TEAM - Recommendation</strong>
+                                <span>26 KB</span>
                             </div>
                         </div>
-                        <script> 
+                    </div>
+                    
+                    <!-- File posted by you -->
+                    <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                        <div class="fileInfo">
+                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                             <div class="fileDetails">
+                                 <strong>Final Documentation</strong>
+                                 <span>12 KB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Structure -->
+            <div id="fileModal" class="modal">
+                <div class="modalContent">
+                    <span class="closeButton" onclick="closeModal()">&times;</span>
+                    <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                </div>
+            </div>
+
+                    
+                    <!-- submissions -->
+                     <div class="submissionFrame" id="submissionFrame">
+                <div class="submissionscontainer">
+                <div class= "requirement-list">
+                    <div class = "req-nameCont"> 
+                        <div class="requirement-name">
+                        
+                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                        // Function to fetch requirements information for the logged-in student's group
+                        function fetchRequirementsInfo() {
+                            fetch('fetchRequirements.php')
+                                .then(response => response.json())
+                                .then(requirements => {
+                                    const reqNameContainer = document.querySelector('.req-nameCont');
+                                    
+                                    // Clear existing content
+                                    reqNameContainer.innerHTML = '';
+
+                                    // Populate the container with the group's requirements
+                                    requirements.forEach(requirement => {
+                                        const div = document.createElement('div');
+                                        div.className = 'requirement-name';
+                                        div.textContent = requirement;
+                                        reqNameContainer.appendChild(div);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching requirements information:', error);
+                                });
+                        }
+
+                        // Fetch requirements information when the page loads
+                        fetchRequirementsInfo();
+                    });
+                    </script>
+                    </div>
+                    
+                </div>
+         <style> 
+           .submissionFrame {
+                display: none;
+            }
+         </style>
+                <div class= "requirement-details">
+                    <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
+                    <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
+                    
+                    <div class="requirement-descriptionCont"> Requirement Description: 
+                        <div class="requirement-descBox" id="req_description"> 
+                            ?????
+                        </div>        
+                    </div>
+                    <div class="reqfile-version" id="reqfile_version"> <h4>Version: ?????</h4> 
+                    </div> <br>   
+                    <!-- idk kung san lalagay ung file attached id -->
+                    <div class="Attach-Files"> 
+                            <form id="file-upload" class="requirement-file">
+                                <div class="atchFiles">   
+                                    <h3>Attach Files   </h3> 
+                                    <!-- Replace img tag with the i tag -->
+                                    <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
+                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
+                                    <div id="upload-btn" class="upload-container"></div>
+                                    <label for="input-file"></label>
+                                    <input type="file" accept="pdf" id="input-file" name="profile_picture">
+                                </div>
+                            </form> 
+                        </div>   
+                        <div class="Attached-FileCont">
+                            <!-- attached files go here -->
+                        </div>        
+
+                    <div class="req-submitbtnCont"> 
+                        
+                        <button class="reqbtn" type="button">
+                            submit
+                        </button>
+                    </div>
+                    <script>
+                        
+                        document.getElementById('input-file').addEventListener('change', function() {
+                        var files = this.files; // Get the selected files
+
+                        var fileList = document.createElement('ul'); // Create a list to hold file details
+                        for (var i = 0; i < files.length; i++) {
+                        // Check if the file is a PDF
+                        if (files[i].type === 'application/pdf') {
+                            var listItem = document.createElement('li'); // Create list item for each file
+                            listItem.style.backgroundColor = '#F8EFE3'; // Set background color
+                            listItem.style.borderRadius = '15px';
+                            listItem.style.width = '245px';
+                            listItem.style.height = '45px';
+                                   
+                            if (i > 0) {
+                                listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
+                            } else {
+                                listItem.style.marginTop = "5px";
+                            }
+
+                            // Create icon element
+                            var fileIcon = document.createElement('i');
+                            fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
+                            
+                            // Create anchor element
+                            var fileLink = document.createElement('a');
+                            fileLink.textContent = files[i].name; // Set text content to file name
+                            fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
+                            fileLink.download = files[i].name; // Set the download attribute to force download
+
+                            // Append icon and anchor elements to list item
+                            listItem.appendChild(fileIcon);
+                            listItem.appendChild(fileLink);
+
+                            // Append list item to list
+                            fileList.appendChild(listItem);
+                        } else {
+                            alert("Only PDF files are allowed.");
+                        }
+
+                        }
+                        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
+                        if (!attachedFileCont) {
+                        attachedFileCont = document.createElement('ul');
+                        attachedFileCont.style.padding = '1px'; // Add padding to the list
+                        attachedFileCont.style.listStyleType = 'none'; // Remove default list style
+                        document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
+                        }
+                        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
+                        });    
+                        
+                            // Get the element with the class "group_name"
+                            const groupDiv = document.getElementById('group_name');
+
+                            // Function to decrease opacity by 70%
+                            function decreaseOpacity() {
+                                groupDiv.style.opacity = '0.80'; // 30% opacity
+                            }
+
+                            // Function to reset opacity to default
+                            function resetOpacity() {
+                                groupDiv.style.opacity = '1'; // 100% opacity
+                            }
+
+                            // Add event listeners for mouseover and mouseout
+                            groupDiv.addEventListener('mouseover', decreaseOpacity);
+                            groupDiv.addEventListener('mouseout', resetOpacity);
+
+                            // Function to handle click event
+                            groupDiv.addEventListener('click', function() {
+                                // Call the showDefaultBody function
+                                showDefaultBody();
+                            });
+                    </script>
+                </div> 
                         </script>
 
                     <!-- file repo -->
@@ -491,13 +633,10 @@ function fetchAcademicYears() {
             if (data.error) {
                 console.error(data.error);
             } else {
-                // Assuming data is an array of academic years
                 console.log('Fetched academic years:', data);
                 const container = document.querySelector('.class-Dropdown');
 
-                // Process the data array in reverse order
                 data.reverse().forEach(yearStr => {
-                    // Parse year as an integer
                     const year = parseInt(yearStr, 10);
                     const displayName = `${year}-${year + 1}`;
 
@@ -509,62 +648,41 @@ function fetchAcademicYears() {
                     button.innerHTML = `<h4>COURSES AY ${displayName}</h4>
                                         <span class="selectedClass"></span>
                                         <div class="coursesListed"></div>`;
-                    
+
                     const ul = document.createElement('ul');
                     ul.className = 'menuCourses';
-                    ul.style.display = 'none'; // Initially hide the ul
+                    ul.style.display = 'none';
 
                     ['Term 1', 'Term 2', 'Term 3'].forEach((term, index) => {
                         const li = document.createElement('li');
                         li.className = 'term';
-                        li.dataset.term = (index + 1).toString(); // Set the dataset value as 1, 2, 3
+                        li.dataset.term = (index + 1).toString();
                         li.textContent = term;
 
                         ul.appendChild(li);
                     });
 
                     button.addEventListener('click', () => {
-                        // Toggle the display of the ul element
                         ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
-                        // Record the clicked year
                         console.log(`Button for AY ${displayName} clicked`);
                         acy_Stored(year);
                         acy_idStored(year);
                     });
 
-                    // Event listener for terms
                     ul.addEventListener('click', (event) => {
-                        const selectedTerm = event.target.dataset.term; // Get the dataset value
+                        const selectedTerm = event.target.dataset.term;
 
                         if (selectedTerm) {
                             console.log(`Selected term: ${selectedTerm}`);
-
-                            // Store the selected term in the session
                             storeSelectedTerm(selectedTerm);
-                            courses();
+                            fetchCourses(button.parentNode); // Pass the container to fetchCourses
 
-                            // Check if coursesDropdown already exists
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
                             if (coursesDropdown) {
-                                // Toggle visibility
                                 coursesDropdown.style.display = coursesDropdown.style.display === 'none' ? 'block' : 'none';
                             } else {
-                                // Create and show coursesDropdown if it doesn't exist
                                 coursesDropdown = document.createElement('div');
                                 coursesDropdown.className = 'coursesDropdown';
-                                coursesDropdown.innerHTML = `
-                                    <div class="dropdownmelon">            
-                                        <h3 class="courseNameDisplay">DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
-                                        <div class="dropdown-content">
-                                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-                                `;
-
-                                // Append coursesDropdown below the button
                                 button.parentNode.appendChild(coursesDropdown);
                             }
                         }
@@ -572,7 +690,6 @@ function fetchAcademicYears() {
 
                     classListDropdown.appendChild(button);
                     classListDropdown.appendChild(ul);
-
                     container.appendChild(classListDropdown);
                 });
             }
@@ -580,8 +697,8 @@ function fetchAcademicYears() {
         .catch(error => console.error('Error fetching academic years:', error));
 }
 
-// Call fetchAcademicYears when your page is ready
-document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+// // Call fetchAcademicYears when your page is ready
+// document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 
@@ -674,9 +791,46 @@ function storeSelectedTerm(selectedTerm) {
     });
 }
 
-function courses() {
+function fetchCourses(container) {
+    fetch('fetchCourses.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+            } else {
+                console.log('Courses:', data);
+                let coursesDropdown = container.querySelector('.coursesDropdown');
+                if (!coursesDropdown) {
+                    coursesDropdown = document.createElement('div');
+                    coursesDropdown.className = 'coursesDropdown';
+                    container.appendChild(coursesDropdown);
+                }
+                coursesDropdown.innerHTML = ''; // Clear previous content
 
+                data.forEach(course => {
+                    const courseElement = document.createElement('div');
+                    courseElement.className = 'course';
+                    courseElement.innerHTML = `
+                        <div class="dropdownmelon">            
+                            <h3 class="courseNameDisplay">${course.course_code} - ${course.section} <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                            <div class="dropdown-content">
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    `;
+                    coursesDropdown.appendChild(courseElement);
+                });
+            }
+        })
+        .catch(error => console.error('Fetch error:', error));
 }
+
+document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
+
 
 
 

@@ -57,6 +57,7 @@ function newGroupCreated() {
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
   }
 
+// view files  
   function openModal(filePath) {
     document.getElementById('fileFrame').src = filePath;
     document.getElementById('fileModal').style.display = "block";
