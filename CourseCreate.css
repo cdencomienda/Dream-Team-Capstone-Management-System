@@ -2,13 +2,13 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-} 
+}
 body{
   /* width: 100%;
   height: 100%; */
   background: #CBC4BA;
   overflow-x: hidden;
-} 
+}
 #courseNameDisplay {
   margin-left: 20px;
 }
@@ -20,7 +20,7 @@ body{
 .containerMenu{
   margin-left: 50px;
 }
-
+ 
 /* dropdown edit profile */
 .container{
   position: relative;
@@ -42,7 +42,7 @@ body{
   height: 400;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 20000;
-}   
+}  
 .dropdown-profile{
   position: absolute;
     background-color: #FFEBCF;
@@ -54,7 +54,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-} 
+}
 .dropdown-profile h5edit{
   color: #000000;
   size: 5px;
@@ -65,16 +65,16 @@ body{
   width:120px;
   height:120px;
   margin-top: 30px;
-  margin-left: 150px; 
+  margin-left: 150px;
   border-radius:50%;
   overflow:hidden;
   cursor:pointer;
 }
 .dropdown-profile  .profile img{
   position:absolute;
-  top: 0px; 
+  top: 0px;
   left: 0px;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   object-fit:cover;
 }
@@ -83,7 +83,7 @@ body{
 .inputEmail,
 .inputPassword{
   width: 200px;
-  border: 1px solid #000000; 
+  border: 1px solid #000000;
   margin: 10px 0 5px 0;
   padding-left: 5px;
   padding-top: 5px;
@@ -91,7 +91,7 @@ body{
   height: 30px;
   border-radius: 10px;
   background-color: #ffffff;
-  outline: none; 
+  outline: none;
 }
 .action{
   position:relative;  
@@ -109,9 +109,9 @@ body{
 }
 .action .profile img{
   position:absolute;
-  top: 0px; 
+  top: 0px;
   left: 0px;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   object-fit:cover;
 }
@@ -121,7 +121,7 @@ body{
   padding: 20px;
   background: #FFEBCF;
   border: 2px solid #000000;
-  width: 230px; 
+  width: 230px;
   border-radius:15px;
   transition:0.5s;
   visibility:visible;
@@ -145,41 +145,41 @@ body{
   font-size: 15px;
   color:#000000;
   font-weight: 400;
-} 
-
+}
+ 
 .logoutBtn{
   width: 170px;
-  padding: 10px; 
+  padding: 10px;
   border-radius: 15px;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 15px;
-}     
+}    
 .logoutBtn:hover {
-  background-color: #707070; 
+  background-color: #707070;
 }
-
+ 
 .editprofileBtn{
   width: 170px;
   padding: 10px;
   border-radius: 15px;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 15px;
-}   
+}  
 .editprofileBtn:hover {
-  background-color: #707070; 
-} 
+  background-color: #707070;
+}
 .saveEditbtn{
   width: 170px;
   padding: 10px;
   margin-top: 20px;
   border-radius: 15px;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   text-decoration: none;
   cursor: pointer;
   border: 2px #000000;
@@ -187,8 +187,8 @@ body{
   font-size: 15px;
 }
 .saveEditbtn:hover {
-  background-color: #707070; 
-} 
+  background-color: #707070;
+}
 /* header&search */
 .header{
   background-color: #213B9A;
@@ -212,15 +212,15 @@ body{
   width: 100px;
   height: 90px;
 }
-.searchTerm { 
+.searchTerm {
   margin-top: 20px;
   width: 600px;height: 30px;
   border: 3px solid #d8b34d;
-  border-right: none; 
+  border-right: none;
   padding-left: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  
+ 
   border-radius: 20px 0 0 20px;
   outline: none;
   color: #000000;
@@ -239,7 +239,7 @@ body{
 .searchTerm:focus{
   color: #000000;
 }
-
+ 
 /* left sidebar */
 .Lsection{
   background-color: #E2C17B;
@@ -251,7 +251,7 @@ body{
   background-repeat: no-repeat;
   position: absolute;
   background-size:100% 100%;
-} 
+}
 #SectionBtn{
   top: 20px;
   left: 50px;
@@ -315,7 +315,7 @@ body{
   background-image: url(menu_assets/capstone_icon.png);
   background-repeat: no-repeat;
 }
-.logobtn{ 
+.logobtn{
 width:100px;
 height:90px;
 top: -10px;
@@ -328,42 +328,42 @@ position: relative;
 background-image: url(menu_assets/system_logo.png);
 background-repeat: no-repeat;
 }
-
-.professorClass{ 
-  margin-left: 80px; 
+ 
+.professorClass{
+  margin-left: 80px;
   width: 330px;
   height: 1200px;  
-  position:relative; 
+  position:relative;
   overflow: auto;
 }
-
+ 
 /* creating course */
 /* .containerCreatecourse h2{
-  margin: 0px 0px 20px 0px; 
+  margin: 0px 0px 20px 0px;
 }
 .courseCreation{
   width: 330px;
   height: 100px;  
-  position: relative; 
+  position: relative;
   visibility: visible;
 }
-.createAButton{ 
+.createAButton{
     margin: 40px 40px 20px 40px ;
-    width: 240px; 
+    width: 240px;
     padding: 5px 30px;
-    border: 1px solid #000000; 
+    border: 1px solid #000000;
     height: 45px;
-    border-radius: 10px; 
-    background-color: #F8EFE3; 
+    border-radius: 10px;
+    background-color: #F8EFE3;
   }
-  .createAButton:hover { 
+  .createAButton:hover {
     background-color: #a8a7a7;
     transform: scale(1);
     cursor: pointer;
   }
 .inputTerm{
   width: 280px;
-  border: 1px solid #000000; 
+  border: 1px solid #000000;
   margin: 10px 0 5px 0;
   padding-left: 5px;
   padding-top: 5px;
@@ -371,19 +371,19 @@ background-repeat: no-repeat;
   height: 30px;
   border-radius: 10px;
   background-color: #F8EFE3;
-  outline: none; 
+  outline: none;
 }
 .createcourseButton{
   margin-left: 45px;
   margin-top: 20px;
-  width: 190px; 
+  width: 190px;
   padding: 5px 30px;
-  border: 1px solid #000000; 
+  border: 1px solid #000000;
   height: 35px;
-  border-radius: 10px; 
+  border-radius: 10px;
   background-color: #F8EFE3;
 }
-.createcourseButton:hover { 
+.createcourseButton:hover {
   background-color: #a8a7a7;
   transform: scale(1);
   cursor: pointer;
@@ -392,48 +392,48 @@ background-repeat: no-repeat;
   display: none;
 }
 .containerCreatecourse{
-  margin-left: 10px; 
+  margin-left: 10px;
   width: 290px;
   height: 450px;
   padding: 10px;
-  background-color: #ffffff; 
-  border: 1px solid #000000; 
+  background-color: #ffffff;
+  border: 1px solid #000000;
   border-radius: 15px;
   overflow: hidden;
   transition:0.5s;  
-} 
+}
 .courseNAMEbtn {
   width:140px;
   text-align:center;
   font-size: 18px;
   padding: 0px;
   font-weight: 100;
-  font-size: 15px; 
+  font-size: 15px;
   border: 0px;
   background-color: transparent;
   line-height: 25px;
-} 
+}
 .courseNAMEbtn:hover{
   background-color: #0056b3;
 }
 .courseInfo {
-  margin-left: 10px; 
-  margin-top: 20px; 
-  width: 250px; 
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 250px;
   padding: 5px 30px;
   border-top: 0.5px  solid #000000;
-  border-bottom: 0.5px  solid #000000; 
-  height: 30px; 
-  text-align: center; 
-} 
+  border-bottom: 0.5px  solid #000000;
+  height: 30px;
+  text-align: center;
+}
 .inputSection{
   width: 100px;
-  border: 1px solid #000000; 
+  border: 1px solid #000000;
   height: 30px;
   padding-left: 5px;
   border-radius: 5px;
   background-color: #F8EFE3;
-  outline: none; 
+  outline: none;
 }
 .inputAY{
   width: 145px;
@@ -442,7 +442,7 @@ background-repeat: no-repeat;
   padding-left: 5px;
   border-radius: 5px;
   background-color: #F8EFE3;
-  outline: none; 
+  outline: none;
 }
 .Term{
   width: 125px;
@@ -451,10 +451,10 @@ background-repeat: no-repeat;
   padding-left: 5px;
   border-radius: 5px;
   background-color: #F8EFE3;
-  outline: none; 
+  outline: none;
 }
-
-.inputUnits{ 
+ 
+.inputUnits{
   width: 133px;
   height: 30px;
   border: 1px solid #000000;  
@@ -471,12 +471,12 @@ background-repeat: no-repeat;
   padding-left: 5px;
   border-radius: 5px;
   background-color: #F8EFE3;
-  outline: none; 
+  outline: none;
 } */
-
-
+ 
+ 
 /* coursemelon button */
-.class-Dropdown{ 
+.class-Dropdown{
   margin-left: 120px;
   margin-top: 30px;
   width: 360px;
@@ -484,10 +484,10 @@ background-repeat: no-repeat;
   position: relative;
   overflow: auto;
 }
-.classListDropdown{ 
+.classListDropdown{
   width: 320px;
   margin-bottom: 30px;
-  position: relative; 
+  position: relative;
   z-index: 0px;
 }
 .classListDropdown *{
@@ -495,7 +495,7 @@ background-repeat: no-repeat;
   position: relative;
   /* display: inline-block; */
 }
-
+ 
 .listClass{
 background: #fff;
 color: #2a2f3b;
@@ -512,7 +512,7 @@ transition: 0.3s;
 }
 .listClass:hover{
 background: #b6b6b6;
-} 
+}
 .coursesListed{
 width: 0px;
 height: 0px;
@@ -541,18 +541,18 @@ width: 100%;
 transform: translateX(-50%);
 opacity: 0px;
 display: none;
-transition: 0.2s; 
-z-index: 1000; 
+transition: 0.2s;
+z-index: 1000;
 }
-
+ 
 .menuCourses li{
 padding: 0.7em 0.5em;
 margin: 1px;
 border-radius: 5px;
 cursor: pointer;
 z-index: 1px;
-} 
-.activeClass{ 
+}
+.activeClass{
 background: #b6b6b6;
 border-radius: 15px;
 }
@@ -569,12 +569,12 @@ z-index: 1px;
 display: none;
 height: 170px;
 }
-
+ 
 .coursesButtons {
 display: flex;
 flex-direction: column;
 }
-
+ 
 .coursesButtons button {
 padding: 10px;
 margin: 5px 0;
@@ -585,42 +585,42 @@ color: white;
 border-radius: 5px;
 cursor: pointer;
 }
-
+ 
 .coursesButtons button:hover {
 background-color: #0056b3;
 }
 .termh3{
 margin: 15px;
 }
-
+ 
 /* for the courses inside the term css  */
 .coursesDropdown{
 height: 200px;
 overflow: auto;
-
+ 
 }
 .dropdownmelon{
 margin-left: 15px;
 }
-
+ 
 /* coursemelon button */
-.classSet { 
+.classSet {
 position: relative;
-width:40px; 
-margin-left: 30px; 
+width:40px;
+margin-left: 30px;
 text-align:center;
-font-size: 18px; 
-font-weight: 100; 
+font-size: 18px;
+font-weight: 100;
 border: #000000;
 background-color: transparent;
 z-index: 0px;
-} 
-.classSet:hover { 
+}
+.classSet:hover {
 background-color: #0056b3;
 transform: scale(1);
 cursor: pointer;
 z-index: 0px;
-}   
+}  
 .dropdown-content {
 position: absolute;
 left: 97px;
@@ -637,20 +637,20 @@ border-radius: 15px;
 background-color: #F8EFE3;
 }
 .dropdownbtn{
-width: 110px; 
-border: 1px solid #000000; 
+width: 110px;
+border: 1px solid #000000;
 height: 24px;
 margin-bottom: 5px;
 padding: 5px;
-border-radius: 10px; 
+border-radius: 10px;
 background-color: #FFFFFF;
 }
-.dropdownbtn:hover { 
+.dropdownbtn:hover {
 background-color: #a8a8a8;
 transform: scale(1);
 cursor: pointer;
-}   
-
+}  
+ 
 .course-container {
 display: flex;
 align-items: center;
@@ -658,9 +658,9 @@ margin-bottom: 10px; /* Adjust margin as needed */
 }
 .course-container h3 {
 margin-right: 10px; /* Adjust margin between course name and button */
-margin-left: 30px; 
+margin-left: 30px;
 }
-
+ 
 /* new group created */
 .createdgroupBTN{
 width: 300px;
@@ -668,12 +668,12 @@ border: 1px solid #000000;
 height: 45px;
 margin-top: 20px;
 margin-left: 15px;
-margin-bottom: 20px; 
+margin-bottom: 20px;
 border-radius : 10px;
-background-color: #f8efe3; 
-
+background-color: #f8efe3;
+ 
 }
-.createdgroupBTN:hover { 
+.createdgroupBTN:hover {
 background-color: #a8a8a8;
 transform: scale(1);
 cursor: pointer;
@@ -684,7 +684,7 @@ cursor: pointer;
   width: 1000px;
   height: 600px;
   padding: 25px;
-  margin-top: -500px;
+  margin-top: 0px;
   display: none;
   z-index: 0; /* Set a lower z-index */
 }
@@ -695,7 +695,7 @@ cursor: pointer;
   margin-top: -35px;
   height: 10%;
   display: grid;
-  grid-template-columns: 1fr auto; 
+  grid-template-columns: 1fr auto;
   gap: 10px;
 }
 .GroupmembersContainer{
@@ -711,31 +711,31 @@ opacity: 0;
 transform: translateY(-10px);
 transition: opacity 150ms ease-in-out;
 }
-
+ 
 .Rep-FilesBtn:hover{
   background-color: #958f87;
 }
-
+ 
 .Submission-Btn:hover{
   background-color: #958f87;
 }
 .Rep-FilesBtn, .Submission-Btn, .Members-Btn {
-  width: auto; 
+  width: auto;
   height: 25px;
   background-color: #F8EFE3;
   position: relative;
   border-radius: 20px;
   border: none;
-  padding: 0 10px; 
+  padding: 0 10px;
   cursor: pointer;
   margin: 5px;
 }
 .Rep-FilesBtn {
-  width: 66px; 
+  width: 66px;
 }
 .Members-Btn {
-  width: 80px; 
-  margin-right: 10px; 
+  width: 80px;
+  margin-right: 10px;
 }
 .Submission-Btn {
   width: 120px;
@@ -755,7 +755,7 @@ position: relative;
 border-radius: 20px;
 border: none;
 transition:backround-color .3s ease;
-} 
+}
 .Members-Btn:hover {
 background-color: #958f87;
 }
@@ -794,7 +794,7 @@ align-items: center;
 .group_name{
 width: 350px;
 height: 35px;
-background-color: #F8EFE3; 
+background-color: #F8EFE3;
 position: relative;
 border-radius: 20px;
 margin-top: 40px;
@@ -803,13 +803,13 @@ text-align: center;
 display: flex;
 margin: 0;
 justify-content: center;
-
+ 
 }
 .button-group{
 grid-column: 2 / 3;
-display: flex; 
-justify-content: center; 
-align-items: center; 
+display: flex;
+justify-content: center;
+align-items: center;
 outline: 0px;
 transition:backround-color 0.5s ease;
 text-align: center;
@@ -823,12 +823,12 @@ position: relative;
 top: -0px;
 width: 700px;
 height: 300px;
-padding: 25px; 
-background-color: #ffffff; 
+padding: 25px;
+background-color: #ffffff;
 border-radius: 15px;
 overflow:hidden;
 display: none;
-transition:1s; 
+transition:1s;
 }
 .createdReq{
   position: relative;
@@ -838,27 +838,27 @@ transition:1s;
     border: 1px solid #000000;
     margin-left: 380px;
     margin-top: -180px;
-    background-color: #F8EFE3; 
+    background-color: #F8EFE3;
 }
 .inputRequirements{
 margin-top: 10px;
 margin-bottom: 20px;
 padding: 5px;
 width: 330px;  
-border: 1px solid #000000; 
+border: 1px solid #000000;
 height: 35px;
-border-radius: 10px; 
-background-color: #F8EFE3; 
+border-radius: 10px;
+background-color: #F8EFE3;
 }
 .inputRequirementsDescription{
 margin-top: 10px;
 margin-bottom: 20px;
 padding: 5px;
 width: 330px;  
-border: 1px solid #000000; 
+border: 1px solid #000000;
 height: 35px;
-border-radius: 10px; 
-background-color: #F8EFE3; 
+border-radius: 10px;
+background-color: #F8EFE3;
 }
 .addreqbtn{
 margin-top: 10px;
@@ -874,18 +874,18 @@ border-radius: 15px;
 .addreqbtn:hover{
 background-color: #aeaeaeae;
 }
-
+ 
 /* rubric */
 .rubriccontainer{
 position: relative;  
 top: 0px;
 width: 500px;
 height: 300px;
-padding: 25px; 
-background-color: #ffffff; 
+padding: 25px;
+background-color: #ffffff;
 border-radius: 15px;
 overflow:hidden;
-transition:1s; 
+transition:1s;
 display: flex;
 gap: 20px;
 display: flex;
@@ -896,10 +896,10 @@ align-items: center;
 margin-top: 10px;
 width: 380px;
 height: 170px;
-margin-top: 10px; 
+margin-top: 10px;
 border: 1px solid #000000;
 padding: 15px;
-background-color: #F8EFE3; 
+background-color: #F8EFE3;
 border-radius: 10px;
 overflow: auto;
 overflow: overlay;
@@ -1001,7 +1001,7 @@ border-bottom: 1px solid #aeaeaeae;
 }
 .tag:hover{
 background-color: #aeaeaeae;
-
+ 
 }
 .no-result-message{
 padding: 0px 0px 12px;
@@ -1012,7 +1012,7 @@ margin-top: 8px;
 }
 .btn_submit{
 padding: 17px 24px;
-background-color: #F8EFE3; 
+background-color: #F8EFE3;
 border: none;
 cursor: pointer;
 border: 1px solid #000000;
@@ -1021,8 +1021,8 @@ border-radius: 15px;
 }
 .btn_submit:hover{
 background-color: #dbd3c9;
-}       
-
+}      
+ 
 /* start of group file,submission, and member css  */
 .requirement-name{
   position: relative;
@@ -1038,21 +1038,21 @@ background-color: #dbd3c9;
 }
 .req-nameCont{
   width: 350px;
-  height: 580px; 
+  height: 580px;
   display: flex;  
   flex-direction: column;
   margin-top: 25px;
 }
-.requirement-list{ 
-  background-color: white; 
+.requirement-list{
+  background-color: white;
   border-radius: 35px;
   width: 350px;
   height: 580px;
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 .submissionscontainer{
   width: 1000px;
-  height: 600px; 
+  height: 600px;
   margin-top: 0px;
   display: flex;
   flex-direction: row; /* Display children elements in a row */
@@ -1082,10 +1082,10 @@ background-color: #dbd3c9;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out;
-  z-index: 1000; 
+  z-index: 1000;
   text-align: left;
 }
-.documentationCont{ 
+.documentationCont{
   margin: 10px;
   margin-top: 30px;
   width: 455px;
@@ -1111,7 +1111,7 @@ background-color: #dbd3c9;
       align-items: center; /* Center items vertically */
       height: 30px;
      
-  } 
+  }
   .divDocuReqLogs{
     width: 40px;
   }
@@ -1123,7 +1123,7 @@ background-color: #dbd3c9;
     width: 150px;
     margin-left: 10px;
   }
-
+ 
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -1144,7 +1144,7 @@ background-color: #dbd3c9;
     width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px; 
+    margin-left: 250px;
     background-color: transparent;
     border: none;
 }
@@ -1161,11 +1161,11 @@ background-color: #dbd3c9;
   background-color: #F8EFE3;
   border-radius: 25px;
   display: flex;
-  
+ 
   flex-direction: row;
   align-items: center;
 }
-.defaultBody{ 
+.defaultBody{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -1176,15 +1176,15 @@ background-color: #dbd3c9;
   display: flex;
   flex-direction: column;
 }
-
-
+ 
+ 
 .recentFiles {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
+ 
 .fileMessage {
   background-color: #f0f0f0;
   border-radius: 10px;
@@ -1196,41 +1196,41 @@ background-color: #dbd3c9;
   max-width: 70%;
   cursor: pointer;
 }
-
+ 
 .fileMessage.left {
   align-self: flex-start;
 }
-
+ 
 .fileMessage.right {
   align-self: flex-end;
   background-color: #e0f7fa;
 }
-
+ 
 .fileInfo {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
+ 
 .fileIcon {
   width: 40px;
   height: 40px;
 }
-
+ 
 .fileDetails {
   display: flex;
   flex-direction: column;
 }
-
+ 
 .fileDetails strong {
   font-size: 16px;
 }
-
+ 
 .fileDetails span {
   font-size: 12px;
   color: #666;
 }
-
+ 
 .modal {
   display: none;
   position: fixed;
@@ -1243,7 +1243,7 @@ background-color: #dbd3c9;
   background-color: rgba(0,0,0,0.5);
   z-index: 500 ;
 }
-
+ 
 .modalContent {
   background-color: #fff;
   margin: 5% auto;
@@ -1254,7 +1254,7 @@ background-color: #dbd3c9;
   position: relative;
   z-index: 500 ;
 }
-
+ 
 .closeButton {
   color: #aaa;
   float: right;
@@ -1262,7 +1262,7 @@ background-color: #dbd3c9;
   font-weight: bold;
   z-index: 500 ;
 }
-
+ 
 .closeButton:hover,
 .closeButton:focus {
   color: black;
@@ -1270,15 +1270,15 @@ background-color: #dbd3c9;
   cursor: pointer;
   z-index: 500 ;
 }
-
+ 
 #fileFrame {
   width: 100%;
   height: 96%;
   z-index: 500 ;
 }
-
+ 
 /* end of fucing css */
-
+ 
  
 /* ewna ko sino gumawa neto brt yata */
 body{
@@ -1299,11 +1299,11 @@ body{
      z-index: 1000;
      display: none;
  }
-
+ 
  #error-message.show {
      display: block;
  }
-
+ 
  #error-message button {
      margin-top: 10px;
      padding: 5px 10px;
@@ -1313,7 +1313,7 @@ body{
      border-radius: 5px;
      cursor: pointer;
  }
-
+ 
 /* notif */
 .hero{
   margin-left: 80px;
@@ -1321,7 +1321,7 @@ body{
   width: 100%;
 }
 .notificationContainer{
-  width: 350px; 
+  width: 350px;
 }
 .single-box{
   width: 330px;
@@ -1344,7 +1344,7 @@ a.read{
 .single-box:active {
   background-color: #004080;
 }  
-
+ 
 .single-box.unseen{
   width: 330px;
   padding: 30px;
@@ -1354,7 +1354,7 @@ a.read{
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-} 
+}
 .unseen:hover {
   background-color: #0056b3;  
 }
@@ -1364,7 +1364,7 @@ a.read{
 .post{
   color: hsl(219, 12%, 42%);
   font-weight: 800;
-} 
+}
 span.dot{
   display: inline-block;
   background-color: hsl(1, 90%, 64%);
@@ -1372,32 +1372,32 @@ span.dot{
   width: 9px;
   border-radius: 50%;
   margin-left: 7px;
-} 
-  
-
-
+}
+ 
+ 
+ 
  .close {
  background-color: transparent;
  height: 30px;
  width:  30px;
  border: none;
  padding: 5px;
- border-radius: 5px; 
+ border-radius: 5px;
  cursor: pointer;
  margin-left: 350px;
- overflow: hidden; 
+ overflow: hidden;
 }
 .close i {
- color: black; 
+ color: black;
  font-size: 25px;
  transition: opacity 0.3s ease;
  margin:-3px
 }
 .close i:hover {
- opacity: 50%; 
+ opacity: 50%;
  border-radius:25px;
-} 
-
+}
+ 
 /* admin course create addition */
 .Users{
   top: -65px;
@@ -1414,7 +1414,7 @@ span.dot{
   background-repeat: no-repeat;
   /* color: white; */
 }
-.Defense-Reports{ 
+.Defense-Reports{
   top: -85px;
   left: 20px;
   width:50px;
@@ -1429,21 +1429,21 @@ span.dot{
   background-repeat: no-repeat;
   font-size:small;
   /* color: white; */
-} 
-
+}
+ 
 /* viewmembers */
 .closeViewGroup{
   margin-left: 90%;
   background-color: transparent; /* Example background color */
   height: 25px;
   width:  25px;
-  border: none; 
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  overflow: hidden; 
-} 
+  overflow: hidden;
+}
 .viewgroup{
-  position: relative; 
+  position: relative;
   width: 250px;
   height: 350px;
   top: 0px;
@@ -1461,7 +1461,7 @@ span.dot{
   border-radius: 10px;
   background-color: #f8efe3;
   overflow: auto;
-
+ 
 }
 .adminClass{
   position: relative;
@@ -1473,4 +1473,4 @@ span.dot{
   top: -1200px;
   display: block;
   z-index: 0; /* Set a lower z-index */
-} 
+}
