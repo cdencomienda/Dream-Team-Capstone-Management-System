@@ -180,7 +180,7 @@
  
     <div class="wrapper"><!-- start of wrapper scroll -->
         <div class="class-Dropdown">
-            <!-- <div class="classListDropdown">                              
+            <div class="classListDropdown">                              
                 <button class="listClass">  
                     <h4>COURSES AY 2023-2024</h4>
                     <span class="selectedClass"></span> 
@@ -191,7 +191,7 @@
                     <li class="term" data-term="term2">Term 2</li>
                     <li class="term" data-term="term3">Term 3</li>
                 </ul>
-            </div>     -->
+            </div>    
         <div class="coursesDetails" id="term1">
             <h3 class="termh3">Courses for Term 1</h3>
             <div class="coursesDropdown">
@@ -284,10 +284,7 @@
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
         </div> 
-
     </div>
-
-        
 
         <div class="adminClass">
         <!-- viewgroup div -->
@@ -304,8 +301,39 @@
                     <h4>InstructorName</h4>
                 </div>
             </div>
+
+        <!-- Requirement div -->
+        <div class="setrequirements">
+            <h3>Requirements</h3>
+            <form class="Requirements" method="POST" action="addRequirements.php">
+                <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
+                <h3>Requirements Description</h3>
+                <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
+                <div class="createdReq" id="selectedRequire">
+
+                </div>
+                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+            </form>
+        </div> 
+
+        <!-- Rubric div -->
+        <div class="rubriccontainer" style="display: none"> 
+        <h3>Rubric</h3>
+                <form class="addRubric" method="POST" action="addRubric.php">
+                    <div>  
+                    </div>
+                    <section class="table_selectrubric">
+                        <table>
+                            <tbody class="rubricList" id="selectedRubric">
+                            <!-- Your student list rows will be dynamically populated here -->
+                            </tbody>
+                        </table>
+                    </section>
+                </form> 
+        </div>
+
         <!-- group class div -->
-            <div class="GroupContainer">
+         <div class="GroupContainer">
                     <div class="dashboard_header">
                         <!-- Group Name Box -->
                         <div class="groupname_container"> 
@@ -363,85 +391,83 @@
                     </div> 
 
                     <!-- files -->
-            <div class="defaultBody" id="defaultBody">
-                <div class="recentFiles">
-                    <!-- File posted by another person -->
-                    <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
-                        <div class="fileInfo">
-                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                            <div class="fileDetails">
-                                <strong>DREAM TEAM - Recommendation</strong>
-                                <span>26 KB</span>
+                <div class="defaultBody" id="defaultBody">
+                    <div class="recentFiles">
+                        <!-- File posted by another person -->
+                        <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>DREAM TEAM - Recommendation</strong>
+                                    <span>26 KB</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- File posted by you -->
-                    <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
-                        <div class="fileInfo">
-                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                             <div class="fileDetails">
-                                 <strong>Final Documentation</strong>
-                                 <span>12 KB</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Structure -->
-            <div id="fileModal" class="modal">
-                <div class="modalContent">
-                    <span class="closeButton" onclick="closeModal()">&times;</span>
-                    <iframe id="fileFrame" src="" frameborder="0"></iframe>
-                </div>
-            </div>
-
-                    
-                    <!-- submissions -->
-                     <div class="submissionFrame" id="submissionFrame">
-                <div class="submissionscontainer">
-                <div class= "requirement-list">
-                    <div class = "req-nameCont"> 
-                        <div class="requirement-name">
                         
+                        <!-- File posted by you -->
+                        <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>Final Documentation</strong>
+                                    <span>12 KB</span>
+                                </div>
+                            </div>
                         </div>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                        // Function to fetch requirements information for the logged-in student's group
-                        function fetchRequirementsInfo() {
-                            fetch('fetchRequirements.php')
-                                .then(response => response.json())
-                                .then(requirements => {
-                                    const reqNameContainer = document.querySelector('.req-nameCont');
-                                    
-                                    // Clear existing content
-                                    reqNameContainer.innerHTML = '';
-
-                                    // Populate the container with the group's requirements
-                                    requirements.forEach(requirement => {
-                                        const div = document.createElement('div');
-                                        div.className = 'requirement-name';
-                                        div.textContent = requirement;
-                                        reqNameContainer.appendChild(div);
-                                    });
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching requirements information:', error);
-                                });
-                        }
-
-                        // Fetch requirements information when the page loads
-                        fetchRequirementsInfo();
-                    });
-                    </script>
                     </div>
-                    
                 </div>
-         <style> 
-           .submissionFrame {
-                display: none;
-            }
-         </style>
+                <!-- Modal Structure -->
+                <div id="fileModal" class="modal">
+                    <div class="modalContent">
+                        <span class="closeButton" onclick="closeModal()">&times;</span>
+                        <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>  
+                        <!-- submissions -->
+                        <div class="submissionFrame" id="submissionFrame">
+                    <div class="submissionscontainer">
+                    <div class= "requirement-list">
+                        <div class = "req-nameCont"> 
+                            <div class="requirement-name">
+                            
+                            </div>
+                        <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                            // Function to fetch requirements information for the logged-in student's group
+                            function fetchRequirementsInfo() {
+                                fetch('fetchRequirements.php')
+                                    .then(response => response.json())
+                                    .then(requirements => {
+                                        const reqNameContainer = document.querySelector('.req-nameCont');
+                                        
+                                        // Clear existing content
+                                        reqNameContainer.innerHTML = '';
+
+                                        // Populate the container with the group's requirements
+                                        requirements.forEach(requirement => {
+                                            const div = document.createElement('div');
+                                            div.className = 'requirement-name';
+                                            div.textContent = requirement;
+                                            reqNameContainer.appendChild(div);
+                                        });
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching requirements information:', error);
+                                    });
+                            }
+
+                            // Fetch requirements information when the page loads
+                            fetchRequirementsInfo();
+                        });
+                        </script>
+                        </div>
+                        
+                    </div>
+            <style> 
+            .submissionFrame {
+                    display: none;
+                }
+            </style>
                 <div class= "requirement-details">
                     <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
                     <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
@@ -565,35 +591,6 @@
                 <!-- file requirement -->
             
         </div>  
-        <!-- Requirement div -->
-        <div class="setrequirements">
-            <h3>Requirements</h3>
-            <form class="Requirements" method="POST" action="addRequirements.php">
-                <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
-                <h3>Requirements Description</h3>
-                <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
-                <div class="createdReq" id="selectedRequire">
-
-                </div>
-                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
-            </form>
-        </div> 
-
-        <!-- Rubric div -->
-        <div class="rubriccontainer" style="display: none"> 
-        <h3>Rubric</h3>
-                <form class="addRubric" method="POST" action="addRubric.php">
-                    <div>  
-                    </div>
-                    <section class="table_selectrubric">
-                        <table>
-                            <tbody class="rubricList" id="selectedRubric">
-                            <!-- Your student list rows will be dynamically populated here -->
-                            </tbody>
-                        </table>
-                    </section>
-                </form> 
-        </div>
 
     </div><!-- end of wrapper scroll --> 
      

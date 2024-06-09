@@ -183,16 +183,6 @@ function rubric() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
-// function viewMembers() { 
-//   var container = document.querySelector('.viewgroup'); 
-//   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-  
-// //   var hideGroup = document.getElementById("viewGRP")
-// //   if (container) {
-// //       hideGroup.style.display = "none";
-// //   } 
-// }
-
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 

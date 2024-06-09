@@ -637,7 +637,7 @@ border-radius: 15px;
 background-color: #F8EFE3;
 }
 .dropdownbtn{
-width: 100px; 
+width: 110px; 
 border: 1px solid #000000; 
 height: 24px;
 margin-bottom: 5px;
@@ -820,7 +820,7 @@ transition: backround-color .3s ease;
 /* setrequirements */
 .setrequirements{
 position: relative;  
-top: -1100px;
+top: -0px;
 width: 700px;
 height: 300px;
 padding: 25px; 
@@ -878,7 +878,7 @@ background-color: #aeaeaeae;
 /* rubric */
 .rubriccontainer{
 position: relative;  
-top: -1100px;
+top: 0px;
 width: 500px;
 height: 300px;
 padding: 25px; 
@@ -1430,6 +1430,7 @@ span.dot{
   font-size:small;
   /* color: white; */
 } 
+
 /* viewmembers */
 .closeViewGroup{
   margin-left: 90%;
@@ -1445,7 +1446,7 @@ span.dot{
   position: relative; 
   width: 250px;
   height: 350px;
-  top: -1080px;
+  top: 0px;
   overflow: hidden;
   padding: 30px;
   display: none;
@@ -1468,7 +1469,8 @@ span.dot{
   width: 1000px;
   height: 600px;
   padding: 25px;
-  margin-top: -700px;
+  margin-top: 0;
+  top: -1200px;
   display: block;
   z-index: 0; /* Set a lower z-index */
 } 
