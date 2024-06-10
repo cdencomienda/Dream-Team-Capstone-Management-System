@@ -398,3 +398,18 @@ window.onclick = function(event) {
     }
 }
 
+function showModal() {
+  document.getElementById('rubricModal').style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById('rubricModal').style.display = "none";
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+  var modal = document.getElementById('rubricModal');
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+}

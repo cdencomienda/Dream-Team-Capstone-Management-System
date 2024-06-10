@@ -323,13 +323,75 @@
                     <div>  
                     </div>
                     <section class="table_selectrubric">
-                        <table>
-                            <tbody class="rubricList" id="selectedRubric">
-                            <!-- Your student list rows will be dynamically populated here -->
-                            </tbody>
-                        </table>
-                    </section>
-                </form> 
+    <table>
+        <thead>
+            <tr>
+                <th class="Rubricid-column">Rubric id</th>
+                <th class="Rubricid-column">Rubric Description</th>
+            </tr>
+        </thead>
+        <tbody class="rubricList" id="selectedRubric">
+            <tr>
+                <td>1</td>
+                <td><a href="#" class="rubric-description" onclick="showModal()">DATA MANAGEMENT</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><a href="#" class="rubric-description" onclick="showModal()">CPE METHODS OF RESEARCH</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><a href="#" class="rubric-description" onclick="showModal()">CPE DESIGN</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Modal -->
+<div id="rubricModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="rubric-container">
+            <div class="rubric-header">
+                <h1>Written Communication</h1>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="description-column">Description</th>
+                        <th class="grade-Desc">score description</th>
+                        <th class="grades-column">Grades</th>          
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="criteria">
+                        <td class="description">
+                            <strong>B1. Executive Summary</strong><br>
+                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                        </td>
+                        <td class="grade_description">
+                            askdjbajdb<br>
+                        </td>
+                        <td class="score-column">
+                            <select>
+                                <option value="7">7</option>
+                                <option value="6">6</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                                <option value="0">0</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Repeat for other criteria as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+                </form>  
         </div>
 
         <!-- group class div -->
