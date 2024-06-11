@@ -623,8 +623,8 @@ z-index: 0px;
 }  
 .dropdown-content {
 position: absolute;
-left: 97px;
-top: 160px;
+left: 170px;
+top: 20px;
 overflow: hidden;
 display: none;
 z-index: 1000;

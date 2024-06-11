@@ -1,6 +1,8 @@
 <?php
 session_start(); // Start the session
 
+header('Content-Type: application/json'); // Set the content type to JSON
+
 // Check if session variables are set
 if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SESSION['account_id'])) {
     $acy_id = $_SESSION['acy_id'];
@@ -12,32 +14,36 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
 
     // Check connection
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+        echo json_encode(['error' => 'Connection failed: ' . mysqli_connect_error()]);
+        exit;
     }
 
-    // SQL query
-    $query = "SELECT course_code, section, professor FROM `course` WHERE acy_id = $acy_id AND term = '$selectedTerm' AND professor = $account_id";
-
+    // SQL query with prepared statement
+    $query = "SELECT course_code, section, course_id, professor FROM `course` WHERE acy_id = ? AND term = ? AND professor = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('isi', $acy_id, $selectedTerm, $account_id);
+    
     // Execute the query
-    $result = mysqli_query($conn, $query);
-
-    // Check if query executed successfully
-    if ($result) {
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
         $courses = [];
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = $result->fetch_assoc()) {
             $courses[] = [
+                'course_id' => $row['course_id'],
                 'course_code' => $row['course_code'],
                 'section' => $row['section']
             ];
         }
         // Return the courses as JSON
-        header('Content-Type: application/json');
         echo json_encode($courses);
     } else {
-        echo json_encode(['error' => mysqli_error($conn)]);
+        echo json_encode(['error' => $stmt->error]);
     }
 
-    // Close the connection
+    // Close the statement and connection
+    $stmt->close();
     mysqli_close($conn);
+} else {
+    echo json_encode(['error' => 'Session variables not set']);
 }
 ?>

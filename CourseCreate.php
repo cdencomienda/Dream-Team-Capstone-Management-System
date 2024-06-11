@@ -850,6 +850,14 @@ function storeSelectedTerm(selectedTerm) {
     });
 }
 
+function dropdownMelon(button) {
+    const targetId = button.dataset.target;
+    const dropdownContent = document.getElementById(targetId);
+    if (dropdownContent) {
+        dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
 function fetchCourses(container) {
     fetch('fetchCourses.php')
         .then(response => response.json())
@@ -864,30 +872,61 @@ function fetchCourses(container) {
                     coursesDropdown.className = 'coursesDropdown';
                     container.appendChild(coursesDropdown);
                 }
-                coursesDropdown.innerHTML = ''; // Clear previous content
 
                 data.forEach(course => {
                     const courseElement = document.createElement('div');
                     courseElement.className = 'course';
-                    courseElement.innerHTML = `
-                        <div class="dropdownmelon">            
-                            <h3 class="courseNameDisplay">${course.course_code} - ${course.section} <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
-                            <div class="dropdown-content">
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                            </div>
-                        </div>
-                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+
+                    const courseTitle = document.createElement('h3');
+                    courseTitle.className = 'courseNameDisplay';
+
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.classList.add('classSet');
+                    button.textContent = '•••';
+                    button.dataset.target = 'dropdown-' + course.course_id;
+
+                    const dropdownContent = document.createElement('div');
+                    dropdownContent.classList.add('dropdown-content');
+                    dropdownContent.id = 'dropdown-' + course.course_id;
+                    dropdownContent.style.display = 'none';
+
+                    // Add content to dropdown
+                    dropdownContent.innerHTML = `
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="setRequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     `;
+
+                    courseTitle.textContent = `${course.course_code} - ${course.section} `;
+                    courseTitle.appendChild(button); // Add the button inside h3
+
+                    courseElement.appendChild(courseTitle);
+                    courseElement.appendChild(dropdownContent);
                     coursesDropdown.appendChild(courseElement);
+
+                    button.addEventListener('click', function() {
+                        dropdownMelon(this);
+                    });
+
+                    // Log the course_id to the console
+                    console.log('Course ID:', course.course_id);
                 });
             }
         })
         .catch(error => console.error('Fetch error:', error));
 }
 
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
 
 
 
