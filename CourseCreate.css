@@ -710,6 +710,7 @@ pointer-events: none;
 opacity: 0;
 transform: translateY(-10px);
 transition: opacity 150ms ease-in-out;
+width: 200px;
 }
  
 .Rep-FilesBtn:hover{

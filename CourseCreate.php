@@ -800,12 +800,93 @@ function fetchCourses(container) {
         .catch(error => console.error('Fetch error:', error));
 }
 
-// ian mojica @2:40am added function
 function newGroupCreated(course_id, group_name) {
     var container = document.querySelector('.GroupContainer');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-    console.log(course_id, group_name);  
+    console.log(course_id, group_name);
+    fetchGroupData(course_id, group_name);
+    fetchStudentGroups();
+
+    // Prepare the data to be sent in the request body
+    const formData = new FormData();
+    formData.append('course_id', course_id);
+    formData.append('group_name', group_name);
+
+    // Send an AJAX request using fetch
+    fetch('fetchGroupName.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(result => console.log(result))
+    .catch(error => console.error('Error:', error));
 }
+
+// Example function to fetch group data and display group name
+function fetchGroupData(course_id, group_name) {
+    // Clear the existing content in the group_name element
+    document.getElementById('group_name').textContent = '';
+
+    fetch('fetchGroupName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'course_id': course_id,
+            'group_name': group_name
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Display the fetched group name in the group_name element
+            document.getElementById('group_name').textContent = data.group_name;
+            console.log('Group Name:', data.group_name);
+            console.log('Student Group ID:', data.student_group_id);
+
+            // Store data in session using JavaScript (if needed)
+            sessionStorage.setItem('student_group_id', data.student_group_id);
+        } else {
+            console.error('Error:', data.message);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+function fetchStudentGroups() {
+    fetch('test.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                console.log(data.message); // Output any error message
+            } else {
+                const groupMembersContainer = document.querySelector('.GroupmembersContainer');
+                
+                // Clear the container first
+                groupMembersContainer.innerHTML = '';
+
+                // Process the JSON data
+                data.forEach(student => {
+                    console.log(student); // Output each student
+                    // Create a new element for each student and append it to the container
+                    const studentElement = document.createElement('div');
+                    studentElement.textContent = student;
+                    groupMembersContainer.appendChild(studentElement);
+                });
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+
+
 
 
 function groups() {
