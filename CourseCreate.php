@@ -916,18 +916,12 @@ function fetchCourses(container) {
                                         groupButton.type = 'button';
                                         groupButton.classList.add('createdgroupBTN');
                                         groupButton.onclick = function() {
-                                            newGroupCreated(group_name);
-                                        };
+                                        newGroupCreated(course.course_id, group_name);
+                                    };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
                                     });
-                                }
-                                // ian mojica @2:40am added function
-                                function newGroupCreated() {
-                                var container = document.querySelector('.GroupContainer');
-                                container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-                                    
-                                }        
+                                }     
                             });
                         }
                     })
@@ -937,6 +931,12 @@ function fetchCourses(container) {
         .catch(error => console.error('Fetch error:', error));
 }
 
+// ian mojica @2:40am added function
+function newGroupCreated(course_id, group_name) {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    console.log(course_id, group_name);  
+}
 
 
 function groups() {
@@ -995,7 +995,7 @@ function reqName() {
     const createdReq = document.querySelector('.createdReq');
     createdReq.innerHTML = ''; // Clear previous content
 
-    fetch('test.php') // Replace 'path_to_your_php_file.php' with your actual PHP file path
+    fetch('createdRequirement.php') // Replace 'path_to_your_php_file.php' with your actual PHP file path
         .then(response => response.json())
         .then(data => {
             // Check if data contains reqNames array
