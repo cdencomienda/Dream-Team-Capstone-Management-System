@@ -737,6 +737,8 @@ function fetchAcademicYears() {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm);
                             fetchCourses(button.parentNode); // Pass the container to fetchCourses
+                            groupCourses();
+                            groups();
 
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
                             if (coursesDropdown) {
@@ -860,68 +862,170 @@ function dropdownMelon(button) {
     }
 }
 
+
 function fetchCourses(container) {
+    // Check if coursesDropdown already exists in the container
+    let coursesDropdown = container.querySelector('.coursesDropdown');
+
+    // If coursesDropdown doesn't exist, create it
+    if (!coursesDropdown) {
+        coursesDropdown = document.createElement('div');
+        coursesDropdown.className = 'coursesDropdown';
+        container.appendChild(coursesDropdown);
+    } else {
+        // Clear previous content in coursesDropdown
+        coursesDropdown.innerHTML = '';
+    }
+
     fetch('fetchCourses.php')
         .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('Error:', data.error);
+        .then(coursesData => {
+            if (coursesData.error) {
+                console.error('Error:', coursesData.error);
             } else {
-                console.log('Courses:', data);
-                let coursesDropdown = container.querySelector('.coursesDropdown');
-                if (!coursesDropdown) {
-                    coursesDropdown = document.createElement('div');
-                    coursesDropdown.className = 'coursesDropdown';
-                    container.appendChild(coursesDropdown);
-                }
+                console.log('Courses:', coursesData);
 
-                data.forEach(course => {
-                    const courseElement = document.createElement('div');
-                    courseElement.className = 'course';
+                fetch('FetchGroups.php')
+                    .then(response => response.json())
+                    .then(groupsData => {
+                        if (groupsData.error) {
+                            console.error('Error:', groupsData.error);
+                        } else {
+                            console.log('Groups:', groupsData);
 
-                    const courseTitle = document.createElement('h3');
-                    courseTitle.className = 'courseNameDisplay';
+                            coursesData.forEach(course => {
+                                const courseElement = document.createElement('div');
+                                courseElement.className = 'course';
 
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.classList.add('classSet');
-                    button.textContent = '•••';
-                    button.dataset.target = 'dropdown-' + course.course_id;
+                                const courseTitle = document.createElement('h3');
+                                courseTitle.className = 'courseNameDisplay';
 
-                    const dropdownContent = document.createElement('div');
-                    dropdownContent.classList.add('dropdown-content');
-                    dropdownContent.id = 'dropdown-' + course.course_id;
-                    dropdownContent.style.display = 'none';
+                                const button = document.createElement('button');
+                                button.type = 'button';
+                                button.classList.add('classSet');
+                                button.textContent = '•••';
+                                button.dataset.target = 'dropdown-' + course.course_id;
 
-                    // Add content to dropdown
-                    dropdownContent.innerHTML = `
-                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                    `;
+                                const dropdownContent = document.createElement('div');
+                                dropdownContent.classList.add('dropdown-content');
+                                dropdownContent.id = 'dropdown-' + course.course_id;
+                                dropdownContent.style.display = 'none';
 
-                    courseTitle.textContent = `${course.course_code} - ${course.section} `;
-                    courseTitle.appendChild(button); // Add the button inside h3
+                                // Refactor to use handleAction function
+                                const actions = ['View Members', 'Requirements', 'Rubric'];
+                                actions.forEach(action => {
+                                    const actionButton = document.createElement('button');
+                                    actionButton.type = 'button';
+                                    actionButton.className = 'dropdownbtn';
+                                    actionButton.textContent = action;
+                                    actionButton.onclick = () => handleAction(action, course.course_id);
+                                    dropdownContent.appendChild(actionButton);
+                                });
 
-                    courseElement.appendChild(courseTitle);
-                    courseElement.appendChild(dropdownContent);
-                    coursesDropdown.appendChild(courseElement);
+                                courseTitle.textContent = `${course.course_code} - ${course.section} `;
+                                courseTitle.appendChild(button); // Add the button inside h3
 
-                    button.addEventListener('click', function() {
-                        dropdownMelon(this);
-                        // Log the course_id to the console when the button is clicked
-                        console.log('Clicked Course ID:', course.course_id);
-                        saveCourseID(course.course_id);
-                        fetchStudents()
-                    });
+                                courseElement.appendChild(courseTitle);
+                                courseElement.appendChild(dropdownContent);
+                                coursesDropdown.appendChild(courseElement);
 
-                    // Log the course_id to the console
-                    console.log('Course ID:', course.course_id);
-                });
+                                button.addEventListener('click', function() {
+                                    dropdownMelon(this);
+                                    // Log the course_id to the console when the button is clicked
+                                    console.log('Clicked Course ID:', course.course_id);
+                                    saveCourseID(course.course_id);
+                                });
+
+                                // Log the course_id to the console
+                                console.log('Course ID:', course.course_id);
+
+                                // Create and append buttons based on group data for each course
+                                if (groupsData[course.course_id]) {
+                                    groupsData[course.course_id].forEach(group_name => {
+                                        const groupButton = document.createElement('button');
+                                        groupButton.type = 'button';
+                                        groupButton.classList.add('createdgroupBTN');
+                                        groupButton.textContent = group_name;
+                                        courseElement.appendChild(groupButton);
+                                    });
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching groups data:', error));
             }
         })
         .catch(error => console.error('Fetch error:', error));
 }
+
+
+
+function groups() {
+    fetch('FetchGroups.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data:', data); // Debug statement to check data structure
+            // Check if the data contains an error
+            if (data.error) {
+                console.error('Error in data:', data.error);
+            } else {
+                // Assuming data is an array of group names
+                data.forEach(group_name => {
+                    console.log(group_name);
+                    // Do whatever you need with the group_name here
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+
+
+
+function handleAction(action, course_id) {
+    console.log('Clicked:', course_id);
+    switch (action) {
+        case 'View Members':
+            viewMembers(course_id);
+            fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
+            break;
+        case 'Requirements':
+            setrequirements(course_id);
+            storeCourseID(course_id);
+            break;
+        case 'Rubric':
+            rubric();
+            break;
+    }
+}
+
+function groupCourses() {
+    fetch('test.php')
+        .then(response => response.json())
+        .then(data => {
+            // Check if the data contains an error
+            if(data.error) {
+                console.error(data.error);
+            } else {
+                // Assuming data is an array of course IDs
+                data.forEach(course => {
+                    console.log('fetched course_id for groups: ' + course);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
 
 function saveCourseID(courseID) {
     fetch('fetchCourseID.php', {
@@ -943,14 +1047,25 @@ function saveCourseID(courseID) {
 }
 
 function fetchStudents() {
+    const membersContainer = document.querySelector('.membersContainer');
+    membersContainer.innerHTML = ''; // Clear previous content
+
     fetch('fetchStudents.php')
     .then(response => response.json())
     .then(data => {
         console.log(data); // Log the received JSON data
         // Process the data as needed
+        data.forEach(student => {
+            const memberHeading = document.createElement('h4');
+            memberHeading.textContent = `${student.firstName} ${student.lastName}`;
+            membersContainer.appendChild(memberHeading);
+        });
     })
     .catch(error => console.error('Fetch error:', error));
 }
+
+
+
 
 
 

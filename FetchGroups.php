@@ -1,61 +1,59 @@
 <?php
-// Replace these with your actual database credentials
-$conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
+// Start the session
+session_start();
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Check if group_courses is set in the session and if it's an array
+if(isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
+    // Connect to the database
+    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
-// Array to store courseIDs
-$courseIDs = [];
+    // Check connection
+    if (!$conn) {
+        echo json_encode(['error' => 'Connection failed: ' . mysqli_connect_error()]);
+        exit;
+    }
 
-// Get the courseID from the GET request
-$courseID = isset($_GET['courseID']) ? $_GET['courseID'] : null;
+    // Initialize an empty array to store results with segregation by course_id
+    $results = [];
 
-if ($courseID !== null) {
-    $courseIDs[] = $courseID;
-}
+    // Loop through each course_id in group_courses array
+    foreach($_SESSION['group_courses'] as $course_id) {
+        // Escape the course_id for security
+        $course_id = mysqli_real_escape_string($conn, $course_id);
 
-// Check if there are multiple courseIDs in the array
-if (!empty($courseIDs)) {
-    $data = []; // Array to store the JSON data
+        // Initialize an empty array for group_names under each course_id
+        $group_names = [];
 
-    foreach ($courseIDs as $id) {
-        // Prepare and execute SQL query to fetch groupIDs for the given courseID from the group table
-        $sqlGroups = "SELECT DISTINCT groupName FROM `group` WHERE courseID = $id 
-                        AND studentID IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID = $id) 
-                        AND studentID IN (SELECT DISTINCT studentID FROM `enrolled students` WHERE courseID = $id)";
-        $resultGroups = $conn->query($sqlGroups);
+        // SQL query to fetch group_name based on course_id
+        $query = "SELECT group_name FROM groups WHERE course_id = $course_id";
+        $result = mysqli_query($conn, $query);
 
-        if ($resultGroups) {
-            if ($resultGroups->num_rows > 0) {
-                // Array to store group names
-                $groupNames = array();
-
-                // Fetch group names
-                while ($rowGroup = $resultGroups->fetch_assoc()) {
-                    $groupNames[] = $rowGroup['groupName'];
+        // Check if the query was successful
+        if ($result) {
+            // Fetch the group_name and add it to the group_names array if it's not already present
+            while($row = mysqli_fetch_assoc($result)) {
+                $group_name = $row['group_name'];
+                if (!in_array($group_name, $group_names)) {
+                    $group_names[] = $group_name;
                 }
-
-                // Add group names to the data array
-                $data["Groups for Course ID $id"] = $groupNames;
-            } else {
-                // No groups found for this course
-                $data["No groups found for Course ID $id"] = [];
             }
+            // Add the group_names array to the results array under the respective course_id key
+            $results[$course_id] = $group_names;
         } else {
-            // Error fetching group data
-            $data["Error fetching group data for Course ID $id"] = $conn->error;
+            echo json_encode(['error' => 'Error in query: ' . mysqli_error($conn)]);
+            exit;
         }
     }
 
-    // Output the JSON data
-    echo json_encode($data);
-} else {
-    // No courseIDs provided
-    echo json_encode(["error" => "No courseIDs provided"]);
-}
+    // Close the connection
+    mysqli_close($conn);
 
-$conn->close();
+    // Send the results as JSON
+    header('Content-Type: application/json');
+    echo json_encode($results);
+} else {
+    // If group_courses is not set or is not an array, send an error message as JSON
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'group_courses array is not set or is not an array in session.']);
+}
 ?>

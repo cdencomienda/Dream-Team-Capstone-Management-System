@@ -595,7 +595,7 @@ margin: 15px;
  
 /* for the courses inside the term css  */
 .coursesDropdown{
-height: 200px;
+height: 500px;
 overflow: auto;
  
 }
