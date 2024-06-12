@@ -394,7 +394,6 @@
     </div>
 </div>
                 </form>  
-        </div>
 
         <!-- group class div -->
          <div class="GroupContainer">
@@ -635,7 +634,7 @@
 </html> 
 
 
-<!-- <script>
+<script>
 
 document.addEventListener("DOMContentLoaded", function() {
     fetch('fetchProfessorSession.php')
@@ -833,19 +832,6 @@ function dropdownMelon(button) {
 }
 
 
-// Define the newGroupCreated function to toggle the display of GroupContainer
-function newGroupCreated() {
-    var container = document.querySelector('.GroupContainer');
-    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
-
-// Define the handleGroupAction function outside fetchCourses function
-function handleGroupAction(groupName, courseId) {
-    // Call newGroupCreated to toggle GroupContainer display
-    newGroupCreated();
-}
-
-
 function fetchCourses(container) {
     // Check if coursesDropdown already exists in the container
     let coursesDropdown = container.querySelector('.coursesDropdown');
@@ -930,10 +916,6 @@ function fetchCourses(container) {
                                         groupButton.type = 'button';
                                         groupButton.classList.add('createdgroupBTN');
                                         groupButton.textContent = group_name;
-
-                                        // Add onclick event for group buttons
-                                        groupButton.onclick = () => handleGroupAction(group_name, course.course_id);
-
                                         courseElement.appendChild(groupButton);
                                     });
                                 }
@@ -945,7 +927,6 @@ function fetchCourses(container) {
         })
         .catch(error => console.error('Fetch error:', error));
 }
-
 
 
 
@@ -1119,6 +1100,6 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 
-</script> -->
+</script>
 
 <!-- mmssmnmn -->
