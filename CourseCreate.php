@@ -894,7 +894,7 @@ function fetchCourses(container) {
                     // Add content to dropdown
                     dropdownContent.innerHTML = `
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                        <button type="button" class="dropdownbtn" onclick="setRequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     `;
 
@@ -907,6 +907,10 @@ function fetchCourses(container) {
 
                     button.addEventListener('click', function() {
                         dropdownMelon(this);
+                        // Log the course_id to the console when the button is clicked
+                        console.log('Clicked Course ID:', course.course_id);
+                        saveCourseID(course.course_id);
+                        fetchStudents()
                     });
 
                     // Log the course_id to the console
@@ -916,6 +920,37 @@ function fetchCourses(container) {
         })
         .catch(error => console.error('Fetch error:', error));
 }
+
+function saveCourseID(courseID) {
+    fetch('fetchCourseID.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ course_id: courseID })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Course ID saved in session:', data.course_id);
+        } else {
+            console.error('Failed to save course ID in session:', data.error);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+function fetchStudents() {
+    fetch('fetchStudents.php')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the received JSON data
+        // Process the data as needed
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+
 
 
 
