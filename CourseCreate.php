@@ -915,10 +915,19 @@ function fetchCourses(container) {
                                         const groupButton = document.createElement('button');
                                         groupButton.type = 'button';
                                         groupButton.classList.add('createdgroupBTN');
+                                        groupButton.onclick = function() {
+                                            newGroupCreated(group_name);
+                                        };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
                                     });
                                 }
+                                // ian mojica @2:40am added function
+                                function newGroupCreated() {
+                                var container = document.querySelector('.GroupContainer');
+                                container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+                                    
+                                }        
                             });
                         }
                     })
