@@ -1,66 +1,70 @@
-
 <?php
-session_start(); // Start the session
+// Start the session
+session_start();
 
-// Check if varCourseID is set in the session
-if (isset($_SESSION['varCourseID'])) {
-    // Get varCourseID from the session
-    $varCourseID = $_SESSION['varCourseID'];
+// Check if courseGroupID is set in the session
+if (isset($_SESSION['courseGroupID']) && is_array($_SESSION['courseGroupID'])) {
+    $courseGroupIDs = $_SESSION['courseGroupID'];
 
-    // Create connection
-    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
+    // Check if requirements and requirementsDescription are set in POST
+    if (isset($_POST['requirements']) && isset($_POST['requirementsDescription'])) {
+        $requirements = $_POST['requirements'];
+        $requirementsDescription = $_POST['requirementsDescription'];
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+        // Check if there are matched group IDs before proceeding with the SQL insert query
+        if (!empty($courseGroupIDs) && $_SESSION['courseGroupID'] != 0) {
+            // Connect to the "dream team" database
+            $conn_dream = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
-    // Prepare and execute SQL query to get all unique requirementsID from the group table for the given courseID
-    $sql = "SELECT DISTINCT requirementsID FROM `group` WHERE courseID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $varCourseID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Check if there are any unique requirementsIDs found
-    if ($result->num_rows > 0) {
-        // Initialize an array to store unique requirementsIDs
-        $uniqueRequirementsIDs = array();
-
-        // Fetch all unique requirementsIDs and add them to the array
-        while ($row = $result->fetch_assoc()) {
-            $uniqueRequirementsIDs[] = $row['requirementsID'];
-        }
-
-        // Loop through unique requirementsIDs and insert the submitted data for each ID
-        foreach ($uniqueRequirementsIDs as $requirementsID) {
-            // Check if the 'requirements' and 'requirementsDescription' fields are set in the POST data
-            if (isset($_POST['requirements']) && isset($_POST['requirementsDescription'])) {
-                $requirements = $_POST['requirements'];
-                $requirementsDescription = $_POST['requirementsDescription'];
-
-                // Prepare and execute SQL insert query
-                $insertSql = "INSERT INTO requirements (reqName, reqDescription, requirementsID) VALUES (?, ?, ?)";
-                $insertStmt = $conn->prepare($insertSql);
-                $insertStmt->bind_param("sss", $requirements, $requirementsDescription, $requirementsID);
-                $insertStmt->execute();
-                $insertStmt->close();
-
-                // Echo the inserted data for demonstration
-                
-                
-                header("Location: " . $_SERVER['HTTP_REFERER']);
-            } else {
-                echo "Please fill out all required fields.";
+            // Check connection
+            if (!$conn_dream) {
+                echo json_encode(['error' => 'Connection to dream_team failed: ' . mysqli_connect_error()]);
+                exit;
             }
+
+            $successCount = 0; // Counter to track successful insertions
+
+            // Prepare and execute SQL insert query for each courseGroupID
+            foreach ($courseGroupIDs as $courseGroupID) {
+                $reqName = mysqli_real_escape_string($conn_dream, $requirements);
+                $reqDescription = mysqli_real_escape_string($conn_dream, $requirementsDescription);
+                $insertSql = "INSERT INTO requirements (reqName, reqDescription, requirementsID) VALUES ('$reqName', '$reqDescription', $courseGroupID)";
+
+                if (mysqli_query($conn_dream, $insertSql)) {
+                    $successCount++; // Increment the counter for successful insertion
+                } else {
+                    echo json_encode(['error' => 'Error in insert query to dream_team: ' . mysqli_error($conn_dream)]);
+                }
+            }
+
+            // Close the connection to dream_team
+            mysqli_close($conn_dream);
+
+            // Check if all insertions were successful
+            if ($successCount == count($courseGroupIDs)) {
+                echo "Inserted all requirements successfully.";
+            } else {
+                echo "Error inserting some requirements.";
+            }
+
+            // Optionally, you can redirect after processing all insertions
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+        } else {
+            // Set the alert message in JavaScript
+            echo "<script>alert('No course group IDs found in session or courseGroupID is 0.');</script>";
+            // Stay on the same page
+            echo "<script>window.history.back();</script>";
         }
     } else {
-        echo "No requirements found for this course.";
+        // Set the alert message in JavaScript
+        echo "<script>alert('Requirements data not provided in POST.');</script>";
+        // Stay on the same page
+        echo "<script>window.history.back();</script>";
     }
-
-    $stmt->close();
-    $conn->close();
 } else {
-    echo "Course ID not set in session.";
+    // Set the alert message in JavaScript
+    echo "<script>alert('No Groups are in this Course.');</script>";
+    // Stay on the same page
+    echo "<script>window.history.back();</script>";
 }
 ?>

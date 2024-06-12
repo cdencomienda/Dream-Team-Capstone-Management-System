@@ -3,7 +3,7 @@
 session_start();
 
 // Check if group_courses is set in the session and if it's an array
-if(isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
+if (isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
     // Connect to the database
     $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
@@ -17,7 +17,7 @@ if(isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
     $results = [];
 
     // Loop through each course_id in group_courses array
-    foreach($_SESSION['group_courses'] as $course_id) {
+    foreach ($_SESSION['group_courses'] as $course_id) {
         // Escape the course_id for security
         $course_id = mysqli_real_escape_string($conn, $course_id);
 
@@ -31,7 +31,7 @@ if(isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
         // Check if the query was successful
         if ($result) {
             // Fetch the group_name and add it to the group_names array if it's not already present
-            while($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $group_name = $row['group_name'];
                 if (!in_array($group_name, $group_names)) {
                     $group_names[] = $group_name;
@@ -44,6 +44,9 @@ if(isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
             exit;
         }
     }
+
+    // Save the results to the session
+    $_SESSION['group_names'] = $results;
 
     // Close the connection
     mysqli_close($conn);

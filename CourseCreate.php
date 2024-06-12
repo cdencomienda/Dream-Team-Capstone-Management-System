@@ -495,35 +495,6 @@
                             <div class="requirement-name">
                             
                             </div>
-                        <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                            // Function to fetch requirements information for the logged-in student's group
-                            function fetchRequirementsInfo() {
-                                fetch('fetchRequirements.php')
-                                    .then(response => response.json())
-                                    .then(requirements => {
-                                        const reqNameContainer = document.querySelector('.req-nameCont');
-                                        
-                                        // Clear existing content
-                                        reqNameContainer.innerHTML = '';
-
-                                        // Populate the container with the group's requirements
-                                        requirements.forEach(requirement => {
-                                            const div = document.createElement('div');
-                                            div.className = 'requirement-name';
-                                            div.textContent = requirement;
-                                            reqNameContainer.appendChild(div);
-                                        });
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching requirements information:', error);
-                                    });
-                            }
-
-                            // Fetch requirements information when the page loads
-                            fetchRequirementsInfo();
-                        });
-                        </script>
                         </div>
                         
                     </div>
@@ -737,7 +708,6 @@ function fetchAcademicYears() {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm);
                             fetchCourses(button.parentNode); // Pass the container to fetchCourses
-                            groupCourses();
                             groups();
 
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
@@ -934,6 +904,7 @@ function fetchCourses(container) {
                                     // Log the course_id to the console when the button is clicked
                                     console.log('Clicked Course ID:', course.course_id);
                                     saveCourseID(course.course_id);
+                                    fetchGroupID();
                                 });
 
                                 // Log the course_id to the console
@@ -984,6 +955,60 @@ function groups() {
         .catch(error => console.error('Error fetching data:', error));
 }
 
+function fetchGroupID() {
+    fetch('groupRequirement.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Check if data.courseGroupID is an array
+        if (Array.isArray(data.courseGroupID)) {
+            // Re-index the array numerically
+            const courseGroupIDs = data.courseGroupID;
+
+            console.log(courseGroupIDs); // This will contain the array of courseGroupIDs
+
+            // You can perform further operations with the courseGroupIDs here
+        } else {
+            console.error('Data received is not in the expected format:', data);
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+function reqName() {
+    const createdReq = document.querySelector('.createdReq');
+    createdReq.innerHTML = ''; // Clear previous content
+
+    fetch('test.php') // Replace 'path_to_your_php_file.php' with your actual PHP file path
+        .then(response => response.json())
+        .then(data => {
+            // Check if data contains reqNames array
+            if (data.reqNames && Array.isArray(data.reqNames)) {
+                // Loop through the reqNames array and append each item to createdReq
+                data.reqNames.forEach(reqName => {
+                    const reqElement = document.createElement('div');
+                    reqElement.textContent = reqName;
+                    createdReq.appendChild(reqElement);
+                });
+            } else {
+                console.error('Invalid data format or missing reqNames array');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+
+
 
 
 
@@ -1000,29 +1025,12 @@ function handleAction(action, course_id) {
             break;
         case 'Requirements':
             setrequirements(course_id);
-            storeCourseID(course_id);
+            reqName();
             break;
         case 'Rubric':
             rubric();
             break;
     }
-}
-
-function groupCourses() {
-    fetch('test.php')
-        .then(response => response.json())
-        .then(data => {
-            // Check if the data contains an error
-            if(data.error) {
-                console.error(data.error);
-            } else {
-                // Assuming data is an array of course IDs
-                data.forEach(course => {
-                    console.log('fetched course_id for groups: ' + course);
-                });
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
 }
 
 
