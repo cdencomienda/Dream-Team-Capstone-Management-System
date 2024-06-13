@@ -199,6 +199,7 @@
                     <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -215,6 +216,7 @@
                         <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -230,6 +232,7 @@
                         <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -245,6 +248,7 @@
                         <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">          
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -262,6 +266,7 @@
                     <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -277,6 +282,7 @@
                     <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">          
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -301,6 +307,127 @@
                     <h4>InstructorName</h4>
                 </div>
             </div>
+        
+        <!-- addmembers div -->
+        <div class="addmember" id="addmembers">
+            <div class="flex-container">
+                <h3>Add Members</h3>
+                <!-- lead panel -->
+                <div>
+                    <label for="leadPanelist">Selected Lead Panel:</label>
+                    <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                </div>
+            </div>
+
+            <div class="flex-container">
+                <!-- panel1 -->
+                <div>
+                    <label for="panelist1">Selected Panel 1:</label>
+                    <input type="text" id="panelist1" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                </div>
+            </div>
+
+            <div class="flex-container">
+                <!-- panel2 -->
+                <div>
+                    <label for="panelist2">Selected Panel 2:</label>
+                    <input type="text" id="panelist2" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                </div>
+            </div>
+
+            <div class="flex-container">
+                <!-- panel3 -->
+                <div>
+                    <label for="panelist3">Selected Panel 3:</label>
+                    <input type="text" id="panelist3" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                </div>
+            </div>   
+
+            <div class="flex-container">
+                <!-- advisor -->
+                <div>
+                    <label for="advisor">Selected Advisor:</label>
+                    <input type="text" id="advisor" name="advisorName" class="inputName" oninput="selectedUserName(this.value, 'advisor')" placeholder="Type an advisor's name">
+                </div>
+            </div> 
+            <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+        </div>
+
+            <div class="addmember" id="addmembers">
+                <div class="flex-container">
+                    <h3>Add Members</h3>
+                            <!-- lead panel -->
+                            <div>
+                            <label for="selectedPanelists">Selected Lead Panel:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="flex-container">
+                            <!-- panel1 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 1:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option> 
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="flex-container">
+                            <!-- panel2 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 2:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option> 
+                                    <option value="Serge">Serge</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Luigi">Luigi</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div> 
+
+                        <div class="flex-container">
+                            <!-- panel3 -->
+                            <div>
+                            <label for="selectedPanelists">Selected Panel 3:</label>
+                                <select id="selectedPanelists" name="panelistName" class="inputName" onchange="selectedUserName(this.value, 'panelist')">
+                                    <option value="" selected disabled>Select a panelist</option>
+                                    <option value="Yong">Yong</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Serge">Serge</option> 
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div> 
+                        </div>   
+                        <div class="flex-container">
+                            <!-- advisor -->
+                            <div>
+                                <label for="selectedAdvisors">Selected Advisor:</label>
+                                <select id="selectedAdvisors" name="advisorName" class="inputName" onchange="selectedUserName(this.value, 'advisor')">
+                                    <option value="" selected disabled>Select an advisor</option>
+                                    <option value="222">222</option>
+                                    <option value="uuu">uuu</option>
+                                    <option value="Sgegege">Sgegege</option>
+                                    <!-- Add more options dynamically if needed -->
+                                </select>
+                            </div>
+                        </div> 
+                        <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+            </div>
+                
 
         <!-- Requirement div -->
         <div class="setrequirements">
@@ -318,39 +445,7 @@
 
         <!-- Rubric div -->
         <div class="rubriccontainer" style="display: none"> 
-        <h3>Rubric</h3>
-                <form class="addRubric" method="POST" action="addRubric.php">
-                    <div>  
-                    </div>
-                    <section class="table_selectrubric">
-    <table>
-        <thead>
-            <tr>
-                <th class="Rubricid-column">Rubric id</th>
-                <th class="Rubricid-column">Rubric Description</th>
-            </tr>
-        </thead>
-        <tbody class="rubricList" id="selectedRubric">
-            <tr>
-                <td>1</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">DATA MANAGEMENT</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">CPE METHODS OF RESEARCH</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">CPE DESIGN</a></td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<!-- Modal -->
-<!-- Modal -->
-<div id="rubricModal" class="modal">
-    <div class="modal-content">
+        <div class="secondaryRubriccont">
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="rubric-container">
                 <h1>Written Communication</h1>
@@ -391,9 +486,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
-                </form>  
+    </div>        
 
         <!-- group class div -->
          <div class="GroupContainer">
@@ -503,7 +596,7 @@
 </html> 
 
 
-<script>
+<!-- <script>
 
 document.addEventListener("DOMContentLoaded", function() {
     fetch('fetchProfessorSession.php')
@@ -1059,6 +1152,6 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 
-</script>
+</script> -->
 
 <!-- mmssmnmn -->

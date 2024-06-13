@@ -875,35 +875,47 @@ border-radius: 15px;
 .addreqbtn:hover{
 background-color: #aeaeaeae;
 }
- 
-/* rubric */
-.rubriccontainer{
+/* addmember */
+.addmember{
 position: relative;  
 top: 0px;
 width: 500px;
-height: 300px;
+height: 420px;
 padding: 25px;
 background-color: #ffffff;
 border-radius: 15px;
 overflow:hidden;
-transition:1s;
-display: flex;
-gap: 20px;
-display: flex;
-justify-content: center;
-align-items: center;
+display: none;
+transition:1s;  
+} 
+.inputName{
+  width: 220px;
+  height: 50px;
+  background-color: white; 
+  border-radius: 15px;
+  overflow: hidden;
 }
-.table_selectrubric{
-margin-top: 10px;
-width: 380px;
-height: 170px;
-margin-top: 10px;
-border: 1px solid #000000;
-padding: 15px;
-background-color: #F8EFE3;
-border-radius: 10px;
-overflow: auto;
-overflow: overlay;
+.flex-container{
+  padding: 10px;
+}
+
+/* rubric */
+
+.rubriccontainer {
+  position: relative;
+  top: 0px;
+  width: calc(100% - 100px); /* Adjusted width to fit within 1050px width */
+  max-width: none; /* Remove max-width */
+  height: calc(100% - 150px); /* Adjusted height to fit within 650px height */
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 1s;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 /* .rubriccontainerv2{
 position: relative;
@@ -1245,7 +1257,7 @@ background-color: #dbd3c9;
   z-index: 500 ;
 }
  
-.modalContent {
+.secondaryRubriccont {
   background-color: #fff;
   margin: 5% auto;
   padding: 20px;
@@ -1254,6 +1266,7 @@ background-color: #dbd3c9;
   height: 75%;
   position: relative;
   z-index: 500 ;
+  overflow: auto;
 }
  
 .closeButton {
