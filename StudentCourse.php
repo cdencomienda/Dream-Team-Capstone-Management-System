@@ -289,35 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="requirement-name">
                         
                         </div>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                        // Function to fetch requirements information for the logged-in student's group
-                        function fetchRequirementsInfo() {
-                            fetch('fetchRequirements.php')
-                                .then(response => response.json())
-                                .then(requirements => {
-                                    const reqNameContainer = document.querySelector('.req-nameCont');
-                                    
-                                    // Clear existing content
-                                    reqNameContainer.innerHTML = '';
-
-                                    // Populate the container with the group's requirements
-                                    requirements.forEach(requirement => {
-                                        const div = document.createElement('div');
-                                        div.className = 'requirement-name';
-                                        div.textContent = requirement;
-                                        reqNameContainer.appendChild(div);
-                                    });
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching requirements information:', error);
-                                });
-                        }
-
-                        // Fetch requirements information when the page loads
-                        fetchRequirementsInfo();
-                    });
-                    </script>
                     </div>
                     
                 </div>
@@ -361,81 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             submit
                         </button>
                     </div>
-                    <script>
-                        
-                        document.getElementById('input-file').addEventListener('change', function() {
-                        var files = this.files; // Get the selected files
-
-                        var fileList = document.createElement('ul'); // Create a list to hold file details
-                        for (var i = 0; i < files.length; i++) {
-                        // Check if the file is a PDF
-                        if (files[i].type === 'application/pdf') {
-                            var listItem = document.createElement('li'); // Create list item for each file
-                            listItem.style.backgroundColor = '#F8EFE3'; // Set background color
-                            listItem.style.borderRadius = '15px';
-                            listItem.style.width = '245px';
-                            listItem.style.height = '45px';
-                                   
-                            if (i > 0) {
-                                listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
-                            } else {
-                                listItem.style.marginTop = "5px";
-                            }
-
-                            // Create icon element
-                            var fileIcon = document.createElement('i');
-                            fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
-                            
-                            // Create anchor element
-                            var fileLink = document.createElement('a');
-                            fileLink.textContent = files[i].name; // Set text content to file name
-                            fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
-                            fileLink.download = files[i].name; // Set the download attribute to force download
-
-                            // Append icon and anchor elements to list item
-                            listItem.appendChild(fileIcon);
-                            listItem.appendChild(fileLink);
-
-                            // Append list item to list
-                            fileList.appendChild(listItem);
-                        } else {
-                            alert("Only PDF files are allowed.");
-                        }
-
-                        }
-                        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
-                        if (!attachedFileCont) {
-                        attachedFileCont = document.createElement('ul');
-                        attachedFileCont.style.padding = '1px'; // Add padding to the list
-                        attachedFileCont.style.listStyleType = 'none'; // Remove default list style
-                        document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
-                        }
-                        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
-                        });    
-                        
-                            // Get the element with the class "group_name"
-                            const groupDiv = document.getElementById('group_name');
-
-                            // Function to decrease opacity by 70%
-                            function decreaseOpacity() {
-                                groupDiv.style.opacity = '0.80'; // 30% opacity
-                            }
-
-                            // Function to reset opacity to default
-                            function resetOpacity() {
-                                groupDiv.style.opacity = '1'; // 100% opacity
-                            }
-
-                            // Add event listeners for mouseover and mouseout
-                            groupDiv.addEventListener('mouseover', decreaseOpacity);
-                            groupDiv.addEventListener('mouseout', resetOpacity);
-
-                            // Function to handle click event
-                            groupDiv.addEventListener('click', function() {
-                                // Call the showDefaultBody function
-                                showDefaultBody();
-                            });
-                    </script>
+ 
                 </div>
             
         </div>
