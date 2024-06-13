@@ -880,8 +880,8 @@ background-color: #aeaeaeae;
 .rubriccontainer{
 position: relative;  
 top: 0px;
-width: 500px;
-height: 300px;
+width: 800px;
+height: 420px;
 padding: 25px;
 background-color: #ffffff;
 border-radius: 15px;
@@ -895,8 +895,8 @@ align-items: center;
 }
 .table_selectrubric{
 margin-top: 10px;
-width: 380px;
-height: 170px;
+width: 760px;
+height: 350px;
 margin-top: 10px;
 border: 1px solid #000000;
 padding: 15px;
