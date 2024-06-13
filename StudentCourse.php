@@ -122,13 +122,10 @@
 
             <!-- Container for student's courses -->
             <div class = "studentCourseDropdown" id="studentCoursesDropdown">
-                    <h3>My Courses</h3>
+                    <div class= "courses"> <h2>Courses</h2></div>
                     <div class="course" id="coursesList">
-
-                    edfgsdgers
-
                     </div> <!-- This will be populated with the list of courses -->
-                    <button type="button" id = "group_name1" class="createdgroupBTN" onclick="newGroupCreated()"></button>
+                    <!-- <button type="button" id = "group_name1" class="createdgroupBTN" onclick="newGroupCreated()"></button> -->
 
                 </div>
             <div class="dropdown">
@@ -145,7 +142,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     function fetchCourses() {
-        fetch('LiveSearchStudentCourses.php') // Replace with the actual path to your PHP script
+        fetch('LiveSearchStudentCourses.php') 
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -161,8 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             const academicYearRange = academicYear + ' - ' + (academicYear + 1);
 
                             // Create a new h3 for each course
-                            const courseHeader = document.createElement('h4');
-                            courseHeader.textContent = `${course.course_code} - ${course.section} - Term ${course.term} - ${academicYearRange}`;
+                            const courseHeader = document.createElement('h3');
+                            courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - ${course.section} - T${course.term}`;
 
                             // Create a new button for each course
                             const courseButton = document.createElement('button');
@@ -195,13 +192,43 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('New group created for:', course);
         // Add your custom functionality here
     }
+    
+
+
 
     // Call the fetchCourses function when the DOM is fully loaded
     fetchCourses();
 });
 
+function fetchGroupName() {
+    fetch('getGroupNameforButton.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                // Handle the error as needed, for example, display it to the user
+                alert('Error: ' + data.error);
+            } else {
+                console.log('Group Name:', data.group_name);
+                // Use the group_name as needed, for example, display it on the webpage
+                document.getElementById('groupName').innerText = data.group_name;
+                document.getElementById('group_name1').innerText = data.group_name;
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            // Handle fetch error, for example, display it to the user
+            alert('Fetch error: ' + error.message);
+        });
+}
 
 
+window.onload = fetchGroupName;
 
 
 </script>  

@@ -730,7 +730,9 @@ label{
   margin-top: 40px;
   height: 1000px;
 }
-
+.courses{
+  margin-left: -12%;
+}
 .close {
   background-color: transparent;
   height: 30px;
@@ -956,6 +958,6 @@ label{
 
 .course{
 
-margin-left: 5px;
+margin-left: -40px;
 
 }

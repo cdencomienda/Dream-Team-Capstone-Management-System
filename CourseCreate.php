@@ -199,6 +199,7 @@
                     <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -215,6 +216,7 @@
                         <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -230,6 +232,7 @@
                         <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -245,6 +248,7 @@
                         <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">          
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
@@ -262,6 +266,7 @@
                     <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -277,6 +282,7 @@
                     <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                     <div class="dropdown-content">          
                         <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                         <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                         <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                     </div>
@@ -300,6 +306,51 @@
                     <h4>StudentName</h4>
                     <h4>InstructorName</h4>
                 </div>
+            </div>
+        
+        <!-- addmembers div -->
+            <div class="addmember" id="addmembers">
+                <div class="flex-container">
+                    <h3>Add Members</h3>
+                    <!-- lead panel -->
+                    <div>
+                        <label for="leadPanelist">Selected Lead Panel:</label>
+                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- panel1 -->
+                    <div>
+                        <label for="panelist1">Selected Panel 1:</label>
+                        <input type="text" id="panelist1" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- panel2 -->
+                    <div>
+                        <label for="panelist2">Selected Panel 2:</label>
+                        <input type="text" id="panelist2" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- panel3 -->
+                    <div>
+                        <label for="panelist3">Selected Panel 3:</label>
+                        <input type="text" id="panelist3" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                    </div>
+                </div>   
+
+                <div class="flex-container">
+                    <!-- advisor -->
+                    <div>
+                        <label for="advisor">Selected Advisor:</label>
+                        <input type="text" id="advisor" name="advisorName" class="inputName" oninput="selectedUserName(this.value, 'advisor')" placeholder="Type an advisor's name">
+                    </div>
+                </div> 
+                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
             </div>
 
         <!-- Requirement div -->
