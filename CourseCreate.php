@@ -348,51 +348,52 @@
 </section>
 
 <!-- Modal -->
+<!-- Modal -->
 <div id="rubricModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="rubric-container">
-            <div class="rubric-header">
                 <h1>Written Communication</h1>
             </div>
-            <table>
-                <thead>
+            <table>        
+                <div class="rubric-header">
+    
+                <thead >
+            
+                    <!-- column title -->
                     <tr>
-                        <th class="description-column">Description</th>
-                        <th class="grade-Desc">score description</th>
-                        <th class="grades-column">Grades</th>          
+                        <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                        <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                        <th style = "background-color: #CBC4BA;">Criteria</th>
+                        <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                        <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                        <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                        <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                        <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
                     </tr>
+                     <!-- column title end -->
                 </thead>
                 <tbody>
-                    <tr class="criteria">
-                        <td class="description">
-                            <strong>B1. Executive Summary</strong><br>
-                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                        </td>
-                        <td class="grade_description">
-                            askdjbajdb<br>
-                        </td>
-                        <td class="score-column">
-                            <select>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                                <option value="0">0</option>
-                            </select>
-                        </td>
+                    <tr>
+                        <td>40%</td>
+                        <td>Relevance</td>
+                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
                     </tr>
-                    <!-- Repeat for other criteria as needed -->
+                    <tr>
+                        <td>60%</td>
+                        <td>Neatness</td>
+                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
                 </form>  
-        </div>
 
         <!-- group class div -->
          <div class="GroupContainer">
@@ -408,8 +409,6 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
-
                             <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class = "filesContainer"> 
@@ -485,163 +484,6 @@
                         <iframe id="fileFrame" src="" frameborder="0"></iframe>
                     </div>
                 </div>  
-                        <!-- submissions -->
-                        <div class="submissionFrame" id="submissionFrame">
-                    <div class="submissionscontainer">
-                    <div class= "requirement-list">
-                        <div class = "req-nameCont"> 
-                            <div class="requirement-name">
-                            
-                            </div>
-                        <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                            // Function to fetch requirements information for the logged-in student's group
-                            function fetchRequirementsInfo() {
-                                fetch('fetchRequirements.php')
-                                    .then(response => response.json())
-                                    .then(requirements => {
-                                        const reqNameContainer = document.querySelector('.req-nameCont');
-                                        
-                                        // Clear existing content
-                                        reqNameContainer.innerHTML = '';
-
-                                        // Populate the container with the group's requirements
-                                        requirements.forEach(requirement => {
-                                            const div = document.createElement('div');
-                                            div.className = 'requirement-name';
-                                            div.textContent = requirement;
-                                            reqNameContainer.appendChild(div);
-                                        });
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching requirements information:', error);
-                                    });
-                            }
-
-                            // Fetch requirements information when the page loads
-                            fetchRequirementsInfo();
-                        });
-                        </script>
-                        </div>
-                        
-                    </div>
-            <style> 
-            .submissionFrame {
-                    display: none;
-                }
-            </style>
-                <div class= "requirement-details">
-                    <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
-                    <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
-                    
-                    <div class="requirement-descriptionCont"> Requirement Description: 
-                        <div class="requirement-descBox" id="req_description"> 
-                            ?????
-                        </div>        
-                    </div>
-                    <div class="reqfile-version" id="reqfile_version"> <h4>Version: ?????</h4> 
-                    </div> <br>   
-                    <!-- idk kung san lalagay ung file attached id -->
-                    <div class="Attach-Files"> 
-                            <form id="file-upload" class="requirement-file">
-                                <div class="atchFiles">   
-                                    <h3>Attach Files   </h3> 
-                                    <!-- Replace img tag with the i tag -->
-                                    <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
-                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
-                                    <div id="upload-btn" class="upload-container"></div>
-                                    <label for="input-file"></label>
-                                    <input type="file" accept="pdf" id="input-file" name="profile_picture">
-                                </div>
-                            </form> 
-                        </div>   
-                        <div class="Attached-FileCont">
-                            <!-- attached files go here -->
-                        </div>        
-
-                    <div class="req-submitbtnCont"> 
-                        
-                        <button class="reqbtn" type="button">
-                            submit
-                        </button>
-                    </div>
-                    <script>
-                        
-                        document.getElementById('input-file').addEventListener('change', function() {
-                        var files = this.files; // Get the selected files
-
-                        var fileList = document.createElement('ul'); // Create a list to hold file details
-                        for (var i = 0; i < files.length; i++) {
-                        // Check if the file is a PDF
-                        if (files[i].type === 'application/pdf') {
-                            var listItem = document.createElement('li'); // Create list item for each file
-                            listItem.style.backgroundColor = '#F8EFE3'; // Set background color
-                            listItem.style.borderRadius = '15px';
-                            listItem.style.width = '245px';
-                            listItem.style.height = '45px';
-                                   
-                            if (i > 0) {
-                                listItem.style.marginTop = '2px'; // Add margin to the top except for the first item
-                            } else {
-                                listItem.style.marginTop = "5px";
-                            }
-
-                            // Create icon element
-                            var fileIcon = document.createElement('i');
-                            fileIcon.className = 'fa-regular fa-file-pdf'; // Set the class for the icon
-                            
-                            // Create anchor element
-                            var fileLink = document.createElement('a');
-                            fileLink.textContent = files[i].name; // Set text content to file name
-                            fileLink.href = URL.createObjectURL(files[i]); // Set href to the URL of the file
-                            fileLink.download = files[i].name; // Set the download attribute to force download
-
-                            // Append icon and anchor elements to list item
-                            listItem.appendChild(fileIcon);
-                            listItem.appendChild(fileLink);
-
-                            // Append list item to list
-                            fileList.appendChild(listItem);
-                        } else {
-                            alert("Only PDF files are allowed.");
-                        }
-
-                        }
-                        var attachedFileCont = document.querySelector('.Attached-FileCont ul');
-                        if (!attachedFileCont) {
-                        attachedFileCont = document.createElement('ul');
-                        attachedFileCont.style.padding = '1px'; // Add padding to the list
-                        attachedFileCont.style.listStyleType = 'none'; // Remove default list style
-                        document.querySelector('.Attached-FileCont').appendChild(attachedFileCont);
-                        }
-                        attachedFileCont.appendChild(fileList); // Append file list to Attached-FileCont
-                        });    
-                        
-                            // Get the element with the class "group_name"
-                            const groupDiv = document.getElementById('group_name');
-
-                            // Function to decrease opacity by 70%
-                            function decreaseOpacity() {
-                                groupDiv.style.opacity = '0.80'; // 30% opacity
-                            }
-
-                            // Function to reset opacity to default
-                            function resetOpacity() {
-                                groupDiv.style.opacity = '1'; // 100% opacity
-                            }
-
-                            // Add event listeners for mouseover and mouseout
-                            groupDiv.addEventListener('mouseover', decreaseOpacity);
-                            groupDiv.addEventListener('mouseout', resetOpacity);
-
-                            // Function to handle click event
-                            groupDiv.addEventListener('click', function() {
-                                // Call the showDefaultBody function
-                                showDefaultBody();
-                            });
-                    </script>
-                </div> 
-                        </script>
 
                     <!-- file repo -->
                     <div class="professorFilesR" id="profFilesR">
@@ -651,7 +493,6 @@
                     </div>
                 </div> 
                 <!-- file requirement -->
-            
         </div>  
 
     </div><!-- end of wrapper scroll --> 
@@ -735,6 +576,7 @@ function fetchAcademicYears() {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm);
                             fetchCourses(button.parentNode); // Pass the container to fetchCourses
+                            groups();
 
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
                             if (coursesDropdown) {
@@ -858,64 +700,340 @@ function dropdownMelon(button) {
     }
 }
 
+
 function fetchCourses(container) {
+    // Check if coursesDropdown already exists in the container
+    let coursesDropdown = container.querySelector('.coursesDropdown');
+
+    // If coursesDropdown doesn't exist, create it
+    if (!coursesDropdown) {
+        coursesDropdown = document.createElement('div');
+        coursesDropdown.className = 'coursesDropdown';
+        container.appendChild(coursesDropdown);
+    } else {
+        // Clear previous content in coursesDropdown
+        coursesDropdown.innerHTML = '';
+    }
+
     fetch('fetchCourses.php')
         .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('Error:', data.error);
+        .then(coursesData => {
+            if (coursesData.error) {
+                console.error('Error:', coursesData.error);
             } else {
-                console.log('Courses:', data);
-                let coursesDropdown = container.querySelector('.coursesDropdown');
-                if (!coursesDropdown) {
-                    coursesDropdown = document.createElement('div');
-                    coursesDropdown.className = 'coursesDropdown';
-                    container.appendChild(coursesDropdown);
-                }
+                console.log('Courses:', coursesData);
 
-                data.forEach(course => {
-                    const courseElement = document.createElement('div');
-                    courseElement.className = 'course';
+                fetch('FetchGroups.php')
+                    .then(response => response.json())
+                    .then(groupsData => {
+                        if (groupsData.error) {
+                            console.error('Error:', groupsData.error);
+                        } else {
+                            console.log('Groups:', groupsData);
 
-                    const courseTitle = document.createElement('h3');
-                    courseTitle.className = 'courseNameDisplay';
+                            coursesData.forEach(course => {
+                                const courseElement = document.createElement('div');
+                                courseElement.className = 'course';
 
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.classList.add('classSet');
-                    button.textContent = '•••';
-                    button.dataset.target = 'dropdown-' + course.course_id;
+                                const courseTitle = document.createElement('h3');
+                                courseTitle.className = 'courseNameDisplay';
 
-                    const dropdownContent = document.createElement('div');
-                    dropdownContent.classList.add('dropdown-content');
-                    dropdownContent.id = 'dropdown-' + course.course_id;
-                    dropdownContent.style.display = 'none';
+                                const button = document.createElement('button');
+                                button.type = 'button';
+                                button.classList.add('classSet');
+                                button.textContent = '•••';
+                                button.dataset.target = 'dropdown-' + course.course_id;
 
-                    // Add content to dropdown
-                    dropdownContent.innerHTML = `
-                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                        <button type="button" class="dropdownbtn" onclick="setRequirements()">Requirements</button>
-                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                    `;
+                                const dropdownContent = document.createElement('div');
+                                dropdownContent.classList.add('dropdown-content');
+                                dropdownContent.id = 'dropdown-' + course.course_id;
+                                dropdownContent.style.display = 'none';
 
-                    courseTitle.textContent = `${course.course_code} - ${course.section} `;
-                    courseTitle.appendChild(button); // Add the button inside h3
+                                // Refactor to use handleAction function
+                                const actions = ['View Members', 'Requirements', 'Rubric'];
+                                actions.forEach(action => {
+                                    const actionButton = document.createElement('button');
+                                    actionButton.type = 'button';
+                                    actionButton.className = 'dropdownbtn';
+                                    actionButton.textContent = action;
+                                    actionButton.onclick = () => handleAction(action, course.course_id);
+                                    dropdownContent.appendChild(actionButton);
+                                });
 
-                    courseElement.appendChild(courseTitle);
-                    courseElement.appendChild(dropdownContent);
-                    coursesDropdown.appendChild(courseElement);
+                                courseTitle.textContent = `${course.course_code} - ${course.section} `;
+                                courseTitle.appendChild(button); // Add the button inside h3
 
-                    button.addEventListener('click', function() {
-                        dropdownMelon(this);
-                    });
+                                courseElement.appendChild(courseTitle);
+                                courseElement.appendChild(dropdownContent);
+                                coursesDropdown.appendChild(courseElement);
 
-                    // Log the course_id to the console
-                    console.log('Course ID:', course.course_id);
-                });
+                                button.addEventListener('click', function() {
+                                    dropdownMelon(this);
+                                    // Log the course_id to the console when the button is clicked
+                                    console.log('Clicked Course ID:', course.course_id);
+                                    saveCourseID(course.course_id);
+                                    fetchGroupID();
+                                });
+
+                                // Log the course_id to the console
+                                console.log('Course ID:', course.course_id);
+
+                                // Create and append buttons based on group data for each course
+                                if (groupsData[course.course_id]) {
+                                    groupsData[course.course_id].forEach(group_name => {
+                                        const groupButton = document.createElement('button');
+                                        groupButton.type = 'button';
+                                        groupButton.classList.add('createdgroupBTN');
+                                        groupButton.onclick = function() {
+                                        newGroupCreated(course.course_id, group_name);
+                                    };
+                                        groupButton.textContent = group_name;
+                                        courseElement.appendChild(groupButton);
+                                    });
+                                }     
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching groups data:', error));
             }
         })
         .catch(error => console.error('Fetch error:', error));
 }
+
+function newGroupCreated(course_id, group_name) {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    console.log(course_id, group_name);
+    fetchGroupData(course_id, group_name);
+    fetchStudentGroups();
+
+    // Prepare the data to be sent in the request body
+    const formData = new FormData();
+    formData.append('course_id', course_id);
+    formData.append('group_name', group_name);
+
+    // Send an AJAX request using fetch
+    fetch('fetchGroupName.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(result => console.log(result))
+    .catch(error => console.error('Error:', error));
+}
+
+// Example function to fetch group data and display group name
+function fetchGroupData(course_id, group_name) {
+    // Clear the existing content in the group_name element
+    document.getElementById('group_name').textContent = '';
+
+    fetch('fetchGroupName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'course_id': course_id,
+            'group_name': group_name
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Display the fetched group name in the group_name element
+            document.getElementById('group_name').textContent = data.group_name;
+            console.log('Group Name:', data.group_name);
+            console.log('Student Group ID:', data.student_group_id);
+
+            // Store data in session using JavaScript (if needed)
+            sessionStorage.setItem('student_group_id', data.student_group_id);
+        } else {
+            console.error('Error:', data.message);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+function fetchStudentGroups() {
+    fetch('test.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                console.log(data.message); // Output any error message
+            } else {
+                const groupMembersContainer = document.querySelector('.GroupmembersContainer');
+                
+                // Clear the container first
+                groupMembersContainer.innerHTML = '';
+
+                // Process the JSON data
+                data.forEach(student => {
+                    console.log(student); // Output each student
+                    // Create a new element for each student and append it to the container
+                    const studentElement = document.createElement('div');
+                    studentElement.textContent = student;
+                    groupMembersContainer.appendChild(studentElement);
+                });
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+
+
+
+
+function groups() {
+    fetch('FetchGroups.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data:', data); // Debug statement to check data structure
+            // Check if the data contains an error
+            if (data.error) {
+                console.error('Error in data:', data.error);
+            } else {
+                // Assuming data is an array of group names
+                data.forEach(group_name => {
+                    console.log(group_name);
+                    // Do whatever you need with the group_name here
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function fetchGroupID() {
+    fetch('groupRequirement.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Check if data.courseGroupID is an array
+        if (Array.isArray(data.courseGroupID)) {
+            // Re-index the array numerically
+            const courseGroupIDs = data.courseGroupID;
+
+            console.log(courseGroupIDs); // This will contain the array of courseGroupIDs
+
+            // You can perform further operations with the courseGroupIDs here
+        } else {
+            console.error('Data received is not in the expected format:', data);
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+function reqName() {
+    const createdReq = document.querySelector('.createdReq');
+    createdReq.innerHTML = ''; // Clear previous content
+
+    fetch('createdRequirement.php') // Replace 'path_to_your_php_file.php' with your actual PHP file path
+        .then(response => response.json())
+        .then(data => {
+            // Check if data contains reqNames array
+            if (data.reqNames && Array.isArray(data.reqNames)) {
+                // Loop through the reqNames array and append each item to createdReq
+                data.reqNames.forEach(reqName => {
+                    const reqElement = document.createElement('div');
+                    reqElement.textContent = reqName;
+                    createdReq.appendChild(reqElement);
+                });
+            } else {
+                console.error('Invalid data format or missing reqNames array');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+
+
+
+
+
+
+
+
+
+function handleAction(action, course_id) {
+    console.log('Clicked:', course_id);
+    switch (action) {
+        case 'View Members':
+            viewMembers(course_id);
+            fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
+            break;
+        case 'Requirements':
+            setrequirements(course_id);
+            reqName();
+            break;
+        case 'Rubric':
+            rubric();
+            break;
+    }
+}
+
+
+
+function saveCourseID(courseID) {
+    fetch('fetchCourseID.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ course_id: courseID })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Course ID saved in session:', data.course_id);
+        } else {
+            console.error('Failed to save course ID in session:', data.error);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+function fetchStudents() {
+    const membersContainer = document.querySelector('.membersContainer');
+    membersContainer.innerHTML = ''; // Clear previous content
+
+    fetch('fetchStudents.php')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the received JSON data
+        // Process the data as needed
+        data.forEach(student => {
+            const memberHeading = document.createElement('h4');
+            memberHeading.textContent = `${student.firstName} ${student.lastName}`;
+            membersContainer.appendChild(memberHeading);
+        });
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+
+
+
+
 
 
 
@@ -943,4 +1061,4 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 </script>
 
-<!-- mmmnmn -->
+<!-- mmssmnmn -->

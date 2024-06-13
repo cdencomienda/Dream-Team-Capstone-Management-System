@@ -1,30 +1,46 @@
 <?php
-session_start(); // Start the session
+// Start or resume the session
+session_start();
 
-if (isset($_POST['selectedTerm'])) {
-    $selectedTerm = intval($_POST['selectedTerm']); // Cast to integer
+// Check if student_group_id is set in the session
+if(isset($_SESSION['student_group_id'])) {
+    // Assuming you have already connected to the database
+    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
-    // Store the selected term (as an integer) in the session
-    $_SESSION['selectedTerm'] = $selectedTerm;
+    // Check the connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-    // Construct a JSON response
-    $response = [
-        'status' => 'success',
-        'message' => 'Selected term stored in session: ' . $selectedTerm,
-    ];
+    // Prepare the SQL query
+    $student_group_id = $_SESSION['student_group_id'];
+    $sql = "SELECT student FROM groups WHERE student_group_id = $student_group_id";
 
-    // Send the JSON response
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    // Execute the query
+    $result = mysqli_query($conn, $sql);
+
+    // Check if there are any results
+    if (mysqli_num_rows($result) > 0) {
+        // Initialize an array to store student data
+        $students = array();
+
+        // Fetch and store data of each row in the array
+        while($row = mysqli_fetch_assoc($result)) {
+            $students[] = $row["student"];
+        }
+
+        // Encode the array as JSON
+        $json_students = json_encode($students);
+
+        // Output the JSON data
+        echo $json_students;
+    } else {
+        echo json_encode(array("message" => "No students found for the student_group_id: $student_group_id"));
+    }
+
+    // Close the connection
+    mysqli_close($conn);
 } else {
-    // Handle case where selectedTerm is not received
-    $response = [
-        'status' => 'error',
-        'message' => 'selectedTerm not received.',
-    ];
-
-    // Send the JSON error response
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    echo json_encode(array("message" => "Session variable student_group_id is not set."));
 }
 ?>

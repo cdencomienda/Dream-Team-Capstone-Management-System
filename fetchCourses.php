@@ -27,13 +27,18 @@ if (isset($_SESSION['acy_id']) && isset($_SESSION['selectedTerm']) && isset($_SE
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $courses = [];
+        $course_ids = []; // Array to store course_ids
         while ($row = $result->fetch_assoc()) {
             $courses[] = [
                 'course_id' => $row['course_id'],
                 'course_code' => $row['course_code'],
                 'section' => $row['section']
             ];
+            $course_ids[] = $row['course_id']; // Add course_id to the array
         }
+        // Save the course_ids array in session
+        $_SESSION['group_courses'] = $course_ids;
+
         // Return the courses as JSON
         echo json_encode($courses);
     } else {

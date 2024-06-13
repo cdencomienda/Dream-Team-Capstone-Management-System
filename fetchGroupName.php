@@ -2,45 +2,66 @@
 // Start the session
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
-    echo json_encode(['error' => 'User not logged in']);
-    exit();
-}
+// Check if course_id and group_name are sent via POST
+if (isset($_POST['course_id']) && isset($_POST['group_name'])) {
+    // Retrieve course_id and group_name from POST data
+    $course_id = $_POST['course_id'];
+    $group_name = $_POST['group_name'];
 
-// Check if the course ID is set in the session
-if (isset($_SESSION['varCourseID'])) {
-    // Retrieve the course ID from the session
-    $courseID = $_SESSION['varCourseID'];
-    
-    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
+    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Escape variables for security
-    $userID = $conn->real_escape_string($_SESSION['user_id']);
-    $courseID = $conn->real_escape_string($courseID);
-
-    // Prepare and execute SQL query to fetch groupName based on courseID and userID
-    $sql = "SELECT groupName FROM `group` WHERE courseID = '$courseID' AND studentID = '$userID'";
-    $result = $conn->query($sql);
+    // Prepare and execute SQL query to fetch unique group_name and student_group_id
+    $sql = "SELECT DISTINCT group_name, student_group_id FROM groups WHERE course_id = ? AND group_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("is", $course_id, $group_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Fetch group name and encode as JSON
+        // Fetch the first row
         $row = $result->fetch_assoc();
-        $groupName = $row["groupName"];
-        $response = ['groupName' => $groupName];
+        
+        // Store student_group_id in a session variable
+        $_SESSION['student_group_id'] = $row["student_group_id"];
+
+        // Prepare JSON response
+        $response = array(
+            'success' => true,
+            'group_name' => $row["group_name"],
+            'student_group_id' => $row["student_group_id"]
+        );
+
+        // Output JSON response
+        header('Content-Type: application/json');
         echo json_encode($response);
     } else {
-        echo json_encode(['error' => 'No group found for this course']);
+        // Prepare JSON response for no groups found
+        $response = array(
+            'success' => false,
+            'message' => 'No groups found for the specified course ID and group name.'
+        );
+
+        // Output JSON response
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 
-    // Close database connection
+    $stmt->close();
     $conn->close();
 } else {
-    echo json_encode(['error' => 'Course ID not set in session']);
+    // Prepare JSON response for missing data
+    $response = array(
+        'success' => false,
+        'message' => 'Error: Course ID and Group Name are required.'
+    );
+
+    // Output JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 ?>
