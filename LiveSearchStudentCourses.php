@@ -1,50 +1,60 @@
 <?php
 // Start the session if it's not already active
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Check if session user_id is set and not empty
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     // Connect to the database
-    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
+    $conn = new mysqli('localhost', 'root', '', 'soe_assessment');
 
     // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
     // Get the student ID from the session
     $studentID = $_SESSION['user_id'];
 
-    // Query to fetch courses the student is enrolled in
-    $sql = "SELECT c.courseID, c.courseName
-        FROM `course created` c
-        JOIN `enrolled students` es ON c.courseID = es.courseID
-        WHERE es.studentID = ?;";
+    // Query to fetch the required course details for the student
+    $sql = "SELECT c.course_code, c.section, c.term, c.acy_id
+            FROM course c
+            INNER JOIN students s ON c.course_id = s.course_id
+            WHERE s.student_id = ?";
 
     // Prepare the statement
     $stmt = $conn->prepare($sql);
     
-    // Bind the student ID parameter
-    $stmt->bind_param('i', $studentID);
-    
-    // Execute the statement
-    $stmt->execute();
-    
-    
-    // Fetch the results
-    $result = $stmt->get_result();
+    if ($stmt) {
+        // Bind the student ID parameter
+        $stmt->bind_param('s', $studentID); // 's' since student_id appears to be a string
+        
+        // Execute the statement
+        $stmt->execute();
+        
+        // Fetch the results
+        $result = $stmt->get_result();
 
-    $courses = [];
+        $courses = [];
 
-    // If results are found, fetch each row and add it to the courses array
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $courses[] = $row;
+        // If results are found, fetch each row and add it to the courses array
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $courses[] = $row;
+            }
         }
+
+        // Close the statement
+        $stmt->close();
+    } else {
+        // Handle errors with preparing the statement
+        echo json_encode(['error' => 'Failed to prepare statement']);
+        $conn->close();
+        exit;
     }
 
-    // Close the statement and database connection
-    $stmt->close();
+    // Close the database connection
     $conn->close();
 
     // Output the courses as JSON
