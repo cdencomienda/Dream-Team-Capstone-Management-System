@@ -41,17 +41,45 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         // If results are found, fetch each row and add it to the courses array
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                // Fetch academic year based on acy_id
+                $acy_id = $row['acy_id'];
+                $academicYearQuery = "SELECT academic_year FROM academic_year WHERE acy_id = ?";
+                $academicYearStmt = $conn->prepare($academicYearQuery);
+                
+                if ($academicYearStmt) {
+                    $academicYearStmt->bind_param('s', $acy_id); // Assuming acy_id is a string
+                    
+                    // Execute the academic year statement
+                    $academicYearStmt->execute();
+                    
+                    // Fetch the academic year result
+                    $academicYearResult = $academicYearStmt->get_result();
+                    
+                    if ($academicYearResult->num_rows > 0) {
+                        $academicYearRow = $academicYearResult->fetch_assoc();
+                        $row['academic_year'] = $academicYearRow['academic_year'];
+                    }
+                    
+                    $academicYearStmt->close();
+                } else {
+                    // Handle errors with preparing the academic year statement
+                    $row['error'] = 'Failed to fetch academic year';
+                }
+
+                // Exclude acy_id from the output JSON
+                unset($row['acy_id']);
+                
                 $courses[] = $row;
             }
+        } else {
+            $courses = ['message' => 'No courses found for the student.'];
         }
 
         // Close the statement
         $stmt->close();
     } else {
         // Handle errors with preparing the statement
-        echo json_encode(['error' => 'Failed to prepare statement']);
-        $conn->close();
-        exit;
+        $courses = ['error' => 'Failed to prepare statement'];
     }
 
     // Close the database connection
