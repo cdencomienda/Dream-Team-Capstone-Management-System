@@ -877,7 +877,7 @@ background-color: #aeaeaeae;
 }
  
 /* rubric */
-<<<<<<< HEAD
+
 .rubriccontainer {
   position: relative;
   top: 0px;
@@ -893,36 +893,6 @@ background-color: #aeaeaeae;
   gap: 20px;
   justify-content: center;
   align-items: center;
-=======
-.rubriccontainer{
-position: relative;  
-top: 0px;
-width: 800px;
-height: 420px;
-padding: 25px;
-background-color: #ffffff;
-border-radius: 15px;
-overflow:hidden;
-transition:1s;
-display: flex;
-gap: 20px;
-display: flex;
-justify-content: center;
-align-items: center;
->>>>>>> dc786fca69e63e58edda54756f7d0954539250ce
-}
-.rubric-containe
-.table_selectrubric{
-margin-top: 10px;
-width: 760px;
-height: 350px;
-margin-top: 10px;
-border: 1px solid #000000;
-padding: 15px;
-background-color: #F8EFE3;
-border-radius: 10px;
-overflow: auto;
-overflow: overlay;
 }
 /* .rubriccontainerv2{
 position: relative;

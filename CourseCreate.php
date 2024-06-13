@@ -319,6 +319,7 @@
         <!-- Rubric div -->
         <div class="rubriccontainer" style="display: none"> 
         <div class="secondaryRubriccont">
+        <span class="close" onclick="closeModal()">&times;</span>
         <div class="rubric-container">
                 <h1>Written Communication</h1>
             </div>
@@ -358,9 +359,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-
+    </div>        
 
         <!-- group class div -->
          <div class="GroupContainer">
