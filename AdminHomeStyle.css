@@ -15,15 +15,14 @@ body{
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 .adminClass{
-  position: relative;
-  margin-left: 480px;
-  /* width: 1000px;
-  height: 630px;
-  top: -1080px;
-  overflow: hidden;
-  display: none;
-  background-color: #ffffff;
-  border-radius: 15px; */
+  width: 1000px;
+    height: 700px;
+    padding: 25px;
+    left: 80px;
+    margin-top: 0;
+    top: -1200px;
+    display: block;
+    z-index: 0;
 } 
 
 /* dropdown edit profile */
@@ -371,12 +370,12 @@ background-repeat: no-repeat;
 /* table layout */
 main.table {
   margin-left: 130px;
-  margin-top: 50px;
-  width: 1000px;
-  height: 400px;
-  background-color: #ffff; 
-  border-radius: 15px;
-  overflow: hidden;
+    margin-top: 50px;
+    width: 1000px;
+    height: 600px;
+    background-color: #ffff;
+    border-radius: 15px;
+    overflow: hidden;
   }
 .input-group{
   margin-left: 20px;
@@ -754,12 +753,12 @@ main.table {
   background-color: #F8EFE3;
 }
 .dropdownbtn{
-  width: 100px; 
-  border: 1px solid #000000; 
+  width: 110px;
+  border: 1px solid #000000;
   height: 24px;
   margin-bottom: 5px;
   padding: 5px;
-  border-radius: 10px; 
+  border-radius: 10px;
   background-color: #FFFFFF;
 }
 .dropdownbtn:hover { 
@@ -799,7 +798,8 @@ main.table {
   margin-left: 0px;
   width: 1000px;
   height: 630px; 
-  top: -1100px;
+  left: 450px;
+    top: -1140px;
   overflow:hidden;
   display: none;
   background-color: #ffffff;
@@ -938,6 +938,7 @@ main.table {
   top: -1100px;
   width: 400px;
   height: 300px;
+  left: 450px;
   padding: 25px; 
   background-color: #ffffff; 
   border-radius: 15px;
@@ -982,18 +983,19 @@ main.table {
 
 /* rubric */
 .rubriccontainer{
-  position: relative;  
-  top: -1100px;
-  width: 500px;
-  height: 300px;
-  padding: 25px; 
-  background-color: #ffffff; 
+  position: relative;
+  top: -1140px;
+  left: 470px;
+  width: calc(100% - 100px); /* Adjusted width to fit within 1050px width */
+  max-width: none; /* Remove max-width */
+  height: calc(100% - 150px); /* Adjusted height to fit within 650px height */
+  padding: 25px;
+  background-color: #ffffff;
   border-radius: 15px;
-  overflow:hidden;
-  transition:1s; 
+  overflow: hidden;
+  transition: 1s;
   display: flex;
   gap: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -1143,21 +1145,21 @@ main.table {
 }
 .req-nameCont{
   width: 350px;
-  height: 580px; 
+  height: 580px;
   display: flex;  
   flex-direction: column;
   margin-top: 25px;
 }
-.requirement-list{ 
-  background-color: white; 
+.requirement-list{
+  background-color: white;
   border-radius: 35px;
   width: 350px;
   height: 580px;
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 .submissionscontainer{
   width: 1000px;
-  height: 600px; 
+  height: 600px;
   margin-top: 0px;
   display: flex;
   flex-direction: row; /* Display children elements in a row */
@@ -1187,10 +1189,10 @@ main.table {
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out;
-  z-index: 1000; 
+  z-index: 1000;
   text-align: left;
 }
-.documentationCont{ 
+.documentationCont{
   margin: 10px;
   margin-top: 30px;
   width: 455px;
@@ -1216,7 +1218,7 @@ main.table {
       align-items: center; /* Center items vertically */
       height: 30px;
      
-  } 
+  }
   .divDocuReqLogs{
     width: 40px;
   }
@@ -1228,7 +1230,7 @@ main.table {
     width: 150px;
     margin-left: 10px;
   }
-
+ 
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -1249,7 +1251,7 @@ main.table {
     width: 20px; /* Set a custom width */
     height: 20px; /* Set a custom height */
     padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px; 
+    margin-left: 250px;
     background-color: transparent;
     border: none;
 }
@@ -1266,11 +1268,11 @@ main.table {
   background-color: #F8EFE3;
   border-radius: 25px;
   display: flex;
-  
+ 
   flex-direction: row;
   align-items: center;
 }
-.defaultBody{ 
+.defaultBody{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -1279,8 +1281,133 @@ main.table {
   margin-left: -25px;
   margin-top: 0px;
   display: flex;
+  flex-direction: column;
 }
-
+ 
+ 
+.recentFiles {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.fileMessage {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 70%;
+  cursor: pointer;
+}
+ 
+.fileMessage.left {
+  align-self: flex-start;
+}
+ 
+.fileMessage.right {
+  align-self: flex-end;
+  background-color: #e0f7fa;
+}
+ 
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.fileIcon {
+  width: 40px;
+  height: 40px;
+}
+ 
+.fileDetails {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.fileDetails strong {
+  font-size: 16px;
+}
+ 
+.fileDetails span {
+  font-size: 12px;
+  color: #666;
+}
+ 
+.modal {
+  z-index: 1;
+  left: 800px;
+  top: 160px;
+  padding: 15px; 
+  border-radius: 20px;
+  width: 270px;
+  height: 60px;
+  overflow: hidden;
+  background-color: #e2c17b;
+  z-index: 500;
+}
+ 
+.secondaryRubriccont {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  height: 75%;
+  position: relative;
+  z-index: 500 ;
+  overflow: auto;
+}
+ 
+.closeButton {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 500 ;
+}
+ 
+.closeButton:hover,
+.closeButton:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 500 ;
+}
+ 
+#fileFrame {
+  width: 100%;
+  height: 96%;
+  z-index: 500 ;
+}   
+/* addmember */
+.addmember{
+  position: relative;  
+  top: -1100px;
+  width: 500px;
+  height: 420px;
+  left: 450px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow:hidden;
+  display: none;
+  transition:1s;  
+  } 
+  .inputName{
+    width: 220px;
+    height: 50px;
+    background-color: white; 
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .flex-container{
+    padding: 10px;
+  }
 
 /* viewmembers */
 .closeViewGroup{
@@ -1297,7 +1424,8 @@ main.table {
   position: relative; 
   width: 250px;
   height: 350px;
-  top: -1080px;
+  top: -1145px;
+  left: 450px;
   overflow: hidden;
   padding: 30px;
   display: none;

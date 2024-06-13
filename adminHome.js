@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function addMembers() { 
+function AddMembers() { 
   var container = document.querySelector('.addmember');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }

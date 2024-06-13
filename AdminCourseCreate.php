@@ -200,9 +200,10 @@
                     <div class="dropdownmelon">            
                         <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
-                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
                     </div>
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
@@ -215,9 +216,10 @@
                     <div class="dropdownmelon">            
                         <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
-                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
                     </div>
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
@@ -230,9 +232,10 @@
                     <div class="dropdownmelon">            
                         <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">          
-                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
                     </div>
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
@@ -255,21 +258,125 @@
                     <h4>StudentName</h4>
                     <h4>InstructorName</h4>
                 </div>
-            </div>
-        <!-- group class div -->
-            <div class="GroupContainer">
-                    <div class="dashboard_header">
-                        <div class="groupname_container"> 
-                            <div class="group_name" id="group_name">     
-                            </div>   
-                                </div>
-                                <script> 
-                                    
-                                </script> 
-                            <h4>
-                    <div class="button-group"> 
-                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+            </div> 
+                 
+        <!-- addmembers div -->
+            <div class="addmember" id="addmembers">
+                    <div class="flex-container">
+                        <h3>Add Members</h3>
+                        <!-- lead panel -->
+                        <div>
+                            <label for="leadPanelist">Selected Lead Panel:</label>
+                            <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        </div>
+                    </div>
 
+                    <div class="flex-container">
+                        <!-- panel1 -->
+                        <div>
+                            <label for="panelist1">Selected Panel 1:</label>
+                            <input type="text" id="panelist1" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        </div>
+                    </div>
+
+                    <div class="flex-container">
+                        <!-- panel2 -->
+                        <div>
+                            <label for="panelist2">Selected Panel 2:</label>
+                            <input type="text" id="panelist2" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        </div>
+                    </div>
+
+                    <div class="flex-container">
+                        <!-- panel3 -->
+                        <div>
+                            <label for="panelist3">Selected Panel 3:</label>
+                            <input type="text" id="panelist3" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        </div>
+                    </div>   
+
+                    <div class="flex-container">
+                        <!-- advisor -->
+                        <div>
+                            <label for="advisor">Selected Advisor:</label>
+                            <input type="text" id="advisor" name="advisorName" class="inputName" oninput="selectedUserName(this.value, 'advisor')" placeholder="Type an advisor's name">
+                        </div>
+                    </div> 
+                    <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+                </div>
+        
+        <!-- Requirement div -->
+            <div class="setrequirements">
+                <h3>Requirements</h3>
+                <form class="Requirements" method="POST" action="addRequirements.php">
+                    <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
+                    <h3>Requirements Description</h3>
+                    <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
+                    <div></div>
+                    <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+                </form>
+            </div> 
+
+        
+             <!-- Rubric div -->
+        <div class="rubriccontainer" style="display: none"> 
+        <div class="secondaryRubriccont">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="rubric-container">
+                <h1>Written Communication</h1>
+            </div>
+            <table>        
+                <div class="rubric-header">
+    
+                <thead >
+            
+                    <!-- column title -->
+                    <tr>
+                        <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                        <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                        <th style = "background-color: #CBC4BA;">Criteria</th>
+                        <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                        <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                        <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                        <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                        <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
+                    </tr>
+                     <!-- column title end -->
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>40%</td>
+                        <td>Relevance</td>
+                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                    </tr>
+                    <tr>
+                        <td>60%</td>
+                        <td>Neatness</td>
+                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>        
+
+        <!-- group class div -->
+         <div class="GroupContainer">
+                    <div class="dashboard_header">
+                        <!-- Group Name Box -->
+                        <div class="groupname_container"> 
+                            <!-- ian mojica  group name -->
+                            <div class="group_name" id="group_name"> 
+                                sample     
+                            </div>   
+                        </div>
+                        <script> 
+                                    
+                        </script> 
+                    <div class="button-group"> 
                             <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class = "filesContainer"> 
@@ -313,55 +420,38 @@
                     </div> 
 
                     <!-- files -->
-                    <div class="defaultBody" id="defaultBody">
-                        <div class="recentFiles" >
-                            'featured files here'
-                        </div >
-                    </div>
-                    
-                    <!-- submissions -->
-                    <div class="submissionFrame" id="submissionFrame">
-                        <div class="submissionscontainer">
-                            <div class= "requirement-list">
-                                <div class = "req-nameCont"> 
-                                    <div class="requirement-name">
-                                    
-                                    </div>
-                                    <script>
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                    // Function to fetch requirements information for the logged-in student's group
-                                    function fetchRequirementsInfo() {
-                                        fetch('fetchRequirements.php')
-                                            .then(response => response.json())
-                                            .then(requirements => {
-                                                const reqNameContainer = document.querySelector('.req-nameCont');
-                                                
-                                                // Clear existing content
-                                                reqNameContainer.innerHTML = '';
-            
-                                                // Populate the container with the group's requirements
-                                                requirements.forEach(requirement => {
-                                                    const div = document.createElement('div');
-                                                    div.className = 'requirement-name';
-                                                    div.textContent = requirement;
-                                                    reqNameContainer.appendChild(div);
-                                                });
-                                            })
-                                            .catch(error => {
-                                                console.error('Error fetching requirements information:', error);
-                                            });
-                                    }
-            
-                                    // Fetch requirements information when the page loads
-                                    fetchRequirementsInfo();
-                                });
-                                </script>
+                <div class="defaultBody" id="defaultBody">
+                    <div class="recentFiles">
+                        <!-- File posted by another person -->
+                        <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>DREAM TEAM - Recommendation</strong>
+                                    <span>26 KB</span>
                                 </div>
-                                
                             </div>
                         </div>
-                        <script> 
-                        </script>
+                        
+                        <!-- File posted by you -->
+                        <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>Final Documentation</strong>
+                                    <span>12 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Structure -->
+                <div id="fileModal" class="modal">
+                    <div class="modalContent">
+                        <span class="closeButton" onclick="closeModal()">&times;</span>
+                        <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>  
 
                     <!-- file repo -->
                     <div class="professorFilesR" id="profFilesR">
@@ -371,36 +461,8 @@
                     </div>
                 </div> 
                 <!-- file requirement -->
-            
         </div>  
-        <!-- Requirement div -->
-        <div class="setrequirements">
-            <h3>Requirements</h3>
-            <form class="Requirements" method="POST" action="addRequirements.php">
-                <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
-                <h3>Requirements Description</h3>
-                <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
-                <div></div>
-                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
-            </form>
-        </div> 
-
-        <!-- Rubric div -->
-        <div class="rubriccontainer" style="display: none"> 
-                <form class="addRubric" method="POST" action="addRubric.php">
-                    <div>
-                        <input type="text" id="courserubric" class="select-box" name="rubricCode" placeholder="Input Rubric" required />
-                        <input type="submit" class="btn_submit" value="Submit" />
-                    </div>
-                    <section class="table_selectrubric">
-                        <table>
-                            <tbody class="rubricList" id="selectedRubric">
-                            <!-- Your student list rows will be dynamically populated here -->
-                            </tbody>
-                        </table>
-                    </section>
-                </form> 
-        </div>
+            
 
     </div><!-- end of wrapper scroll --> 
 
