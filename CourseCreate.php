@@ -445,39 +445,7 @@
 
         <!-- Rubric div -->
         <div class="rubriccontainer" style="display: none"> 
-        <h3>Rubric</h3>
-                <form class="addRubric" method="POST" action="addRubric.php">
-                    <div>  
-                    </div>
-                    <section class="table_selectrubric">
-    <table>
-        <thead>
-            <tr>
-                <th class="Rubricid-column">Rubric id</th>
-                <th class="Rubricid-column">Rubric Description</th>
-            </tr>
-        </thead>
-        <tbody class="rubricList" id="selectedRubric">
-            <tr>
-                <td>1</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">DATA MANAGEMENT</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">CPE METHODS OF RESEARCH</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><a href="#" class="rubric-description" onclick="showModal()">CPE DESIGN</a></td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<!-- Modal -->
-<!-- Modal -->
-<div id="rubricModal" class="modal">
-    <div class="modal-content">
+        <div class="secondaryRubriccont">
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="rubric-container">
                 <h1>Written Communication</h1>
@@ -518,9 +486,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
-                </form>  
+    </div>        
 
         <!-- group class div -->
          <div class="GroupContainer">
