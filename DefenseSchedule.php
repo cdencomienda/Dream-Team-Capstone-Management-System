@@ -122,24 +122,24 @@
                                 <div class="titleFLex">
                                     <div class="titleDetails">
                                         <label class="textBox" for="schedTitle">Sched Title:</label>
-                                        <input type="text" id="schedTitle" name="schedTitle" class="input-field"><br>
+                                        <input type="text" id="schedTitle" name="schedTitle"  class="input-field" required><br>
                                     </div>  
                                  </div>
                                 <div class="timeDateflexcont">
                                         <!-- second flexBox -->
                                         <div class="dateDetails">
-                                            <label  class="textBox" for="date">Date:</label>
-                                            <input type="date" id="date" name="date" class="input-field2"><br>
+                                            <label  class="textBox" for="date"required>Date: </label>
+                                            <input type="date" id="date" name="date" class="input-field2" required><br>
                                         </div>
                                         <div class="timeDetails">
-                                            <label  class="textBox" for="time">Time:</label>
-                                            <input type="time" id="time" name="time" class="input-field3"><br>
+                                            <label  class="textBox" for="time"required>Time:</label>
+                                            <input type="time" id="time" name="time" class="input-field3" required><br>
                                         </div>
                                 </div>      
                             </div>
                             <!-- Second primary container -->
                             <div class="groupFlex">
-                            <label  class="textBox" for="GroupName">Group Name:</label>
+                            <label  class="textBox" for="GroupName" required>Group Name:</label>
                             <input type="text" id="GroupName" name="GroupName" class="input-field"><br>
                             </div>
                         </div>    
@@ -149,7 +149,19 @@
             </div>
             
             <div class= "Schedule" id="scheduleContainer">
-           
+                <div class ="DefenseScheduleCont">
+                <div class="SchedTitle">
+            <h2>${schedTitle}</h2>
+        </div>
+        <div class="SchedDetails">
+            time: ${time}<br>
+            date: ${date}<br>
+            group name: ${groupName}<br>
+        </div>
+        <div class="DocumentStatus">
+            Status: ?????
+        </div
+                </div>
             </div>
             
             <div class="divButton">
