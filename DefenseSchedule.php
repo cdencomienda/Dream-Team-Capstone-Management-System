@@ -149,7 +149,19 @@
             </div>
             
             <div class= "Schedule" id="scheduleContainer">
-           
+                <div class ="DefenseScheduleCont">
+                <div class="SchedTitle">
+            <h2>${schedTitle}</h2>
+        </div>
+        <div class="SchedDetails">
+            time: ${time}<br>
+            date: ${date}<br>
+            group name: ${groupName}<br>
+        </div>
+        <div class="DocumentStatus">
+            Status: ?????
+        </div
+                </div>
             </div>
             
             <div class="divButton">
