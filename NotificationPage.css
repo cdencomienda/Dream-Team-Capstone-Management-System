@@ -42,7 +42,7 @@ overflow-x: hidden;
 .dropdown-profile{
   position: absolute;
     background-color: #FFEBCF;
-    width: 400px;
+    width: 500px;
     height: 500px;
     padding: 15px;
     border: 1px solid #000000;
@@ -61,7 +61,7 @@ overflow-x: hidden;
   width:120px;
   height:120px;
   margin-top: 30px;
-  margin-left: 150px; 
+  margin-left: 185px; 
   border-radius:50%;
   overflow:hidden;
   cursor:pointer;
