@@ -88,42 +88,66 @@ function closeEditform(){
   });
   
    
-function createDefenseContainer() {
-  // Gather input values
-  const schedTitle = document.getElementById('schedTitle').value;
-  const time = document.getElementById('time').value;
-  const date = document.getElementById('date').value;
-  
-  const groupName = document.getElementById('GroupName').value;
-  // Create new defense schedule container
-  const defenseContainer = document.createElement('div');
-  defenseContainer.classList.add('DefenseScheduleCont');
-  defenseContainer.innerHTML = `
-      <div class="SchedTitle">
-          <h2>${schedTitle}</h2>
-      </div>
-      <div class="SchedDetails">
-          time: ${time}<br>
-          date: ${date}<br>
-          group name: ${groupName}<br>
-      </div>
-      <div class="DocumentStatus">
-          Status: ?????
-      </div>
-  `;
+  function createDefenseContainer() {
+    // Gather input values
+    const schedTitle = document.getElementById('schedTitle').value;
+    const time = document.getElementById('time').value;
+    const date = document.getElementById('date').value;
+    const groupName = document.getElementById('GroupName').value;
 
-  // Check if a new row needs to be created
-  let lastRow = document.querySelector('.ScheduleRow:last-child');
-  if (!lastRow || lastRow.children.length === 4) {
-      lastRow = document.createElement('div');
-      lastRow.classList.add('ScheduleRow');
-      document.getElementById('scheduleContainer').appendChild(lastRow);
-  }
+    // Check if a schedule with the same time, group name, or title already exists
+    const existingSchedules = document.querySelectorAll('.DefenseScheduleCont');
+    for (let i = 0; i < existingSchedules.length; i++) {
+        const existingDetails = existingSchedules[i].querySelector('.SchedDetails').innerHTML;
+        const existingTitle = existingSchedules[i].querySelector('.SchedTitle h2').innerText;
 
-  // Append the new container to the last row
-  lastRow.appendChild(defenseContainer);
+        if (existingDetails.includes(`time: ${time}`)) {
+            alert('A schedule with the same time already exists. Please choose a different time.');
+            return;
+        }
 
-  // Scroll to the bottom to show the newly added row
-  
-}   
+        if (existingDetails.includes(`group name: ${groupName}`)) {
+            alert('A schedule with the same group name already exists. Please choose a different group name.');
+            return;
+        }
+
+        if (existingTitle === schedTitle) {
+            alert('A schedule with the same title already exists. Please choose a different title.');
+            return;
+        }
+    }
+
+    // Create new defense schedule container
+    const defenseContainer = document.createElement('div');
+    
+    defenseContainer.classList.add('DefenseScheduleCont');
+    defenseContainer.innerHTML = `
+        <div class="SchedTitle">
+            <h2>${schedTitle}</h2>
+        </div>
+        <div class="SchedDetails">
+            time: ${time}<br>
+            date: ${date}<br>
+            group name: ${groupName}<br>
+        </div>
+        <div class="DocumentStatus">
+            Status: ?????
+        </div>
+    `;
+
+    // Check if a new row needs to be created
+    let lastRow = document.querySelector('.ScheduleRow:last-child');
+    if (!lastRow || lastRow.children.length === 4) {
+        lastRow = document.createElement('div');
+        lastRow.classList.add('ScheduleRow');
+        document.getElementById('scheduleContainer').appendChild(lastRow);
+    }
+
+    // Append the new container to the last row
+    lastRow.appendChild(defenseContainer);
+
+    // Scroll to the bottom to show the newly added row
+    // defenseContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
  
