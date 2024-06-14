@@ -310,12 +310,21 @@
         
         <!-- addmembers div -->
             <div class="addmember" id="addmembers">
-                <div class="flex-container">
+                
+            <div class="flex-container">
                     <h3>Add Members</h3>
                     <!-- lead panel -->
                     <div>
+                        <label for="chairpanelist">Selected Chair Panel:</label>
+                        <input type="text" id="charpanelist" name="chairpanelistName" class="inputName" oninput="selectedUserName(this.value, 'chairpanelist')" placeholder="Type chair panelist's name">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- lead panel -->
+                    <div>
                         <label for="leadPanelist">Selected Lead Panel:</label>
-                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type lead panelist's name">
                     </div>
                 </div>
 
