@@ -2,7 +2,7 @@ function addComment() {
     // Get the comments section container
     var commentsSection = document.getElementById('commentsSection');
     var sendIcon = document.createElement('i');
-     sendIcon.classList.add('fa-solid', 'fa-paper-plane');
+     sendIcon.classList.add('fa-solid', 'fa-trash-can');
      
     // Clone the existing comment section (optional, if needed)
     var newComment = document.createElement('div');
