@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="DefenseResults.css">
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button>
@@ -206,7 +207,25 @@
                     </tr>
                 </table>
                 <p>Course Passing Rate: <span id="passing-rate">75%</span></p>
+            </div>
+            <div class="barGraphCont">
+                <section id="stats-bar-graph" class="bar-graph bar-graph-vertical">
+                    <div class="bar-pass bar-container">
+                        <div class="bar" data-percentage="5%"></div>
+                        <span class="verdict">PASS</span>
+                    </div>
+                    <div class="bar-conditional-pass bar-container">
+                        <div class="bar" data-percentage="70%"></div>
+                        <span class="verdict">CONDITIONAL PASS</span>
+                    </div>
+                    <div class="bar-repeat bar-container">
+                        <div class="bar" data-percentage="20%"></div>
+                        <span class="verdict">REPEAT</span>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
+    
 </body>
 </html>

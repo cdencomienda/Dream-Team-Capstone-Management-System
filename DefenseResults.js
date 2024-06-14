@@ -125,3 +125,17 @@ function Users(){
       document.getElementById('repeat').innerText = stats.repeat + '%';
       document.getElementById('passing-rate').innerText = stats.passingRate + '%';
   }
+  $(document).ready(function(){
+    // Function to animate bars based on percentage values
+    function animateBars() {
+        $('.bar').each(function() {
+            var percentage = $(this).data('percentage');
+            $(this).animate({
+                height: percentage
+            }, 1000);
+        });
+    }
+    
+    // Call the function when the document is ready
+    animateBars();
+}); 

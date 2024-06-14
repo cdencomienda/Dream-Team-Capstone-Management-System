@@ -486,6 +486,7 @@ td select {
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
+      height: 500px;
   }
 
   .close {
@@ -500,4 +501,46 @@ td select {
       color: black;
       text-decoration: none;
       cursor: pointer;
+  }
+    /* CSS for Bar Graph */
+    #stats-bar-graph {
+      margin-top: 20px;
+      max-width: 300px;
+  }
+
+  .bar-container {
+      float: left;
+      height: 150px;
+      margin-right: 8px;
+      position: relative;
+      text-align: center;
+      width: 80px;
+  }
+
+  .bar {
+      border-radius: 3px;
+      bottom: 0;
+      position: absolute;
+      width: 40px;
+  }
+
+  .verdict {
+      bottom: -20px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      margin: 0 auto;
+      font-size: 14px;
+  }
+
+  .bar-pass .bar {
+      background-color: #64b2d1;
+  }
+
+  .bar-conditional-pass .bar {
+      background-color: #5292ac;
+  }
+
+  .bar-repeat .bar {
+      background-color: #407286;
   }
