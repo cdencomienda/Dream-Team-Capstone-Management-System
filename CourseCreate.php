@@ -345,18 +345,10 @@
                 </div>
 
                 <div class="flex-container">
-                    <!-- panel3 -->
+                    <!-- adviser -->
                     <div>
-                        <label for="panelist3">Selected Panel 3:</label>
-                        <input type="text" id="panelist3" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
-                    </div>
-                </div>   
-
-                <div class="flex-container">
-                    <!-- advisor -->
-                    <div>
-                        <label for="advisor">Selected Advisor:</label>
-                        <input type="text" id="advisor" name="advisorName" class="inputName" oninput="selectedUserName(this.value, 'advisor')" placeholder="Type an advisor's name">
+                        <label for="advisor">Selected Adviser:</label>
+                        <input type="text" id="adviser" name="adviserName" class="inputName" oninput="selectedUserName(this.value, 'adviser')" placeholder="Type an adviser's name">
                     </div>
                 </div> 
                 <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
