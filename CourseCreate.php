@@ -310,12 +310,21 @@
         
         <!-- addmembers div -->
             <div class="addmember" id="addmembers">
-                <div class="flex-container">
+            <form id="selectedPanelist" method="POST">
+            <div class="flex-container">
                     <h3>Add Members</h3>
                     <!-- lead panel -->
                     <div>
+                        <label for="chairpanelist">Selected Chair Panel:</label>
+                        <input type="text" id="charpanelist" name="chairpanelistName" class="inputName" oninput="selectedUserName(this.value, 'chairpanelist')" placeholder="Type chair panelist's name">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- lead panel -->
+                    <div>
                         <label for="leadPanelist">Selected Lead Panel:</label>
-                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
+                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type lead panelist's name">
                     </div>
                 </div>
 
@@ -336,22 +345,16 @@
                 </div>
 
                 <div class="flex-container">
-                    <!-- panel3 -->
+                    <!-- adviser -->
                     <div>
-                        <label for="panelist3">Selected Panel 3:</label>
-                        <input type="text" id="panelist3" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
-                    </div>
-                </div>   
-
-                <div class="flex-container">
-                    <!-- advisor -->
-                    <div>
-                        <label for="advisor">Selected Advisor:</label>
-                        <input type="text" id="advisor" name="advisorName" class="inputName" oninput="selectedUserName(this.value, 'advisor')" placeholder="Type an advisor's name">
+                        <label for="advisor">Selected Adviser:</label>
+                        <input type="text" id="adviser" name="adviserName" class="inputName" oninput="selectedUserName(this.value, 'adviser')" placeholder="Type an adviser's name">
                     </div>
                 </div> 
+                
                 <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
             </div>
+            <form>
 
         <!-- Requirement div -->
         <div class="setrequirements">
@@ -374,7 +377,7 @@
         <div class="rubric-container">
                 <h1>Written Communication</h1>
             </div>
-            <table>        
+            <table class="table">        
                 <div class="rubric-header">
     
                 <thead >
@@ -393,11 +396,14 @@
                      <!-- column title end -->
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>40%</td>
+                        
                         <td>Relevance</td>
                         <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
                         <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
                         <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
                     </tr>
                     <tr>
@@ -406,6 +412,11 @@
                         <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
                         <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
                         <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -767,7 +778,7 @@ function fetchCourses(container) {
                                 dropdownContent.style.display = 'none';
 
                                 // Refactor to use handleAction function
-                                const actions = ['View Members', 'Requirements', 'Rubric'];
+                                const actions = ['View Members', 'Add Panelist', 'Requirements', 'Rubric'];
                                 actions.forEach(action => {
                                     const actionButton = document.createElement('button');
                                     actionButton.type = 'button';
@@ -877,7 +888,7 @@ function fetchGroupData(course_id, group_name) {
 }
 
 function fetchStudentGroups() {
-    fetch('test.php')
+    fetch('fetchStudentGroups.php')
         .then(response => response.json())
         .then(data => {
             if (data.message) {
@@ -983,6 +994,142 @@ function reqName() {
 }
 
 
+function fetchRubricHeader() {
+    const rubricContainer = document.querySelector('.rubric-container');
+    rubricContainer.innerHTML = ''; // Clear previous content
+
+    const rubric = document.querySelector('.table');
+    rubric.innerHTML = ''; // Clear previous content
+
+    fetch('test.php')
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of results
+            console.log('Fetched Data:', data); // Log the entire data fetched from the server
+
+            data.forEach(result => {
+                // Display only the results here
+                console.log("Rubric ID: " + result.rubrics_id);
+                console.log("Rubric Name: " + result.rubric_name);
+                console.log("Level Details: ");
+                result.level_details.forEach(detail => {
+                    console.log("- " + detail);
+                });
+                console.log("Level Percentages: ");
+                console.log(result.level_percentage); // Log the array of level percentages directly
+                console.log("Criteria: ");
+                result.criteria.forEach((criteria, index) => {
+                    console.log("Index: " + index);
+                    console.log("Criteria Name: " + criteria.criteria_name);
+                    console.log("Criteria Details:");
+                    console.log("(" + criteria.criteria_details.length + ") [" + criteria.criteria_details.map(detail => "'" + detail + "'").join(', ') + "]");
+
+                    // Display the criteria details array based on the fetched data
+                    const criteriaDetailsArray = criteria.criteria_details;
+                    console.log(criteriaDetailsArray); // Log the criteria details array separately
+                    // Log the rubric percentage
+                    console.log("Rubric Percentage: " + criteria.rubric_percentage);
+                });
+
+                // Create a new h1 element to display the rubric name
+                const rubricNameH1 = document.createElement('h1');
+                rubricNameH1.textContent = result.rubric_name;
+                rubricContainer.appendChild(rubricNameH1);
+
+                // Create the table below the rubric name
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tr = document.createElement('tr');
+
+                // Table headers based on fetched data
+                const headers = [
+                    "Overall Percentage",
+                    "Learning Outcomes",
+                    "Criteria",
+                    ...result.level_details.map((detail, index) => `${detail} (${result.level_percentage[index]}%)`)
+                ];
+
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.innerHTML = headerText;
+                    tr.appendChild(th);
+                });
+
+                thead.appendChild(tr);
+                table.appendChild(thead);
+
+                // Create table body to display criteria details
+                const tbody = document.createElement('tbody');
+                result.criteria.forEach((criteria, index) => {
+                    const tr = document.createElement('tr');
+
+                    // Create a cell for rubric percentage
+                    const percentageTd = document.createElement('td');
+                    percentageTd.innerHTML = criteria.rubric_percentage;
+                    tr.appendChild(percentageTd);
+
+                    // Create a cell for criteria name
+                    const nameTd = document.createElement('td');
+                    nameTd.innerHTML = criteria.criteria_name.join(', ');
+                    tr.appendChild(nameTd);
+
+                    // Create cells for each criteria detail
+                    criteria.criteria_details.forEach((detail, i) => {
+                        const detailTd = document.createElement('td');
+                        detailTd.innerHTML = detail;
+                        tr.appendChild(detailTd);
+
+                        // Duplicate the first detail (index 0)
+                        if (i === 0) {
+                            const duplicateDetailTd = document.createElement('td');
+                            duplicateDetailTd.innerHTML = detail;
+                            tr.appendChild(duplicateDetailTd);
+                        }
+                    });
+
+                    // Append the row to tbody
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(tbody);
+                rubricContainer.appendChild(table);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Call the function to fetch and display the results
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -998,12 +1145,16 @@ function handleAction(action, course_id) {
             viewMembers(course_id);
             fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
             break;
+        case 'Add Panelist':
+            AddMembers(course_id);
+            break;
         case 'Requirements':
             setrequirements(course_id);
             reqName();
             break;
         case 'Rubric':
             rubric();
+            fetchRubricHeader();
             break;
     }
 }

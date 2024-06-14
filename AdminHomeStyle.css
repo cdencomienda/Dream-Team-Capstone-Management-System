@@ -51,7 +51,7 @@ body{
 .dropdown-profile{
   position: absolute;
     background-color: #FFEBCF;
-    width: 400px;
+    width: 500px;
     height: 600px;
     padding: 15px;
     border: 1px solid #000000;
@@ -70,7 +70,7 @@ body{
   width:120px;
   height:120px;
   margin-top: 30px;
-  margin-left: 150px; 
+  margin-left: 185px; 
   border-radius:50%;
   overflow:hidden;
   cursor:pointer;
@@ -371,7 +371,7 @@ background-repeat: no-repeat;
 main.table {
   margin-left: 130px;
     margin-top: 50px;
-    width: 1000px;
+    width: 1200px;
     height: 600px;
     background-color: #ffff;
     border-radius: 15px;
@@ -430,8 +430,7 @@ main.table {
     font-size: 15px;
   }
 
-  .table__body {
-  width: 96%;
+  .table__body { 
   max-height: 75%;
   background-color: #f2f2f2;
   margin: 15px;
@@ -465,14 +464,14 @@ main.table {
   text-align: left;
   }
   
-  thead th {
+  /* thead th {
   position: sticky;
   top: 0;
   left: 0;
   background-color: #FFEBCF;
   cursor: pointer;
   text-transform: capitalize;
-  }
+  } */
   
   tbody tr:nth-child(even) {
   background-color: #0000000b;
@@ -553,12 +552,50 @@ main.table {
     opacity: 50%; 
     border-radius:25px;
    } 
+ 
+.user-row .show-modal-btn {
+  display: inline-block;
+  padding: 5px 10px;  
+  border: 1px solid #ccc;  
+  background-color: #f0f0f0;  
+  color: #333;  
+  border-radius: 3px;  
+  text-align: center;
+  cursor: pointer;
+  margin: 0;  
+}
 
+.user-row .show-modal-btn:hover {
+  background-color: #e0e0e0;  
+  border-color: #999;  
+} 
+ 
+/* .user-row td {
+  padding: 10px;  
+} */
+ 
+button.show-modal-btn {
+  all: unset;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0;
+}
+
+button.show-modal-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
    
 .show-modal-btn {  
   color: #000000;
   float: right;
-  font-size: 23px;
+  font-size: 17px;
   font-weight: bold;
   background-color: transparent;
   border: none;
