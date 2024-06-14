@@ -227,28 +227,6 @@ function fetchGroupName() {
         });
 }
 
-function displayGroupMembers() {
-            fetch('LiveSearchGroupMembers.php')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('groupMembersContainer');
-                    container.innerHTML = '';
-
-                    if (data.error) {
-                        container.innerHTML = `<p>${data.error}</p>`;
-                    } else {
-                        data.forEach(student => {
-                            const studentElement = document.createElement('p');
-                            studentElement.textContent = `Student: ${student}`;
-                            container.appendChild(studentElement);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('groupMembersContainer').innerHTML = '<p>An error occurred while fetching group members.</p>';
-                });
-        }
 
 
 
@@ -267,7 +245,13 @@ window.onload = fetchGroupName;
                                 <div class = "documentationCont">
                                     Document Requirement: <br>
                                     <div class = "ReqDocumentation">
-                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class ="attachedDocumentation"> 
+                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                         <div class="fileDetails">
+                                            <strong>Final Documentation</strong>
+                                            <span>12 KB</span>
+                                            </div>    
+                                        </div>
                                         <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
                                             <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
                                                 
@@ -278,7 +262,13 @@ window.onload = fetchGroupName;
                                 <div class = "AdvCont">          
                                     Advisor Recomendation Sheet: 
                                     <div class = "advRecomendation">
-                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                         <div class = "attachedAdvRecom">
+                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                            <div class="fileDetails">
+                                                <strong>DREAM TEAM - Recommendation</strong>
+                                                <span>26 KB</span>
+                                            </div>    
+                                         </div>    
                                         <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
                                              <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
 
@@ -293,9 +283,15 @@ window.onload = fetchGroupName;
 
                         </div>    
                         <div class="mDropdown" data-flsDropdown>  
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="displayGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
-                                <div class="GroupmembersContainer" id="groupMembersContainer"></div>
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                 Barit, Christian
+                                 Encomienda, Carlos Daniel
+                                 Gudito, John Emerson
+                                 Mojica, Nicholas Ian
+                                </div>
+                                
                             </div>
                         </div>
                     </h4>
@@ -338,6 +334,19 @@ window.onload = fetchGroupName;
                 <div class= "requirement-list">
                     <div class = "req-nameCont"> 
                         <div class="requirement-name">
+                            Chapter 1
+                        
+                        </div>
+                        <div class="requirement-name">
+                            Adviser Recommendation Sheet
+                        
+                        </div>
+                        <div class="requirement-name">
+                            Chapter 2
+                        
+                        </div>
+                        <div class="requirement-name">
+                            Chapter 1-2 Final
                         
                         </div>
                     </div>
@@ -349,15 +358,13 @@ window.onload = fetchGroupName;
             }
          </style>
                 <div class= "requirement-details">
-                    <div class="requirement-title" id="req_title"> <h3> Documentation requirement </h3> </div> <br>
-                    <div class="requirement-due" id="req_due"> <h4> Due : ??/??/???? </h4> </div><br>
-                    
+                    <div class="requirement-title" id="req_title"> <h3> Documentation Requirement for Chapter 1 </h3> </div> <br>
                     <div class="requirement-descriptionCont"> Requirement Description: 
                         <div class="requirement-descBox" id="req_description"> 
-                            ?????
+                                Attach your file of Chapter 1 for Pre-Defense
                         </div>        
                     </div>
-                    <div class="reqfile-version" id="reqfile_version"> <h4>Version: ?????</h4> 
+                    <div class="reqfile-version" id="reqfile_version"> 
                     </div> <br>   
                     <!-- idk kung san lalagay ung file attached id -->
                     <div class="Attach-Files"> 
@@ -380,7 +387,7 @@ window.onload = fetchGroupName;
                     <div class="req-submitbtnCont"> 
                         
                         <button class="reqbtn" type="button">
-                            submit
+                            Submit
                         </button>
                     </div>
  
