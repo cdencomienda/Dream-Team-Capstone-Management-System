@@ -227,8 +227,28 @@ function fetchGroupName() {
         });
 }
 
+function displayGroupMembers() {
+            fetch('LiveSearchGroupMembers.php')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('groupMembersContainer');
+                    container.innerHTML = '';
 
-
+                    if (data.error) {
+                        container.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        data.forEach(student => {
+                            const studentElement = document.createElement('p');
+                            studentElement.textContent = `Student: ${student}`;
+                            container.appendChild(studentElement);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('groupMembersContainer').innerHTML = '<p>An error occurred while fetching group members.</p>';
+                });
+        }
 
 
 
@@ -273,7 +293,7 @@ window.onload = fetchGroupName;
 
                         </div>    
                         <div class="mDropdown" data-flsDropdown>  
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="displayGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer"></div>
                             </div>
