@@ -371,56 +371,67 @@
         </div> 
 
         <!-- Rubric div -->
+        
         <div class="rubriccontainer" style="display: none"> 
-        <div class="secondaryRubriccont">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="rubric-container">
-                <h1>Written Communication</h1>
-            </div>
-            <table class="table">        
-                <div class="rubric-header">
-    
-                <thead >
-            
-                    <!-- column title -->
-                    <tr>
-                        <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
-                        <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
-                        <th style = "background-color: #CBC4BA;">Criteria</th>
-                        <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
-                        <th style = "background-color: #CBC4BA;">Good (80%)</th>
-                        <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
-                        <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
-                        <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
-                    </tr>
-                     <!-- column title end -->
-                </thead>
-                <tbody>
-                        
-                        <td>Relevance</td>
-                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
-                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                    </tr>
-                    <tr>
-                        <td>60%</td>
-                        <td>Neatness</td>
-                        <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
-                        <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <form class="rubricinput" method="POST">
+            <h3>Select Rubric</h3> 
+                <div class="form-row">
+                    <input type="text" class="inputRubric" name="rubric" placeholder="Request Rubric">
+                    <div class="selectedRub" id="selectedRubric"></div>
+                    <button type="submit" class="addRubric" onclick="addrubric()">Add +</button>
+                </div>
+            </form> 
+
+            <div class="secondaryRubriccont">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="rubric-container">
+                    <h1>Written Communication</h1>
+                </div>
+                <table class="table">        
+                    <div class="rubric-header">
+        
+                    <thead >
+                
+                        <!-- column title -->
+                        <tr>
+                            <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                            <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                            <th style = "background-color: #CBC4BA;">Criteria</th>
+                            <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                            <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                            <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                            <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                            <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
+                        </tr>
+                        <!-- column title end -->
+                    </thead>
+                    <tbody>
+                            
+                            <td>Relevance</td>
+                            <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                            <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        </tr>
+                        <tr>
+                            <td>60%</td>
+                            <td>Neatness</td>
+                            <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                            <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     </div>        
 
         <!-- group class div -->
