@@ -374,17 +374,17 @@
         
         <div class="rubriccontainer" style="display: none"> 
 
-            <form class="rubricinput" method="POST">
-            <h3>Select Rubric</h3> 
-                <div class="form-row">
-                    <input type="text" class="inputRubric" name="rubric" placeholder="Request Rubric">
-                    <div class="selectedRub" id="selectedRubric"></div>
-                    <button type="submit" class="addRubric" onclick="addrubric()">Add +</button>
-                </div>
-            </form> 
+<form class="rubricinput" method="POST" action="submittedRubric.php">
+    <h3>Select Rubric</h3> 
+    <div class="form-row">
+        <input type="text" class="inputRubric" name="rubric" placeholder="Request Rubric">
+        <input type="hidden" id="rubric_id" name="rubric_id"> <!-- Hidden input for rubric ID -->
+        <div class="selectedRub" id="selectedRubric"></div>
+        <button type="submit" class="addRubric">Add +</button>
+    </div>
+</form>
 
             <div class="secondaryRubriccont">
-            <span class="close" onclick="closeModal()">&times;</span>
             <div class="rubric-container">
                     <h1>Written Communication</h1>
                 </div>
@@ -418,15 +418,7 @@
                             <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
                         </tr>
                         <tr>
-                            <td>60%</td>
-                            <td>Neatness</td>
-                            <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
-                            <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
-                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
-                            <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+
 
                         </tr>
                     </tbody>
@@ -1005,14 +997,85 @@ function reqName() {
 }
 
 
-function fetchRubricHeader() {
+function fetchRubricNames() {
+    fetch('fetchRubricName.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+            } else {
+                // Initialize autocomplete with fetched rubric names and IDs
+                $(".inputRubric").autocomplete({
+                    source: data.map(rubric => ({
+                        label: rubric.rubric_name + ' (' + rubric.rubric_id + ')',
+                        value: rubric.rubric_name,
+                        id: rubric.rubric_id
+                    })),
+                    select: function(event, ui) {
+                        $(this).val(ui.item.value); // Set the input field value to the selected rubric name
+                        $(this).attr('data-rubric-id', ui.item.id); // Set a data attribute for the rubric_id
+                        $('#rubric_id').val(ui.item.id); // Set the hidden input field value to the rubric ID
+                        return false;
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+}
+
+function fetchRubricSelected() {
+
+    const selectedRubElement = document.querySelector('.selectedRub');
+    selectedRubElement.innerHTML = '';
+
+    fetch('fetchSelectedRubric.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+            } else {
+                // Clear the .selectedRub element
+                const selectedRubElement = document.querySelector('.selectedRub');
+                selectedRubElement.innerHTML = '';
+
+                // Add the fetched rubric name to .selectedRub
+                const rubricName = document.createElement('h4');
+                rubricName.textContent = 'Selected Rubric: ' + data.rubricName;
+                selectedRubElement.appendChild(rubricName);
+
+                console.log('Selected Rubric:', data.rubricName);
+                // You can handle the rubricName data here
+            }
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+}
+
+
+
+
+
+function fetchRubric() {
     const rubricContainer = document.querySelector('.rubric-container');
     rubricContainer.innerHTML = ''; // Clear previous content
 
     const rubric = document.querySelector('.table');
     rubric.innerHTML = ''; // Clear previous content
 
-    fetch('test.php')
+    fetch('fetchDisplayRubric.php')
         .then(response => response.json())
         .then(data => {
             // Assuming data is an array of results
@@ -1113,42 +1176,6 @@ function fetchRubricHeader() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Call the function to fetch and display the results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function handleAction(action, course_id) {
     console.log('Clicked:', course_id);
     switch (action) {
@@ -1165,7 +1192,9 @@ function handleAction(action, course_id) {
             break;
         case 'Rubric':
             rubric();
-            fetchRubricHeader();
+            fetchRubricNames();
+            fetchRubricSelected();
+            fetchRubric();
             break;
     }
 }
