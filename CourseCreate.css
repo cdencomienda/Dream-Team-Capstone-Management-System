@@ -904,10 +904,10 @@ transition:1s;
 .rubriccontainer {
   position: relative;
   top: 0px;
-  width: calc(100% - 100px); /* Adjusted width to fit within 1050px width */
+  width: 1300px;
   max-width: none; /* Remove max-width */
-  height: calc(100% - 150px); /* Adjusted height to fit within 650px height */
-  padding: 25px;
+  height: 700px;
+  padding: 10px;
   background-color: #ffffff;
   border-radius: 15px;
   overflow: hidden;
@@ -1259,7 +1259,7 @@ background-color: #dbd3c9;
  
 .secondaryRubriccont {
   background-color: #fff;
-  margin: 5% auto;
+  margin: 30px;
   padding: 20px;
   border: 1px solid #888;
   width: 90%;
