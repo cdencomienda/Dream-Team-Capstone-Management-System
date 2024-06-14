@@ -19,6 +19,9 @@ function openClassPage(){
 function logOUT(){
   window.location.assign("LoginSignup.php")
 }
+function capstoneProf(){
+  window.location.assign("Capstone.php")
+}
 function scheduleProf(){
   window.location.assign("Defenseschedule.php")
 }

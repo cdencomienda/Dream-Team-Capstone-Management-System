@@ -12,6 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <?php include 'login.php'; ?>
+        <?php include 'CourseCreated.php'; ?>
         <?php include 'editProfile.php'; ?>
         
         <div class="header">
@@ -100,10 +101,10 @@
 <body>
 
     <div class="Lsection">
-        <button type="button" class="notif" onclick="notifAuth()">Notification</button>
-        <button type="button" class="class" onclick="studentClass()">Class</button>
-        <button type="button" class="schedule" onclick="Schedule()">Schedule</button>
-        <button type="button" class="capstone" onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="notif" onclick="notifProf()">Notification</button>
+        <button type="button" class="class" onclick="openClassPage()">Class</button>
+        <button type="button" class="schedule" onclick="scheduleProf()">Schedule</button>
+        <button type="button" class="capstone" onclick="capstoneProf()">Capstone Defense</button>
     </div>
     <div class="Defense-Page">      
         <div class="rubric-container">
@@ -226,7 +227,7 @@
         </div>
     </div>
 </div>
-    <script src="homepage.js"></script>
+ 
     <script src="Capstone.js"></script>
 </body>
 </html>
