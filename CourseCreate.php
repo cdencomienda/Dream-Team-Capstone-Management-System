@@ -778,7 +778,7 @@ function fetchCourses(container) {
                                 dropdownContent.style.display = 'none';
 
                                 // Refactor to use handleAction function
-                                const actions = ['View Members', 'Add Member', 'Requirements', 'Rubric'];
+                                const actions = ['View Members', 'Add Panelist', 'Requirements', 'Rubric'];
                                 actions.forEach(action => {
                                     const actionButton = document.createElement('button');
                                     actionButton.type = 'button';
@@ -1145,7 +1145,7 @@ function handleAction(action, course_id) {
             viewMembers(course_id);
             fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
             break;
-        case 'Add Member':
+        case 'Add Panelist':
             AddMembers(course_id);
             break;
         case 'Requirements':
