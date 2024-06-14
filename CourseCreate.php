@@ -310,7 +310,7 @@
         
         <!-- addmembers div -->
             <div class="addmember" id="addmembers">
-                
+            <form id="selectedPanelist" method="POST">
             <div class="flex-container">
                     <h3>Add Members</h3>
                     <!-- lead panel -->
@@ -351,8 +351,10 @@
                         <input type="text" id="adviser" name="adviserName" class="inputName" oninput="selectedUserName(this.value, 'adviser')" placeholder="Type an adviser's name">
                     </div>
                 </div> 
+                
                 <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
             </div>
+            <form>
 
         <!-- Requirement div -->
         <div class="setrequirements">
