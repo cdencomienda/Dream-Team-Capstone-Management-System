@@ -1,71 +1,91 @@
 <?php
 session_start();
 
-// Ensure that course_id is set in the session
-if (!isset($_SESSION['course_id'])) {
-    echo json_encode(['error' => 'Course ID not set in session']);
-    exit();
-}
+// Check if course_id is set in the session
+if (isset($_SESSION['course_id'])) {
+    $course_id = $_SESSION['course_id'];
 
-$course_id = $_SESSION['course_id'];
+    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
 
-// Create database connection
-$conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(['error' => 'Connection failed: ' . $conn->connect_error]));
-}
+    // Prepare the SQL statement
+    $sql = "SELECT rubrics_id, rubric_name, level_details, level_percentage FROM rubrics WHERE course_id = ?";
+    $stmt = $conn->prepare($sql);
 
-// Prepare and bind the SQL statement to get rubrics
-$stmt = $conn->prepare("SELECT rubrics_id, rubric_name, level_details, level_percentage FROM rubrics WHERE course_id = ?");
-$stmt->bind_param("i", $course_id);
-
-// Execute the statement
-$stmt->execute();
-
-// Get the result
-$result = $stmt->get_result();
-
-// Fetch data and store in an array
-$rubrics = [];
-while ($row = $result->fetch_assoc()) {
-    $row['level_details'] = explode('~', $row['level_details']);
-    $row['level_percentage'] = explode('~', $row['level_percentage']);
-    $rubrics[] = $row;
-}
-
-// Close the first statement
-$stmt->close();
-
-// Fetch criteria for each rubric
-foreach ($rubrics as &$rubric) {
-    $stmt = $conn->prepare("SELECT rubric_percentage, criteria_name, criteria_details FROM rubric_table WHERE rubrics_id = ?");
-    $stmt->bind_param("i", $rubric['rubrics_id']);
+    // Bind the course_id parameter to the SQL statement
+    $stmt->bind_param("i", $course_id);
 
     // Execute the statement
     $stmt->execute();
 
     // Get the result
-    $criteria_result = $stmt->get_result();
+    $result = $stmt->get_result();
 
-    // Fetch criteria data and store in an array
-    $criteria = [];
-    while ($criteria_row = $criteria_result->fetch_assoc()) {
-        $criteria_row['criteria_details'] = explode('~', $criteria_row['criteria_details']);
-        $criteria[] = $criteria_row;
+    // Initialize an array to hold the data
+    $rubrics = [];
+
+    // Check if there are any rows
+    if ($result->num_rows > 0) {
+        // Output the data for each row
+        while ($row = $result->fetch_assoc()) {
+            // Split the level_details and level_percentage by '~'
+            $levelDetails = explode('~', $row['level_details']);
+            $levelPercentages = explode('~', $row['level_percentage']);
+
+            // Add the data to the array
+            $rubrics[] = [
+                'rubrics_id' => $row['rubrics_id'],
+                'rubric_name' => $row['rubric_name'],
+                'level_details' => $levelDetails,
+                'level_percentage' => $levelPercentages
+            ];
+
+            // Fetch criteria_name, criteria_details, and rubric_percentage from rubric_table based on rubrics_id
+            $criteria_query = "SELECT rubric_percentage, criteria_name, criteria_details FROM rubric_table WHERE rubrics_id = ?";
+            $criteria_stmt = $conn->prepare($criteria_query);
+            $criteria_stmt->bind_param("i", $row['rubrics_id']);
+            $criteria_stmt->execute();
+            $criteria_result = $criteria_stmt->get_result();
+
+            // Initialize an array to hold criteria data
+            $criteria_data = [];
+
+            // Check if there are any rows
+            if ($criteria_result->num_rows > 0) {
+                while ($criteria_row = $criteria_result->fetch_assoc()) {
+                    // Split criteria_name and criteria_details by '~' delimiter
+                    $criteriaName = explode('~', $criteria_row['criteria_name']);
+                    $criteriaDetails = explode('~', $criteria_row['criteria_details']);
+
+                    $criteria_data[] = [
+                        'rubric_percentage' => $criteria_row['rubric_percentage'],
+                        'criteria_name' => $criteriaName,
+                        'criteria_details' => $criteriaDetails
+                    ];
+                }
+            }
+
+            // Add criteria data to the rubrics array
+            $rubrics[count($rubrics) - 1]['criteria'] = $criteria_data;
+
+            // Close the criteria statement
+            $criteria_stmt->close();
+        }
     }
 
-    // Close the statement
+    // Close the main statement and connection
     $stmt->close();
+    $conn->close();
 
-    // Add criteria to the rubric
-    $rubric['criteria'] = $criteria;
+    // Output the data as JSON
+    header('Content-Type: application/json');
+    echo json_encode($rubrics);
+
+} else {
+    echo json_encode(['error' => 'Course ID is not set in the session.']);
 }
-
-// Close the database connection
-$conn->close();
-
-// Send the data as JSON
-echo json_encode($rubrics);
 ?>
