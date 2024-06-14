@@ -475,6 +475,10 @@
                         <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
                         <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
                         <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
                     </tr>
                     <tr>
                         <td>60%</td>
@@ -482,6 +486,11 @@
                         <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
                         <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
                         <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                        <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -596,7 +605,7 @@
 </html> 
 
 
-<!-- <script>
+<script>
 
 document.addEventListener("DOMContentLoaded", function() {
     fetch('fetchProfessorSession.php')
@@ -843,7 +852,7 @@ function fetchCourses(container) {
                                 dropdownContent.style.display = 'none';
 
                                 // Refactor to use handleAction function
-                                const actions = ['View Members', 'Requirements', 'Rubric'];
+                                const actions = ['View Members', 'Add Member', 'Requirements', 'Rubric'];
                                 actions.forEach(action => {
                                     const actionButton = document.createElement('button');
                                     actionButton.type = 'button';
@@ -953,7 +962,7 @@ function fetchGroupData(course_id, group_name) {
 }
 
 function fetchStudentGroups() {
-    fetch('test.php')
+    fetch('fetchStudentGroups.php')
         .then(response => response.json())
         .then(data => {
             if (data.message) {
@@ -1059,6 +1068,75 @@ function reqName() {
 }
 
 
+// Define the fetchRubric function to fetch and populate the table
+function fetchRubric() {
+    fetch('test.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+            } else {
+                const rubricName = data[0].rubric_name;
+                const rubricContainer = document.querySelector('.rubric-container');
+                rubricContainer.innerHTML = `<h1>${rubricName}</h1>`;
+
+                const table = document.querySelector('.rubric-table');
+
+                // Clear existing table headers and rows
+                table.innerHTML = '';
+
+                // Create new table headers
+                const tableHeaderRow = document.createElement('tr');
+                const headers = ['Overall Percentage', 'Learning Outcomes', 'Criteria'];
+
+                data.forEach(rubric => {
+                    rubric.criteria.forEach(criteria => {
+                        headers.push(`${criteria.criteria_name} (${criteria.rubric_percentage}%)`);
+                    });
+                });
+
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    tableHeaderRow.appendChild(th);
+                });
+
+                table.appendChild(tableHeaderRow);
+
+                // Create rows for each criteria
+                data.forEach(rubric => {
+                    rubric.criteria.forEach(criteria => {
+                        const row = document.createElement('tr');
+                        const rubricPercentageCell = document.createElement('td');
+                        rubricPercentageCell.textContent = `${criteria.rubric_percentage}%`;
+                        const learningOutcomesCell = document.createElement('td');
+                        learningOutcomesCell.textContent = criteria.criteria_details[0];
+                        const criteriaNameCell = document.createElement('td');
+                        criteriaNameCell.textContent = criteria.criteria_name;
+                        row.appendChild(rubricPercentageCell);
+                        row.appendChild(learningOutcomesCell);
+                        row.appendChild(criteriaNameCell);
+
+                        rubric.level_details.forEach(level => {
+                            const cell = document.createElement('td');
+                            cell.textContent = level;
+                            row.appendChild(cell);
+                        });
+
+                        table.appendChild(row);
+                    });
+                });
+            }
+        })
+        .catch(error => console.error('Fetch Error:', error));
+}
+
+
+// Call fetchRubric function when needed, such as on page load
+document.addEventListener('DOMContentLoaded', fetchRubric);
+
+
+
 
 
 
@@ -1074,12 +1152,16 @@ function handleAction(action, course_id) {
             viewMembers(course_id);
             fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
             break;
+        case 'Add Member':
+            AddMembers(course_id);
+            break;
         case 'Requirements':
             setrequirements(course_id);
             reqName();
             break;
         case 'Rubric':
             rubric();
+            fetchRubric();
             break;
     }
 }
@@ -1152,6 +1234,6 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 
-</script> -->
+</script>
 
 <!-- mmssmnmn -->
