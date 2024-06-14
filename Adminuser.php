@@ -191,7 +191,7 @@
                             newRow += '<td>' + user.userType + '</td>';
                             newRow += '<td>' + user.firstName + ' ' + user.lastName + '</td>';
                             newRow += '<td>' + user.userEmail + '</td>';
-                            newRow += '<td><button class="show-modal-btn"><i class="fa-regular fa-pen-to-square"></i></button></td>'; // Add button for modal
+                            newRow += '<td><button class="show-modal-btn">Edit</button></td>';  
                             newRow += '</tr>';
                             $('#user_table_body').append(newRow);
                         });
@@ -217,26 +217,31 @@
                 event.stopPropagation(); // Prevent row click event from triggering
                 var userId = $(this).closest('.user-row').data('user-id'); // Get user ID from closest '.user-row'
                 var modal = $('#editDeleteModal');
-                var isChangesSaved = true; // Flag to track if changes are saved
 
-                // Check if changes are saved
-                // Example: Check if the user type has been modified
-                if ($('#userId').val() !== userId || $('#userType').val() !== $(this).closest('tr').find('td:eq(1)').text().trim()) {
-                    isChangesSaved = confirm('You have unsaved changes. Are you sure you want to select a new user?');
-                }
-
-                // If changes are saved or user confirms, proceed
-                if (isChangesSaved) {
-                    // Populate modal with user data
-                    modal.find('#userId').val(userId);
-                    // Display the modal
-                    modal.show();
-                }
+                // Populate modal with user data
+                modal.find('#userId').val(userId);
+                // Get user type for selected user
+                var userType = $(this).closest('tr').find('td:eq(1)').text().trim();
+                // Set selected option in dropdown
+                modal.find('#userType').val(userType);
+                // Display the modal
+                modal.show();
             });
 
             // Close modal/popup when close button is clicked
             $('.close-modal-btn').click(function(){
-                $('#editDeleteModal').hide();
+                var modal = $('#editDeleteModal');
+                var isChangesSaved = true; // Flag to track if changes are saved
+
+                // Check if changes are saved
+                // Example: Check if the user type has been modified
+                if ($('#userId').val() !== '' || $('#userType').val() !== modal.find('#userType').data('original-value')) {
+                    isChangesSaved = confirm('You have unsaved changes. Are you sure you want to close the modal?');
+                }
+
+                if (isChangesSaved) {
+                    $('#editDeleteModal').hide();
+                }
             });
 
             // Handle click on delete user button
@@ -260,23 +265,8 @@
                 });
             });
 
-            // Handle click on user row
-            $('#user_table_body').on('click', '.user-row', function() {
-                var userId = $(this).data('user-id');
-                var modal = $('#editDeleteModal');
-                
-                // Populate modal with user data
-                modal.find('#userId').val(userId);
-                
-                // Get user type for selected user
-                var userType = $(this).find('td:eq(1)').text().trim();
-                
-                // Set selected option in dropdown
-                modal.find('#userType').val(userType);
-                
-                // Display the modal
-                modal.show();
-            });
+            // Remove click event handler for the user row
+            $('#user_table_body').off('click', '.user-row');
 
             // Handle click on save changes button
             $('#saveEditBtn').click(function(){
