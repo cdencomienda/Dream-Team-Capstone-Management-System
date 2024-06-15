@@ -152,15 +152,15 @@
             
                     <div class ="DefenseScheduleCont">
                         <div class ="SchedTitle">
-                            <h5>syllabus managemen</h5>
+                            <h5>Capstone Management System</h5>
                         </div>
                     <div class="SchedDetails">
                         Time: 04:21<br>
-                        Date: 2024-05-25<br>
-                        Group-name: Syllabuddies<br>
+                        Date: 2024-06-15<br>
+                        Group-Name: Dream Team<br>
                     </div>
                     <div class="DocumentStatus">
-                        Status: ?????
+                        Status: Pending
                      </div>
                 </div>
                 
