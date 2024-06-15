@@ -149,7 +149,7 @@
             </div>
             
             <div class= "Schedule" id="scheduleContainer">
-                <div class ="DefenseScheduleCont">
+                <!-- <div class ="DefenseScheduleCont">
                 <div class="SchedTitle">
             <h2>${schedTitle}</h2>
         </div>
@@ -161,7 +161,7 @@
         <div class="DocumentStatus">
             Status: ?????
         </div
-                </div>
+                </div> -->
             </div>
             
             <div class="divButton">

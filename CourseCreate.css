@@ -1598,6 +1598,14 @@ tr:hover {
   border: 1px solid #888;
   width: 80%;
 }
+.modalContent{
+  background-color: #fefefe;
+  margin: 1% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 90%;
+}
 
 .close {
   color: #aaa;
