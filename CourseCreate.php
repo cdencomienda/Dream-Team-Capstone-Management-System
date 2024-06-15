@@ -310,7 +310,7 @@
         
         <!-- addmembers div -->
         <div class="addmember" id="addmembers">
-    <form id="selectedPanelist" action="test.php" method="POST">
+    <form id="selectedPanelist" action="addPanelGroup.php" method="POST">
         <div class="flex-container">
             <h3>Assign Panel to Group</h3>
             <!-- group  -->
@@ -567,6 +567,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function fetchAcademicYears() {
+
+    const classDropdown = document.querySelector('.class-Dropdown');
+    classDropdown.innerHTML = ''; // Clear previous content
+
     fetch('fetchAcademicYears.php')
         .then(response => {
             if (!response.ok) {
@@ -1215,6 +1219,8 @@ function handleAction(action, course_id) {
 }
 
 function fetchPanelandGroup(){
+
+
 
     fetch('fetchGroupsandPanel.php')
         .then(response => response.json())
