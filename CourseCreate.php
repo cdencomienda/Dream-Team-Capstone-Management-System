@@ -309,52 +309,66 @@
             </div>
         
         <!-- addmembers div -->
-            <div class="addmember" id="addmembers">
-            <form id="selectedPanelist" method="POST">
-            <div class="flex-container">
-                    <h3>Add Members</h3>
-                    <!-- lead panel -->
-                    <div>
-                        <label for="chairpanelist">Selected Chair Panel:</label>
-                        <input type="text" id="charpanelist" name="chairpanelistName" class="inputName" oninput="selectedUserName(this.value, 'chairpanelist')" placeholder="Type chair panelist's name">
-                    </div>
-                </div>
-
-                <div class="flex-container">
-                    <!-- lead panel -->
-                    <div>
-                        <label for="leadPanelist">Selected Lead Panel:</label>
-                        <input type="text" id="leadPanelist" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type lead panelist's name">
-                    </div>
-                </div>
-
-                <div class="flex-container">
-                    <!-- panel1 -->
-                    <div>
-                        <label for="panelist1">Selected Panel 1:</label>
-                        <input type="text" id="panelist1" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
-                    </div>
-                </div>
-
-                <div class="flex-container">
-                    <!-- panel2 -->
-                    <div>
-                        <label for="panelist2">Selected Panel 2:</label>
-                        <input type="text" id="panelist2" name="panelistName" class="inputName" oninput="selectedUserName(this.value, 'panelist')" placeholder="Type a panelist's name">
-                    </div>
-                </div>
-
-                <div class="flex-container">
-                    <!-- adviser -->
-                    <div>
-                        <label for="advisor">Selected Adviser:</label>
-                        <input type="text" id="adviser" name="adviserName" class="inputName" oninput="selectedUserName(this.value, 'adviser')" placeholder="Type an adviser's name">
-                    </div>
-                </div> 
-                
-                <button type="submit" class="addreqbtn" onclick="addreqBTN()">Add +</button>
+        <div class="addmember" id="addmembers">
+    <form id="selectedPanelist" action="test.php" method="POST">
+        <div class="flex-container">
+            <h3>Assign Panel to Group</h3>
+            <!-- group  -->
+            <div>
+                <label for="group">Group:</label>
+                <input type="text" id="courseGroup" name="courseGroupName" class="inputName" placeholder="Type Group name">
+                <input type="hidden" id="courseGroupId" name="courseGroupId">
             </div>
-            <form>
+        </div>
+
+        <div class="flex-container">
+            <!-- chair panel -->
+            <div>
+                <label for="chairpanelist">Selected Chair Panel:</label>
+                <input type="text" id="charPanelist" name="chairpanelistName" class="inputName" placeholder="Type Chair Panelist's name">
+                <input type="hidden" id="charPanelistId" name="chairpanelistId">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <!-- lead panel -->
+            <div>
+                <label for="leadPanelist">Selected Lead Panel:</label>
+                <input type="text" id="leadPanelist" name="leadPanelistName" class="inputName" placeholder="Type Lead Panelist's name">
+                <input type="hidden" id="leadPanelistId" name="leadPanelistId">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <!-- panel1 -->
+            <div>
+                <label for="panelist1">Selected Panel 1:</label>
+                <input type="text" id="panelist1" name="panelist1Name" class="inputName" placeholder="Type a Panelist's name">
+                <input type="hidden" id="panelist1Id" name="panelist1Id">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <!-- panel2 -->
+            <div>
+                <label for="panelist2">Selected Panel 2:</label>
+                <input type="text" id="panelist2" name="panelist2Name" class="inputName" placeholder="Type a Panelist's name">
+                <input type="hidden" id="panelist2Id" name="panelist2Id">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <!-- adviser -->
+            <div>
+                <label for="adviser">Selected Adviser:</label>
+                <input type="text" id="adviser" name="adviserName" class="inputName" placeholder="Type an adviser's name">
+                <input type="hidden" id="adviserId" name="adviserId">
+            </div>
+        </div> 
+
+        <button type="submit" class="addreqbtn">Add +</button>
+    </form>
+</div>
 
         <!-- Requirement div -->
         <div class="setrequirements">
@@ -1185,6 +1199,7 @@ function handleAction(action, course_id) {
             break;
         case 'Add Panelist':
             AddMembers(course_id);
+            fetchPanelandGroup();
             break;
         case 'Requirements':
             setrequirements(course_id);
@@ -1199,7 +1214,51 @@ function handleAction(action, course_id) {
     }
 }
 
+function fetchPanelandGroup(){
 
+    fetch('fetchGroupsandPanel.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const groups = data.groups.map(group => ({
+                    label: group.group_name,
+                    value: group.student_group_id
+                }));
+                
+                const panelists = data.users.map(user => ({
+                    label: user.name,
+                    value: user.userID
+                }));
+
+                // Apply autocomplete to the group input
+                $("#courseGroup").autocomplete({
+                    source: groups,
+                    select: function(event, ui) {
+                        $("#courseGroup").val(ui.item.label);
+                        $("#courseGroupId").val(ui.item.value);
+                        return false;
+                    }
+                });
+
+                // Apply autocomplete to panelist inputs
+                $(".inputName").not("#courseGroup").autocomplete({
+                    source: panelists,
+                    select: function(event, ui) {
+                        $(this).val(ui.item.label);
+                        $(this).next("input[type='hidden']").val(ui.item.value);
+                        return false;
+                    }
+                });
+            } else {
+                console.error('Error:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+
+}
 
 function saveCourseID(courseID) {
     fetch('fetchCourseID.php', {
