@@ -205,10 +205,7 @@
                     </div>
                 </div>
                 <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div>  
-
-            
-
+            </div>   
             <div class="coursesDetails" id="term1">
                 <h3 class="termh3">Courses for Term 1</h3>
                 <div class="coursesDropdown">
@@ -291,6 +288,7 @@
             </div>
         </div> 
     </div>
+    </div><!-- end of wrapper scroll --> 
 
         <div class="adminClass">
         <!-- viewgroup div -->
@@ -310,7 +308,7 @@
         
         <!-- addmembers div -->
         <div class="addmember" id="addmembers">
-    <form id="selectedPanelist" action="addPanelGroup.php" method="POST">
+        <form id="selectedPanelist" action="addPanelGroup.php" method="POST">
         <div class="flex-container">
             <h3>Assign Panel to Group</h3>
             <!-- group  -->

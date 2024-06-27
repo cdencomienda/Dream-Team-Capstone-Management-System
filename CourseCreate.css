@@ -485,17 +485,18 @@ background-repeat: no-repeat;
   overflow: auto;
 }
 .classListDropdown{
-  width: 320px;
-  margin-bottom: 30px;
+  width: 340px;
+  margin-bottom: 10px;
   position: relative;
+  margin-left: 10px;
   z-index: 0px;
 }
 .classListDropdown *{
   box-sizing: border-box;
-  position: relative;
+  position: relative; 
+  
   /* display: inline-block; */
-}
- 
+} 
 .listClass{
 background: #fff;
 color: #2a2f3b;
@@ -597,6 +598,7 @@ margin: 15px;
 .coursesDropdown{
 height: 500px;
 overflow: auto;
+margin-top: 20px;
  
 }
 .dropdownmelon{
@@ -663,15 +665,14 @@ margin-left: 30px;
  
 /* new group created */
 .createdgroupBTN{
-width: 300px;
-border: 1px solid #000000;
-height: 45px;
-margin-top: 20px;
-margin-left: 15px;
-margin-bottom: 20px;
-border-radius : 10px;
-background-color: #f8efe3;
- 
+  width: 300px;
+  border: 0px solid #000000;
+  height: 55px;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background-color: #ffffff;  
 }
 .createdgroupBTN:hover {
 background-color: #a8a8a8;
@@ -679,8 +680,7 @@ transform: scale(1);
 cursor: pointer;
 }
 .GroupContainer{
-  position: relative;
-  margin-left: 35px;
+  position: relative; 
   width: 1000px;
   height: 600px;
   padding: 25px;
@@ -1537,7 +1537,7 @@ span.dot{
   height: 600px;
   padding: 25px;
   margin-top: 0;
-  top: -1200px;
+  top: -900px;
   display: block;
   z-index: 0; /* Set a lower z-index */
 }
