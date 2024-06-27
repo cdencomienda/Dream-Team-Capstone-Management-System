@@ -546,3 +546,286 @@ text-align: center;
   background: #000; /* Change background color on hover */
   color: #fff; /* Change text and icon color on hover */
 }
+
+.single-box{
+  width: 180px;
+  padding: 20px;
+  margin-top: 40px;
+  margin-left: 120px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.MainScheduleCont{
+  height: 650px;
+  width: 1250px;
+  background-color: wheat;
+  border-radius: 20px;
+  margin-left: 250px;
+  margin-top: 40px;
+}
+.Schedule{
+  height: 570px;
+  width: 1250px;
+  background-color: wheat;
+  position: relative;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  border-radius: 20px;
+
+}
+.DefenseScheduleCont {
+  height: 200px; /* Adjust height as needed */
+  width: 200px; /* Adjust width as needed */
+  background-color: whitesmoke;
+  margin: 5px 30px; /* Adjust margin as needed */
+  padding: 20px; /* Add padding as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 5px 5px 3px rgba(0,0,0,.1);
+  flex-shrink: 0; /* Prevent containers from shrinking */
+  padding: 20px;
+  border-radius: 15px;
+}
+.ScheduleRow {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+   /* Distribute items evenly */
+  margin-bottom: 20px;
+  width: 1200px;
+  border: #000;
+  height: 250px;
+  margin: 20px 10px;
+  
+}
+.SchedTitle{
+  height: 50px;
+  width: 200px;
+  margin: 10px;
+}
+.DetailsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.SchedDetails, .DocumentStatus {
+  display: flex;
+  text-align: justify;
+  justify-content: flex-start;
+  margin: 0 10px; /* Adjust the margin as needed */
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 225px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.divButton{
+  height: 50px;
+  margin-top: 15px;
+}
+#addScheduleBtn{
+  margin: 4px;
+  margin-left: 40px;
+  width: 150px;
+  height: 40px;
+  background-color: solid #888;
+  border-radius: 25px;
+  border: none;
+  transition:backround-color .3s ease;
+
+}
+#addScheduleBtn:hover{
+  background-color: #958f87;
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 25px;
+  border: 1px solid #888;
+  width: 45%;
+  height: 45%;
+  border-radius: 20px;
+}
+
+/* The Close Button */
+.closeM {  
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeM:hover,
+.closeM:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.SchedDetails{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+.DetailsFlex,
+.groupFlex{
+  max-width: 70%;
+  background-color: #FEE3BC;
+  padding: 15px;
+  border-radius: 25px;
+}
+.timeDateflexcont {
+  margin-top: 30px;
+  width: -50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; /* Adjust spacing between items */
+}
+.dateDetails,
+.timeDetails {
+  margin-right: 20px; /* Add more space between time and date */
+}
+.textBox{
+  display: block; /* Display labels as block elements */
+  font-weight: bold; /* Make labels bold */
+  font-size: 16px; /* Increase font size */
+  margin-bottom: 5px; /* Add margin below labels */
+}
+
+.input-field {
+  width: 65%; /* Adjust width as needed */
+  padding: 10px; /* Add padding as needed */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */  
+}
+.input-field2{
+  width: 80%; /* Adjust width as needed */
+  padding: 10px; /* Add padding as needed */
+  font-size: large;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; 
+}
+.input-field3{
+  width: 60%;
+  padding: 10px; /* Add padding as needed */
+  font-size: large;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add margin between input fields */
+  transition: border-color 0.3s ease; 
+}
+
+.SchedSbmit{
+  width: 15%;
+  height: 30px;
+  margin-top:5px;
+  border-radius: 10px;
+  float: right;
+  background-color: #fcd497;
+  border: none;
+  transition:backround-color .3s ease;
+}
+.SchedSbmit:hover{
+  background-color: #958f87;
+
+}
+
+.closeM {
+  background-color: transparent;
+  height: 30px;
+  width:  30px;
+  border: none;
+  padding: 5px;
+  border-radius: 5px; 
+  cursor: pointer;
+  margin-left: 350px;
+  overflow: hidden; 
+ }
+ .closeM i {
+  color: black; 
+  font-size: 25px;
+  transition: opacity 0.3s ease;
+  margin:-3px
+ }
+ .closeM i:hover {
+  opacity: 50%; 
+  border-radius:25px;
+ } 
+
+#error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: #ffcccc;
+    color: #ff0000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+#error-message.show {
+    display: block;
+}
+
+#error-message button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.close {
+/* Add your button styles here */
+background-color: transparent; /* Example background color */
+height: 30px;
+width:  30px;
+border: none;
+padding: 5px;
+border-radius: 5px;
+cursor: pointer;
+margin-left: 350px;
+overflow: hidden; 
+}
+
+
+
+/* CSS for the icon inside the button */
+.close i {
+/* Add your icon styles here */
+color: black; /* Example color */
+font-size: 25px;
+margin:-3px
+transition opacity 0.3s ease; /* Add transition for background color */
+}
+/* Change background color on hover */
+.close i:hover {
+opacity: 50%; /* Example background color on hover */
+border-radius:25px;
+}

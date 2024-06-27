@@ -101,4 +101,14 @@ function addComment() {
       commentsSection.scrollTo({ top: newComment.offsetTop, behavior: 'smooth' });
     }, 10); // Adjust delay if needed (in milliseconds)
   }
+
+  // ClassListener
   
+  document.getElementById('scheduleContainer').addEventListener('click', function() {
+    var defenseMainElements = document.getElementsByClassName('defense-main');
+    var subelement = document.getElementsByClassName('MainScheduleCont');
+    for (var i = 0; i < defenseMainElements.length, subelement.length; i++) {
+        defenseMainElements[i].style.display = 'block';
+        subelement[i].style.display = 'none';
+    }
+});
