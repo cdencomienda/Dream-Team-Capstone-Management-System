@@ -680,8 +680,7 @@ transform: scale(1);
 cursor: pointer;
 }
 .GroupContainer{
-  position: relative;
-  margin-left: 35px;
+  position: relative; 
   width: 1000px;
   height: 600px;
   padding: 25px;
@@ -1538,7 +1537,7 @@ span.dot{
   height: 600px;
   padding: 25px;
   margin-top: 0;
-  top: -1200px;
+  top: -900px;
   display: block;
   z-index: 0; /* Set a lower z-index */
 }
