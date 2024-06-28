@@ -148,6 +148,45 @@ dropdownsClass.forEach(dropdown => {
         });
     });
 });
+function dropdownMelon() {
+  var container = document.querySelector('.dropdown-content');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdownBtns = document.querySelectorAll('.dropdownbtn');
+
+  dropdownBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+          var allDropdowns = document.querySelectorAll('.dropdown-content');
+          allDropdowns.forEach(function(dropdown) {
+              dropdown.style.display = 'none';
+          }); 
+      });
+  });
+});
+function AddMembers() { 
+  var container = document.querySelector('.addmember');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function setrequirements() { 
+  var container = document.querySelector('.setrequirements');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function rubric() { 
+  var container = document.querySelector('.defense-main');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function viewMembers() { 
+  var container = document.querySelector('.viewgroup'); 
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
+ 
+}
+
 function newGroupCreated() {
   var container = document.querySelector('.GroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';

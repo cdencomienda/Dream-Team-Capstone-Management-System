@@ -344,7 +344,7 @@ body {
   width: 82%; /* Set width */
   padding: 20px;
   margin: 1% auto;
-  background-color: #e2dacd;
+  background-color: #fff;
   height: 250px; 
   border-radius: 20px;
 }
@@ -352,7 +352,7 @@ body {
   width: 82%; /* Set width */
   padding: 20px;
   margin: 1% auto;
-  background-color: #e2dacd;
+  background-color: #fff;
   height: 250px; 
   border-radius: 20px;
 }
@@ -363,7 +363,7 @@ body {
   overflow: auto; 
   padding: 1px;
   margin: 1% auto;
-  background-color: #e2dacd;
+  background-color: #fff;
 }
 .comments-section {
     display: flex;
@@ -391,6 +391,16 @@ body {
     margin-right: 10px;
     width: 60%;
 }
+.defense-main{
+  position: relative; 
+  width: 1500px;
+  height: 600px;
+  padding: 25px;
+  margin-top: -1200px;
+  margin-left: 350px ;
+  
+  z-index: 0; /* Set a lower z-index */
+}
   .Defense-Page{
     
     width: 82%; /* Set width */
@@ -398,7 +408,7 @@ body {
     overflow: auto; 
     padding: 25px;
     margin: 1% auto;
-    background-color: #e2dacd;
+    background-color: #ffff;
     border-radius: 25px;
     
   }
@@ -453,9 +463,20 @@ body {
 
 
 /*RubricStart*/
-
+.grpDefense-Details {
+  background-color: #FFD08B;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  margin-top: 2%;
+  border-radius: 20px;
+}
+.grpDefense-Details,.capstone-title h3{
+  color: white;
+}
 .rubric-header {
-  background-color: white;
+  background-color: #FFD08B;
   padding: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -464,8 +485,9 @@ body {
   border-radius: 20px;
 }
 .rubric-header h1 {
+  background-color: #FFD08B;
   margin: 0;
-  color: #171616;
+  color: #fff;
 }
 table {
   width: 100%;
@@ -972,7 +994,7 @@ z-index: 0px;
 .dropdown-content {
 position: absolute;
 left: 170px;
-top: 20px;
+top: 190px;
 overflow: hidden;
 display: none;
 z-index: 1000;

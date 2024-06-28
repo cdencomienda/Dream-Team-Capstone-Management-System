@@ -261,10 +261,19 @@
                 <!-- file requirement -->
         </div>  
     <!-- start rubrics set hidden -->
-    <div class = "defense-main" style = "display: none">
+    <div class = "defense-main" style = "display: ">
         <div class="Defense-Page" >      
-
+            
             <div class="rubric-container">
+                  <!-- dito lagay group name + title ng paper -->
+                <div class ="grpDefense-Details">
+                    <div class = "Group Name">
+                        <h3> group </h3>
+                    </div>
+                    <div class = "capstone-title">
+                        <h3> development of ???</h3>
+                    </div>
+                </div>    
                 <div class="rubric-header">
                     <h1>Written Communication</h1>
                 </div>
