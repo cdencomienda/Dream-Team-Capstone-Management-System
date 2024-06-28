@@ -162,7 +162,7 @@
             </div>
         </div>        
     </div>           
-    <div class="GroupContainer" >
+    <div class="GroupContainer" style = "display: none;" >
                     <div class="dashboard_header">
                         <!-- Group Name Box -->
                         <div class="groupname_container"> 
