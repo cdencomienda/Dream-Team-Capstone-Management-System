@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone Defense</title>
     <link rel="stylesheet" href="Capstone.css">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -106,34 +107,163 @@
         <button type="button" class="schedule" onclick="scheduleProf()">Schedule</button>
         <button type="button" class="capstone" onclick="capstoneProf()">Capstone Defense</button>
     </div>
+   
     <div class="MainScheduleCont">
-            <div class= "Schedule" id="scheduleContainer">
-            
-                    <div class ="DefenseScheduleCont">
-                        <div class ="SchedTitle">
-                            <h5>Capstone Management System</h5>
+        <div class="class-Dropdown">
+                <div class="classListDropdown">
+                <h4>DEFENSE LIST</h4>
+                              
+                    <button class="listClass">  
+                        <h4>COURSES AY 2023-2024</h4>
+                        <span class="selectedClass"></span> 
+                        <div class="coursesListed"></div>                        
+                    </button>
+                    <ul class="menuCourses"> 
+                        <li class="term" data-term="term1">Term 1</li>
+                        <li class="term" data-term="term2">Term 2</li>
+                        <li class="term" data-term="term3">Term 3</li>
+                    </ul>
+                </div>    
+            <div class="coursesDetails" id="term1">
+                <h3 class="termh3">Courses for Term 1</h3>
+                <div class="coursesDropdown">
+                    <div class="dropdownmelon">            
+                        <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                        <div class="dropdown-content">
+                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                         </div>
-                    <div class="SchedDetails">
-                        Time: 04:21<br>
-                        Date: 2024-06-15<br>
-                        Group-Name: Dream Team<br>
                     </div>
-                    <div class="DocumentStatus">
-                        Status: Pending
-                     </div>
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                </div>   
+                <div class="coursesDetails" id="term1">
+                    <h3 class="termh3">Courses for Term 1</h3>
+                    <div class="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                            <div class="dropdown-content">
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                                <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-            
-            <div class="divButton">
-                <!-- <button class="CreateSched" id = "addScheduleBtn">
-                   Add Schedule <i class="fa-solid fa-plus"></i>
-                </button> -->
             </div>
-        </div>
 
-    </div>
+                <div class="divButton">
+                    <!-- <button class="CreateSched" id = "addScheduleBtn">
+                    Add Schedule <i class="fa-solid fa-plus"></i>
+                    </button> -->
+                </div>
+            </div>
+        </div>        
+    </div>           
+    <div class="GroupContainer" >
+                    <div class="dashboard_header">
+                        <!-- Group Name Box -->
+                        <div class="groupname_container"> 
+                            <!-- ian mojica  group name -->
+                            <div class="group_name" id="group_name"> 
+                                sample     
+                            </div>   
+                        </div>
+                        <script> 
+                                    
+                        </script> 
+                    <div class="button-group"> 
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">          
+                                    Advisor Recomendation Sheet: 
+                                    <div class = "advRecomendation">
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
+                        </div>    
+                        <div class="mDropdown" data-flsDropdown>  
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                    member1
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
+                    </div> 
+
+                    <!-- files -->
+                <div class="defaultBody" id="defaultBody">
+                    <div class="recentFiles">
+                        <!-- File posted by another person -->
+                        <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>DREAM TEAM - Recommendation</strong>
+                                    <span>26 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- File posted by you -->
+                        <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>Final Documentation</strong>
+                                    <span>12 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Structure -->
+                <div id="fileModal" class="modal">
+                    <div class="modalContent">
+                        <span class="closeButton" onclick="closeModal()">&times;</span>
+                        <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>  
+
+                    <!-- file repo -->
+                    <div class="professorFilesR" id="profFilesR">
+                        <div class = "sFileContainer">
+                        files repository
+                        </div>
+                    </div>
+                </div> 
+                <!-- file requirement -->
+        </div>  
+    <!-- start rubrics set hidden -->
     <div class = "defense-main" style = "display: none">
         <div class="Defense-Page" >      
+
             <div class="rubric-container">
                 <div class="rubric-header">
                     <h1>Written Communication</h1>
