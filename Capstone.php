@@ -261,7 +261,7 @@
                 <!-- file requirement -->
         </div>  
     <!-- start rubrics set hidden -->
-    <div class = "defense-main" style = "display: ">
+    <div class = "defense-main" style = "display: none">
         <div class="Defense-Page" >      
             
             <div class="rubric-container">
