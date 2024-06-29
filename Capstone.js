@@ -180,6 +180,20 @@ function rubric() {
   var container = document.querySelector('.defense-main');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
+function showDefaultBody() {
+  document.getElementById("defaultBody").style.display = "block";
+  var defenseMainElements = document.getElementsByClassName('defense-main');
+  for (var i = 0; i < defenseMainElements.length; i++) {
+      defenseMainElements[i].style.display = 'none';
+  }
+}
+function groupDefenseRubrics() {
+  document.getElementById("defaultBody").style.display = "none";
+  var defenseMainElements = document.getElementsByClassName('defense-main');
+  for (var i = 0; i < defenseMainElements.length; i++) {
+      defenseMainElements[i].style.display = 'block';
+  }
+}
 
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 

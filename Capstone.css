@@ -39,7 +39,8 @@ body {
   width: 500;
   height: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 20000;
+
 }   
 
 .dropdown-profile{
@@ -349,7 +350,7 @@ body {
   border-radius: 20px;
 }
 .cDiv{
-  width: 82%; /* Set width */
+  width: 100%; /* Set width */
   padding: 20px;
   margin: 1% auto;
   background-color: #fff;
@@ -392,18 +393,21 @@ body {
     width: 60%;
 }
 .defense-main{
-  position: relative; 
-  width: 1500px;
+  background-color: #ffffff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  width: 1050px;
   height: 600px;
-  padding: 25px;
-  margin-top: -1200px;
-  margin-left: 350px ;
+  margin-left: -25px;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
   
   z-index: 0; /* Set a lower z-index */
 }
   .Defense-Page{
     
-    width: 82%; /* Set width */
+    width: 100%; /* Set width */
     height:550px; /* Set height */
     overflow: auto; 
     padding: 25px;
@@ -427,7 +431,7 @@ body {
     align-items: center;
     width: 50%;
     padding: 8px;
-    background-color: #ffffff;
+    background-color:#FFE2BF;
     border: none;
     border-radius: 15px;
     transition: background-color 0.2s ease-in-out;
@@ -444,11 +448,11 @@ body {
     cursor: pointer;
 }
   .addComment:hover {
-    background-color: #e0e0e0; /* Change background color on hover */
+    background-color: #e6d9c3; /* Change background color on hover */
   }
     
   .sendComment:hover {
-    background-color: #e0e0e0; /* Change background color on hover */
+    background-color: #e6d9c3; /* Change background color on hover */
   }
 /* .rubric-container {
   width: 85%;
@@ -464,7 +468,7 @@ body {
 
 /*RubricStart*/
 .grpDefense-Details {
-  background-color: #FFD08B;
+  background-color: #f5b555;
   padding: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -557,6 +561,7 @@ text-align: center;
   border-radius: 5px; /* Optional: Rounded corners */
   cursor: pointer; /* Change cursor to pointer */
   transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+  
 }
 
 .send-button i {
@@ -1049,7 +1054,7 @@ cursor: pointer;
 }
 .GroupContainer{
   position: relative; 
-  width: 1000px;
+  width: 1150px;
   height: 600px;
   padding: 25px;
   margin-top: -1200px;
@@ -1059,7 +1064,7 @@ cursor: pointer;
 }
 .dashboard_header{
   background-color: #E2C17B;
-  width: 100%;
+  width: 1100px;
   margin-left: -25px;
   margin-top: -35px;
   height: 10%;
@@ -1089,7 +1094,7 @@ width: 200px;
 .Submission-Btn:hover{
   background-color: #958f87;
 }
-.Rep-FilesBtn, .Submission-Btn, .Members-Btn {
+.Rep-FilesBtn, .Submission-Btn, .Members-Btn, .group-Drubrics {
   width: auto;
   height: 25px;
   background-color: #F8EFE3;
@@ -1115,9 +1120,24 @@ width: 200px;
   border-radius: 20px;
   border: none;
 }
+.group-Drubrics{
+  border: none;
+  width: 85px;
+  height: 25x;
+  margin-right: 10px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  transition:backround-color .3s ease;
+}
+.group-Drubrics:hover {
+  background-color: #958f87;
+  }
+
 .Members-Btn{
 border: none;
-width: 125px;
+width: 105px;
 height: 25x;
 margin-right: 10px;
 background-color: #F8EFE3;
@@ -1161,9 +1181,15 @@ grid-column: 1 / 2;
 display: flex;
 align-items: center;
 }
+
+.group_name:hover {
+  background-color: #958f87; /* Change background color on hover */
+}
+
 .group_name{
 width: 350px;
 height: 35px;
+align-items: center;
 background-color: #F8EFE3;
 position: relative;
 border-radius: 20px;
@@ -1173,7 +1199,8 @@ text-align: center;
 display: flex;
 margin: 0;
 justify-content: center;
- 
+cursor: pointer; /* Change cursor to pointer on hover */
+transition: background-color 0.3s ease, color 0.3s ease; 
 }
 .button-group{
 grid-column: 2 / 3;
@@ -1332,12 +1359,13 @@ transition: backround-color .3s ease;
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  width: 1000px;
+  width: 1100px;
   height: 600px;
   margin-left: -25px;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
+  z-index: 0;
 }
  
  
@@ -1367,7 +1395,7 @@ transition: backround-color .3s ease;
 .fileMessage.right {
   align-self: flex-end;
   background-color: #e0f7fa;
-}
+} 
  
 .fileInfo {
   display: flex;
