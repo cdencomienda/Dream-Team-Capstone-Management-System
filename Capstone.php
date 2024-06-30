@@ -133,7 +133,7 @@
                             <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
                             <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
                             <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                            <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
                         </div>
                     </div>
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
@@ -224,6 +224,8 @@
                     </div>
                     </h4>
                 </div> 
+                
+
                 <div class = "defense-main" style = "display: none">
                     <div class="Defense-Page" >      
                         
@@ -398,7 +400,53 @@
                 <!-- Group Defense Rubric -->
                
         </div>  
+
     <!-- start rubrics set hidden -->  
+      <!-- Rubric div -->
+        
+      <div class="rubriccontainer" style="display: none"> 
+                    <div class="secondaryRubriccont">
+                    <div class="rubric-container">
+                            <h1>Written Communication</h1>
+                        </div>
+                        <table class="table">        
+                            <div class="rubric-header">
+                
+                            <thead >
+                        
+                                <!-- column title -->
+                                <tr>
+                                    <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                                    <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                                    <th style = "background-color: #CBC4BA;">Criteria</th>
+                                    <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                                    <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                                    <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                                    <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                                    <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
+                                </tr>
+                                <!-- column title end -->
+                            </thead>
+                            <tbody>
+                                    
+                                    <td>Relevance</td>
+                                    <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                                    <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                </tr>
+                                <tr>
+        
+        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>        
+        
 </div> 
 <script src="Capstone.js"></script>
 </body>

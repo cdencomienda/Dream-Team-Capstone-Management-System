@@ -180,6 +180,12 @@ function rubric() {
   var container = document.querySelector('.defense-main');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
+
+function rubric_preview() { 
+  var container = document.querySelector('.rubriccontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
 function showDefaultBody() {
   document.getElementById("defaultBody").style.display = "block";
   var defenseMainElements = document.getElementsByClassName('defense-main');
@@ -209,34 +215,10 @@ function newGroupCreated() {
 // viewfiles  
 function openModal(filePath) {
   document.getElementById('fileFrame').src = filePath;
-  document.getElementById('fileModal').style.display = "block";
+  document.getElementById('fileModal').style.display = 'block';
 }
 
 function closeModal() {
-  document.getElementById('fileFrame').src = "";
-  document.getElementById('fileModal').style.display = "none";
-}
-
-// Close the modal when the user clicks anywhere outside of the modal content
-window.onclick = function(event) {
-  var modal = document.getElementById('fileModal');
-  if (event.target == modal) {
-      closeModal();
-  }
-}
-
-function showModal() {
-document.getElementById('rubricModal').style.display = "block";
-}
-
-function closeModal() {
-document.getElementById('rubricModal').style.display = "none";
-}
-
-// Close the modal if the user clicks outside of it
-window.onclick = function(event) {
-var modal = document.getElementById('rubricModal');
-if (event.target == modal) {
-    modal.style.display = "none";
-}
+  document.getElementById('fileModal').style.display = 'none';
+  document.getElementById('fileFrame').src = ''; // Clear the iframe src
 }
