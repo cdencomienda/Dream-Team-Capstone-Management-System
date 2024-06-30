@@ -46,22 +46,24 @@ if (isset($_SESSION['user_id'])) {
             // Check if the third query was successful
             if ($result3 && mysqli_num_rows($result3) > 0) {
                 // Fetch and display data from the result
+                $students = [];
                 while ($row3 = mysqli_fetch_assoc($result3)) {
-                    echo "Student: " . $row3['student'] . "<br>";
+                    $students[] = $row3['student'];
                 }
+                echo json_encode($students);
             } else {
-                echo "No students found in the specified group or error executing third query: " . mysqli_error($conn);
+                echo json_encode(["error" => "No students found in the specified group or error executing third query: " . mysqli_error($conn)]);
             }
         } else {
-            echo "Error executing second query or no result found: " . mysqli_error($conn);
+            echo json_encode(["error" => "Error executing second query or no result found: " . mysqli_error($conn)]);
         }
     } else {
-        echo "Error executing first query or no result found: " . mysqli_error($conn);
+        echo json_encode(["error" => "Error executing first query or no result found: " . mysqli_error($conn)]);
     }
 
     // Close connection
     mysqli_close($conn);
 } else {
-    echo "user_id not found in session.";
+    echo json_encode(["error" => "user_id not found in session."]);
 }
 ?>
