@@ -453,6 +453,8 @@ function toggleDocuReqLogs() {
   }
 }
 
+// docu/adv logs
+
 function toggleAdvReqLogs() {
   const popup = document.getElementById('AdvReqrmntLogs');
   const isDisplayed = popup.style.display === 'block';
@@ -493,6 +495,10 @@ function openModal(filePath) {
   document.getElementById('fileModal').style.display = "block";
 }
 
+odal = document.getElementById('fileModal');
+  if (event.target == modal) {
+      closeModal();
+  }
 function closeModal() {
   document.getElementById('fileFrame').src = "";
   document.getElementById('fileModal').style.display = "none";
@@ -500,11 +506,7 @@ function closeModal() {
 
 // Close the modal when the user clicks anywhere outside of the modal content
 window.onclick = function(event) {
-  var modal = document.getElementById('fileModal');
-  if (event.target == modal) {
-      closeModal();
-  }
-
+  var m
   // Close the popup if clicked outside
   if (!event.target.matches('.DocuReqLogs, .AdvLogs, .fa-ellipsis')) {
       const popups = document.getElementsByClassName('fileLogsPopup');

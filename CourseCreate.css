@@ -1290,12 +1290,20 @@ background-color: #dbd3c9;
   flex-direction: column;
   gap: 10px;
 }
- 
+ #sender{
+  margin-right: 250px; /* Adjust spacing between sender and file info */
+
+}
+#sentbyme{
+  margin-right: -195px; /* Adjust spacing between sender and file info */
+
+}
 .fileMessage {
   background-color: #f0f0f0;
   border-radius: 10px;
   padding: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   width: fit-content;

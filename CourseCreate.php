@@ -500,6 +500,7 @@
                     <div class="recentFiles">
                         <!-- File posted by another person -->
                         <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class = "sender" id = "sender"> them </div> 
                             <div class="fileInfo">
                                 <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                 <div class="fileDetails">
@@ -511,6 +512,7 @@
                         
                         <!-- File posted by you -->
                         <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class = "sender" id = "sentbyme"> me  </div> 
                             <div class="fileInfo">
                                 <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                 <div class="fileDetails">
