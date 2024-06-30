@@ -452,37 +452,38 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                            <div class = "flsDropdown" data-flsDropdown>
+                        <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
-                            <div class = "filesContainer"> 
-                                <div class = "documentationCont">
+                            <div class="filesContainer"> 
+                                <div class="documentationCont">
                                     Document Requirement: <br>
-                                    <div class = "ReqDocumentation">
-                                        <div class ="attachedDocumentation"> here attached file </div>
-                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
-                                                
+                                    <div class="ReqDocumentation">
+                                        <div class="attachedDocumentation"> here attached file </div>
+                                        <div class="divDocuReqLogs"> <br> 
+                                            <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                                                <h4>Document Requirement Logs</h4>
+                                                <!-- Logs will be dynamically added here -->
                                             </div>
                                         </div>
                                     </div>     
                                 </div>   
-                                <div class = "AdvCont">          
-                                    Advisor Recomendation Sheet: 
-                                    <div class = "advRecomendation">
-                                         <div class = "attachedAdvRecom"> attached file here </div>    
-                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
-
+                                <div class="AdvCont">          
+                                    Adviser Recommendation Sheet: 
+                                    <div class="advRecomendation">
+                                        <div class="attachedAdvRecom"> attached file here </div>    
+                                        <div class="divAdvLogs"> <br> 
+                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
+                                                <h4>Adviser's Recommendations Sheet</h4>
+                                                <!-- Logs will be dynamically added here -->
                                             </div>
                                         </div>
                                     </div>
                                 </div> 
-                            </div>  
-                            <script>
-                                    
-                            </script>
-
+                            </div>
                         </div>    
+                        
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->

@@ -383,6 +383,7 @@ function clsViewGrp(){
       });
   });
 // viewfiles  
+
   function openModal(filePath) {
     document.getElementById('fileFrame').src = filePath;
     document.getElementById('fileModal').style.display = "block";
@@ -414,5 +415,101 @@ window.onclick = function(event) {
   var modal = document.getElementById('rubricModal');
   if (event.target == modal) {
       modal.style.display = "none";
+  }
+}
+
+function toggleDocuReqLogs() {
+  const popup = document.getElementById('DocuReqrmntLogs');
+  const isDisplayed = popup.style.display === 'block';
+
+  // Close any other open popups
+  const popups = document.getElementsByClassName('fileLogsPopup');
+  for (let i = 0; i < popups.length; i++) {
+      popups[i].style.display = 'none';
+  }
+
+  // Toggle the current popup
+  popup.style.display = isDisplayed ? 'none' : 'block';
+
+  if (!isDisplayed) {
+      popup.innerHTML = `
+          <h4>Document Requirement Logs</h4>
+          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">docu-test1.pdf</div>
+              <div class="fileVersion">version 3.0</div>
+          </div>
+          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test2.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">docu-test2.pdf</div>
+              <div class="fileVersion">version 2.0</div>
+          </div>
+          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">docu-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+      `;
+  }
+}
+
+function toggleAdvReqLogs() {
+  const popup = document.getElementById('AdvReqrmntLogs');
+  const isDisplayed = popup.style.display === 'block';
+
+  // Close any other open popups
+  const popups = document.getElementsByClassName('fileLogsPopup');
+  for (let i = 0; i < popups.length; i++) {
+      popups[i].style.display = 'none';
+  }
+
+  // Toggle the current popup
+  popup.style.display = isDisplayed ? 'none' : 'block';
+
+  if (!isDisplayed) {
+      popup.innerHTML = `
+          <h4>Advisor's Recommendations Sheet</h4>
+          <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test1.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test1.pdf</div>
+              <div class="fileVersion">version 3.0</div>
+          </div>
+          <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test2.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test2.pdf</div>
+              <div class="fileVersion">version 2.0</div>
+          </div>
+          <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+      `;
+  }
+}
+
+function openModal(filePath) {
+  document.getElementById('fileFrame').src = filePath;
+  document.getElementById('fileModal').style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById('fileFrame').src = "";
+  document.getElementById('fileModal').style.display = "none";
+}
+
+// Close the modal when the user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+  var modal = document.getElementById('fileModal');
+  if (event.target == modal) {
+      closeModal();
+  }
+
+  // Close the popup if clicked outside
+  if (!event.target.matches('.DocuReqLogs, .AdvLogs, .fa-ellipsis')) {
+      const popups = document.getElementsByClassName('fileLogsPopup');
+      for (let i = 0; i < popups.length; i++) {
+          popups[i].style.display = 'none';
+      }
   }
 }
