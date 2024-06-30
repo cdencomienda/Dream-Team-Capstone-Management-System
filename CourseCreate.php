@@ -1216,10 +1216,7 @@ function handleAction(action, course_id) {
     }
 }
 
-function fetchPanelandGroup(){
-
-
-
+function fetchPanelandGroup() {
     fetch('fetchGroupsandPanel.php')
         .then(response => response.json())
         .then(data => {
@@ -1244,15 +1241,31 @@ function fetchPanelandGroup(){
                     }
                 });
 
-                // Apply autocomplete to panelist inputs
-                $(".inputName").not("#courseGroup").autocomplete({
-                    source: panelists,
-                    select: function(event, ui) {
-                        $(this).val(ui.item.label);
-                        $(this).next("input[type='hidden']").val(ui.item.value);
-                        return false;
-                    }
-                });
+                const selectedNames = new Set();
+
+                function updateAutocomplete() {
+                    $(".inputName").not("#courseGroup").each(function() {
+                        const inputElement = $(this);
+
+                        inputElement.autocomplete({
+                            source: function(request, response) {
+                                const filteredPanelists = panelists.filter(panelist => 
+                                    !selectedNames.has(panelist.label)
+                                );
+                                response($.ui.autocomplete.filter(filteredPanelists, request.term));
+                            },
+                            select: function(event, ui) {
+                                selectedNames.add(ui.item.label);
+                                inputElement.val(ui.item.label);
+                                inputElement.next("input[type='hidden']").val(ui.item.value);
+                                updateAutocomplete();
+                                return false;
+                            }
+                        });
+                    });
+                }
+
+                updateAutocomplete();
             } else {
                 console.error('Error:', data.message);
             }
@@ -1260,9 +1273,8 @@ function fetchPanelandGroup(){
         .catch(error => {
             console.error('Fetch error:', error);
         });
-
-
 }
+
 
 function saveCourseID(courseID) {
     fetch('fetchCourseID.php', {
