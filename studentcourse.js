@@ -95,8 +95,19 @@ window.onclick = function(event) {
 // });
 // }) 
 
-  
    
 
-
-  
+document.getElementById('input-file').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const attachedFileContainer = document.querySelector('.Attached-FileCont');
+        
+        // Create a new div element to display the file name
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'attached-file';
+        fileDiv.textContent = file.name;
+        
+        // Append the new div to the attached files container
+        attachedFileContainer.appendChild(fileDiv);
+    }
+});

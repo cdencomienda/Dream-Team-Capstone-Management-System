@@ -284,6 +284,28 @@ body{
     cursor: pointer;
 }
 
+
+.attached-file {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.remove-btn {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.remove-btn:hover {
+  background-color: #ff1a1a;
+}
 .fileMessage.left {
     align-self: flex-start;
 }

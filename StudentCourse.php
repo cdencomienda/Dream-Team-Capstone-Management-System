@@ -136,7 +136,7 @@
 
                     <!-- Group Name Box -->
 
-                <div class="groupname_container"> 
+                <div class="groupname_container" onclick = "showDefaultBody()"> 
                     <div class="group_name" id="groupName"> sample </div>   
                 </div>
 <script>
@@ -263,9 +263,10 @@ window.onload = fetchGroupName;
 
                 <h4>
                     <div class="button-group"> 
-                    <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
 
-                            <div class = "flsDropdown" data-flsDropdown>
+                        <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
+
+                        <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class = "filesContainer"> 
                                 <div class = "documentationCont">
@@ -303,20 +304,20 @@ window.onload = fetchGroupName;
                                     </div>
                                 </div> 
                             </div>  
-                            <script>
-                                    
-                            </script>
-
                         </div>    
+
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
-                                <div class="GroupmembersContainer" id="groupMembersContainer">
-                                </div>   
+                            <div class="GroupmembersContainer" id="groupMembersContainer">   
                             </div>
-                        </div>
-                    </h4>
-                </div>
+                    </div>
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Rubrics </button> 
+                        <!-- defense-rubric    -->
+                </h4>
+            </div>
+
+
             <div class="defaultBody" id="defaultBody">
                 <div class="recentFiles">
                     <!-- File posted by another person -->
@@ -350,68 +351,137 @@ window.onload = fetchGroupName;
                 </div>
             </div>
             
-            <div class="submissionFrame" id="submissionFrame">
+            <div class="submissionFrame" style = "display: none;" id="submissionFrame">
                 <div class="submissionscontainer">
                 <div class= "requirement-list">
                     <div class = "req-nameCont"> 
                         <div class="requirement-name">
                             Chapter 1
-                        
-                        </div>
-                        <div class="requirement-name">
-                            Adviser Recommendation Sheet
-                        
-                        </div>
-                        <div class="requirement-name">
-                            Chapter 2
-                        
-                        </div>
-                        <div class="requirement-name">
-                            Chapter 1-2 Final
-                        
                         </div>
                     </div>
-                    
                 </div>
          <style> 
-           .submissionFrame {
-                display: none;
-            }
-         </style>
-                <div class= "requirement-details">
-                    <div class="requirement-title" id="req_title"> <h3> Documentation Requirement for Chapter 1 </h3> </div> <br>
-                    <div class="requirement-descriptionCont"> Requirement Description: 
-                        <div class="requirement-descBox" id="req_description"> 
-                                Attach your file of Chapter 1 for Pre-Defense
-                        </div>        
-                    </div>
-                    <div class="reqfile-version" id="reqfile_version"> 
-                    </div> <br>   
-                    <!-- idk kung san lalagay ung file attached id -->
-                    <div class="Attach-Files"> 
-                            <form id="file-upload" class="requirement-file">
-                                <div class="atchFiles">   
-                                    <h3>Attach Files   </h3> 
-                                    <!-- Replace img tag with the i tag -->
-                                    <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
-                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
-                                    <div id="upload-btn" class="upload-container"></div>
-                                    <label for="input-file"></label>
-                                    <input type="file" accept="pdf" id="input-file" name="profile_picture">
-                                </div>
-                            </form> 
-                        </div>   
-                        <div class="Attached-FileCont">
-                            <!-- attached files go here -->
-                        </div>        
 
-                    <div class="req-submitbtnCont"> 
-                        
-                        <button class="reqbtn" type="button">
-                            Submit
-                        </button>
-                    </div>
- 
+         </style>
+                <div class="requirement-details">
+    <div class="requirement-title" id="req_title"> <h3> Documentation Requirement for Chapter 1 </h3> </div> <br>
+    <div class="requirement-descriptionCont"> Requirement Description: 
+        <div class="requirement-descBox" id="req_description"> 
+            Attach your file of Chapter 1 for Pre-Defense
+        </div>        
+    </div>
+    <div class="reqfile-version" id="reqfile_version"> 
+    </div> <br>   
+    <!-- idk kung san lalagay ung file attached id -->
+    <div class="Attach-Files"> 
+        <form id="file-upload" class="requirement-file">
+            <div class="atchFiles">   
+                <h3>Attach Files</h3> 
+                <!-- Replace img tag with the i tag -->
+                <!-- <i class="fa-solid fa-plus" id="attach-btn"></i> -->
+                <img src="course_assets/plus.png" alt="attached file" id="attach-btn"> 
+                <div id="upload-btn" class="upload-container"></div>
+                <label for="input-file"></label>
+                <input type="file" accept="application/pdf" id="input-file" name="profile_picture">
+            </div>
+        </form> 
+    </div>   
+    <div class="Attached-FileCont">
+        <!-- attached files go here -->
+    </div>        
+
+    <div class="req-submitbtnCont"> 
+        <button class="reqbtn" type="button" id= "submit-btn">
+            Submit
+        </button>
+    </div>
+</div>
+
+<script>
+     document.getElementById('input-file').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const attachedFileContainer = document.querySelector('.Attached-FileCont');
+            
+            // Create a new div element to display the file name and remove button
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'attached-file';
+            fileDiv.textContent = file.name;
+            
+            // Create a remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.textContent = 'Remove';
+            removeBtn.addEventListener('click', function() {
+                attachedFileContainer.removeChild(fileDiv);
+            });
+
+            // Append the remove button to the file div
+            fileDiv.appendChild(removeBtn);
+
+            // Append the new div to the attached files container
+            attachedFileContainer.appendChild(fileDiv);
+        }
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        const attachedFileContainer = document.querySelector('.Attached-FileCont');
+        const defaultBody = document.getElementById('defaultBody');
+        const files = attachedFileContainer.querySelectorAll('.attached-file');
+
+        files.forEach(fileDiv => {
+            const fileName = fileDiv.textContent.replace('Remove', '').trim();
+
+            // Create a new file message div
+            const fileMessageDiv = document.createElement('div');
+            fileMessageDiv.className = 'fileMessage right';
+            fileMessageDiv.onclick = function() { openModal(`featuredfiles/${fileName}`); };
+
+            // Create the file info div
+            const fileInfoDiv = document.createElement('div');
+            fileInfoDiv.className = 'fileInfo';
+
+            // Create the file icon img
+            const fileIconImg = document.createElement('img');
+            fileIconImg.src = 'menu_assets/file-icon.png';
+            fileIconImg.alt = 'file icon';
+            fileIconImg.className = 'fileIcon';
+
+            // Create the file details div
+            const fileDetailsDiv = document.createElement('div');
+            fileDetailsDiv.className = 'fileDetails';
+
+            // Create the strong element for the file name
+            const strongElement = document.createElement('strong');
+            strongElement.textContent = fileName;
+
+            // Create the span element for file size (mock size for example)
+            const spanElement = document.createElement('span');
+            spanElement.textContent = 'Unknown Size';
+
+            // Append elements to their parents
+            fileDetailsDiv.appendChild(strongElement);
+            fileDetailsDiv.appendChild(spanElement);
+            fileInfoDiv.appendChild(fileIconImg);
+            fileInfoDiv.appendChild(fileDetailsDiv);
+            fileMessageDiv.appendChild(fileInfoDiv);
+
+            // Append the file message div to the recentFiles div
+            defaultBody.querySelector('.recentFiles').appendChild(fileMessageDiv);
+        });
+
+        // Clear the attached files container after submission
+        attachedFileContainer.innerHTML = '';
+    });
+
+    function openModal(filePath) {
+        alert(`Opening modal for: ${filePath}`);
+        // Implement modal opening logic here
+    }
+</script>
+
+
+
                 </div>
             
         </div>
