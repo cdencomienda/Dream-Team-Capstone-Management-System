@@ -625,7 +625,7 @@ function fetchAcademicYears() {
                         if (selectedTerm) {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm);
-                            fetchCourses(button.parentNode); // Pass the container to fetchCourses
+                            fetchCourses(button.parentNode, year, selectedTerm); // Pass the year and selectedTerm to fetchCourses
                             groups();
 
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
@@ -751,7 +751,7 @@ function dropdownMelon(button) {
 }
 
 
-function fetchCourses(container) {
+function fetchCourses(container, year, selectedTerm) {
     // Check if coursesDropdown already exists in the container
     let coursesDropdown = container.querySelector('.coursesDropdown');
 
@@ -836,6 +836,9 @@ function fetchCourses(container) {
                                         groupButton.classList.add('createdgroupBTN');
                                         groupButton.onclick = function() {
                                         newGroupCreated(course.course_id, group_name);
+                                        console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
+                                        const directory = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
+                                        console.log(directory);
                                     };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
@@ -1319,11 +1322,50 @@ function fetchStudents() {
 
 
 
+function coursesData() {
+    fetch('repositoryDirectory.php') // Replace with your PHP script URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Output fetched JSON data to console (for demonstration)
+            // Process the fetched data here
+            processData(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+function processData(data) {
+    // Check if the data is an object with status and message properties
+    if (data && data.status && data.message) {
+        // Check for success status or handle errors
+        if (data.status === "success") {
+            console.log(data.message); // Log success message
+        } else {
+            console.error('Error:', data.message); // Log error message
+        }
+    } else {
+        console.error('Error: Data is not in expected format.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    coursesData();
+});
 
 
 
 
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    coursesData();
+});
 
 
 
