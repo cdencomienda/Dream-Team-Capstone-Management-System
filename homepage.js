@@ -19,44 +19,58 @@ function StudentCapstone(){
 } 
  
 
+ // edit profile js 
 
-document.addEventListener('DOMContentLoaded', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
+document.addEventListener('DOMContentLoaded', (event) => {
+  const profilePic = document.getElementById('profilePic');
+  const menu = document.getElementById('menuBtn');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const overlay = document.getElementById('editProfileOverlay');
 
-  editProfileBtn.addEventListener('click', function (event) {
-    // Prevent default behavior of anchor tag
-    event.preventDefault();
-    // Execute your edit profile function or redirect to the edit profile page
-    // Example:
-    // window.location.assign("EditProfilePage.html");
+  profilePic.addEventListener('click', () => {
+      menu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+      if (!profilePic.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.remove('show');
+      }
+  });
+  profile.addEventListener('click', function () {
+    const toggleMenu = document.querySelector('.menu');
+    toggleMenu.classList.toggle('active');
+  });
+   
+  const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
+  tap.addEventListener('click', function () {
+    const toggleMenu = document.querySelector('.menu', '.settingMelon', );
+    toggleMenu.classList.toggle('active', 'melonActivate');
   }); 
-});
+
+  editProfileBtn.addEventListener('click', () => {
+      overlay.classList.add('show');
+      menu.classList.remove('show');
+  });
+
+  function closeEditform() {
+      overlay.classList.remove('show');
+  }
+
+  window.onclick = function(event) {
+      if (event.target == overlay) {
+          overlay.classList.remove('show');
+      }
+  }
+
+  // Attach closeEditform function to the global scope
+  window.closeEditform = closeEditform;
+}); 
+
+function Back(){
+  document.getElementById('menuBtn').style.display = 'none';
+}
 
 function logOUT(){
   window.location.assign("LoginSignup.php")
 }
-
-const tap = document.querySelector('.profile');
-tap.addEventListener('click', function () {
-  const toggleMenu = document.querySelector('.menu');
-  toggleMenu.classList.toggle('active');
-});
-document.addEventListener('profile', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
-
-  editProfileBtn.addEventListener('click', function (event) { 
-    event.preventDefault(); 
-  }); 
-});
-
-document.getElementById('editProfileBtn').addEventListener('click', function() {
-  var overlay = document.getElementById("editProfileOverlay");
-  overlay.style.display = "block";
-});
  
-function closeEditform(){
-  document.getElementById('editProfileOverlay').style.display = 'none';
-  document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
-}

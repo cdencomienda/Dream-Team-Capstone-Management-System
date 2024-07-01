@@ -23,43 +23,58 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+ 
+// edit profile js 
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  const profilePic = document.getElementById('profilePic');
+  const menu = document.getElementById('menuBtn');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const overlay = document.getElementById('editProfileOverlay');
 
-document.addEventListener('DOMContentLoaded', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
+  profilePic.addEventListener('click', () => {
+      menu.classList.toggle('show');
+  });
 
-  editProfileBtn.addEventListener('click', function (event) {
-    // Prevent default behavior of anchor tag
-    event.preventDefault();
-    // Execute your edit profile function or redirect to the edit profile page
-    // Example:
-    // window.location.assign("EditProfilePage.html");
-  }); 
+  document.addEventListener('click', (event) => {
+      if (!profilePic.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.remove('show');
+      }
+  });
+
+  editProfileBtn.addEventListener('click', () => {
+      overlay.classList.add('show');
+      menu.classList.remove('show');
+  });
+
+  function closeEditform() {
+      overlay.classList.remove('show');
+  }
+
+  window.onclick = function(event) {
+      if (event.target == overlay) {
+          overlay.classList.remove('show');
+      }
+  }
+
+  // Attach closeEditform function to the global scope
+  window.closeEditform = closeEditform;
+}); 
+
+function Back(){
+  document.getElementById('menuBtn').style.display = 'none';
+}
+
+profile.addEventListener('click', function () {
+  const toggleMenu = document.querySelector('.menu');
+  toggleMenu.classList.toggle('active');
 });
 
 function logOUT(){
   window.location.assign("LoginSignup.php")
 }
 
-const tap = document.querySelector('.profile');
-tap.addEventListener('click', function () {
-  const toggleMenu = document.querySelector('.menu');
-  toggleMenu.classList.toggle('active');
-});
-document.addEventListener('profile', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
-
-  editProfileBtn.addEventListener('click', function (event) { 
-    event.preventDefault(); 
-  }); 
-});
-
-document.getElementById('editProfileBtn').addEventListener('click', function() {
-  var overlay = document.getElementById("editProfileOverlay");
-  overlay.style.display = "block";
-});
+ 
  
 function closeEditform(){
   document.getElementById('editProfileOverlay').style.display = 'none';
@@ -82,12 +97,7 @@ function closeEditform(){
   function scheduleProf(){
     window.location.assign("Defenseschedule.php")
   }
-  document.getElementById('editProfileBtn').addEventListener('click', function() {
-    var overlay = document.getElementById("editProfileOverlay");
-    overlay.style.display = "block";
-  });
   
-   
   function createDefenseContainer() {
     // Gather input values
     const schedTitle = document.getElementById('schedTitle').value;

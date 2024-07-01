@@ -3,9 +3,7 @@
   padding: 0;
   font-family: sans-serif;
 }
-body{
-  /* width: 100%;
-  height: 100%; */
+body{ 
   background: #CBC4BA;
   overflow-x: hidden;
 }
@@ -93,59 +91,69 @@ body{
   background-color: #ffffff;
   outline: none;
 }
-.action{
-  position:relative;  
+ 
+
+.action {
+  position: relative;  
 }
-.action .profile{
-  position:relative;
-  width:60px;
-  height:60px;
+.action .profile {
+  position: relative;
+  width: 60px;
+  height: 60px;
   margin-top: 25px;
   margin-left: 200px;
   margin-bottom: 40px;
-  border-radius:50%;
-  overflow:hidden;
-  cursor:pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
 }
-.action .profile img{
-  position:absolute;
+.action .profile img {
+  position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
-  object-fit:cover;
+  object-fit: cover;
 }
-.action .menu{  
-  top:75px;
-  right:-130px;
+.action .menu {
+  top: 75px;
+  right: -130px;
   padding: 20px;
   background: #FFEBCF;
   border: 2px solid #000000;
   width: 230px;
-  border-radius:15px;
-  transition:0.5s;
-  visibility:visible;
-  opacity:0;
+  border-radius: 15px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
 }
-.action .menu.active{  
-  visibility:visible;
-  opacity:1;
+.action .menu.show {
+  visibility: visible;
+  opacity: 1;
 }
-.action .menu h3{
-  width:100%;
-  text-align:center;
+.action .menu h3 {
+  width: 100%;
+  text-align: center;
   font-size: 18px;
-  padding:20px 0;
+  padding: 20px 0;
   font-weight: 500;
   font-size: 15px;
-  color:#000000;
+  color: #000000;
   line-height: 25px;
 }
-.action .menu h3 span{
+.action .menu h3 span {
   font-size: 15px;
-  color:#000000;
+  color: #000000;
   font-weight: 400;
 }
+.editoverlay {
+  display: none; /* Initially hidden */
+  /* Add your styling for overlay here */
+}
+.editoverlay.show {
+  display: block; /* Show when class 'show' is added */
+}
+
  
 .logoutBtn{
   width: 170px;
@@ -337,144 +345,6 @@ background-repeat: no-repeat;
   overflow: auto;
 }
  
-/* creating course */
-/* .containerCreatecourse h2{
-  margin: 0px 0px 20px 0px;
-}
-.courseCreation{
-  width: 330px;
-  height: 100px;  
-  position: relative;
-  visibility: visible;
-}
-.createAButton{
-    margin: 40px 40px 20px 40px ;
-    width: 240px;
-    padding: 5px 30px;
-    border: 1px solid #000000;
-    height: 45px;
-    border-radius: 10px;
-    background-color: #F8EFE3;
-  }
-  .createAButton:hover {
-    background-color: #a8a7a7;
-    transform: scale(1);
-    cursor: pointer;
-  }
-.inputTerm{
-  width: 280px;
-  border: 1px solid #000000;
-  margin: 10px 0 5px 0;
-  padding-left: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: #F8EFE3;
-  outline: none;
-}
-.createcourseButton{
-  margin-left: 45px;
-  margin-top: 20px;
-  width: 190px;
-  padding: 5px 30px;
-  border: 1px solid #000000;
-  height: 35px;
-  border-radius: 10px;
-  background-color: #F8EFE3;
-}
-.createcourseButton:hover {
-  background-color: #a8a7a7;
-  transform: scale(1);
-  cursor: pointer;
-}
-.containerCreatecourse {
-  display: none;
-}
-.containerCreatecourse{
-  margin-left: 10px;
-  width: 290px;
-  height: 450px;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 15px;
-  overflow: hidden;
-  transition:0.5s;  
-}
-.courseNAMEbtn {
-  width:140px;
-  text-align:center;
-  font-size: 18px;
-  padding: 0px;
-  font-weight: 100;
-  font-size: 15px;
-  border: 0px;
-  background-color: transparent;
-  line-height: 25px;
-}
-.courseNAMEbtn:hover{
-  background-color: #0056b3;
-}
-.courseInfo {
-  margin-left: 10px;
-  margin-top: 20px;
-  width: 250px;
-  padding: 5px 30px;
-  border-top: 0.5px  solid #000000;
-  border-bottom: 0.5px  solid #000000;
-  height: 30px;
-  text-align: center;
-}
-.inputSection{
-  width: 100px;
-  border: 1px solid #000000;
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
-  background-color: #F8EFE3;
-  outline: none;
-}
-.inputAY{
-  width: 145px;
-  border: 1px solid #000000;  
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
-  background-color: #F8EFE3;
-  outline: none;
-}
-.Term{
-  width: 125px;
-  border: 1px solid #000000;  
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
-  background-color: #F8EFE3;
-  outline: none;
-}
- 
-.inputUnits{
-  width: 133px;
-  height: 30px;
-  border: 1px solid #000000;  
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
-  background-color: #F8EFE3;
-  outline: none;  
-}
-.coursename{
-  width: 125px;
-  border: 1px solid #000000;  
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
-  background-color: #F8EFE3;
-  outline: none;
-} */
- 
- 
 /* coursemelon button */
 .class-Dropdown{
   margin-left: 120px;
@@ -498,21 +368,21 @@ background-repeat: no-repeat;
   /* display: inline-block; */
 } 
 .listClass{
-background: #fff;
-color: #2a2f3b;
-display: flex;
-width: 320px;
-justify-content: space-between;
-align-items: center;
-border: 1px #323741 solid;
-border-radius: 15px;
-padding: 5px;
-height: 80px;
-cursor: pointer;
-transition: 0.3s;
-}
+  background: #fff;
+  color: #2a2f3b;
+  display: flex;
+  width: 320px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px #323741 solid;
+  border-radius: 15px;
+  padding: 5px;
+  height: 80px;
+  cursor: pointer;
+  transition: 0.3s;
+  }
 .listClass:hover{
-background: #b6b6b6;
+  background: #b6b6b6;
 }
 .coursesListed{
 width: 0px;
