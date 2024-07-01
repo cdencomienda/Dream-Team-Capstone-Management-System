@@ -175,8 +175,9 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                            <div class = "flsDropdown" data-flsDropdown>
+                        <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            
                             <div class = "filesContainer"> 
                                 <div class = "documentationCont">
                                     Document Requirement: <br>
@@ -188,6 +189,7 @@
                                         </div>
                                     </div>     
                                 </div>   
+                                
                                 <div class = "AdvCont">          
                                     Advisor Recomendation Sheet: 
                                     <div class = "advRecomendation">
@@ -199,16 +201,16 @@
                                         </div>
                                     </div>
                                 </div> 
+                            
                             </div>  
+                            
                             <script>
                                     
                             </script>
-
                         </div>
 
                         <div class= "group-Rubrics">
                             <button type="button" class=" group-Drubrics" onclick="groupDefenseRubrics()"> <i class="fa-solid fa-table"></i> Rubrics </button>
-                            
                         </div>
 
                         <div class="mDropdown" data-flsDropdown>  
@@ -218,14 +220,12 @@
                                     member1
                                 </div>
                         </div>
-
-                        
-
                     </div>
                     </h4>
                 </div> 
                 
-
+                <!-- panelist : role-member -->
+                 
                 <div class = "defense-main" style = "display: none">
                     <div class="Defense-Page" >      
                         
@@ -340,13 +340,26 @@
                             </table>   
                         </div>
                     </div>
+                    <!-- for chair panel only -->
+                    <div class="commentsCollection">
+                        <div class="CommentsDiv">
+                            <div class="comments-section" id="commentsSection">
+                                <div class="panel-comments">
+                                    <h3>Panel 1 Comments:</h3>
+                                    <textarea class="comments-input"></textarea>
+                                    <button class="approve-button"><i class="fa-solid fa-check"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- chair panel end -->
                     <div class="cDiv">
                         <div class="CommentsDiv">
                             <div class="comments-section" id="commentsSection">
                                 <div class="panel-comments">
                                     <h3>Panel 1 Comments:</h3>
                                     <textarea class="comments-input"></textarea>
-                                    <button class="send-button"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -355,7 +368,9 @@
                             <button class="sendComment"><i class="fa-solid fa-paper-plane"></i> Send</button>
                         </div>
                     </div>
+
                 </div>  
+
                     <!-- files -->
                 <div class="defaultBody " id="defaultBody">
                     <div class="recentFiles">
@@ -446,7 +461,6 @@
                         </table>
                     </div>
             </div>        
-        
 </div> 
 <script src="Capstone.js"></script>
 </body>
