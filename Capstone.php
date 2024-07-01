@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone Defense</title>
     <link rel="stylesheet" href="Capstone.css">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -106,152 +107,346 @@
         <button type="button" class="schedule" onclick="scheduleProf()">Schedule</button>
         <button type="button" class="capstone" onclick="capstoneProf()">Capstone Defense</button>
     </div>
+   
     <div class="MainScheduleCont">
-            <div class= "Schedule" id="scheduleContainer">
-            
-                    <div class ="DefenseScheduleCont">
-                        <div class ="SchedTitle">
-                            <h5>Capstone Management System</h5>
+        <div class="class-Dropdown">
+                <div class="classListDropdown">
+                <h4>DEFENSE LIST</h4>
+                              
+                    <button class="listClass">  
+                        <h4>COURSES AY 2023-2024</h4>
+                        <span class="selectedClass"></span> 
+                        <div class="coursesListed"></div>                        
+                    </button>
+                    <ul class="menuCourses"> 
+                        <li class="term" data-term="term1">Term 1</li>
+                        <li class="term" data-term="term2">Term 2</li>
+                        <li class="term" data-term="term3">Term 3</li>
+                    </ul>
+                </div>    
+            <div class="coursesDetails" id="term1">
+                <h3 class="termh3">Courses for Term 1</h3>
+                <div class="coursesDropdown">
+                    <div class="dropdownmelon">            
+                        <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                        <div class="dropdown-content">
+                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
                         </div>
-                    <div class="SchedDetails">
-                        Time: 04:21<br>
-                        Date: 2024-06-15<br>
-                        Group-Name: Dream Team<br>
                     </div>
-                    <div class="DocumentStatus">
-                        Status: Pending
-                     </div>
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                </div>   
+                <div class="coursesDetails" id="term1">
+                    <h3 class="termh3">Courses for Term 1</h3>
+                    <div class="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                            <div class="dropdown-content">
+                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
+                                <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
+                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-            
-            <div class="divButton">
-                <!-- <button class="CreateSched" id = "addScheduleBtn">
-                   Add Schedule <i class="fa-solid fa-plus"></i>
-                </button> -->
             </div>
-        </div>
 
-    </div>
-    <div class = "defense-main" style = "display: none">
-        <div class="Defense-Page" >      
-            <div class="rubric-container">
-                <div class="rubric-header">
-                    <h1>Written Communication</h1>
+                <div class="divButton">
+                    <!-- <button class="CreateSched" id = "addScheduleBtn">
+                    Add Schedule <i class="fa-solid fa-plus"></i>
+                    </button> -->
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="description-column">Description</th>
-                            <th class="grade-Desc">score description</th>
-                            <th class="grades-column">Grades</th>          
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="criteria">
-                            <td class="description">
-                                <strong>B1. Executive Summary</strong><br>
-                                The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                            </td>
-                            <td class="grade_description">
-                                askdjbajdb<br>
-                            </td>
-                            <td class="score-column">
-                                <select>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                    <option value="0">0</option>
-                                </select>
-                            </td>
-                        
-                        </tr>
-                        <tr class="criteria">
-                            <td class="description">
-                                <strong>B1. Executive Summary</strong><br>
-                                The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                            </td>
-                            <td class="grade_description">
-                                askdjbajdb<br>
-                            </td>
-                            <td class="score-column">
-                                <select>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                    <option value="0">0</option>
-                                </select>
-                            </td>
-                        
-                        </tr><tr class="criteria">
-                            <td class="description">
-                                <strong>B1. Executive Summary</strong><br>
-                                The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                            </td>
-                            <td class="grade_description">
-                                askdjbajdb<br>
-                            </td>
-                            <td class="score-column">
-                                <select>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                    <option value="0">0</option>
-                                </select>
-                            </td>
-                        
-                        </tr><tr class="criteria">
-                            <td class="description">
-                                <strong>B1. Executive Summary</strong><br>
-                                The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                            </td>
-                            <td class="grade_description">
-                                askdjbajdb<br>
-                            </td>
-                            <td class="score-column">
-                                <select>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                    <option value="0">0</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>   
             </div>
-        </div>
-        <div class="cDiv">
-            <div class="CommentsDiv">
-                <div class="comments-section" id="commentsSection">
-                    <div class="panel-comments">
-                        <h3>Panel 1 Comments:</h3>
-                        <textarea class="comments-input"></textarea>
-                        <button class="send-button"><i class="fa-solid fa-trash-can"></i></button>
+        </div>        
+    </div>           
+    <div class="GroupContainer" style = "display: none;" >
+                    <div class="dashboard_header">
+                        <!-- Group Name Box -->
+                        <div class="groupname_container" onclick="showDefaultBody()"> 
+                            <!-- ian mojica  group name -->
+                            <div class="group_name" id="group_name"> 
+                                sample     
+                            </div>   
+                        </div>
+                        <script> 
+                                    
+                        </script> 
+                    <div class="button-group"> 
+                            <div class = "flsDropdown" data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class = "filesContainer"> 
+                                <div class = "documentationCont">
+                                    Document Requirement: <br>
+                                    <div class = "ReqDocumentation">
+                                        <div class ="attachedDocumentation"> here attached file </div>
+                                        <div class = "divDocuReqLogs"> <br>
+                                             <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs"></div>
+                                        </div>
+                                    </div>     
+                                </div>   
+                                <div class = "AdvCont">          
+                                    Advisor Recomendation Sheet: 
+                                    <div class = "advRecomendation">
+                                         <div class = "attachedAdvRecom"> attached file here </div>    
+                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <script>
+                                    
+                            </script>
+
+                        </div>
+
+                        <div class= "group-Rubrics">
+                            <button type="button" class=" group-Drubrics" onclick="groupDefenseRubrics()"> <i class="fa-solid fa-table"></i> Rubrics </button>
+                            
+                        </div>
+
+                        <div class="mDropdown" data-flsDropdown>  
+                            <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                                <!-- Container to display group members -->
+                                <div class="GroupmembersContainer" id="groupMembersContainer">
+                                    member1
+                                </div>
+                        </div>
+
+                        
+
+                    </div>
+                    </h4>
+                </div> 
+                
+
+                <div class = "defense-main" style = "display: none">
+                    <div class="Defense-Page" >      
+                        
+                        <div class="rubric-container">
+                              <!-- dito lagay group name + title ng paper -->
+                            <div class ="grpDefense-Details">
+                                <div class = "Group Name">
+                                    <h3> group </h3>
+                                </div>
+                                <div class = "capstone-title">
+                                    <h3> development of ???</h3>
+                                </div>
+                            </div>    
+                            <div class="rubric-header">
+                                <h1>Written Communication</h1>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="description-column">Description</th>
+                                        <th class="grade-Desc">score description</th>
+                                        <th class="grades-column">Grades</th>          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="criteria">
+                                        <td class="description">
+                                            <strong>B1. Executive Summary</strong><br>
+                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                        </td>
+                                        <td class="grade_description">
+                                            askdjbajdb<br>
+                                        </td>
+                                        <td class="score-column">
+                                            <select>
+                                                <option value="7">7</option>
+                                                <option value="6">6</option>
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                        </td>
+                                    
+                                    </tr>
+                                    <tr class="criteria">
+                                        <td class="description">
+                                            <strong>B1. Executive Summary</strong><br>
+                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                        </td>
+                                        <td class="grade_description">
+                                            askdjbajdb<br>
+                                        </td>
+                                        <td class="score-column">
+                                            <select>
+                                                <option value="7">7</option>
+                                                <option value="6">6</option>
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                        </td>
+                                    
+                                    </tr><tr class="criteria">
+                                        <td class="description">
+                                            <strong>B1. Executive Summary</strong><br>
+                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                        </td>
+                                        <td class="grade_description">
+                                            askdjbajdb<br>
+                                        </td>
+                                        <td class="score-column">
+                                            <select>
+                                                <option value="7">7</option>
+                                                <option value="6">6</option>
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                        </td>
+                                    
+                                    </tr><tr class="criteria">
+                                        <td class="description">
+                                            <strong>B1. Executive Summary</strong><br>
+                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                        </td>
+                                        <td class="grade_description">
+                                            askdjbajdb<br>
+                                        </td>
+                                        <td class="score-column">
+                                            <select>
+                                                <option value="7">7</option>
+                                                <option value="6">6</option>
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>   
+                        </div>
+                    </div>
+                    <div class="cDiv">
+                        <div class="CommentsDiv">
+                            <div class="comments-section" id="commentsSection">
+                                <div class="panel-comments">
+                                    <h3>Panel 1 Comments:</h3>
+                                    <textarea class="comments-input"></textarea>
+                                    <button class="send-button"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addCommBtn">
+                            <button class="addComment" onclick="addComment()"><i class="fa-solid fa-plus"></i> Add Comments</button>
+                            <button class="sendComment"><i class="fa-solid fa-paper-plane"></i> Send</button>
+                        </div>
+                    </div>
+                </div>  
+                    <!-- files -->
+                <div class="defaultBody " id="defaultBody">
+                    <div class="recentFiles">
+                        <!-- File posted by another person -->
+                        <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>DREAM TEAM - Recommendation</strong>
+                                    <span>26 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- File posted by you -->
+                        <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class="fileInfo">
+                                <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                <div class="fileDetails">
+                                    <strong>Final Documentation</strong>
+                                    <span>12 KB</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="addCommBtn">
-                <button class="addComment" onclick="addComment()"><i class="fa-solid fa-plus"></i> Add Comments</button>
-                <button class="sendComment"><i class="fa-solid fa-paper-plane"></i> Send</button>
-            </div>
-        </div>
-    </div>    
+                <!-- Modal Structure -->
+                <div id="fileModal" class="modal">
+                    <div class="modalContent">
+                        <span class="closeButton" onclick="closeModal()">&times;</span>
+                        <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>  
+
+                    <!-- file repo -->
+                    <div class="professorFilesR" id="profFilesR">
+                        <div class = "sFileContainer">
+                        files repository
+                        </div>
+                    </div>
+                </div> 
+                <!-- Group Defense Rubric -->
+               
+        </div>  
+
+    <!-- start rubrics set hidden -->  
+      <!-- Rubric div -->
+        
+      <div class="rubriccontainer" style="display: none"> 
+                    <div class="secondaryRubriccont">
+                    <div class="rubric-container">
+                            <h1>Written Communication</h1>
+                        </div>
+                        <table class="table">        
+                            <div class="rubric-header">
+                
+                            <thead >
+                        
+                                <!-- column title -->
+                                <tr>
+                                    <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                                    <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                                    <th style = "background-color: #CBC4BA;">Criteria</th>
+                                    <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                                    <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                                    <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                                    <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                                    <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
+                                </tr>
+                                <!-- column title end -->
+                            </thead>
+                            <tbody>
+                                    
+                                    <td>Relevance</td>
+                                    <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                                    <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                </tr>
+                                <tr>
+        
+        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>        
+        
 </div> 
 <script src="Capstone.js"></script>
 </body>

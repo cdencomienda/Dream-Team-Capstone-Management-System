@@ -227,6 +227,32 @@ function fetchGroupName() {
         });
 }
 
+function fetchStudents() {
+    fetch("LiveSearchGroupMembers.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById("groupMembersContainer");
+            if (data.error) {
+                container.innerHTML = data.error;
+            } else {
+                let output = "";
+                data.forEach(student => {
+                    output += student + "<br>";
+                });
+                container.innerHTML = output;
+            }
+        })
+        .catch(error => {
+            document.getElementById("groupMembersContainer").innerHTML = "Error: " + error;
+        });
+}
+
+
 
 
 
@@ -283,15 +309,10 @@ window.onload = fetchGroupName;
 
                         </div>    
                         <div class="mDropdown" data-flsDropdown>  
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer">
-                                 Barit, Christian
-                                 Encomienda, Carlos Daniel
-                                 Gudito, John Emerson
-                                 Mojica, Nicholas Ian
-                                </div>
-                                
+                                </div>   
                             </div>
                         </div>
                     </h4>

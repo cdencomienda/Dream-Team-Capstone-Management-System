@@ -9,7 +9,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$response = array('match' => false);
+$response = array('match' => false, 'account_id' => null);
 
 if (isset($_SESSION['fName']) && isset($_SESSION['lname'])) {
     $fName = $_SESSION['fName'];
@@ -26,6 +26,8 @@ if (isset($_SESSION['fName']) && isset($_SESSION['lname'])) {
         $_SESSION['account_id'] = $row['account_id'];
         $response['match'] = true;
         $response['account_id'] = $row['account_id'];
+    } else {
+        $_SESSION['account_id'] = null; // Clear any existing account_id in session
     }
     
     $stmt->close();

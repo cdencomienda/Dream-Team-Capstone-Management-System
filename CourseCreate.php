@@ -450,37 +450,38 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                            <div class = "flsDropdown" data-flsDropdown>
+                        <div class = "flsDropdown" data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
-                            <div class = "filesContainer"> 
-                                <div class = "documentationCont">
+                            <div class="filesContainer"> 
+                                <div class="documentationCont">
                                     Document Requirement: <br>
-                                    <div class = "ReqDocumentation">
-                                        <div class ="attachedDocumentation"> here attached file </div>
-                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
-                                                
+                                    <div class="ReqDocumentation">
+                                        <div class="attachedDocumentation"> here attached file </div>
+                                        <div class="divDocuReqLogs"> <br> 
+                                            <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                                                <h4>Document Requirement Logs</h4>
+                                                <!-- Logs will be dynamically added here -->
                                             </div>
                                         </div>
                                     </div>     
                                 </div>   
-                                <div class = "AdvCont">          
-                                    Advisor Recomendation Sheet: 
-                                    <div class = "advRecomendation">
-                                         <div class = "attachedAdvRecom"> attached file here </div>    
-                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
-
+                                <div class="AdvCont">          
+                                    Adviser Recommendation Sheet: 
+                                    <div class="advRecomendation">
+                                        <div class="attachedAdvRecom"> attached file here </div>    
+                                        <div class="divAdvLogs"> <br> 
+                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
+                                                <h4>Adviser's Recommendations Sheet</h4>
+                                                <!-- Logs will be dynamically added here -->
                                             </div>
                                         </div>
                                     </div>
                                 </div> 
-                            </div>  
-                            <script>
-                                    
-                            </script>
-
+                            </div>
                         </div>    
+                        
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
@@ -497,6 +498,7 @@
                     <div class="recentFiles">
                         <!-- File posted by another person -->
                         <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                            <div class = "sender" id = "sender"> them </div> 
                             <div class="fileInfo">
                                 <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                 <div class="fileDetails">
@@ -508,6 +510,7 @@
                         
                         <!-- File posted by you -->
                         <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
+                            <div class = "sender" id = "sentbyme"> me  </div> 
                             <div class="fileInfo">
                                 <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                 <div class="fileDetails">
@@ -620,7 +623,7 @@ function fetchAcademicYears() {
                         if (selectedTerm) {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm);
-                            fetchCourses(button.parentNode); // Pass the container to fetchCourses
+                            fetchCourses(button.parentNode, year, selectedTerm); // Pass the year and selectedTerm to fetchCourses
                             groups();
 
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
@@ -746,7 +749,7 @@ function dropdownMelon(button) {
 }
 
 
-function fetchCourses(container) {
+function fetchCourses(container, year, selectedTerm) {
     // Check if coursesDropdown already exists in the container
     let coursesDropdown = container.querySelector('.coursesDropdown');
 
@@ -831,6 +834,9 @@ function fetchCourses(container) {
                                         groupButton.classList.add('createdgroupBTN');
                                         groupButton.onclick = function() {
                                         newGroupCreated(course.course_id, group_name);
+                                        console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
+                                        const directory = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
+                                        console.log(directory);
                                     };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
@@ -1214,10 +1220,7 @@ function handleAction(action, course_id) {
     }
 }
 
-function fetchPanelandGroup(){
-
-
-
+function fetchPanelandGroup() {
     fetch('fetchGroupsandPanel.php')
         .then(response => response.json())
         .then(data => {
@@ -1242,15 +1245,31 @@ function fetchPanelandGroup(){
                     }
                 });
 
-                // Apply autocomplete to panelist inputs
-                $(".inputName").not("#courseGroup").autocomplete({
-                    source: panelists,
-                    select: function(event, ui) {
-                        $(this).val(ui.item.label);
-                        $(this).next("input[type='hidden']").val(ui.item.value);
-                        return false;
-                    }
-                });
+                const selectedNames = new Set();
+
+                function updateAutocomplete() {
+                    $(".inputName").not("#courseGroup").each(function() {
+                        const inputElement = $(this);
+
+                        inputElement.autocomplete({
+                            source: function(request, response) {
+                                const filteredPanelists = panelists.filter(panelist => 
+                                    !selectedNames.has(panelist.label)
+                                );
+                                response($.ui.autocomplete.filter(filteredPanelists, request.term));
+                            },
+                            select: function(event, ui) {
+                                selectedNames.add(ui.item.label);
+                                inputElement.val(ui.item.label);
+                                inputElement.next("input[type='hidden']").val(ui.item.value);
+                                updateAutocomplete();
+                                return false;
+                            }
+                        });
+                    });
+                }
+
+                updateAutocomplete();
             } else {
                 console.error('Error:', data.message);
             }
@@ -1258,9 +1277,8 @@ function fetchPanelandGroup(){
         .catch(error => {
             console.error('Fetch error:', error);
         });
-
-
 }
+
 
 function saveCourseID(courseID) {
     fetch('fetchCourseID.php', {
@@ -1302,11 +1320,50 @@ function fetchStudents() {
 
 
 
+function coursesData() {
+    fetch('repositoryDirectory.php') // Replace with your PHP script URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Output fetched JSON data to console (for demonstration)
+            // Process the fetched data here
+            processData(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+function processData(data) {
+    // Check if the data is an object with status and message properties
+    if (data && data.status && data.message) {
+        // Check for success status or handle errors
+        if (data.status === "success") {
+            console.log(data.message); // Log success message
+        } else {
+            console.error('Error:', data.message); // Log error message
+        }
+    } else {
+        console.error('Error: Data is not in expected format.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    coursesData();
+});
 
 
 
 
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    coursesData();
+});
 
 
 

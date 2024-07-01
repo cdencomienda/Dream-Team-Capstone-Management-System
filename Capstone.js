@@ -104,11 +104,121 @@ function addComment() {
 
   // ClassListener
   
-  document.getElementById('scheduleContainer').addEventListener('click', function() {
-    var defenseMainElements = document.getElementsByClassName('defense-main');
-    var subelement = document.getElementsByClassName('MainScheduleCont');
-    for (var i = 0; i < defenseMainElements.length, subelement.length; i++) {
-        defenseMainElements[i].style.display = 'block';
-        subelement[i].style.display = 'none';
-    }
+//   document.getElementById('scheduleContainer').addEventListener('click', function() {
+//     var defenseMainElements = document.getElementsByClassName('defense-main');
+//     var subelement = document.getElementsByClassName('MainScheduleCont');
+//     for (var i = 0; i < defenseMainElements.length, subelement.length; i++) {
+//         defenseMainElements[i].style.display = 'block';
+//         subelement[i].style.display = 'none';
+//     }
+// });
+
+const dropdownsClass = document.querySelectorAll('.classListDropdown');
+
+dropdownsClass.forEach(dropdown => {
+    const listClass = dropdown.querySelector('.listClass');
+    const coursesListed = dropdown.querySelector('.coursesListed');
+    const menuCourses = dropdown.querySelector('.menuCourses');
+    const options = dropdown.querySelectorAll('.menuCourses > .term');
+    const selectedClass = dropdown.querySelector('.selectedClass');
+
+    listClass.addEventListener('click', () => {
+        menuCourses.classList.toggle('menuCourses-open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Update the selected class text
+            selectedClass.innerText = option.innerText;
+
+            // Hide all course details
+            document.querySelectorAll('.coursesDetails').forEach(detail => {
+                detail.style.display = 'none';
+            });
+
+            // Show the selected term's courses
+            const term = option.getAttribute('data-term');
+            const coursesDetail = document.getElementById(term);
+            if (coursesDetail) {
+                coursesDetail.style.display = 'block';
+            }
+
+            // Hide the main menuCourses
+            menuCourses.classList.remove('menuCourses-open');
+        });
+    });
 });
+function dropdownMelon() {
+  var container = document.querySelector('.dropdown-content');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdownBtns = document.querySelectorAll('.dropdownbtn');
+
+  dropdownBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+          var allDropdowns = document.querySelectorAll('.dropdown-content');
+          allDropdowns.forEach(function(dropdown) {
+              dropdown.style.display = 'none';
+          }); 
+      });
+  });
+});
+function AddMembers() { 
+  var container = document.querySelector('.addmember');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function setrequirements() { 
+  var container = document.querySelector('.setrequirements');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function rubric() { 
+  var container = document.querySelector('.defense-main');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function rubric_preview() { 
+  var container = document.querySelector('.rubriccontainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}
+
+function showDefaultBody() {
+  document.getElementById("defaultBody").style.display = "block";
+  var defenseMainElements = document.getElementsByClassName('defense-main');
+  for (var i = 0; i < defenseMainElements.length; i++) {
+      defenseMainElements[i].style.display = 'none';
+  }
+}
+function groupDefenseRubrics() {
+  document.getElementById("defaultBody").style.display = "none";
+  var defenseMainElements = document.getElementsByClassName('defense-main');
+  for (var i = 0; i < defenseMainElements.length; i++) {
+      defenseMainElements[i].style.display = 'block';
+  }
+}
+
+function viewMembers() { 
+  var container = document.querySelector('.viewgroup'); 
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
+ 
+}
+
+function newGroupCreated() {
+  var container = document.querySelector('.GroupContainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    
+}
+// viewfiles  
+function openModal(filePath) {
+  document.getElementById('fileFrame').src = filePath;
+  document.getElementById('fileModal').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('fileModal').style.display = 'none';
+  document.getElementById('fileFrame').src = ''; // Clear the iframe src
+}
