@@ -455,7 +455,12 @@
                                 <div class="documentationCont">
                                     Document Requirement: <br>
                                     <div class="ReqDocumentation">
-                                        <div class="attachedDocumentation"> here attached file </div>
+                                        <div class="attachedDocumentation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
+                                        
+                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                            <div class="Recent-fileName">docu-test1.pdf</div>
+                                            <div class="Recent-fileVersion">version 3.0</div>
+                                        </div>
                                         <div class="divDocuReqLogs"> <br> 
                                             <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
                                             <div class="fileLogsPopup" id="DocuReqrmntLogs">
@@ -467,21 +472,13 @@
                                 </div>   
                                 <div class="AdvCont">          
                                     Adviser Recommendation Sheet: 
-                                    <div class="advRecomendation">
-                                        <div class="attachedAdvRecom"> attached file here </div>    
-                                        <div class="divAdvLogs"> <br> 
-                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
-                                                <h4>Adviser's Recommendations Sheet</h4>
-                                                <!-- Logs will be dynamically added here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="AdvCont">          
-                                    Adviser Recommendation Sheet: 
-                                    <div class="advRecomendation">
-                                        <div class="attachedAdvRecom"> attached file here </div>    
+                                    <div class="advRecomendation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
+                                        
+                                        <div class="attachedAdvRecom">
+                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                            <div class="Recent-fileName">docu-test1.pdf</div>
+                                            <div class="Recent-fileVersion">version 3.0</div>    
+                                        </div>    
                                         <div class="divAdvLogs"> <br> 
                                             <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
                                             <div class="fileLogsPopup" id="AdvReqrmntLogs">
