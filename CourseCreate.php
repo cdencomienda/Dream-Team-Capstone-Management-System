@@ -914,6 +914,7 @@ function newGroupCreated(course_id, group_name) {
     fetchGroupData(course_id, group_name);
     fetchStudentGroups();
     fetchPanelGroups();
+    requirementName();
 
     // Prepare the data to be sent in the request body
     const formData = new FormData();
@@ -1048,6 +1049,104 @@ function fetchPanelGroups() {
             console.error('Error fetching panelist data:', error);
         });
 }
+
+
+
+function requirementName() {
+    const filesContainer = document.querySelector('.filesContainer');
+    filesContainer.innerHTML = ''; // Clear existing content
+
+    fetch('test2.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Received reqName data:', data);
+
+            // Loop through each reqName in the data array
+            data.forEach(reqName => {
+                // Create a new element for each documentationCont
+                const documentationCont = document.createElement('div');
+                documentationCont.classList.add('documentationCont');
+
+                // Document Requirement text
+                const docRequirementText = document.createElement('div');
+                docRequirementText.textContent = reqName;
+                documentationCont.appendChild(docRequirementText);
+                documentationCont.appendChild(document.createElement('br'));
+
+                // Create a new element for ReqDocumentation
+                const reqDocumentation = document.createElement('div');
+                reqDocumentation.classList.add('ReqDocumentation');
+
+                // Create attachedDocumentation
+                const attachedDocumentation = document.createElement('div');
+                attachedDocumentation.classList.add('attachedDocumentation');
+                attachedDocumentation.setAttribute('onclick', `openModal('requirement_repository/docu-logs/${reqName}.pdf')`);
+
+                // Create file icon and file name
+                const fileIcon = document.createElement('img');
+                fileIcon.src = 'menu_assets/file-icon.png';
+                fileIcon.alt = 'file icon';
+                fileIcon.classList.add('fileIcon');
+                attachedDocumentation.appendChild(fileIcon);
+
+                const fileName = document.createElement('div');
+                fileName.classList.add('Recent-fileName');
+                fileName.textContent = `sample.pdf`; // Replace with actual file name logic
+                attachedDocumentation.appendChild(fileName);
+
+                // Append attachedDocumentation to reqDocumentation
+                reqDocumentation.appendChild(attachedDocumentation);
+                reqDocumentation.appendChild(document.createElement('br'));
+
+                // Create divDocuReqLogs
+                const divDocuReqLogs = document.createElement('div');
+                divDocuReqLogs.classList.add('divDocuReqLogs');
+
+                // Create DocuReqLogs button
+                const docuReqLogsButton = document.createElement('button');
+                docuReqLogsButton.classList.add('DocuReqLogs');
+                docuReqLogsButton.setAttribute('onclick', 'toggleDocuReqLogs()');
+
+                const ellipsisIcon = document.createElement('i');
+                ellipsisIcon.classList.add('fa-solid', 'fa-ellipsis');
+
+                // Add click event listener to ellipsisIcon
+                ellipsisIcon.addEventListener('click', () => {
+                    console.log(`Clicked on ellipsis icon for ${reqName}`);
+                    // Add further actions as needed
+                });
+
+                docuReqLogsButton.appendChild(ellipsisIcon);
+
+                // Append DocuReqLogs button to divDocuReqLogs
+                divDocuReqLogs.appendChild(docuReqLogsButton);
+
+                // Create fileLogsPopup
+                const fileLogsPopup = document.createElement('div');
+                fileLogsPopup.classList.add('fileLogsPopup', 'hidden'); // Assuming hidden class is defined in your CSS
+                fileLogsPopup.id = 'DocuReqrmntLogs';
+
+                const logsTitle = document.createElement('h4');
+                logsTitle.textContent = 'Document Requirement Logs';
+                fileLogsPopup.appendChild(logsTitle);
+
+                // Append fileLogsPopup to divDocuReqLogs
+                divDocuReqLogs.appendChild(fileLogsPopup);
+
+                // Append divDocuReqLogs to reqDocumentation
+                reqDocumentation.appendChild(divDocuReqLogs);
+
+                // Append reqDocumentation to documentationCont
+                documentationCont.appendChild(reqDocumentation);
+
+                // Append documentationCont to filesContainer
+                filesContainer.appendChild(documentationCont);
+            });
+        })
+        .catch(error => console.error('Error fetching reqName data:', error));
+}
+
+
 
 
 
