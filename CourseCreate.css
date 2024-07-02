@@ -580,7 +580,7 @@ pointer-events: none;
 opacity: 0;
 transform: translateY(-10px);
 transition: opacity 150ms ease-in-out;
-width: 200px;
+width: 300px;
 }
 .PanelistContainer{
   position: absolute;
@@ -594,7 +594,7 @@ width: 200px;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out;
-  width: 200px;
+  width: 300px;
   }
    
 .Rep-FilesBtn:hover{

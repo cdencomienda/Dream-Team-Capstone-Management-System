@@ -368,7 +368,7 @@
         <!-- Requirement div -->
         <div class="setrequirements">
             <h3>Requirements</h3>
-            <form id="setRequrements" class="Requirements" method="POST" action="addRequirements.php">
+            <form class="Requirements" method="POST" action="addRequirements.php">
                 <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
                 <h3>Requirements Description</h3>
                 <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
@@ -383,7 +383,7 @@
         
         <div class="rubriccontainer" style="display: none"> 
 
-<form id="setRubrics" class="rubricinput" method="POST" action="submittedRubric.php">
+<form class="rubricinput" method="POST" action="submittedRubric.php">
     <h3>Select Rubric</h3> 
     <div class="form-row">
         <input type="text" class="inputRubric" name="rubric" placeholder="Request Rubric">
@@ -916,6 +916,7 @@ function newGroupCreated(course_id, group_name) {
     console.log(course_id, group_name);
     fetchGroupData(course_id, group_name);
     fetchStudentGroups();
+    fetchPanelGroups();
 
     // Prepare the data to be sent in the request body
     const formData = new FormData();
@@ -985,14 +986,42 @@ function fetchStudentGroups() {
                 data.forEach(student => {
                     console.log(student); // Output each student
                     // Create a new element for each student and append it to the container
-                    const studentElement = document.createElement('div');
+                    const studentElement = document.createElement('h4');
                     studentElement.textContent = student;
+                    studentElement.style.textAlign = 'left';
                     groupMembersContainer.appendChild(studentElement);
                 });
             }
         })
         .catch(error => console.error('Error:', error));
 }
+
+function fetchPanelGroups() {
+    const PanelistContainer = document.querySelector('.PanelistContainer');
+    PanelistContainer.innerHTML = ''; // Clear existing content
+
+    fetch('test2.php')
+        .then(response => response.json())
+        .then(data => {
+            // Iterate through panelists data
+            data.forEach(panelist => {
+                const panelistName = `${panelist.firstName} ${panelist.lastName}`;
+                const panelistRole = panelist.panelRole;
+                
+                // Create an h3 element for each panelist
+                const panelistElement = document.createElement('h4');
+                panelistElement.textContent = `${panelistRole} - ${panelistName}`;
+                panelistElement.style.textAlign = 'left'; // Align text to the left
+
+                // Append the h3 element to PanelistContainer
+                PanelistContainer.appendChild(panelistElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching panelist data:', error);
+        });
+}
+
 
 
 
@@ -1254,8 +1283,6 @@ function fetchRubric() {
 
 function clearForm() {
         document.getElementById('selectedPanelist').reset();
-        document.getElementById('setRubrics').reset();
-        document.getElementById('setRequirments').reset();
     }
 
 
@@ -1268,12 +1295,10 @@ function handleAction(action, course_id) {
             break;
         case 'Add Panelist':
             AddMembers(course_id);
-            clearForm();
             fetchPanelandGroup();
             break;
         case 'Requirements':
             setrequirements(course_id);
-            clearForm();
             reqName();
             break;
         case 'Rubric':
