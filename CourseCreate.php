@@ -1038,87 +1038,67 @@ function requirementName() {
     const filesContainer = document.querySelector('.filesContainer');
     filesContainer.innerHTML = ''; // Clear existing content
 
-    fetch('test2.php')
+    fetch('requirementName.php')
         .then(response => response.json())
         .then(data => {
             console.log('Received reqName data:', data);
-
-            // Loop through each reqName in the data array
             data.forEach(reqName => {
-                // Create a new element for each documentationCont
+                // Create a documentationCont element
                 const documentationCont = document.createElement('div');
                 documentationCont.classList.add('documentationCont');
 
-                // Document Requirement text
-                const docRequirementText = document.createElement('div');
-                docRequirementText.textContent = reqName;
-                documentationCont.appendChild(docRequirementText);
-                documentationCont.appendChild(document.createElement('br'));
+                // Create Document Requirement text
+                const docRequirement = document.createElement('div');
+                docRequirement.textContent = `${reqName}`;
+                documentationCont.appendChild(docRequirement);
 
-                // Create a new element for ReqDocumentation
+                // Create ReqDocumentation container
                 const reqDocumentation = document.createElement('div');
                 reqDocumentation.classList.add('ReqDocumentation');
 
-                // Create attachedDocumentation
+                // Create attachedDocumentation div
                 const attachedDocumentation = document.createElement('div');
                 attachedDocumentation.classList.add('attachedDocumentation');
-                attachedDocumentation.setAttribute('onclick', `openModal('requirement_repository/docu-logs/${reqName}.pdf')`);
+                // Example of setting click handler, adjust based on your data structure
+                attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.fileUrl)}')`);
 
-                // Create file icon and file name
+                // Create file icon (adjust as per your actual structure)
                 const fileIcon = document.createElement('img');
                 fileIcon.src = 'menu_assets/file-icon.png';
                 fileIcon.alt = 'file icon';
                 fileIcon.classList.add('fileIcon');
                 attachedDocumentation.appendChild(fileIcon);
 
-                const fileName = document.createElement('div');
-                fileName.classList.add('Recent-fileName');
-                fileName.textContent = `sample.pdf`; // Replace with actual file name logic
-                attachedDocumentation.appendChild(fileName);
+                // Create Recent-fileName div (adjust based on actual data structure)
+                const recentFileName = document.createElement('div');
+                recentFileName.textContent = reqName.fileName; // Assuming 'fileName' is a property in your data
+                recentFileName.classList.add('Recent-fileName');
+                attachedDocumentation.appendChild(recentFileName);
 
-                // Append attachedDocumentation to reqDocumentation
                 reqDocumentation.appendChild(attachedDocumentation);
-                reqDocumentation.appendChild(document.createElement('br'));
 
-                // Create divDocuReqLogs
+                // Create divDocuReqLogs div
                 const divDocuReqLogs = document.createElement('div');
                 divDocuReqLogs.classList.add('divDocuReqLogs');
 
-                // Create DocuReqLogs button
-                const docuReqLogsButton = document.createElement('button');
-                docuReqLogsButton.classList.add('DocuReqLogs');
-                docuReqLogsButton.setAttribute('onclick', 'toggleDocuReqLogs()');
+                // Create toggle button with icon
+                const toggleButton = document.createElement('button');
+                toggleButton.classList.add('DocuReqLogs');
+                toggleButton.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
 
-                const ellipsisIcon = document.createElement('i');
-                ellipsisIcon.classList.add('fa-solid', 'fa-ellipsis');
+                // Add onclick event to toggle logs
+                toggleButton.onclick = function() {
+                    console.log('Clicked toggleButton for reqName:', reqName);
+                    // Assuming toggleDocuReqLogs toggles visibility of logs
+                    toggleDocuReqLogs(reqName); // Pass reqName or related data as needed
+                    clickedRequirement(reqName);
+                };
 
-                // Add click event listener to ellipsisIcon
-                ellipsisIcon.addEventListener('click', () => {
-                    console.log(`Clicked on ellipsis icon for ${reqName}`);
-                    // Add further actions as needed
-                });
+                // Append toggleButton to divDocuReqLogs
+                divDocuReqLogs.appendChild(toggleButton);
 
-                docuReqLogsButton.appendChild(ellipsisIcon);
-
-                // Append DocuReqLogs button to divDocuReqLogs
-                divDocuReqLogs.appendChild(docuReqLogsButton);
-
-                // Create fileLogsPopup
-                const fileLogsPopup = document.createElement('div');
-                fileLogsPopup.classList.add('fileLogsPopup', 'hidden'); // Assuming hidden class is defined in your CSS
-                fileLogsPopup.id = 'DocuReqrmntLogs';
-
-                const logsTitle = document.createElement('h4');
-                logsTitle.textContent = 'Document Requirement Logs';
-                fileLogsPopup.appendChild(logsTitle);
-
-                // Append fileLogsPopup to divDocuReqLogs
-                divDocuReqLogs.appendChild(fileLogsPopup);
-
-                // Append divDocuReqLogs to reqDocumentation
                 reqDocumentation.appendChild(divDocuReqLogs);
 
-                // Append reqDocumentation to documentationCont
                 documentationCont.appendChild(reqDocumentation);
 
                 // Append documentationCont to filesContainer
@@ -1127,6 +1107,31 @@ function requirementName() {
         })
         .catch(error => console.error('Error fetching reqName data:', error));
 }
+
+
+function clickedRequirement(reqName) {
+    // Fetch API request
+    fetch('sessionReqName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reqName: reqName }), // Use reqName parameter passed to function
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to save reqName to session');
+        }
+        console.log('reqName saved to session successfully');
+    })
+    .catch(error => console.error('Error saving reqName to session:', error));
+}
+
+
+
+
+
+
 
 
 
