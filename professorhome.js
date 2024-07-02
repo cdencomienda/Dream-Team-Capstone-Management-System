@@ -1,3 +1,21 @@
+ 
+document.addEventListener('click', e =>{
+    const isflsDropdowButton = e.target.matches("[data-Members-button]")
+    if(!ismDropdownButton && e.target.closest('[data-mDropdown]') != null)
+    return
+    
+    let currentmDropdown
+    if(ismDropdownButton){
+        currentmDropdown = e.target.closest('[data-mDropdown]')
+        currentmDropdown.classList.toggle('active')
+    }
+    
+    document.querySelectorAll("[data-mDropdown].active").forEach(flsDropdown => {
+        if (mDropdown === currentmDropdown) return
+        mDropdown.classList.remove("active")
+    });
+    }) 
+ 
  function openArchive(){
   window.location.assign("ProfessorHome.php")
 }
@@ -523,3 +541,4 @@ window.onclick = function(event) {
       }
   }
 }
+

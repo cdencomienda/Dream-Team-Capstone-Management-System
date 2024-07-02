@@ -567,20 +567,7 @@ cursor: pointer;
   grid-template-columns: 1fr auto;
   gap: 10px;
 }
-/* .PanelistContainer{
-  position: absolute;
-  left: 0;
-  top: calc(100% + .25rem);
-  background-color: white;
-  padding: .75rem;
-  border-radius:.25rem ;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 150ms ease-in-out;
-  width: 200px;
-  } */
+ 
 .GroupmembersContainer{
 position: absolute;
 left: 0;
@@ -595,7 +582,21 @@ transform: translateY(-10px);
 transition: opacity 150ms ease-in-out;
 width: 200px;
 }
- 
+.PanelistContainer{
+  position: absolute;
+  left: 0;
+  top: calc(100% + .25rem);
+  background-color: white;
+  padding: .75rem;
+  border-radius:.25rem ;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out;
+  width: 200px;
+  }
+   
 .Rep-FilesBtn:hover{
   background-color: #958f87;
 }
@@ -603,7 +604,7 @@ width: 200px;
 .Submission-Btn:hover{
   background-color: #958f87;
 }
-.Rep-FilesBtn, .Submission-Btn, .Members-Btn {
+.Rep-FilesBtn, .Submission-Btn, .Members-Btn, .Panelist-Btn {
   width: auto;
   height: 25px;
   background-color: #F8EFE3;
@@ -655,6 +656,34 @@ opacity: 1;
 transform: translateY(0);
 pointer-events: auto;
 }
+
+.Panelist-Btn{
+  border: none;
+  width: 125px;
+  height: 35x;
+  margin-right: 10px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  transition:backround-color .3s ease;
+  }
+  .Panelist-Btn:hover {
+  background-color: #958f87;
+  }
+  */
+  button:hover{
+    background-color:#958f87;
+  }
+  .pDropdown{
+    position: relative;
+  }
+  .pDropdown > .Panelist-Btn:focus + .PanelistContainer{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  }
+
 .submissionFrame, .professorFilesR {
 display: none;
 background-color: #ffffff;
