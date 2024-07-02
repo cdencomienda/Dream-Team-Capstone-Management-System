@@ -463,34 +463,16 @@
                                         </div>
                                         <div class="divDocuReqLogs"> <br> 
                                             <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class="fileLogsPopup" id="DocuReqrmntLogs">
-                                                <h4>Document Requirement Logs</h4>
-                                                <!-- Logs will be dynamically added here -->
-                                            </div>
                                         </div>
                                     </div>     
                                 </div>   
-                                <div class="AdvCont">          
-                                    Adviser Recommendation Sheet: 
-                                    <div class="advRecomendation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
-                                        
-                                        <div class="attachedAdvRecom">
-                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                                            <div class="Recent-fileName">docu-test1.pdf</div>
-                                                
-                                        </div>    
-                                        <div class="divAdvLogs"> <br> 
-                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
-                                                <h4>Adviser's Recommendations Sheet</h4>
-                                                <!-- Logs will be dynamically added here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
+                                 
                             </div>
                         </div>    
-                        
+                        <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                                                <h4>Document Requirement Logs</h4>
+                                                <!-- Logs will be dynamically added here -->
+                                            </div>
                         <div class="mDropdown" data-mDropdown>  
                         <button type="button" class="Members-Btn" data-Members-Btn onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
