@@ -29,7 +29,7 @@ body{
   width:280px;
   bottom: 35px;
   left: 84%;
-  z-index: 100;
+  z-index:0;
 }
 .editoverlay{
   display: none;
@@ -1263,11 +1263,11 @@ background-color: #dbd3c9;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   overflow: hidden;
   background-color: rgba(0,0,0,0.5);
-  z-index: 500 ;
+  z-index: 1500 ;
 }
  
 .secondaryRubriccont {

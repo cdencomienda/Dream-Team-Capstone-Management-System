@@ -414,7 +414,6 @@ function clsViewGrp(){
     document.getElementById('fileFrame').src = filePath;
     document.getElementById('fileModal').style.display = "block";
 }
-
 function closeModal() {
     document.getElementById('fileFrame').src = "";
     document.getElementById('fileModal').style.display = "none";
