@@ -349,17 +349,16 @@ background-repeat: no-repeat;
 .class-Dropdown{
   margin-left: 120px;
   margin-top: 30px;
-  width: 360px;
+  width: 380px;
   height: 1200px;
   position: relative;
   overflow: auto;
 }
 .classListDropdown{
-  width: 340px;
+  width: 340px; 
   margin-bottom: 10px;
   position: relative;
-  margin-left: 10px;
-  z-index: 0px;
+  margin-left: 10px; 
 }
 .classListDropdown *{
   box-sizing: border-box;
@@ -466,7 +465,7 @@ margin: 15px;
  
 /* for the courses inside the term css  */
 .coursesDropdown{
-height: 500px;
+height: 50%;
 overflow: auto;
 margin-top: 20px;
  
@@ -568,6 +567,20 @@ cursor: pointer;
   grid-template-columns: 1fr auto;
   gap: 10px;
 }
+/* .PanelistContainer{
+  position: absolute;
+  left: 0;
+  top: calc(100% + .25rem);
+  background-color: white;
+  padding: .75rem;
+  border-radius:.25rem ;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out;
+  width: 200px;
+  } */
 .GroupmembersContainer{
 position: absolute;
 left: 0;
