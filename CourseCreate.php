@@ -478,6 +478,19 @@
                                         </div>
                                     </div>
                                 </div> 
+                                <div class="AdvCont">          
+                                    Adviser Recommendation Sheet: 
+                                    <div class="advRecomendation">
+                                        <div class="attachedAdvRecom"> attached file here </div>    
+                                        <div class="divAdvLogs"> <br> 
+                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
+                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
+                                                <h4>Adviser's Recommendations Sheet</h4>
+                                                <!-- Logs will be dynamically added here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
                         </div>    
                         

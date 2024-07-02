@@ -1046,10 +1046,11 @@ background-color: #dbd3c9;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  overflow-y: auto;
 }
 .filesContainer{
   position: absolute;
-  width: 470px;
+  width: 490px;
   height: 325px;
   left: -250px;
   top: calc(100% + .25rem);
@@ -1063,7 +1064,7 @@ background-color: #dbd3c9;
   transition: opacity 150ms ease-in-out;
   z-index: 1000;
   text-align: left;
-  
+  overflow-y: auto
 }
 
 .documentationCont{
@@ -1162,6 +1163,7 @@ background-color: #dbd3c9;
     border: 1px solid #ccc;
     margin-bottom: 10px;
     overflow-y: auto;
+   
 }
 
 #DocuReqrmntLogs {
@@ -1179,6 +1181,7 @@ background-color: #dbd3c9;
   padding: 10px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
+  
 }
 
 .fileLogsPopup .logItem:last-child {
