@@ -217,9 +217,10 @@ function viewMembers() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
  
 }
-
- 
- 
+function filesbtn() {
+    const dropdown = document.querySelector('[data-flsDropdown]');
+    dropdown.classList.toggle('active');
+}
 // js fucntion of group submission members requ files 
 document.addEventListener('click', e =>{
   const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
@@ -507,6 +508,21 @@ function toggleAdvReqLogs() {
               <div class="fileVersion">version 2.0</div>
           </div>
           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
               <img src="https://via.placeholder.com/24" alt="file icon">
               <div class="fileName">adv-test3.pdf</div>
               <div class="fileVersion">version 1.0</div>

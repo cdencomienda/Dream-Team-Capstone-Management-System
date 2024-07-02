@@ -139,8 +139,7 @@
                 </div>
             </div>
         </div>
-
-            
+ 
         <script>
                 window.onload = function() {
                     var urlParams = new URLSearchParams(window.location.search);
@@ -450,8 +449,8 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                        <div class = "flsDropdown" data-flsDropdown>
-                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                        <div class = "flsDropdown " data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" onclick = "filesbtn()"data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class="filesContainer"> 
                                 <div class="documentationCont">
                                     Document Requirement: <br>
