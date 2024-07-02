@@ -953,8 +953,17 @@ function fetchGroupData(course_id, group_name) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Display the fetched group name in the group_name element
-            document.getElementById('group_name').textContent = data.group_name;
+            // Create a new h3 element for displaying the group name
+            const groupHeader = document.createElement('h3');
+            groupHeader.textContent = data.group_name;
+
+            // Clear any existing content in the group_name element
+            const groupContainer = document.getElementById('group_name');
+            groupContainer.innerHTML = '';
+            
+            // Append the h3 element to the group_name element
+            groupContainer.appendChild(groupHeader);
+
             console.log('Group Name:', data.group_name);
             console.log('Student Group ID:', data.student_group_id);
 
@@ -967,57 +976,79 @@ function fetchGroupData(course_id, group_name) {
     .catch(error => console.error('Fetch error:', error));
 }
 
+
 function fetchStudentGroups() {
     fetch('fetchStudentGroups.php')
         .then(response => response.json())
         .then(data => {
-            if (data.message) {
-                console.log(data.message); // Output any error message
+            if (data.error) {
+                console.error(data.error); // Output any error message
             } else {
                 const groupMembersContainer = document.querySelector('.GroupmembersContainer');
                 
                 // Clear the container first
                 groupMembersContainer.innerHTML = '';
 
-                // Process the JSON data
-                data.forEach(student => {
-                    console.log(student); // Output each student
-                    // Create a new element for each student and append it to the container
-                    const studentElement = document.createElement('h4');
-                    studentElement.textContent = student;
-                    studentElement.style.textAlign = 'left';
-                    groupMembersContainer.appendChild(studentElement);
-                });
+                // Output adviser's name or "No Adviser"
+                const adviserElement = document.createElement('h4');
+                adviserElement.textContent = data.adviser ? "Adviser - " + data.adviser : "No Adviser";
+                adviserElement.style.textAlign = 'left';
+                groupMembersContainer.appendChild(adviserElement);
+
+                // Process the array of students
+                if (data.students && data.students.length > 0) {
+                    data.students.forEach(student => {
+                        const studentElement = document.createElement('h4');
+                        studentElement.textContent = student;
+                        studentElement.style.textAlign = 'left';
+                        groupMembersContainer.appendChild(studentElement);
+                    });
+                } else {
+                    console.log("No students found.");
+                }
             }
         })
         .catch(error => console.error('Error:', error));
 }
 
+
+
+
+
 function fetchPanelGroups() {
     const PanelistContainer = document.querySelector('.PanelistContainer');
     PanelistContainer.innerHTML = ''; // Clear existing content
 
-    fetch('test2.php')
+    fetch('fetchPanelGroups.php')
         .then(response => response.json())
         .then(data => {
-            // Iterate through panelists data
-            data.forEach(panelist => {
-                const panelistName = `${panelist.firstName} ${panelist.lastName}`;
-                const panelistRole = panelist.panelRole;
-                
-                // Create an h3 element for each panelist
-                const panelistElement = document.createElement('h4');
-                panelistElement.textContent = `${panelistRole} - ${panelistName}`;
-                panelistElement.style.textAlign = 'left'; // Align text to the left
+            // Check for error message
+            if (data.error) {
+                const errorElement = document.createElement('h4');
+                errorElement.textContent = data.error;
+                errorElement.style.textAlign = 'left';
+                PanelistContainer.appendChild(errorElement);
+            } else {
+                // Iterate through panelists data
+                data.forEach(panelist => {
+                    const panelistName = `${panelist.firstName} ${panelist.lastName}`;
+                    const panelistRole = panelist.panelRole;
+                    
+                    // Create an h4 element for each panelist
+                    const panelistElement = document.createElement('h4');
+                    panelistElement.textContent = `${panelistRole} - ${panelistName}`;
+                    panelistElement.style.textAlign = 'left'; // Align text to the left
 
-                // Append the h3 element to PanelistContainer
-                PanelistContainer.appendChild(panelistElement);
-            });
+                    // Append the h4 element to PanelistContainer
+                    PanelistContainer.appendChild(panelistElement);
+                });
+            }
         })
         .catch(error => {
             console.error('Error fetching panelist data:', error);
         });
 }
+
 
 
 
