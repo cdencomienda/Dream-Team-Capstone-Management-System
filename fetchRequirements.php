@@ -1,74 +1,67 @@
 <?php
+
 // Start the session
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('HTTP/1.1 401 Unauthorized');
-    echo json_encode(['error' => 'User not logged in']);
-    exit();
-}
-
 // Database connection details
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'dreamteam';
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "your_database";
 
-$conn = new mysqli($host, $username, $password, $database);
+// Check if group_id is set in session
+if (!isset($_SESSION['group_id'])) {
+    die("Group ID not found in session.");
+}
 
+$group_id = $_SESSION['group_id'];
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if ($conn->connect_error) {
-    header('HTTP/1.1 500 Internal Server Error');
-    echo json_encode(['error' => 'Database connection failed']);
-    exit();
+  die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve the user ID from the session
-$userID = $_SESSION['user_id'];
+// Query to get group name based on group_id
+$sql_group_name = "SELECT group_name FROM groups WHERE group_id = ?";
+$stmt_group_name = $conn->prepare($sql_group_name);
+$stmt_group_name->bind_param("i", $group_id);
+$stmt_group_name->execute();
+$result_group_name = $stmt_group_name->get_result();
 
-// Retrieve the `requirementsID` for the user's group
-$sql = "SELECT g.requirementsID
-        FROM `group` g
-        JOIN `users` u ON g.studentID = u.userID
-        WHERE u.userID = ?";
+if ($result_group_name->num_rows > 0) {
+  $row_group_name = $result_group_name->fetch_assoc();
+  $group_name = $row_group_name['group_name'];
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $userID);
-$stmt->execute();
-$result = $stmt->get_result();
-$groupData = $result->fetch_assoc();
+  // Query to get requirements based on group_id
+  $sql_requirements = "SELECT reqName, reqDescription FROM requirements WHERE requirementsID = ?";
+  $stmt_requirements = $conn->prepare($sql_requirements);
+  $stmt_requirements->bind_param("i", $group_id);
+  $stmt_requirements->execute();
+  $result_requirements = $stmt_requirements->get_result();
 
-$requirementsID = $groupData['requirementsID'];
+  if ($result_requirements->num_rows > 0) {
+    while ($row_requirements = $result_requirements->fetch_assoc()) {
+      $reqName = $row_requirements['reqName'];
+      $reqDescription = $row_requirements['reqDescription'];
 
-// Check if the `requirementsID` is found
-if (!$requirementsID) {
-    echo json_encode(['error' => 'Requirements ID not found']);
-    exit();
+      // Output or process your data here
+      echo "Requirement Name: " . $reqName . "<br>";
+      echo "Requirement Description: " . $reqDescription . "<br>";
+      echo "<hr>";
+    }
+  } else {
+    echo "No requirements found for group ID: " . $group_id . "<br>";
+  }
+
+  $stmt_requirements->close();
+} else {
+  echo "No group found for group ID: " . $group_id . "<br>";
 }
 
-// Fetch the requirements details based on `requirementsID`
-$sql = "SELECT r.reqName
-        FROM requirements r
-        WHERE r.requirementsID = ?";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $requirementsID);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$requirements = [];
-
-// Populate the requirements array with the fetched data
-while ($row = $result->fetch_assoc()) {
-    $requirements[] = $row['reqName'];
-}
-
-$stmt->close();
+$stmt_group_name->close();
 $conn->close();
 
-// Set the content type to JSON
-header('Content-Type: application/json');
-
-// Return the requirements as a JSON response
-echo json_encode($requirements);
 ?>
