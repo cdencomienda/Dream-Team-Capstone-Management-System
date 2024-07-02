@@ -29,7 +29,7 @@ body{
   width:280px;
   bottom: 35px;
   left: 84%;
-  z-index: 100;
+  z-index:0;
 }
 .editoverlay{
   display: none;
@@ -349,17 +349,16 @@ background-repeat: no-repeat;
 .class-Dropdown{
   margin-left: 120px;
   margin-top: 30px;
-  width: 360px;
+  width: 380px;
   height: 1200px;
   position: relative;
   overflow: auto;
 }
 .classListDropdown{
-  width: 340px;
+  width: 340px; 
   margin-bottom: 10px;
   position: relative;
-  margin-left: 10px;
-  z-index: 0px;
+  margin-left: 10px; 
 }
 .classListDropdown *{
   box-sizing: border-box;
@@ -466,7 +465,7 @@ margin: 15px;
  
 /* for the courses inside the term css  */
 .coursesDropdown{
-height: 500px;
+height: 50%;
 overflow: auto;
 margin-top: 20px;
  
@@ -568,6 +567,7 @@ cursor: pointer;
   grid-template-columns: 1fr auto;
   gap: 10px;
 }
+ 
 .GroupmembersContainer{
 position: absolute;
 left: 0;
@@ -580,9 +580,23 @@ pointer-events: none;
 opacity: 0;
 transform: translateY(-10px);
 transition: opacity 150ms ease-in-out;
-width: 200px;
+width: 300px;
 }
- 
+.PanelistContainer{
+  position: absolute;
+  left: 0;
+  top: calc(100% + .25rem);
+  background-color: white;
+  padding: .75rem;
+  border-radius:.25rem ;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out;
+  width: 300px;
+  }
+   
 .Rep-FilesBtn:hover{
   background-color: #958f87;
 }
@@ -590,7 +604,7 @@ width: 200px;
 .Submission-Btn:hover{
   background-color: #958f87;
 }
-.Rep-FilesBtn, .Submission-Btn, .Members-Btn {
+.Rep-FilesBtn, .Submission-Btn, .Members-Btn, .Panelist-Btn {
   width: auto;
   height: 25px;
   background-color: #F8EFE3;
@@ -642,6 +656,34 @@ opacity: 1;
 transform: translateY(0);
 pointer-events: auto;
 }
+
+.Panelist-Btn{
+  border: none;
+  width: 125px;
+  height: 35x;
+  margin-right: 10px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  transition:backround-color .3s ease;
+  }
+  .Panelist-Btn:hover {
+  background-color: #958f87;
+  }
+  */
+  button:hover{
+    background-color:#958f87;
+  }
+  .pDropdown{
+    position: relative;
+  }
+  .pDropdown > .Panelist-Btn:focus + .PanelistContainer{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  }
+
 .submissionFrame, .professorFilesR {
 display: none;
 background-color: #ffffff;
@@ -674,6 +716,7 @@ text-align: center;
 display: flex;
 margin: 0;
 justify-content: center;
+align-items: center;
  
 }
 .button-group{
@@ -998,15 +1041,17 @@ background-color: #dbd3c9;
 }
 .flsDropdown.active{
   position: relative;
+  display: block;
 }
 .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  overflow-y: auto;
 }
 .filesContainer{
   position: absolute;
-  width: 470px;
+  width: 490px;
   height: 325px;
   left: -250px;
   top: calc(100% + .25rem);
@@ -1020,7 +1065,7 @@ background-color: #dbd3c9;
   transition: opacity 150ms ease-in-out;
   z-index: 1000;
   text-align: left;
-  
+  overflow-y: auto
 }
 
 .documentationCont{
@@ -1050,6 +1095,17 @@ background-color: #dbd3c9;
       height: 30px;
      
   }
+  .attachedDocumentation{
+    justify-content: space-between;
+    align-items: center;
+  }
+  .Recent-fileName{
+    margin-left: 25%;
+    width: 100px;
+  }
+  .Recent-fileVersion{
+    margin-left: 130%;
+  }
   .divDocuReqLogs{
     width: 40px;
   }
@@ -1062,6 +1118,36 @@ background-color: #dbd3c9;
     margin-left: 10px;
   }
  
+  .attachedDocumentation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.attachedDocumentation:hover {
+    background-color: #E8D7C3; /* Change background color on hover */
+    transform: scale(1.02); /* Slightly increase the size on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+.attachedAdvRecom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.attachedAdvRecom:hover {
+    background-color: #E8D7C3; /* Change background color on hover */
+    transform: scale(1.02); /* Slightly increase the size on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -1076,71 +1162,89 @@ background-color: #dbd3c9;
   }
   .AdvLogs {
     display: flex;
-    justify-content: center; /* Center horizontally */
+    justify-content: center;
     align-items: center;
-    font-size: 20px; /* Increase the font size */
-    width: 20px; /* Set a custom width */
-    height: 20px; /* Set a custom height */
-    padding: 6px; /* Add padding to increase clickable area */
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    padding: 6px;
     margin-left: 250px;
     background-color: transparent;
     border: none;
 }
-.AdvCont{
-  margin: 10px;
-  width: 455px;
-  height: 125px;
-  background-color: white;
+
+.AdvCont {
+    margin: 10px;
+    width: 455px;
+    height: 125px;
+    background-color: white;
 }
-.advRecomendation{
-  margin-top: 15px;
-  height: 55px;
-  width: 100%;
-  background-color: #F8EFE3;
-  border-radius: 25px;
-  display: flex;
- 
-  flex-direction: row;
-  align-items: center;
+
+.advRecomendation {
+    margin-top: 15px;
+    height: 55px;
+    width: 100%;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .fileLogsPopup {
-  display: none;
-  position: absolute;
-  left: 0;
-  z-index: 1000;
-  background-color: #f9f9f9;
-  min-width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    max-height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow-y: auto;
+   
 }
-#DocuReqrmntLogs{
-  bottom: 30%;
+
+#DocuReqrmntLogs {
+  bottom: 50%;
+  left: 37%;
 }
-#AdvReqrmntLogs{
-  bottom: -30px;
+
+#AdvReqrmntLogs {
+    bottom: -30px;
 }
+
 .fileLogsPopup .logItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #eee;
+  cursor: pointer;
+  
 }
+
 .fileLogsPopup .logItem:last-child {
   border-bottom: none;
 }
+
 .fileLogsPopup .logItem img {
   width: 24px;
   height: 24px;
   margin-right: 10px;
 }
+
 .fileLogsPopup .logItem .fileName {
   flex: 1;
 }
+
+.fileLogsPopup .logItem:hover {
+  background-color: #f0f0f0;
+}
+
 .defaultBody{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
@@ -1221,11 +1325,11 @@ background-color: #dbd3c9;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   overflow: hidden;
   background-color: rgba(0,0,0,0.5);
-  z-index: 500 ;
+  z-index: 1500 ;
 }
  
 .secondaryRubriccont {
@@ -1554,4 +1658,9 @@ tr:hover {
 }
 .score-column{
 text-align: center;
+}
+
+
+.fileVersion{
+
 }

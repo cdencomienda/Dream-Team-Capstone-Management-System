@@ -71,41 +71,43 @@ function viewMembers() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';  
 }
 
-  // profile
+// edit profile js 
 
-  document.addEventListener('profile', function () {
-    const editProfileBtn = document.querySelector('.editprofileBtn');
-    const logoutBtn = document.querySelector('.logoutBtn');
-  
-    editProfileBtn.addEventListener('click', function (event) { 
-      event.preventDefault(); 
-    }); 
+document.addEventListener('DOMContentLoaded', (event) => {
+  const profilePic = document.getElementById('profilePic');
+  const menu = document.getElementById('menuBtn');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const overlay = document.getElementById('editProfileOverlay');
+
+  profilePic.addEventListener('click', () => {
+      menu.classList.toggle('show');
   });
-  document.getElementById('editProfileBtn').addEventListener('click', function() {
-    var overlay = document.getElementById("editProfileOverlay");
-    overlay.style.display = "block";
+
+  document.addEventListener('click', (event) => {
+      if (!profilePic.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.remove('show');
+      }
   });
-   
-  function closeEditform(){
-    document.getElementById('editProfileOverlay').style.display = 'none';
-    document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
+
+  editProfileBtn.addEventListener('click', () => {
+      overlay.classList.add('show');
+      menu.classList.remove('show');
+  });
+
+  function closeEditform() {
+      overlay.classList.remove('show');
   }
 
-  function Back(){
-    document.getElementById('menuBtn').style.display = 'none';
-  }
-  
   window.onclick = function(event) {
-    var overlay = document.getElementById("editProfileOverlay");
-    if (event.target == overlay) {
-        overlay.style.display = "none";
-    }
+      if (event.target == overlay) {
+          overlay.classList.remove('show');
+      }
   }
-  function newGroupCreated() {
-    var container = document.querySelector('.GroupContainer');
-    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-      
-  }
+
+  // Attach closeEditform function to the global scope
+  window.closeEditform = closeEditform;
+});   
+
 // for class dropdown
 
 const dropdownsClass = document.querySelectorAll('.classListDropdown');

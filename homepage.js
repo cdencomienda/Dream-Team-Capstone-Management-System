@@ -21,7 +21,7 @@ function StudentCapstone(){
 
  // edit profile js 
 
-document.addEventListener('DOMContentLoaded', (event) => {
+ document.addEventListener('DOMContentLoaded', (event) => {
   const profilePic = document.getElementById('profilePic');
   const menu = document.getElementById('menuBtn');
   const editProfileBtn = document.getElementById('editProfileBtn');
@@ -36,16 +36,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
           menu.classList.remove('show');
       }
   });
-  profile.addEventListener('click', function () {
-    const toggleMenu = document.querySelector('.menu');
-    toggleMenu.classList.toggle('active');
-  });
-   
-  const tap = document.querySelector('.profile', 'melonbtn', 'editprofileBtn');
-  tap.addEventListener('click', function () {
-    const toggleMenu = document.querySelector('.menu', '.settingMelon', );
-    toggleMenu.classList.toggle('active', 'melonActivate');
-  }); 
 
   editProfileBtn.addEventListener('click', () => {
       overlay.classList.add('show');
@@ -65,6 +55,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Attach closeEditform function to the global scope
   window.closeEditform = closeEditform;
 }); 
+
 
 function Back(){
   document.getElementById('menuBtn').style.display = 'none';

@@ -139,8 +139,7 @@
                 </div>
             </div>
         </div>
-
-            
+ 
         <script>
                 window.onload = function() {
                     var urlParams = new URLSearchParams(window.location.search);
@@ -450,46 +449,54 @@
                                     
                         </script> 
                     <div class="button-group"> 
-                        <div class = "flsDropdown" data-flsDropdown>
-                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                        <div class = "flsDropdown " data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" onclick = "filesbtn()"data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class="filesContainer"> 
                                 <div class="documentationCont">
                                     Document Requirement: <br>
                                     <div class="ReqDocumentation">
-                                        <div class="attachedDocumentation"> here attached file </div>
+                                        <div class="attachedDocumentation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
+                                        
+                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                            <div class="Recent-fileName">docu-test1.pdf</div>
+                                            
+                                        </div>
                                         <div class="divDocuReqLogs"> <br> 
                                             <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class="fileLogsPopup" id="DocuReqrmntLogs">
-                                                <h4>Document Requirement Logs</h4>
-                                                <!-- Logs will be dynamically added here -->
-                                            </div>
                                         </div>
                                     </div>     
                                 </div>   
-                                <div class="AdvCont">          
-                                    Adviser Recommendation Sheet: 
-                                    <div class="advRecomendation">
-                                        <div class="attachedAdvRecom"> attached file here </div>    
-                                        <div class="divAdvLogs"> <br> 
-                                            <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class="fileLogsPopup" id="AdvReqrmntLogs">
-                                                <h4>Adviser's Recommendations Sheet</h4>
-                                                <!-- Logs will be dynamically added here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
+                                 
                             </div>
                         </div>    
-                        
-                        <div class="mDropdown" data-flsDropdown>  
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                        <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                                                <h4>Document Requirement Logs</h4>
+                                                <!-- Logs will be dynamically added here -->
+                                            </div>
+                        <div class="mDropdown" data-mDropdown>  
+                        <button type="button" class="Members-Btn" data-Members-Btn onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer">
                                     member1
                                 </div>
                             </div>
+                        
+                            <div class="pDropdown" data-pDropdown>  
+                                <button type="button" class="Panelist-Btn" data-pDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
+                                        <div class="PanelistContainer" id="PanelistContainer">
+                                            Panel1
+                                        </div>
+                                    </div>
                         </div>
+
+                        <!-- <div class="pDropdown" data-flsDropdown>  
+                        <button type="button" class="Panelist-Btn" data-flsDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
+                                <div class="PanelistContainer" id="PanelistContainer">
+                                    Panel1
+                                </div>
+                            </div>
+                        </div>    -->
+
                     </h4>
                     </div> 
 
@@ -522,7 +529,7 @@
                     </div>
                 </div>
                 <!-- Modal Structure -->
-                <div id="fileModal" class="modal">
+                <div id="fileModal" class="modal" style = "z-index = 1000">
                     <div class="modalContent">
                         <span class="closeButton" onclick="closeModal()">&times;</span>
                         <iframe id="fileFrame" src="" frameborder="0"></iframe>
@@ -835,8 +842,8 @@ function fetchCourses(container, year, selectedTerm) {
                                         groupButton.onclick = function() {
                                         newGroupCreated(course.course_id, group_name);
                                         console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
-                                        const directory = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
-                                        console.log(directory);
+                                        const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
+                                        setDirectory(directoryPath);
                                     };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
@@ -851,12 +858,45 @@ function fetchCourses(container, year, selectedTerm) {
         .catch(error => console.error('Fetch error:', error));
 }
 
+function setDirectory(path) {
+    console.log('this is the button directory: ', path);
+
+    const fileDirectory = path;
+    console.log('this is the actual directory: ', fileDirectory);
+
+    // Prepare the directory steps
+    const directorySteps = fileDirectory.split(' > ').join('/');
+
+    // Check the directory using fetch API
+    fetch('profSetDirectory.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ directory: directorySteps })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.exists) {
+            console.log('Directory exists: ', data.path);
+        } else {
+            console.log('Directory does not exist: ', data.path);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
 function newGroupCreated(course_id, group_name) {
     var container = document.querySelector('.GroupContainer');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
     console.log(course_id, group_name);
     fetchGroupData(course_id, group_name);
     fetchStudentGroups();
+    fetchPanelGroups();
+    requirementName();
 
     // Prepare the data to be sent in the request body
     const formData = new FormData();
@@ -896,8 +936,17 @@ function fetchGroupData(course_id, group_name) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Display the fetched group name in the group_name element
-            document.getElementById('group_name').textContent = data.group_name;
+            // Create a new h3 element for displaying the group name
+            const groupHeader = document.createElement('h3');
+            groupHeader.textContent = data.group_name;
+
+            // Clear any existing content in the group_name element
+            const groupContainer = document.getElementById('group_name');
+            groupContainer.innerHTML = '';
+            
+            // Append the h3 element to the group_name element
+            groupContainer.appendChild(groupHeader);
+
             console.log('Group Name:', data.group_name);
             console.log('Student Group ID:', data.student_group_id);
 
@@ -910,30 +959,183 @@ function fetchGroupData(course_id, group_name) {
     .catch(error => console.error('Fetch error:', error));
 }
 
+
 function fetchStudentGroups() {
     fetch('fetchStudentGroups.php')
         .then(response => response.json())
         .then(data => {
-            if (data.message) {
-                console.log(data.message); // Output any error message
+            if (data.error) {
+                console.error(data.error); // Output any error message
             } else {
                 const groupMembersContainer = document.querySelector('.GroupmembersContainer');
                 
                 // Clear the container first
                 groupMembersContainer.innerHTML = '';
 
-                // Process the JSON data
-                data.forEach(student => {
-                    console.log(student); // Output each student
-                    // Create a new element for each student and append it to the container
-                    const studentElement = document.createElement('div');
-                    studentElement.textContent = student;
-                    groupMembersContainer.appendChild(studentElement);
-                });
+                // Output adviser's name or "No Adviser"
+                const adviserElement = document.createElement('h4');
+                adviserElement.textContent = data.adviser ? "Adviser - " + data.adviser : "No Adviser";
+                adviserElement.style.textAlign = 'left';
+                groupMembersContainer.appendChild(adviserElement);
+
+                // Process the array of students
+                if (data.students && data.students.length > 0) {
+                    data.students.forEach(student => {
+                        const studentElement = document.createElement('h4');
+                        studentElement.textContent = student;
+                        studentElement.style.textAlign = 'left';
+                        groupMembersContainer.appendChild(studentElement);
+                    });
+                } else {
+                    console.log("No students found.");
+                }
             }
         })
         .catch(error => console.error('Error:', error));
 }
+
+
+
+
+
+function fetchPanelGroups() {
+    const PanelistContainer = document.querySelector('.PanelistContainer');
+    PanelistContainer.innerHTML = ''; // Clear existing content
+
+    fetch('fetchPanelGroups.php')
+        .then(response => response.json())
+        .then(data => {
+            // Check for error message
+            if (data.error) {
+                const errorElement = document.createElement('h4');
+                errorElement.textContent = data.error;
+                errorElement.style.textAlign = 'left';
+                PanelistContainer.appendChild(errorElement);
+            } else {
+                // Iterate through panelists data
+                data.forEach(panelist => {
+                    const panelistName = `${panelist.firstName} ${panelist.lastName}`;
+                    const panelistRole = panelist.panelRole;
+                    
+                    // Create an h4 element for each panelist
+                    const panelistElement = document.createElement('h4');
+                    panelistElement.textContent = `${panelistRole} - ${panelistName}`;
+                    panelistElement.style.textAlign = 'left'; // Align text to the left
+
+                    // Append the h4 element to PanelistContainer
+                    PanelistContainer.appendChild(panelistElement);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching panelist data:', error);
+        });
+}
+
+
+
+function requirementName() {
+    const filesContainer = document.querySelector('.filesContainer');
+    filesContainer.innerHTML = ''; // Clear existing content
+
+    fetch('requirementName.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Received reqName data:', data);
+            data.forEach(reqName => {
+                // Create a documentationCont element
+                const documentationCont = document.createElement('div');
+                documentationCont.classList.add('documentationCont');
+
+                // Create Document Requirement text
+                const docRequirement = document.createElement('div');
+                docRequirement.textContent = `${reqName}`;
+                documentationCont.appendChild(docRequirement);
+
+                // Create ReqDocumentation container
+                const reqDocumentation = document.createElement('div');
+                reqDocumentation.classList.add('ReqDocumentation');
+
+                // Create attachedDocumentation div
+                const attachedDocumentation = document.createElement('div');
+                attachedDocumentation.classList.add('attachedDocumentation');
+                // Example of setting click handler, adjust based on your data structure
+                attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.fileUrl)}')`);
+
+                // Create file icon (adjust as per your actual structure)
+                const fileIcon = document.createElement('img');
+                fileIcon.src = 'menu_assets/file-icon.png';
+                fileIcon.alt = 'file icon';
+                fileIcon.classList.add('fileIcon');
+                attachedDocumentation.appendChild(fileIcon);
+
+                // Create Recent-fileName div (adjust based on actual data structure)
+                const recentFileName = document.createElement('div');
+                recentFileName.textContent = reqName.fileName; // Assuming 'fileName' is a property in your data
+                recentFileName.classList.add('Recent-fileName');
+                attachedDocumentation.appendChild(recentFileName);
+
+                reqDocumentation.appendChild(attachedDocumentation);
+
+                // Create divDocuReqLogs div
+                const divDocuReqLogs = document.createElement('div');
+                divDocuReqLogs.classList.add('divDocuReqLogs');
+
+                // Create toggle button with icon
+                const toggleButton = document.createElement('button');
+                toggleButton.classList.add('DocuReqLogs');
+                toggleButton.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
+
+                // Add onclick event to toggle logs
+                toggleButton.onclick = function() {
+                    console.log('Clicked toggleButton for reqName:', reqName);
+                    // Assuming toggleDocuReqLogs toggles visibility of logs
+                    toggleDocuReqLogs(reqName); // Pass reqName or related data as needed
+                    clickedRequirement(reqName);
+                };
+
+                // Append toggleButton to divDocuReqLogs
+                divDocuReqLogs.appendChild(toggleButton);
+
+                reqDocumentation.appendChild(divDocuReqLogs);
+
+                documentationCont.appendChild(reqDocumentation);
+
+                // Append documentationCont to filesContainer
+                filesContainer.appendChild(documentationCont);
+            });
+        })
+        .catch(error => console.error('Error fetching reqName data:', error));
+}
+
+
+function clickedRequirement(reqName) {
+    // Fetch API request
+    fetch('sessionReqName.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reqName: reqName }), // Use reqName parameter passed to function
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to save reqName to session');
+        }
+        console.log('reqName saved to session successfully');
+    })
+    .catch(error => console.error('Error saving reqName to session:', error));
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1193,7 +1395,9 @@ function fetchRubric() {
 }
 
 
-
+function clearForm() {
+        document.getElementById('selectedPanelist').reset();
+    }
 
 
 function handleAction(action, course_id) {
@@ -1213,6 +1417,7 @@ function handleAction(action, course_id) {
             break;
         case 'Rubric':
             rubric();
+            clearForm();
             fetchRubricNames();
             fetchRubricSelected();
             fetchRubric();
@@ -1356,14 +1561,6 @@ document.addEventListener('DOMContentLoaded', function() {
     coursesData();
 });
 
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    coursesData();
-});
 
 
 

@@ -27,24 +27,23 @@
  
         <div class="container">
             <div class="action">
-                <div class="profile">
+                <div class="profile" id="profilePic">
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
-                <div class="menu" id ="menuBtn">
-                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                <div class="menu" id="menuBtn">
+                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
                     <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
                 </div>
             </div>
-            <!-- editprofile -->
+            <!-- editprofile --> 
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
                     <div>
-                        <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                        <button class="close" onclick="closeEditform()"><i class="fa-regular fa-circle-xmark"></i></button>
                     </div>
-                    
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
@@ -52,24 +51,22 @@
                         <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
-                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
-                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                        <button type="submit" class="saveEditbtn"> Save Changes </button>
-                       
+                        <h3><input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"></h3>
+                        <h3><input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"></h3>
+                        <h3><input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"></h3>
+                        <h3><input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"></h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
                     </form>
-                   
                     <?php if(isset($_SESSION['error_message'])) { ?>
-                <div id="error-message" class="show">
- 
-                    <?php echo $_SESSION['error_message']; ?>
-                    <button onclick="clearErrorMessage()">OK</button>
+                    <div id="error-message" class="show">
+                        <?php echo $_SESSION['error_message']; ?>
+                        <button onclick="clearErrorMessage()">OK</button>
+                    </div>
+                    <?php unset($_SESSION['error_message']); } ?>
                 </div>
-            <?php
-                unset($_SESSION['error_message']); // Clear the error message after displaying it
-            } ?>
- 
+            </div>
+        </div>
+
     <script>
         window.onload = function() {
             var urlParams = new URLSearchParams(window.location.search);
@@ -122,7 +119,7 @@
             <section class="table__header">
                 <h1> User Accounts </h1> 
                 <div class="input-group">
-                    <input type="search" placeholder="Search User...">
+                    <input type="search" placeholder="Search User..." stlye =" background: transparent;">
                     <img src="images/search.png" alt="">
                 </div> 
                 <!-- Popup/Modal Structure -->
@@ -163,138 +160,139 @@
         </main> 
         <?php include 'editProfile.php'; ?>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="useradmin.js"></script>
-                         <!-- <tr>
-                        <td> "userID":"20240001 </td>
-                        <td> "userType":"Student"</td>
-                        <td> "userName":"Austria, Jose" </td>
-                        <td> "userEmail":"jaustria@student.apc.edu.ph"</td>
-                        </tr> -->
-    <script>
+<script src="useradmin.js"></script>
+<script>
+    $(document).ready(function(){
+        // Function to load users based on search query
+        function loadUsers(searchQuery = '') {
+            $.ajax({
+                url: 'useradmin.php',
+                type: 'GET',
+                data: {search: searchQuery},
+                success: function(response){
+                    // Parse JSON response
+                    var users = JSON.parse(response);
+                    // Clear existing rows
+                    $('#user_table_body').empty();
+                    // Append user data to the table
+                    users.forEach(function(user){
+                        var newRow = '<tr class="user-row" data-user-id="' + user.userID + '" data-user-type="' + user.userType + '">';
+                        newRow += '<td class="user-id">' + user.userID + '</td>';
+                        newRow += '<td>' + user.userType + '</td>';
+                        newRow += '<td>' + user.firstName + ' ' + user.lastName + '</td>';
+                        newRow += '<td>' + user.userEmail + '</td>';
+                        newRow += '<td><button class="show-modal-btn">Edit</button></td>';  
+                        newRow += '</tr>';
+                        $('#user_table_body').append(newRow);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        }
 
-        $(document).ready(function(){
-            // Function to load users based on search query
-            function loadUsers(searchQuery = '') {
-                $.ajax({
-                    url: 'useradmin.php',
-                    type: 'GET',
-                    data: {search: searchQuery},
-                    success: function(response){
-                        // Parse JSON response
-                        var users = JSON.parse(response);
-                        // Clear existing rows
-                        $('#user_table_body').empty();
-                        // Append user data to the table
-                        users.forEach(function(user){
-                            var newRow = '<tr class="user-row" data-user-id="' + user.userID + '">';
-                            newRow += '<td class="user-id">' + user.userID + '</td>';
-                            newRow += '<td>' + user.userType + '</td>';
-                            newRow += '<td>' + user.firstName + ' ' + user.lastName + '</td>';
-                            newRow += '<td>' + user.userEmail + '</td>';
-                            newRow += '<td><button class="show-modal-btn">Edit</button></td>';  
-                            newRow += '</tr>';
-                            $('#user_table_body').append(newRow);
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle errors
-                        console.error(xhr.responseText);
-                    }
-                });
+        // Initial load of users
+        loadUsers();
+
+        // Handles search in users
+        const search = document.querySelector('.input-group input');
+        search.addEventListener('input', function() {
+            loadUsers(search.value);
+        });
+
+        // Handle click on button to show modal
+        $('#user_table_body').on('click', '.show-modal-btn', function(event) {
+            event.stopPropagation(); // Prevent row click event from triggering
+            var userId = $(this).closest('.user-row').data('user-id'); // Get user ID from closest '.user-row'
+            var modal = $('#editDeleteModal');
+
+            // Populate modal with user data
+            modal.find('#userId').val(userId);
+            // Get user type for selected user
+            var userType = $(this).closest('tr').find('td:eq(1)').text().trim();
+            // Set selected option in dropdown
+            modal.find('#userType').val(userType);
+            // Display the modal
+            modal.show();
+        });
+
+        // Close modal/popup when close button is clicked
+        $('.close-modal-btn').click(function(){
+            var modal = $('#editDeleteModal');
+            var isChangesSaved = true; // Flag to track if changes are saved
+
+            // Check if changes are saved
+            // Example: Check if the user type has been modified
+            if ($('#userId').val() !== '' || $('#userType').val() !== modal.find('#userType').data('original-value')) {
+                isChangesSaved = confirm('You have unsaved changes. Are you sure you want to close the modal?');
             }
 
-            // Initial load of users
-            loadUsers();
+            if (isChangesSaved) {
+                $('#editDeleteModal').hide();
+            }
+        });
 
-            // Handles search in users
-            const search = document.querySelector('.input-group input');
-            search.addEventListener('input', function() {
-                loadUsers(search.value);
-            });
+        // Handle click on delete user button
+        $('#deleteUserBtn').click(function(){
+            var userId = $('#userId').val();
+            var userType = $('#user_table_body').find('tr[data-user-id="' + userId + '"]').data('user-type');
 
-            // Handle click on button to show modal
-            $('#user_table_body').on('click', '.show-modal-btn', function(event) {
-                event.stopPropagation(); // Prevent row click event from triggering
-                var userId = $(this).closest('.user-row').data('user-id'); // Get user ID from closest '.user-row'
-                var modal = $('#editDeleteModal');
+            // Check if user is a Program Director
+            if (userType === 'Program Director') {
+                alert('Cannot delete a Program Director.');
+                return;
+            }
 
-                // Populate modal with user data
-                modal.find('#userId').val(userId);
-                // Get user type for selected user
-                var userType = $(this).closest('tr').find('td:eq(1)').text().trim();
-                // Set selected option in dropdown
-                modal.find('#userType').val(userType);
-                // Display the modal
-                modal.show();
-            });
-
-            // Close modal/popup when close button is clicked
-            $('.close-modal-btn').click(function(){
-                var modal = $('#editDeleteModal');
-                var isChangesSaved = true; // Flag to track if changes are saved
-
-                // Check if changes are saved
-                // Example: Check if the user type has been modified
-                if ($('#userId').val() !== '' || $('#userType').val() !== modal.find('#userType').data('original-value')) {
-                    isChangesSaved = confirm('You have unsaved changes. Are you sure you want to close the modal?');
-                }
-
-                if (isChangesSaved) {
+            // Perform delete operation using AJAX
+            $.ajax({
+                url: 'delete&edituser.php',
+                type: 'POST',
+                data: {userId: userId},
+                success: function(response){
+                    // Reload users after successful deletion
+                    loadUsers(search.value);
+                    // Close modal
                     $('#editDeleteModal').hide();
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
                 }
-            });
-
-            // Handle click on delete user button
-            $('#deleteUserBtn').click(function(){
-                var userId = $('#userId').val();
-                // Perform delete operation using AJAX
-                $.ajax({
-                    url: 'delete&edituser.php',
-                    type: 'POST',
-                    data: {userId: userId},
-                    success: function(response){
-                        // Reload users after successful deletion
-                        loadUsers(search.value);
-                        // Close modal
-                        $('#editDeleteModal').hide();
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle errors
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-
-            // Remove click event handler for the user row
-            $('#user_table_body').off('click', '.user-row');
-
-            // Handle click on save changes button
-            $('#saveEditBtn').click(function(){
-                var userId = $('#userId').val();
-                var userType = $('#userType').val(); 
-                // Perform update operation using AJAX
-                $.ajax({
-                    url: 'delete&edituser.php',
-                    type: 'POST',
-                    data: {
-                        userId: userId,
-                        userType: userType 
-                    },
-                    success: function(response){
-                        // Reload users after successful edit
-                        loadUsers(search.value);
-                        // Close modal
-                        $('#editDeleteModal').hide();
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle errors
-                        console.error(xhr.responseText);
-                    }
-                });
             });
         });
 
-        </script>
+        // Remove click event handler for the user row
+        $('#user_table_body').off('click', '.user-row');
+
+        // Handle click on save changes button
+        $('#saveEditBtn').click(function(){
+            var userId = $('#userId').val();
+            var userType = $('#userType').val(); 
+            // Perform update operation using AJAX
+            $.ajax({
+                url: 'delete&edituser.php',
+                type: 'POST',
+                data: {
+                    userId: userId,
+                    userType: userType 
+                },
+                success: function(response){
+                    // Reload users after successful edit
+                    loadUsers(search.value);
+                    // Close modal
+                    $('#editDeleteModal').hide();
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
         </script>
         </div>
     </div>

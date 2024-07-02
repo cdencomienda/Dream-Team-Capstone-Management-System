@@ -28,6 +28,7 @@ if (isset($_POST['course_id']) && isset($_POST['group_name'])) {
         
         // Store student_group_id in a session variable
         $_SESSION['student_group_id'] = $row["student_group_id"];
+        $_SESSION['group_name'] = $row["group_name"];
 
         // Prepare JSON response
         $response = array(

@@ -1,3 +1,21 @@
+ 
+document.addEventListener('click', e =>{
+    const isflsDropdowButton = e.target.matches("[data-Members-button]")
+    if(!ismDropdownButton && e.target.closest('[data-mDropdown]') != null)
+    return
+    
+    let currentmDropdown
+    if(ismDropdownButton){
+        currentmDropdown = e.target.closest('[data-mDropdown]')
+        currentmDropdown.classList.toggle('active')
+    }
+    
+    document.querySelectorAll("[data-mDropdown].active").forEach(flsDropdown => {
+        if (mDropdown === currentmDropdown) return
+        mDropdown.classList.remove("active")
+    });
+    }) 
+ 
  function openArchive(){
   window.location.assign("ProfessorHome.php")
 }
@@ -199,9 +217,10 @@ function viewMembers() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
  
 }
-
- 
- 
+function filesbtn() {
+    const dropdown = document.querySelector('[data-flsDropdown]');
+    dropdown.classList.toggle('active');
+}
 // js fucntion of group submission members requ files 
 document.addEventListener('click', e =>{
   const isflsDropdowButton = e.target.matches("[data-flsDropdown-button]")
@@ -396,7 +415,6 @@ function clsViewGrp(){
     document.getElementById('fileFrame').src = filePath;
     document.getElementById('fileModal').style.display = "block";
 }
-
 function closeModal() {
     document.getElementById('fileFrame').src = "";
     document.getElementById('fileModal').style.display = "none";
@@ -494,6 +512,21 @@ function toggleAdvReqLogs() {
               <div class="fileName">adv-test3.pdf</div>
               <div class="fileVersion">version 1.0</div>
           </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
+           <div class="logItem" onclick="openModal('requirement%20_repository/adv-logs/adv-test3.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">adv-test3.pdf</div>
+              <div class="fileVersion">version 1.0</div>
+          </div>
       `;
   }
 }
@@ -523,3 +556,4 @@ window.onclick = function(event) {
       }
   }
 }
+
