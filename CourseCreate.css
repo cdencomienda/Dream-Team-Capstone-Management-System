@@ -1173,26 +1173,32 @@ background-color: #dbd3c9;
 }
 
 .fileLogsPopup .logItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
 }
 
 .fileLogsPopup .logItem:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .fileLogsPopup .logItem img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
 }
 
 .fileLogsPopup .logItem .fileName {
-    flex: 1;
+  flex: 1;
 }
+
+.fileLogsPopup .logItem:hover {
+  background-color: #f0f0f0;
+}
+
 .defaultBody{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
