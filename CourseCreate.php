@@ -371,7 +371,7 @@
         <!-- Requirement div -->
         <div class="setrequirements">
             <h3>Requirements</h3>
-            <form class="Requirements" method="POST" action="addRequirements.php">
+            <form id="setRequrements" class="Requirements" method="POST" action="addRequirements.php">
                 <input type="text" class="inputRequirements" name="requirements" placeholder="Input requirements">
                 <h3>Requirements Description</h3>
                 <input type="text" class="inputRequirementsDescription" name="requirementsDescription" placeholder="Input Description">
@@ -386,7 +386,7 @@
         
         <div class="rubriccontainer" style="display: none"> 
 
-<form class="rubricinput" method="POST" action="submittedRubric.php">
+<form id="setRubrics" class="rubricinput" method="POST" action="submittedRubric.php">
     <h3>Select Rubric</h3> 
     <div class="form-row">
         <input type="text" class="inputRubric" name="rubric" placeholder="Request Rubric">
@@ -837,8 +837,8 @@ function fetchCourses(container, year, selectedTerm) {
                                         groupButton.onclick = function() {
                                         newGroupCreated(course.course_id, group_name);
                                         console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
-                                        const directory = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
-                                        console.log(directory);
+                                        const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
+                                        setDirectory(directoryPath);
                                     };
                                         groupButton.textContent = group_name;
                                         courseElement.appendChild(groupButton);
@@ -852,6 +852,37 @@ function fetchCourses(container, year, selectedTerm) {
         })
         .catch(error => console.error('Fetch error:', error));
 }
+
+function setDirectory(path) {
+    console.log('this is the button directory: ', path);
+
+    const fileDirectory = path;
+    console.log('this is the actual directory: ', fileDirectory);
+
+    // Prepare the directory steps
+    const directorySteps = fileDirectory.split(' > ').join('/');
+
+    // Check the directory using fetch API
+    fetch('profSetDirectory.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ directory: directorySteps })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.exists) {
+            console.log('Directory exists: ', data.path);
+        } else {
+            console.log('Directory does not exist: ', data.path);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 
 function newGroupCreated(course_id, group_name) {
     var container = document.querySelector('.GroupContainer');
@@ -1195,7 +1226,11 @@ function fetchRubric() {
 }
 
 
-
+function clearForm() {
+        document.getElementById('selectedPanelist').reset();
+        document.getElementById('setRubrics').reset();
+        document.getElementById('setRequirments').reset();
+    }
 
 
 function handleAction(action, course_id) {
@@ -1207,14 +1242,17 @@ function handleAction(action, course_id) {
             break;
         case 'Add Panelist':
             AddMembers(course_id);
+            clearForm();
             fetchPanelandGroup();
             break;
         case 'Requirements':
             setrequirements(course_id);
+            clearForm();
             reqName();
             break;
         case 'Rubric':
             rubric();
+            clearForm();
             fetchRubricNames();
             fetchRubricSelected();
             fetchRubric();
@@ -1358,14 +1396,6 @@ document.addEventListener('DOMContentLoaded', function() {
     coursesData();
 });
 
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    coursesData();
-});
 
 
 

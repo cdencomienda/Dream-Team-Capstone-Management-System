@@ -25,6 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $groupName = mysqli_real_escape_string($conn, $_POST['courseGroupName']);
     $groupId = mysqli_real_escape_string($conn, $_POST['courseGroupId']);
 
+    // Check if groupName or groupId is null or empty
+    if (empty($groupName) || empty($groupId)) {
+        echo "<script>alert('Group Name or Group ID cannot be null or empty.');</script>";
+        echo "<script>window.history.back();</script>";
+        exit;
+    }
+
+    // Check if a group with the same groupName and courseID already exists
+    $checkGroupQuery = "SELECT * FROM `group` WHERE groupName='$groupName' AND courseID='$_SESSION[course_id]'";
+    $checkGroupResult = mysqli_query($conn, $checkGroupQuery);
+
+    if (mysqli_num_rows($checkGroupResult) > 0) {
+        echo "<script>alert('A group with the same name already exists for this course.');</script>";
+        echo "<script>window.history.back();</script>";
+        exit;
+    }
+
     // Fetch the last panelID from the group table
     $lastPanelIdQuery = "SELECT MAX(panelID) as maxPanelId FROM `group`";
     $lastPanelIdResult = mysqli_query($conn, $lastPanelIdQuery);
@@ -37,6 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect adviser data and escape string values
     $adviserName = mysqli_real_escape_string($conn, $_POST['adviserName']);
     $adviserId = mysqli_real_escape_string($conn, $_POST['adviserId']);
+
+    // Check if adviserName or adviserId is null or empty
+    if (empty($adviserName) || empty($adviserId)) {
+        echo "<script>alert('Adviser Name or Adviser ID cannot be null or empty.');</script>";
+        echo "<script>window.history.back();</script>";
+        exit;
+    }
 
     // Insert into the group table
     $insertGroupQuery = "INSERT INTO `group` (groupName, groupID, courseID, panelID, adviserID, requirementsID) VALUES ('$groupName', '$groupId', '$_SESSION[course_id]', '$newPanelId', '$adviserId', '$groupId')";
@@ -58,6 +82,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $panelRoles = ['Chair Panel', 'Lead Panel', 'Panel Member 1', 'Panel Member 2'];
         $panelIds = [$chairPanelistId, $leadPanelistId, $panelist1Id, $panelist2Id];
         $panelNames = [$chairPanelistName, $leadPanelistName, $panelist1Name, $panelist2Name];
+
+        // Check if any panelist names or IDs are null or empty
+        for ($i = 0; $i < count($panelNames); $i++) {
+            if (empty($panelNames[$i]) || empty($panelIds[$i])) {
+                echo "<script>alert('Panelist Name or Panelist ID cannot be null or empty for role " . $panelRoles[$i] . ".');</script>";
+                echo "<script>window.history.back();</script>";
+                exit;
+            }
+        }
 
         $insertPanelistQuery = "INSERT INTO `panelist` (panelID, professorID, panelRole) VALUES ";
         for ($i = 0; $i < count($panelRoles); $i++) {

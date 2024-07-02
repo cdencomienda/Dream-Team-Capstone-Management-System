@@ -41,7 +41,7 @@ while ($row = $result->fetch_assoc()) {
     $studentGroupID = $row['student_group_id'];
 
     // Format academic year as "YYYY-YYYY"
-    $academicYearRange = ($academicYear) . '-' . ($academicYear + 1); // Adjust the range as needed
+    $academicYearRange = 'AY ' . ($academicYear) . '-' . ($academicYear + 1); // Adjust the range as needed
 
     // Create directories if academic year changes or new course starts
     if ($academicYear !== $currentYear) {
