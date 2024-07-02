@@ -341,8 +341,8 @@ body {
   border-radius: 25px;
 }
 .commentsCollection{
-
-  width: 82%; /* Set width */
+  display: none;
+  width: 100%; /* Set width */
   padding: 20px;
   margin: 1% auto;
   background-color: #fff;
@@ -551,7 +551,7 @@ text-align: center;
   border-right: 1px solid #ddd;
  font-size: 23px  ;
 }
-.send-button {
+.delete-button {
   margin-top: 1.5%;
   padding: 10px 20px; /* Increase padding to make the button bigger */
   font-size: 20px; /* Increase font size */
@@ -561,15 +561,34 @@ text-align: center;
   border-radius: 5px; /* Optional: Rounded corners */
   cursor: pointer; /* Change cursor to pointer */
   transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
-  
 }
-
-.send-button i {
+.approve-button {
+  margin-top: 1.5%;
+  padding: 10px 20px; /* Increase padding to make the button bigger */
+  font-size: 20px; /* Increase font size */
+  background: transparent; /* Remove background */
+  /* border: 2px solid #000; Add a border to make the button visible */
+  border: none;
+  border-radius: 5px; /* Optional: Rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+}
+.approve-button i {
   font-size: 24px; /* Increase the icon size */
   vertical-align: middle; /* Align the icon vertically */
 }
 
-.send-button:hover {
+.approve-button:hover {
+  background: #000; /* Change background color on hover */
+  color: #fff; /* Change text and icon color on hover */
+}
+
+.delete-button i {
+  font-size: 24px; /* Increase the icon size */
+  vertical-align: middle; /* Align the icon vertically */
+}
+
+.delete-button:hover {
   background: #000; /* Change background color on hover */
   color: #fff; /* Change text and icon color on hover */
 }

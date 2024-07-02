@@ -1,7 +1,4 @@
-// function TogglegroupMembers() { 
-//     var container = document.querySelector('.containerCreatecourse');
-//     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-//   }
+ 
 
 
 document.addEventListener('click', e =>{
@@ -95,8 +92,54 @@ window.onclick = function(event) {
 // });
 // }) 
 
-  
    
 
-
+document.getElementById('input-file').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const attachedFileContainer = document.querySelector('.Attached-FileCont');
+        
+        // Create a new div element to display the file name
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'attached-file';
+        fileDiv.textContent = file.name;
+        
+        // Append the new div to the attached files container
+        attachedFileContainer.appendChild(fileDiv);
+    }
+});
+document.addEventListener('DOMContentLoaded', (event) => {
+    const profilePic = document.getElementById('profilePic');
+    const menu = document.getElementById('menuBtn');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const overlay = document.getElementById('editProfileOverlay');
+  
+    profilePic.addEventListener('click', () => {
+        menu.classList.toggle('show');
+    });
+  
+    document.addEventListener('click', (event) => {
+        if (!profilePic.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+    });
+  
+    editProfileBtn.addEventListener('click', () => {
+        overlay.classList.add('show');
+        menu.classList.remove('show');
+    });
+  
+    function closeEditform() {
+        overlay.classList.remove('show');
+    }
+  
+    window.onclick = function(event) {
+        if (event.target == overlay) {
+            overlay.classList.remove('show');
+        }
+    }
+  
+    // Attach closeEditform function to the global scope
+    window.closeEditform = closeEditform;
+  }); 
   

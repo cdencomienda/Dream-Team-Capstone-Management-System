@@ -25,18 +25,7 @@ window.onclick = function(event) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
-
-  editProfileBtn.addEventListener('click', function (event) {
-    // Prevent default behavior of anchor tag
-    event.preventDefault();
-    // Execute your edit profile function or redirect to the edit profile page
-    // Example:
-    // window.location.assign("EditProfilePage.html");
-  }); 
-});
+ 
 
 function logOUT(){
   window.location.assign("LoginSignup.php")

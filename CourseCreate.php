@@ -100,11 +100,11 @@
  
         <div class="container">
             <div class="action">
-                <div class="profile">
+                <div class="profile" id="profilePic">
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
-                <div class="menu" id ="menuBtn">
-                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                <div class="menu" id="menuBtn">
+                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
@@ -114,11 +114,9 @@
             <!-- editprofile --> 
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
-        
                     <div>
-                        <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                        <button class="close" onclick="closeEditform()"><i class="fa-regular fa-circle-xmark"></i></button>
                     </div>
-                    
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
@@ -126,22 +124,22 @@
                         <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
-                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
-                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                        <button type="submit" class="saveEditbtn"> Save Changes </button>
-                       
+                        <h3><input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"></h3>
+                        <h3><input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"></h3>
+                        <h3><input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"></h3>
+                        <h3><input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"></h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
                     </form>
-                   
                     <?php if(isset($_SESSION['error_message'])) { ?>
-                <div id="error-message" class="show">
-                    <?php echo $_SESSION['error_message']; ?>
-                    <button onclick="clearErrorMessage()">OK</button>
+                    <div id="error-message" class="show">
+                        <?php echo $_SESSION['error_message']; ?>
+                        <button onclick="clearErrorMessage()">OK</button>
+                    </div>
+                    <?php unset($_SESSION['error_message']); } ?>
                 </div>
-            <?php
-                unset($_SESSION['error_message']); // Clear the error message after displaying it
-            } ?>
+            </div>
+        </div>
+
             
         <script>
                 window.onload = function() {
@@ -484,14 +482,30 @@
                             </div>
                         </div>    
                         
-                        <div class="mDropdown" data-flsDropdown>  
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
+                        <div class="mDropdown" data-mDropdown>  
+                        <button type="button" class="Members-Btn" data-Members-Btn onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
                                 <div class="GroupmembersContainer" id="groupMembersContainer">
                                     member1
                                 </div>
                             </div>
+                        
+                            <div class="pDropdown" data-pDropdown>  
+                                <button type="button" class="Panelist-Btn" data-pDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
+                                        <div class="PanelistContainer" id="PanelistContainer">
+                                            Panel1
+                                        </div>
+                                    </div>
                         </div>
+
+                        <!-- <div class="pDropdown" data-flsDropdown>  
+                        <button type="button" class="Panelist-Btn" data-flsDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
+                                <div class="PanelistContainer" id="PanelistContainer">
+                                    Panel1
+                                </div>
+                            </div>
+                        </div>    -->
+
                     </h4>
                     </div> 
 

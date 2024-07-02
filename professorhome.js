@@ -1,13 +1,22 @@
-document.addEventListener('profile', function () {
-  const editProfileBtn = document.querySelector('.editprofileBtn');
-  const logoutBtn = document.querySelector('.logoutBtn');
-
-  editProfileBtn.addEventListener('click', function (event) { 
-    event.preventDefault(); 
-  }); 
-});
-
-function openArchive(){
+ 
+document.addEventListener('click', e =>{
+    const isflsDropdowButton = e.target.matches("[data-Members-button]")
+    if(!ismDropdownButton && e.target.closest('[data-mDropdown]') != null)
+    return
+    
+    let currentmDropdown
+    if(ismDropdownButton){
+        currentmDropdown = e.target.closest('[data-mDropdown]')
+        currentmDropdown.classList.toggle('active')
+    }
+    
+    document.querySelectorAll("[data-mDropdown].active").forEach(flsDropdown => {
+        if (mDropdown === currentmDropdown) return
+        mDropdown.classList.remove("active")
+    });
+    }) 
+ 
+ function openArchive(){
   window.location.assign("ProfessorHome.php")
 }
 function notifProf(){
@@ -25,30 +34,47 @@ function capstoneProf(){
 function scheduleProf(){
   window.location.assign("Defenseschedule.php")
 }
-document.getElementById('editProfileBtn').addEventListener('click', function() {
-  var overlay = document.getElementById("editProfileOverlay");
-  overlay.style.display = "block";
-});
- 
-function closeEditform(){
-  document.getElementById('editProfileOverlay').style.display = 'none';
-  document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
-}
- 
+
+// edit profile js 
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const profilePic = document.getElementById('profilePic');
+  const menu = document.getElementById('menuBtn');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const overlay = document.getElementById('editProfileOverlay');
+
+  profilePic.addEventListener('click', () => {
+      menu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+      if (!profilePic.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.remove('show');
+      }
+  });
+
+  editProfileBtn.addEventListener('click', () => {
+      overlay.classList.add('show');
+      menu.classList.remove('show');
+  });
+
+  function closeEditform() {
+      overlay.classList.remove('show');
+  }
+
+  window.onclick = function(event) {
+      if (event.target == overlay) {
+          overlay.classList.remove('show');
+      }
+  }
+
+  // Attach closeEditform function to the global scope
+  window.closeEditform = closeEditform;
+}); 
+
 function Back(){
   document.getElementById('menuBtn').style.display = 'none';
 }
-
-window.onclick = function(event) {
-  var overlay = document.getElementById("editProfileOverlay");
-  if (event.target == overlay) {
-      overlay.style.display = "none";
-  }
-}
-
-const profile = document.querySelector('.profile');
-const melonbtn = document.querySelector('.melonbtn');
-const editprofileBtn = document.querySelector('.editprofileBtn');
 
 profile.addEventListener('click', function () {
   const toggleMenu = document.querySelector('.menu');
@@ -515,3 +541,4 @@ window.onclick = function(event) {
       }
   }
 }
+
