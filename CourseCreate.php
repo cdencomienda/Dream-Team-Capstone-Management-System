@@ -459,7 +459,7 @@
                                         
                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                             <div class="Recent-fileName">docu-test1.pdf</div>
-                                            <div class="Recent-fileVersion">version 3.0</div>
+                                            
                                         </div>
                                         <div class="divDocuReqLogs"> <br> 
                                             <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
@@ -477,7 +477,7 @@
                                         <div class="attachedAdvRecom">
                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                             <div class="Recent-fileName">docu-test1.pdf</div>
-                                            <div class="Recent-fileVersion">version 3.0</div>    
+                                                
                                         </div>    
                                         <div class="divAdvLogs"> <br> 
                                             <button class="AdvLogs" onclick="toggleAdvReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>

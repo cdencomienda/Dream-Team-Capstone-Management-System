@@ -1118,6 +1118,36 @@ background-color: #dbd3c9;
     margin-left: 10px;
   }
  
+  .attachedDocumentation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.attachedDocumentation:hover {
+    background-color: #E8D7C3; /* Change background color on hover */
+    transform: scale(1.02); /* Slightly increase the size on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+.attachedAdvRecom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.attachedAdvRecom:hover {
+    background-color: #E8D7C3; /* Change background color on hover */
+    transform: scale(1.02); /* Slightly increase the size on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
   .DocuReqLogs{
     display: flex;
     justify-content: center; /* Center horizontally */
