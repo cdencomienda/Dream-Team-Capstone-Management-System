@@ -1094,6 +1094,17 @@ background-color: #dbd3c9;
       height: 30px;
      
   }
+  .attachedDocumentation{
+    justify-content: space-between;
+    align-items: center;
+  }
+  .Recent-fileName{
+    margin-left: 25%;
+    width: 100px;
+  }
+  .Recent-fileVersion{
+    margin-left: 130%;
+  }
   .divDocuReqLogs{
     width: 40px;
   }
@@ -1615,4 +1626,9 @@ tr:hover {
 }
 .score-column{
 text-align: center;
+}
+
+
+.fileVersion{
+
 }
