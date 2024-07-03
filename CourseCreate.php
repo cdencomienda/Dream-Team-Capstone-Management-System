@@ -504,7 +504,7 @@
 
                     </h4>
                     </div> 
-
+ 
                     <!-- files -->
                 <div class="defaultBody" id="defaultBody">
                     <div class="recentFiles">
@@ -906,6 +906,7 @@ function newGroupCreated(course_id, group_name) {
     fetchStudentGroups();
     fetchPanelGroups();
     requirementName();
+    fileFeed();
     
 
     // Prepare the data to be sent in the request body
@@ -1198,6 +1199,76 @@ function popUpLog(reqName) {
         })
         .catch(error => console.error('Fetch error: ', error));
 }
+
+
+
+function fileFeed() {
+    const defaultBody = document.querySelector('.defaultBody'); // Select the container
+    defaultBody.innerHTML = ''; // Clear previous content if any
+
+    fetch('test2.php', {
+        method: 'GET' // Assuming your PHP script uses GET method
+    })
+    .then(response => response.json()) // Parse the JSON response
+    .then(data => {
+        // Log the fetched data to the console
+        console.log('Fetched data:', data);
+
+        // Iterate over each item in the fetched data
+        data.forEach(item => {
+            // Create elements for each file message
+            const recentFilesDiv = document.createElement('div');
+            recentFilesDiv.classList.add('recentFiles'); // Add class 'recentFiles'
+
+            const fileMessage = document.createElement('div');
+            fileMessage.classList.add('fileMessage', 'left');
+            fileMessage.setAttribute('onclick', `openModal('${item.filePath}')`);
+            fileMessage.onclick = function() {
+                console.log('Open modal for reqName:', item.reqName, 'path', item.filePath);
+                openModal(item.filePath);
+            };
+
+            // Create sender element
+            const sender = document.createElement('div');
+            sender.classList.add('sender');
+            sender.textContent = item.firstName + ' ' + item.lastName; // Concatenate first name and last name
+
+            // Create fileInfo container
+            const fileInfoDiv = document.createElement('div');
+            fileInfoDiv.classList.add('fileInfo');
+
+            // Create fileIcon element
+            const fileIconImg = document.createElement('img');
+            fileIconImg.src = 'menu_assets/file-icon.png'; // Sample file icon
+            fileIconImg.alt = 'file icon';
+            fileIconImg.classList.add('fileIcon');
+
+            const fileDetailsDiv = document.createElement('div');
+            fileDetailsDiv.classList.add('fileDetails');
+
+            const fileNameStrong = document.createElement('strong');
+            fileNameStrong.textContent = item.fileName + ' - V' + item.version + '.pdf';
+
+            fileDetailsDiv.appendChild(fileNameStrong);
+            fileInfoDiv.appendChild(fileIconImg); // Append file icon to fileInfoDiv
+            fileInfoDiv.appendChild(fileDetailsDiv); // Append file details to fileInfoDiv
+            fileMessage.appendChild(sender);
+            fileMessage.appendChild(fileInfoDiv); // Append fileInfoDiv to fileMessage
+            recentFilesDiv.appendChild(fileMessage); // Append fileMessage to recentFilesDiv
+            defaultBody.appendChild(recentFilesDiv); // Append recentFilesDiv to defaultBody
+        });
+
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+
+
+
+
+
 
 
 //files
