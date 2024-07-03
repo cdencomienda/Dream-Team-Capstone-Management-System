@@ -578,7 +578,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function fetchAcademicYears() {
-
     const classDropdown = document.querySelector('.class-Dropdown');
     classDropdown.innerHTML = ''; // Clear previous content
 
@@ -593,10 +592,13 @@ function fetchAcademicYears() {
             if (data.error) {
                 console.error(data.error);
             } else {
+                // Sort the academic years in descending order
+                data.sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
+
                 console.log('Fetched academic years:', data);
                 const container = document.querySelector('.class-Dropdown');
 
-                data.reverse().forEach(yearStr => {
+                data.forEach(yearStr => {
                     const year = parseInt(yearStr, 10);
                     const displayName = `${year}-${year + 1}`;
 
@@ -657,6 +659,8 @@ function fetchAcademicYears() {
         })
         .catch(error => console.error('Error fetching academic years:', error));
 }
+
+
 
 // // Call fetchAcademicYears when your page is ready
 // document.addEventListener('DOMContentLoaded', fetchAcademicYears);
@@ -1056,7 +1060,7 @@ function requirementName() {
 
                 // Create Document Requirement text
                 const docRequirement = document.createElement('div');
-                docRequirement.textContent = `${reqName}`;
+                docRequirement.textContent = reqName.reqName; // Access reqName property
                 documentationCont.appendChild(docRequirement);
 
                 // Create ReqDocumentation container
@@ -1066,19 +1070,22 @@ function requirementName() {
                 // Create attachedDocumentation div
                 const attachedDocumentation = document.createElement('div');
                 attachedDocumentation.classList.add('attachedDocumentation');
-                // Example of setting click handler, adjust based on your data structure
-                attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.fileUrl)}')`);
+                attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.filePath)}')`);
+                attachedDocumentation.onclick = function() {
+                        console.log('Open modal for:', reqName.filePath);
+                        openModal(reqName.filePath);
+                    };
 
-                // Create file icon (adjust as per your actual structure)
+                // Create file icon
                 const fileIcon = document.createElement('img');
                 fileIcon.src = 'menu_assets/file-icon.png';
                 fileIcon.alt = 'file icon';
                 fileIcon.classList.add('fileIcon');
                 attachedDocumentation.appendChild(fileIcon);
 
-                // Create Recent-fileName div (adjust based on actual data structure)
+                // Create Recent-fileName div
                 const recentFileName = document.createElement('div');
-                recentFileName.textContent = reqName.fileName; // Assuming 'fileName' is a property in your data
+                recentFileName.textContent = reqName.fileName;
                 recentFileName.classList.add('Recent-fileName');
                 attachedDocumentation.appendChild(recentFileName);
 
@@ -1096,13 +1103,12 @@ function requirementName() {
                 // Add onclick event to toggle logs
                 toggleButton.onclick = function() {
                     console.log('Clicked toggleButton for reqName:', reqName);
-                    // Assuming toggleDocuReqLogs toggles visibility of logs
+                    // Implement toggleDocuReqLogs, clickedRequirement, and popUpLog as needed
                     toggleDocuReqLogs(reqName); // Pass reqName or related data as needed
-                    clickedRequirement(reqName);
-                    // popUpLog();
+                    clickedRequirement(reqName.reqName);
+                    popUpLog(reqName.reqName);
                 };
 
-                // Append toggleButton to divDocuReqLogs
                 divDocuReqLogs.appendChild(toggleButton);
 
                 reqDocumentation.appendChild(divDocuReqLogs);
@@ -1115,6 +1121,7 @@ function requirementName() {
         })
         .catch(error => console.error('Error fetching reqName data:', error));
 }
+
 
 
 function clickedRequirement(reqName) {
@@ -1136,27 +1143,61 @@ function clickedRequirement(reqName) {
 }
 
 
-// function popUpLog() {
+function popUpLog(reqName) {
+    const logContainer = document.querySelector('.fileLogsPopup'); // Select the container
+    logContainer.innerHTML = '';
 
+    // Create an <h4> element
+    const heading = document.createElement('h3');
+    heading.textContent = reqName;
 
-//     const logItem = document.querySelector('.logItem');
-//     logItem.innerHTML = ''; // Clear existing content
-    
+    // Append the <h4> element to the logContainer
+    logContainer.appendChild(heading);
 
-//             fetch('test2.php')
-//                 .then(response => response.json())
-//                 .then(data => {
-//                     if (data.filePaths) {
-//                         data.filePaths.forEach(filePath => {
-//                             console.log(filePath);
-//                             // Here you can add additional logic to handle the file paths
-//                         });
-//                     } else if (data.error) {
-//                         console.error('Error: ' + data.error);
-//                     }
-//                 })
-//                 .catch(error => console.error('Fetch error: ', error));
-//         }
+    fetch('test2.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.filePaths && data.filePaths.length > 0) {
+                data.filePaths.forEach((filePath, index) => {
+                    console.log(filePath);
+
+                    // Extract the file name from the file path
+                    const fileName = filePath.split('/').pop();
+
+                    // Create a new log item div
+                    const logItem = document.createElement('div');
+                    logItem.className = 'logItem';
+                    logItem.id = `logItem${index + 1}`;
+                    logItem.setAttribute('onclick', `openModal('${filePath}')`);
+                    logItem.onclick = function() {
+                        console.log('Open modal for:', filePath);
+                        openModal(filePath);
+                    };
+
+                    // Create and append the file icon image
+                    const img = document.createElement('img');
+                    img.src = 'https://via.placeholder.com/24';
+                    img.alt = 'file icon';
+                    logItem.appendChild(img);
+
+                    // Create and append the file name div
+                    const fileNameDiv = document.createElement('div');
+                    fileNameDiv.className = 'fileName';
+                    fileNameDiv.textContent = fileName;
+                    logItem.appendChild(fileNameDiv);
+
+                    // Append the log item to the container
+                    logContainer.appendChild(logItem);
+                });
+            } else {
+                // If no files are uploaded or found
+                const noFilesMessage = document.createElement('div');
+                noFilesMessage.textContent = 'No Files Uploaded';
+                logContainer.appendChild(noFilesMessage);
+            }
+        })
+        .catch(error => console.error('Fetch error: ', error));
+}
 
 
 //files
@@ -1614,5 +1655,7 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 </script>
+
+
 
 <!-- mmssmnmn -->

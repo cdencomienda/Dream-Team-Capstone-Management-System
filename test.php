@@ -1,18 +1,13 @@
 <?php
 session_start();
 
-// Initialize an array to store files information
-$filesArray = [];
-
 // Check if the student_group_id session variable is set
 if(isset($_SESSION['student_group_id'])) {
     $studentGroupId = $_SESSION['student_group_id'];
-    echo "Session variable student_group_id is set. Value: $studentGroupId<br>";
 
     // Check if the fullPath session variable is set
     if(isset($_SESSION['fullPath'])) {
         $fullPath = rtrim($_SESSION['fullPath'], '/') . '/'; // Ensure fullPath ends with a slash
-        echo "Session variable fullPath is set. Value: $fullPath<br>";
 
         // Database connection
         $conn = new mysqli('localhost', 'root', '', 'dreamteam');
@@ -22,49 +17,51 @@ if(isset($_SESSION['student_group_id'])) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Prepare SQL query to fetch uploaderID, fileName, version, and user's first name and last name, ordered by version ascending
-        $sql = "SELECT r.uploaderID, r.fileName, r.version, u.firstName, u.lastName 
+        // Prepare SQL query to fetch the most recent file for each reqName
+        $sql = "SELECT r.uploaderID, r.fileName, r.version, r.reqName, u.firstName, u.lastName 
                 FROM repository r
                 INNER JOIN users u ON r.uploaderID = u.userID
+                INNER JOIN (
+                    SELECT reqName, MAX(version) AS max_version
+                    FROM repository
+                    WHERE requirementsID = ?
+                    GROUP BY reqName
+                ) max_versions ON r.reqName = max_versions.reqName AND r.version = max_versions.max_version
                 WHERE r.requirementsID = ?
-                ORDER BY r.version ASC";
+                ORDER BY r.reqName"; 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $studentGroupId);
+        $stmt->bind_param("ii", $studentGroupId, $studentGroupId);
         $stmt->execute();
-        $stmt->bind_result($uploaderID, $fileName, $version, $firstName, $lastName);
+        $stmt->bind_result($uploaderID, $fileName, $version, $reqName, $firstName, $lastName);
         
-        // Fetch results into the array
+        // Initialize an array to store results
+        $results = [];
+
+        // Fetch the most recent file for each reqName
         while ($stmt->fetch()) {
-            $filesArray[] = [
-                'uploaderID' => $firstName . ' ' . $lastName,
+            $filePath = $fullPath . "{$fileName} - V{$version}.pdf";
+            $fileExists = file_exists($filePath);
+            
+            // Prepare the result data
+            $result = [
+                'reqName' => $reqName,
                 'fileName' => $fileName,
-                'version' => $version
+                'version' => $version,
+                'fileExists' => $fileExists,
+                'filePath' => $fileExists ? $filePath : null
             ];
-        }
-        
-        // Check if any results were found
-        if (!empty($filesArray)) {
-            echo "Files:<br>";
-            foreach ($filesArray as $file) {
-                echo "{$file['uploaderID']} - {$file['fileName']} - V{$file['version']}<br>";
-                
-                // Construct the file path to check (include .pdf extension)
-                $filePath = $fullPath . $file['fileName'] . ' - V' . $file['version'] . '.pdf';
-                
-                // Check if the file exists
-                if (file_exists($filePath)) {
-                    echo "File exists: $filePath<br>";
-                } else {
-                    echo "File does not exist: $filePath<br>";
-                }
-            }
-        } else {
-            echo "No files found for student_group_id: $studentGroupId<br>";
+
+            // Add result to results array
+            $results[] = $result;
         }
 
         // Close statement and database connection
         $stmt->close();
         $conn->close();
+
+        // Output results as JSON
+        header('Content-Type: application/json');
+        echo json_encode($results);
 
     } else {
         echo "Session variable fullPath is not set.<br>";

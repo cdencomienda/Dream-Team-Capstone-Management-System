@@ -460,7 +460,7 @@ function toggleDocuReqLogs() {
   if (!isDisplayed) {
       popup.innerHTML = `
           <h4>Document Requirement Logs</h4>
-          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
+          <div class="logItem" id="logItem1" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
               <img src="https://via.placeholder.com/24" alt="file icon">
               <div class="fileName">docu-test1.pdf</div>
           </div>
