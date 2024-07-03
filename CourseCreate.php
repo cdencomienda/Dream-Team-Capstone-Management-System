@@ -1053,6 +1053,17 @@ function requirementName() {
     fetch('requirementName.php')
         .then(response => response.json())
         .then(data => {
+
+            if (data.length === 0) {
+                // If no data is fetched, display a message
+                const noFilesMessage = document.createElement('h4');
+                noFilesMessage.textContent = 'No files uploaded';
+                noFilesMessage.style.display = 'flex';
+                noFilesMessage.style.justifyContent = 'center';
+                noFilesMessage.style.marginTop = '130px';
+                noFilesMessage.classList.add('noFilesMessage');
+                filesContainer.appendChild(noFilesMessage);
+            } else {
             console.log('Received reqName data:', data);
             data.forEach(reqName => {
                 // Create a documentationCont element
@@ -1119,6 +1130,7 @@ function requirementName() {
                 // Append documentationCont to filesContainer
                 filesContainer.appendChild(documentationCont);
             });
+        }
         })
         .catch(error => console.error('Error fetching reqName data:', error));
 }
@@ -1206,7 +1218,7 @@ function fileFeed() {
     const defaultBody = document.querySelector('.defaultBody'); // Select the container
     defaultBody.innerHTML = ''; // Clear previous content if any
 
-    fetch('test2.php', {
+    fetch('fileFeed.php', {
         method: 'GET' // Assuming your PHP script uses GET method
     })
     .then(response => response.json()) // Parse the JSON response
