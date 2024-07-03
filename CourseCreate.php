@@ -1072,7 +1072,7 @@ function requirementName() {
                 attachedDocumentation.classList.add('attachedDocumentation');
                 attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.filePath)}')`);
                 attachedDocumentation.onclick = function() {
-                        console.log('Open modal for:', reqName.filePath);
+                        console.log('Open modal for reqName:', reqName.reqName, 'path', reqName.filePath);
                         openModal(reqName.filePath);
                     };
 
@@ -1154,7 +1154,7 @@ function popUpLog(reqName) {
     // Append the <h4> element to the logContainer
     logContainer.appendChild(heading);
 
-    fetch('test2.php')
+    fetch('popupFile.php')
         .then(response => response.json())
         .then(data => {
             if (data.filePaths && data.filePaths.length > 0) {
@@ -1170,7 +1170,7 @@ function popUpLog(reqName) {
                     logItem.id = `logItem${index + 1}`;
                     logItem.setAttribute('onclick', `openModal('${filePath}')`);
                     logItem.onclick = function() {
-                        console.log('Open modal for:', filePath);
+                        console.log('Open modal for reqName:', reqName, 'path', filePath);
                         openModal(filePath);
                     };
 
@@ -1586,13 +1586,14 @@ function fetchStudents() {
         console.log(data); // Log the received JSON data
         // Process the data as needed
         data.forEach(student => {
-            const memberHeading = document.createElement('h4');
+            const memberHeading = document.createElement('h5');
             memberHeading.textContent = `${student.firstName} ${student.lastName}`;
             membersContainer.appendChild(memberHeading);
         });
     })
     .catch(error => console.error('Fetch error:', error));
 }
+
 
 
 

@@ -1,62 +1,76 @@
 <?php
+// Start the session
 session_start();
 
-// Check if course_id is provided via POST
-if (isset($_SESSION['course_id'])) {
+// Initialize an empty array to store student details
+$students_details = [];
+
+// Check if course_id is set in session
+if(isset($_SESSION['course_id'])) {
+    // If course_id is set, fetch student IDs for that course
     $course_id = $_SESSION['course_id'];
 
-    // Database connection for student_ids
+    // Database connection
     $conn_students = mysqli_connect('localhost', 'root', '', 'soe_assessment');
-
-    // Check connection
-    if (!$conn_students) {
+    if(!$conn_students) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Query to get student IDs based on the provided course_id
-    $sql_students = "SELECT student_id FROM students WHERE course_id = ?";
-    $stmt_students = $conn_students->prepare($sql_students);
-    $stmt_students->bind_param('i', $course_id);
-    $stmt_students->execute();
-    $result_students = $stmt_students->get_result();
+    // Prepare SQL statement to fetch student IDs
+    $query = "SELECT student_id FROM students WHERE course_id = ?";
+    $stmt = mysqli_prepare($conn_students, $query);
+    mysqli_stmt_bind_param($stmt, "i", $course_id);
+    
+    // Execute query to get student IDs
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    // Fetch student IDs and store in an array
+    // Fetch student IDs and store them in the array
     $student_ids = [];
-    while ($row_students = $result_students->fetch_assoc()) {
-        $student_ids[] = $row_students['student_id'];
+    while($row = mysqli_fetch_assoc($result)) {
+        $student_ids[] = $row['student_id'];
     }
 
-    // Close student IDs connections
-    $stmt_students->close();
-    $conn_students->close();
+    // Close statement for student IDs query
+    mysqli_stmt_close($stmt);
 
-    // Database connection for users
-    $conn_users = mysqli_connect('localhost', 'root', '', 'dreamteam');
+    // Close connection to student database
+    mysqli_close($conn_students);
 
-    // Check connection
-    if (!$conn_users) {
+    // Now connect to 'dreamteam' database for user details
+    $conn_dreamteam = mysqli_connect('localhost', 'root', '', 'dreamteam');
+    if(!$conn_dreamteam) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Query to get firstName and lastName based on student_ids
-    $sql_users = "SELECT firstName, lastName FROM users WHERE userID IN (";
-    $sql_users .= implode(',', array_map('intval', $student_ids));
-    $sql_users .= ")";
-    $result_users = mysqli_query($conn_users, $sql_users);
+    // Prepare SQL statement to fetch firstName and lastName for each student
+    $query_users = "SELECT firstName, lastName FROM users WHERE userID = ?";
+    $stmt_users = mysqli_prepare($conn_dreamteam, $query_users);
 
-    // Fetch data into an array
-    $students = [];
-    while ($row_users = mysqli_fetch_assoc($result_users)) {
-        $students[] = $row_users;
+    // Fetch student details
+    foreach($student_ids as $student_id) {
+        mysqli_stmt_bind_param($stmt_users, "s", $student_id);
+        mysqli_stmt_execute($stmt_users);
+        $result_users = mysqli_stmt_get_result($stmt_users);
+
+        // Fetch firstName and lastName and store in students_details array
+        while($row_users = mysqli_fetch_assoc($result_users)) {
+            $students_details[] = [
+                'firstName' => $row_users['firstName'],
+                'lastName' => $row_users['lastName'],
+            ];
+        }
     }
 
-    // Close users connection
-    mysqli_close($conn_users);
+    // Close statement and connection for user details
+    mysqli_stmt_close($stmt_users);
+    mysqli_close($conn_dreamteam);
 
-    // Send data as JSON
+    // Output student details as JSON
     header('Content-Type: application/json');
-    echo json_encode($students);
+    echo json_encode($students_details);
 } else {
-    echo "course_id not set";
+    // If course_id is not set in session
+    echo json_encode(['error' => 'Course ID is not set in session.']);
 }
 ?>
