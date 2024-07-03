@@ -39,12 +39,12 @@ if (empty($s_id)) {
     exit();
 }
 
-// SQL query to get the group name using the s_id
-$sql = "SELECT group_name FROM groups WHERE s_id = ?";
+// SQL query to get the group name and group_id using the s_id
+$sql = "SELECT group_id, group_name FROM groups WHERE s_id = ?";
 if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("i", $s_id);
     $stmt->execute();
-    $stmt->bind_result($group_name);
+    $stmt->bind_result($group_id, $group_name);
     $stmt->fetch();
     $stmt->close();
 } else {
@@ -55,5 +55,12 @@ if ($stmt = $conn->prepare($sql)) {
 
 $conn->close();
 
-echo json_encode(['group_name' => isset($group_name) ? $group_name : 'Group not found']);
+if (isset($group_id) && isset($group_name)) {
+    // Store group_id and group_name in session
+    $_SESSION['group_id'] = $group_id;
+    $_SESSION['group_name'] = $group_name;
+    echo json_encode(['group_id' => $group_id, 'group_name' => $group_name]);
+} else {
+    echo json_encode(['error' => 'Group not found']);
+}
 ?>

@@ -211,9 +211,13 @@ function fetchGroupName() {
                 alert('Error: ' + data.error);
             } else {
                 console.log('Group Name:', data.group_name);
-                // Use the group_name as needed, for example, display it on the webpage
+                console.log('Group ID:', data.group_id);
+                // Use the group_name and group_id as needed, for example, display them on the webpage
                 document.getElementById('groupName').innerText = data.group_name;
                 document.getElementById('group_name1').innerText = data.group_name;
+
+                // Store group_id in localStorage or sessionStorage as needed
+                localStorage.setItem('group_id', data.group_id);
             }
         })
         .catch(error => {
@@ -222,6 +226,7 @@ function fetchGroupName() {
             alert('Fetch error: ' + error.message);
         });
 }
+
 
 function fetchStudents() {
     fetch("LiveSearchGroupMembers.php")
@@ -248,6 +253,32 @@ function fetchStudents() {
         });
 }
 
+// function storeGroupId() {
+//             fetch('getGroupNameforButton.php', {
+//                 method: 'GET',
+//                 credentials: 'include'
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 if (data.error) {
+//                     console.error(data.error);
+//                 } else {
+//                     console.log('Group ID:', data.group_id);
+//                     console.log('Group Name:', data.group_name);
+//                     // Accessing the group_id from the session later if needed
+//                     fetch('path/to/another/php/script_to_access_session.php', {
+//                         method: 'GET',
+//                         credentials: 'include'
+//                     })
+//                     .then(response => response.json())
+//                     .then(sessionData => {
+//                         console.log('Group ID from session:', sessionData.group_id);
+//                         console.log('Group Name from session:', sessionData.group_name);
+//                     });
+//                 }
+//             })
+//             .catch(error => console.error('Error:', error));
+//         }
 
 
 
@@ -352,7 +383,6 @@ window.onload = fetchGroupName;
                 <div class= "requirement-list">
                     <div class = "req-nameCont"> 
                         <div class="requirement-name">
-                            Chapter 1
                         </div>
                     </div>
                 </div>
