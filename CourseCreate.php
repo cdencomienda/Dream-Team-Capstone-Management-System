@@ -449,6 +449,8 @@
                                     
                         </script> 
                     <div class="button-group"> 
+
+                    <!-- files -->
                         <div class = "flsDropdown " data-flsDropdown>
                             <button type="button" class=" Rep-FilesBtn" onclick = "filesbtn()"data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             <div class="filesContainer"> 
@@ -469,6 +471,9 @@
                                  
                             </div>
                         </div>    
+
+
+                        <!-- files popup -->
                         <div class="fileLogsPopup" id="DocuReqrmntLogs">
                                                 <h4>Document Requirement Logs</h4>
                                                 <!-- Logs will be dynamically added here -->
@@ -897,6 +902,7 @@ function newGroupCreated(course_id, group_name) {
     fetchStudentGroups();
     fetchPanelGroups();
     requirementName();
+    
 
     // Prepare the data to be sent in the request body
     const formData = new FormData();
@@ -1033,6 +1039,7 @@ function fetchPanelGroups() {
 }
 
 
+//files
 
 function requirementName() {
     const filesContainer = document.querySelector('.filesContainer');
@@ -1092,6 +1099,7 @@ function requirementName() {
                     // Assuming toggleDocuReqLogs toggles visibility of logs
                     toggleDocuReqLogs(reqName); // Pass reqName or related data as needed
                     clickedRequirement(reqName);
+                    // popUpLog();
                 };
 
                 // Append toggleButton to divDocuReqLogs
@@ -1128,7 +1136,30 @@ function clickedRequirement(reqName) {
 }
 
 
+// function popUpLog() {
 
+
+//     const logItem = document.querySelector('.logItem');
+//     logItem.innerHTML = ''; // Clear existing content
+    
+
+//             fetch('test2.php')
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     if (data.filePaths) {
+//                         data.filePaths.forEach(filePath => {
+//                             console.log(filePath);
+//                             // Here you can add additional logic to handle the file paths
+//                         });
+//                     } else if (data.error) {
+//                         console.error('Error: ' + data.error);
+//                     }
+//                 })
+//                 .catch(error => console.error('Fetch error: ', error));
+//         }
+
+
+//files
 
 
 

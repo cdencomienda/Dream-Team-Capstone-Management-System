@@ -463,18 +463,8 @@ function toggleDocuReqLogs() {
           <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
               <img src="https://via.placeholder.com/24" alt="file icon">
               <div class="fileName">docu-test1.pdf</div>
-              <div class="fileVersion">version 3.0</div>
           </div>
-          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test2.pdf')">
-              <img src="https://via.placeholder.com/24" alt="file icon">
-              <div class="fileName">docu-test2.pdf</div>
-              <div class="fileVersion">version 2.0</div>
-          </div>
-          <div class="logItem" onclick="openModal('requirement%20_repository/docu-logs/docu-test3.pdf')">
-              <img src="https://via.placeholder.com/24" alt="file icon">
-              <div class="fileName">docu-test3.pdf</div>
-              <div class="fileVersion">version 1.0</div>
-          </div>
+
       `;
   }
 }
