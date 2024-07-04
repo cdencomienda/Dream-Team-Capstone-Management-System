@@ -223,6 +223,10 @@
                             </div>
                         </div>
 
+                        <div class="gradeSummary" >  
+                            <button type="button" class="summary-Btn" data-pDropdown-button onclick="gradeSummary()"> <i class="fa-solid fa-percentage"></i> Grades </button> 
+                        </div>  
+
                     </div>
                     </h4>
                 </div> 
@@ -353,8 +357,8 @@
                                     <button class="approve-button"><i class="fa-solid fa-check"></i></button>
                                 </div>
                             </div>
-                            <div class = "">
-                                <button class = "gradeSumarry"> summary of grades </button> 
+                            <div class = "grades-summary">
+                                <button class = "gradeSumarry" onclick ="gradeSummary()"> summary of grades </button> 
                             </div>    
                         </div>
 
@@ -378,7 +382,93 @@
 
                 </div>  
 
-                    <!-- files -->
+    <div class="rubric-summary" style="display: none;">
+        <div class="panel-grades">
+                
+                <div class="Defense-Page" id="summaryGrade">
+                    <div class="chairPgrade">
+                    <h2> chair panel </h2>
+                    <div class="rubric-container">
+                        <!-- dito lagay group name + title ng paper -->
+                        <div class="grpDefense-Details">
+                            <div class="Group-Name">
+                                <h3>group</h3>
+                            </div>
+                            <div class="capstone-title">
+                                <h3>development of ???</h3>
+                            </div>
+                        </div>
+                        <div class="rubric-header">
+                            <h1>Written Communication</h1>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="description-column">Description</th>
+                                    <th class="grade-Desc">score description</th>
+                                    <th class="grades-column">Grades</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="criteria">
+                                    <td class="description">
+                                        <strong>B1. Executive Summary</strong><br>
+                                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                    </td>
+                                    <td class="grade_description">
+                                        askdjbajdb<br>
+                                    </td>
+                                    <td class="score-column">
+                                        <span class="score"></span>
+                                    </td>
+                                </tr>
+                                <tr class="criteria">
+                                    <td class="description">
+                                        <strong>B1. Executive Summary</strong><br>
+                                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                    </td>
+                                    <td class="grade_description">
+                                        askdjbajdb<br>
+                                    </td>
+                                    <td class="score-column">
+                                        <span class="score"></span>
+                                    </td>
+                                </tr>
+                                <tr class="criteria">
+                                    <td class="description">
+                                        <strong>B1. Executive Summary</strong><br>
+                                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                    </td>
+                                    <td class="grade_description">
+                                        askdjbajdb<br>
+                                    </td>
+                                    <td class="score-column">
+                                        <span class="score"></span>
+                                    </td>
+                                </tr>
+                                <tr class="criteria">
+                                    <td class="description">
+                                        <strong>B1. Executive Summary</strong><br>
+                                        The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                    </td>
+                                    <td class="grade_description">
+                                        askdjbajdb<br>
+                                    </td>
+                                    <td class="score-column">
+                                        <span class="score"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="LeadPgrade"></div>
+            <div class="member1grade"></div>
+            <div class="member2Grade"></div>
+        </div>
+    </div>  
+                <!-- files -->
                 <div class="defaultBody " id="defaultBody">
                     <div class="recentFiles">
                         <!-- File posted by another person -->
@@ -404,6 +494,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Modal Structure -->
                 <div id="fileModal" class="modal">
                     <div class="modalContent">
@@ -420,14 +511,13 @@
                     </div>
                 </div> 
                 <!-- Group Defense Rubric -->
-               
         </div>  
-
-    <!-- start rubrics set hidden -->  
-      <!-- Rubric div -->
         
-      <div class="rubriccontainer" style="display: none"> 
-                    <div class="secondaryRubriccont">
+    <!-- start rubrics set hidden -->  
+    <!-- Rubric div -->
+        
+    <div class="rubriccontainer" style="display: none"> 
+                <div class="secondaryRubriccont">
                     <div class="rubric-container">
                             <h1>Written Communication</h1>
                         </div>
@@ -467,8 +557,11 @@
                             </tbody>
                         </table>
                     </div>
-            </div>        
+            </div>   
+    
 </div> 
+  
+
 <script src="Capstone.js"></script>
 </body>
 </html>

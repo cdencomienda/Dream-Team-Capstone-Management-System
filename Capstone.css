@@ -341,7 +341,7 @@ body {
   border-radius: 25px;
 }
 .commentsCollection{
-  display: none;
+  /* display: none; */
   width: 100%; /* Set width */
   padding: 20px;
   margin: 1% auto;
@@ -1223,6 +1223,31 @@ pointer-events: auto;
   transform: translateY(0);
   pointer-events: auto;
   }
+  
+#summaryGrade{
+  height: 600px;
+  width: 92%;
+  margin-left: -25px;
+  margin-top: 11px;
+}
+.summary-Btn{
+    border: none;
+    width: 100px;
+    padding: 5px;
+    margin-right: 10px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    transition:backround-color .3s ease;
+  }
+    .summary-Btn:hover {
+    background-color: #958f87;
+    }
+    */
+    button:hover{
+      background-color:#958f87;
+    }
 
 .submissionFrame, .professorFilesR {
 display: none;

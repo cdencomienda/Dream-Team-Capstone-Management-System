@@ -199,6 +199,8 @@ function rubric_preview() {
 }
 
 function showDefaultBody() {
+  document.getElementById("summaryGrade").style.display = "none";
+
   document.getElementById("defaultBody").style.display = "block";
   var defenseMainElements = document.getElementsByClassName('defense-main');
   for (var i = 0; i < defenseMainElements.length; i++) {
@@ -206,12 +208,34 @@ function showDefaultBody() {
   }
 }
 function groupDefenseRubrics() {
+  document.getElementById("summaryGrade").style.display = "none";
   document.getElementById("defaultBody").style.display = "none";
   var defenseMainElements = document.getElementsByClassName('defense-main');
   for (var i = 0; i < defenseMainElements.length; i++) {
       defenseMainElements[i].style.display = 'block';
   }
 }
+
+function gradeSummary() {
+  document.getElementById("defaultBody").style.display = "none";
+  var defenseMainElements = document.getElementsByClassName('rubric-summary');
+  for (var i = 0; i < defenseMainElements.length; i++) {
+      defenseMainElements[i].style.display = 'block';
+  }
+}
+
+
+function getRandomScore() {
+  return Math.floor(Math.random() * 8);
+}
+
+// Set a random score for each score span
+document.addEventListener('DOMContentLoaded', () => {
+  const scores = document.querySelectorAll('.score');
+  scores.forEach(score => {
+      score.textContent = getRandomScore();
+  });
+});
 
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
