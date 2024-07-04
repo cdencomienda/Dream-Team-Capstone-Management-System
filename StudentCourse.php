@@ -121,9 +121,6 @@
                     <div class= "courses"> <h2>Courses</h2></div>
                     <div class="course" id="coursesList">
                     </div> 
-                    <!-- This will be populated with the list of courses -->
-                    <button type="button" id = "group_name1" class="createdgroupBTN" onclick="showStudentDefault()"></button>
-
                 </div>
             <div class="dropdown">
             </div>
@@ -156,7 +153,7 @@
 
                                 // Create a new h3 for each course
                                 const courseHeader = document.createElement('h3');
-                                courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - ${course.section} - T${course.term}`;
+                                courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - T${course.term} - ${course.section}`;
 
                                 // Create a new button for each course
                                 const courseButton = document.createElement('button');
@@ -165,7 +162,7 @@
                                 courseButton.className = 'createdgroupBTN';
                                 courseButton.textContent = 'New Group Created'; // Button text
                                 courseButton.onclick = function() {
-                                    newGroupCreated(course);
+                                    showStudentDefault(course);
                                 };
 
                                 // Append the courseHeader and courseButton to the container
