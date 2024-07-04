@@ -25,7 +25,10 @@ window.onclick = function(event) {
 }
 
 
- 
+function newGroupCreated() {
+  var container = document.querySelector('.GroupContainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+}   
 
 function logOUT(){
   window.location.assign("LoginSignup.php")

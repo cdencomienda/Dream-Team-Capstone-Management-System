@@ -488,10 +488,11 @@
                         
                             <div class="pDropdown" data-pDropdown>  
                                 <button type="button" class="Panelist-Btn" data-pDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
-                                        <div class="PanelistContainer" id="PanelistContainer">
-                                            Panel1
-                                        </div>
-                                    </div>
+                                <div class="PanelistContainer" id="PanelistContainer">
+                                    Panel1
+                                </div>
+                            </div>
+                            
                         </div>
 
                         <!-- <div class="pDropdown" data-flsDropdown>  

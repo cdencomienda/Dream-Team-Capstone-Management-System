@@ -127,7 +127,7 @@
             <div class="dropdown">
             </div>
         </div>
-        <div class="StudentDefault">
+        <div class="StudentDefault" style = "display :none;" onclick = "newGroupCreated()">
             <div class="dashboard_header">
 
                     <!-- Group Name Box -->
