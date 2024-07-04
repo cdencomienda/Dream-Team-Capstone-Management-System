@@ -292,7 +292,6 @@ left: 37%;
     height: 600px;
     padding: 25px;
     margin-top: -700px;
-    display: block;
     z-index: 0; /* Set a lower z-index */
 }
 

@@ -242,4 +242,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Attach closeEditform function to the global scope
     window.closeEditform = closeEditform;
   }); 
-  
+
+
+  function showStudentDefault() {
+    const studentDefault = document.getElementById('StudentDefault');
+    studentDefault.style.display = studentDefault.style.display === 'block' ? 'none' : 'block';
+}

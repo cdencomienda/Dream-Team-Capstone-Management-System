@@ -120,174 +120,174 @@
             <div class = "studentCourseDropdown" id="studentCoursesDropdown">
                     <div class= "courses"> <h2>Courses</h2></div>
                     <div class="course" id="coursesList">
-                    </div> <!-- This will be populated with the list of courses -->
-                    <!-- <button type="button" id = "group_name1" class="createdgroupBTN" onclick="newGroupCreated()"></button> -->
+                    </div> 
+                    <!-- This will be populated with the list of courses -->
+                    <button type="button" id = "group_name1" class="createdgroupBTN" onclick="showStudentDefault()"></button>
 
                 </div>
             <div class="dropdown">
             </div>
         </div>
-        <div class="StudentDefault" style = "display :none;" onclick = "newGroupCreated()">
+        
+        <div class="StudentDefault" id = "StudentDefault" style = "display: none;">  
             <div class="dashboard_header">
-
                     <!-- Group Name Box -->
-
-                <div class="groupname_container" onclick = "showDefaultBody()"> 
+            <div class="groupname_container"> 
                     <div class="group_name" id="groupName"> sample </div>   
-                </div>
+            </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    function fetchCourses() {
-        fetch('LiveSearchStudentCourses.php') 
-            .then(response => response.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    const courseContainer = document.querySelector('.course');
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        function fetchCourses() {
+            fetch('LiveSearchStudentCourses.php') 
+                .then(response => response.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        const courseContainer = document.querySelector('.course');
 
-                    if (courseContainer) {
-                        courseContainer.innerHTML = ''; // Clear existing content
+                        if (courseContainer) {
+                            courseContainer.innerHTML = ''; // Clear existing content
 
-                        data.forEach((course, index) => {
-                            // Parse academic_year as an integer
-                            const academicYear = parseInt(course.academic_year);
-                            // Calculate academic year range in "year - year + 1" format
-                            const academicYearRange = academicYear + ' - ' + (academicYear + 1);
+                            data.forEach((course, index) => {
+                                // Parse academic_year as an integer
+                                const academicYear = parseInt(course.academic_year);
+                                // Calculate academic year range in "year - year + 1" format
+                                const academicYearRange = academicYear + ' - ' + (academicYear + 1);
 
-                            // Create a new h3 for each course
-                            const courseHeader = document.createElement('h3');
-                            courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - ${course.section} - T${course.term}`;
+                                // Create a new h3 for each course
+                                const courseHeader = document.createElement('h3');
+                                courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - ${course.section} - T${course.term}`;
 
-                            // Create a new button for each course
-                            const courseButton = document.createElement('button');
-                            courseButton.type = 'button';
-                            courseButton.id = `group_name${index + 1}`; // Unique ID for each button
-                            courseButton.className = 'createdgroupBTN';
-                            courseButton.textContent = 'New Group Created'; // Button text
-                            courseButton.onclick = function() {
-                                newGroupCreated(course);
-                            };
+                                // Create a new button for each course
+                                const courseButton = document.createElement('button');
+                                courseButton.type = 'button';
+                                courseButton.id = `group_name${index + 1}`; // Unique ID for each button
+                                courseButton.className = 'createdgroupBTN';
+                                courseButton.textContent = 'New Group Created'; // Button text
+                                courseButton.onclick = function() {
+                                    newGroupCreated(course);
+                                };
 
-                            // Append the courseHeader and courseButton to the container
-                            courseContainer.appendChild(courseHeader);
-                            courseContainer.appendChild(courseButton);
-                        });
+                                // Append the courseHeader and courseButton to the container
+                                courseContainer.appendChild(courseHeader);
+                                courseContainer.appendChild(courseButton);
+                            });
+                        } else {
+                            console.error('No element with class "course" found.');
+                        }
                     } else {
-                        console.error('No element with class "course" found.');
+                        console.log(data.message || 'No courses found for the student.');
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Function to handle the button click event
+        function newGroupCreated(course) {
+            console.log('New group created for:', course);
+            // Add your custom functionality here
+        }
+        
+
+
+
+        // Call the fetchCourses function when the DOM is fully loaded
+        fetchCourses();
+    });
+
+    function fetchGroupName() {
+        fetch('getGroupNameforButton.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    console.error('Error:', data.error);
+                    // Handle the error as needed, for example, display it to the user
+                    alert('Error: ' + data.error);
                 } else {
-                    console.log(data.message || 'No courses found for the student.');
+                    console.log('Group Name:', data.group_name);
+                    console.log('Group ID:', data.group_id);
+                    // Use the group_name and group_id as needed, for example, display them on the webpage
+                    document.getElementById('groupName').innerText = data.group_name;
+                    document.getElementById('group_name1').innerText = data.group_name;
+
+                    // Store group_id in localStorage or sessionStorage as needed
+                    localStorage.setItem('group_id', data.group_id);
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Fetch error:', error);
+                // Handle fetch error, for example, display it to the user
+                alert('Fetch error: ' + error.message);
             });
     }
 
-    // Function to handle the button click event
-    function newGroupCreated(course) {
-        console.log('New group created for:', course);
-        // Add your custom functionality here
+
+    function fetchStudents() {
+        fetch("LiveSearchGroupMembers.php")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const container = document.getElementById("groupMembersContainer");
+                if (data.error) {
+                    container.innerHTML = data.error;
+                } else {
+                    let output = "";
+                    data.forEach(student => {
+                        output += student + "<br>";
+                    });
+                    container.innerHTML = output;
+                }
+            })
+            .catch(error => {
+                document.getElementById("groupMembersContainer").innerHTML = "Error: " + error;
+            });
     }
-    
 
-
-
-    // Call the fetchCourses function when the DOM is fully loaded
-    fetchCourses();
-});
-
-function fetchGroupName() {
-    fetch('getGroupNameforButton.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error('Error:', data.error);
-                // Handle the error as needed, for example, display it to the user
-                alert('Error: ' + data.error);
-            } else {
-                console.log('Group Name:', data.group_name);
-                console.log('Group ID:', data.group_id);
-                // Use the group_name and group_id as needed, for example, display them on the webpage
-                document.getElementById('groupName').innerText = data.group_name;
-                document.getElementById('group_name1').innerText = data.group_name;
-
-                // Store group_id in localStorage or sessionStorage as needed
-                localStorage.setItem('group_id', data.group_id);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            // Handle fetch error, for example, display it to the user
-            alert('Fetch error: ' + error.message);
-        });
-}
-
-
-function fetchStudents() {
-    fetch("LiveSearchGroupMembers.php")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const container = document.getElementById("groupMembersContainer");
-            if (data.error) {
-                container.innerHTML = data.error;
-            } else {
-                let output = "";
-                data.forEach(student => {
-                    output += student + "<br>";
-                });
-                container.innerHTML = output;
-            }
-        })
-        .catch(error => {
-            document.getElementById("groupMembersContainer").innerHTML = "Error: " + error;
-        });
-}
-
-// function storeGroupId() {
-//             fetch('getGroupNameforButton.php', {
-//                 method: 'GET',
-//                 credentials: 'include'
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.error) {
-//                     console.error(data.error);
-//                 } else {
-//                     console.log('Group ID:', data.group_id);
-//                     console.log('Group Name:', data.group_name);
-//                     // Accessing the group_id from the session later if needed
-//                     fetch('path/to/another/php/script_to_access_session.php', {
-//                         method: 'GET',
-//                         credentials: 'include'
-//                     })
-//                     .then(response => response.json())
-//                     .then(sessionData => {
-//                         console.log('Group ID from session:', sessionData.group_id);
-//                         console.log('Group Name from session:', sessionData.group_name);
-//                     });
-//                 }
-//             })
-//             .catch(error => console.error('Error:', error));
-//         }
+    // function storeGroupId() {
+    //             fetch('getGroupNameforButton.php', {
+    //                 method: 'GET',
+    //                 credentials: 'include'
+    //             })
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 if (data.error) {
+    //                     console.error(data.error);
+    //                 } else {
+    //                     console.log('Group ID:', data.group_id);
+    //                     console.log('Group Name:', data.group_name);
+    //                     // Accessing the group_id from the session later if needed
+    //                     fetch('path/to/another/php/script_to_access_session.php', {
+    //                         method: 'GET',
+    //                         credentials: 'include'
+    //                     })
+    //                     .then(response => response.json())
+    //                     .then(sessionData => {
+    //                         console.log('Group ID from session:', sessionData.group_id);
+    //                         console.log('Group Name from session:', sessionData.group_name);
+    //                     });
+    //                 }
+    //             })
+    //             .catch(error => console.error('Error:', error));
+    //         }
 
 
 
 
-window.onload = fetchGroupName;
+    window.onload = fetchGroupName;
 
 
 </script>  
-
                 <h4>
                     <div class="button-group"> 
 
