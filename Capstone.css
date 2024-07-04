@@ -1294,6 +1294,54 @@ transition: backround-color .3s ease;
   z-index: 1000;
   text-align: left;
 }
+.fileLogsPopup {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    max-height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow-y: auto;
+   
+}
+#DocuReqrmntLogs {
+  bottom: 50%;
+  left: 37%;
+}
+
+.fileLogsPopup .logItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  
+}
+
+.fileLogsPopup .logItem:last-child {
+  border-bottom: none;
+}
+
+.fileLogsPopup .logItem img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.fileLogsPopup .logItem .fileName {
+  flex: 1;
+}
+
+.fileLogsPopup .logItem:hover {
+  background-color: #f0f0f0;
+}
 .documentationCont{
   margin: 10px;
   margin-top: 30px;

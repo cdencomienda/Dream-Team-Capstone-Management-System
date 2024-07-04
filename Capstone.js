@@ -67,41 +67,53 @@ function closeEditform(){
 
 
 function addComment() {
-    // Get the comments section container
-    var commentsSection = document.getElementById('commentsSection');
-    var sendIcon = document.createElement('i');
-     sendIcon.classList.add('fa-solid', 'fa-trash-can');
-     
-    // Clone the existing comment section (optional, if needed)
-    var newComment = document.createElement('div');
-    newComment.classList.add('panel-comments');
+  // Get the comments section container
+  var commentsSection = document.getElementById('commentsSection');
   
-    // Create the new elements
-    var newHeading = document.createElement('h3');
-    newHeading.textContent = 'Comment # ' + (commentsSection.children.length + 1);
-  
-    var newTextArea = document.createElement('textarea');
-    newTextArea.classList.add('comments-input');
-  
-    // Create the send button
-    var sendButton = document.createElement('button');
-    sendButton.innerHTML = sendIcon.outerHTML;
-    sendButton.classList.add('send-button');  // Add a class for styling (optional)
-  
-    // Append the new elements to the new comment div
-    
-    newComment.appendChild(newHeading);
-    newComment.appendChild(newTextArea);
-    newComment.appendChild(sendButton);  // Add the button here
-  
-    // Append the new comment div to the comments section container
-    commentsSection.appendChild(newComment);
+  // Create the new comment div
+  var newComment = document.createElement('div');
+  newComment.classList.add('panel-comments');
 
-    setTimeout(function() {
+  // Create the new elements
+  var newHeading = document.createElement('h3');
+  newHeading.textContent = 'Comment # ' + (commentsSection.children.length + 1);
+
+  var newTextArea = document.createElement('textarea');
+  newTextArea.classList.add('comments-input');
+
+  // Create the delete button
+  var deleteButton = document.createElement('button');
+  deleteButton.classList.add('delete-button');  // Add a class for styling
+  deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+  deleteButton.onclick = function() {
+      if (confirm("Are you sure you want to delete this comment?")) {
+          newComment.remove();
+          // Update comment numbers
+          updateCommentNumbers();
+      }
+  };
+
+  // Append the new elements to the new comment div
+  newComment.appendChild(newHeading);
+  newComment.appendChild(newTextArea);
+  newComment.appendChild(deleteButton);  // Add the button here
+
+  // Append the new comment div to the comments section container
+  commentsSection.appendChild(newComment);
+
+  setTimeout(function() {
       commentsSection.scrollTo({ top: newComment.offsetTop, behavior: 'smooth' });
-    }, 10); // Adjust delay if needed (in milliseconds)
-  }
+  }, 10); // Adjust delay if needed (in milliseconds)
+}
 
+function updateCommentNumbers() {
+  var commentsSection = document.getElementById('commentsSection');
+  var commentDivs = commentsSection.getElementsByClassName('panel-comments');
+  for (var i = 0; i < commentDivs.length; i++) {
+      var heading = commentDivs[i].getElementsByTagName('h3')[0];
+      heading.textContent = 'Comment # ' + (i + 1);
+  }
+}
   // ClassListener
   
 //   document.getElementById('scheduleContainer').addEventListener('click', function() {
@@ -212,6 +224,13 @@ function newGroupCreated() {
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
     
 }
+function newGroupCreated2() {
+  var container = document.querySelector('.GroupContainer');
+  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+  var chairpanelCollection = document.querySelector('.commentsCollection')
+  chairpanelCollection.style.display = (chairpanelCollection.style.display === 'none' || chairpanelCollection.style.display === '') ? 'block' : 'none';
+  
+}
 // viewfiles  
 function openModal(filePath) {
   document.getElementById('fileFrame').src = filePath;
@@ -221,4 +240,37 @@ function openModal(filePath) {
 function closeModal() {
   document.getElementById('fileModal').style.display = 'none';
   document.getElementById('fileFrame').src = ''; // Clear the iframe src
+}
+function filesbtn() {
+  const dropdown = document.querySelector('[data-flsDropdown]');
+  dropdown.classList.toggle('active');
+}
+
+function toggleDocuReqLogs() {
+  const popup = document.getElementById('DocuReqrmntLogs');
+  const isDisplayed = popup.style.display === 'block';
+
+  // Close any other open popups
+  const popups = document.getElementsByClassName('fileLogsPopup');
+  for (let i = 0; i < popups.length; i++) {
+      popups[i].style.display = 'none';
+  }
+
+  // Toggle the current popup
+  popup.style.display = isDisplayed ? 'none' : 'block';
+
+  if (!isDisplayed) {
+      popup.innerHTML = `
+          <h4>Document Requirement Logs</h4>
+          <div class="logItem" id="logItem1" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">docu-test1.pdf</div>
+          </div>
+        <h4>Document Requirement Logs</h4>
+          <div class="logItem" id="logItem1" onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')">
+              <img src="https://via.placeholder.com/24" alt="file icon">
+              <div class="fileName">docu-test1.pdf</div>
+          </div>
+      `;
+  }
 }
