@@ -293,45 +293,36 @@ window.onload = fetchGroupName;
 
                         <button type="button" class=" Submission-Btn" onclick="submissionBtnAuth()"> <i class="fa-solid fa-clipboard"></i> Submissions </button>
 
-                        <div class = "flsDropdown" data-flsDropdown>
-                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
-                            <div class = "filesContainer"> 
-                                <div class = "documentationCont">
+                        <!-- files -->
+                        <div class = "flsDropdown " data-flsDropdown>
+                            <button type="button" class=" Rep-FilesBtn" onclick = "filesbtn()"data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <div class="filesContainer"> 
+                                <div class="documentationCont">
                                     Document Requirement: <br>
-                                    <div class = "ReqDocumentation">
-                                        <div class ="attachedDocumentation"> 
+                                    <div class="ReqDocumentation">
+                                        <div class="attachedDocumentation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
+                                        
                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                                         <div class="fileDetails">
-                                            <strong>Final Documentation</strong>
-                                            <span>12 KB</span>
-                                            </div>    
+                                            <div class="Recent-fileName">docu-test1.pdf</div>
+                                            
                                         </div>
-                                        <div class = "divDocuReqLogs"> <br> <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs">
-                                                
-                                            </div>
+                                        <div class="divDocuReqLogs"> <br> 
+                                            <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
                                         </div>
                                     </div>     
                                 </div>   
-                                <div class = "AdvCont">          
-                                    Advisor Recomendation Sheet: 
-                                    <div class = "advRecomendation">
-                                         <div class = "attachedAdvRecom">
-                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                                            <div class="fileDetails">
-                                                <strong>DREAM TEAM - Recommendation</strong>
-                                                <span>26 KB</span>
-                                            </div>    
-                                         </div>    
-                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>  
+                                 
+                            </div>
                         </div>    
+
+
+                        <!-- files popup -->
+                        <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                                                <h4>Document Requirement Logs</h4>
+                                                <!-- Logs will be dynamically added here -->
+                                            </div>  
+
+                        
 
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Members </button>

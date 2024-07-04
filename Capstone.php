@@ -136,7 +136,11 @@
                             <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
                         </div>
                     </div>
+                    <!-- PanelMember, Lead -->
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                    
+                    <!-- chair panel -->
+                    <button type="button" class="createdgroupBTN" onclick="newGroupCreated2()">Group name2</button>
                 </div>   
                 <div class="coursesDetails" id="term1">
                     <h3 class="termh3">Courses for Term 1</h3>
@@ -161,7 +165,8 @@
                 </div>
             </div>
         </div>        
-    </div>           
+    </div>       
+
     <div class="GroupContainer" style = "display: none;" >
                     <div class="dashboard_header">
                         <!-- Group Name Box -->
@@ -176,43 +181,38 @@
                         </script> 
                     <div class="button-group"> 
                         <div class = "flsDropdown" data-flsDropdown>
-                            <button type="button" class=" Rep-FilesBtn" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
+                            <button type="button" class=" Rep-FilesBtn" onclick = "filesbtn()" data-flsDropdown-button> <i class="fa-solid fa-file"></i> Files </button>
                             
-                            <div class = "filesContainer"> 
-                                <div class = "documentationCont">
+                            <div class="filesContainer"> 
+                                <div class="documentationCont">
                                     Document Requirement: <br>
-                                    <div class = "ReqDocumentation">
-                                        <div class ="attachedDocumentation"> here attached file </div>
+                                    <div class="ReqDocumentation">
+                                        <div class="attachedDocumentation"onclick="openModal('requirement%20_repository/docu-logs/docu-test1.pdf')"> 
+                                        
+                                        <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                                        
+                                            <div class="Recent-fileName">docu-test1.pdf</div>
+                                            
+                                        </div>
+
                                         <div class = "divDocuReqLogs"> <br>
-                                             <button class = "DocuReqLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                            <div class = "DrequirementLogsCont" id ="DocuReqrmntLogs"></div>
+                                            <button class = "DocuReqLogs" onclick="toggleDocuReqLogs()" > <i class="fa-solid fa-ellipsis"></i> </button>
                                         </div>
                                     </div>     
                                 </div>   
-                                
-                                <div class = "AdvCont">          
-                                    Advisor Recomendation Sheet: 
-                                    <div class = "advRecomendation">
-                                         <div class = "attachedAdvRecom"> attached file here </div>    
-                                        <div class = "divAdvLogs"> <br> <button class = "AdvLogs"> <i class="fa-solid fa-ellipsis"></i> </button>
-                                             <div class = "AdvRequirementLogsCont" id ="AdvReqrmntLogs">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            
                             </div>  
-                            
-                            <script>
-                                    
-                            </script>
                         </div>
-
+                          <!-- files popup -->
+                          <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                        <h4>Document Requirement Logs</h4>
+                        <!-- Logs will be dynamically added here -->
+                        </div>
+                      
+                        
                         <div class= "group-Rubrics">
                             <button type="button" class=" group-Drubrics" onclick="groupDefenseRubrics()"> <i class="fa-solid fa-table"></i> Rubrics </button>
                         </div>
-
+                        
                         <div class="mDropdown" data-flsDropdown>  
                             <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchGroupMembers()"  > <i class="fa-solid fa-user-group"></i> Members </button>
                                 <!-- Container to display group members -->
@@ -343,24 +343,28 @@
                     <!-- for chair panel only -->
                     <div class="commentsCollection">
                         <div class="CommentsDiv">
-                            <div class="comments-section" id="commentsSection">
+                            <div class="comments-section">
                                 <div class="panel-comments">
                                     <h3>Panel 1 Comments:</h3>
                                     <textarea class="comments-input"></textarea>
                                     <button class="approve-button"><i class="fa-solid fa-check"></i></button>
                                 </div>
                             </div>
+                            <div class = "">
+                                <button class = "gradeSumarry"> summary of grades </button> 
+                            </div>    
                         </div>
+
                     </div>
                     <!-- chair panel end -->
                     <div class="cDiv">
                         <div class="CommentsDiv">
                             <div class="comments-section" id="commentsSection">
-                                <div class="panel-comments">
+                                <!-- <div class="panel-comments">
                                     <h3>Panel 1 Comments:</h3>
                                     <textarea class="comments-input"></textarea>
                                     <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="addCommBtn">
