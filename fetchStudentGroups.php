@@ -43,7 +43,7 @@ if(isset($_SESSION['student_group_id'])) {
                     // Prepare SQL query to get adviserID
                     $group_name = $conn_dreamteam->real_escape_string($_SESSION['group_name']); // Escape the group_name string
 
-                    $sql_adviser = "SELECT adviserID FROM `group` WHERE groupName = '$group_name'"; // Enclose 'group' in backticks
+                    $sql_adviser = "SELECT adviserID FROM `group` WHERE groupName = '$group_name' AND requirementsID = $student_group_id"; // Enclose 'group' in backticks
 
                     // Execute the query to get adviserID
                     $result_adviser = $conn_dreamteam->query($sql_adviser);

@@ -696,7 +696,7 @@ function fetchCourses(container, year, selectedTerm) {
 
             console.log('Courses:', coursesData);
 
-            fetch('test.php')
+            fetch('fetchGroupsAdviser.php')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -750,7 +750,6 @@ function fetchCourses(container, year, selectedTerm) {
                             dropdownMelon(this);
                             console.log('Clicked Course ID:', course.course_id);
                             saveCourseID(course.course_id);
-                            // fetchGroupID();
                         });
 
                         console.log('Course ID:', course.course_id);
@@ -814,7 +813,7 @@ function newGroupCreated(course_id, group_name) {
     console.log(course_id, group_name);
     fetchGroupData(course_id, group_name);
     fetchStudentGroups();
-    fetchPanelGroups();
+    // fetchPanelGroups();
     requirementName();
     fileFeed();
     
@@ -1186,6 +1185,7 @@ function fileFeed() {
     });
 }
 
+
 //files
 function groups() {
     fetch('FetchGroups.php')
@@ -1210,32 +1210,6 @@ function groups() {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
-function fetchGroupID() {
-    fetch('groupRequirement.php')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Check if data.courseGroupID is an array
-        if (Array.isArray(data.courseGroupID)) {
-            // Re-index the array numerically
-            const courseGroupIDs = data.courseGroupID;
-
-            console.log(courseGroupIDs); // This will contain the array of courseGroupIDs
-
-            // You can perform further operations with the courseGroupIDs here
-        } else {
-            console.error('Data received is not in the expected format:', data);
-        }
-    })
-    .catch(error => console.error('Error fetching data:', error));
-}
-
-
 
 
 

@@ -854,7 +854,6 @@ function fetchCourses(container, year, selectedTerm) {
                             dropdownMelon(this);
                             console.log('Clicked Course ID:', course.course_id);
                             saveCourseID(course.course_id);
-                            // fetchGroupID();
                         });
 
                         console.log('Course ID:', course.course_id);
@@ -1314,33 +1313,6 @@ function groups() {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
-function fetchGroupID() {
-    fetch('groupRequirement.php')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Check if data.courseGroupID is an array
-        if (Array.isArray(data.courseGroupID)) {
-            // Re-index the array numerically
-            const courseGroupIDs = data.courseGroupID;
-
-            console.log(courseGroupIDs); // This will contain the array of courseGroupIDs
-
-            // You can perform further operations with the courseGroupIDs here
-        } else {
-            console.error('Data received is not in the expected format:', data);
-        }
-    })
-    .catch(error => console.error('Error fetching data:', error));
-}
-
-
-
 
 
 function reqName() {
