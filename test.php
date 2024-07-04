@@ -2,46 +2,60 @@
 // Start the session
 session_start();
 
+// Check if user_id is set in the session
+if (!isset($_SESSION['user_id'])) {
+    echo 'User ID is not set in session.';
+    exit;
+}
+
 // Check if group_courses is set in the session and if it's an array
 if (isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
-    // Connect to the database
-    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
+    $user_id = $_SESSION['user_id'];
 
-    // Check connection
+    // Connect to the database
+    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
     if (!$conn) {
-        echo json_encode(['error' => 'Connection failed: ' . mysqli_connect_error()]);
-        exit;
+        die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Initialize an empty array to store results with segregation by course_id
     $results = [];
+    
+    foreach ($_SESSION['group_courses'] as $course_info) {
+        // Validate course_id in course_info
+        if (isset($course_info['course_id'])) {
+            $course_id = $course_info['course_id'];
 
-    // Loop through each course_id in group_courses array
-    foreach ($_SESSION['group_courses'] as $course_id) {
-        // Escape the course_id for security
-        $course_id = mysqli_real_escape_string($conn, $course_id);
+            // Initialize an array for group names under each course_id
+            $group_names = [];
 
-        // Initialize an empty array for group_names under each course_id
-        $group_names = [];
+            // Fetch group names for the course_id
+            $query = "SELECT groupName FROM `group` WHERE adviserID = ? AND courseID = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $user_id, $course_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        // SQL query to fetch group_name based on course_id
-        $query = "SELECT group_name FROM groups WHERE course_id = $course_id";
-        $result = mysqli_query($conn, $query);
-
-        // Check if the query was successful
-        if ($result) {
-            // Fetch the group_name and add it to the group_names array if it's not already present
-            while ($row = mysqli_fetch_assoc($result)) {
-                $group_name = $row['group_name'];
-                if (!in_array($group_name, $group_names)) {
-                    $group_names[] = $group_name;
+            // Check if the query was successful
+            if ($result) {
+                // Fetch the group names and add them to the group_names array if they're not already present
+                while ($row = $result->fetch_assoc()) {
+                    $group_name = $row['groupName'];
+                    if (!in_array($group_name, $group_names)) {
+                        $group_names[] = $group_name;
+                    }
                 }
+            } else {
+                echo 'Error in query: ' . $stmt->error;
+                exit;
             }
+            
             // Add the group_names array to the results array under the respective course_id key
             $results[$course_id] = $group_names;
+
+            // Close the statement
+            $stmt->close();
         } else {
-            echo json_encode(['error' => 'Error in query: ' . mysqli_error($conn)]);
-            exit;
+            echo "Invalid course info: " . var_export($course_info, true) . "<br>";
         }
     }
 
@@ -51,12 +65,11 @@ if (isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
     // Close the connection
     mysqli_close($conn);
 
-    // Send the results as JSON
+    // Send results as JSON
     header('Content-Type: application/json');
     echo json_encode($results);
 } else {
-    // If group_courses is not set or is not an array, send an error message as JSON
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'group_courses array is not set or is not an array in session.']);
+    // If group_courses is not set or is not an array, send an error message
+    echo 'group_courses array is not set or is not an array in session.';
 }
 ?>
