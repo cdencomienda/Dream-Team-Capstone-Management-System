@@ -374,6 +374,20 @@ background-repeat: no-repeat;
   font-size:small;
   /* color: white; */
 } 
+.advisory{
+  top: -90px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/users-icon.png);
+  background-repeat: no-repeat;
+}
 
 /* table layout */
 main.table {

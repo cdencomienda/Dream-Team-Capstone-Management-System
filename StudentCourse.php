@@ -129,8 +129,10 @@
         <div class="StudentDefault" id = "StudentDefault" style = "display: none;">  
             <div class="dashboard_header">
                     <!-- Group Name Box -->
+                    <div class="groupname_container" onclick = "showDefaultBody()"> 
             <div class="groupname_container"> 
                     <div class="group_name" id="groupName"> sample </div>   
+                </div>
             </div>
 <script>
     
@@ -195,35 +197,50 @@
     });
 
     function fetchGroupName() {
-        fetch('getGroupNameforButton.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    console.error('Error:', data.error);
-                    // Handle the error as needed, for example, display it to the user
-                    alert('Error: ' + data.error);
-                } else {
-                    console.log('Group Name:', data.group_name);
-                    console.log('Group ID:', data.group_id);
-                    // Use the group_name and group_id as needed, for example, display them on the webpage
-                    document.getElementById('groupName').innerText = data.group_name;
-                    document.getElementById('group_name1').innerText = data.group_name;
+    fetch('getGroupNameforButton.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                // Handle the error as needed, for example, display it to the user
+                alert('Error: ' + data.error);
+            } else {
+                console.log('Groups:', data.groups);
 
-                    // Store group_id in localStorage or sessionStorage as needed
-                    localStorage.setItem('group_id', data.group_id);
+                // Update buttons with class 'createdgroupBTN'
+                const buttons = document.getElementsByClassName('createdgroupBTN');
+                for (let i = 0; i < buttons.length && i < data.groups.length; i++) { 
+                    buttons[i].innerText = data.groups[i].group_name;
+                    buttons[i].setAttribute('data-group-id', data.groups[i].group_id);
+
+                    // Optionally store group IDs in localStorage or sessionStorage
+                    localStorage.setItem(`group_id_${i}`, data.groups[i].group_id);
                 }
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-                // Handle fetch error, for example, display it to the user
-                alert('Fetch error: ' + error.message);
-            });
-    }
+
+                // Update elements with class 'group_name'
+                const groupElements = document.getElementsByClassName('group_name');
+                for (let i = 0; i < groupElements.length && i < data.groups.length; i++) {
+                    groupElements[i].innerText = data.groups[i].group_name;
+                    groupElements[i].setAttribute('data-group-id', data.groups[i].group_id);
+
+                    // Optionally store group IDs in localStorage or sessionStorage
+                    localStorage.setItem(`group_id_${i}`, data.groups[i].group_id);
+                }
+            }
+        }) 
+        .catch(error => {
+            console.error('Fetch error:', error);
+            // Handle fetch error, for example, display it to the user
+            alert('Fetch error: ' + error.message);
+        });
+}
+
+
 
 
     function fetchStudents() {
@@ -251,32 +268,6 @@
             });
     }
 
-    // function storeGroupId() {
-    //             fetch('getGroupNameforButton.php', {
-    //                 method: 'GET',
-    //                 credentials: 'include'
-    //             })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 if (data.error) {
-    //                     console.error(data.error);
-    //                 } else {
-    //                     console.log('Group ID:', data.group_id);
-    //                     console.log('Group Name:', data.group_name);
-    //                     // Accessing the group_id from the session later if needed
-    //                     fetch('path/to/another/php/script_to_access_session.php', {
-    //                         method: 'GET',
-    //                         credentials: 'include'
-    //                     })
-    //                     .then(response => response.json())
-    //                     .then(sessionData => {
-    //                         console.log('Group ID from session:', sessionData.group_id);
-    //                         console.log('Group Name from session:', sessionData.group_name);
-    //                     });
-    //                 }
-    //             })
-    //             .catch(error => console.error('Error:', error));
-    //         }
 
 
 
