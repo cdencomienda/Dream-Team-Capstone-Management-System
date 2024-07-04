@@ -561,6 +561,9 @@
             </div>   
     
 </div> 
+
+
+
   
 
 <script src="Capstone.js"></script>
@@ -850,7 +853,7 @@ function fetchCourses(container, year, selectedTerm) {
                         button.addEventListener('click', function() {
                             dropdownMelon(this);
                             console.log('Clicked Course ID:', course.course_id);
-                            // saveCourseID(course.course_id);
+                            saveCourseID(course.course_id);
                             // fetchGroupID();
                         });
 
@@ -908,6 +911,38 @@ function setDirectory(path) {
         console.error('Error:', error);
     });
 }
+
+function newGroupCreated(course_id, group_name) {
+    var container = document.querySelector('.GroupContainer');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    console.log(course_id, group_name);
+    fetchGroupData(course_id, group_name);
+    // fetchStudentGroups();
+    // fetchPanelGroups();
+    // requirementName();
+    // fileFeed();
+    
+
+    // Prepare the data to be sent in the request body
+    const formData = new FormData();
+    formData.append('course_id', course_id);
+    formData.append('group_name', group_name);
+
+    // Send an AJAX request using fetch
+    fetch('fetchGroupName.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(result => console.log(result))
+    .catch(error => console.error('Error:', error));
+}
+
 
 function fetchGroupData(course_id, group_name) {
     // Clear the existing content in the group_name element
@@ -1333,83 +1368,15 @@ function reqName() {
 }
 
 
-function fetchRubricNames() {
-    fetch('fetchRubricName.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error(data.error);
-            } else {
-                // Initialize autocomplete with fetched rubric names and IDs
-                $(".inputRubric").autocomplete({
-                    source: data.map(rubric => ({
-                        label: rubric.rubric_name + ' (' + rubric.rubric_id + ')',
-                        value: rubric.rubric_name,
-                        id: rubric.rubric_id
-                    })),
-                    select: function(event, ui) {
-                        $(this).val(ui.item.value); // Set the input field value to the selected rubric name
-                        $(this).attr('data-rubric-id', ui.item.id); // Set a data attribute for the rubric_id
-                        $('#rubric_id').val(ui.item.id); // Set the hidden input field value to the rubric ID
-                        return false;
-                    }
-                });
-            }
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-}
-
-function fetchRubricSelected() {
-
-    const selectedRubElement = document.querySelector('.selectedRub');
-    selectedRubElement.innerHTML = '';
-
-    fetch('fetchSelectedRubric.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error(data.error);
-            } else {
-                // Clear the .selectedRub element
-                const selectedRubElement = document.querySelector('.selectedRub');
-                selectedRubElement.innerHTML = '';
-
-                // Add the fetched rubric name to .selectedRub
-                const rubricName = document.createElement('h4');
-                rubricName.textContent = 'Selected Rubric: ' + data.rubricName;
-                selectedRubElement.appendChild(rubricName);
-
-                console.log('Selected Rubric:', data.rubricName);
-                // You can handle the rubricName data here
-            }
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-}
-
-
 
 
 
 function fetchRubric() {
-    const rubricContainer = document.querySelector('.rubric-container');
+    const rubricContainer = document.querySelector('.secondaryRubriccont');
     rubricContainer.innerHTML = ''; // Clear previous content
 
-    const rubric = document.querySelector('.table');
-    rubric.innerHTML = ''; // Clear previous content
+    // const rubric = document.querySelector('.table');
+    // rubric.innerHTML = ''; // Clear previous content
 
     fetch('fetchDisplayRubric.php')
         .then(response => response.json())
@@ -1517,85 +1484,11 @@ function clearForm() {
 function handleAction(action, course_id) {
     console.log('Clicked:', course_id);
     switch (action) {
-        case 'View Members':
-            viewMembers(course_id);
-            fetchStudents(course_id); // Call fetchStudentIDs when 'View Members' is clicked
-            break;
-        case 'Add Panelist':
-            AddMembers(course_id);
-            clearForm();
-            fetchPanelandGroup();
-            break;
-        case 'Requirements':
-            setrequirements(course_id);
-            reqName();
-            break;
         case 'Rubric':
-            rubric();
-            fetchRubricNames();
-            fetchRubricSelected();
+            rubric_preview();
             fetchRubric();
             break;
     }
-}
-
-function fetchPanelandGroup() {
-    fetch('fetchGroupsandPanel.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                const groups = data.groups.map(group => ({
-                    label: group.group_name,
-                    value: group.student_group_id
-                }));
-                
-                const panelists = data.users.map(user => ({
-                    label: user.name,
-                    value: user.userID
-                }));
-
-                // Apply autocomplete to the group input
-                $("#courseGroup").autocomplete({
-                    source: groups,
-                    select: function(event, ui) {
-                        $("#courseGroup").val(ui.item.label);
-                        $("#courseGroupId").val(ui.item.value);
-                        return false;
-                    }
-                });
-
-                const selectedNames = new Set();
-
-                function updateAutocomplete() {
-                    $(".inputName").not("#courseGroup").each(function() {
-                        const inputElement = $(this);
-
-                        inputElement.autocomplete({
-                            source: function(request, response) {
-                                const filteredPanelists = panelists.filter(panelist => 
-                                    !selectedNames.has(panelist.label)
-                                );
-                                response($.ui.autocomplete.filter(filteredPanelists, request.term));
-                            },
-                            select: function(event, ui) {
-                                selectedNames.add(ui.item.label);
-                                inputElement.val(ui.item.label);
-                                inputElement.next("input[type='hidden']").val(ui.item.value);
-                                updateAutocomplete();
-                                return false;
-                            }
-                        });
-                    });
-                }
-
-                updateAutocomplete();
-            } else {
-                console.error('Error:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
 }
 
 
@@ -1619,7 +1512,7 @@ function saveCourseID(courseID) {
 }
 
 function fetchStudents() {
-    const membersContainer = document.querySelector('.membersContainer');
+    const membersContainer = document.querySelector('.GroupmembersContainer');
     membersContainer.innerHTML = ''; // Clear previous content
 
     fetch('fetchStudents.php')
