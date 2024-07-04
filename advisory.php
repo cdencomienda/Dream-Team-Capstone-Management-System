@@ -162,7 +162,7 @@
     </div>    
     </div><!-- end of wrapper scroll -->    
 
-    <div class="GroupContainer" style = "display: none;" >
+    <div class="GroupContainer" id = "advisoryGroupContainer"style = "display: none;" >
                     <div class="dashboard_header">
                         <!-- Group Name Box -->
                         <div class="groupname_container" onclick="showDefaultBody()"> 
