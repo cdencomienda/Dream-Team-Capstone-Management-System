@@ -267,6 +267,20 @@ body{
   height: 50px ;
   transition:.5s;
 }
+.advisory{
+  top: -55px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/users-icon.png);
+  background-repeat: no-repeat;
+}
 .notif{
   top: 10px;
   left: 10px;

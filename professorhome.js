@@ -34,7 +34,9 @@ function capstoneProf(){
 function scheduleProf(){
   window.location.assign("Defenseschedule.php")
 }
-
+function advisoryProf(){
+    window.location.assign("advisory.php")
+}
 // edit profile js 
 
 document.addEventListener('DOMContentLoaded', (event) => {

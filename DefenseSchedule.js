@@ -23,6 +23,7 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
  
 // edit profile js 
 
@@ -94,10 +95,15 @@ function closeEditform(){
   function logOUT(){
     window.location.assign("LoginSignup.php")
   }
+  function capstoneProf(){
+    window.location.assign("Capstone.php")
+  }
   function scheduleProf(){
     window.location.assign("Defenseschedule.php")
   }
-  
+  function advisoryProf(){
+    window.location.assign("advisory.php")
+  }
   function createDefenseContainer() {
     // Gather input values
     const schedTitle = document.getElementById('schedTitle').value;

@@ -2,13 +2,12 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  
 }
 
-body {
-  width: 100%;
-  height: 100%;
+body{ 
   background: #CBC4BA;
-  overflow-y:scroll;
+  overflow: hidden;
 }
 
 @media print {
@@ -18,7 +17,11 @@ body {
       width: auto !important;
   }
 }
-
+.wrapper {
+  max-height: 100vh; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
 .container {
   position: relative;
   display: flex;
@@ -100,12 +103,17 @@ body {
   position:relative;
   width:60px;
   height:60px;
-  margin-top: 25px;
+  margin-top: 40px;
   margin-left: 200px;
   margin-bottom: 40px;
   border-radius:50%;
   overflow:hidden;
   cursor:pointer;
+}
+.wrapper {
+  max-height: 100vh; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 .action .profile img{
   position:absolute;
@@ -302,7 +310,20 @@ body {
   left: 20px;
   background-image: url(menu_assets/capstone_icon.png);
 }
-
+.advisory{
+  top: -55px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/users-icon.png);
+  background-repeat: no-repeat;
+}
 .logobtn {
   width: 100px;
   height: 90px;
@@ -1017,23 +1038,23 @@ z-index: 0px;
 }  
 .dropdown-content {
   position: absolute;
-  left: 190px;
-  top: 20px;
+  left: 200px;
+  top: 140px;
   overflow: hidden;
   display: none;
   z-index: 1000;
   width: 140px;
   text-align: center;
   font-size: 18px;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #000000;
   border-radius: 15px;
   background-color: #F8EFE3;
   }
 .dropdownbtn{
-width: 110px;
+width: 120px;
 border: 1px solid #000000;
-height: 24px;
+height: 30px;
 margin-bottom: 5px;
 padding: 5px;
 border-radius: 10px;
@@ -1076,7 +1097,7 @@ cursor: pointer;
   width: 1150px;
   height: 600px;
   padding: 25px;
-  margin-top: -1200px;
+  margin-top: -900px;
   margin-left: 500px ;
   
   z-index: 0; /* Set a lower z-index */
@@ -1606,7 +1627,7 @@ transition: backround-color .3s ease;
 
 .rubriccontainer {
   position: relative;
-  top: -1180px;
+  top: -900px;
   left: 500px;
   width: 1300px;
   max-width: none; /* Remove max-width */

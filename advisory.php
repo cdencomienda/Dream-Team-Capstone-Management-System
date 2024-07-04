@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Defense</title>
+    <title>Advisory</title>
     <link rel="stylesheet" href="Capstone.css">
     
     <!-- Font Awesome -->
@@ -18,7 +18,7 @@
         
         <div class="header">
             <div class="wrap">
-                <button type="button" class="logobtn"  onclick="Studentarchive()"></button>
+                <button type="button" class="logobtn"  onclick="openArchive()"></button>
                 </div>
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -28,50 +28,46 @@
             </div>
      
             <div class="container">
-                <div class="action">
-                    <div class="profile">
-                        <img src="menu_assets/users-icon.png" alt="profile-img">
-                    </div>
-                    <div class="menu" id ="menuBtn">
-                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                        </h3>
-                        <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
-                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
-                    </div>
+            <div class="action">
+                <div class="profile" id="profilePic">
+                    <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
-                <!-- editprofile --> 
-                <div id="editProfileOverlay" class="editoverlay">
-                    <div class="dropdown-profile">
-            
-                        <div>
-                            <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                <div class="menu" id="menuBtn">
+                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                    </h3>
+                    <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
+                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                </div>
+            </div>
+            <!-- editprofile --> 
+            <div id="editProfileOverlay" class="editoverlay">
+                <div class="dropdown-profile">
+                    <div>
+                        <button class="close" onclick="closeEditform()"><i class="fa-regular fa-circle-xmark"></i></button>
+                    </div>
+                    <form id="editProfileForm" action="editProfile.php" method="POST">
+                        <div class="profile">
+                            <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
-                        
-                        <form id="editProfileForm" action="editProfile.php" method="POST">
-                            <div class="profile">
-                                <img src="menu_assets/prof.png" alt="profile-img">
-                            </div>
-                            <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                            </h5edit>
-                            <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                            <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
-                            <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
-                            <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                            <button type="submit" class="saveEditbtn"> Save Changes </button>
-                           
-                        </form>
-                       
-                        <?php if(isset($_SESSION['error_message'])) { ?>
+                        <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h5edit>
+                        <h3><input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"></h3>
+                        <h3><input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"></h3>
+                        <h3><input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"></h3>
+                        <h3><input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"></h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
+                    </form>
+                    <?php if(isset($_SESSION['error_message'])) { ?>
                     <div id="error-message" class="show">
                         <?php echo $_SESSION['error_message']; ?>
                         <button onclick="clearErrorMessage()">OK</button>
                     </div>
-                <?php
-                    unset($_SESSION['error_message']); // Clear the error message after displaying it
-                } ?>
-                
+                    <?php unset($_SESSION['error_message']); } ?>
+                </div>
+            </div>
+        </div>
             <script>
                     window.onload = function() {
                         var urlParams = new URLSearchParams(window.location.search);
@@ -106,10 +102,10 @@
         <button type="button" class="class" onclick="openClassPage()">Class</button>
         <button type="button" class="schedule" onclick="scheduleProf()">Schedule</button>
         <button type="button" class="capstone" onclick="capstoneProf()">Capstone Defense</button>
-        <button type="button" class="advisory" onclick="advisory()">Advisory</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
 
     </div>
-   
+    <div class="wrapper"><!-- start of wrapper scroll -->
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
                 <div class="classListDropdown">
@@ -132,9 +128,7 @@
                     <div class="dropdownmelon">            
                         <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
-                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                            
                             <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
                         </div>
                     </div>
@@ -150,9 +144,7 @@
                         <div class="dropdownmelon">            
                             <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                             <div class="dropdown-content">
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                                <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                             
                                 <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                             </div>
                         </div>
@@ -167,7 +159,8 @@
                 </div>
             </div>
         </div>        
-    </div>       
+    </div>    
+    </div><!-- end of wrapper scroll -->    
 
     <div class="GroupContainer" style = "display: none;" >
                     <div class="dashboard_header">

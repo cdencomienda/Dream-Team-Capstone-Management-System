@@ -99,6 +99,7 @@
       <button type="button" class="class"  onclick="openClassPage()">Class</button>
       <button type="button" class="schedule"  onclick="scheduleProf()">Schedule</button>
       <button type="button" class="capstone"  onclick="capstoneProf()">Capstone Defense</button>
+      <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div>
   <div class="hero">
     <div class="single-box">
