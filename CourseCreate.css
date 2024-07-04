@@ -1269,6 +1269,7 @@ background-color: #dbd3c9;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
  
  
