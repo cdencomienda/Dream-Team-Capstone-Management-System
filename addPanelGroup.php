@@ -43,10 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Fetch the last panelID from the group table
-    $lastPanelIdQuery = "SELECT MAX(panelID) as maxPanelId FROM `group`";
+    $lastPanelIdQuery = "SELECT panelID FROM `panelist` ORDER BY panelID DESC LIMIT 1;";
     $lastPanelIdResult = mysqli_query($conn, $lastPanelIdQuery);
-    $lastPanelIdRow = mysqli_fetch_assoc($lastPanelIdResult);
-    $lastPanelId = $lastPanelIdRow['maxPanelId'];
+    
+    if ($lastPanelIdResult) {
+        $lastPanelIdRow = mysqli_fetch_assoc($lastPanelIdResult);
+        $lastPanelId = $lastPanelIdRow['panelID'];
+    } else {
+        // Handle query error or no results found
+        $lastPanelId = null; // Assuming default value if no panelID exists
+    }
+    
 
     // Set newPanelId to 1 if lastPanelId is null
     $newPanelId = ($lastPanelId === null) ? 1 : $lastPanelId + 1;

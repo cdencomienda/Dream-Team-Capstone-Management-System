@@ -777,106 +777,107 @@ function dropdownMelon(button) {
 }
 
 function fetchCourses(container, year, selectedTerm) {
-    // Check if coursesDropdown already exists in the container
     let coursesDropdown = container.querySelector('.coursesDropdown');
 
-    // If coursesDropdown doesn't exist, create it
     if (!coursesDropdown) {
         coursesDropdown = document.createElement('div');
         coursesDropdown.className = 'coursesDropdown';
         container.appendChild(coursesDropdown);
     } else {
-        // Clear previous content in coursesDropdown
         coursesDropdown.innerHTML = '';
     }
 
-    fetch('fetchCourses.php')
+    fetch('fetchCoursePanel.php')
         .then(response => response.json())
         .then(coursesData => {
             if (coursesData.error) {
-                console.error('Error:', coursesData.error);
-            } else {
-                console.log('Courses:', coursesData);
+                console.error('Error fetching courses:', coursesData.error);
+                return; // Exit early if there's an error
+            }
 
-                fetch('FetchGroups.php')
-                    .then(response => response.json())
-                    .then(groupsData => {
-                        if (groupsData.error) {
-                            console.error('Error:', groupsData.error);
-                        } else {
-                            console.log('Groups:', groupsData);
+            console.log('Courses:', coursesData);
 
-                            coursesData.forEach(course => {
-                                const courseElement = document.createElement('div');
-                                courseElement.className = 'course';
+            fetch('fetchGroupsPanel.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(groupsData => {
+                    if (groupsData.error) {
+                        console.error('Error fetching groups:', groupsData.error);
+                        return; // Exit early if there's an error
+                    }
 
-                                const courseTitle = document.createElement('h3');
-                                courseTitle.className = 'courseNameDisplay';
+                    console.log('Groups:', groupsData);
 
-                                const button = document.createElement('button');
-                                button.type = 'button';
-                                button.classList.add('classSet');
-                                button.textContent = '•••';
-                                button.dataset.target = 'dropdown-' + course.course_id;
+                    coursesData.forEach(course => {
+                        const courseElement = document.createElement('div');
+                        courseElement.className = 'course';
 
-                                const dropdownContent = document.createElement('div');
-                                dropdownContent.classList.add('dropdown-content');
-                                dropdownContent.id = 'dropdown-' + course.course_id;
-                                dropdownContent.style.display = 'none';
+                        const courseTitle = document.createElement('h3');
+                        courseTitle.className = 'courseNameDisplay';
 
-                                // Refactor to use handleAction function
-                                const actions = ['Rubric'];
-                                actions.forEach(action => {
-                                    const actionButton = document.createElement('button');
-                                    actionButton.type = 'button';
-                                    actionButton.className = 'dropdownbtn';
-                                    actionButton.textContent = action;
-                                    actionButton.onclick = () => handleAction(action, course.course_id);
-                                    dropdownContent.appendChild(actionButton);
-                                });
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.classList.add('classSet');
+                        button.textContent = '•••';
+                        button.dataset.target = 'dropdown-' + course.course_id;
 
-                                courseTitle.textContent = `${course.course_code} - ${course.section} `;
-                                courseTitle.appendChild(button); // Add the button inside h3
+                        const dropdownContent = document.createElement('div');
+                        dropdownContent.classList.add('dropdown-content');
+                        dropdownContent.id = 'dropdown-' + course.course_id;
+                        dropdownContent.style.display = 'none';
 
-                                courseElement.appendChild(courseTitle);
-                                courseElement.appendChild(dropdownContent);
-                                coursesDropdown.appendChild(courseElement);
+                        const actions = ['Rubric'];
+                        actions.forEach(action => {
+                            const actionButton = document.createElement('button');
+                            actionButton.type = 'button';
+                            actionButton.className = 'dropdownbtn';
+                            actionButton.textContent = action;
+                            actionButton.onclick = () => handleAction(action, course.course_id);
+                            dropdownContent.appendChild(actionButton);
+                        });
 
-                                button.addEventListener('click', function() {
-                                    dropdownMelon(this);
-                                    // Log the course_id to the console when the button is clicked
-                                    console.log('Clicked Course ID:', course.course_id);
-                                    saveCourseID(course.course_id);
-                                    fetchGroupID();
-                                });
+                        courseTitle.textContent = `${course.course_code} - ${course.section} `;
+                        courseTitle.appendChild(button);
 
-                                // Log the course_id to the console
-                                console.log('Course ID:', course.course_id);
+                        courseElement.appendChild(courseTitle);
+                        courseElement.appendChild(dropdownContent);
+                        coursesDropdown.appendChild(courseElement);
 
-                                // Create and append buttons based on group data for each course
-                                if (groupsData[course.course_id]) {
-                                    groupsData[course.course_id].forEach(group_name => {
-                                        const groupButton = document.createElement('button');
-                                        groupButton.type = 'button';
-                                        groupButton.classList.add('createdgroupBTN');
-                                        groupButton.onclick = function() {
-                                        newGroupCreated(course.course_id, group_name);
-                                        console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
-                                        const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
-                                        setDirectory(directoryPath);
-                                    };
-                                        groupButton.textContent = group_name;
-                                        courseElement.appendChild(groupButton);
-                                    });
-                                }     
+                        button.addEventListener('click', function() {
+                            dropdownMelon(this);
+                            console.log('Clicked Course ID:', course.course_id);
+                            // saveCourseID(course.course_id);
+                            // fetchGroupID();
+                        });
+
+                        console.log('Course ID:', course.course_id);
+
+                        if (groupsData[course.course_id]) {
+                            groupsData[course.course_id].forEach(group_name => {
+                                const groupButton = document.createElement('button');
+                                groupButton.type = 'button';
+                                groupButton.classList.add('createdgroupBTN');
+                                groupButton.onclick = function() {
+                                    newGroupCreated(course.course_id, group_name);
+                                    console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
+                                    const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
+                                    setDirectory(directoryPath);
+                                };
+                                groupButton.textContent = group_name;
+                                courseElement.appendChild(groupButton);
                             });
                         }
-                    })
-                    .catch(error => console.error('Error fetching groups data:', error));
-            }
+                    });
+                })
+                .catch(error => console.error('Error fetching groups data:', error));
         })
-        .catch(error => console.error('Fetch error:', error));
+        .catch(error => console.error('Error fetching courses:', error));
 }
+
 
 function setDirectory(path) {
     console.log('this is the button directory: ', path);
@@ -1254,27 +1255,7 @@ function fileFeed() {
     });
 }
 
-
-
-
-
-
-
-
 //files
-
-
-
-
-
-
-
-
-
-
-
-
-
 function groups() {
     fetch('FetchGroups.php')
         .then(response => {

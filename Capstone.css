@@ -1038,15 +1038,15 @@ z-index: 0px;
 }  
 .dropdown-content {
   position: absolute;
-  left: 200px;
-  top: 140px;
+  left: 190px;
+  top: 20px;
   overflow: hidden;
   display: none;
   z-index: 1000;
   width: 140px;
   text-align: center;
   font-size: 18px;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #000000;
   border-radius: 15px;
   background-color: #F8EFE3;
