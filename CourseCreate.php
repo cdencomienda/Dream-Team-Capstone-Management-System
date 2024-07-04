@@ -1564,6 +1564,7 @@ function handleAction(action, course_id) {
             break;
         case 'Add Panelist':
             AddMembers(course_id);
+            clearForm();
             fetchPanelandGroup();
             break;
         case 'Requirements':
@@ -1572,7 +1573,6 @@ function handleAction(action, course_id) {
             break;
         case 'Rubric':
             rubric();
-            clearForm();
             fetchRubricNames();
             fetchRubricSelected();
             fetchRubric();
