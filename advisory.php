@@ -821,7 +821,7 @@
         console.log(course_id, group_name);
         fetchGroupData(course_id, group_name);
         fetchStudentGroups();
-        // fetchPanelGroups();
+        fetchPanelGroups();
         requirementName();
         fileFeed();
         
@@ -930,7 +930,7 @@
         const PanelistContainer = document.querySelector('.PanelistContainer');
         PanelistContainer.innerHTML = ''; // Clear existing content
 
-        fetch('fetchPanelGroups.php')
+        fetch('test.php')
             .then(response => response.json())
             .then(data => {
                 // Check for error message
