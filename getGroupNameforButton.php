@@ -25,7 +25,11 @@ if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $stmt->bind_result($s_id);
-    $stmt->fetch();
+    
+    $s_ids = [];
+    while ($stmt->fetch()) {
+        $s_ids[] = $s_id;
+    }
     $stmt->close();
 } else {
     echo json_encode(['error' => 'Error preparing statement: ' . $conn->error]);
@@ -33,34 +37,40 @@ if ($stmt = $conn->prepare($sql)) {
     exit();
 }
 
-if (empty($s_id)) {
+if (empty($s_ids)) {
     echo json_encode(['error' => 'Student not found.']);
     $conn->close();
     exit();
 }
 
-// SQL query to get the group name and group_id using the s_id
-$sql = "SELECT group_id, group_name FROM groups WHERE s_id = ?";
-if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("i", $s_id);
-    $stmt->execute();
-    $stmt->bind_result($group_id, $group_name);
-    $stmt->fetch();
-    $stmt->close();
-} else {
-    echo json_encode(['error' => 'Error preparing statement: ' . $conn->error]);
-    $conn->close();
-    exit();
+$groups = [];
+
+foreach ($s_ids as $s_id) {
+    // SQL query to get the group name and group_id using the s_id
+    $sql = "SELECT group_id, group_name FROM groups WHERE s_id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $s_id);
+        $stmt->execute();
+        $stmt->bind_result($group_id, $group_name);
+        
+        while ($stmt->fetch()) {
+            $groups[] = ['group_id' => $group_id, 'group_name' => $group_name];
+        }
+        $stmt->close();
+    } else {
+        echo json_encode(['error' => 'Error preparing statement: ' . $conn->error]);
+        $conn->close();
+        exit();
+    }
 }
 
 $conn->close();
 
-if (isset($group_id) && isset($group_name)) {
-    // Store group_id and group_name in session
-    $_SESSION['group_id'] = $group_id;
-    $_SESSION['group_name'] = $group_name;
-    echo json_encode(['group_id' => $group_id, 'group_name' => $group_name]);
+if (!empty($groups)) {
+    // Store groups in session
+    $_SESSION['groups'] = $groups;
+    echo json_encode(['groups' => $groups]);
 } else {
-    echo json_encode(['error' => 'Group not found']);
+    echo json_encode(['error' => 'Groups not found']);
 }
 ?>
