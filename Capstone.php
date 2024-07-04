@@ -130,9 +130,6 @@
                     <div class="dropdownmelon">            
                         <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                         <div class="dropdown-content">
-                            <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                            <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                            <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
                             <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
                         </div>
                     </div>
@@ -148,9 +145,7 @@
                         <div class="dropdownmelon">            
                             <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
                             <div class="dropdown-content">
-                                <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button> 
-                                <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                                <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
+                                
                                 <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
                             </div>
                         </div>
@@ -728,7 +723,7 @@ function fetchCourses(container, year, selectedTerm) {
                                 dropdownContent.style.display = 'none';
 
                                 // Refactor to use handleAction function
-                                const actions = ['View Members', 'Add Panelist', 'Requirements', 'Rubric'];
+                                const actions = ['Rubric'];
                                 actions.forEach(action => {
                                     const actionButton = document.createElement('button');
                                     actionButton.type = 'button';
