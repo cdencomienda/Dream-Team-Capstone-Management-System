@@ -203,9 +203,13 @@
                                 <!-- Container to display group members -->
                             <div class="GroupmembersContainer" id="groupMembersContainer">   
                             </div>
-                    </div>
-                        <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Rubrics </button> 
-                        <!-- defense-rubric    -->
+                    </div> 
+                        <div class="pDropdown" data-pDropdown>  
+                            <button type="button" class="Panelist-Btn" data-pDropdown-button onclick="fetchpanelist()"  > <i class="fa-solid fa-user-group"></i> Panelist </button> 
+                            <div class="PanelistContainer" id="PanelistContainer">
+                                Panel1
+                            </div>
+                        </div>
                 </h4>
             </div>
 
@@ -375,6 +379,48 @@
                 </div>
             </div>
         </style>
+        <div class="rubriccontainer" style="display: none"> 
+                <div class="secondaryRubriccont">
+                    <div class="rubric-container">
+                            <h1>Written Communication</h1>
+                        </div>
+                        <table class="table">        
+                            <div class="rubric-header">
+                
+                            <thead >
+                        
+                                <!-- column title -->
+                                <tr>
+                                    <th style = "background-color: #CBC4BA;">Overall<br> Percentage</th>
+                                    <th style = "background-color: #CBC4BA;">Learning Outcomes</th>
+                                    <th style = "background-color: #CBC4BA;">Criteria</th>
+                                    <th style = "background-color: #CBC4BA;">Excellent (100%)</th>
+                                    <th style = "background-color: #CBC4BA;">Good (80%)</th>
+                                    <th style = "background-color: #CBC4BA;">Satisfactory (75%)</th>
+                                    <th style = "background-color: #CBC4BA;">Slight Satisfactory (50%)</th>
+                                    <th style = "background-color: #CBC4BA;">Disatisfactory (25%)</th>
+                                </tr>
+                                <!-- column title end -->
+                            </thead>
+                            <tbody>
+                                    
+                                    <td>Relevance</td>
+                                    <td>The content is comprehensive, well-researched, and highly informative. It demonstrates a deep understanding of the subject matter.</td>
+                                    <td>The content is mostly accurate and relevant but may lack some depth or clarity in certain areas. It generally conveys the required information.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                    <td>The content is partially accurate and relevant but greatly lacks some depth or clarity in certain areas.</td>
+                                </tr>
+                                <tr>
+        
+        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>  
     </div>
     <!-- ian end -->    
 </body>
@@ -1372,19 +1418,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 </script>
 
 

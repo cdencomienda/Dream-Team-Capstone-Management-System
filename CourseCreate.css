@@ -370,9 +370,9 @@ background-repeat: no-repeat;
 }
 .classListDropdown{
   width: 340px; 
+  margin-top: 10px;
   margin-bottom: 10px;
-  position: relative;
-  margin-left: 10px; 
+  position: relative; 
 }
 .classListDropdown *{
   box-sizing: border-box;
@@ -420,8 +420,8 @@ border-radius: 15px;
 color: #2a2f3b ;
 position: absolute;
 top: 80px;
-left: 50%;
-width: 100%;
+left: 47%;
+width: 94%;
 transform: translateX(-50%);
 opacity: 0px;
 display: none;
