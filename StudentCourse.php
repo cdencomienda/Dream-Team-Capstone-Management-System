@@ -699,6 +699,7 @@ function fetchCourses(container, year, selectedTerm) {
                             dropdownMelon(this);
                             console.log('Clicked Course ID:', course.course_id);
                             saveCourseID(course.course_id);
+                            
                         });
 
                         console.log('Course ID:', course.course_id);
@@ -766,6 +767,9 @@ function setDirectory(path) {
         fetchStudentGroups();
         fetchPanelGroups();
         requirementName();
+        fetchGroupID();
+        reqName();
+        clear();
         fileFeed();
 
         
@@ -1186,11 +1190,36 @@ function groups() {
 
 
 
+function fetchGroupID() {
+    fetch('groupRequirement.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Check if data.courseGroupID is an array
+        if (Array.isArray(data.courseGroupID)) {
+            // Re-index the array numerically
+            const courseGroupIDs = data.courseGroupID;
+
+            console.log('this is the course group ids:', courseGroupIDs); // This will contain the array of courseGroupIDs
+
+            // You can perform further operations with the courseGroupIDs here
+        } else {
+            console.error('Data received is not in the expected format:', data);
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
 function reqName() {
-    const createdReq = document.querySelector('.createdReq');
+    const createdReq = document.querySelector('.req-nameCont');
     createdReq.innerHTML = ''; // Clear previous content
 
-    fetch('createdRequirement.php') // Replace 'path_to_your_php_file.php' with your actual PHP file path
+    fetch('createdRequirement.php')
         .then(response => response.json())
         .then(data => {
             // Check if data contains reqNames array
@@ -1198,8 +1227,23 @@ function reqName() {
                 // Loop through the reqNames array and append each item to createdReq
                 data.reqNames.forEach(reqName => {
                     const reqElement = document.createElement('div');
-                    reqElement.textContent = reqName;
+                    reqElement.classList.add('requirement-name');
+
+                    // Adding onclick event handler
+                    reqElement.onclick = function() {
+                        console.log('Requirement name clicked:', reqName);
+                        // Additional logic for click event can be added here
+                        reqDesc(reqName);
+                        clear();
+                    };
+
+                    const reqNameElement = document.createElement('h4');
+                    reqNameElement.textContent = reqName; // Assuming each requirement has a 'name' property
+
+                    reqElement.appendChild(reqNameElement);
                     createdReq.appendChild(reqElement);
+
+                    console.log('These are the reqName::', reqName);
                 });
             } else {
                 console.error('Invalid data format or missing reqNames array');
@@ -1209,6 +1253,176 @@ function reqName() {
             console.error('Error fetching data:', error);
         });
 }
+
+function reqDesc(name) {
+    console.log('this the the reqName for Desc: ', name);
+
+    // Construct the data to send
+    const formData = new FormData();
+    formData.append('name', name);
+
+    // Fetch request
+    fetch('reqDescStudents.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json()) // Parse response as JSON
+    .then(data => {
+        // Handle JSON response
+        console.log('Response from PHP:', data);
+        if (data.reqDescription) {
+            console.log('reqDescription:', data.reqDescription);
+            
+            // Create elements and append them
+            createElements(name, data.reqDescription);
+        } else {
+            console.error('Error:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
+}
+
+function createElements(name, reqDescription) {
+    // Create elements
+    const titleElement = document.createElement('h2');
+    titleElement.classList.add('requirement-title');
+    titleElement.textContent = name;
+
+    const descriptionContElement = document.createElement('div');
+    descriptionContElement.classList.add('requirement-descriptionCont');
+    descriptionContElement.textContent = 'Requirement Description:';
+
+    const descBoxElement = document.createElement('div');
+    descBoxElement.classList.add('requirement-descBox');
+    descBoxElement.textContent = reqDescription;
+
+    const attachFilesElement = document.createElement('div');
+    attachFilesElement.classList.add('Attach-Files');
+
+    const attachFilesHeading = document.createElement('h3');
+    attachFilesHeading.textContent = 'Attach Files';
+
+    const uploadBtnContainer = document.createElement('div');
+    uploadBtnContainer.id = 'upload-btn';
+    uploadBtnContainer.classList.add('upload-container');
+
+    const inputFileLabel = document.createElement('label');
+    inputFileLabel.htmlFor = 'input-file';
+
+    const inputFile = document.createElement('input');
+    inputFile.type = 'file';
+    inputFile.accept = 'application/pdf';
+    inputFile.id = 'input-file';
+    inputFile.name = 'profile_picture';
+
+    inputFile.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const fileContent = event.target.result;
+
+            // Create file container
+            const fileContainer = document.createElement('div');
+            fileContainer.classList.add('file-item');
+
+            // File name
+            const fileName = document.createElement('span');
+            fileName.textContent = file.name;
+
+            // Remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.textContent = 'Remove';
+            removeBtn.addEventListener('click', function() {
+                fileContainer.parentNode.removeChild(fileContainer);
+                inputFile.value = ''; // Clear the file input after removal
+            });
+
+            // Preview file name
+            const fileNamePreview = document.createElement('span');
+            fileNamePreview.textContent = file.name;
+
+            fileContainer.appendChild(fileNamePreview);
+            fileContainer.appendChild(removeBtn);
+
+
+
+            // Append file container to Attached-FileCont
+            const attachedFileCont = document.querySelector('.Attached-FileCont');
+            if (attachedFileCont) {
+                attachedFileCont.appendChild(fileContainer);
+            } else {
+                console.error('Error: Container element .Attached-FileCont not found.');
+            }
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+
+    const attachedFileCont = document.createElement('div');
+    attachedFileCont.classList.add('Attached-FileCont');
+
+    const submitBtnCont = document.createElement('div');
+    submitBtnCont.classList.add('req-submitbtnCont');
+
+    const submitBtn = document.createElement('button');
+    submitBtn.classList.add('reqbtn');
+    submitBtn.type = 'button';
+    submitBtn.id = 'submit-btn';
+    submitBtn.textContent = 'Submit';
+
+    submitBtn.addEventListener('click', function() {
+        console.log('Submit button clicked!');
+        // You can add further logic here for form submission or other actions
+    });
+
+    // Append elements
+    attachFilesElement.appendChild(attachFilesHeading);
+    attachFilesElement.appendChild(uploadBtnContainer);
+    attachFilesElement.appendChild(inputFileLabel);
+    attachFilesElement.appendChild(inputFile);
+
+    const requirementsContainer = document.querySelector('.requirement-details');
+    if (requirementsContainer) {
+        requirementsContainer.appendChild(titleElement);
+        requirementsContainer.appendChild(descriptionContElement);
+        requirementsContainer.appendChild(descBoxElement);
+        requirementsContainer.appendChild(attachFilesElement);
+        requirementsContainer.appendChild(attachedFileCont); // Append Attached-FileCont
+        requirementsContainer.appendChild(submitBtnCont); // Append req-submitbtnCont
+        submitBtnCont.appendChild(submitBtn); // Append Submit button to submitBtnCont
+    } else {
+        console.error('Error: Container element .requirements-details not found.');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+function clear(){
+    const cont = document.querySelector('.requirement-details');
+    cont.innerHTML = '';
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -1428,158 +1642,3 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- script ni carlos -->
-
-<!-- <script> 
-    document.addEventListener('DOMContentLoaded', function() {
-        function fetchCourses() {
-            fetch('LiveSearchStudentCourses.php') 
-                .then(response => response.json())
-                .then(data => {
-                    if (Array.isArray(data)) {
-                        const courseContainer = document.querySelector('.course');
-
-                        if (courseContainer) {
-                            courseContainer.innerHTML = ''; // Clear existing content
-
-                            data.forEach((course, index) => {
-                                // Parse academic_year as an integer
-                                const academicYear = parseInt(course.academic_year);
-                                // Calculate academic year range in "year - year + 1" format
-                                const academicYearRange = academicYear + ' - ' + (academicYear + 1);
-
-                                // Create a new h3 for each course
-                                const courseHeader = document.createElement('h3');
-                                courseHeader.textContent = `${course.course_code} - AY ${academicYearRange} - T${course.term} - ${course.section}`;
-
-                                // Create a new button for each course
-                                const courseButton = document.createElement('button');
-                                courseButton.type = 'button';
-                                courseButton.id = `group_name${index + 1}`; // Unique ID for each button
-                                courseButton.className = 'createdgroupBTN';
-                                courseButton.textContent = 'New Group Created'; // Button text
-                                courseButton.onclick = function() {
-                                    showStudentDefault(course);
-                                };
-
-                                // Append the courseHeader and courseButton to the container
-                                courseContainer.appendChild(courseHeader);
-                                courseContainer.appendChild(courseButton);
-                            });
-                        } else {
-                            console.error('No element with class "course" found.');
-                        }
-                    } else {
-                        console.log(data.message || 'No courses found for the student.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-        // Function to handle the button click event
-        function newGroupCreated(course) {
-            console.log('New group created for:', course);
-            // Add your custom functionality here
-        }
-         
-        // Call the fetchCourses function when the DOM is fully loaded
-        fetchCourses();
-    });
-
-    function fetchGroupName() {
-    fetch('getGroupNameforButton.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error('Error:', data.error);
-                // Handle the error as needed, for example, display it to the user
-                alert('Error: ' + data.error);
-            } else {
-                console.log('Groups:', data.groups);
-
-                // Update buttons with class 'createdgroupBTN'
-                const buttons = document.getElementsByClassName('createdgroupBTN');
-                for (let i = 0; i < buttons.length && i < data.groups.length; i++) { 
-                    buttons[i].innerText = data.groups[i].group_name;
-                    buttons[i].setAttribute('data-group-id', data.groups[i].group_id);
-
-                    // Optionally store group IDs in localStorage or sessionStorage
-                    localStorage.setItem(`group_id_${i}`, data.groups[i].group_id);
-                }
-
-                // Update elements with class 'group_name'
-                const groupElements = document.getElementsByClassName('group_name');
-                for (let i = 0; i < groupElements.length && i < data.groups.length; i++) {
-                    groupElements[i].innerText = data.groups[i].group_name;
-                    groupElements[i].setAttribute('data-group-id', data.groups[i].group_id);
-
-                    // Optionally store group IDs in localStorage or sessionStorage
-                    localStorage.setItem(`group_id_${i}`, data.groups[i].group_id);
-                }
-            }
-        }) 
-        .catch(error => {
-            console.error('Fetch error:', error);
-            // Handle fetch error, for example, display it to the user
-            alert('Fetch error: ' + error.message);
-        });
-    } 
-    function fetchStudents() {
-        fetch("LiveSearchGroupMembers.php")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const container = document.getElementById("groupMembersContainer");
-                if (data.error) {
-                    container.innerHTML = data.error;
-                } else {
-                    let output = "";
-                    data.forEach(student => {
-                        output += student + "<br>";
-                    });
-                    container.innerHTML = output;
-                }
-            })
-            .catch(error => {
-                document.getElementById("groupMembersContainer").innerHTML = "Error: " + error;
-            });
-    } 
-    window.onload = fetchGroupName;
-
-</script>   -->

@@ -1365,6 +1365,7 @@ function reqName() {
                     const reqElement = document.createElement('div');
                     reqElement.textContent = reqName;
                     createdReq.appendChild(reqElement);
+                    console.log('these are the reqName:: ', reqName)
                 });
             } else {
                 console.error('Invalid data format or missing reqNames array');
