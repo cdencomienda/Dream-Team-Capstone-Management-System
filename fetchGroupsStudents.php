@@ -2,38 +2,19 @@
 // Start the session
 session_start();
 
-// Check if user_id is set in the session
-if (!isset($_SESSION['user_id'])) {
-    echo 'User ID is not set in session.';
-    exit;
-}
+// Check if the session variables are set
+if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
 
-// Check if group_courses is set in the session and if it's an array
-if (isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
-    $user_id = $_SESSION['user_id'];
+    // Initialize an array to store results
+    $results = [];
 
-    // Connect to the database
+    // Establish database connection
     $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
+
+    // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
-    $results = [];
-    
-    // Fetch s_id from students table
-    $stmt = $conn->prepare("SELECT s_id FROM students WHERE student_id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($s_id);
-
-    // Store s_id in an array
-    $s_ids = [];
-    while ($stmt->fetch()) {
-        $s_ids[] = $s_id;
-    }
-
-    // Close statement
-    $stmt->close();
 
     foreach ($_SESSION['group_courses'] as $course_info) {
         // Validate course_id in course_info
@@ -43,46 +24,91 @@ if (isset($_SESSION['group_courses']) && is_array($_SESSION['group_courses'])) {
             // Initialize an array for group names under each course_id
             $group_names = [];
 
-            // Fetch group names for the course_id
-            $query = "SELECT group_name FROM `groups` WHERE s_id = ? AND course_id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ii", $s_id, $course_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            // Query the database for student_group_id in groups table
+            $sql_s_id = "SELECT s_id FROM students WHERE student_id = ? AND course_id = ?";
+            $stmt_s_id = mysqli_prepare($conn, $sql_s_id);
+            mysqli_stmt_bind_param($stmt_s_id, "ii", $_SESSION['user_id'], $course_id);
+            mysqli_stmt_execute($stmt_s_id);
+            $result_s_id = mysqli_stmt_get_result($stmt_s_id);
 
-            // Check if the query was successful
-            if ($result) {
-                // Fetch the group names and add them to the group_names array if they're not already present
-                while ($row = $result->fetch_assoc()) {
-                    $group_name = $row['group_name'];
-                    $group_names[] = $group_name; // Add all fetched group names
+            if (mysqli_num_rows($result_s_id) > 0) {
+                $row_s_id = mysqli_fetch_assoc($result_s_id);
+                $s_id = $row_s_id['s_id'];
+
+                $sql_student_group_id = "SELECT student_group_id FROM groups WHERE s_id = ? AND course_id = ?";
+                $stmt_student_group_id = mysqli_prepare($conn, $sql_student_group_id);
+                mysqli_stmt_bind_param($stmt_student_group_id, "ii", $s_id, $course_id);
+                mysqli_stmt_execute($stmt_student_group_id);
+                $result_student_group_id = mysqli_stmt_get_result($stmt_student_group_id);
+
+                if (mysqli_num_rows($result_student_group_id) > 0) {
+                    while ($row_student_group_id = mysqli_fetch_assoc($result_student_group_id)) {
+                        $student_group_id = $row_student_group_id['student_group_id'];
+
+                        // Switch to dreamteam database
+                        mysqli_select_db($conn, 'dreamteam');
+
+                        $sql_group_name = "SELECT groupName FROM `group` WHERE requirementsID = ? AND courseID = ?";
+                        $stmt_group_name = mysqli_prepare($conn, $sql_group_name);
+                        mysqli_stmt_bind_param($stmt_group_name, "ii", $student_group_id, $course_id);
+                        mysqli_stmt_execute($stmt_group_name);
+                        $result_group_name = mysqli_stmt_get_result($stmt_group_name);
+
+                        if (mysqli_num_rows($result_group_name) > 0) {
+                            while ($row_group_name = mysqli_fetch_assoc($result_group_name)) {
+                                $group_name = $row_group_name['groupName'];
+
+                                // Add group name to the group_names array if not already present
+                                if (!in_array($group_name, $group_names)) {
+                                    $group_names[] = $group_name;
+                                }
+                            }
+                        } else {
+                            // Handle case where no group name is found
+                            $group_names[] = 'No group found';
+                        }
+                    }
+                } else {
+                    // Handle case where no student group id is found
+                    $group_names[] = 'No student group found';
                 }
             } else {
-                echo 'Error in query: ' . $stmt->error;
-                exit;
+                // Handle case where no s_id is found
+                $group_names[] = 'No s_id found';
             }
-            
+
             // Add the group_names array to the results array under the respective course_id key
             $results[$course_id] = $group_names;
-
-            // Close the statement
-            $stmt->close();
         } else {
-            echo "Invalid course info: " . var_export($course_info, true) . "<br>";
+            // Handle case where course_id is not set in course_info
+            $results[$course_id] = ['error' => "Course ID not set in course_info"];
         }
     }
 
-    // Save the results to the session (if needed)
-    $_SESSION['group_names'] = $results;
-
-    // Close the connection
+    // Close statements and connection
+    mysqli_stmt_close($stmt_s_id);
+    mysqli_stmt_close($stmt_student_group_id);
+    mysqli_stmt_close($stmt_group_name);
     mysqli_close($conn);
 
-    // Send results as JSON
+    // Save the results to the session
+    $_SESSION['group_names'] = $results;
+
+    // Send results as JSON (optional)
     header('Content-Type: application/json');
     echo json_encode($results);
 } else {
-    // If group_courses is not set or is not an array, send an error message
-    echo 'group_courses array is not set or is not an array in session.';
+    // Handle case where session variables are not set
+    $error = [];
+    if (!isset($_SESSION['group_courses'])) {
+        $error[] = "Session variable 'group_courses' is not set.";
+    }
+    if (!isset($_SESSION['user_id'])) {
+        $error[] = "Session variable 'user_id' is not set.";
+    }
+    
+    // Send error message as JSON
+    header('Content-Type: application/json');
+    echo json_encode(['error' => $error]);
 }
 ?>

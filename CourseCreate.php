@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function fetchAcademicYears() {
     const classDropdown = document.querySelector('.class-Dropdown');
-    classDropdown.innerHTML = ''; // Clear previous content
+    classDropdown.innerHTML = '<h3>My Courses</h3>'; // Clear previous content
 
     fetch('fetchAcademicYears.php')
         .then(response => {

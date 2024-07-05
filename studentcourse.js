@@ -123,11 +123,12 @@ function submissionBtnAuth() {
     document.getElementById("submissionFrame").style.display = "flex";
 }
 
-function newGroupCreated() {
-    var container = document.querySelector('.StudentDefault');
+ 
+function rubric_preview() { 
+    var container = document.querySelector('.rubriccontainer');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
   }
- 
+
  // viewfiles  
 
  function openModal(filePath) {
