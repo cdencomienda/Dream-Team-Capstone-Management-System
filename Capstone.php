@@ -1483,23 +1483,23 @@ function saveCourseID(courseID) {
     .catch(error => console.error('Fetch error:', error));
 }
 
-function fetchStudents() {
-    const membersContainer = document.querySelector('.GroupmembersContainer');
-    membersContainer.innerHTML = ''; // Clear previous content
+// function fetchStudents() {
+//     const membersContainer = document.querySelector('.GroupmembersContainer');
+//     membersContainer.innerHTML = ''; // Clear previous content
 
-    fetch('fetchStudents.php')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Log the received JSON data
-        // Process the data as needed
-        data.forEach(student => {
-            const memberHeading = document.createElement('h5');
-            memberHeading.textContent = `${student.firstName} ${student.lastName}`;
-            membersContainer.appendChild(memberHeading);
-        });
-    })
-    .catch(error => console.error('Fetch error:', error));
-}
+//     fetch('fetchStudents.php')
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data); // Log the received JSON data
+//         // Process the data as needed
+//         data.forEach(student => {
+//             const memberHeading = document.createElement('h5');
+//             memberHeading.textContent = `${student.firstName} ${student.lastName}`;
+//             membersContainer.appendChild(memberHeading);
+//         });
+//     })
+//     .catch(error => console.error('Fetch error:', error));
+// }
 
 
 
