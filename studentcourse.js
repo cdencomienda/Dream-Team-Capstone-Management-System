@@ -1,4 +1,77 @@
- 
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownsClass = document.querySelectorAll('.classListDropdown');
+
+    dropdownsClass.forEach(dropdown => {
+        const listClass = dropdown.querySelector('.listClass');
+        const menuCourses = dropdown.querySelector('.menuCourses');
+        const options = dropdown.querySelectorAll('.menuCourses > .term');
+        const selectedClass = dropdown.querySelector('.selectedClass');
+
+        listClass.addEventListener('click', () => {
+            menuCourses.classList.toggle('menuCourses-open');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                // Update the selected class text
+                selectedClass.innerText = option.innerText;
+
+                // Hide all course details
+                document.querySelectorAll('.coursesDetails').forEach(detail => {
+                    detail.style.display = 'none';
+                });
+
+                // Show the selected term's courses
+                const term = option.getAttribute('data-term');
+                const coursesDetail = document.getElementById(term);
+                if (coursesDetail) {
+                    coursesDetail.style.display = 'block';
+                }
+
+                // Hide the main menuCourses
+                menuCourses.classList.remove('menuCourses-open');
+            });
+        });
+    });
+
+    function dropdownMelon(button) {
+        const container = button.parentNode.querySelector('.dropdown-content');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    }
+
+    const dropdownBtns = document.querySelectorAll('.dropdownbtn');
+
+    dropdownBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        });
+    });
+
+    // Your other functions like AddMembers, setrequirements, rubric, rubric_preview, etc.
+    function AddMembers() { 
+        var container = document.querySelector('.addmember');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    }
+
+    function setrequirements() { 
+        var container = document.querySelector('.setrequirements');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    }
+
+    function rubric() { 
+        var container = document.querySelector('.defense-main');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    }
+
+    function rubric_preview() { 
+        var container = document.querySelector('.rubriccontainer');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    }
+});
+
 
 
 document.addEventListener('click', e =>{
@@ -38,19 +111,20 @@ function StudentSchedule(){
   } 
   
 function showDefaultBody() {
-    document.getElementById("defaultBody").style.display = "block";
-    document.getElementById("submissionFrame").style.display = "none";
-  
+    document.getElementById("StudentDefault").style.display = "block";
+} 
+function newGroupCreated() {
+    var container = document.querySelector('.StudentDefault');
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
 
 function submissionBtnAuth() {
     document.getElementById("defaultBody").style.display = "none";
     document.getElementById("submissionFrame").style.display = "flex";
-
 }
 
 function newGroupCreated() {
-    var container = document.querySelector('.student');
+    var container = document.querySelector('.StudentDefault');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
   }
  

@@ -113,29 +113,59 @@
         <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
     </div>
     <!-- Ian -->
+     
     <div class="StudentClass">
-        <div class="course_created" grid>
-
-            <!-- Container for student's courses -->
-            <div class = "studentCourseDropdown" id="studentCoursesDropdown">
-                    <div class= "courses"> <h2>Courses</h2></div>
-                    <div class="course" id="coursesList">
+        <div class="class-Dropdown">
+            <div class="classListDropdown">                              
+                <button class="listClass">  
+                    <h4>COURSES AY 2023-2024</h4>
+                    <span class="selectedClass"></span> 
+                    <div class="coursesListed"></div>                        
+                </button>
+                <ul class="menuCourses"> 
+                    <li class="term" data-term="term1">Term 1</li>
+                    <li class="term" data-term="term2">Term 2</li>
+                    <li class="term" data-term="term3">Term 3</li>
+                </ul>
+            </div> 
+                <div class="coursesDetails" id="term1">
+                    <h3 class="termh3">Courses for Term 1</h3>
+                    <div class="coursesDropdown">
+                        <div class="dropdownmelon">            
+                            <h3 class="courseNameDisplay"> DATAMNGT <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
+                            <div class="dropdown-content">
+                                <button type="button" class="dropdownbtn" onclick="rubric_preview()">Rubric</button>
+                            </div>
+                        </div>
+                        <!-- PanelMember, Lead -->
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
+                        <!-- chair panel -->
+                        <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name2</button>
+                    </div>     
+                    <div class="divButton">
+                        <!-- <button class="CreateSched" id = "addScheduleBtn">
+                        Add Schedule <i class="fa-solid fa-plus"></i>
+                        </button> -->
                     </div> 
                 </div>
-            <div class="dropdown">
-            </div>
-        </div>
-        
-        <div class="StudentDefault" id = "StudentDefault" style = "display: none;">  
+            </div>    
+        </div>    
+        <div class="StudentDefault" id = "StudentDefault" style = "display: none;" >  
             <div class="dashboard_header">
-                    <!-- Group Name Box -->
-                    <div class="groupname_container" onclick = "showDefaultBody()"> 
-            <div class="groupname_container"> 
-                    <div class="group_name" id="groupName"> sample </div>   
+                <!-- Group Name Box -->
+                <div class="groupname_container" onclick = "showDefaultBody()"> 
+                    <div class="groupname_container"> 
+                        <div class="group_name" id="groupName"> sample  
+                    
+                    </div>   
                 </div>
-            </div>
-<script>
-    
+            </div> 
+
+        
+        
+<!-- script ni carlos -->
+
+<!-- <script> 
     document.addEventListener('DOMContentLoaded', function() {
         function fetchCourses() {
             fetch('LiveSearchStudentCourses.php') 
@@ -188,10 +218,7 @@
             console.log('New group created for:', course);
             // Add your custom functionality here
         }
-        
-
-
-
+         
         // Call the fetchCourses function when the DOM is fully loaded
         fetchCourses();
     });
@@ -238,11 +265,7 @@
             // Handle fetch error, for example, display it to the user
             alert('Fetch error: ' + error.message);
         });
-}
-
-
-
-
+    } 
     function fetchStudents() {
         fetch("LiveSearchGroupMembers.php")
             .then(response => {
@@ -266,16 +289,11 @@
             .catch(error => {
                 document.getElementById("groupMembersContainer").innerHTML = "Error: " + error;
             });
-    }
-
-
-
-
-
+    } 
     window.onload = fetchGroupName;
 
+</script>   -->
 
-</script>  
                 <h4>
                     <div class="button-group"> 
 
@@ -298,19 +316,15 @@
                                             <button class="DocuReqLogs" onclick="toggleDocuReqLogs()"> <i class="fa-solid fa-ellipsis"></i> </button>
                                         </div>
                                     </div>     
-                                </div>   
-                                 
+                                </div>    
                             </div>
-                        </div>    
-
+                        </div>     
 
                         <!-- files popup -->
                         <div class="fileLogsPopup" id="DocuReqrmntLogs">
                                                 <h4>Document Requirement Logs</h4>
                                                 <!-- Logs will be dynamically added here -->
-                                            </div>  
-
-                        
+                                            </div>   
 
                         <div class="mDropdown" data-flsDropdown>  
                         <button type="button" class="Members-Btn" data-flsDropdown-button onclick="fetchStudents()"  > <i class="fa-solid fa-user-group"></i> Members </button>
@@ -402,7 +416,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
      document.getElementById('input-file').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -483,19 +497,13 @@
         alert(`Opening modal for: ${filePath}`);
         // Implement modal opening logic here
     }
-</script>
+</script> -->
 
-
-
+                    </div>
                 </div>
-            
-        </div>
-    </div>
-    
+            </div>
         </style>
-        
     </div>
     <!-- ian end -->    
 </body>
-
 </html>

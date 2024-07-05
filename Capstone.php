@@ -188,18 +188,18 @@
                                         <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
                                         
                                             <div class="Recent-fileName">docu-test1.pdf</div>
-                                            
                                         </div>
 
                                         <div class = "divDocuReqLogs"> <br>
                                             <button class = "DocuReqLogs" onclick="toggleDocuReqLogs()" > <i class="fa-solid fa-ellipsis"></i> </button>
                                         </div>
+
                                     </div>     
                                 </div>   
                             </div>  
                         </div>
                           <!-- files popup -->
-                          <div class="fileLogsPopup" id="DocuReqrmntLogs">
+                        <div class="fileLogsPopup" id="DocuReqrmntLogs">
                         <h4>Document Requirement Logs</h4>
                         <!-- Logs will be dynamically added here -->
                         </div>
