@@ -137,7 +137,7 @@
                     
                     <!-- chair panel -->
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated2()">Group name2</button>
-                </div>   
+                </div>  
                 <div class="coursesDetails" id="term1">
                     <h3 class="termh3">Courses for Term 1</h3>
                     <div class="coursesDropdown">
