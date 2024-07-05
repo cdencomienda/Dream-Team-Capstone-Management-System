@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin User Edit Menu</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-
-    <link rel="stylesheet" href="DefenseResults.css">
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="AdminHomeStyle.css">
+    
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button>
@@ -28,24 +28,23 @@
  
         <div class="container">
             <div class="action">
-                <div class="profile">
+                <div class="profile" id="profilePic">
                     <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
-                <div class="menu" id ="menuBtn">
-                <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                <div class="menu" id="menuBtn">
+                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                     </h3>
                     <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
                     <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
                 </div>
             </div>
-            <!-- editprofile -->
+            <!-- editprofile --> 
             <div id="editProfileOverlay" class="editoverlay">
                 <div class="dropdown-profile">
                     <div>
-                        <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                        <button class="close" onclick="closeEditform()"><i class="fa-regular fa-circle-xmark"></i></button>
                     </div>
-                    
                     <form id="editProfileForm" action="editProfile.php" method="POST">
                         <div class="profile">
                             <img src="menu_assets/prof.png" alt="profile-img">
@@ -53,23 +52,21 @@
                         <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
                         <span><?php echo $_SESSION['user_email']; ?></span>
                         </h5edit>
-                        <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                        <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
-                        <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
-                        <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                        <button type="submit" class="saveEditbtn"> Save Changes </button>
-                       
+                        <h3><input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"></h3>
+                        <h3><input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"></h3>
+                        <h3><input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"></h3>
+                        <h3><input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"></h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
                     </form>
-                   
                     <?php if(isset($_SESSION['error_message'])) { ?>
-                <div id="error-message" class="show">
- 
-                    <?php echo $_SESSION['error_message']; ?>
-                    <button onclick="clearErrorMessage()">OK</button>
+                    <div id="error-message" class="show">
+                        <?php echo $_SESSION['error_message']; ?>
+                        <button onclick="clearErrorMessage()">OK</button>
+                    </div>
+                    <?php unset($_SESSION['error_message']); } ?>
                 </div>
-            <?php
-                unset($_SESSION['error_message']); // Clear the error message after displaying it
-            } ?>
+            </div>
+        </div>
  
     <script>
         window.onload = function() {
@@ -116,22 +113,24 @@
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
         <button type="button" class="Users"  onclick="Users()">Users</button>
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
         </div> 
     </div>
     
-<script src="DefenseResults.js"></script>   
-    <div class="classlist"> 
+
+    
+    <div class="classlist">
     <div class="Tablecontainer">
         <div class="tableHeader">
-            <h1> Defense Results </h1>
+            <h1>Defense Results</h1>
         </div>
         <table>
-            <Thead>
+            <thead>
                 <tr>
                     <th class="courseCode-column">Course Code</th>
                     <th class="courseName-column">Course Name</th>
-                </tr> 
-            </Thead>
+                </tr>
+            </thead>
             <tbody>
                 <tr class="criteria">
                     <td class="courseCode">
@@ -207,25 +206,53 @@
                     </tr>
                 </table>
                 <p>Course Passing Rate: <span id="passing-rate">75%</span></p>
+                <div id="myPlot" style="width:100%;height:100%;"></div>
             </div>
-            <div class="barGraphCont">
-                <section id="stats-bar-graph" class="bar-graph bar-graph-vertical">
-                    <div class="bar-pass bar-container">
-                        <div class="bar" data-percentage="5%"></div>
-                        <span class="verdict">PASS</span>
-                    </div>
-                    <div class="bar-conditional-pass bar-container">
-                        <div class="bar" data-percentage="70%"></div>
-                        <span class="verdict">CONDITIONAL PASS</span>
-                    </div>
-                    <div class="bar-repeat bar-container">
-                        <div class="bar" data-percentage="20%"></div>
-                        <span class="verdict">REPEAT</span>
-                    </div>
-                </section>
+            <div id="SOFTDES-stats" class="stats-container">
+                <h2>Final Defense Report SOFTWARE DESIGN</h2>
+                <!-- Add table and Plotly chart for SOFTDES similar to DATAMGT -->
             </div>
+            <!-- Add other stats containers for CPEMETS, CPEDES1, and CPEDES2 -->
         </div>
     </div>
-    
+</div>
+<script>
+    // Show Stats Modal
+    function showStats(statId) {
+        var statsContainers = document.querySelectorAll('.stats-container');
+        statsContainers.forEach(function(container) {
+            container.style.display = 'none';
+        });
+        document.getElementById(statId).style.display = 'block';
+        document.getElementById('stats-modal').style.display = 'block';
+
+        if (statId === 'DATAMGT-stats') {
+            var data = [{
+                x: ['PASS', 'CONDITIONAL PASS', 'REPEAT'],
+                y: [5, 70, 20],
+                type: 'bar'
+            }];
+            var layout = {
+                title: 'Defense Results',
+                width: 600,
+                height: 400
+            };
+            Plotly.newPlot('myPlot', data, layout);
+        }
+    }
+
+    // Close Stats Modal
+    function closeModal() {
+        document.getElementById('stats-modal').style.display = 'none';
+    }
+
+    // Update Stats based on Academic Year
+    function updateStats() {
+        var year = document.getElementById('academic-year').value;
+        console.log("Selected year:", year);
+        // Update the stats data based on the selected year
+    }
+</script>
+<script src="adminHome.js"></script>
 </body>
 </html>
