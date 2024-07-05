@@ -1285,6 +1285,9 @@ function reqDesc(name) {
 }
 
 function createElements(name, reqDescription) {
+    // Define requirementsContainer first
+    const requirementsContainer = document.querySelector('.requirement-details');
+
     // Create elements
     const titleElement = document.createElement('h2');
     titleElement.classList.add('requirement-title');
@@ -1298,8 +1301,11 @@ function createElements(name, reqDescription) {
     descBoxElement.classList.add('requirement-descBox');
     descBoxElement.textContent = reqDescription;
 
+    const fileContainer = document.createElement('div');
+    fileContainer.classList.add('Attach-Files');
+
     const attachFilesElement = document.createElement('div');
-    attachFilesElement.classList.add('Attach-Files');
+    attachFilesElement.classList.add('atchFiles');
 
     const attachFilesHeading = document.createElement('h3');
     attachFilesHeading.textContent = 'Attach Files';
@@ -1324,10 +1330,6 @@ function createElements(name, reqDescription) {
         reader.onload = function(event) {
             const fileContent = event.target.result;
 
-            // Create file container
-            const fileContainer = document.createElement('div');
-            fileContainer.classList.add('file-item');
-
             // File name
             const fileName = document.createElement('span');
             fileName.textContent = file.name;
@@ -1347,8 +1349,6 @@ function createElements(name, reqDescription) {
 
             fileContainer.appendChild(fileNamePreview);
             fileContainer.appendChild(removeBtn);
-
-
 
             // Append file container to Attached-FileCont
             const attachedFileCont = document.querySelector('.Attached-FileCont');
@@ -1382,24 +1382,26 @@ function createElements(name, reqDescription) {
     });
 
     // Append elements
+    uploadBtnContainer.appendChild(inputFileLabel);
+    uploadBtnContainer.appendChild(inputFile);
+
     attachFilesElement.appendChild(attachFilesHeading);
     attachFilesElement.appendChild(uploadBtnContainer);
-    attachFilesElement.appendChild(inputFileLabel);
-    attachFilesElement.appendChild(inputFile);
 
-    const requirementsContainer = document.querySelector('.requirement-details');
-    if (requirementsContainer) {
-        requirementsContainer.appendChild(titleElement);
-        requirementsContainer.appendChild(descriptionContElement);
-        requirementsContainer.appendChild(descBoxElement);
-        requirementsContainer.appendChild(attachFilesElement);
-        requirementsContainer.appendChild(attachedFileCont); // Append Attached-FileCont
-        requirementsContainer.appendChild(submitBtnCont); // Append req-submitbtnCont
-        submitBtnCont.appendChild(submitBtn); // Append Submit button to submitBtnCont
-    } else {
-        console.error('Error: Container element .requirements-details not found.');
-    }
+    fileContainer.appendChild(attachFilesElement);
+    attachedFileCont.appendChild(fileContainer); // Append fileContainer to Attached-FileCont
+
+    requirementsContainer.appendChild(titleElement);
+    requirementsContainer.appendChild(descriptionContElement);
+    requirementsContainer.appendChild(descBoxElement);
+    requirementsContainer.appendChild(attachedFileCont); // Append Attached-FileCont here
+    requirementsContainer.appendChild(submitBtnCont); // Append req-submitbtnCont
+    submitBtnCont.appendChild(submitBtn); // Append Submit button to submitBtnCont
 }
+
+
+
+
 
 
 
