@@ -446,8 +446,16 @@ left: 37%;
     height: 96%;
     z-index: 500 ;
 }
-
-
+.atchFiles{
+  width: 150px;
+  height: 23px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.atchFiles:hover{
+  background-color: #aaaaaa;
+  
+}
 
   .groupname_container{
      margin-top: 8px;
@@ -469,6 +477,9 @@ left: 37%;
     margin-top: 3px ;
     justify-content: center;
     align-items: center;
+  }
+  .group_name:hover{
+    background-color: #aaaaaa; 
   }
   .button-group{
     grid-column: 2 / 3;
@@ -751,15 +762,20 @@ left: 37%;
 .requirement-name{
   position: relative;
   background-color: #F8EFE3;
-  border-radius: 25px;
+  border-radius: 10px;
   width: 250px;
   height: 55px  ;
-  margin-left: 50px;
-  text-align  : center;
-  padding-top: 40px;
+  padding: 10px;
+  margin-left: 40px;
+  border: 1px solid;
+  text-align  : center; 
   display: block;
   margin-bottom: 5px;
 }
+.requirement-name:hover{
+  background-color: #aaaaaa; 
+}
+
 .requirement-details{
   position: relative;
   background-color: white; 
@@ -791,12 +807,13 @@ left: 37%;
 }
 .requirement-descBox{
   width: 475px;
-  height: 33px;
-  background-color:#F8EFE3;
+  height: 140px;
+  background-color: #F8EFE3;
   margin-left: 0;
-  margin-top: 30px;
+  margin-top: 15px;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 10px;
+  padding: 10px;
 }
 .reqfile-version{
   text-align: left;
@@ -817,12 +834,14 @@ left: 37%;
   margin-top: -25px;
 }
 .reqbtn{
-  height: 25px;
+  height: 35px;
   width: 95px;
-  border-radius: 15px;
+  border-radius: 10px;
   border: none;
-  background-color: #FFEBCF;
-  
+  background-color: #FFEBCF; 
+}
+.reqbtn:hover{
+  background-color: #aaaaaa;
 }
 .Attached-FileCont{
   margin: 15px;
@@ -1095,6 +1114,7 @@ label{
 }
 .classListDropdown{
   width: 380px; 
+  margin-top: 10px;
   margin-bottom: 10px;
   position: relative; 
 }

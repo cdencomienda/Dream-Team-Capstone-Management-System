@@ -68,55 +68,112 @@ function closeEditform(){
   document.getElementById('menuBtn').style.display = 'block'; // Show the menuBtn element
 }
 
+function createCommonElements(panelType, panelNumber) {
+  // Create the panel div
+  var panelDiv = document.createElement('div');
+  panelDiv.classList.add(panelType);
 
-function addComment() {
-  // Get the comments section container
-  var commentsSection = document.getElementById('commentsSection');
-  
-  // Create the new comment div
-  var newComment = document.createElement('div');
-  newComment.classList.add('panel-comments');
+  // Create the heading element
+  var heading = document.createElement('h3');
+  heading.textContent = '#' + panelNumber;
 
-  // Create the new elements
-  var newHeading = document.createElement('h3');
-  newHeading.textContent = 'Comment # ' + (commentsSection.children.length + 1);
+  // Create a line break element
+  var lineBreak = document.createElement('br');
 
-  var newTextArea = document.createElement('textarea');
-  newTextArea.classList.add('comments-input');
+  // Append the heading and line break to the panel div
+  panelDiv.appendChild(heading);
+  panelDiv.appendChild(lineBreak);
+
+  // Create the content div (for textarea and buttons)
+  var contentDiv = document.createElement('div');
+  contentDiv.classList.add(panelType + '-sent');
+
+  // Create the textarea element
+  var textArea = document.createElement('textarea');
+  textArea.classList.add('comments-input');
 
   // Create the delete button
   var deleteButton = document.createElement('button');
-  deleteButton.classList.add('delete-button');  // Add a class for styling
+  deleteButton.classList.add('delete-button');
   deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
   deleteButton.onclick = function() {
-      if (confirm("Are you sure you want to delete this comment?")) {
-          newComment.remove();
-          // Update comment numbers
-          updateCommentNumbers();
-      }
+    if (confirm("Are you sure you want to delete this " + panelType + "?")) {
+      panelDiv.remove();
+      contentDiv.remove();
+      // Update panel numbers
+      updatePanelNumbers();
+    }
   };
 
-  // Append the new elements to the new comment div
-  newComment.appendChild(newHeading);
-  newComment.appendChild(newTextArea);
-  newComment.appendChild(deleteButton);  // Add the button here
+  // Append the textarea and delete button to the content div
+  contentDiv.appendChild(textArea);
+  contentDiv.appendChild(deleteButton);
 
-  // Append the new comment div to the comments section container
-  commentsSection.appendChild(newComment);
-
-  setTimeout(function() {
-      commentsSection.scrollTo({ top: newComment.offsetTop, behavior: 'smooth' });
-  }, 10); // Adjust delay if needed (in milliseconds)
+  return {
+    panelDiv: panelDiv,
+    contentDiv: contentDiv
+  };
 }
 
-function updateCommentNumbers() {
-  var commentsSection = document.getElementById('commentsSection');
-  var commentDivs = commentsSection.getElementsByClassName('panel-comments');
-  for (var i = 0; i < commentDivs.length; i++) {
-      var heading = commentDivs[i].getElementsByTagName('h3')[0];
-      heading.textContent = 'Comment # ' + (i + 1);
+function updatePanelNumbers() {
+  var comments = document.querySelectorAll('.panel-comments');
+  for (var i = 0; i < comments.length; i++) {
+    comments[i].querySelector('h3').textContent = 'Comment #' + ((i / 2) + 1);
+  }
+  var revisions = document.querySelectorAll('.panel-revision');
+  for (var i = 0; i < revisions.length; i++) {
+    revisions[i].querySelector('h3').textContent = 'Revision #' + ((i / 2) + 1);
+  }
+  var requirements = document.querySelectorAll('.panel-requirement');
+  for (var i = 0; i < requirements.length; i++) {
+    requirements[i].querySelector('h3').textContent = 'Additional Requirement #' + ((i / 2) + 1);
   }
 }
+
+
+function addComment() {
+  var commentsSection = document.getElementById('commentsSection');
+  var panelNumber = (commentsSection.children.length / 2) + 1;
+  var elements = createCommonElements('panel-comments', panelNumber);
+
+  elements.panelDiv.querySelector('h3').textContent += ' Comments:';
+  commentsSection.appendChild(elements.panelDiv);
+  commentsSection.appendChild(elements.contentDiv);
+
+  setTimeout(function() {
+    commentsSection.scrollTo({ top: elements.panelDiv.offsetTop, behavior: 'smooth' });
+  }, 10);
+}
+
+function addRevision() {
+  var commentsSection = document.getElementById('commentsSection');
+  var panelNumber = (commentsSection.children.length / 2) + 1;
+  var elements = createCommonElements('panel-revision', panelNumber);
+
+  elements.panelDiv.querySelector('h3').textContent += ' Revision:';
+  commentsSection.appendChild(elements.panelDiv);
+  commentsSection.appendChild(elements.contentDiv);
+
+  setTimeout(function() {
+    commentsSection.scrollTo({ top: elements.panelDiv.offsetTop, behavior: 'smooth' });
+  }, 10);
+}
+
+function addRequirement() {
+  var commentsSection = document.getElementById('commentsSection');
+  var panelNumber = (commentsSection.children.length / 2) + 1;
+  var elements = createCommonElements('panel-requirement', panelNumber);
+
+  elements.panelDiv.querySelector('h3').textContent += ' Additional Requirement:';
+  commentsSection.appendChild(elements.panelDiv);
+  commentsSection.appendChild(elements.contentDiv);
+
+  setTimeout(function() {
+    commentsSection.scrollTo({ top: elements.panelDiv.offsetTop, behavior: 'smooth' });
+  }, 10);
+}
+
+
   // ClassListener
   
 //   document.getElementById('scheduleContainer').addEventListener('click', function() {
@@ -200,32 +257,40 @@ function rubric_preview() {
   var container = document.querySelector('.rubriccontainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
-
-function showDefaultBody() {
-  document.getElementById("summaryGrade").style.display = "none";
-
-  document.getElementById("defaultBody").style.display = "block";
+// Helper function to hide all sections
+function hideAllSections() {
+  document.getElementById("rubric-summary").style.display = "none";
+  document.getElementById("defaultBody").style.display = "none";
+  document.getElementById("defense-main").style.display = "none";
+  
   var defenseMainElements = document.getElementsByClassName('defense-main');
   for (var i = 0; i < defenseMainElements.length; i++) {
       defenseMainElements[i].style.display = 'none';
   }
 }
+
+// Function to show the default body
+function showDefaultBody() {
+  hideAllSections();
+  document.getElementById("defaultBody").style.display = "block";
+}
+
+// Function to show the group defense rubrics
 function groupDefenseRubrics() {
-  document.getElementById("summaryGrade").style.display = "none";
-  document.getElementById("defaultBody").style.display = "none";
+  hideAllSections();
   var defenseMainElements = document.getElementsByClassName('defense-main');
   for (var i = 0; i < defenseMainElements.length; i++) {
       defenseMainElements[i].style.display = 'block';
   }
 }
 
+// Function to show the grade summary
 function gradeSummary() {
-  document.getElementById("defaultBody").style.display = "none";
-  var defenseMainElements = document.getElementsByClassName('rubric-summary');
-  for (var i = 0; i < defenseMainElements.length; i++) {
-      defenseMainElements[i].style.display = 'block';
-  }
+  hideAllSections();
+  document.getElementById("summaryGrade").style.display = "block";
+  document.getElementById("rubric-summary").style.display = "block";
 }
+
 
 
 function getRandomScore() {
@@ -301,3 +366,135 @@ function toggleDocuReqLogs() {
       `;
   }
 }
+function toggleRubricSummary(panelClass, arrowClass) {
+  const panel = document.querySelector(`.${panelClass}`);
+  const arrow = document.querySelector(`.${arrowClass}`);
+  if (panel.classList.contains('expand')) {
+    panel.classList.remove('expand');
+    arrow.classList.remove('down');
+    arrow.classList.add('right');
+  } else {
+    panel.classList.add('expand');
+    arrow.classList.remove('right');
+    arrow.classList.add('down');
+  }
+}
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Get modal element
+  var modal = document.getElementById("gradeModal");
+
+  // Get open modal button
+  var gradeSummaryButton = document.querySelector(".compute-button");
+
+  // Get close button
+  var closeButton = modal.querySelector(".close");
+
+  // Get submit button
+  var submitButton = document.getElementById("submitGrade");
+
+  // Listen for open click
+  gradeSummaryButton.addEventListener("click", computeGrades);
+
+  // Listen for close click
+  closeButton.addEventListener("click", closeModal);
+
+  // Listen for outside click
+  window.addEventListener("click", outsideClick);
+
+  // Function to open modal
+  function openModal() {
+      modal.style.display = "block";
+  }
+
+  // Function to close modal
+  function closeModal() {
+      modal.style.display = "none";
+  }
+
+  // Function to close modal if outside click
+  function outsideClick(e) {
+      if (e.target == modal) {
+          closeModal();
+      }
+  }
+
+  // Function to calculate grades and display in modal
+  function computeGrades() {
+      var chairPanelGrades = extractPanelGrades(".chairPgrade .criteria");
+      var leadPanelGrades = extractPanelGrades(".leadPanelContent .criteria");
+      var panelMemberGrades = extractPanelGrades(".panelMemberContent .criteria");
+
+      var panelists = {
+          "Chair Panel": calculateAverage(chairPanelGrades),
+          "Lead Panel": calculateAverage(leadPanelGrades),
+          "Panel Member 1": calculateAverage(panelMemberGrades)
+      };
+
+      var totalGrade = 0;
+      var totalCriteria = 0;
+
+      // Calculate overall total grade and criteria count
+      Object.keys(panelists).forEach(function(panelist) {
+          totalGrade += panelists[panelist].totalGrade;
+          totalCriteria += panelists[panelist].count;
+      });
+
+      // Populate grade table and calculate averages
+      var gradeTableBody = document.querySelector("#gradeTable tbody");
+      gradeTableBody.innerHTML = "";
+
+      Object.keys(panelists).forEach(function(panelist) {
+          var panelistTotalGrade = panelists[panelist].totalGrade;
+          var panelistCount = panelists[panelist].count;
+          var panelistAverage = panelistTotalGrade / panelistCount;
+
+          var newRow = document.createElement("tr");
+          newRow.innerHTML = `<td>${panelist}</td><td>${panelistAverage.toFixed(2)}</td>`;
+          gradeTableBody.appendChild(newRow);
+      });
+
+      // Calculate overall average
+      var overallAverage = totalGrade / totalCriteria;
+      var totalPercentage = (overallAverage / 7) * 100; // Assuming max score is 7 per criterion
+      document.getElementById("totalPercentage").textContent = totalPercentage.toFixed(2);
+
+      // Open the modal after computing grades
+      openModal();
+  }
+
+  // Function to extract grades from HTML structure
+  function extractPanelGrades(selector) {
+      var rows = document.querySelectorAll(selector);
+      var grades = [];
+
+      rows.forEach(function(row) {
+          var gradeElement = row.querySelector(".score-column .score");
+          var grade = gradeElement ? parseInt(gradeElement.textContent) : 0;
+          grades.push(grade);
+      });
+
+      return grades;
+  }
+
+  // Function to calculate average from an array of grades
+  function calculateAverage(grades) {
+      var totalGrade = grades.reduce(function(acc, grade) {
+          return acc + grade;
+      }, 0);
+
+      var count = grades.length;
+
+      return {
+          totalGrade: totalGrade,
+          count: count
+      };
+  }
+
+  // Function to handle grade submission
+  submitButton.addEventListener("click", function() {
+      var verdict = document.getElementById("verdictDropdown").value;
+      alert("Grades submitted with verdict: " + verdict);
+      closeModal();
+  });
+});
+

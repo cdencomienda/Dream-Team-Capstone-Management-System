@@ -251,8 +251,9 @@
                 <div class="submissionscontainer">
                 <div class= "requirement-list">
                     <div class = "req-nameCont"> 
-                        <div class="requirement-name">
-                        </div>
+                        <button class="requirement-name">
+                            <h4>FILE KEMELOT IAN</h4>
+                        </button>
                     </div>
                 </div>
          <style> 
@@ -292,7 +293,7 @@
     </div>
 </div>
 
-<!-- <script>
+<script>
      document.getElementById('input-file').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -373,7 +374,7 @@
         alert(`Opening modal for: ${filePath}`);
         // Implement modal opening logic here
     }
-</script> -->
+</script>
 
                     </div>
                 </div>
