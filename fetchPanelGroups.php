@@ -10,14 +10,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if group_name is set in the session
-if (isset($_SESSION['group_name'])) {
-    // Get the group_name from the session
+// Check if group_name and student_group_id are set in the session
+if (isset($_SESSION['group_name']) && isset($_SESSION['student_group_id'])) {
+    // Get the group_name and student_group_id from the session
     $group_name = $_SESSION['group_name'];
+    $student_group_id = $_SESSION['student_group_id'];
 
     // Prepare and execute the query to get the panelID
-    $stmt = $conn->prepare("SELECT panelID FROM `group` WHERE groupName = ?");
-    $stmt->bind_param("s", $group_name);
+    $stmt = $conn->prepare("SELECT panelID FROM `group` WHERE groupName = ? AND requirementsID = ?");
+    $stmt->bind_param("si", $group_name, $student_group_id);
     $stmt->execute();
     $stmt->bind_result($panelID);
 
@@ -74,8 +75,8 @@ if (isset($_SESSION['group_name'])) {
         echo json_encode(array("error" => "Panelists are not set."));
     }
 } else {
-    // If group_name is not set, echo an appropriate message
-    echo json_encode(array("error" => "Group name is not set in the session."));
+    // If group_name or student_group_id is not set, echo an appropriate message
+    echo json_encode(array("error" => "Group name or student group ID is not set in the session."));
 }
 
 // Close the connection

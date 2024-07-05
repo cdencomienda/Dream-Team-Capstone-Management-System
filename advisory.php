@@ -815,16 +815,16 @@ function setDirectory(path) {
     });
 }
 
-function newGroupCreated(course_id, group_name) {
-    var container = document.querySelector('.GroupContainer');
-    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-    console.log(course_id, group_name);
-    fetchGroupData(course_id, group_name);
-    fetchStudentGroups();
-    // fetchPanelGroups();
-    requirementName();
-    fileFeed();
-    
+    function newGroupCreated(course_id, group_name) {
+        var container = document.querySelector('.GroupContainer');
+        container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+        console.log(course_id, group_name);
+        fetchGroupData(course_id, group_name);
+        fetchStudentGroups();
+        fetchPanelGroups();
+        requirementName();
+        fileFeed();
+        
 
     // Prepare the data to be sent in the request body
     const formData = new FormData();
