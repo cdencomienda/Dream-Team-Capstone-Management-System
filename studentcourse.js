@@ -115,6 +115,7 @@ function showDefaultBody() {
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 } 
 function newGroupCreated() {
+    document.getElementById("rubriccontainer").style.display = "none";
     var container = document.querySelector('.StudentDefault');
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
@@ -125,8 +126,11 @@ function submissionBtnAuth() {
 }
 
  
-function rubric_preview() { 
+function rubric_preview() {
+    document.getElementById("StudentDefault").style.display = "none";
+ 
     var container = document.querySelector('.rubriccontainer');
+
     container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
   }
 
@@ -321,6 +325,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
   function showStudentDefault() {
+
     const studentDefault = document.getElementById('StudentDefault');
     studentDefault.style.display = studentDefault.style.display === 'block' ? 'none' : 'block';
 }

@@ -661,6 +661,7 @@ left: 37%;
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out;
     width: 200px;
+    z-index: 100
   }
   .PanelistContainer{
     position: absolute;
@@ -675,6 +676,7 @@ left: 37%;
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out;
     width: 300px;
+    z-index: 100
     }
   .Panelist-Btn{
     border: none;
