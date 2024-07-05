@@ -111,7 +111,8 @@ function StudentSchedule(){
   } 
   
 function showDefaultBody() {
-    document.getElementById("StudentDefault").style.display = "block";
+    var container = document.querySelector('.defaultBody'); 
+    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 } 
 function newGroupCreated() {
     var container = document.querySelector('.StudentDefault');

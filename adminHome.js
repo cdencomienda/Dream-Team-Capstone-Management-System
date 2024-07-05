@@ -64,7 +64,10 @@ document.addEventListener('profile', function () {
     function Schedule(){
       window.location.assign("AdminDefenseschedule.php")
     }
-
+    function DefenseR(){
+        window.location.assign("DefenseResults.php")
+      }
+  
 // action of melonbtns
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
@@ -445,5 +448,138 @@ function clsViewGrp(){
       });
   });
   
- 
+  function showStats(courseId) {
+    document.querySelectorAll('.stats-container').forEach(function(div) {
+        div.classList.remove('active');
+    });
+    document.getElementById(courseId).classList.add('active');
+    document.getElementById('stats-modal').style.display = 'block';
+    updatePlot(courseId.replace('-stats', ''));
+}
+
+function closeModal() {
+    document.getElementById('stats-modal').style.display = 'none';
+}
+
+function updateStats() {
+    var year = document.getElementById('academic-year').value;
+    var activeDiv = document.querySelector('.stats-container.active');
+    var stats = getStats(activeDiv.id.replace('-stats', ''), year);
+    updateModalContent(stats);
+    updatePlot(activeDiv.id.replace('-stats', ''));
+}
+
+function getStats(courseId, year) {
+    // This function should return stats based on courseId and year
+    // Here, we are using dummy data
+    const dummyStats = {
+        'DATAMGT': {
+            '2023-2026': { pass: 5, conditionalPass: 70, repeat: 20, passingRate: 75 },
+            '2022-2025': { pass: 10, conditionalPass: 60, repeat: 30, passingRate: 70 },
+        },
+        'SOFTDES': {
+            '2023-2026': { pass: 10, conditionalPass: 60, repeat: 30, passingRate: 70 },
+            '2022-2025': { pass: 15, conditionalPass: 50, repeat: 35, passingRate: 65 },
+        },
+        // Add stats for other courses and years
+    };
+    return dummyStats[courseId][year];
+}
+
+function updateModalContent(stats) {
+    document.getElementById('pass').innerText = stats.pass + '%';
+    document.getElementById('conditional-pass').innerText = stats.conditionalPass + '%';
+    document.getElementById('repeat').innerText = stats.repeat + '%';
+    document.getElementById('passing-rate').innerText = stats.passingRate + '%';
+}
+
+function updatePlot(courseId) {
+    var year = document.getElementById('academic-year').value;
+    var stats = getStats(courseId, year);
+    var xArray = ["PASS", "CONDITIONAL PASS", "REPEAT"];
+    var yArray = [stats.pass, stats.conditionalPass, stats.repeat];
+
+    var data = [{
+        x: xArray,
+        y: yArray,
+        type: "bar",
+        orientation: "v",
+        marker: {color: "rgba(0,0,255,0.6)"}
+    }];
+
+    var layout = {title: "Final Defense Report Statistics"};
+
+    Plotly.newPlot("myPlot", data, layout);
+}
+
+$(document).ready(function() {
+    function animateBars() {
+        $('.bar').each(function() {
+            var percentage = $(this).data('percentage');
+            $(this).animate({
+                height: percentage
+            }, 1000);
+        });
+    }
+
+    animateBars();
+});
+
+
+//   function showStats(courseId) {
+//     document.querySelectorAll('.stats-container').forEach(function(div) {
+//         div.classList.remove('active');
+//     });
+//     document.getElementById(courseId).classList.add('active');
+//     document.getElementById('stats-modal').style.display = 'block';
+// }
+
+// function closeModal() {
+//     document.getElementById('stats-modal').style.display = 'none';
+// }
+
+// function updateStats() {
+//     var year = document.getElementById('academic-year').value;
+//     var activeDiv = document.querySelector('.stats-container.active');
+//     var stats = getStats(activeDiv.id.replace('-stats', ''), year);
+//     updateModalContent(stats);
+// }
+
+// function getStats(courseId, year) {
+//     // This function should return stats based on courseId and year
+//     // Here, we are using dummy data
+//     const dummyStats = {
+//         'DATAMGT': {
+//             '2023-2026': { pass: 5, conditionalPass: 70, repeat: 20, passingRate: 75 },
+//             '2022-2025': { pass: 10, conditionalPass: 60, repeat: 30, passingRate: 70 },
+//         },
+//         'SOFTDES': {
+//             '2023-2026': { pass: 10, conditionalPass: 60, repeat: 30, passingRate: 70 },
+//             '2022-2025': { pass: 15, conditionalPass: 50, repeat: 35, passingRate: 65 },
+//         },
+//         // Add stats for other courses and years
+//     };
+//     return dummyStats[courseId][year];
+// }
+
+// function updateModalContent(stats) {
+//     document.getElementById('pass').innerText = stats.pass + '%';
+//     document.getElementById('conditional-pass').innerText = stats.conditionalPass + '%';
+//     document.getElementById('repeat').innerText = stats.repeat + '%';
+//     document.getElementById('passing-rate').innerText = stats.passingRate + '%';
+// }
+// $(document).ready(function(){
+//   // Function to animate bars based on percentage values
+//   function animateBars() {
+//       $('.bar').each(function() {
+//           var percentage = $(this).data('percentage');
+//           $(this).animate({
+//               height: percentage
+//           }, 1000);
+//       });
+//   }
+  
+//   // Call the function when the document is ready
+//   animateBars();
+// }); 
   
