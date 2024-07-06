@@ -422,6 +422,7 @@ left: 37%;
 iframe {
   width: 80%;
   height: 500px;
+  z-index: 10000;
 } 
 .modal {
     display: none;

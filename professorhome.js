@@ -198,27 +198,58 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+// classlist dropdown 
 
-function AddMembers() { 
-  var container = document.querySelector('.addmember');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
 
-function setrequirements() { 
-  var container = document.querySelector('.setrequirements');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
 
-function rubric() { 
-  var container = document.querySelector('.rubriccontainer');
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
-
-function viewMembers() { 
-  var container = document.querySelector('.viewgroup'); 
-  container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none'; 
- 
-}
+// melon btn HIHI 
+function hideAllContainers() {
+    var containers = document.querySelectorAll('.addmember, .setrequirements, .rubriccontainer, .viewgroup');
+    containers.forEach(function(container) {
+      container.style.display = 'none';
+    });
+  }
+  
+  function AddMembers() { 
+    var container = document.querySelector('.addmember');
+    if (container.style.display === 'block') {
+      container.style.display = 'none';
+    } else {
+      hideAllContainers();
+      container.style.display = 'block';
+    }
+  }
+  
+  function setrequirements() { 
+    var container = document.querySelector('.setrequirements');
+    if (container.style.display === 'block') {
+      container.style.display = 'none';
+    } else {
+      hideAllContainers();
+      container.style.display = 'block';
+    }
+  }
+  
+  function rubric() { 
+    var container = document.querySelector('.rubriccontainer');
+    if (container.style.display === 'block') {
+      container.style.display = 'none';
+    } else {
+      hideAllContainers();
+      container.style.display = 'block';
+    }
+  }
+  
+  function viewMembers() { 
+    var container = document.querySelector('.viewgroup');
+    if (container.style.display === 'block') {
+      container.style.display = 'none';
+    } else {
+      hideAllContainers();
+      container.style.display = 'block';
+    }
+  }
+  
 function filesbtn() {
     const dropdown = document.querySelector('[data-flsDropdown]');
     dropdown.classList.toggle('active');

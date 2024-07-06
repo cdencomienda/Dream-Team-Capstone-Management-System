@@ -1061,8 +1061,8 @@ border-radius: 15px;
 color: #2a2f3b ;
 position: absolute;
 top: 80px;
-left: 50%;
-width: 100%;
+left: 47%;
+width: 94%;
 transform: translateX(-50%);
 opacity: 0px;
 display: none;
@@ -1137,6 +1137,7 @@ margin-left: 30px;
 text-align:center;
 font-size: 18px;
 font-weight: 100;
+border-radius: 15px;
 border: #000000;
 background-color: transparent;
 z-index: 0px;
@@ -1149,11 +1150,11 @@ z-index: 0px;
 }  
 .dropdown-content {
   position: absolute;
-  left: 200px;
-  top: 140px;
+  left: 165px;
+  top: 20px;
   overflow: hidden;
   display: none;
-  z-index: 1000;
+  z-index: 1000; 
   width: 140px;
   text-align: center;
   font-size: 18px;
@@ -1208,10 +1209,14 @@ cursor: pointer;
   width: 1150px;
   height: 600px;
   padding: 25px;
-  margin-top: -1172px;
+  margin-top: -975px;
   margin-left: 500px ;
   
   z-index: 0; /* Set a lower z-index */
+}
+ 
+#GrpContainer {
+  margin-top: -1165px;
 }
 .dashboard_header{
   background-color: #E2C17B;
@@ -1719,6 +1724,7 @@ transition: backround-color .3s ease;
   display: flex;
   flex-direction: column;
   z-index: 0;
+  overflow: auto;
 }
  
  
@@ -1739,6 +1745,8 @@ transition: backround-color .3s ease;
   width: fit-content;
   max-width: 70%;
   cursor: pointer;
+  flex-direction: column;
+  overflow: auto;
 }
  
 .fileMessage.left {
@@ -1848,7 +1856,7 @@ transition: backround-color .3s ease;
 
 .rubriccontainer {
   position: relative;
-  top: -900px;
+  top: -980px;
   left: 500px;
   width: 1300px;
   max-width: none; /* Remove max-width */
