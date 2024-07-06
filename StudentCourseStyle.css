@@ -401,6 +401,26 @@ left: 37%;
     color: #666;
 }
 
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+iframe {
+  width: 80%;
+  height: 500px;
+} 
 .modal {
     display: none;
     position: fixed;
@@ -412,6 +432,7 @@ left: 37%;
     overflow: hidden;
     background-color: rgba(0,0,0,0.5);
     z-index: 500 ;
+    padding: ;
 }
 
 .modalContent {
@@ -419,11 +440,12 @@ left: 37%;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 90%;
+    width: 62%;
     height: 75%;
     position: relative;
     z-index: 500 ;
-}
+    padding: 2%
+  }
 
 .closeButton {
     color: #aaa;
