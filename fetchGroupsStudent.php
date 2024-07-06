@@ -27,9 +27,11 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
             // Query the database for student_group_id in groups table
             $sql_s_id = "SELECT s_id FROM students WHERE student_id = ? AND course_id = ?";
             $stmt_s_id = mysqli_prepare($conn, $sql_s_id);
-            mysqli_stmt_bind_param($stmt_s_id, "ii", $_SESSION['user_id'], $course_id);
+            $user_id = strval($_SESSION['user_id']); // Convert to string
+            mysqli_stmt_bind_param($stmt_s_id, "si", $user_id, $course_id);
             mysqli_stmt_execute($stmt_s_id);
             $result_s_id = mysqli_stmt_get_result($stmt_s_id);
+            
 
             if (mysqli_num_rows($result_s_id) > 0) {
                 $row_s_id = mysqli_fetch_assoc($result_s_id);
@@ -48,7 +50,7 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
                         // Switch to dreamteam database
                         mysqli_select_db($conn, 'dreamteam');
 
-                        $sql_group_name = "SELECT groupName FROM `group` WHERE requirementsID = ? AND courseID = ?";
+                        $sql_group_name = "SELECT groupName FROM `group` WHERE groupID = ? AND courseID = ?";
                         $stmt_group_name = mysqli_prepare($conn, $sql_group_name);
                         mysqli_stmt_bind_param($stmt_group_name, "ii", $student_group_id, $course_id);
                         mysqli_stmt_execute($stmt_group_name);
