@@ -1304,64 +1304,43 @@ function createElements(name, reqDescription) {
     descriptionContElement.classList.add('requirement-descriptionCont');
     descriptionContElement.innerHTML = `Requirement Description: <div class="requirement-descBox" id="req_description">${reqDescription}</div>`;
 
-    // Append elements to the requirementsContainer
-    requirementsContainer.appendChild(titleElement);
-    requirementsContainer.appendChild(descriptionContElement);
-}
-
-
-
-
-function createElement(name, reqDescription) {
-    // Define requirementsContainer first
-    const requirementsContainer = document.querySelector('.requirement-details');
-
-    // Create elements
-    const titleElement = document.createElement('div');
-    titleElement.classList.add('requirement-title');
-    titleElement.id = 'req_title';
-    const titleHeader = document.createElement('h1');
-    titleHeader.textContent = ` ${name}`;
-    titleElement.appendChild(titleHeader);
-
-    const descriptionContElement = document.createElement('div');
-    descriptionContElement.classList.add('requirement-descriptionCont');
-    descriptionContElement.innerHTML = `Requirement Description: <div class="requirement-descBox" id="req_description">${reqDescription}</div>`;
-
-    const versionElement = document.createElement('div');
-    versionElement.id = 'reqfile_version';
-    versionElement.classList.add('reqfile-version');
-
+    // Create file container element
     const fileContainer = document.createElement('div');
     fileContainer.classList.add('Attach-Files');
 
+    // Create form element inside fileContainer
     const formElement = document.createElement('form');
     formElement.id = 'file-upload';
     formElement.classList.add('requirement-file');
     formElement.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
         console.log('Form submitted!'); // Placeholder for form submission action
-        // Additional processing logic can go here
+        event.preventDefault();
+        submitFile();
     });
-
+    
+    // Create attach files element inside formElement
     const attachFilesElement = document.createElement('div');
     attachFilesElement.classList.add('atchFiles');
     attachFilesElement.innerHTML = `<h3>Attach Files</h3>
                                     <img src="course_assets/plus.png" alt="attached file" id="attach-btn">`;
 
+    // Create upload button container inside attachFilesElement
     const uploadBtnContainer = document.createElement('div');
     uploadBtnContainer.id = 'upload-btn';
     uploadBtnContainer.classList.add('upload-container');
 
+    // Create label for input file
     const inputFileLabel = document.createElement('label');
     inputFileLabel.htmlFor = 'input-file';
 
+    // Create input file element
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
     inputFile.accept = 'application/pdf';
     inputFile.id = 'input-file';
     inputFile.name = 'profile_picture';
 
+    // Event listener for file input change
     inputFile.addEventListener('change', function(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -1391,13 +1370,15 @@ function createElement(name, reqDescription) {
             fileContainer.appendChild(fileName);
             fileContainer.appendChild(removeBtn);
 
-            // Append file container to Attached-FileCont
             const attachedFileCont = document.querySelector('.Attached-FileCont');
             if (attachedFileCont) {
                 attachedFileCont.appendChild(fileContainer);
+                formElement.appendChild(createSubmitButton);
             } else {
-                console.error('Error: Container element .Attached-FileCont not found.');
+                console.error('Error: .Attached-FileCont not found');
             }
+
+
         };
 
         if (file) {
@@ -1405,36 +1386,48 @@ function createElement(name, reqDescription) {
         }
     });
 
+    // Append file container to Attached-FileCont
     const attachedFileCont = document.createElement('div');
     attachedFileCont.classList.add('Attached-FileCont');
 
+
+    const createSubmitButton = document.createElement('div');
+    createSubmitButton.classList.add('req-submitbtnCont');
+
+
+    // Create submit button
     const submitBtn = document.createElement('button');
     submitBtn.classList.add('reqbtn');
-    submitBtn.type = 'submit'; // Change button type to submit
+    submitBtn.type = 'submit' // Change button type to submit
     submitBtn.id = 'submit-btn';
     submitBtn.textContent = 'Submit';
 
-    // Append elements
-    uploadBtnContainer.appendChild(inputFileLabel);
-    uploadBtnContainer.appendChild(inputFile);
+    // Append submit button to formElement
+
+    createSubmitButton.appendChild(submitBtn);
+
+
+
+    attachedFileCont.appendChild(fileContainer);
 
     attachFilesElement.appendChild(uploadBtnContainer);
-
+    attachFilesElement.appendChild(inputFileLabel);
+    attachFilesElement.appendChild(inputFile);
     formElement.appendChild(attachFilesElement);
-    formElement.appendChild(submitBtn); // Append submit button to form
 
-    fileContainer.appendChild(formElement);
+
+
+    // Append elements to the requirementsContainer
     requirementsContainer.appendChild(titleElement);
     requirementsContainer.appendChild(descriptionContElement);
-    requirementsContainer.appendChild(versionElement);
-    requirementsContainer.appendChild(fileContainer); 
+    requirementsContainer.appendChild(fileContainer);
+
     requirementsContainer.appendChild(attachedFileCont);
 
-    // No need for a separate submit button container now
-
-    // Append form to requirementsContainer
-    requirementsContainer.appendChild(formElement);
+    fileContainer.appendChild(formElement);
 }
+
+
 
 
 function submitFile() {
