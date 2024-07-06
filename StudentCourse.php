@@ -717,6 +717,7 @@ function fetchCourses(container, year, selectedTerm) {
                                     console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
                                     const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
                                     setDirectory(directoryPath);
+                                    saveCourseID(course.course_id);
                                 };
                                 groupButton.textContent = group_name;
                                 courseElement.appendChild(groupButton);
