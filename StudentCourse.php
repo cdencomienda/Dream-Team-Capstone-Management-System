@@ -1289,26 +1289,32 @@ function createElements(name, reqDescription) {
     const requirementsContainer = document.querySelector('.requirement-details');
 
     // Create elements
-    const titleElement = document.createElement('h2');
+    const titleElement = document.createElement('div');
     titleElement.classList.add('requirement-title');
-    titleElement.textContent = name;
+    titleElement.id = 'req_title';
+    const titleHeader = document.createElement('h3');
+    titleHeader.textContent = `Documentation Requirement for ${name}`;
+    titleElement.appendChild(titleHeader);
 
     const descriptionContElement = document.createElement('div');
     descriptionContElement.classList.add('requirement-descriptionCont');
-    descriptionContElement.textContent = 'Requirement Description:';
+    descriptionContElement.innerHTML = `Requirement Description: <div class="requirement-descBox" id="req_description">${reqDescription}</div>`;
 
-    const descBoxElement = document.createElement('div');
-    descBoxElement.classList.add('requirement-descBox');
-    descBoxElement.textContent = reqDescription;
+    const versionElement = document.createElement('div');
+    versionElement.id = 'reqfile_version';
+    versionElement.classList.add('reqfile-version');
 
     const fileContainer = document.createElement('div');
     fileContainer.classList.add('Attach-Files');
 
+    const formElement = document.createElement('form');
+    formElement.id = 'file-upload';
+    formElement.classList.add('requirement-file');
+
     const attachFilesElement = document.createElement('div');
     attachFilesElement.classList.add('atchFiles');
-
-    const attachFilesHeading = document.createElement('h3');
-    attachFilesHeading.textContent = 'Attach Files';
+    attachFilesElement.innerHTML = `<h3>Attach Files</h3>
+                                    <img src="course_assets/plus.png" alt="attached file" id="attach-btn">`;
 
     const uploadBtnContainer = document.createElement('div');
     uploadBtnContainer.id = 'upload-btn';
@@ -1330,6 +1336,11 @@ function createElements(name, reqDescription) {
         reader.onload = function(event) {
             const fileContent = event.target.result;
 
+            // File container
+            const fileContainer = document.createElement('div');
+            fileContainer.classList.add('attached-file');
+            fileContainer.classList.add('flex');
+
             // File name
             const fileName = document.createElement('span');
             fileName.textContent = file.name;
@@ -1343,11 +1354,8 @@ function createElements(name, reqDescription) {
                 inputFile.value = ''; // Clear the file input after removal
             });
 
-            // Preview file name
-            const fileNamePreview = document.createElement('span');
-            fileNamePreview.textContent = file.name;
-
-            fileContainer.appendChild(fileNamePreview);
+            // Append elements to fileContainer
+            fileContainer.appendChild(fileName);
             fileContainer.appendChild(removeBtn);
 
             // Append file container to Attached-FileCont
@@ -1385,19 +1393,19 @@ function createElements(name, reqDescription) {
     uploadBtnContainer.appendChild(inputFileLabel);
     uploadBtnContainer.appendChild(inputFile);
 
-    attachFilesElement.appendChild(attachFilesHeading);
     attachFilesElement.appendChild(uploadBtnContainer);
 
-    fileContainer.appendChild(attachFilesElement);
-    attachedFileCont.appendChild(fileContainer); // Append fileContainer to Attached-FileCont
-
+    formElement.appendChild(attachFilesElement);
+    fileContainer.appendChild(formElement);
     requirementsContainer.appendChild(titleElement);
     requirementsContainer.appendChild(descriptionContElement);
-    requirementsContainer.appendChild(descBoxElement);
-    requirementsContainer.appendChild(attachedFileCont); // Append Attached-FileCont here
-    requirementsContainer.appendChild(submitBtnCont); // Append req-submitbtnCont
-    submitBtnCont.appendChild(submitBtn); // Append Submit button to submitBtnCont
+    requirementsContainer.appendChild(versionElement);
+    requirementsContainer.appendChild(fileContainer); 
+    requirementsContainer.appendChild(attachedFileCont);
+    submitBtnCont.appendChild(submitBtn);
+    requirementsContainer.appendChild(submitBtnCont); 
 }
+
 
 
 
