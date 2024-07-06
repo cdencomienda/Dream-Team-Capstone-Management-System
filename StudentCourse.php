@@ -508,7 +508,7 @@ function fetchAcademicYears() {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm); // Assuming this function handles storing the selected term
                             fetchCourses(button.parentNode, year, selectedTerm); // Pass the year and selectedTerm to fetchCourses
-                            groups(); // Assuming this function handles some other functionality
+                            // groups(); // Assuming this function handles some other functionality
                             
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
                             if (coursesDropdown) {
@@ -969,10 +969,10 @@ function requirementName() {
                 // Create attachedDocumentation div
                 const attachedDocumentation = document.createElement('div');
                 attachedDocumentation.classList.add('attachedDocumentation');
-                attachedDocumentation.setAttribute('onclick', `openModal('${encodeURIComponent(reqName.filePath)}')`);
+                attachedDocumentation.setAttribute('onclick', `openModal1('${encodeURIComponent(reqName.filePath)}')`);
                 attachedDocumentation.onclick = function() {
                         console.log('Open modal for reqName:', reqName.reqName, 'path', reqName.filePath);
-                        openModal(reqName.filePath);
+                        openModal1(reqName.filePath);
                     };
 
                 // Create file icon
@@ -1068,10 +1068,10 @@ function popUpLog(reqName) {
                     const logItem = document.createElement('div');
                     logItem.className = 'logItem';
                     logItem.id = `logItem${index + 1}`;
-                    logItem.setAttribute('onclick', `openModal('${filePath}')`);
+                    logItem.setAttribute('onclick', `openModal1('${filePath}')`);
                     logItem.onclick = function() {
                         console.log('Open modal for reqName:', reqName, 'path', filePath);
-                        openModal(filePath);
+                        openModal1(filePath);
                     };
 
                     // Create and append the file icon image
@@ -1121,10 +1121,10 @@ function fileFeed() {
 
             const fileMessage = document.createElement('div');
             fileMessage.classList.add('fileMessage', 'left');
-            fileMessage.setAttribute('onclick', `openModal('${item.filePath}')`);
+            fileMessage.setAttribute('onclick', `openModal1('${item.filePath}')`);
             fileMessage.onclick = function() {
                 console.log('Open modal for reqName:', item.reqName, 'path', item.filePath);
-                openModal(item.filePath);
+                openModal1(item.filePath);
             };
 
             // Create sender element
@@ -1167,29 +1167,29 @@ function fileFeed() {
 // //files
 
 
-function groups() {
-    fetch('fetchGroupsStudent.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data:', data); // Debug statement to check data structure
-            // Check if the data contains an error
-            if (data.error) {
-                console.error('Error in data:', data.error);
-            } else {
-                // Assuming data is an array of group names
-                data.forEach(group_name => {
-                    console.log(group_name);
-                    // Do whatever you need with the group_name here
-                });
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
+// function groups() {
+//     fetch('fetchGroupsStudent.php')
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             console.log('Data:', data); // Debug statement to check data structure
+//             // Check if the data contains an error
+//             if (data.error) {
+//                 console.error('Error in data:', data.error);
+//             } else {
+//                 // Assuming data is an array of group names
+//                 data.forEach(group_name => {
+//                     console.log(group_name);
+//                     // Do whatever you need with the group_name here
+//                 });
+//             }
+//         })
+//         .catch(error => console.error('Error fetching data:', error));
+// }
 
 
 
@@ -1289,6 +1289,30 @@ function reqDesc(name) {
 }
 
 function createElements(name, reqDescription) {
+    const requirementsContainer = document.querySelector('.requirement-details');
+
+    // Create title element
+    const titleElement = document.createElement('div');
+    titleElement.classList.add('requirement-title');
+    titleElement.id = 'req_title';
+    const titleHeader = document.createElement('h1');
+    titleHeader.textContent = ` ${name}`;
+    titleElement.appendChild(titleHeader);
+
+    // Create description container element
+    const descriptionContElement = document.createElement('div');
+    descriptionContElement.classList.add('requirement-descriptionCont');
+    descriptionContElement.innerHTML = `Requirement Description: <div class="requirement-descBox" id="req_description">${reqDescription}</div>`;
+
+    // Append elements to the requirementsContainer
+    requirementsContainer.appendChild(titleElement);
+    requirementsContainer.appendChild(descriptionContElement);
+}
+
+
+
+
+function createElement(name, reqDescription) {
     // Define requirementsContainer first
     const requirementsContainer = document.querySelector('.requirement-details');
 
