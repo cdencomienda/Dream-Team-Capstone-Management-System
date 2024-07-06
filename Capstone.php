@@ -163,7 +163,7 @@
         </div>        
     </div>       
 
-    <div class="GroupContainer" style = "display: none;" >
+    <div class="GroupContainer" id ="GrpContainer"style = "display: none;" >
                     <div class="dashboard_header">
                         <!-- Group Name Box -->
                         <div class="groupname_container" onclick="showDefaultBody()"> 
@@ -642,7 +642,7 @@
                   
                 
                 <!-- files -->
-                <div class="defaultBody " id="defaultBody">
+                <div class="defaultBody" id="defaultBody" style ="overflow: auto;">
                     <div class="recentFiles">
                         <!-- File posted by another person -->
                         <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
