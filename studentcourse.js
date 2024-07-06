@@ -329,3 +329,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const studentDefault = document.getElementById('StudentDefault');
     studentDefault.style.display = studentDefault.style.display === 'block' ? 'none' : 'block';
 }
+function openModal1(filePath) {
+    var modal = document.getElementById('fileModal');
+    var iframe = document.getElementById('fileFrame');
+    iframe.src = filePath;
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    var modal = document.getElementById('fileModal');
+    modal.style.display = "none";
+}
+
+// Close the modal when the user clicks outside of the modal
+window.onclick = function(event) {
+    var modal = document.getElementById('fileModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Optional: Close the modal when the user presses the "Esc" key
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        var modal = document.getElementById('fileModal');
+        modal.style.display = "none";
+    }
+});

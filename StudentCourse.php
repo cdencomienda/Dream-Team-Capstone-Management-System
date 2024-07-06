@@ -154,7 +154,8 @@
                     </div> 
                 </div>
             </div>    
-        </div>    
+        </div>   
+
         <div class="StudentDefault" id = "StudentDefault" style = "display: none;" >  
             <div class="dashboard_header">
                 <!-- Group Name Box -->
@@ -213,38 +214,40 @@
                 </h4>
             </div>
 
-
             <div class="defaultBody" id="defaultBody">
-                <div class="recentFiles">
-                    <!-- File posted by another person -->
-                    <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">
-                        <div class="fileInfo">
-                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                            <div class="fileDetails">
-                                <strong>DREAM TEAM - Recommendation</strong>
-                                <span>26 KB</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- File posted by you -->
-                    <div class="fileMessage right" onclick="openModal('featuredfiles/Final Documentation.pdf')">
-                        <div class="fileInfo">
-                            <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
-                             <div class="fileDetails">
-                                 <strong>Final Documentation</strong>
-                                 <span>12 KB</span>
-                            </div>
-                        </div>
+        <div class="recentFiles">
+            <!-- File posted by another person -->
+            <div class="fileMessage left" onclick="openModal1('featuredfiles/DREAM TEAM - Recommendation.pdf')">
+                <div class="fileInfo">
+                    <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                    <div class="fileDetails">
+                        <strong>DREAM TEAM - Recommendation</strong>
+                        <span>26 KB</span>
                     </div>
                 </div>
             </div>
-            <!-- Modal Structure -->
-            <div id="fileModal" class="modal">
-                <div class="modalContent">
-                      <iframe id="fileFrame" src="" frameborder="0"></iframe>
+            
+            <!-- File posted by you -->
+            <div class="fileMessage right" onclick="openModal1('featuredfiles/Final Documentation.pdf')">
+                <div class="fileInfo">
+                    <img src="menu_assets/file-icon.png" alt="file icon" class="fileIcon">
+                    <div class="fileDetails">
+                        <strong>Final Documentation</strong>
+                        <span>12 KB</span>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- Modal Structure -->
+    <div id="fileModal" class="modal">
+        <div class="modalContent">
+            <span class="closeBtn" onclick="closeModal()">&times;</span>
+            <iframe id="fileFrame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+    
             
             <div class="submissionFrame" style = "display: none;" id="submissionFrame">
                 <div class="submissionscontainer">
