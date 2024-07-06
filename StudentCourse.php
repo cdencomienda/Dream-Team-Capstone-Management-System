@@ -1312,10 +1312,12 @@ function createElements(name, reqDescription) {
     // Create form element inside fileContainer
     const formElement = document.createElement('form');
     formElement.id = 'file-upload';
+    formElement.action = 'test.php';
+    formElement.method = 'POST';
+    formElement.enctype = 'multipart/form-data';
     formElement.classList.add('requirement-file');
     formElement.addEventListener('submit', function(event) {
         console.log('Form submitted!'); // Placeholder for form submission action
-        event.preventDefault();
         submitFile();
     });
     
@@ -1339,7 +1341,7 @@ function createElements(name, reqDescription) {
     inputFile.type = 'file';
     inputFile.accept = 'application/pdf';
     inputFile.id = 'input-file';
-    inputFile.name = 'profile_picture';
+    inputFile.name = 'studentFile';
 
     // Event listener for file input change
     inputFile.addEventListener('change', function(event) {
@@ -1400,6 +1402,7 @@ function createElements(name, reqDescription) {
     const submitBtn = document.createElement('button');
     submitBtn.classList.add('reqbtn');
     submitBtn.type = 'submit' // Change button type to submit
+    submitBtn.name = 'submit'
     submitBtn.id = 'submit-btn';
     submitBtn.textContent = 'Submit';
 
@@ -1427,6 +1430,8 @@ function createElements(name, reqDescription) {
 
     fileContainer.appendChild(formElement);
 }
+
+
 
 
 
