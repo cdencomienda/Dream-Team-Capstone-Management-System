@@ -581,5 +581,43 @@ $(document).ready(function() {
   
 //   // Call the function when the document is ready
 //   animateBars();
-// }); 
-  
+// // }); 
+// function updateStats1() {
+//     var selectedYear = document.getElementById("academic-year").value;
+
+//     // Example: Update data for DATAMGT subject
+//     if (selectedYear === "2024-2025") {
+//         document.getElementById("datamgt-pass").textContent = "15%";
+//         document.getElementById("datamgt-conditional-pass").textContent = "55%";
+//         document.getElementById("datamgt-repeat").textContent = "20%";
+//         document.getElementById("datamgt-passing-rate").textContent = "75%";
+//     } else if (selectedYear === "2023-2024") {
+//         document.getElementById("datamgt-pass").textContent = "20%";
+//         document.getElementById("datamgt-conditional-pass").textContent = "50%";
+//         document.getElementById("datamgt-repeat").textContent = "30%";
+//         document.getElementById("datamgt-passing-rate").textContent = "80%";
+//     } else if (selectedYear === "2022-2023") {
+//         document.getElementById("datamgt-pass").textContent = "10%";
+//         document.getElementById("datamgt-conditional-pass").textContent = "60%";
+//         document.getElementById("datamgt-repeat").textContent = "30%";
+//         document.getElementById("datamgt-passing-rate").textContent = "70%";
+//     }
+
+//     // Example: Update data for SOFTDES subject
+//     if (selectedYear === "2024-2025") {
+//         document.getElementById("softdes-pass").textContent = "25%";
+//         document.getElementById("softdes-conditional-pass").textContent = "50%";
+//         document.getElementById("softdes-repeat").textContent = "25%";
+//         document.getElementById("softdes-passing-rate").textContent = "75%";
+//     } else if (selectedYear === "2023-2024") {
+//         document.getElementById("softdes-pass").textContent = "30%";
+//         document.getElementById("softdes-conditional-pass").textContent = "45%";
+//         document.getElementById("softdes-repeat").textContent = "25%";
+//         document.getElementById("softdes-passing-rate").textContent = "80%";
+//     } else if (selectedYear === "2022-2023") {
+//         document.getElementById("softdes-pass").textContent = "20%";
+//         document.getElementById("softdes-conditional-pass").textContent = "55%";
+//         document.getElementById("softdes-repeat").textContent = "25%";
+//         document.getElementById("softdes-passing-rate").textContent = "70%";
+//     }
+// }

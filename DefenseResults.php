@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin User Edit Menu</title>
+    <title>Defemse Result</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="AdminHomeStyle.css">
     
     <div class="header">
@@ -116,143 +115,245 @@
         <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
         </div> 
     </div>
-    
-
-    
-    <div class="classlist">
-    <div class="Tablecontainer">
-        <div class="tableHeader">
-            <h1>Defense Results</h1>
+     <!-- bar graph code  -->
+     <div class="classlist">
+        <div class="Tablecontainer">
+            <div class="tableHeader">
+                <h1>Defense Results</h1>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="courseCode-column">Course Code</th>
+                        <th class="courseName-column">Course Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="criteria">
+                        <td class="courseCode">
+                            <strong>DATAMGT</strong><br>
+                        </td>
+                        <td class="courseName">
+                            <a href="javascript:void(0);" onclick="showStats('DATAMGT-stats')">DATA MANAGEMENT</a><br>
+                        </td>
+                    </tr>
+                    <tr class="criteria">
+                        <td class="courseCode">
+                            <strong>SOFTDES</strong><br>
+                        </td>
+                        <td class="courseName">
+                            <a href="javascript:void(0);" onclick="showStats('SOFTDES-stats')">Software Design</a><br>
+                        </td>
+                    </tr>
+                    <tr class="criteria">
+                        <td class="courseCode">
+                            <strong>CPEMETS</strong><br>
+                        </td>
+                        <td class="courseName">
+                            <a href="javascript:void(0);" onclick="showStats('CPEMETS-stats')">CPE Methods of Research</a><br>
+                        </td>
+                    </tr>
+                    <tr class="criteria">
+                        <td class="courseCode">
+                            <strong>CPEDES1</strong><br>
+                        </td>
+                        <td class="courseName">
+                            <a href="javascript:void(0);" onclick="showStats('CPEDES1-stats')">CPE Design 1</a><br>
+                        </td>
+                    </tr>
+                    <tr class="criteria">
+                        <td class="courseCode">
+                            <strong>CPEDES2</strong><br>
+                        </td>
+                        <td class="courseName">
+                            <a href="javascript:void(0);" onclick="showStats('CPEDES2-stats')">CPE Design 2</a><br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table>
-            <thead>
+
+        <div id="stats-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <label for="academic-year">Select Academic Year:</label>
+        <select id="academic-year" onchange="updateStatsAndChart()">
+            <option value="2024-2025">2024-2025</option>
+            <option value="2023-2024">2023-2024</option>
+            <option value="2022-2023">2022-2023</option>
+        </select>
+
+        <!-- Statistics containers for DATAMGT and SOFTDES -->
+        <div id="DATAMGT-stats" class="stats-container">
+            <h2>Final Defense Report DATA MANAGEMENT</h2>
+            <table>
                 <tr>
-                    <th class="courseCode-column">Course Code</th>
-                    <th class="courseName-column">Course Name</th>
+                    <th>FINAL VERDICT</th>
+                    <th>Percentage</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr class="criteria">
-                    <td class="courseCode">
-                        <strong>DATAMGT</strong><br>
-                    </td>
-                    <td class="courseName">
-                        <a href="javascript:void(0);" onclick="showStats('DATAMGT-stats')">DATA MANAGEMENT</a><br>
-                    </td>
+                <tr>
+                    <td>PASS</td>
+                    <td id="datamgt-pass">15%</td>
                 </tr>
-                <tr class="criteria">
-                    <td class="courseCode">
-                        <strong>SOFTDES</strong><br>
-                    </td>
-                    <td class="courseName">
-                        <a href="javascript:void(0);" onclick="showStats('SOFTDES-stats')">Software Design</a><br>
-                    </td>
+                <tr>
+                    <td>CONDITIONAL PASS</td>
+                    <td id="datamgt-conditional-pass">55%</td>
                 </tr>
-                <tr class="criteria">
-                    <td class="courseCode">
-                        <strong>CPEMETS</strong><br>
-                    </td>
-                    <td class="courseName">
-                        <a href="javascript:void(0);" onclick="showStats('CPEMETS-stats')">CPE Methods of Research</a><br>
-                    </td>
+                <tr>
+                    <td>REPEAT</td>
+                    <td id="datamgt-repeat">20%</td>
                 </tr>
-                <tr class="criteria">
-                    <td class="courseCode">
-                        <strong>CPEDES1</strong><br>
-                    </td>
-                    <td class="courseName">
-                        <a href="javascript:void(0);" onclick="showStats('CPEDES1-stats')">CPE Design 1</a><br>
-                    </td>
+                <tr>
+                    <td>Passing Rate</td>
+                    <td id="datamgt-passing-rate">70%</td>
                 </tr>
-                <tr class="criteria">
-                    <td class="courseCode">
-                        <strong>CPEDES2</strong><br>
-                    </td>
-                    <td class="courseName">
-                        <a href="javascript:void(0);" onclick="showStats('CPEDES2-stats')">CPE Design 2</a><br>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="stats-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <label for="academic-year">Select Academic Year:</label>
-            <select id="academic-year" onchange="updateStats()">
-                <option value="2023-2026">2024-2025</option>
-                <option value="2022-2025">2023-2024</option>
-                <option value="2021-2024">2022-2023</option>
-            </select>
-            <div id="DATAMGT-stats" class="stats-container">
-                <h2>Final Defense Report DATA MANAGEMENT</h2>
-                <table>
-                    <tr>
-                        <th>FINAL VERDICT</th>
-                        <th>Percentage</th>
-                    </tr>
-                    <tr>
-                        <td>PASS</td>
-                        <td id="pass">5%</td>
-                    </tr>
-                    <tr>
-                        <td>CONDITIONAL PASS</td>
-                        <td id="conditional-pass">70%</td>
-                    </tr>
-                    <tr>
-                        <td>REPEAT</td>
-                        <td id="repeat">20%</td>
-                    </tr>
-                </table>
-                <p>Course Passing Rate: <span id="passing-rate">75%</span></p>
-                <div id="myPlot" style="width:100%;height:100%;"></div>
-            </div>
-            <div id="SOFTDES-stats" class="stats-container">
-                <h2>Final Defense Report SOFTWARE DESIGN</h2>
-                <!-- Add table and Plotly chart for SOFTDES similar to DATAMGT -->
-            </div>
-            <!-- Add other stats containers for CPEMETS, CPEDES1, and CPEDES2 -->
+            </table>
         </div>
+        
+        <div id="SOFTDES-stats" class="stats-container">
+            <h2>Final Defense Report SOFTWARE DESIGN</h2>
+            <table>
+                <tr>
+                    <th>FINAL VERDICT</th>
+                    <th>Percentage</th>
+                </tr>
+                <tr>
+                    <td>PASS</td>
+                    <td id="softdes-pass">25%</td>
+                </tr>
+                <tr>
+                    <td>CONDITIONAL PASS</td>
+                    <td id="softdes-conditional-pass">50%</td>
+                </tr>
+                <tr>
+                    <td>REPEAT</td>
+                    <td id="softdes-repeat">25%</td>
+                </tr>
+                <tr>
+                    <td><h2>Passing Rate</h2></td>
+                    <td id="softdes-passing-rate"><h2>75%<h2></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Canvas for Bar Chart -->
+        <canvas id="myBarChart" style="width: 600px; height: 170px; margin-top: 20px;"></canvas>
+
     </div>
 </div>
+
+
 <script>
-    // Show Stats Modal
-    function showStats(statId) {
-        var statsContainers = document.querySelectorAll('.stats-container');
-        statsContainers.forEach(function(container) {
-            container.style.display = 'none';
-        });
-        document.getElementById(statId).style.display = 'block';
-        document.getElementById('stats-modal').style.display = 'block';
+    // Initialize the chart
+    const ctx = document.getElementById('myBarChart').getContext('2d');
+    let myBarChart; // Variable to hold the chart instance
 
-        if (statId === 'DATAMGT-stats') {
-            var data = [{
-                x: ['PASS', 'CONDITIONAL PASS', 'REPEAT'],
-                y: [5, 70, 20],
-                type: 'bar'
-            }];
-            var layout = {
-                title: 'Defense Results',
-                width: 600,
-                height: 400
-            };
-            Plotly.newPlot('myPlot', data, layout);
+    // Initial data for the chart
+    const initialData = {
+        labels: ['PASS', 'CONDITIONAL PASS', 'REPEAT'],
+        datasets: [{
+            label: 'Values',
+            data: [15, 55, 20], // Initial data for 2024-2025
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 205, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // Chart configuration
+    const config = {
+        type: 'bar',
+        data: initialData,
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
         }
-    }
+    };
 
-    // Close Stats Modal
-    function closeModal() {
-        document.getElementById('stats-modal').style.display = 'none';
-    }
+    // Create the chart instance
+    myBarChart = new Chart(ctx, config);
 
-    // Update Stats based on Academic Year
-    function updateStats() {
-        var year = document.getElementById('academic-year').value;
-        console.log("Selected year:", year);
-        // Update the stats data based on the selected year
+    function updateStatsAndChart() {
+    const selectedYear = document.getElementById('academic-year').value;
+
+    // Update statistics for DATAMGT
+    if (selectedYear === "2024-2025") {
+        document.getElementById("datamgt-pass").textContent = "15%";
+        document.getElementById("datamgt-conditional-pass").textContent = "55%";
+        document.getElementById("datamgt-repeat").textContent = "20%";
+        const passPercentage = 15;
+        const conditionalPassPercentage = 55;
+        const repeatPercentage = 20;
+        const totalPassingPercentage = passPercentage + conditionalPassPercentage;
+        document.getElementById("datamgt-passing-rate").textContent = totalPassingPercentage + "%";
+
+        // Update chart data
+        myBarChart.data.datasets[0].data = [passPercentage, conditionalPassPercentage, repeatPercentage];
+        myBarChart.update();
+    } else if (selectedYear === "2023-2024") {
+        // Update statistics for 2023-2024
+        // Ensure these values match what is displayed in your HTML table
+        document.getElementById("datamgt-pass").textContent = "20%";
+        document.getElementById("datamgt-conditional-pass").textContent = "50%";
+        document.getElementById("datamgt-repeat").textContent = "30%";
+        const passPercentage = 20;
+        const conditionalPassPercentage = 50;
+        const repeatPercentage = 30;
+        const totalPassingPercentage = passPercentage + conditionalPassPercentage;
+        document.getElementById("datamgt-passing-rate").textContent = totalPassingPercentage + "%";
+
+        // Update chart data
+        myBarChart.data.datasets[0].data = [passPercentage, conditionalPassPercentage, repeatPercentage];
+        myBarChart.update();
     }
+    // Repeat the same process for SOFTDES
+
+    if (selectedYear === "2024-2025") {
+        document.getElementById("softdes-pass").textContent = "25%";
+        document.getElementById("softdes-conditional-pass").textContent = "50%";
+        document.getElementById("softdes-repeat").textContent = "25%";
+        const passPercentage = 25;
+        const conditionalPassPercentage = 50;
+        const repeatPercentage = 25;
+        const totalPassingPercentage = passPercentage + conditionalPassPercentage;
+        document.getElementById("softdes-passing-rate").textContent = totalPassingPercentage + "%";
+
+        // Update chart data
+        myBarChart.data.datasets[0].data = [passPercentage, conditionalPassPercentage, repeatPercentage];
+        myBarChart.update();
+    } else if (selectedYear === "2023-2024") {
+        // Update statistics for 2023-2024
+        // Ensure these values match what is displayed in your HTML table
+        document.getElementById("softdes-pass").textContent = "30%";
+        document.getElementById("softdes-conditional-pass").textContent = "45%";
+        document.getElementById("softdes-repeat").textContent = "25%";
+        const passPercentage = 30;
+        const conditionalPassPercentage = 45;
+        const repeatPercentage = 25;
+        const totalPassingPercentage = passPercentage + conditionalPassPercentage;
+        document.getElementById("softdes-passing-rate").textContent = totalPassingPercentage + "%";
+
+        // Update chart data
+        myBarChart.data.datasets[0].data = [passPercentage, conditionalPassPercentage, repeatPercentage];
+        myBarChart.update();
+    }
+}
+
 </script>
+
+
 <script src="adminHome.js"></script>
 </body>
 </html>
