@@ -499,6 +499,7 @@ font-weight: 100;
 border: #000000;
 background-color: transparent;
 z-index: 0px;
+border-radius: 15px;
 }
 .classSet:hover {
 background-color: #0056b3;
@@ -1573,10 +1574,10 @@ span.dot{
   width: 1000px;
   height: 600px;
   padding: 25px;
-  margin-top: 0;
+  margin-top: -105px;
   top: -900px;
   display: block;
-  z-index: 0; /* Set a lower z-index */
+  z-index: 0;  
 }
 
 
