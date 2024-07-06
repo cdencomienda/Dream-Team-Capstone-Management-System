@@ -242,8 +242,7 @@
             <!-- Modal Structure -->
             <div id="fileModal" class="modal">
                 <div class="modalContent">
-                    <span class="closeButton" onclick="closeModal()">&times;</span>
-                    <iframe id="fileFrame" src="" frameborder="0"></iframe>
+                      <iframe id="fileFrame" src="" frameborder="0"></iframe>
                 </div>
             </div>
             
@@ -262,7 +261,8 @@
                 <div class="requirement-details">
     <div class="requirement-title" id="req_title"> <h3> Documentation Requirement for Chapter 1 </h3> </div> <br>
     <div class="requirement-descriptionCont"> Requirement Description: 
-        <div class="requirement-descBox" id="req_description"> 
+        <div class="requirement-descBox" id="req_description">              <span class="closeButton" onclick="closeModal()">&times;</span>
+     
             Attach your file of Chapter 1 for Pre-Defense
         </div>        
     </div>
@@ -1421,11 +1421,11 @@ function createElements(name, reqDescription) {
 
 
 
-function clear(){
-    const cont = document.querySelector('.requirement-details');
-    cont.innerHTML = '';
+// function clear(){
+//     const cont = document.querySelector('.requirement-details');
+//     cont.innerHTML = '';
 
-}
+// }
 
 
 

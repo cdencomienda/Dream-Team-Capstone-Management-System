@@ -801,9 +801,8 @@ left: 37%;
 .requirement-descriptionCont{
   text-align: left;
   margin: 15px;
-
-  width: 475px;
-  height: 10px;
+  width: 495px;
+  height: 195px;
 }
 .requirement-descBox{
   width: 475px;
@@ -824,10 +823,9 @@ left: 37%;
 .Attach-Files{
   text-align: left;
   margin: 15px;
-  margin-top: -10px; 
+  margin-top: 20px; 
   height: 95px;  
-  margin-left: 15px;
-  margin-top: -20px  ;
+  margin-left: 15px; 
 }
 .req-submitbtnCont{
   margin-left: 435px;
@@ -847,7 +845,7 @@ left: 37%;
   margin: 15px;
   margin-top: -75px;
   width: 295px;
-  height: 100px;
+  height: 140px;
   overflow: auto;
 }
 label{
