@@ -83,3 +83,4 @@ if (isset($_SESSION['course_id'])) {
     echo json_encode(['error' => 'Course ID is not set in session.']);
 }
 ?>
+<!--  -->

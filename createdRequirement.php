@@ -51,3 +51,4 @@ if (isset($_SESSION['courseGroupID']) && is_array($_SESSION['courseGroupID'])) {
     echo json_encode(['error' => 'Course Group IDs are not saved in session or the session data is not in the expected format.']);
 }
 ?>
+<!--  -->
