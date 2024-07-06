@@ -1292,8 +1292,8 @@ function createElements(name, reqDescription) {
     const titleElement = document.createElement('div');
     titleElement.classList.add('requirement-title');
     titleElement.id = 'req_title';
-    const titleHeader = document.createElement('h3');
-    titleHeader.textContent = `Documentation Requirement for ${name}`;
+    const titleHeader = document.createElement('h1');
+    titleHeader.textContent = ` ${name}`;
     titleElement.appendChild(titleHeader);
 
     const descriptionContElement = document.createElement('div');
@@ -1310,6 +1310,11 @@ function createElements(name, reqDescription) {
     const formElement = document.createElement('form');
     formElement.id = 'file-upload';
     formElement.classList.add('requirement-file');
+    formElement.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        console.log('Form submitted!'); // Placeholder for form submission action
+        // Additional processing logic can go here
+    });
 
     const attachFilesElement = document.createElement('div');
     attachFilesElement.classList.add('atchFiles');
@@ -1375,19 +1380,11 @@ function createElements(name, reqDescription) {
     const attachedFileCont = document.createElement('div');
     attachedFileCont.classList.add('Attached-FileCont');
 
-    const submitBtnCont = document.createElement('div');
-    submitBtnCont.classList.add('req-submitbtnCont');
-
     const submitBtn = document.createElement('button');
     submitBtn.classList.add('reqbtn');
-    submitBtn.type = 'button';
+    submitBtn.type = 'submit'; // Change button type to submit
     submitBtn.id = 'submit-btn';
     submitBtn.textContent = 'Submit';
-
-    submitBtn.addEventListener('click', function() {
-        console.log('Submit button clicked!');
-        // You can add further logic here for form submission or other actions
-    });
 
     // Append elements
     uploadBtnContainer.appendChild(inputFileLabel);
@@ -1396,14 +1393,48 @@ function createElements(name, reqDescription) {
     attachFilesElement.appendChild(uploadBtnContainer);
 
     formElement.appendChild(attachFilesElement);
+    formElement.appendChild(submitBtn); // Append submit button to form
+
     fileContainer.appendChild(formElement);
     requirementsContainer.appendChild(titleElement);
     requirementsContainer.appendChild(descriptionContElement);
     requirementsContainer.appendChild(versionElement);
     requirementsContainer.appendChild(fileContainer); 
     requirementsContainer.appendChild(attachedFileCont);
-    submitBtnCont.appendChild(submitBtn);
-    requirementsContainer.appendChild(submitBtnCont); 
+
+    // No need for a separate submit button container now
+
+    // Append form to requirementsContainer
+    requirementsContainer.appendChild(formElement);
+}
+
+
+function submitFile() {
+    console.log('Submitting files:');
+
+    // Select the container where files are attached
+    const attachedFileCont = document.querySelector('.Attached-FileCont');
+
+    // Initialize an array to store file names
+    const fileNames = [];
+
+    // Iterate over each attached file container
+    const attachedFiles = attachedFileCont.querySelectorAll('.attached-file');
+    attachedFiles.forEach(fileContainer => {
+        // Get the file name
+        const fileName = fileContainer.querySelector('span').textContent;
+        fileNames.push(fileName); // Store each file name in the array
+        console.log(fileName);
+        // You can process or send each file here as needed
+    });
+
+    // Example of using the file names array
+    fileNames.forEach(name => {
+        // Do something with each file name
+        console.log(`Processing file: ${name}`);
+    });
+
+    // Perform additional submission logic here
 }
 
 
@@ -1420,12 +1451,11 @@ function createElements(name, reqDescription) {
 
 
 
+function clear(){
+    const cont = document.querySelector('.requirement-details');
+    cont.innerHTML = '';
 
-// function clear(){
-//     const cont = document.querySelector('.requirement-details');
-//     cont.innerHTML = '';
-
-// }
+}
 
 
 

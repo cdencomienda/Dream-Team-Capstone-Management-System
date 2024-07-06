@@ -63,22 +63,15 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
                                     $group_names[] = $group_name;
                                 }
                             }
-                        } else {
-                            // Handle case where no group name is found
-                            $group_names[] = 'No group found';
                         }
                     }
-                } else {
-                    // Handle case where no student group id is found
-                    $group_names[] = 'No student group found';
                 }
-            } else {
-                // Handle case where no s_id is found
-                $group_names[] = 'No s_id found';
             }
 
-            // Add the group_names array to the results array under the respective course_id key
-            $results[$course_id] = $group_names;
+            // Only add to results if there are group names found
+            if (!empty($group_names)) {
+                $results[$course_id] = $group_names;
+            }
         } else {
             // Handle case where course_id is not set in course_info
             $results[$course_id] = ['error' => "Course ID not set in course_info"];
