@@ -24,7 +24,7 @@ if (isset($_SESSION['courseGroupID']) && is_array($_SESSION['courseGroupID'])) {
         $courseGroupID = mysqli_real_escape_string($conn_dream, $courseGroupID);
 
         // Query to fetch reqName based on courseGroupID
-        $query = "SELECT DISTINCT reqName FROM requirements WHERE requirementsID = $courseGroupID";
+        $query = "SELECT DISTINCT reqName FROM requirements WHERE requirementsID = '$courseGroupID'";
         $result = mysqli_query($conn_dream, $query);
 
         // Check if the query was successful
@@ -39,7 +39,7 @@ if (isset($_SESSION['courseGroupID']) && is_array($_SESSION['courseGroupID'])) {
         }
     }
 
-    // Close the connection to dream_team
+    // Close the connection to dreamteam
     mysqli_close($conn_dream);
 
     // Remove duplicates from reqNames array
@@ -51,4 +51,3 @@ if (isset($_SESSION['courseGroupID']) && is_array($_SESSION['courseGroupID'])) {
     echo json_encode(['error' => 'Course Group IDs are not saved in session or the session data is not in the expected format.']);
 }
 ?>
-<!--  -->

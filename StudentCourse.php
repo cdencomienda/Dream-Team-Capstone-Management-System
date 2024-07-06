@@ -767,11 +767,11 @@ function setDirectory(path) {
         container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
         console.log(course_id, group_name);
         fetchGroupData(course_id, group_name);
+        reqName();
         fetchStudentGroups();
         fetchPanelGroups();
         requirementName();
         fetchGroupID();
-        reqName();
         clear();
         fileFeed();
 
@@ -1256,6 +1256,7 @@ function reqName() {
             console.error('Error fetching data:', error);
         });
 }
+
 
 function reqDesc(name) {
     console.log('this the the reqName for Desc: ', name);
