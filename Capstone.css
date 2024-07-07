@@ -1214,7 +1214,7 @@ cursor: pointer;
   width: 1150px;
   height: 600px;
   padding: 25px;
-  margin-top: -975px;
+  
   margin-left: 500px ;
   
   z-index: 0; /* Set a lower z-index */
@@ -1223,6 +1223,10 @@ cursor: pointer;
 #GrpContainer {
   margin-top: -1165px;
 }
+#advisoryGroupContainer{
+  margin-top: -842px;
+}
+
 .dashboard_header{
   background-color: #E2C17B;
   width: 1100px;
