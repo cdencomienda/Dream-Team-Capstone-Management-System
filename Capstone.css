@@ -1663,12 +1663,12 @@ transition: backround-color .3s ease;
   height: 125px;
   background-color:white;
 }
-.ReqDocumentation{
+.ReqDocumentation {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
-  width: 100%;
+  width: 461px;
   height: 55px;
   background-color: #F8EFE3;
   border-radius: 25px;
@@ -1687,23 +1687,32 @@ transition: backround-color .3s ease;
     width: 40px;
   }
   .attachedDocumentation{
-    width: 150px;
-    margin-left: 10px;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   .attachedAdvRecom{
     width: 150px;
     margin-left: 10px;
   }
- 
+  .Recent-fileName{
+    margin-left: 26px;
+    width: 289px;
+  }
   .DocuReqLogs{
     display: flex;
-    justify-content: center; /* Center horizontally */
+    justify-content: center;
     align-items: center;
-    font-size: 20px; /* Increase the font size */
-    width: 20px; /* Set a custom width */
-    height: 20px; /* Set a custom height */
-    padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    padding: 6px;
+    margin-left: 39px;
     background-color: transparent;
     border: none;
   }
