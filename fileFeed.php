@@ -15,12 +15,12 @@ if ($conn->connect_error) {
     die(json_encode(array("error" => "Connection failed: " . $conn->connect_error)));
 }
 
-// Query to fetch uploaderID, fileName, and version from repository table based on student_group_id
+// Query to fetch uploaderID, fileName, and version from repository table based on student_group_id, ordered by version descending
 $sql = "SELECT r.uploaderID, r.fileName, r.version, u.firstName, u.lastName 
         FROM repository r
         INNER JOIN users u ON r.uploaderID = u.userID
         WHERE r.requirementsID = $student_group_id
-        ORDER BY r.version ASC";
+        ORDER BY r.uploadCount ASC"; // Ordering by version descending
 
 $result = $conn->query($sql);
 
@@ -53,4 +53,3 @@ if ($result->num_rows > 0) {
     $conn->close();
 }
 ?>
-

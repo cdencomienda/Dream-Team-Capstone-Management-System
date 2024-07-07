@@ -12,6 +12,8 @@ if ($conn->connect_error) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve POST data
     $name = $_POST['name'];
+    $_SESSION['reqName'] = $name;
+
 
     // Check if student_group_id is in session
     if (isset($_SESSION['student_group_id'])) {
@@ -24,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($reqDescription);
 
         if ($stmt->fetch()) {
+            $_SESSION['reqDescription'] = $reqDescription;
+
             // Prepare response as JSON
             $response = array(
                 'reqDescription' => $reqDescription

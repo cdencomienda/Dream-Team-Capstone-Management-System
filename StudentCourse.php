@@ -1312,7 +1312,7 @@ function createElements(name, reqDescription) {
     // Create form element inside fileContainer
     const formElement = document.createElement('form');
     formElement.id = 'file-upload';
-    formElement.action = 'test.php';
+    formElement.action = 'uploadFileStudents.php';
     formElement.method = 'POST';
     formElement.enctype = 'multipart/form-data';
     formElement.classList.add('requirement-file');

@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (file_exists($fullPath)) {
         // Save the full path in the session
         $_SESSION['fullPath'] = $fullPath;
+        $_SESSION['reqName'] = null;
         
         echo json_encode(['exists' => true, 'path' => $fullPath]);
     } else {
