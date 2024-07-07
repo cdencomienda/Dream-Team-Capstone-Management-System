@@ -693,7 +693,7 @@
                   
                 
                 <!-- files -->
-                <div class="defaultBody" id="defaultBody" style ="overflow:">
+                <div class="defaultBody" id="defaultBody" style ="overflow: auto">
                     <div class="recentFiles">
                         <!-- File posted by another person -->
                         <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">

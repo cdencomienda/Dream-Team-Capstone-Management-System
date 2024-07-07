@@ -536,7 +536,7 @@
                     </div>
                 </div>
                 <!-- Modal Structure -->
-                <div id="fileModal" class="modal" style = "z-index = 1000">
+                <div id="fileModal" class="modal" style = "z-index: 1000">
                     <div class="modalContent">
                         <span class="closeButton" onclick="closeModal()">&times;</span>
                         <iframe id="fileFrame" src="" frameborder="0"></iframe>
