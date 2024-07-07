@@ -43,7 +43,7 @@ overflow-x: hidden;
   position: absolute;
     background-color: #FFEBCF;
     width: 500px;
-    height: 500px;
+    height: 650px;
     padding: 15px;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -447,4 +447,18 @@ span.dot{
   background-repeat: no-repeat;
   font-size:small;
   /* color: white; */
+}
+.advisory{
+  top: -95px;
+  left: 20px;
+  width:50px;
+  height:30px;
+  padding: 60px 0px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/users-icon.png);
+  background-repeat: no-repeat;
 }

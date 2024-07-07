@@ -112,6 +112,7 @@
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
         <button type="button" class="Users"  onclick="Users()">Users</button>
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div> 
     <div class="wrapper">
         <div class="adminClass">  

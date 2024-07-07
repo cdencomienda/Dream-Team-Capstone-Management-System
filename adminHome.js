@@ -66,7 +66,10 @@ document.addEventListener('profile', function () {
     }
     function DefenseR(){
         window.location.assign("DefenseResults.php")
-      }
+    }
+    function advisoryProf(){
+        window.location.assign("adminAdvisory.php")
+    }
   
 // action of melonbtns
 function viewMembers() { 
