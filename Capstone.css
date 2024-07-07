@@ -646,7 +646,7 @@ th {
 }
 td select {
   padding: 15px;
-  width: 70px;
+  width: 135px;
   border-radius: 5px;
   font-size:20px;
 }
@@ -1586,6 +1586,7 @@ transition: backround-color .3s ease;
 .flsDropdown.active{
   position: relative;
 }
+ /* filesContainer start */
 .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
   opacity: 1;
   transform: translateY(0);
@@ -1715,47 +1716,88 @@ transition: backround-color .3s ease;
     margin-left: 39px;
     background-color: transparent;
     border: none;
-  }
-  .AdvLogs {
+  }.AdvCont {
+    margin: 10px;
+    width: 455px;
+    height: 125px;
+    background-color: white;
+}
+
+.advRecomendation {
+    margin-top: 15px;
+    height: 55px;
+    width: 100%;
+    background-color: #F8EFE3;
+    border-radius: 25px;
     display: flex;
-    justify-content: center; /* Center horizontally */
+    flex-direction: row;
     align-items: center;
-    font-size: 20px; /* Increase the font size */
-    width: 20px; /* Set a custom width */
-    height: 20px; /* Set a custom height */
-    padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px;
-    background-color: transparent;
-    border: none;
 }
-.AdvCont{
-  margin: 10px;
-  width: 455px;
-  height: 125px;
-  background-color: white;
+
+.fileLogsPopup {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    max-height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow-y: auto;
+   
 }
-.advRecomendation{
-  margin-top: 15px;
-  height: 55px;
-  width: 100%;
-  background-color: #F8EFE3;
-  border-radius: 25px;
+
+#DocuReqrmntLogs {
+  bottom: 50%;
+  left: 37%;
+}
+
+#AdvReqrmntLogs {
+    bottom: -30px;
+}
+
+.fileLogsPopup .logItem {
   display: flex;
- 
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  
 }
+
+.fileLogsPopup .logItem:last-child {
+  border-bottom: none;
+}
+
+.fileLogsPopup .logItem img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.fileLogsPopup .logItem .fileName {
+  flex: 1;
+}
+
+.fileLogsPopup .logItem:hover {
+  background-color: #f0f0f0;
+}
+
 .defaultBody{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  width: 1100px;
+  width: 1000px;
   height: 600px;
   margin-left: -25px;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
-  z-index: 0;
   overflow: auto;
 }
  
@@ -1766,19 +1808,27 @@ transition: backround-color .3s ease;
   flex-direction: column;
   gap: 10px;
 }
- 
+ .sender{
+  width: 280px; /* Adjust spacing between sender and file info */
+
+}
+#sentbyme{
+  margin-right: -195px; /* Adjust spacing between sender and file info */
+
+}
 .fileMessage {
   background-color: #f0f0f0;
   border-radius: 10px;
   padding: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: fit-content;
-  max-width: 70%;
+  gap: 215px;
   cursor: pointer;
-  flex-direction: column;
+  flex-direction: row;
   overflow: auto;
+  width: 76%;
+  border: 2px black;
+  margin-left: 11%;
 }
  
 .fileMessage.left {
@@ -1788,13 +1838,14 @@ transition: backround-color .3s ease;
 .fileMessage.right {
   align-self: flex-end;
   background-color: #e0f7fa;
-} 
+}
  
 .fileInfo {
   display: flex;
   align-items: center;
   gap: 10px;
-}
+  flex-direction: row;
+  width: 50%;}
  
 .fileIcon {
   width: 40px;
@@ -1814,6 +1865,7 @@ transition: backround-color .3s ease;
   font-size: 12px;
   color: #666;
 }
+/* filesContainer end*/
  
 .modal {
   display: none;

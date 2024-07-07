@@ -107,6 +107,7 @@
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
         <button type="button" class="advisory"  id=advisoryAdmin onclick="advisoryProf()">Advisory</button>
     </div>
+    <script src="adminHome.js"></script>
     <div class="wrapper"><!-- start of wrapper scroll -->
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
@@ -472,7 +473,7 @@
 </div> 
 
 <script src="Capstone.js"></script>
-<script src="adminHome.js"></script>
+
 </body>
 </html>
 

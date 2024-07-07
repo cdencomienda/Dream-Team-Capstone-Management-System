@@ -1849,7 +1849,7 @@ function rubricDefense(groupName) {
                     result.level_percentage.forEach((percentage, index) => {
                         const option = document.createElement('option');
                         option.value = index + 1; // Assuming values start from 1
-                        option.textContent = `Level ${index + 1} (${percentage}%)`;
+                        option.textContent = `${index + 1} (${percentage}%)`;
                         select.appendChild(option);
                     });
 
