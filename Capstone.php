@@ -2085,26 +2085,7 @@ function computeGroupName(group_name) {
 }
 
 
-// Add event listeners to each div
-chairDropdown.addEventListener('click', function() {
-    toggleRubricSummary('chairPgrade', 'chairArrow');
-    console.log("Chair dropdown clicked");
-});
 
-leadPanelDropdown.addEventListener('click', function() {
-    toggleRubricSummary('leadPanelContent', 'leadArrow');
-    console.log("Lead panel dropdown clicked");
-});
-
-panelMemberDropdown.addEventListener('click', function() {
-    toggleRubricSummary('panelMemberContent', 'panelMemberArrow');
-    console.log("Panel member dropdown clicked");
-});
-
-panelMember2Dropdown.addEventListener('click', function() {
-    toggleRubricSummary('panelMember2Content', 'panelMember2Arrow');
-    console.log("Panel member 2 dropdown clicked");
-});
 
 
 
