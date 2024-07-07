@@ -32,7 +32,6 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
             mysqli_stmt_execute($stmt_s_id);
             $result_s_id = mysqli_stmt_get_result($stmt_s_id);
             
-
             if (mysqli_num_rows($result_s_id) > 0) {
                 $row_s_id = mysqli_fetch_assoc($result_s_id);
                 $s_id = $row_s_id['s_id'];
@@ -67,10 +66,10 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
                             }
                         }
                     }
-                } 
+                }
             } else {
                 // Handle case where no s_id is found
-                $group_names[] = 'No s_id found';
+                $error[] = "Session variable 's_id' is not set.";
             }
 
             // Add the group_names array to the results array under the respective course_id key
@@ -82,9 +81,15 @@ if (isset($_SESSION['group_courses']) && isset($_SESSION['user_id'])) {
     }
 
     // Close statements and connection
-    mysqli_stmt_close($stmt_s_id);
-    mysqli_stmt_close($stmt_student_group_id);
-    mysqli_stmt_close($stmt_group_name);
+    if (isset($stmt_s_id)) {
+        mysqli_stmt_close($stmt_s_id);
+    }
+    if (isset($stmt_student_group_id)) {
+        mysqli_stmt_close($stmt_student_group_id);
+    }
+    if (isset($stmt_group_name)) {
+        mysqli_stmt_close($stmt_group_name);
+    }
     mysqli_close($conn);
 
     // Save the results to the session
