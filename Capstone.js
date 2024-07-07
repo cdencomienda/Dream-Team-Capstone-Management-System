@@ -323,6 +323,7 @@ function newGroupCreated2() {
   chairpanelCollection.style.display = (chairpanelCollection.style.display === 'none' || chairpanelCollection.style.display === '') ? 'block' : 'none';
   
 }
+
 // viewfiles  
 function openModal(filePath) {
   document.getElementById('fileFrame').src = filePath;
@@ -366,6 +367,56 @@ function toggleDocuReqLogs() {
       `;
   }
 }
+
+//score description changing per score
+const scoreDescriptions = {
+  "B1": {
+      7: "Excellent summary with no errors.",
+      6: "Very good summary with minor errors.",
+      5: "Good summary with some errors.",
+      4: "Adequate summary with several errors.",
+      3: "Fair summary with many errors.",
+      2: "Poor summary with numerous errors.",
+      1: "Very poor summary with major errors.",
+      0: "No summary provided or completely incorrect."
+  },
+  "B2": {
+      7: "Excellent presentation skills with perfect delivery.",
+      6: "Very good presentation skills with minor issues.",
+      5: "Good presentation skills with some issues.",
+      4: "Adequate presentation skills with several issues.",
+      3: "Fair presentation skills with many issues.",
+      2: "Poor presentation skills with numerous issues.",
+      1: "Very poor presentation skills with major issues.",
+      0: "No presentation skills demonstrated or completely incorrect."
+  },
+  "B3": {
+      7: "Outstanding oral communication with no errors.",
+      6: "Very good oral communication with minor errors.",
+      5: "Good oral communication with some errors.",
+      4: "Adequate oral communication with several errors.",
+      3: "Fair oral communication with many errors.",
+      2: "Poor oral communication with numerous errors.",
+      1: "Very poor oral communication with major errors.",
+      0: "No oral communication provided or completely incorrect."
+  }
+};
+
+
+// GRADE COMPUTING
+document.addEventListener('DOMContentLoaded', (event) => {
+  const scoreSelects = document.querySelectorAll('.score-select');
+
+  scoreSelects.forEach(select => {
+      select.addEventListener('change', function() {
+          const selectedScore = this.value;
+          const criteriaId = this.closest('tr').querySelector('.description strong').textContent.split('.')[0];
+          const descriptionElement = this.closest('tr').querySelector('.grade_description');
+          descriptionElement.textContent = scoreDescriptions[criteriaId][selectedScore] || 'Description not available for this score.';
+      });
+  });
+});
+
 function toggleRubricSummary(panelClass, arrowClass) {
   const panel = document.querySelector(`.${panelClass}`);
   const arrow = document.querySelector(`.${arrowClass}`);
@@ -423,11 +474,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var chairPanelGrades = extractPanelGrades(".chairPgrade .criteria");
       var leadPanelGrades = extractPanelGrades(".leadPanelContent .criteria");
       var panelMemberGrades = extractPanelGrades(".panelMemberContent .criteria");
-
+      var panelMember2Grades = extractPanelGrades(".panelMember2Content .criteria");
       var panelists = {
           "Chair Panel": calculateAverage(chairPanelGrades),
           "Lead Panel": calculateAverage(leadPanelGrades),
-          "Panel Member 1": calculateAverage(panelMemberGrades)
+          "Panel Member 1": calculateAverage(panelMemberGrades),
+          "Panel Member 2": calculateAverage(panelMember2Grades)
       };
 
       var totalGrade = 0;
@@ -498,3 +550,84 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 
+let currentFeedbackType = '';
+
+function addComment() {
+    currentFeedbackType = 'Comment';
+    addFeedback(currentFeedbackType);
+}
+
+function addRevision() {
+    currentFeedbackType = 'Revision';
+    addFeedback(currentFeedbackType);
+}
+
+function addRequirement() {
+    currentFeedbackType = 'Additional Requirement';
+    addFeedback(currentFeedbackType);
+}
+
+function addFeedback(type) {
+    // Show the feedback input field
+    const feedbackContainer = document.createElement('div');
+    feedbackContainer.classList.add('feedback-input-container');
+    
+    const textarea = document.createElement('textarea');
+    textarea.classList.add('feedback-input');
+    textarea.placeholder = type + ": Enter your text here";
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    deleteButton.addEventListener('click', () => deleteFeedback(feedbackContainer));
+
+    feedbackContainer.appendChild(textarea);
+    feedbackContainer.appendChild(deleteButton);
+    document.getElementById('commentsSection').appendChild(feedbackContainer);
+}
+
+
+function sendFeedback() {
+    const feedbackContainers = document.querySelectorAll('.feedback-input-container');
+    if (feedbackContainers.length > 0) {
+        const commentSection = document.querySelector('.commentsCollection .comments-section');
+        
+        feedbackContainers.forEach(container => {
+            const textarea = container.querySelector('textarea');
+            const feedbackText = textarea.value;
+
+            if (feedbackText.trim() !== '') {
+                const feedbackContainer = document.createElement('div');
+                feedbackContainer.classList.add('comment-sent');
+
+                const feedbackTextArea = document.createElement('textarea');
+                feedbackTextArea.classList.add('comments-input');
+                feedbackTextArea.disabled = true;
+                feedbackTextArea.value = feedbackText;
+
+                const approveButton = document.createElement('button');
+                approveButton.classList.add('approve-button');
+                approveButton.innerHTML = '<i class="fa-solid fa-check"></i>';
+                approveButton.addEventListener('click', () => approveComment(feedbackTextArea));
+
+                feedbackContainer.appendChild(feedbackTextArea);
+                feedbackContainer.appendChild(approveButton);
+
+                commentSection.appendChild(feedbackContainer);
+
+                // Remove the feedback input field
+                container.remove();
+            }
+        });
+    } else {
+        alert('Please enter your feedback before sending.');
+    }
+}
+
+function deleteFeedback(container) {
+    container.remove();
+}
+
+function approveComment(textarea) {
+    textarea.disabled = true;
+}

@@ -234,7 +234,8 @@
                 
                 <!-- panelist : role-member -->
                  
-    <div class="defense-main" id="defense-main" style="display: none;">
+    
+    <div class="defense-main" id="defense-main" style="display: none; overflow-x: hidden;" >
         <div class="Defense-Page" id = "Defense-Page">      
             
             <div class="rubric-container">
@@ -283,7 +284,7 @@
                                 
                                 </td>
                             
-                                <td class="grade_description">Select a score to see the description.</td>
+                                <td class="grade_description">Excellent summary with no errors.</td>
                             
                                 <td class="score-column">
                                     
@@ -312,7 +313,7 @@
                                 
                                 </td>
                             
-                                <td class="grade_description">Select a score to see the description.</td>
+                                <td class="grade_description">Excellent presentation skills with perfect delivery.</td>
                             
                                 <td class="score-column">
                                     
@@ -341,7 +342,7 @@
                                 
                                 </td>
                             
-                                <td class="grade_description">Select a score to see the description.</td>
+                                <td class="grade_description">Outstanding oral communication with no errors.</td>
                             
                                 <td class="score-column">
                                     
@@ -390,7 +391,7 @@
                         <button onclick="addRequirement()">Additional Requirement</button>
                         </div>
                     </div>
-                    <button class="sendComment"><i class="fa-solid fa-paper-plane"></i> Send</button>
+                    <button class="sendComment" onclick = "sendFeedback()"><i class="fa-solid fa-paper-plane"></i> Send</button>
                 </div>
 
 
@@ -409,14 +410,14 @@
                         
                         <div class="panel-comments">
                         
-                            <h3>Panel 1 Comments:</h3> <BR>
+                            <h3>Chair Panel:</h3> <BR>
                             
                         
                         </div>
-                        <div class ="comment-sent">
-                            <textarea class="comments-input"></textarea>
+                        <div class ="comment-sent" style="width: 95%;">
+                            <!-- <textarea disabled class="comments-input"></textarea>
                             
-                            <button class="approve-button"><i class="fa-solid fa-check"></i></button>
+                            <button class="approve-button"><i class="fa-solid fa-check"></i></button> -->
                         </div>
                     
                     </div>
@@ -532,12 +533,12 @@
                 </div>
                   
                         <!-- Lead Panel Dropdown -->
-                        <div class="dropdown-container" onclick="toggleRubricSummary('leadPanelContent', 'leadArrow')">
+                 <div class="dropdown-container" onclick="toggleRubricSummary('leadPanelContent', 'leadArrow')">
                           <span class="arrow right leadArrow">▶</span>
                           <span><h2>Lead Panel</h2></span>
                         </div>
-                        <div class="leadPanelContent">
-                          <div class="Defense-Page" id="leadSummaryGrade">
+                <div class="leadPanelContent">
+                        <div class="Defense-Page" id="leadSummaryGrade">
                             <div class="rubric-container">
                               <div class="rubric-header">
                                 <h1>Oral Communication</h1>
@@ -563,15 +564,17 @@
                                 </tbody>
                               </table>
                             </div>
-                          </div>
-                        </div>
+                    </div>
+                </div>
                   
-                        <!-- Panel Member 1 Dropdown -->
-                        <div class="dropdown-container" onclick="toggleRubricSummary('panelMemberContent', 'panelMemberArrow')">
-                          <span class="arrow right panelMemberArrow">▶</span>
-                          <span><h2>Panel Member 1</h2></span>
-                        </div>
-                        <div class="panelMemberContent">
+
+                <!-- Panel Member 1 Dropdown -->
+                <div class="dropdown-container" onclick="toggleRubricSummary('panelMemberContent', 'panelMemberArrow')">
+                    <span class="arrow right panelMemberArrow">▶</span>
+                    <span><h2>Panel Member 1</h2></span>
+                </div>
+
+                <div class="panelMemberContent">
                           <div class="Defense-Page" id="panelMemberSummaryGrade">
                             <div class="rubric-container">
                               <div class="rubric-header">
@@ -600,6 +603,42 @@
                             </div>
                           </div>
                         </div>
+
+                <!-- Panel Member 2 Dropdown -->
+                <div class="dropdown-container" onclick="toggleRubricSummary('panelMember2Content', 'panelMember2Arrow')">
+                    <span class="arrow right panelMember2Arrow">▶</span>
+                    <span><h2>Panel Member 2</h2></span>
+                 </div>
+                
+                <div class="panelMember2Content">
+                    <div class="Defense-Page" id="panelMember2SummaryGrade">
+                        <div class="rubric-container">
+                            <div class="rubric-header">
+                                <h1>Project Evaluation</h1>
+                              </div>
+                              <table>
+                                <thead>
+                                  <tr>
+                                    <th class="description-column">Description</th>
+                                    <th class="grade-Desc">Score Description</th>
+                                    <th class="grades-column">Grades</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B4. Jollibee Burger Steak </strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
+                                  <!-- More rows as needed -->
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
                   
                         <!-- Compute Button -->
                         <button class="compute-button" onclick="computeGrades()">Compute</button>
@@ -608,6 +647,8 @@
                 </div>
 
                
+
+
                 <!-- Modal for Grade Summary -->
                 <div id="gradeModal" class="modal">
                     <div class="modal-content">
@@ -624,15 +665,25 @@
                         <!-- Dynamic rows will be inserted here -->
                         </tbody>
                     </table>
-                    <p>Total Percentage: <span id="totalPercentage">0</span>%</p>
-                    <p>Verdict:</p>
-                    <select id="verdictDropdown">
-                        <option value="Pass">Pass</option>
-                        <option value="Conditional Pass">Conditional Pass</option>
-                        <option value="Re-Defense">Re-Defense</option>
-                        <option value="Repeat">Repeat</option>
-                    </select>
-                    <button id="submitGrade">Submit</button>
+                        <div class = "Grades-Verdict" style="margin-top: 4%;">
+
+                            <p> <h2>Total Percentage: <span id="totalPercentage">0</span>%</h2></p>
+                         
+                            <h3> <p>Verdict:</p> </h3>
+                         
+                            <select id="verdictDropdown">
+                          
+                                 
+                                <option value="Pass"><h4> Pass</h4></option>
+                                <option value="Conditional Pass">Conditional Pass</option>
+                                <option value="Re-Defense">Re-Defense</option>
+                                <option value="Repeat">Repeat</option>
+                                
+                          
+                            </select>
+                          
+                            <button id="submitGrade">Submit</button>
+                        </div>
                     </div>
                 </div>
 
@@ -642,7 +693,7 @@
                   
                 
                 <!-- files -->
-                <div class="defaultBody" id="defaultBody" style ="overflow: auto;">
+                <div class="defaultBody" id="defaultBody" style ="overflow:">
                     <div class="recentFiles">
                         <!-- File posted by another person -->
                         <div class="fileMessage left" onclick="openModal('featuredfiles/DREAM TEAM - Recommendation.pdf')">

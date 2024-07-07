@@ -1,22 +1,29 @@
 <?php
-// Retrieve POST data
-$postData = file_get_contents('php://input');
-$data = json_decode($postData, true);
+session_start();
 
-// Check if fileNames parameter exists
-if (isset($data['fileNames'])) {
-    // $data['fileNames'] is already an array, no need to decode again
-    $fileNames = $data['fileNames'];
+if (isset($_POST['submit'])) {
+    // Check if file upload is set and handle errors
+    if (!isset($_FILES['studentFile']) || $_FILES['studentFile']['error'] !== UPLOAD_ERR_OK) {
+        die("File upload failed with error code " . $_FILES['studentFile']['error']);
+    }
 
-    // Respond with JSON content type
-    header('Content-Type: application/json');
+    $file = $_FILES['studentFile'];
 
-    // Echo back the file names as JSON
-    echo json_encode(['message' => 'Received file names', 'fileNames' => $fileNames]);
-} else {
-    // Respond with JSON content type
-    header('Content-Type: application/json');
+    // Specify the directory where you want to save the uploaded files
+    $uploadDir = 'test/';
 
-    echo json_encode(['error' => 'No file names received']);
+    // Generate a unique name to prevent overwriting existing files
+    $fileName = uniqid() . '_' . basename($file['name']);
+
+    // Move the uploaded file to the desired directory
+    $destination = $uploadDir . $fileName;
+    if (!move_uploaded_file($file['tmp_name'], $destination)) {
+        die("Failed to move uploaded file");
+    }
+
+    echo "File uploaded successfully as: " . $fileName;
+
+    // Optionally, you can store the file path in a session variable
+    $_SESSION['uploadedFilePath'] = $destination;
 }
 ?>
