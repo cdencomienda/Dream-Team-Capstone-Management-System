@@ -1058,7 +1058,7 @@ background-color: #dbd3c9;
   position: relative;
   display: block;
 }
-
+/* filesContainer start */
 .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
   opacity: 1;
   transform: translateY(0);
@@ -1337,7 +1337,8 @@ background-color: #dbd3c9;
   font-size: 12px;
   color: #666;
 }
- 
+/* filesContainer end*/
+
 .modal {
   display: none;
   position: fixed;
