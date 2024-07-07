@@ -1,69 +1,131 @@
 <?php
 session_start();
 
-// Check if course_id, student_group_id, and user_id are set in the session
-if (isset($_SESSION['course_id']) && isset($_SESSION['student_group_id']) && isset($_SESSION['user_id'])) {
-    // Database connection details
-    $conn = new mysqli('localhost', 'root', '', 'dreamteam');
+// Check if course_id is set in the session
+if (isset($_SESSION['course_id'])) {
+    $course_id = $_SESSION['course_id'];
+
+    // Connect to the 'dreamteam' database
+    $conn = mysqli_connect('localhost', 'root', '', 'dreamteam');
 
     // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Escape variables for security
-    $course_id = $_SESSION['course_id'];
-    $student_group_id = $_SESSION['student_group_id'];
-    $user_id = $_SESSION['user_id'];
+    // Prepare the SQL statement to get rubricID and rubricName
+    $rubrics_query = "SELECT rubricsID, rubricName FROM rubrics WHERE courseID = ?";
+    $rubrics_stmt = $conn->prepare($rubrics_query);
 
-    // Prepare SQL query to get panelID based on courseID and requirementsID
-    $sql_panel = "SELECT panelID FROM `group` 
-                  WHERE courseID = ? AND requirementsID = ?";
-    
-    // Prepare statement for panelID query
-    $stmt_panel = $conn->prepare($sql_panel);
-    $stmt_panel->bind_param("ii", $course_id, $student_group_id);
-    $stmt_panel->execute();
-    $stmt_panel->bind_result($panelID);
-    $stmt_panel->fetch();
-    $stmt_panel->close();
-    
-    if ($panelID) {
-        // Prepare SQL query to get panelRole based on professorID, user_id, and panelID
-        $sql_panelist = "SELECT panelRole FROM `panelist` 
-                         WHERE professorID = ? AND panelID = ?";
-        
-        // Prepare statement for panelist query
-        $stmt_panelist = $conn->prepare($sql_panelist);
-        $stmt_panelist->bind_param("ii", $user_id, $panelID);
-        $stmt_panelist->execute();
-        $stmt_panelist->bind_result($panelRole);
-        $stmt_panelist->fetch();
-        $stmt_panelist->close();
-        
-        if ($panelRole) {
-            // Save panelRole in session
-            $_SESSION['panelRole'] = $panelRole;
-            
-            // Prepare data to send as JSON
-            $response = array(
-                'panelRole' => $panelRole
-            );
-            
-            // Send JSON response
-            header('Content-Type: application/json');
-            echo json_encode($response);
-        } else {
-            echo "No panel role found for professor ID: $user_id and panel ID: $panelID";
-        }
-    } else {
-        echo "No panel found for course ID: $course_id and student group ID: $student_group_id";
+    // Bind the course_id parameter to the SQL statement
+    $rubrics_stmt->bind_param("i", $course_id);
+
+    // Execute the statement to get rubricID and rubricName
+    $rubrics_stmt->execute();
+
+    // Get the result
+    $rubrics_result = $rubrics_stmt->get_result();
+
+    // Initialize variables to hold rubricID and rubricName
+    $rubricID = null;
+    $rubricName = null;
+
+    // Check if there is a result
+    if ($rubrics_result->num_rows > 0) {
+        // Fetch rubricID and rubricName
+        $rubrics_row = $rubrics_result->fetch_assoc();
+        $rubricID = $rubrics_row['rubricsID'];
+        $rubricName = $rubrics_row['rubricName'];
     }
 
-    // Close database connection
+    // Close the rubrics statement
+    $rubrics_stmt->close();
+
+    // Close the dreamteam connection
     $conn->close();
+
+    // Connect to the 'soe_assessment' database
+    $conn = mysqli_connect('localhost', 'root', '', 'soe_assessment');
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Prepare the SQL statement to get rubrics data
+    $sql = "SELECT level_details, level_percentage FROM rubrics WHERE course_id = ? AND rubrics_id = ? AND rubric_name = ?";
+    $stmt = $conn->prepare($sql);
+
+    // Bind the course_id, rubricID, and rubricName parameters to the SQL statement
+    $stmt->bind_param("iis", $course_id, $rubricID, $rubricName);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Initialize an array to hold the data
+    $rubrics = [];
+
+    // Check if there are any rows
+    if ($result->num_rows > 0) {
+        // Output the data for each row
+        while ($row = $result->fetch_assoc()) {
+            // Split the level_details and level_percentage by '~'
+            $levelDetails = explode('~', $row['level_details']);
+            $levelPercentages = explode('~', $row['level_percentage']);
+
+            // Add the data to the array
+            $rubrics[] = [
+                'rubrics_id' => $rubricID,
+                'rubric_name' => $rubricName,
+                'level_details' => $levelDetails,
+                'level_percentage' => $levelPercentages
+            ];
+
+            // Fetch criteria_name, criteria_details, and rubric_percentage from rubric_table based on rubrics_id
+            $criteria_query = "SELECT rubric_percentage, criteria_name, criteria_details FROM rubric_table WHERE rubrics_id = ?";
+            $criteria_stmt = $conn->prepare($criteria_query);
+            $criteria_stmt->bind_param("i", $rubricID);
+            $criteria_stmt->execute();
+            $criteria_result = $criteria_stmt->get_result();
+
+            // Initialize an array to hold criteria data
+            $criteria_data = [];
+
+            // Check if there are any rows
+            if ($criteria_result->num_rows > 0) {
+                while ($criteria_row = $criteria_result->fetch_assoc()) {
+                    // Split criteria_name and criteria_details by '~' delimiter
+                    $criteriaName = explode('~', $criteria_row['criteria_name']);
+                    $criteriaDetails = explode('~', $criteria_row['criteria_details']);
+
+                    $criteria_data[] = [
+                        'rubric_percentage' => $criteria_row['rubric_percentage'],
+                        'criteria_name' => $criteriaName,
+                        'criteria_details' => $criteriaDetails
+                    ];
+                }
+            }
+
+            // Add criteria data to the rubrics array
+            $rubrics[count($rubrics) - 1]['criteria'] = $criteria_data;
+
+            // Close the criteria statement
+            $criteria_stmt->close();
+        }
+    }
+
+    // Close the main statement and connection
+    $stmt->close();
+    $conn->close();
+
+    // Output the data as JSON
+    header('Content-Type: application/json');
+    echo json_encode($rubrics);
+
 } else {
-    // If course_id, student_group_id, or user_id is not set in the session
-    echo "Course ID, Student Group ID, or User ID is not set in the session.";
+    echo json_encode(['error' => 'Course ID is not set in the session.']);
 }
 ?>

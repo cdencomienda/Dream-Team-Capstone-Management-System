@@ -247,11 +247,6 @@
                         <h3>Group</h3>
                     </div>
                         
-                    <div class="capstone-title">
-                        
-                        <h3>Development of ???</h3>
-                        
-                    </div>
                 
                 </div>    
                     
@@ -261,7 +256,7 @@
                     
                 </div>
                     
-                    <table>
+                    <table class="table">
                         <thead>
                         
                         <tr>
@@ -884,7 +879,7 @@ function fetchAcademicYears() {
                             console.log(`Selected term: ${selectedTerm}`);
                             storeSelectedTerm(selectedTerm); // Assuming this function handles storing the selected term
                             fetchCourses(button.parentNode, year, selectedTerm); // Pass the year and selectedTerm to fetchCourses
-                            groups(); // Assuming this function handles some other functionality
+
                             
                             let coursesDropdown = button.parentNode.querySelector('.coursesDropdown');
                             if (coursesDropdown) {
@@ -1094,6 +1089,7 @@ function fetchCourses(container, year, selectedTerm) {
                                     setDirectory(directoryPath);
                                     saveCourseID(course.course_id);
                                     setPanelRole();
+                                    rubricDefense(group_name);
                                 };
                                 groupButton.textContent = group_name;
                                 courseElement.appendChild(groupButton);
@@ -1753,7 +1749,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function setPanelRole() {
-    fetch('test.php') // Replace with the path to your PHP script
+    fetch('fetchPanelRole.php') // Replace with the path to your PHP script
         .then(response => response.json())
         .then(data => {
             // Process data
@@ -1764,6 +1760,136 @@ function setPanelRole() {
             console.error('Error fetching panel role:', error);
         });
 }
+
+
+function rubricDefense(groupName) {
+    fetch('fetchDisplayRubric.php')
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of results
+            console.log('Fetched Data:', data); // Log the entire data fetched from the server
+
+            // Clear the contents of the .table element
+            const tableElement = document.querySelector('.table');
+            if (tableElement) {
+                tableElement.innerHTML = ''; // Clear existing table content
+            } else {
+                console.error('Table element not found');
+                return; // Exit function if table element is not found
+            }
+
+            // Create table structure
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // Create header row and add headers
+            const headerRow = document.createElement('tr');
+            const headers = ["Criteria", "Criteria Details", "Score Description", "Grades"];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+
+            // Append thead to table
+            table.appendChild(thead);
+
+            // Append table to .table element
+            tableElement.appendChild(table);
+
+            // Populate tbody with data
+            data.forEach(result => {
+                console.log("Rubric ID: " + result.rubrics_id);
+                console.log("Rubric Name: " + result.rubric_name);
+                console.log("Level Details: ");
+                result.level_details.forEach(detail => {
+                    console.log("- " + detail);
+                });
+                console.log("Level Percentages: ");
+                console.log(result.level_percentage); // Log the array of level percentages directly
+                console.log("Criteria: ");
+                result.criteria.forEach(criteria => {
+                    console.log("Criteria Name: " + criteria.criteria_name);
+                    console.log("Criteria Details:");
+                    console.log(criteria.criteria_details);
+
+                    // Create row for criteria
+                    const row = document.createElement('tr');
+                    row.classList.add('criteria');
+
+                    // Column 1: criteria.criteria_name
+                    const col1 = document.createElement('td');
+                    col1.classList.add('description');
+                    col1.textContent = criteria.criteria_name;
+                    row.appendChild(col1);
+
+                    // Column 2: criteria.criteria_details array 0 and array 1
+                    const col2 = document.createElement('td');
+                    col2.classList.add('description');
+                    col2.textContent = criteria.criteria_details[0] + ', ' + criteria.criteria_details[1];
+                    row.appendChild(col2);
+
+                    // Column 3: .grade_description
+                    const col3 = document.createElement('td');
+                    col3.classList.add('grade_description');
+                    col3.textContent = 'Grade Description'; // Replace with actual grade description logic if available
+                    row.appendChild(col3);
+
+                    // Column 4: .score-column
+                    const col4 = document.createElement('td');
+                    col4.classList.add('score-column');
+
+                    // Create select element for score
+                    const select = document.createElement('select');
+                    select.classList.add('score-select');
+
+                    // Populate select options based on level percentages
+                    result.level_percentage.forEach((percentage, index) => {
+                        const option = document.createElement('option');
+                        option.value = index + 1; // Assuming values start from 1
+                        option.textContent = `Level ${index + 1} (${percentage}%)`;
+                        select.appendChild(option);
+                    });
+
+                    col4.appendChild(select);
+                    row.appendChild(col4);
+
+                    // Append row to tbody
+                    tbody.appendChild(row);
+                });
+
+                // Rename the .rubric-header element with the result.rubric_name
+                const rubricHeader = document.querySelector('.rubric-header');
+                if (rubricHeader) {
+                    rubricHeader.innerHTML = `<h1>${result.rubric_name}</h1>`;
+                } else {
+                    console.error('Rubric header not found');
+                }
+            });
+
+            // Append tbody to table
+            table.appendChild(tbody);
+
+            // Rename the <div> element with the class 'Group Name' using the groupName parameter
+            const groupDiv = document.querySelector('.Group.Name');
+            if (groupDiv) {
+                groupDiv.innerHTML = `<h3>${groupName}</h3>`;
+            } else {
+                console.error('Group div not found');
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+
+
+
 
 
 
