@@ -237,9 +237,16 @@
     
     <div class="defense-main" id="defense-main" style="display: none; overflow-x: hidden;" >
         <div class="Defense-Page" id = "Defense-Page">      
-            
+        <div class="panel-Role">
+                        
+                        <h3>Chair Panel:</h3> <BR>
+                        
+                    
+                    </div>
             <div class="rubric-container">
             <!-- dito lagay group name + title ng paper -->
+
+            
                 
                 <div class="grpDefense-Details" id="summgrpDefense-Details">
                         
@@ -249,6 +256,7 @@
                         
                 
                 </div>    
+                
                     
                 <div class="rubric-header">
                         
@@ -367,6 +375,9 @@
             <div class="cDiv">
                 <h1>COMMENTS</h2>
                 <h2>______________________________</h2>
+                <form>
+
+                
                 <div class="CommentsDiv">
                     
                     <div class="comments-section" id="commentsSection">
@@ -376,6 +387,7 @@
                     </div>
                         
                 </div>
+                </form>
                 
                 <div class="addCommBtn">
                     <div class="dropdown1">
@@ -397,18 +409,10 @@
 
             <!-- for chair panel only -->
             <div class="commentsCollection">
-                <h1>COMMENTS COLLECTION</h1>
-                <h2>______________________________</h2>
                 <div class="CommentsDiv">
                     
                     <div class="comments-section">
                         
-                        <div class="panel-comments">
-                        
-                            <h3>Chair Panel:</h3> <BR>
-                            
-                        
-                        </div>
                         <div class ="comment-sent" style="width: 95%;">
                             <!-- <textarea disabled class="comments-input"></textarea>
                             
@@ -440,14 +444,16 @@
                         <h3>Group</h3>
     
                     </div>
+
+                    
     
-                    <div class="capstone-title">
-    
-                        <h3>Development of ???</h3>
-        
-                    </div>
+
         
                 </div>
+                <div class="rubric-header">
+                                <h1>Written Communication</h1>
+                              
+                            </div>
                         
                 <!-- Chair Panel Dropdown -->
                 <div class="dropdown-container" onclick="toggleRubricSummary('chairPgrade', 'chairArrow')">
@@ -1087,8 +1093,9 @@ function fetchCourses(container, year, selectedTerm) {
                                     console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
                                     const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
                                     setDirectory(directoryPath);
-                                    saveCourseID(course.course_id);
                                     setPanelRole();
+                                    saveCourseID(course.course_id);
+                                    computeGroupName(group_name);
                                     rubricDefense(group_name);
                                 };
                                 groupButton.textContent = group_name;
@@ -1754,7 +1761,56 @@ function setPanelRole() {
         .then(data => {
             // Process data
             console.log('Panel Role:', data.panelRole);
-            // You can update your UI or perform further actions with the panelRole
+            
+            // Assuming you want to update an element with class .panel-Role
+            const panelElement = document.querySelector('.panel-Role');
+            const gradesContainer = document.querySelector('.panel-grades');
+            const summaryButton = document.querySelector('.summary-Btn');
+
+            if (panelElement) {
+                // Create a new h3 element
+                const h3Element = document.createElement('h2');
+                h3Element.textContent = data.panelRole; // Set text content to fetched panelRole
+                
+                // Clear existing content and append the new h3 element
+                panelElement.innerHTML = ''; // Clear existing content
+                panelElement.appendChild(h3Element); // Append the new h3 element
+                
+                // Additional logic based on panelRole value
+                if (data.panelRole === 'Chair Panel') {
+                    // Unhide .panel-grades and .summary-Btn if panelRole is 'Chair Panel'
+                    if (gradesContainer) {
+                        gradesContainer.style.display = ''; // Show the container
+                        console.log('.panel-grades shown.');
+                    } else {
+                        console.warn('Element with class panel-grades not found.');
+                    }
+
+                    if (summaryButton) {
+                        summaryButton.style.display = ''; // Show the summary button
+                        console.log('.summary-Btn shown.');
+                    } else {
+                        console.warn('Element with class summary-Btn not found.');
+                    }
+                } else {
+                    // Hide .panel-grades and .summary-Btn if panelRole is not 'Chair Panel'
+                    if (gradesContainer) {
+                        gradesContainer.style.display = 'none'; // Hide the container
+                        console.log('.panel-grades hidden.');
+                    } else {
+                        console.warn('Element with class panel-grades not found.');
+                    }
+
+                    if (summaryButton) {
+                        summaryButton.style.display = 'none'; // Hide the summary button
+                        console.log('.summary-Btn hidden.');
+                    } else {
+                        console.warn('Element with class summary-Btn not found.');
+                    }
+                }
+            } else {
+                console.error('Element with class .panel-Role not found.');
+            }
         })
         .catch(error => {
             console.error('Error fetching panel role:', error);
@@ -1762,28 +1818,145 @@ function setPanelRole() {
 }
 
 
+
+
+
+
+
+
+var feedbackList = [];
+
+function addFeedback(type) {
+    var container = document.createElement('div');
+    container.classList.add('feedback-input-container');
+
+    var textarea = document.createElement('textarea');
+    textarea.classList.add('feedback-input');
+    textarea.placeholder = type + ': Enter your text here';
+
+    var deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    deleteButton.addEventListener('click', function() {
+        container.remove(); // Remove the container on button click
+        removeFromFeedbackList(textarea.value);
+    });
+
+    container.appendChild(textarea);
+    container.appendChild(deleteButton);
+
+    document.getElementById('commentsSection').appendChild(container);
+
+    // Add event listener to capture text content when user finishes typing
+    textarea.addEventListener('input', function() {
+        updateFeedbackInList(textarea.value, type);
+    });
+}
+
+function updateFeedbackInList(text, type) {
+    // Find the feedback item in the list based on type
+    var existingFeedback = feedbackList.find(item => item.type === type);
+
+    // If found, update the text; otherwise, add new feedback item
+    if (existingFeedback) {
+        existingFeedback.text = text;
+    } else {
+        feedbackList.push({ type: type, text: text });
+    }
+}
+
+function removeFromFeedbackList(text) {
+    feedbackList = feedbackList.filter(item => item.text !== text);
+}
+
+function clearCommentsSection() {
+    var commentsSection = document.querySelector('.comments-section');
+    if (commentsSection) {
+        commentsSection.innerHTML = ''; // Clear the contents of .comments-section
+    } else {
+        console.error('Comments section not found');
+    }
+}
+
+function sendFeedback() {
+    clearCommentsSection();
+
+    feedbackList.forEach(item => {
+        console.log(`Type: ${item.type}, Text: ${item.text}`);
+
+        var panelCommentsDiv = document.createElement('div');
+        panelCommentsDiv.classList.add('panel-comments');
+
+        var commentsSection = document.querySelector('.comments-section');
+        if (commentsSection) {
+            commentsSection.appendChild(panelCommentsDiv);
+        } else {
+            console.error('Comments section not found');
+            return;
+        }
+
+        var commentSentDiv = document.createElement('div');
+        commentSentDiv.classList.add('comment-sent');
+        commentSentDiv.style.width = '95%';
+
+        var textarea = document.createElement('textarea');
+        textarea.classList.add('comments-input');
+        textarea.setAttribute('disabled', '');
+        textarea.textContent = item.text;
+
+        var approveButton = document.createElement('button');
+        approveButton.classList.add('approve-button');
+        approveButton.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+        commentSentDiv.appendChild(textarea);
+        commentSentDiv.appendChild(approveButton);
+
+        commentsSection.appendChild(commentSentDiv);
+    });
+
+    printSelectedOptions();
+
+    // Send feedback data as a POST request
+    fetch('gradingRubric.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ feedbackList: feedbackList, selectedOptions: selectedOptions })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Feedback submitted successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error submitting feedback:', error);
+    });
+
+    // Clear feedback list after submission
+    feedbackList = [];
+}
+
+
+
+
+
+
 function rubricDefense(groupName) {
     fetch('fetchDisplayRubric.php')
         .then(response => response.json())
         .then(data => {
-            // Assuming data is an array of results
-            console.log('Fetched Data:', data); // Log the entire data fetched from the server
-
-            // Clear the contents of the .table element
             const tableElement = document.querySelector('.table');
             if (tableElement) {
-                tableElement.innerHTML = ''; // Clear existing table content
+                tableElement.innerHTML = '';
             } else {
                 console.error('Table element not found');
-                return; // Exit function if table element is not found
+                return;
             }
 
-            // Create table structure
             const table = document.createElement('table');
             const thead = document.createElement('thead');
             const tbody = document.createElement('tbody');
 
-            // Create header row and add headers
             const headerRow = document.createElement('tr');
             const headers = ["Criteria", "Criteria Details", "Score Description", "Grades"];
             headers.forEach(headerText => {
@@ -1792,75 +1965,58 @@ function rubricDefense(groupName) {
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
-
-            // Append thead to table
             table.appendChild(thead);
-
-            // Append table to .table element
             tableElement.appendChild(table);
 
-            // Populate tbody with data
             data.forEach(result => {
-                console.log("Rubric ID: " + result.rubrics_id);
-                console.log("Rubric Name: " + result.rubric_name);
-                console.log("Level Details: ");
-                result.level_details.forEach(detail => {
-                    console.log("- " + detail);
-                });
-                console.log("Level Percentages: ");
-                console.log(result.level_percentage); // Log the array of level percentages directly
-                console.log("Criteria: ");
                 result.criteria.forEach(criteria => {
-                    console.log("Criteria Name: " + criteria.criteria_name);
-                    console.log("Criteria Details:");
-                    console.log(criteria.criteria_details);
-
-                    // Create row for criteria
                     const row = document.createElement('tr');
                     row.classList.add('criteria');
 
-                    // Column 1: criteria.criteria_name
                     const col1 = document.createElement('td');
                     col1.classList.add('description');
                     col1.textContent = criteria.criteria_name;
                     row.appendChild(col1);
 
-                    // Column 2: criteria.criteria_details array 0 and array 1
                     const col2 = document.createElement('td');
                     col2.classList.add('description');
-                    col2.textContent = criteria.criteria_details[0] + ', ' + criteria.criteria_details[1];
+                    col2.textContent = criteria.criteria_details[0];
                     row.appendChild(col2);
 
-                    // Column 3: .grade_description
                     const col3 = document.createElement('td');
                     col3.classList.add('grade_description');
-                    col3.textContent = 'Grade Description'; // Replace with actual grade description logic if available
+                    col3.textContent = criteria.criteria_details[0];
                     row.appendChild(col3);
 
-                    // Column 4: .score-column
                     const col4 = document.createElement('td');
                     col4.classList.add('score-column');
 
-                    // Create select element for score
                     const select = document.createElement('select');
                     select.classList.add('score-select');
 
-                    // Populate select options based on level percentages
-                    result.level_percentage.forEach((percentage, index) => {
+                    const maxIndex = result.level_percentage.length;
+
+                    result.level_percentage.forEach((percentage, idx) => {
+                        const countdownIndex = maxIndex - idx;
                         const option = document.createElement('option');
-                        option.value = index + 1; // Assuming values start from 1
-                        option.textContent = `${index + 1} (${percentage}%)`;
+                        option.value = percentage; // Use percentage as the value
+                        option.textContent = `${countdownIndex} (${percentage}%)`;
                         select.appendChild(option);
+                    });
+
+                    // Automatically log the default selected value (first option)
+                    const defaultSelectedValue = parseInt(select.value, 10);
+                    updateSelectedOption(criteria.criteria_name, defaultSelectedValue);
+
+                    select.addEventListener('change', function(event) {
+                        handleSelectChange(event, criteria.criteria_name);
                     });
 
                     col4.appendChild(select);
                     row.appendChild(col4);
-
-                    // Append row to tbody
                     tbody.appendChild(row);
                 });
 
-                // Rename the .rubric-header element with the result.rubric_name
                 const rubricHeader = document.querySelector('.rubric-header');
                 if (rubricHeader) {
                     rubricHeader.innerHTML = `<h1>${result.rubric_name}</h1>`;
@@ -1869,10 +2025,8 @@ function rubricDefense(groupName) {
                 }
             });
 
-            // Append tbody to table
             table.appendChild(tbody);
 
-            // Rename the <div> element with the class 'Group Name' using the groupName parameter
             const groupDiv = document.querySelector('.Group.Name');
             if (groupDiv) {
                 groupDiv.innerHTML = `<h3>${groupName}</h3>`;
@@ -1885,9 +2039,38 @@ function rubricDefense(groupName) {
 
 
 
+let selectedOptions = []; // Array to store selected options
 
+// Function to print all selected options and their percentages
+function printSelectedOptions() {
+    console.log("Selected Options and Criteria Details:");
+    selectedOptions.forEach(option => {
+        console.log(`${option.criteriaName}: ${option.selectedPercentage}%`);
+    });
+}
 
+function updateSelectedOption(criteriaName, selectedPercentage) {
+    const existingIndex = selectedOptions.findIndex(option => option.criteriaName === criteriaName);
 
+    if (existingIndex !== -1) {
+        // Update existing entry
+        selectedOptions[existingIndex].selectedPercentage = selectedPercentage;
+    } else {
+        // Add new entry
+        const newOption = {
+            criteriaName: criteriaName,
+            selectedPercentage: selectedPercentage
+        };
+        selectedOptions.push(newOption);
+    }
+}
+
+// Function to handle dropdown selection change
+function handleSelectChange(event, criteriaName) {
+    const selectedPercentage = parseInt(event.target.value, 10); // Get the selected percentage value from the dropdown
+    updateSelectedOption(criteriaName, selectedPercentage); // Update the selected option
+    printSelectedOptions(); // Print all selected options (optional)
+}
 
 
 
@@ -1896,14 +2079,32 @@ function rubricDefense(groupName) {
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
+function computeGroupName(group_name) {
+    const panelElement = document.querySelector('.Group-Name');
+    panelElement.innerHTML = `<h2>${group_name}</h2>`;
+}
 
 
+// Add event listeners to each div
+chairDropdown.addEventListener('click', function() {
+    toggleRubricSummary('chairPgrade', 'chairArrow');
+    console.log("Chair dropdown clicked");
+});
 
+leadPanelDropdown.addEventListener('click', function() {
+    toggleRubricSummary('leadPanelContent', 'leadArrow');
+    console.log("Lead panel dropdown clicked");
+});
 
+panelMemberDropdown.addEventListener('click', function() {
+    toggleRubricSummary('panelMemberContent', 'panelMemberArrow');
+    console.log("Panel member dropdown clicked");
+});
 
-
-
-
+panelMember2Dropdown.addEventListener('click', function() {
+    toggleRubricSummary('panelMember2Content', 'panelMember2Arrow');
+    console.log("Panel member 2 dropdown clicked");
+});
 
 
 
