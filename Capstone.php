@@ -1092,6 +1092,8 @@ function fetchCourses(container, year, selectedTerm) {
                                     console.log('AY:', year, 'Term:', selectedTerm, 'Course ID:', course.course_id, 'Course Section:', course.section, 'Course Code:', course.course_code, 'Group Name:', group_name);
                                     const directoryPath = `AY ${year}-${year + 1} > Term ${selectedTerm} > ${course.course_code} - ${course.section} > ${group_name}`;
                                     setDirectory(directoryPath);
+                                    saveCourseID(course.course_id);
+                                    setPanelRole();
                                 };
                                 groupButton.textContent = group_name;
                                 courseElement.appendChild(groupButton);
@@ -1707,23 +1709,6 @@ function saveCourseID(courseID) {
     .catch(error => console.error('Fetch error:', error));
 }
 
-// function fetchStudents() {
-//     const membersContainer = document.querySelector('.GroupmembersContainer');
-//     membersContainer.innerHTML = ''; // Clear previous content
-
-//     fetch('fetchStudents.php')
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data); // Log the received JSON data
-//         // Process the data as needed
-//         data.forEach(student => {
-//             const memberHeading = document.createElement('h5');
-//             memberHeading.textContent = `${student.firstName} ${student.lastName}`;
-//             membersContainer.appendChild(memberHeading);
-//         });
-//     })
-//     .catch(error => console.error('Fetch error:', error));
-// }
 
 
 
@@ -1767,6 +1752,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+function setPanelRole() {
+    fetch('test.php') // Replace with the path to your PHP script
+        .then(response => response.json())
+        .then(data => {
+            // Process data
+            console.log('Panel Role:', data.panelRole);
+            // You can update your UI or perform further actions with the panelRole
+        })
+        .catch(error => {
+            console.error('Error fetching panel role:', error);
+        });
+}
 
 
 
