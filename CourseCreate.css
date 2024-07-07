@@ -1058,15 +1058,15 @@ background-color: #dbd3c9;
   position: relative;
   display: block;
 }
+/* filesContainer start */
 .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  overflow-y: auto;
 }
 .filesContainer{
   position: absolute;
-  width: 490px;
+  width: 470px;
   height: 325px;
   left: -250px;
   top: calc(100% + .25rem);
@@ -1080,9 +1080,55 @@ background-color: #dbd3c9;
   transition: opacity 150ms ease-in-out;
   z-index: 1000;
   text-align: left;
-  overflow-y: auto
+}
+.fileLogsPopup {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    max-height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow-y: auto;
+   
+}
+#DocuReqrmntLogs {
+  bottom: 50%;
+  left: 37%;
 }
 
+.fileLogsPopup .logItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  
+}
+
+.fileLogsPopup .logItem:last-child {
+  border-bottom: none;
+}
+
+.fileLogsPopup .logItem img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.fileLogsPopup .logItem .fileName {
+  flex: 1;
+}
+
+.fileLogsPopup .logItem:hover {
+  background-color: #f0f0f0;
+}
 .documentationCont{
   margin: 10px;
   margin-top: 30px;
@@ -1090,12 +1136,12 @@ background-color: #dbd3c9;
   height: 125px;
   background-color:white;
 }
-.ReqDocumentation{
+.ReqDocumentation {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
-  width: 100%;
+  width: 461px;
   height: 55px;
   background-color: #F8EFE3;
   border-radius: 25px;
@@ -1110,72 +1156,28 @@ background-color: #dbd3c9;
       height: 30px;
      
   }
-  .attachedDocumentation{
-    justify-content: space-between;
-    align-items: center;
-  }
-  .Recent-fileName{
-    margin-left: 25%;
-    width: 100px;
-  }
-  .Recent-fileVersion{
-    margin-left: 130%;
-  }
   .divDocuReqLogs{
     width: 40px;
   }
   .attachedDocumentation{
-    width: 150px;
-    margin-left: 10px;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   .attachedAdvRecom{
     width: 150px;
     margin-left: 10px;
   }
- 
-  .attachedDocumentation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #F8EFE3;
-    border-radius: 25px;
-    padding: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.attachedDocumentation:hover {
-    background-color: #E8D7C3; /* Change background color on hover */
-    transform: scale(1.02); /* Slightly increase the size on hover */
-    cursor: pointer; /* Change cursor to pointer */
-}
-.attachedAdvRecom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #F8EFE3;
-    border-radius: 25px;
-    padding: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.attachedAdvRecom:hover {
-    background-color: #E8D7C3; /* Change background color on hover */
-    transform: scale(1.02); /* Slightly increase the size on hover */
-    cursor: pointer; /* Change cursor to pointer */
-}
-  .DocuReqLogs{
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-    font-size: 20px; /* Increase the font size */
-    width: 20px; /* Set a custom width */
-    height: 20px; /* Set a custom height */
-    padding: 6px; /* Add padding to increase clickable area */
-    margin-left: 250px;
-    background-color: transparent;
-    border: none;
+  .Recent-fileName{
+    margin-left: 26px;
+    width: 289px;
   }
-  .AdvLogs {
+  .DocuReqLogs{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1183,12 +1185,10 @@ background-color: #dbd3c9;
     width: 20px;
     height: 20px;
     padding: 6px;
-    margin-left: 250px;
+    margin-left: 39px;
     background-color: transparent;
     border: none;
-}
-
-.AdvCont {
+  }.AdvCont {
     margin: 10px;
     width: 455px;
     height: 125px;
@@ -1280,8 +1280,8 @@ background-color: #dbd3c9;
   flex-direction: column;
   gap: 10px;
 }
- #sender{
-  margin-right: 250px; /* Adjust spacing between sender and file info */
+ .sender{
+  width: 280px; /* Adjust spacing between sender and file info */
 
 }
 #sentbyme{
@@ -1293,12 +1293,14 @@ background-color: #dbd3c9;
   border-radius: 10px;
   padding: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: fit-content;
-  max-width: 70%;
+  gap: 215px;
   cursor: pointer;
+  flex-direction: row;
+  overflow: auto;
+  width: 76%;
+  border: 2px black;
+  margin-left: 11%;
 }
  
 .fileMessage.left {
@@ -1314,7 +1316,8 @@ background-color: #dbd3c9;
   display: flex;
   align-items: center;
   gap: 10px;
-}
+  flex-direction: row;
+  width: 50%;}
  
 .fileIcon {
   width: 40px;
@@ -1334,7 +1337,8 @@ background-color: #dbd3c9;
   font-size: 12px;
   color: #666;
 }
- 
+/* filesContainer end*/
+
 .modal {
   display: none;
   position: fixed;
