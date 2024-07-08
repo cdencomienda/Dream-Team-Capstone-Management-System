@@ -644,8 +644,11 @@
                         </tbody>
                     </table>
                         <div class = "Grades-Verdict" style="margin-top: 4%;">
+                            <div class="putangina">
 
-                            <p> <h2>Total Percentage: <span id="totalPercentage">0</span>%</h2></p>
+                            <h2>Total Percentage:</h2>
+
+                            </div>
                          
                             <h3> <p>Verdict:</p> </h3>
                          
@@ -2137,8 +2140,19 @@ function fetchResults() {
         gradeTable.appendChild(tbody);
 
         // Update totalPercentage
-        const totalPercentage = document.getElementById('totalPercentage');
-        totalPercentage.textContent = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+        const totalPercentage = document.querySelector('.putangina'); // Select element by class name
+const h2Element = document.createElement('h2'); // Create an <h2> element
+
+if (!testData.error) {
+    const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+    h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
+} else {
+    h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
+}
+
+// Replace the existing content with the <h2> element
+totalPercentage.innerHTML = ''; // Clear existing content
+totalPercentage.appendChild(h2Element); // Append the <h2> element
 
         // Populate verdictDropdown
         const verdictDropdown = document.getElementById('verdictDropdown');
@@ -2165,6 +2179,12 @@ function fetchResults() {
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+
+
+
+
+
 
 
 

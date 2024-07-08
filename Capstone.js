@@ -494,9 +494,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       
 
       // Calculate overall average
-      var overallAverage = totalGrade / totalCriteria;
-      var totalPercentage = (overallAverage / 7) * 100; // Assuming max score is 7 per criterion
-      document.getElementById("totalPercentage").textContent = totalPercentage.toFixed(2);
+
 
       // Open the modal after computing grades
       openModal();
