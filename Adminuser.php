@@ -115,7 +115,7 @@
         <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div> 
     <div class="wrapper">
-        <div class="adminClass">  
+        <div class="adminClass">    
         <main class="table" id="customers_table">
             <section class="table__header">
                 <h1> User Accounts </h1> 
@@ -126,7 +126,7 @@
                 <!-- Popup/Modal Structure -->
                 <div id="editDeleteModal" class="modal" style="display: none;">
                     
-                    <div class="modal-content">
+                    <div class="modal-content" id="modaluser">
                         <label for="userId">User ID:</label>
                         <input type="text" id="userId" name="userId"><br>
                         
