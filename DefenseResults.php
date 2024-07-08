@@ -253,7 +253,7 @@
         labels: ['PASS', 'CONDITIONAL PASS', 'REPEAT'],
         datasets: [{
             label: 'Values',
-            data: [15, 55, 20], // Initial data for 2024-2025
+            data: [15, 55, 30], // Initial data for 2024-2025
             backgroundColor: [
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(255, 205, 86, 0.2)',
@@ -292,7 +292,7 @@
     if (selectedYear === "2024-2025") {
         document.getElementById("datamgt-pass").textContent = "15%";
         document.getElementById("datamgt-conditional-pass").textContent = "55%";
-        document.getElementById("datamgt-repeat").textContent = "20%";
+        document.getElementById("datamgt-repeat").textContent = "30%";
         const passPercentage = 15;
         const conditionalPassPercentage = 55;
         const repeatPercentage = 20;
