@@ -491,19 +491,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           totalCriteria += panelists[panelist].count;
       });
 
-      // Populate grade table and calculate averages
-      var gradeTableBody = document.querySelector("#gradeTable tbody");
-      gradeTableBody.innerHTML = "";
-
-      Object.keys(panelists).forEach(function(panelist) {
-          var panelistTotalGrade = panelists[panelist].totalGrade;
-          var panelistCount = panelists[panelist].count;
-          var panelistAverage = panelistTotalGrade / panelistCount;
-
-          var newRow = document.createElement("tr");
-          newRow.innerHTML = `<td>${panelist}</td><td>${panelistAverage.toFixed(2)}</td>`;
-          gradeTableBody.appendChild(newRow);
-      });
+      
 
       // Calculate overall average
       var overallAverage = totalGrade / totalCriteria;

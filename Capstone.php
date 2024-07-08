@@ -635,7 +635,7 @@
                     <table id="gradeTable">
                         <thead>
                         <tr>
-                            <th>Criterion</th>
+                            <th>Panel</th>
                             <th>Grade</th>
                         </tr>
                         </thead>
@@ -2079,77 +2079,98 @@ function fetchResults() {
         console.log('Fetched Rubric Data:', rubricData);
         console.log('Fetched Test Data:', testData);
 
-        // Assuming you want to update the first rubric header with the first rubric name
-        if (rubricData.length > 0) {
-            const firstRubricName = rubricData[0].rubric_name;
-            const panelGradesContainer = document.querySelector('.panel-gradesContainer');
+        // Clear existing content in gradeTable
+        const gradeTable = document.getElementById('gradeTable');
+        gradeTable.innerHTML = ''; // Clear existing content
 
-            if (panelGradesContainer) {
-                // Clear the existing content of .panel-gradesContainer
-                panelGradesContainer.innerHTML = '';
+        // Create thead for table
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
 
-                // Create a new .panel-grades element
-                const panelGradesElement = document.createElement('div');
-                panelGradesElement.className = 'panel-grades';
+        // Add headers for criteria and grade
+        const criteriaHeader = document.createElement('th');
+        criteriaHeader.textContent = 'Criteria';
 
-                // Create an h2 element with the rubric name
-                const rubricHeader = document.createElement('h2');
-                rubricHeader.className = 'rubric-header';
-                rubricHeader.textContent = firstRubricName;
+        const gradeHeader = document.createElement('th');
+        gradeHeader.textContent = 'Grade';
 
-                // Append the h2 element to the .panel-grades element
-                panelGradesElement.appendChild(rubricHeader);
+        // Append headers to header row
+        headerRow.appendChild(criteriaHeader);
+        headerRow.appendChild(gradeHeader);
 
-                // Create and append the dropdown-container element
-                const dropdownContainer = document.createElement('div');
-                dropdownContainer.className = 'dropdown-container';
-                dropdownContainer.setAttribute('onclick', "toggleRubricSummary('chairPgrade', 'chairArrow')");
+        // Append header row to thead
+        thead.appendChild(headerRow);
 
-                const arrowSpan = document.createElement('span');
-                arrowSpan.className = 'arrow chairArrow down';
-                arrowSpan.textContent = '▶';
+        // Append thead to gradeTable
+        gradeTable.appendChild(thead);
 
-                const h2Span = document.createElement('span');
-                const h2Element = document.createElement('h2');
-                h2Element.textContent = 'Chair Panel';
-                h2Span.appendChild(h2Element);
+        // Create tbody for table
+        const tbody = document.createElement('tbody');
 
-                dropdownContainer.appendChild(arrowSpan);
-                dropdownContainer.appendChild(h2Span);
+        // Process testData for tbody content
+        if (testData.error) {
+            console.error('Error in testData:', testData.error);
+        } else {
+            // Loop through professorsData
+            testData.professorsData.forEach(professor => {
+                // Create a row for each professor
+                const row = document.createElement('tr');
 
-                // Append dropdown-container to panel-grades
-                panelGradesElement.appendChild(dropdownContainer);
+                // Create cells for panel role and grade
+                const criteriaCell = document.createElement('td');
+                criteriaCell.textContent = professor.panelRole; // Assuming panelRole represents criteria
 
-                // Append the structure inside chairPgrade div
-                const chairPgrade = document.createElement('div');
-                chairPgrade.className = 'chairPgrade';
+                const gradeCell = document.createElement('td');
+                const averageGrade = parseFloat(professor.averageWeightedGrade); // Convert to number
+                gradeCell.textContent = isNaN(averageGrade) ? 'N/A' : averageGrade.toFixed(2); // Format as number with 2 decimals
 
-                const defensePage = document.createElement('div');
-                defensePage.className = 'Defense-Page';
-                defensePage.id = 'summaryGrade';
-                defensePage.style.display = 'block';
+                // Append cells to row
+                row.appendChild(criteriaCell);
+                row.appendChild(gradeCell);
 
-                const rubricContainer = document.createElement('div');
-                rubricContainer.className = 'rubric-container';
-
-                defensePage.appendChild(rubricContainer);
-                chairPgrade.appendChild(defensePage);
-                panelGradesElement.appendChild(chairPgrade);
-
-                // Append .panel-grades element to .panel-gradesContainer element
-                panelGradesContainer.appendChild(panelGradesElement);
-
-                console.log("Updated .panel-gradesContainer with new .panel-grades, .rubric-header h2, and dropdown-container.");
-            } else {
-                console.error('.panel-gradesContainer element not found.');
-            }
+                // Append row to tbody
+                tbody.appendChild(row);
+            });
         }
 
-        // Process rubricData and testData as needed
-        // Logging and processing code continues here
+        // Append tbody to gradeTable
+        gradeTable.appendChild(tbody);
+
+        // Update totalPercentage
+        const totalPercentage = document.getElementById('totalPercentage');
+        totalPercentage.textContent = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+
+        // Populate verdictDropdown
+        const verdictDropdown = document.getElementById('verdictDropdown');
+        // Clear existing options
+        verdictDropdown.innerHTML = '';
+        // Define options
+        const verdictOptions = [
+            { value: 'Pass', text: 'Pass' },
+            { value: 'Conditional Pass', text: 'Conditional Pass' },
+            { value: 'Re-Defense', text: 'Re-Defense' },
+            { value: 'Repeat', text: 'Repeat' }
+        ];
+        // Create and append options
+        verdictOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.textContent = option.text;
+            verdictDropdown.appendChild(optionElement);
+        });
+
+        // Rename modal-content to Grade Summary
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.querySelector('h2').textContent = 'Grade Summary';
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+
+
+
+
+
 
 
 
