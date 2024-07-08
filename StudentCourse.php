@@ -1708,4 +1708,3 @@ document.addEventListener('DOMContentLoaded', fetchAcademicYears);
 
 
 <!--  -->
-
