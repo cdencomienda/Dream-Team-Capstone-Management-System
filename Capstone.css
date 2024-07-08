@@ -1404,8 +1404,7 @@ pointer-events: auto;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease;
-    width: 860px;
-     #000;
+    width: 860px; 
   }
   
   .chairPgrade.expand, .leadPanelContent.expand, .panelMemberContent.expand, .panelMember2Content.expand {
@@ -1792,7 +1791,7 @@ transition: backround-color .3s ease;
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  width: 1000px;
+  width: 1100px;
   height: 600px;
   margin-left: -25px;
   margin-top: 0px;

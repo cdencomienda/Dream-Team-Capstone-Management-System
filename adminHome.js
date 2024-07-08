@@ -70,7 +70,9 @@ document.addEventListener('profile', function () {
     function advisoryProf(){
         window.location.assign("adminAdvisory.php")
     }
-  
+    function Capstone(){
+        window.location.assign("adminCapstone.php")
+    }
 // action of melonbtns
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
