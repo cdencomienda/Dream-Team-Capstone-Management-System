@@ -450,10 +450,6 @@
 
         
                 </div>
-                <div class="rubric-header">
-                                <h1>Written Communication</h1>
-                              
-                            </div>
                         
                 <!-- Chair Panel Dropdown -->
                 <div class="dropdown-container" onclick="toggleRubricSummary('chairPgrade', 'chairArrow')">
@@ -471,27 +467,8 @@
                         <div class="rubric-container">
                         
                             <!-- Group name and title -->
-                        
-                            <div class="grpDefense-Details">
-
-                                <div class="Group-Name">
-    
-                                    <h3>Group</h3>
+                    
         
-                                </div>
-        
-                                <div class="capstone-title">
-        
-                                    <h3>Development of ???</h3>
-            
-                                </div>
-            
-                            </div>
-            
-                            <div class="rubric-header">
-                                <h1>Written Communication</h1>
-                              
-                            </div>
                             
                             <table>
                             
@@ -2083,6 +2060,103 @@ function computeGroupName(group_name) {
     const panelElement = document.querySelector('.Group-Name');
     panelElement.innerHTML = `<h2>${group_name}</h2>`;
 }
+
+const summaryBtn = document.querySelector('.summary-Btn');
+
+// Add an event listener for the click event
+summaryBtn.addEventListener('click', function() {
+    gradeSummary();
+    fetchResults();
+});
+
+function fetchResults() {
+    Promise.all([
+        fetch('fetchDisplayRubric.php').then(response => response.json()),
+        fetch('test.php').then(response => response.json())
+    ])
+    .then(([rubricData, testData]) => {
+        // Log the entire data fetched from the server
+        console.log('Fetched Rubric Data:', rubricData);
+        console.log('Fetched Test Data:', testData);
+
+        // Assuming you want to update the first rubric header with the first rubric name
+        if (rubricData.length > 0) {
+            const firstRubricName = rubricData[0].rubric_name;
+            const panelGradesContainer = document.querySelector('.panel-gradesContainer');
+
+            if (panelGradesContainer) {
+                // Clear the existing content of .panel-gradesContainer
+                panelGradesContainer.innerHTML = '';
+
+                // Create a new .panel-grades element
+                const panelGradesElement = document.createElement('div');
+                panelGradesElement.className = 'panel-grades';
+
+                // Create an h2 element with the rubric name
+                const rubricHeader = document.createElement('h2');
+                rubricHeader.className = 'rubric-header';
+                rubricHeader.textContent = firstRubricName;
+
+                // Append the h2 element to the .panel-grades element
+                panelGradesElement.appendChild(rubricHeader);
+
+                // Create and append the dropdown-container element
+                const dropdownContainer = document.createElement('div');
+                dropdownContainer.className = 'dropdown-container';
+                dropdownContainer.setAttribute('onclick', "toggleRubricSummary('chairPgrade', 'chairArrow')");
+
+                const arrowSpan = document.createElement('span');
+                arrowSpan.className = 'arrow chairArrow down';
+                arrowSpan.textContent = '▶';
+
+                const h2Span = document.createElement('span');
+                const h2Element = document.createElement('h2');
+                h2Element.textContent = 'Chair Panel';
+                h2Span.appendChild(h2Element);
+
+                dropdownContainer.appendChild(arrowSpan);
+                dropdownContainer.appendChild(h2Span);
+
+                // Append dropdown-container to panel-grades
+                panelGradesElement.appendChild(dropdownContainer);
+
+                // Append the structure inside chairPgrade div
+                const chairPgrade = document.createElement('div');
+                chairPgrade.className = 'chairPgrade';
+
+                const defensePage = document.createElement('div');
+                defensePage.className = 'Defense-Page';
+                defensePage.id = 'summaryGrade';
+                defensePage.style.display = 'block';
+
+                const rubricContainer = document.createElement('div');
+                rubricContainer.className = 'rubric-container';
+
+                defensePage.appendChild(rubricContainer);
+                chairPgrade.appendChild(defensePage);
+                panelGradesElement.appendChild(chairPgrade);
+
+                // Append .panel-grades element to .panel-gradesContainer element
+                panelGradesContainer.appendChild(panelGradesElement);
+
+                console.log("Updated .panel-gradesContainer with new .panel-grades, .rubric-header h2, and dropdown-container.");
+            } else {
+                console.error('.panel-gradesContainer element not found.');
+            }
+        }
+
+        // Process rubricData and testData as needed
+        // Logging and processing code continues here
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+
+
+
+
 
 
 

@@ -77,7 +77,7 @@ if (isset($_SESSION['account_id'])) {
                                 $courseID = $row_group['courseID'];
 
                                 // SQL query to fetch distinct acy_id from SOE Assessment database
-                                $sql_soe_course = "SELECT DISTINCT acy_id FROM course WHERE professor = $accountId AND course_id = $courseID";
+                                $sql_soe_course = "SELECT DISTINCT acy_id FROM course WHERE course_id = $courseID";
                                 $result_soe_course = mysqli_query($conn_soe, $sql_soe_course);
 
                                 // Check if query executed successfully

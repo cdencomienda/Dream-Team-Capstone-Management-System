@@ -8,11 +8,6 @@ if (isset($_SESSION['user_id'], $_SESSION['student_group_id'], $_SESSION['course
     $studentGroupId = $_SESSION['student_group_id'];
     $courseId = $_SESSION['course_id'];
 
-    // Display session variables
-    echo "User ID: $userId<br>";
-    echo "Student Group ID: $studentGroupId<br>";
-    echo "Course ID: $courseId<br>";
-
     // Database connection
     $conn = new mysqli('localhost', 'root', '', 'dreamteam');
     if ($conn->connect_error) {
@@ -31,15 +26,14 @@ if (isset($_SESSION['user_id'], $_SESSION['student_group_id'], $_SESSION['course
     $stmt->execute();
     $result = $stmt->get_result();
 
+    $professorsData = array();
+
     // Check if there are results from the first query
     if ($result->num_rows > 0) {
         // Iterate through each professorID and fetch the latest assessment data
         while ($row = $result->fetch_assoc()) {
             $professorID = $row['professorID'];
             $panelRole = $row['panelRole'];
-
-            echo "Professor ID: $professorID<br>";
-            echo "Panel Role: $panelRole<br>";
 
             // Prepare and execute the query to get the latest assessment entry for this professorID
             $stmt2 = $conn->prepare("
@@ -64,46 +58,58 @@ if (isset($_SESSION['user_id'], $_SESSION['student_group_id'], $_SESSION['course
                 $remarkTypeArray = explode('~', $row2['remarkType']);
                 $remarksArray = explode('~', $row2['remarks']);
 
-                // Output exploded data
-                echo "Criteria:<br>";
-                foreach ($criteriaArray as $criteria) {
-                    echo "- $criteria<br>";
-                }
-                echo "<br>";
-
-                echo "Weighted Grade:<br>";
+                // Calculate average weighted grade
+                $totalWeightedGrade = 0;
                 foreach ($weightedGradeArray as $weightedGrade) {
-                    echo "- $weightedGrade<br>";
+                    $totalWeightedGrade += (float) $weightedGrade; // Summing up weighted grades
                 }
-                echo "<br>";
+                $averageWeightedGrade = $totalWeightedGrade / count($weightedGradeArray); // Calculating average
 
-                echo "Remark Type:<br>";
-                foreach ($remarkTypeArray as $remarkType) {
-                    echo "- $remarkType<br>";
-                }
-                echo "<br>";
+                // Prepare data for JSON output
+                $professorData = array(
+                    'professorID' => $professorID,
+                    'panelRole' => $panelRole,
+                    'criteria' => $criteriaArray,
+                    'weightedGrade' => $weightedGradeArray,
+                    'remarkType' => $remarkTypeArray,
+                    'remarks' => $remarksArray,
+                    'averageWeightedGrade' => number_format($averageWeightedGrade, 2) . "%"
+                );
 
-                echo "Remarks:<br>";
-                foreach ($remarksArray as $remarks) {
-                    echo "- $remarks<br>";
-                }
-                echo "<br>";
-            } else {
-                echo "No assessment data found for Professor ID: $professorID and Student Group ID: $studentGroupId<br>";
+                // Add professor data to the main array
+                $professorsData[] = $professorData;
             }
 
             // Close the second prepared statement
             $stmt2->close();
         }
     } else {
-        echo "No panels found for Student Group ID: $studentGroupId and Course ID: $courseId";
+        echo json_encode(array('error' => "No panels found for Student Group ID: $studentGroupId and Course ID: $courseId"));
+        exit;
     }
 
     // Close the first prepared statement and database connection
     $stmt->close();
     $conn->close();
+
+    // Calculate overall average if professors were found
+    if (!empty($professorsData)) {
+        $totalAverage = array_sum(array_column($professorsData, 'averageWeightedGrade')) / count($professorsData);
+        $overallAverage = number_format($totalAverage, 2) . "%";
+
+        // Add overall average to the response array
+        $response = array(
+            'professorsData' => $professorsData,
+            'overallAverage' => $overallAverage
+        );
+
+        // Encode response as JSON and output
+        echo json_encode($response);
+    } else {
+        echo json_encode(array('error' => "No assessment data found for professors."));
+    }
 } else {
     // If any session variable is not set, handle the error or redirect
-    echo "Session variables not set.";
+    echo json_encode(array('error' => "Session variables not set."));
 }
 ?>
