@@ -352,12 +352,11 @@
                                     <button class="approve-button"><i class="fa-solid fa-check"></i></button>
                                 </div>
                             </div>
-                            <div class = "">
-                                <button class = "gradeSumarry"> summary of grades </button> 
-                            </div>    
+                                
                         </div>
 
                     </div>
+
                     <!-- chair panel end -->
                     <div class="cDiv">
                         <div class="CommentsDiv">
