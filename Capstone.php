@@ -257,12 +257,7 @@
                 
                 </div>    
                 
-                    
-                <div class="rubric-header">
-                        
-                    <h1>Written Communication</h1>
-                    
-                </div>
+               
                     
                     <table class="table">
                         <thead>
@@ -445,20 +440,10 @@
     
                     </div>
 
-                    
-    
-
-        
                 </div>
                         
                 <!-- Chair Panel Dropdown -->
-                <div class="dropdown-container" onclick="toggleRubricSummary('chairPgrade', 'chairArrow')">
-                
-                    <span class="arrow right chairArrow">▶</span>
-                    
-                    <span><h2>Chair Panel</h2></span>
-                    
-                </div>
+
                         
                 <div class="chairPgrade">
                 <div class = "chairpanelName"><h2>CHAIR PANEL: </h2></span></div>
@@ -532,9 +517,7 @@
                     <div class = "lead-panelName"><h2>LEAD PANEL: </h2></span></div>
                         <div class="Defense-Page" id="leadSummaryGrade">
                             <div class="rubric-container">
-                              <div class="rubric-header">
-                                <h1>Oral Communication</h1>
-                              </div>
+                              
                               <table>
                             
                                 <thead>
@@ -602,9 +585,9 @@
 
                           <div class="Defense-Page" id="panelMemberSummaryGrade">
                             <div class="rubric-container">
-                              <div class="rubric-header">
-                                <h1>Project Evaluation</h1>
-                              </div>
+
+                            
+
                               <table>
                                 <thead>
                                   <tr>
@@ -653,9 +636,7 @@
 
                     <div class="Defense-Page" id="panelMember2SummaryGrade">
                         <div class="rubric-container">
-                            <div class="rubric-header">
-                                <h1>Project Evaluation</h1>
-                              </div>
+                             
                               <table>
                                 <thead>
                                   <tr>
