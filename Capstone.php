@@ -444,32 +444,20 @@
                         <h3>Group</h3>
     
                     </div>
-
-                    
-    
-
-        
                 </div>
                         
-                <!-- Chair Panel Dropdown -->
-                <div class="dropdown-container" onclick="toggleRubricSummary('chairPgrade', 'chairArrow')">
-                
-                    <span class="arrow right chairArrow">▶</span>
-                    
-                    <span><h2>Chair Panel</h2></span>
-                    
-                </div>
+             
+                        <!-- Chair Panel Dropdown -->
+
                         
                 <div class="chairPgrade">
-                
+                <div class = "chairpanelName"><h2>CHAIR PANEL: </h2></span></div>
                     <div class="Defense-Page" id="summaryGrade">
-                    
+
                         <div class="rubric-container">
                         
                             <!-- Group name and title -->
-                    
-        
-                            
+
                             <table>
                             
                                 <thead>
@@ -501,58 +489,107 @@
                                     <!-- More rows as needed -->
                                 
                                 </tbody>
+                                
+                                <tbody>
+                                  
+                                  <tr class="criteria">
+                                  
+                                      <td class="description">
+                                      
+                                          <strong>B1. Executive Summary</strong><br>
+                                          The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                  
+                                      </td>
+                                      
+                                      <td class="grade_description">example description</td>
+                                      <td class="score-column"><span class="score"></span></td>
+                                  
+                                  </tr>
+                                
+                                  <!-- More rows as needed -->
                               
+                              </tbody>
+
                             </table>
-                            
                         </div>
                           
                     </div>
                         
                 </div>
                   
-                        <!-- Lead Panel Dropdown -->
-                 <div class="dropdown-container" onclick="toggleRubricSummary('leadPanelContent', 'leadArrow')">
-                          <span class="arrow right leadArrow">▶</span>
-                          <span><h2>Lead Panel</h2></span>
-                        </div>
+                    <!-- Lead Panel Dropdown -->
                 <div class="leadPanelContent">
+                    <div class = "lead-panelName"><h2>LEAD PANEL: </h2></span></div>
                         <div class="Defense-Page" id="leadSummaryGrade">
                             <div class="rubric-container">
                               <div class="rubric-header">
                                 <h1>Oral Communication</h1>
                               </div>
                               <table>
+                            
                                 <thead>
-                                  <tr>
-                                    <th class="description-column">Description</th>
-                                    <th class="grade-Desc">Score Description</th>
-                                    <th class="grades-column">Grades</th>
-                                  </tr>
+                                
+                                    <tr>
+                                        <th class="description-column">Description</th>
+                                        <th class="grade-Desc">Score Description</th>
+                                        <th class="grades-column">Grades</th>
+                                    </tr>
+                                
                                 </thead>
+                                
                                 <tbody>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B2. Presentation Skills</strong><br>
-                                      The presentation includes clear, coherent, easily understandable communication; proper use of visual aids; and confidence in delivery.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                  <!-- More rows as needed -->
+                                  
+                                    <tr class="criteria">
+                                    
+                                        <td class="description">
+                                        
+                                            <strong>B1. Executive Summary</strong><br>
+                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                    
+                                        </td>
+                                        
+                                        <td class="grade_description">example description</td>
+                                        <td class="score-column"><span class="score"></span></td>
+                                    
+                                    </tr>
+                                  
+                                    <!-- More rows as needed -->
+                                
                                 </tbody>
-                              </table>
+                                
+                                <tbody>
+                                  
+                                  <tr class="criteria">
+                                  
+                                      <td class="description">
+                                      
+                                          <strong>B1. Executive Summary</strong><br>
+                                          The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
+                                  
+                                      </td>
+                                      
+                                      <td class="grade_description">example description</td>
+                                      <td class="score-column"><span class="score"></span></td>
+                                  
+                                  </tr>
+                                
+                                  <!-- More rows as needed -->
+                              
+                              </tbody>
+
+                            </table>
                             </div>
                     </div>
                 </div>
                   
 
                 <!-- Panel Member 1 Dropdown -->
-                <div class="dropdown-container" onclick="toggleRubricSummary('panelMemberContent', 'panelMemberArrow')">
-                    <span class="arrow right panelMemberArrow">▶</span>
-                    <span><h2>Panel Member 1</h2></span>
-                </div>
+                
 
-                <div class="panelMemberContent">
+            <div class="panelMemberContent">
+
+                <div class = "panel-memberName"><h2>PANEL MEMBER: </h2></span></div>
+
                           <div class="Defense-Page" id="panelMemberSummaryGrade">
                             <div class="rubric-container">
                               <div class="rubric-header">
@@ -576,6 +613,22 @@
                                     <td class="score-column"><span class="score"></span></td>
                                   </tr>
                                   <!-- More rows as needed -->
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B3. Project Impact</strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B3. Project Impact</strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </div>
@@ -583,12 +636,11 @@
                         </div>
 
                 <!-- Panel Member 2 Dropdown -->
-                <div class="dropdown-container" onclick="toggleRubricSummary('panelMember2Content', 'panelMember2Arrow')">
-                    <span class="arrow right panelMember2Arrow">▶</span>
-                    <span><h2>Panel Member 2</h2></span>
-                 </div>
-                
+
                 <div class="panelMember2Content">
+               
+                <div class = "panel-member2Name"><h2>PANEL MEMBER 2: </h2></span></div>
+
                     <div class="Defense-Page" id="panelMember2SummaryGrade">
                         <div class="rubric-container">
                             <div class="rubric-header">
@@ -612,13 +664,38 @@
                                     <td class="score-column"><span class="score"></span></td>
                                   </tr>
                                   <!-- More rows as needed -->
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B4. Jollibee Burger Steak </strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B4. Jollibee Burger Steak </strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
+                                  <tr class="criteria">
+                                    <td class="description">
+                                      <strong>B4. Jollibee Burger Steak </strong><br>
+                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
+                                    </td>
+                                    <td class="grade_description">example description</td>
+                                    <td class="score-column"><span class="score"></span></td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
-                  
+                
                         <!-- Compute Button -->
+
                         <button class="compute-button" onclick="computeGrades()">Compute</button>
                       </div>
                     </div>    
@@ -2139,20 +2216,19 @@ function fetchResults() {
         // Append tbody to gradeTable
         gradeTable.appendChild(tbody);
 
-        // Update totalPercentage
         const totalPercentage = document.querySelector('.putangina'); // Select element by class name
-const h2Element = document.createElement('h2'); // Create an <h2> element
+        const h2Element = document.createElement('h2'); // Create an <h2> element
 
-if (!testData.error) {
-    const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
-    h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
-} else {
-    h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
-}
+        if (!testData.error) {
+            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+            h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
+        } else {
+            h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
+        }
 
-// Replace the existing content with the <h2> element
-totalPercentage.innerHTML = ''; // Clear existing content
-totalPercentage.appendChild(h2Element); // Append the <h2> element
+        // Replace the existing content with the <h2> element
+        totalPercentage.innerHTML = ''; // Clear existing content
+        totalPercentage.appendChild(h2Element); // Append the <h2> element
 
         // Populate verdictDropdown
         const verdictDropdown = document.getElementById('verdictDropdown');

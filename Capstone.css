@@ -1399,12 +1399,27 @@ pointer-events: auto;
   .arrow.down {
     transform: rotate(90deg);
   }
-  
-  .chairPgrade, .leadPanelContent, .panelMemberContent, .panelMember2Content {
-    max-height: 0;
-    overflow: hidden;
+  .chairpanelName, .lead-panelName, .panel-memberName, .panel-member2Name{
+    margin: 7%;
+  }
+
+  .chairPgrade,.leadPanelContent, .panelMemberContent, .panelMember2Content {
+    max-height: 1000px;
+    
     transition: max-height 0.5s ease;
     width: 860px; 
+  }
+  .chairPgrade{
+    margin-top: 1%;
+  }
+  .leadPanelContent{
+    margin-top: 2%;
+  } 
+  .panelMemberContent{
+    margin-top: 0;
+  } 
+  .panelMember2Content {
+    margin-top: 0%;
   }
   
   .chairPgrade.expand, .leadPanelContent.expand, .panelMemberContent.expand, .panelMember2Content.expand {
@@ -1438,10 +1453,11 @@ pointer-events: auto;
   
   #summaryGrade, #leadSummaryGrade, #panelMemberSummaryGrade,#panelMember2SummaryGrade  {
     outline: #000;
-    width: 85%;
-    margin-left: 6.5%;
+    width: 121%;
+    margin-left: -2.5%;
     margin-top: -30px;
     overflow-x: hidden;
+    PADDING: 0%;
 
   }
   
@@ -1457,7 +1473,7 @@ pointer-events: auto;
     margin: 17px;
     z-index: 10;
     width: 10%;
-    margin-left: 87%;
+    margin-left: 92%;
     margin-top: 1%;
   }
   

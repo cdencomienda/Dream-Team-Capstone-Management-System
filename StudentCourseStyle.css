@@ -653,6 +653,8 @@ iframe {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .documentationCont{
   
