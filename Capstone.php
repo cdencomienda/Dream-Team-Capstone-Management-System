@@ -444,11 +444,21 @@
                         <h3>Group</h3>
     
                     </div>
+
+                    
+    
+
+        
                 </div>
                         
-             
-                        <!-- Chair Panel Dropdown -->
-
+                <!-- Chair Panel Dropdown -->
+                <div class="dropdown-container" onclick="toggleRubricSummary('chairPgrade', 'chairArrow')">
+                
+                    <span class="arrow right chairArrow">▶</span>
+                    
+                    <span><h2>Chair Panel</h2></span>
+                    
+                </div>
                         
                 <div class="chairPgrade">
                 <div class = "chairpanelName"><h2>CHAIR PANEL: </h2></span></div>
