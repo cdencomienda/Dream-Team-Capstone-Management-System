@@ -521,9 +521,9 @@
                     </div>
                         
                 </div>
-                  
-                    <!-- Lead Panel Dropdown -->
-                <div class="leadPanelContent">
+<!--                   
+                Lead Panel Dropdown -->
+                <!-- <div class="leadPanelContent">
                     <div class = "lead-panelName"><h2>LEAD PANEL: </h2></span></div>
                         <div class="Defense-Page" id="leadSummaryGrade">
                             <div class="rubric-container">
@@ -556,11 +556,11 @@
                                         <td class="grade_description">example description</td>
                                         <td class="score-column"><span class="score"></span></td>
                                     
-                                    </tr>
+                                    </tr> -->
                                   
                                     <!-- More rows as needed -->
                                 
-                                </tbody>
+                                <!-- </tbody>
                                 
                                 <tbody>
                                   
@@ -577,18 +577,17 @@
                                       <td class="score-column"><span class="score"></span></td>
                                   
                                   </tr>
-                                
+                                 -->
                                   <!-- More rows as needed -->
                               
-                              </tbody>
+                              <!-- </tbody>
 
                             </table>
                             </div>
                     </div>
-                </div>
+                </div> -->
                   
-
-                <!-- Panel Member 1 Dropdown -->
+                <!-- Panel Member 1 Dropdown
                 
 
             <div class="panelMemberContent">
@@ -617,7 +616,7 @@
                                     <td class="grade_description">example description</td>
                                     <td class="score-column"><span class="score"></span></td>
                                   </tr>
-                                  <!-- More rows as needed -->
+                                  More rows as needed
                                   <tr class="criteria">
                                     <td class="description">
                                       <strong>B3. Project Impact</strong><br>
@@ -639,11 +638,11 @@
                             </div>
                           </div>
                         </div>
+            -->
+            <!-- Panel Member 2 Dropdown             
 
-                <!-- Panel Member 2 Dropdown -->
-
-                <div class="panelMember2Content">
-               
+            <div class="panelMember2Content">
+                
                 <div class = "panel-member2Name"><h2>PANEL MEMBER 2: </h2></span></div>
 
                     <div class="Defense-Page" id="panelMember2SummaryGrade">
@@ -667,9 +666,9 @@
                                     </td>
                                     <td class="grade_description">example description</td>
                                     <td class="score-column"><span class="score"></span></td>
-                                  </tr>
+                                  </tr> -->
                                   <!-- More rows as needed -->
-                                  <tr class="criteria">
+                                  <!-- <tr class="criteria">
                                     <td class="description">
                                       <strong>B4. Jollibee Burger Steak </strong><br>
                                       The project evaluation includes: assessing the project's impact on the community and its potential for future development.
@@ -697,7 +696,7 @@
                               </table>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                   
                         <!-- Compute Button -->
                         <button class="compute-button" onclick="computeGrades()">Compute</button>
@@ -797,13 +796,14 @@
                     </div>
                 </div> 
                 <!-- Group Defense Rubric -->
-        </div>  
+        
+            </div>
         
     <!-- start rubrics set hidden -->  
     <!-- Rubric div -->
         
     <div class="rubriccontainer" style="display: none"> 
-                <div class="secondaryRubriccont">
+                <div class="seondaryRubriccont">
                     <div class="rubric-container">
                             <h1>Written Communication</h1>
                         </div>
