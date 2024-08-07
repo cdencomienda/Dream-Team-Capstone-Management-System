@@ -257,7 +257,12 @@
                 
                 </div>    
                 
-               
+                    
+                <div class="rubric-header">
+                        
+                    <h1>Written Communication</h1>
+                    
+                </div>
                     
                     <table class="table">
                         <thead>
@@ -456,17 +461,22 @@
                             <table>
                             
                                 <thead>
+                                    <tr>
+                                        <th class="description-column" colspan="3">
+                                            <strong>Rubric Title</strong>
+                                        </th>
+                                    </tr>
+                                                        
                                 
+                                </thead>
+                                
+                                <tbody>
                                     <tr>
                                         <th class="description-column">Description</th>
                                         <th class="grade-Desc">Score Description</th>
                                         <th class="grades-column">Grades</th>
                                     </tr>
-                                
-                                </thead>
-                                
-                                <tbody>
-                                  
+
                                     <tr class="criteria">
                                     
                                         <td class="description">
@@ -517,7 +527,9 @@
                     <div class = "lead-panelName"><h2>LEAD PANEL: </h2></span></div>
                         <div class="Defense-Page" id="leadSummaryGrade">
                             <div class="rubric-container">
-                              
+                              <div class="rubric-header">
+                                <h1>Oral Communication</h1>
+                              </div>
                               <table>
                             
                                 <thead>
@@ -585,9 +597,9 @@
 
                           <div class="Defense-Page" id="panelMemberSummaryGrade">
                             <div class="rubric-container">
-
-                            
-
+                              <div class="rubric-header">
+                                <h1>Project Evaluation</h1>
+                              </div>
                               <table>
                                 <thead>
                                   <tr>
@@ -636,7 +648,9 @@
 
                     <div class="Defense-Page" id="panelMember2SummaryGrade">
                         <div class="rubric-container">
-                             
+                            <div class="rubric-header">
+                                <h1>Project Evaluation</h1>
+                              </div>
                               <table>
                                 <thead>
                                   <tr>
@@ -684,9 +698,8 @@
                             </div>
                           </div>
                         </div>
-                
+                  
                         <!-- Compute Button -->
-
                         <button class="compute-button" onclick="computeGrades()">Compute</button>
                       </div>
                     </div>    
@@ -2207,19 +2220,20 @@ function fetchResults() {
         // Append tbody to gradeTable
         gradeTable.appendChild(tbody);
 
+        // Update totalPercentage
         const totalPercentage = document.querySelector('.putangina'); // Select element by class name
-        const h2Element = document.createElement('h2'); // Create an <h2> element
+const h2Element = document.createElement('h2'); // Create an <h2> element
 
-        if (!testData.error) {
-            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
-            h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
-        } else {
-            h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
-        }
+if (!testData.error) {
+    const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+    h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
+} else {
+    h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
+}
 
-        // Replace the existing content with the <h2> element
-        totalPercentage.innerHTML = ''; // Clear existing content
-        totalPercentage.appendChild(h2Element); // Append the <h2> element
+// Replace the existing content with the <h2> element
+totalPercentage.innerHTML = ''; // Clear existing content
+totalPercentage.appendChild(h2Element); // Append the <h2> element
 
         // Populate verdictDropdown
         const verdictDropdown = document.getElementById('verdictDropdown');
@@ -2272,4 +2286,4 @@ function fetchResults() {
 
 
 
-</script>
+</script
