@@ -571,7 +571,7 @@ cursor: pointer;
   width: 1370px;
   height: 1000px;
   padding: 25px;
-  margin-top: 120px;
+  margin-top: 0%;
   display: none;
   z-index: 0; /* Set a lower z-index */
   margin-left: -4%;
@@ -1269,7 +1269,7 @@ background-color: #dbd3c9;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   width: 1370px;
-  height: 600px;
+  height: 700px;
   margin-left: -25px;
   margin-top: 0px;
   display: flex;
@@ -1582,8 +1582,8 @@ span.dot{
   width: 1000px;
   height: 600px;
   padding: 25px;
-  margin-top: -105px;
-  top: -900px;
+  margin-top: 0px;
+  top: -1068px;
   display: block;
   z-index: 0;  
 }
