@@ -71,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
 
     // Fetch courses and format as JSON
     foreach ($course_ids as $courseID) {
-        $sql_course = "SELECT DISTINCT course_id, course_code, section FROM course WHERE course_id = ? AND acy_id = ? AND term = ?";
+        $sql_course = "SELECT DISTINCT course_id, course_code, section FROM complete_course_view WHERE course_id = ? AND acy_id = ? AND term = ?";
         $stmt_course = $conn_soe->prepare($sql_course);
         $stmt_course->bind_param("iii", $courseID, $acy_id, $selectedTerm);
         $stmt_course->execute();

@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
 
         // Fetch academic years for each courseID
         foreach ($courseIDs as $courseID) {
-            $query_academic_year = "SELECT DISTINCT acy_id FROM `course` WHERE course_id = '$courseID'";
+            $query_academic_year = "SELECT DISTINCT acy_id FROM complete_course_view WHERE course_id = '$courseID'";
             $result_academic_year = mysqli_query($conn_soe_assessment, $query_academic_year);
 
             if (mysqli_num_rows($result_academic_year) > 0) {
@@ -52,7 +52,7 @@ if (isset($_SESSION['user_id'])) {
                 $acy_id = $row_academic_year['acy_id'];
 
                 // Query to fetch academic years from 'academic_year' table
-                $query_academic_years = "SELECT DISTINCT academic_year FROM `academic_year` WHERE acy_id = '$acy_id'";
+                $query_academic_years = "SELECT DISTINCT academic_year FROM complete_course_view WHERE acy_id = '$acy_id'";
                 $result_academic_years = mysqli_query($conn_soe_assessment, $query_academic_years);
 
                 // Check if query executed successfully

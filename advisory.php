@@ -477,7 +477,7 @@
 <script> 
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('fetchProfessorSession.php')
+    fetch('advisoryProfessorSession.php')
         .then(response => response.json())
         .then(data => {
             if (data.match) {
