@@ -860,12 +860,12 @@
 <script> 
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('fetchProfessorSession.php')
+    fetch('capstoneProfessorSession.php')
         .then(response => response.json())
         .then(data => {
             if (data.match) {
                 console.log("Session user matches the database.");
-                console.log("Account ID:", data.account_id);
+                console.log("User ID:", data.account_id);
             } else {
                 console.log("Session user does not match the database.");
                 // Handle the case where there is no match
@@ -2156,7 +2156,7 @@ summaryBtn.addEventListener('click', function() {
 function fetchResults() {
     Promise.all([
         fetch('fetchDisplayRubric.php').then(response => response.json()),
-        fetch('test.php').then(response => response.json())
+        fetch('fetchPanelistGrade.php').then(response => response.json())
     ])
     .then(([rubricData, testData]) => {
         // Log the entire data fetched from the server
@@ -2286,4 +2286,4 @@ totalPercentage.appendChild(h2Element); // Append the <h2> element
 
 
 
-</script
+</script>

@@ -13,7 +13,7 @@ if (isset($_POST['acYear'])) {
         ];
     } else {
         // Use prepared statement to prevent SQL injection
-        $query = "SELECT acy_id FROM `academic_year` WHERE academic_year = ?";
+        $query = "SELECT acy_id FROM complete_course_view WHERE academic_year = ?";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "s", $acYear);
         mysqli_stmt_execute($stmt);
