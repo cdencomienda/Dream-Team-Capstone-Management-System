@@ -22,7 +22,7 @@ body{
  
 /* dropdown edit profile */
 .container{
-  position: relative;
+  position: absolute;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -40,7 +40,7 @@ body{
   width: 500;
   height: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 20000;
+  z-index: 0;
 }  
 .dropdown-profile{
   position: absolute;
@@ -52,6 +52,7 @@ body{
     border-radius: 5px;
     top: 50%;
     left: 50%;
+    z-index: 0;
     transform: translate(-50%, -50%);
 }
 .dropdown-profile h5edit{
@@ -127,6 +128,7 @@ body{
   transition: 0.5s;
   visibility: hidden;
   opacity: 0;
+  z-index: 1000000000000000;
 }
 .action .menu.show {
   visibility: visible;
@@ -391,7 +393,7 @@ background-repeat: no-repeat;
   border: 1px #000000 solid;
   border-radius: 15px;
   padding: 5px;
-  height: 80px;
+  height: 75px;
   cursor: pointer;
   transition: 0.3s;
   font-size: 12px;
@@ -573,7 +575,7 @@ cursor: pointer;
   padding: 25px;
   margin-top: 0%;
   display: none;
-  z-index: 0; /* Set a lower z-index */
+  z-index: 1; /* Set a lower z-index */
   margin-left: -4%;
 }
 .dashboard_header{
@@ -1279,7 +1281,7 @@ background-color: #dbd3c9;
  
  
 .recentFiles {
-  padding: 20px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1294,17 +1296,17 @@ background-color: #dbd3c9;
 }
 .fileMessage {
   background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 215px;
-  cursor: pointer;
-  flex-direction: row;
-  overflow: auto;
-  width: 76%;
-  border: 2px black;
-  margin-left: 11%;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 215px;
+    cursor: pointer;
+    flex-direction: row;
+    overflow: auto;
+    width: 98%;
+    border: 2px black;
+    margin-left: 0%;
 }
  
 .fileMessage.left {
@@ -1577,13 +1579,13 @@ span.dot{
  
 }
 .adminClass{
-  position: relative;
+  position: absolute;
   margin-left: 475px;
   width: 1000px;
   height: 600px;
   padding: 25px;
   margin-top: 0px;
-  top: -1068px;
+  top: 95px;
   display: block;
   z-index: 0;  
 }
