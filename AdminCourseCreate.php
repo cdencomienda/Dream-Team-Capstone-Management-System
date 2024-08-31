@@ -178,7 +178,8 @@
     </div>
 
     <div class="wrapper"><!-- start of wrapper scroll -->
-        <div class="class-Dropdown">
+    <div class="class-Dropdown">
+            <h1>My Courses</h1>
             <div class="classListDropdown">                              
                 <button class="listClass">  
                     <h4>COURSES AY 2023-2024</h4>
@@ -251,42 +252,8 @@
                     </div>
                     <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
                 </div>
-            </div>
-            
-        </div>
-
-        <div class="coursesDetails" id="term2">
-            <h3 class="termh3">Courses for Term 2</h3>
-            <div class="coursesDropdown">
-                <div class="dropdownmelon">            
-                    <h3 class="courseNameDisplay"> MIXSIGS <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
-                    <div class="dropdown-content">
-                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                    </div>
                 </div>
-                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
             </div>
-        </div>
-
-        <div class="coursesDetails" id="term3">
-            <h3 class="termh3">Courses for Term 3</h3>
-            <div class="coursesDropdown">
-                <div class="dropdownmelon">            
-                    <h3 class="courseNameDisplay"> ROBPROA <button type="button" class="classSet" onclick="dropdownMelon(this)">•••</button></h3>
-                    <div class="dropdown-content">          
-                        <button type="button" class="dropdownbtn" onclick="viewMembers()">View Members</button>
-                        <button type="button" class="dropdownbtn" onclick="AddMembers()">Add Members</button> 
-                        <button type="button" class="dropdownbtn" onclick="setrequirements()">Requirements</button>
-                        <button type="button" class="dropdownbtn" onclick="rubric()">Rubric</button>
-                    </div>
-                </div>
-                <button type="button" class="createdgroupBTN" onclick="newGroupCreated()">Group name</button>
-            </div>
-        </div> 
-    </div>
     </div><!-- end of wrapper scroll --> 
 
         <div class="adminClass">
