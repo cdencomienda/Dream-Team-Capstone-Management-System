@@ -1157,6 +1157,7 @@ function fetchCourses(container, year, selectedTerm) {
                                     setPanelRole();
                                     saveCourseID(course.course_id);
                                     computeGroupName(group_name);
+                                    fetchAssessmentData();
                                     rubricDefense(group_name);
                                 };
                                 groupButton.textContent = group_name;
@@ -1887,20 +1888,21 @@ function setPanelRole() {
 
 var feedbackList = [];
 
-function addFeedback(type) {
+function addFeedback(type, initialRemark = '') {
     var container = document.createElement('div');
     container.classList.add('feedback-input-container');
 
     var textarea = document.createElement('textarea');
     textarea.classList.add('feedback-input');
     textarea.placeholder = type + ': Enter your text here';
+    textarea.value = initialRemark; // Set the initial value of the textarea
 
     var deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
     deleteButton.addEventListener('click', function() {
         container.remove(); // Remove the container on button click
-        removeFromFeedbackList(textarea.value);
+        removeFromFeedbackList(textarea.value, type); // Pass type to removeFromFeedbackList
     });
 
     container.appendChild(textarea);
@@ -1913,6 +1915,7 @@ function addFeedback(type) {
         updateFeedbackInList(textarea.value, type);
     });
 }
+
 
 function updateFeedbackInList(text, type) {
     // Find the feedback item in the list based on type
@@ -1939,12 +1942,16 @@ function clearCommentsSection() {
     }
 }
 
+
+
 function sendFeedback() {
     clearCommentsSection();
 
-    feedbackList.forEach(item => {
-        console.log(`Type: ${item.type}, Text: ${item.text}`);
+    // Log the feedback list and selected options
+    console.log('Feedback List:', feedbackList);
+    console.log('Selected Options:', selectedOptions);
 
+    feedbackList.forEach(item => {
         var panelCommentsDiv = document.createElement('div');
         panelCommentsDiv.classList.add('panel-comments');
 
@@ -1965,12 +1972,7 @@ function sendFeedback() {
         textarea.setAttribute('disabled', '');
         textarea.textContent = item.text;
 
-        var approveButton = document.createElement('button');
-        approveButton.classList.add('approve-button');
-        approveButton.innerHTML = '<i class="fa-solid fa-check"></i>';
-
         commentSentDiv.appendChild(textarea);
-        commentSentDiv.appendChild(approveButton);
 
         commentsSection.appendChild(commentSentDiv);
     });
@@ -1996,6 +1998,7 @@ function sendFeedback() {
     // Clear feedback list after submission
     feedbackList = [];
 }
+
 
 
 
@@ -2030,7 +2033,7 @@ function rubricDefense(groupName) {
             tableElement.appendChild(table);
 
             data.forEach(result => {
-                result.criteria.forEach(criteria => {
+                result.criteria.forEach((criteria, criteriaIndex) => {
                     const row = document.createElement('tr');
                     row.classList.add('criteria');
 
@@ -2061,12 +2064,26 @@ function rubricDefense(groupName) {
                     blankOption.textContent = '';
                     select.appendChild(blankOption);
 
+                    // Add options from result.level_details and result.level_percentage
                     result.level_details.forEach((detail, idx) => {
                         const option = document.createElement('option');
                         option.value = result.level_percentage[idx]; // Use corresponding percentage as the value
                         option.textContent = `${detail} (${result.level_percentage[idx]}%)`;
                         select.appendChild(option);
                     });
+
+                    // Set the default selected value
+                    const weightedGrade = weightedGrades[criteriaIndex];
+                    if (weightedGrade !== undefined) {
+                        for (let i = 0; i < select.options.length; i++) {
+                            if (select.options[i].value == weightedGrade) {
+                                select.selectedIndex = i;
+                                col3.textContent = criteria.criteria_details[i]; // Update description based on selected index
+                                handleSelectChange({ target: select }, criteria.criteria_name); // Call handler for default value
+                                break;
+                            }
+                        }
+                    }
 
                     // Handle the change event to update the criteria details based on the selected option
                     select.addEventListener('change', function(event) {
@@ -2103,6 +2120,95 @@ function rubricDefense(groupName) {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
+
+
+
+let weightedGrades = [];
+let remarkTypes = [];
+let remarks = [];
+
+function fetchAssessmentData() {
+    fetch('fetchAssessmentData.php') // Replace with the actual path to your PHP file
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.error || data.weightedGrades.length === 0) {
+                console.log('There is no grade and comment yet.');
+                weightedGrades = [];
+                remarkTypes = [];
+                remarks = [];
+                feedbackList = []; // Clear feedbackList when no data is available
+
+                // Clear existing feedback containers
+                const commentsSection = document.getElementById('commentsSection');
+                if (commentsSection) {
+                    commentsSection.innerHTML = ''; // Clear existing feedback containers
+                } else {
+                    console.error('Comments section not found');
+                }
+            } else {
+                console.log('Weighted Grades:', data.weightedGrades);
+                console.log('Remark Types:', data.remarkTypes);
+                console.log('Remarks:', data.remarks);
+
+                // Store the weighted grades, remark types, and remarks for later use
+                weightedGrades = data.weightedGrades;
+                remarkTypes = data.remarkTypes;
+                remarks = data.remarks;
+
+                // Initialize feedbackList
+                feedbackList = remarkTypes.map((type, index) => {
+                    return {
+                        type: type,
+                        text: remarks[index] || '' // Use empty string if no corresponding remark
+                    };
+                });
+
+                // Log weightedGrades, remarkTypes, remarks, and feedbackList to check their values
+                console.log('Stored Weighted Grades:', weightedGrades);
+                console.log('Stored Remark Types:', remarkTypes);
+                console.log('Stored Remarks:', remarks);
+                console.log('Feedback List:', feedbackList);
+
+                // Clear existing feedback containers
+                const commentsSection = document.getElementById('commentsSection');
+                if (commentsSection) {
+                    commentsSection.innerHTML = ''; // Clear existing feedback containers
+
+                    // Create feedback containers based on valid remark types and remarks
+                    remarkTypes.forEach((type, index) => {
+                        // Ensure type and corresponding remark are not empty
+                        if (type.trim() !== '' && (remarks[index] || '').trim() !== '') {
+                            const remark = remarks[index] || ''; // Provide a default value if no remark is available
+                            addFeedback(type, remark);
+                        }
+                    });
+
+                    // Log message if no valid remark types and remarks are available
+                    if (remarkTypes.every(type => type.trim() === '') || remarks.every(remark => (remark || '').trim() === '')) {
+                        console.log('No valid remark types or remarks available.');
+                    }
+                } else {
+                    console.error('Comments section not found');
+                }
+            }
+        })
+        .catch(function(error) {
+            console.error('Fetch error:', error);
+        });
+}
+
+
+
+
+
+
+
+
 
 
 
