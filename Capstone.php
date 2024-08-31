@@ -2019,7 +2019,7 @@ function rubricDefense(groupName) {
             const tbody = document.createElement('tbody');
 
             const headerRow = document.createElement('tr');
-            const headers = ["Criteria", "Criteria Details", "Score Description", "Grades"];
+            const headers = ["Criteria", "Criteria Details", "Score Description", "Grades"]; //header rubric
             headers.forEach(headerText => {
                 const th = document.createElement('th');
                 th.textContent = headerText;
@@ -2046,7 +2046,7 @@ function rubricDefense(groupName) {
 
                     const col3 = document.createElement('td');
                     col3.classList.add('grade_description');
-                    col3.textContent = criteria.criteria_details[0];
+                    col3.textContent = criteria.criteria_details[0]; // Default to the first detail
                     row.appendChild(col3);
 
                     const col4 = document.createElement('td');
@@ -2055,21 +2055,27 @@ function rubricDefense(groupName) {
                     const select = document.createElement('select');
                     select.classList.add('score-select');
 
-                    const maxIndex = result.level_percentage.length;
+                    // Add a blank first option
+                    const blankOption = document.createElement('option');
+                    blankOption.value = '';
+                    blankOption.textContent = '';
+                    select.appendChild(blankOption);
 
-                    result.level_percentage.forEach((percentage, idx) => {
-                        const countdownIndex = maxIndex - idx;
+                    result.level_details.forEach((detail, idx) => {
                         const option = document.createElement('option');
-                        option.value = percentage; // Use percentage as the value
-                        option.textContent = `${countdownIndex} (${percentage}%)`;
+                        option.value = result.level_percentage[idx]; // Use corresponding percentage as the value
+                        option.textContent = `${detail} (${result.level_percentage[idx]}%)`;
                         select.appendChild(option);
                     });
 
-                    // Automatically log the default selected value (first option)
-                    const defaultSelectedValue = parseInt(select.value, 10);
-                    updateSelectedOption(criteria.criteria_name, defaultSelectedValue);
-
+                    // Handle the change event to update the criteria details based on the selected option
                     select.addEventListener('change', function(event) {
+                        const selectedIndex = select.selectedIndex - 1; // Adjust for the blank option
+                        if (selectedIndex >= 0) {
+                            col3.textContent = criteria.criteria_details[selectedIndex];
+                        } else {
+                            col3.textContent = ''; // Clear the text if the blank option is selected
+                        }
                         handleSelectChange(event, criteria.criteria_name);
                     });
 
@@ -2260,30 +2266,6 @@ totalPercentage.appendChild(h2Element); // Append the <h2> element
     })
     .catch(error => console.error('Error fetching data:', error));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
