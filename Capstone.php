@@ -1888,51 +1888,74 @@ function setPanelRole() {
 
 var feedbackList = [];
 
+// Function to add feedback
 function addFeedback(type, initialRemark = '') {
+    var wrapper = document.createElement('div');
+    wrapper.classList.add('feedback-wrapper');
+
+    // Create and add a type label
+    var typeLabel = document.createElement('div');
+    typeLabel.classList.add('feedback-type-label');
+    typeLabel.textContent = type; // Set the text to the feedback type
+    wrapper.appendChild(typeLabel); // Add the label to the wrapper
+
     var container = document.createElement('div');
     container.classList.add('feedback-input-container');
 
     var textarea = document.createElement('textarea');
     textarea.classList.add('feedback-input');
-    textarea.placeholder = type + ': Enter your text here';
+    textarea.placeholder = 'Enter your text here'; // Placeholder remains consistent
     textarea.value = initialRemark; // Set the initial value of the textarea
 
     var deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
     deleteButton.addEventListener('click', function() {
-        container.remove(); // Remove the container on button click
+        wrapper.remove(); // Remove the wrapper on button click
         removeFromFeedbackList(textarea.value, type); // Pass type to removeFromFeedbackList
     });
 
     container.appendChild(textarea);
     container.appendChild(deleteButton);
 
-    document.getElementById('commentsSection').appendChild(container);
+    wrapper.appendChild(container);
+
+    document.getElementById('commentsSection').appendChild(wrapper);
 
     // Add event listener to capture text content when user finishes typing
     textarea.addEventListener('input', function() {
-        updateFeedbackInList(textarea.value, type);
+        // Update the feedback list with the latest textarea value
+        updateFeedbackInList(textarea.value, type, wrapper);
     });
 }
 
 
-function updateFeedbackInList(text, type) {
-    // Find the feedback item in the list based on type
-    var existingFeedback = feedbackList.find(item => item.type === type);
 
-    // If found, update the text; otherwise, add new feedback item
-    if (existingFeedback) {
-        existingFeedback.text = text;
+
+
+
+// Function to update the feedback list
+function updateFeedbackInList(text, type, container) {
+    // Find if there is already an entry in the feedbackList for this container
+    var existingEntry = feedbackList.find(entry => entry.container === container);
+
+    if (existingEntry) {
+        // Update the text if the entry already exists
+        existingEntry.text = text;
     } else {
-        feedbackList.push({ type: type, text: text });
+        // Add a new entry if none exists for this container
+        feedbackList.push({ type: type, text: text, container: container });
     }
 }
 
-function removeFromFeedbackList(text) {
-    feedbackList = feedbackList.filter(item => item.text !== text);
+
+// Function to remove feedback from the list
+function removeFromFeedbackList(text, type) {
+    feedbackList = feedbackList.filter(item => !(item.text === text && item.type === type));
 }
 
+
+// Function to clear comments section
 function clearCommentsSection() {
     var commentsSection = document.querySelector('.comments-section');
     if (commentsSection) {
@@ -1942,8 +1965,7 @@ function clearCommentsSection() {
     }
 }
 
-
-
+// Function to send feedback
 function sendFeedback() {
     clearCommentsSection();
 
@@ -1998,6 +2020,7 @@ function sendFeedback() {
     // Clear feedback list after submission
     feedbackList = [];
 }
+
 
 
 
@@ -2245,11 +2268,10 @@ function handleSelectChange(event, criteriaName) {
     printSelectedOptions(); // Print all selected options (optional)
 }
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', fetchAcademicYears);
+
+
+// start of verdict page
 
 
 function computeGroupName(group_name) {

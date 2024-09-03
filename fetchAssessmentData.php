@@ -20,7 +20,7 @@ if (isset($_SESSION['student_group_id']) && isset($_SESSION['user_id'])) {
     // Prepare the SQL query to fetch distinct weightedGrade, remarkType, and remarks, ordered by the latest entry
     $sql = "SELECT DISTINCT weightedGrade, remarkType, remarks 
             FROM assessment 
-            WHERE groupID = ? AND uploaderID = ?
+            WHERE groupID = ? AND uploaderID = ? AND verdict IS NULL
             ORDER BY AssessmentID DESC
             LIMIT 1";
 
