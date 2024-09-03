@@ -724,7 +724,7 @@
                         </tbody>
                     </table>
                         <div class = "Grades-Verdict" style="margin-top: 4%;">
-                            <div class="putangina">
+                            <div class="Total">
 
                             <h2>Total Percentage:</h2>
 
@@ -2355,44 +2355,44 @@ function fetchResults() {
         gradeTable.appendChild(tbody);
 
         // Update totalPercentage
-        const totalPercentage = document.querySelector('.putangina'); // Select element by class name
-const h2Element = document.createElement('h2'); // Create an <h2> element
+        const totalPercentage = document.querySelector('.Total'); // Select element by class name
+        const h2Element = document.createElement('h2'); // Create an <h2> element
 
-if (!testData.error) {
-    const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
-    h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
-} else {
-    h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
-}
+        if (!testData.error) {
+            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
+            h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
+        } else {
+            h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
+        }
 
-// Replace the existing content with the <h2> element
-totalPercentage.innerHTML = ''; // Clear existing content
-totalPercentage.appendChild(h2Element); // Append the <h2> element
+        // Replace the existing content with the <h2> element
+        totalPercentage.innerHTML = ''; // Clear existing content
+        totalPercentage.appendChild(h2Element); // Append the <h2> element
 
-        // Populate verdictDropdown
-        const verdictDropdown = document.getElementById('verdictDropdown');
-        // Clear existing options
-        verdictDropdown.innerHTML = '';
-        // Define options
-        const verdictOptions = [
-            { value: 'Pass', text: 'Pass' },
-            { value: 'Conditional Pass', text: 'Conditional Pass' },
-            { value: 'Re-Defense', text: 'Re-Defense' },
-            { value: 'Repeat', text: 'Repeat' }
-        ];
-        // Create and append options
-        verdictOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option.value;
-            optionElement.textContent = option.text;
-            verdictDropdown.appendChild(optionElement);
-        });
+                // Populate verdictDropdown
+                const verdictDropdown = document.getElementById('verdictDropdown');
+                // Clear existing options
+                verdictDropdown.innerHTML = '';
+                // Define options
+                const verdictOptions = [
+                    { value: 'Pass', text: 'Pass' },
+                    { value: 'Conditional Pass', text: 'Conditional Pass' },
+                    { value: 'Re-Defense', text: 'Re-Defense' },
+                    { value: 'Repeat', text: 'Repeat' }
+                ];
+                // Create and append options
+                verdictOptions.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.value;
+                    optionElement.textContent = option.text;
+                    verdictDropdown.appendChild(optionElement);
+                });
 
-        // Rename modal-content to Grade Summary
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.querySelector('h2').textContent = 'Grade Summary';
-    })
-    .catch(error => console.error('Error fetching data:', error));
+                // Rename modal-content to Grade Summary
+                const modalContent = document.querySelector('.modal-content');
+                modalContent.querySelector('h2').textContent = 'Grade Summary';
+            })
+            .catch(error => console.error('Error fetching data:', error));
 }
 
 
