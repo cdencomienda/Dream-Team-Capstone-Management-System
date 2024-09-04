@@ -1397,17 +1397,17 @@ pointer-events: auto;
   .arrow.down {
     transform: rotate(90deg);
   }
-  .chairpanelName, .lead-panelName, .panel-memberName, .panel-member2Name{
+  .panelName, .lead-panelName, .panel-memberName, .panel-member2Name{
     margin: 7%;
   }
 
-  .chairPgrade,.leadPanelContent, .panelMemberContent, .panelMember2Content {
+  .panelGrade,.leadPanelContent, .panelMemberContent, .panelMember2Content {
     max-height: 1000px;
     
     transition: max-height 0.5s ease;
     width: 860px; 
   }
-  .chairPgrade{
+  .panelGrade{
     margin-top: 1%;
   }
   .leadPanelContent{
@@ -1420,7 +1420,7 @@ pointer-events: auto;
     margin-top: 0%;
   }
   
-  .chairPgrade.expand, .leadPanelContent.expand, .panelMemberContent.expand, .panelMember2Content.expand {
+  .panelGrade.expand, .leadPanelContent.expand, .panelMemberContent.expand, .panelMember2Content.expand {
     max-height: 500px; /* Adjust this value based on the content's height */
     overflow: auto;
   }
