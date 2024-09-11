@@ -34,6 +34,13 @@ body{
   z-index: 10px;
 }
 
+.editoverlay {
+  display: none; /* Initially hidden */
+  /* Add your styling for overlay here */
+}
+.editoverlay.show {
+  display: block; /* Show when class 'show' is added */
+}
 
 .editoverlay{
   display: none;
@@ -124,18 +131,18 @@ body{
   height: 100%;
   object-fit:cover;
 }
-.action .menu{  
-  top:75px;
-  right:-130px;
+.action .menu{   
+  top: 75px;
+  right: -130px;
   padding: 20px;
   background: #FFEBCF;
   border: 2px solid #000000;
-  width: 230px; 
-  border-radius:15px;
-  transition:0.5s;
-  visibility:visible;
-  opacity:0;
-  z-index: 1111110;
+  width: 230px;
+  border-radius: 15px;
+  transition: 0.5s;
+  visibility: visible;
+  opacity: 0;
+  z-index: 10;
 }
 .action .menu.active{  
   visibility:visible;
@@ -579,8 +586,7 @@ body{
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  background-color: #e2dacd;
-  ove
+  background-color: #e2dacd; 
 }
 
 
@@ -1027,7 +1033,7 @@ border-radius:25px;
 } 
 .listClass{
 background: #fff;
-color: #2a2f3b;
+color: #000;
 display: flex;
 width: 320px;
 justify-content: space-between;
@@ -1214,8 +1220,8 @@ cursor: pointer;
   width: 1370px;
   height: 1000px;
   padding: 25px;
-  margin-left: 500px ;
-  z-index: 0; /* Set a lower z-index */
+  margin-left: 470px ;
+  z-index: -1; /* Set a lower z-index */
   margin-top: 1%;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
