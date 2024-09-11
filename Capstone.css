@@ -31,6 +31,7 @@ body{
   width: 280px;
   bottom: 50px;
   left: 85%;
+  z-index: 10px;
 }
 
 
@@ -109,6 +110,7 @@ body{
   border-radius:50%;
   overflow:hidden;
   cursor:pointer;
+  z-index: 10px;
 }
 .wrapper {
   max-height: 100vh; /* Set a maximum height */
@@ -1011,11 +1013,10 @@ border-radius:25px;
 }
 
 .classListDropdown{
-  width: 340px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  position: relative; 
-  z-index: 0px;
+    width: 340px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
 }
 .classListDropdown *{
   box-sizing: border-box;

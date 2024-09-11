@@ -108,11 +108,9 @@
     <div class="wrapper"><!-- start of wrapper scroll -->
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
-                <div class="classListDropdown">
-                <h4>ADVISORY</h4>
-                              
+                <div class="classListDropdown"> 
                     <button class="listClass">  
-                        <h4>COURSES AY 2023-2024</h4>
+                        <h2>COURSES AY 2023-2024</h2>
                         <span class="selectedClass"></span> 
                         <div class="coursesListed"></div>                        
                     </button>
