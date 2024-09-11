@@ -31,7 +31,7 @@ body{
   width: 280px;
   bottom: 50px;
   left: 85%;
-  z-index: 10px;
+  z-index: 10;
 }
 
 .editoverlay {
@@ -1221,7 +1221,7 @@ cursor: pointer;
   height: 1000px;
   padding: 25px;
   margin-left: 470px ;
-  z-index: -1; /* Set a lower z-index */
+  z-index: 0; /* Set a lower z-index */
   margin-top: 1%;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
