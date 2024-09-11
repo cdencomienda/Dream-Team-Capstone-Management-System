@@ -109,8 +109,7 @@ body{
   margin-bottom: 40px;
   border-radius:50%;
   overflow:hidden;
-  cursor:pointer;
-  z-index: 10px;
+  cursor:pointer; 
 }
 .wrapper {
   max-height: 100vh; /* Set a maximum height */
@@ -136,6 +135,7 @@ body{
   transition:0.5s;
   visibility:visible;
   opacity:0;
+  z-index: 1111110;
 }
 .action .menu.active{  
   visibility:visible;
@@ -449,16 +449,15 @@ body{
   overflow: auto;
   z-index: 0; /* Set a lower z-index */
 }
-  .Defense-Page{
-    
+  .Defense-Page{  
     width: 98%; /* Set width */
     height:550px; /* Set height */
     overflow: auto; 
     padding: 25px;
     margin: 1% auto;
-    background-color: #ffff;
-    border-radius: 25px;
-    
+    background-color: #ffff; 
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
  
   .addCommBtn{
@@ -1039,7 +1038,7 @@ padding: 5px;
 height: 80px;
 cursor: pointer;
 transition: 0.3s;
-font-size: 12px;
+font-size: 19px;
 }
 .listClass:hover{
 background: #b6b6b6;
@@ -1201,7 +1200,7 @@ margin-left: 30px;
   height: 55px;
   margin-top: 20px;
   margin-left: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 15px;
   background-color: #ffffff;  
 }
@@ -1218,14 +1217,17 @@ cursor: pointer;
   margin-left: 500px ;
   z-index: 0; /* Set a lower z-index */
   margin-top: 1%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
  
 #GrpContainer {
   margin-top: -1165px;
+  z-index: 10px;
 }
 #advisoryGroupContainer{
-  margin-top: -880px;
+  margin-top: -830px;
 }
 
 .dashboard_header{
@@ -1438,7 +1440,8 @@ pointer-events: auto;
     width: 98%;
     height: 1000px;
     overflow-x: hidden;
-    
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
   
   .panel-grades {
@@ -1555,16 +1558,16 @@ cursor: pointer; /* Change cursor to pointer on hover */
 transition: background-color 0.3s ease, color 0.3s ease; 
 }
 .button-group{
-grid-column: 2 / 3;
-display: flex;
-justify-content: center;
-align-items: center;
-outline: 0px;
-transition:backround-color 0.5s ease;
-text-align: center;
-margin-top: 13px;
-margin-right: 105px;
-transition: backround-color .3s ease;
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0px;
+  transition: backround-color 0.5s ease;
+  text-align: center;
+  margin-top: 0px;
+  margin-right: 600px;
+  transition: backround-color .3s ease;
 }
 .requirement-name{
   position: relative;
@@ -1812,7 +1815,7 @@ transition: backround-color .3s ease;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   width: 98%;
-  height: 71%;
+  height: 68%;
   margin-left: -25px;
   margin-top: 0px;
   display: flex;
@@ -1845,9 +1848,8 @@ transition: backround-color .3s ease;
   cursor: pointer;
   flex-direction: row;
   overflow: auto;
-  width: 76%;
+  width: 99%;
   border: 2px black;
-  margin-left: 11%;
 }
  
 .fileMessage.left {
@@ -1959,7 +1961,7 @@ transition: backround-color .3s ease;
 
 .rubriccontainer {
   position: relative;
-  top: -980px;
+  top: -860px;
   left: 500px;
   width: 1300px;
   max-width: none; /* Remove max-width */
