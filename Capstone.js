@@ -287,7 +287,6 @@ function groupDefenseRubrics() {
 // Function to show the grade summary
 function gradeSummary() {
   hideAllSections();
-  document.getElementById("summaryGrade").style.display = "block";
   document.getElementById("rubric-summary").style.display = "block";
 }
 
@@ -298,12 +297,12 @@ function getRandomScore() {
 }
 
 // Set a random score for each score span
-document.addEventListener('DOMContentLoaded', () => {
-  const scores = document.querySelectorAll('.score');
-  scores.forEach(score => {
-      score.textContent = getRandomScore();
-  });
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   const scores = document.querySelectorAll('.score');
+//   scores.forEach(score => {
+//       score.textContent = getRandomScore();
+//   });
+// });
 
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
@@ -471,48 +470,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   // Function to calculate grades and display in modal
   function computeGrades() {
-      var chairPanelGrades = extractPanelGrades(".chairPgrade .criteria");
-      var leadPanelGrades = extractPanelGrades(".leadPanelContent .criteria");
-      var panelMemberGrades = extractPanelGrades(".panelMemberContent .criteria");
-      var panelMember2Grades = extractPanelGrades(".panelMember2Content .criteria");
-      var panelists = {
-          "Chair Panel": calculateAverage(chairPanelGrades),
-          "Lead Panel": calculateAverage(leadPanelGrades),
-          "Panel Member 1": calculateAverage(panelMemberGrades),
-          "Panel Member 2": calculateAverage(panelMember2Grades)
-      };
-
-      var totalGrade = 0;
-      var totalCriteria = 0;
-
-      // Calculate overall total grade and criteria count
-      Object.keys(panelists).forEach(function(panelist) {
-          totalGrade += panelists[panelist].totalGrade;
-          totalCriteria += panelists[panelist].count;
-      });
-
-      
-
-      // Calculate overall average
-
-
-      // Open the modal after computing grades
       openModal();
   }
 
   // Function to extract grades from HTML structure
-  function extractPanelGrades(selector) {
-      var rows = document.querySelectorAll(selector);
-      var grades = [];
+  // function extractPanelGrades(selector) {
+  //     var rows = document.querySelectorAll(selector);
+  //     var grades = [];
 
-      rows.forEach(function(row) {
-          var gradeElement = row.querySelector(".score-column .score");
-          var grade = gradeElement ? parseInt(gradeElement.textContent) : 0;
-          grades.push(grade);
-      });
+  //     rows.forEach(function(row) {
+  //         var gradeElement = row.querySelector(".score-column .score");
+  //         var grade = gradeElement ? parseInt(gradeElement.textContent) : 0;
+  //         grades.push(grade);
+  //     });
 
-      return grades;
-  }
+  //     return grades;
+  // }
 
   // Function to calculate average from an array of grades
   function calculateAverage(grades) {
