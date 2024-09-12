@@ -112,7 +112,7 @@
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
                 <div class="classListDropdown">
-                <h4>DEFENSE LIST</h4>
+                <h1>DEFENSE LIST</h1>
                               
                     <button class="listClass">  
                         <h4>COURSES AY 2023-2024</h4>
@@ -700,7 +700,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function fetchAcademicYears() {
     const classDropdown = document.querySelector('.class-Dropdown');
-    classDropdown.innerHTML = '<h1>DEFENSE LIST</h1>'; // Clear previous content
+    classDropdown.innerHTML = '<h3>DEFENSE LIST</h3>'; // Clear previous content
 
     fetch('panelistYears.php')
         .then(response => {
