@@ -380,11 +380,11 @@ body{
   border-radius: 20px;
 }
 .cDiv{
-  width: 100%; /* Set width */
+  width: 100%;
   padding: 20px;
   margin: 5% auto;
   background-color: #fff;
-  height: 250px; 
+  height: 250px;
   border-radius: 20px;
 }
 .comment-sent, .feedback-input-container{
@@ -458,8 +458,8 @@ body{
 }
   .Defense-Page{  
     width: 98%; /* Set width */
-    height:550px; /* Set height */
-    overflow: auto; 
+    height:auto; /* Set height */
+    overflow:hidden;   
     padding: 25px;
     margin: 1% auto;
     background-color: #ffff; 
@@ -581,12 +581,14 @@ body{
 
 .rubric-container {
   width: 85%;
+  height: auto;
   margin: 2% auto;
   background: #FFEBCF;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #e2dacd; 
+
 }
 
 
