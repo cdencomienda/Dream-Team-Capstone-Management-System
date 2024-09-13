@@ -24,14 +24,13 @@ body{
 }
 .container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 280px;
-  width: 280px;
-  bottom: 50px;
-  left: 85%;
-  z-index: 10;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    width: 280px;
+    bottom: 90px;
+    left: 85%;
+    z-index: 10;
 }
 
 .editoverlay {
@@ -132,6 +131,7 @@ body{
   object-fit:cover;
 }
 .action .menu{   
+  display: none; 
   top: 75px;
   right: -130px;
   padding: 20px;
@@ -145,8 +145,8 @@ body{
   z-index: 10;
 }
 .action .menu.active{  
-  visibility:visible;
-  opacity:1;
+  display: block; /* Show the menu when active */
+  opacity: 1;
 }
 .action .menu h3{
   width:100%;
@@ -1619,6 +1619,8 @@ transition: background-color 0.3s ease, color 0.3s ease;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  overflow: auto;
+  overflow-x: hidden;
 }
 .filesContainer{
   position: absolute;
@@ -1697,7 +1699,7 @@ transition: background-color 0.3s ease, color 0.3s ease;
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
-  width: 461px;
+  width: 450px;
   height: 55px;
   background-color: #F8EFE3;
   border-radius: 25px;
@@ -1780,8 +1782,8 @@ transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #DocuReqrmntLogs {
-  bottom: 50%;
-  left: 37%;
+  bottom: 77%;
+  left: 15%;
 }
 
 #AdvReqrmntLogs {
@@ -1896,10 +1898,7 @@ transition: background-color 0.3s ease, color 0.3s ease;
  
 .modal {
   display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+  position: fixed;  
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -1941,12 +1940,16 @@ transition: background-color 0.3s ease, color 0.3s ease;
   z-index: 500 ;
 }
 .modalContent{
-  background-color: #fefefe;
-  margin: -10% auto;
+  background-color: #fff;
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 80%;
+  width: 62%;
+  top: -250px;
+  height: 75%;
+  position: relative;
+  z-index: 500;
+  padding: 2%;
 }
 
 .close {
@@ -1967,7 +1970,7 @@ transition: background-color 0.3s ease, color 0.3s ease;
 
 .rubriccontainer {
   position: relative;
-  top: -860px;
+  top: -1200px;
   left: 500px;
   width: 1300px;
   max-width: none; /* Remove max-width */

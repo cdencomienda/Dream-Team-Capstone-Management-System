@@ -177,6 +177,7 @@
         <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div> 
     <div class="wrapper">
+        
     <main class="table" id="customers_table">
         <section class="table__header">
             <h1>Archive Capstone Projects</h1>
@@ -221,7 +222,7 @@
         </div>
     </div>
 
-    <script src="archive.js"></script>
+    <!-- <script src="archive.js"></script> -->
     </div>
 <script src="adminHome.js"></script>   
 </body>

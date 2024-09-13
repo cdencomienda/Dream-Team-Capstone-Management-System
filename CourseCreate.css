@@ -1111,8 +1111,8 @@ background-color: #dbd3c9;
    
 }
 #DocuReqrmntLogs {
-  bottom: 50%;
-  left: 37%;
+  bottom: 73%;
+  left: 20%;
 }
  
 .fileLogsPopup .logItem {
@@ -1657,13 +1657,15 @@ tr:hover {
   z-index: 1000;
 }
 .modalContent{
-  background-color: #fefefe;
-  margin: 1% auto;
+  background-color: #fff;
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 90%;
-  z-index: 1000;
+  width: 62%;
+  height: 75%;
+  position: relative;
+  z-index: 500;
+  padding: 2%;
 }
  
 .close {
