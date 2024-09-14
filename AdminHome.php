@@ -178,6 +178,51 @@
     </div> 
     <div class="wrapper">
         
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Archive Capstone Projects</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+                <img src="images/search.png" alt="">
+            </div>
+            <div class="export__file">
+                <label for="export-file" class="export__file-btn" title="Export File"></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                </div>
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Group <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Date <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-file="archived_files/dreamteamfinaltest.pdf">
+                        <td>1</td>
+                        <td>Dream Team</td>
+                        <td>17 December, 2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="closeM">&times;</span>
+            <iframe id="pdf-frame" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
+    <!-- <script src="archive.js"></script> -->
     </div>
 <script src="adminHome.js"></script>   
 </body>

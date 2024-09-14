@@ -16,18 +16,7 @@ body{
    width: auto !important;
   }
  }
-  
 
- .container{
-  position: relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:280px;
-  width:280px;
-  bottom: 35px;
-  left: 84%;
-}
 .editoverlay{
   display: none;
   position: fixed;
@@ -117,7 +106,17 @@ body{
   background-color: #ffffff;
   outline: none; 
 }
- 
+.container{
+  position: relative;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    height: 315px;
+    width: 280px;
+    top: -50px;
+    z-index: 1;
+    left: 70%; 
+}
 .action {
   position: relative;  
 }
@@ -125,9 +124,9 @@ body{
   position: relative;
   width: 60px;
   height: 60px;
-  margin-top: 25px;
+  margin-top: 0;
   margin-left: 200px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
@@ -150,7 +149,7 @@ body{
   border-radius: 15px;
   transition: 0.5s;
   visibility: hidden;
-  opacity: 0;
+  opacity: 0; 
 }
 .action .menu.show {
   visibility: visible;
@@ -367,8 +366,8 @@ main.table {
   z-index: 0;
   margin-left: 130px;
   margin-top: 50px;
-  width: 1000px;
-  height: 400px;
+  width: 90%;
+    height: 80%;
   background-color: #ffff; 
   border-radius: 15px;
   overflow: hidden;

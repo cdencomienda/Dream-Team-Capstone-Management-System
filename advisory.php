@@ -108,11 +108,10 @@
     <div class="wrapper"><!-- start of wrapper scroll -->
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
-                <div class="classListDropdown">
-                <h4>ADVISORY</h4>
-                              
+            <h1>ADVISORY</h1>
+                <div class="classListDropdown"> 
                     <button class="listClass">  
-                        <h4>COURSES AY 2023-2024</h4>
+                        <h2>COURSES AY 2023-2024</h2>
                         <span class="selectedClass"></span> 
                         <div class="coursesListed"></div>                        
                     </button>
@@ -493,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function fetchAcademicYears() {
     const classDropdown = document.querySelector('.class-Dropdown');
-    classDropdown.innerHTML = '<h3>ADVISORY</h3>'; // Clear previous content
+    classDropdown.innerHTML = '<h1>ADVISORY</h1>'; // Clear previous content
 
     fetch('advisoryYears.php')
         .then(response => {

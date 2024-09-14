@@ -361,12 +361,12 @@ background-repeat: no-repeat;
 /* ARCHIVE TABLE */
 main.table {
   margin-left: 130px;
-  margin-top: 50px;
-  width: 1000px;
-  height: 400px;
-  background-color: #ffff; 
-  border-radius: 15px;
-  overflow: hidden;
+    margin-top: 50px;
+    width: 90%;
+    height: 720px;
+    background-color: #ffff;
+    border-radius: 15px;
+    overflow: hidden;
   }
   
   .table__header {

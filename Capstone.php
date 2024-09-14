@@ -112,7 +112,7 @@
     <div class="MainScheduleCont">
         <div class="class-Dropdown">
                 <div class="classListDropdown">
-                <h4>DEFENSE LIST</h4>
+                <h1>DEFENSE LIST</h1>
                               
                     <button class="listClass">  
                         <h4>COURSES AY 2023-2024</h4>
