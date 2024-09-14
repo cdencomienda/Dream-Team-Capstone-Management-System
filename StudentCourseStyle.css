@@ -846,7 +846,7 @@ iframe {
   height: 195px;
 }
 .requirement-descBox{
-  width: 475px;
+  width: 100%;
   height: 140px;
   background-color: #F8EFE3;
   margin-left: 0;
@@ -880,7 +880,7 @@ iframe {
   border-radius: 10px;
   border: none;
   background-color: #FFEBCF; 
-  margin-top: 90%;
+  margin-top: 80%;
 }
 .reqbtn:hover{
   background-color: #aaaaaa;
