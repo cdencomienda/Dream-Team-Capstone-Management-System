@@ -10,14 +10,14 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "studentcourse.js"></script>   
 
-    <link rel="stylesheet" href="DefenseSchedule.css">
+    <link rel="stylesheet" href="AdminDefenseSchedule.css">
 
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?> 
     
     <div class="header">
         <div class="wrap">
-            <button type="button" class="logobtn"  onclick="openArchive1()"></button>
+            <button type="button" class="logobtn"  onclick="openArchive()"></button>
             </div>
         <div class="search">
             <input type="text" class="searchTerm" placeholder="Search for Capstone Projects?">
@@ -97,48 +97,17 @@
 
 <body>  
     <div class="hero">
-        <div class="Lsection">
-            <div id="sectionBtn"></div>
-            <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-            <button type="button" class="class"  onclick="openClassPage1()">Class</button>
-            <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-            <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
-            <button type="button" class="Users"  onclick="Users()">Users</button>
-            <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
-            <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
-        </div>
-<script>
-  function Users(){
-      window.location.assign("Adminuser.php")
-    }
-    function openArchive(){
-      window.location.assign("AdminHome.php")
-    } 
-    function logOUT(){
-      window.location.assign("LoginSignup.php")
-    } 
-    function notifAuth(){
-      window.location.assign("AdminNotifications.php")
-    }
-    function openClassPage(){
-      window.location.assign("AdminCourseCreate.php")
-    } 
-    function logOUT(){
-      window.location.assign("LoginSignup.php")
-    }
-    function Schedule(){
-      window.location.assign("AdminDefenseschedule.php")
-    }
-    function DefenseR(){
-        window.location.assign("DefenseResults.php")
-    }
-    function advisoryProf(){
-        window.location.assign("adminAdvisory.php")
-    }
-    function Capstone(){
-        window.location.assign("adminCapstone.php")
-    }
-    </script>
+    <div class="Lsection">
+        <div id="sectionBtn"></div>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+        <button type="button" class="class"  onclick="openClassPage()">Class</button>
+        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="Users"  onclick="Users()">Users</button>
+        <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
+    </div>
+ 
         <div class="MainScheduleCont">
             <div id="myModal" class="modal">
                 <!-- Modal content -->
@@ -190,9 +159,9 @@
                 </button>
             </div>
         </div>
-
+    <script src="AdminCourseCreate.js"></script>
     </div>
-    <script src="DefenseSchedule.js"></script>
+    
 </body>
 </html>
    

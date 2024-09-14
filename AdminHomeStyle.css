@@ -3,11 +3,10 @@
     padding: 0;
     font-family: sans-serif;
 }
-body{
-  /* width: 100%;
-  height: 100%; */
-  background: #CBC4BA;
-  overflow-x: hidden;
+
+body{ 
+  background: #CBC4BA; 
+  overflow: hidden;
 } 
 .wrapper {
   max-height: 100vh; /* Set a maximum height */
@@ -15,10 +14,10 @@ body{
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 .adminClass{
-  width: 1000px;
+  width: 90%;
     height: 700px;
     padding: 25px;
-    left: 80px;
+    margin-left: 80px;
     margin-top: 0;
     top: -1200px;
     display: block;
@@ -27,14 +26,14 @@ body{
 
 /* dropdown edit profile */
 .container{
-  position: relative;
-  display:flex;
+  position: relative; 
   align-items:center;
   justify-content:center;
-  height:280px;
+  height:0px;
   width:280px;
-  bottom: 35px;
+  bottom: 75px;
   left: 84%;
+  z-index: 0;
 }
 
 .editoverlay{
@@ -120,7 +119,7 @@ body{
   height: 100%;
   object-fit: cover;
 }
-.action .menu {
+.action .menu { 
   top: 75px;
   right: -130px;
   padding: 20px;
@@ -131,6 +130,7 @@ body{
   transition: 0.5s;
   visibility: hidden;
   opacity: 0;
+  z-index: 0;
 }
 .action .menu.show {
   visibility: visible;
@@ -389,24 +389,11 @@ background-repeat: no-repeat;
   background-repeat: no-repeat;
 }
 
-/* table layout */
-main.table {
-  margin-left: 130px;
-    margin-top: 50px;
-    width: 1200px;
-    height: 600px;
-    background-color: #ffff;
-    border-radius: 15px;
-    overflow: hidden;
-  }
-  .input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    margin-left: 5%;
+/* table layout */ 
+  .input-group {  
+    width: 300px;  
     padding: 10px;
+    margin-left: 50px;
     background-color: #f0f0f0;
     border-radius: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -420,19 +407,7 @@ main.table {
     background-color: transparent;
     font-size: 16px;
     color: #333;
-}
-/* .input-group{
-  margin-left: 20px;
-  margin-right: 150px;
-  width: 185px;
-  height: 20px;
-  border: 3px solid #d8b34d;
-  border-radius: 20px; 
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;  
-  background-color: transparent;     
-} */
+} 
 .modal-content{
   margin-left: 20px;
 }
@@ -442,17 +417,10 @@ main.table {
     padding: 30px;
     border: 1px solid #888;
     border-radius: 15px; 
-    width: 15%;
-    height: 10%;
+    width: 300px;
+    height: 70px;
 }
-  .table__header {
-  width: 100%;
-  height: 10%;
-  background-color: #E2C17B;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  }
+  
   .saveeditbtn{
     width: 70px;
     height: 20px;
@@ -1891,9 +1859,7 @@ color: #171616;
 }
 table {
 width: 100%;
-border-collapse: collapse;
-margin-top: 10px;
-margin-bottom: 10px;
+border-collapse: collapse; 
 }
 th, td {
 border: 1px solid #ddd;
@@ -2021,10 +1987,18 @@ font-size: 23px  ;
 .bar-repeat .bar {
     background-color: #407286;
 } 
-main.table {
-  margin-left: 130px;
-    margin-top: 50px;
-    width: 90%;
+.usertable{
+  width: 100%;
+    height: 720px;
+    background-color: #ffff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+main.table { 
+  margin-top: 30px;
+  margin-left: 110px;
+    width: 1720px;
     height: 720px;
     background-color: #ffff;
     border-radius: 15px;
@@ -2036,8 +2010,7 @@ main.table {
   height: 10%;
   background-color: #E2C17B;
   padding: 15px;
-  display: flex;
-  justify-content: space-between;
+  display: flex; 
   align-items: center;
   }
   
@@ -2146,10 +2119,10 @@ main.table {
   
   .export__file {
   position: relative;
+  margin-left: 60px;
   }
   
-  .export__file .export__file-btn {
-  margin-right: 50px;
+  .export__file .export__file-btn { 
   display: inline-block;
   width: 70px;
   height: 50px;

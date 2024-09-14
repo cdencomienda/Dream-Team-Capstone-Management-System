@@ -73,6 +73,7 @@ document.addEventListener('profile', function () {
     function Capstone(){
         window.location.assign("adminCapstone.php")
     }
+
 // action of melonbtns
 function viewMembers() { 
   var container = document.querySelector('.viewgroup'); 
@@ -200,34 +201,7 @@ function creategroup() {
   var container = document.querySelector('.creategroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
 }
- 
-// PANG CREATE NG GROUP UNDER COURSE CREATE
-
-function createGROUP() {
-  // Get input values
-  var groupName = document.querySelector('.inputgroupName').value;
-  var studentName = document.querySelector('.inputName[name="studentName"]').value;
-  var panelName = document.querySelector('.inputName[name="panelName"]').value;
-  var advisorName = document.querySelector('.inputName[name="advisorName"]').value;
-
-  // Create a new div element for the group
-  var newGroupDiv = document.createElement('div');
-  newGroupDiv.className = 'groupDiv';
-
-  // Create a new button element inside the group div
-  var newButton = document.createElement('button');
-  newButton.type = 'button';
-  newButton.className = 'groupButton';
-  newButton.textContent = groupName + ' Group'; // You can customize the button text here
-
-  // Append the button to the group div
-  newGroupDiv.appendChild(newButton);
-
-  // Append the group div to the coursesDropdown section
-  var coursesDropdown = document.getElementById('coursesDropdown');
-  coursesDropdown.appendChild(newGroupDiv);
-}
-
+  
 function newGroupCreated() {
   var container = document.querySelector('.GroupContainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
@@ -260,9 +234,7 @@ function setrequirements() {
 function rubric() { 
   var container = document.querySelector('.rubriccontainer');
   container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-}
-
- 
+} 
  
 // js fucntion of group submission members requ files 
 document.addEventListener('click', e =>{
@@ -275,7 +247,6 @@ document.addEventListener('click', e =>{
       currentflsDropdown = e.target.closest('[data-flsDropdown]')
       currentflsDropdown.classList.toggle('active')
   }
-  
   document.querySelectorAll("[data-flsDropdown].active").forEach(flsDropdown => {
       if (flsDropdown === currentflsDropdown) return
       flsDropdown.classList.remove("active")
@@ -284,7 +255,6 @@ document.addEventListener('click', e =>{
   function showDefaultBody() {
     document.getElementById("defaultBody").style.display = "block";
     document.getElementById("submissionFrame").style.display = "none";
-  
 }
 
 function submissionBtnAuth() {
@@ -292,8 +262,7 @@ function submissionBtnAuth() {
     document.getElementById("submissionFrame").style.display = "flex";
 
 }
-
-
+ 
 function clsViewGrp(){
   var container = document.querySelector('.viewgroup');
   container.style.display = 'none';
@@ -328,8 +297,6 @@ function clsViewGrp(){
     }
     customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
 }
-
-  
       customSelects.forEach(function(customSelect) {
           const searchInput = customSelect.querySelector(".search-tag");
           const optionsContainer = customSelect.querySelector(".options");

@@ -178,7 +178,7 @@
     </div> 
     <div class="wrapper">
         
-    <main class="table" id="customers_table">
+    <main class="table" id="archive_table">
         <section class="table__header">
             <h1>Archive Capstone Projects</h1>
             <div class="input-group">
@@ -214,6 +214,7 @@
         </section>
     </main>
 
+    
     <!-- Modal -->
     <div id="pdfModal" class="modal">
         <div class="modal-content">

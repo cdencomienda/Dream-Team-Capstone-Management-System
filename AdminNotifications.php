@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Menu</title>
     <link rel="stylesheet" href="NotificationPage.css">
+     
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=REM&display=swap" rel="stylesheet">
@@ -93,15 +94,15 @@
 </div>
 </head>
 <body>
-  <div class="Lsection">
-    <div id="sectionBtn"></div>
-      <button type="button" class="notif"  onclick="AdminNotif()">Notification</button>
-      <button type="button" class="class"  onclick="openClassPage()">Class</button>
-      <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-      <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
-      <button type="button" class="Users"  onclick="Users()">Users</button>
-      <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
-      <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
+  <div class="Lsection"> 
+        <div id="sectionBtn"></div>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+        <button type="button" class="class"  onclick="openClassPage()">Class</button>
+        <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
+        <button type="button" class="Users"  onclick="Users()">Users</button>
+        <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div>
     <script>
        
@@ -135,7 +136,7 @@
           <span class="dot"></span>
         </p>
       </div>
-    </div>          
+    </div>    <script src="adminHome.js"></script>         
   </div>
-<script src="adminHome.js"></script>   
+
 </body>

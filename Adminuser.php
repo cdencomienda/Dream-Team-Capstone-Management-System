@@ -14,6 +14,7 @@
     <?php include 'login.php'; ?>
     <?php include 'editProfile.php'; ?>
     
+    
     <div class="header">
         <div class="wrap">
             <button type="button" class="logobtn"  onclick="openArchive()"></button>
@@ -116,7 +117,7 @@
     </div> 
     <div class="wrapper">
         <div class="adminClass">    
-        <main class="table" id="customers_table">
+        <main class="usertable" id="user_table">
             <section class="table__header">
                 <h1> User Accounts </h1> 
                 <div class="input-group">

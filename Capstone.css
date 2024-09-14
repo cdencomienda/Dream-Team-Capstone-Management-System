@@ -17,11 +17,7 @@ body{
       width: auto !important;
   }
 }
-.wrapper {
-  max-height: 100vh; /* Set a maximum height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}
+ 
 .container {
   position: relative;
     align-items: center;
@@ -117,10 +113,9 @@ body{
   overflow:hidden;
   cursor:pointer; 
 }
-.wrapper {
-  max-height: 100vh; /* Set a maximum height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+.wrapper { 
+  overflow-y: auto;  
+  overflow-x: hidden;  
 }
 .action .profile img{
   position:absolute;

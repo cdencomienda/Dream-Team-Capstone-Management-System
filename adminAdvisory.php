@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+ 
+        
         <?php include 'login.php'; ?>
         <?php include 'CourseCreated.php'; ?>
         <?php include 'editProfile.php'; ?>
@@ -97,15 +98,14 @@
 </head>
 <body>
 
-    <div class="Lsection">
-        
-    <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
-        <button type="button" class="class"  onclick="openClassPage1()">Class</button>
+<div class="Lsection"> 
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+        <button type="button" class="class"  onclick="openClassPage()">Class</button>
         <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
-        <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+        <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
         <button type="button" class="Users"  onclick="Users()">Users</button>
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
-        <button type="button" class="advisory"  id=advisoryAdmin onclick="advisoryProf()">Advisory</button>
+        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div>
     <script src="adminHome.js"></script>
     <div class="wrapper"><!-- start of wrapper scroll -->

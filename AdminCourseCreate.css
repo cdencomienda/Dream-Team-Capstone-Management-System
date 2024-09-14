@@ -1,0 +1,1697 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  body{
+    background: #CBC4BA;
+    overflow-x: hidden;
+  }
+  .courseNameDisplay {
+   
+    font-size: 20px;
+  }
+  .wrapper {
+    max-height: 100vh; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  .containerMenu{
+    margin-left: 50px;
+  }
+  .profile-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+   
+   
+  /* dropdown edit profile */
+  .container{
+    position: relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:280px;
+    width:280px;
+    bottom: 35px;
+    left: 84%;
+    z-index:10;
+  }
+  .editoverlay{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 500;
+    height: 400;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20000;
+  }  
+  .dropdown-profile{
+    position: absolute;
+      background-color: #FFEBCF;
+      width: 500px;
+      height: 600px;
+      padding: 15px;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5px;
+  }
+  .dropdown-profile h5edit{
+    color: #000000;
+    size: 5px;
+    padding: 10px;
+  }
+  .dropdown-profile .profile{
+    position:relative;
+    width:120px;
+    height:120px;
+    margin-top: 30px;
+    margin-left: 185px;
+    border-radius:50%;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .dropdown-profile  .profile img{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+  }
+   
+  .inputname,
+  .inputEmail,
+  .inputPassword{
+    width: 200px;
+    border: 1px solid #000000;
+    margin: 10px 0 5px 0;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    outline: none;
+  }
+   
+   
+  .action {
+    position: relative;  
+  }
+  .action .profile {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-top: 25px;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .action .profile img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .action .menu {
+    top: 75px;
+    right: -130px;
+    padding: 20px;
+    background: #FFEBCF;
+    border: 2px solid #000000;
+    width: 230px;
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10;
+  }
+  .action .menu.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .action .menu h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 15px;
+    color: #000000;
+    line-height: 25px;
+  }
+  .action .menu h3 span {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 400;
+  }
+  .editoverlay {
+    display: none; /* Initially hidden */
+    /* Add your styling for overlay here */
+  }
+  .editoverlay.show {
+    display: block; /* Show when class 'show' is added */
+  }
+   
+   
+  .logoutBtn{
+    width: 170px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }    
+  .logoutBtn:hover {
+    background-color: #707070;
+  }
+   
+  .editprofileBtn{
+    width: 170px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }  
+  .editprofileBtn:hover {
+    background-color: #707070;
+  }
+  .saveEditbtn{
+    width: 170px;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px #000000;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+  }
+  .saveEditbtn:hover {
+    background-color: #707070;
+  }
+  /* header&search */
+  .header{
+    background-color: #213B9A;
+    height: 90px;
+    padding: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    background-repeat: no-repeat;
+  }
+  .search {
+    width: 700px;
+    margin-left: 130px;
+    margin-top: auto;
+    position: relative;
+    display: flex;
+  }
+  .wrap{
+    position:absolute;
+    width: 100px;
+    height: 90px;
+  }
+  .searchTerm {
+    margin-top: 20px;
+    width: 600px;height: 30px;
+    border: 3px solid #d8b34d;
+    border-right: none;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    color: #000000;
+  }
+  .searchButton {
+    margin-top: 20px;
+    width: 60px; height: 45 px;
+    border: 3px solid #d8b34d;
+    background: #d8b34d;
+    text-align: center;
+    color: #000000;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .searchTerm:focus{
+    color: #000000;
+  }
+   
+  /* left sidebar */
+  .Lsection{
+    background-color: #E2C17B;
+    float: left;
+    height: 200%;
+    width: 80px;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-size:100% 100%;
+  }
+  #SectionBtn{
+    top: 20px;
+    left: 50px;
+    position: relative;
+    width: 50px;
+    height: 50px ;
+    transition:.5s;
+  }
+  .notif{
+    top: 10px;
+    left: 10px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    position: relative;
+    background-image: url(menu_assets/notif_icon.png);
+    background-repeat: no-repeat;
+  }
+  .class{
+    top: -10px;
+    left: 15px;
+    width:50px;
+    height:30px;
+    padding: 55px 5px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/team_icon.png);
+    background-repeat: no-repeat;
+  }
+  .schedule{
+    top: -25px;
+    left: 15px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/schedule_icon.png);
+    background-repeat: no-repeat;
+  }
+  .capstone{
+    top: -45px;
+    left: 20px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/capstone_icon.png);
+    background-repeat: no-repeat;
+  }
+  .logobtn{
+  width:100px;
+  height:90px;
+  top: -10px;
+  left: -10px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  background-image: url(menu_assets/system_logo.png);
+  background-repeat: no-repeat;
+  }
+  .advisory{
+    top: -95px;
+    left: 20px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/users-icon.png);
+    background-repeat: no-repeat;
+  }
+   
+  .professorClass{
+    margin-left: 80px;
+    width: 330px;
+    height: 1200px;  
+    position:relative;
+    overflow: auto;
+  }
+   
+  /* coursemelon button */
+  .class-Dropdown{
+    margin-left: 120px;
+    margin-top: 20px;
+    width: 380px;
+    height: 1200px;
+    position: relative;
+    overflow: auto;
+  }
+  .classListDropdown{
+    width: 340px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .classListDropdown *{
+    box-sizing: border-box;
+    position: relative;
+   
+    /* display: inline-block; */
+  }
+  .listClass{
+    background: #fff;
+    color: #000000;
+    display: flex;
+    width: 320px;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px #000000 solid;
+    border-radius: 15px;
+    padding: 5px;
+    height: 80px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 12px;
+  }
+  .listClass:hover{
+    background: #b6b6b6;
+  }
+  .coursesListed{
+  width: 0px;
+  height: 0px;
+  margin-right: 20px;
+  margin-left: 20px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 9px solid #000000;
+  transition: 0.3s;
+  }
+  .coursesListed-rotate{
+  transform: rotate(180deg);
+  }
+  .menuCourses{
+  list-style: none;
+  padding: 2px;
+  background: #fff;
+  border: 1px #323741 solid;
+  box-shadow: 2px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  color: #2a2f3b ;
+  position: absolute;
+  top: 80px;
+  left: 47%;
+  width: 94%;
+  transform: translateX(-50%);
+  opacity: 0px;
+  display: none;
+  transition: 0.2s;
+  z-index: 1000;
+  }
+   
+  .menuCourses li{
+  padding: 0.7em 0.5em;
+  margin: 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1px;
+  }
+  .activeClass{
+  background: #b6b6b6;
+  border-radius: 15px;
+  }
+  .menuCourses li:hover{
+    z-index: 1px;
+  background: #b6b6b6;
+  }
+  .menuCourses-open{
+  display: block;
+  opacity: 1;
+  z-index: 1px;
+  }
+  .coursesDetails {
+  display: none;
+  height: 170px;
+  }
+   
+  .coursesButtons {
+  display: flex;
+  flex-direction: column;
+  }
+   
+  .coursesButtons button {
+  padding: 10px;
+  margin: 5px 0;
+  width: 500px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  }
+   
+  .coursesButtons button:hover {
+  background-color: #0056b3;
+  }
+  .termh3{
+  margin: 15px;
+  }
+   
+  /* for the courses inside the term css  */
+  .coursesDropdown{
+  height: 50%;
+  overflow: auto;
+  margin-top: 20px;
+  margin-left: 5%;
+  }
+  .dropdownmelon{
+  margin-left: 15px;
+  }
+   
+  /* coursemelon button */
+  .classSet {
+  position: relative;
+  width:40px;
+  margin-left: 30px;
+  text-align:center;
+  font-size: 18px;
+  font-weight: 100;
+  border: #000000;
+  background-color: transparent;
+  z-index: 0px;
+  border-radius: 15px;
+  }
+  .classSet:hover {
+  background-color: #0056b3;
+  transform: scale(1);
+  cursor: pointer;
+  z-index: 0px;
+  }  
+  .dropdown-content {
+  position: absolute;
+  left: 170px;
+  top: 20px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  width: 140px;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  background-color: #F8EFE3;
+  }
+  .dropdownbtn{
+  width: 110px;
+  border: 1px solid #000000;
+  height: 24px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  }
+  .dropdownbtn:hover {
+  background-color: #a8a8a8;
+  transform: scale(1);
+  cursor: pointer;
+  }  
+   
+  .course-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust margin as needed */
+  }
+  .course-container h3 {
+  margin-right: 10px; /* Adjust margin between course name and button */
+  margin-left: 30px;
+  }
+   
+  /* new group created */
+  .createdgroupBTN{
+    width: 267px;
+    border: 0px solid #000000;
+    height: 55px;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    background-color: #ffffff;  
+    font-size: 15px;
+  }
+  .createdgroupBTN:hover {
+  background-color: #a8a8a8;
+  transform: scale(1);
+  cursor: pointer;
+  }
+  .GroupContainer{
+    position: absolute;
+    width: 1370px;
+    height: 1000px;
+    padding: 25px; 
+    display: none;
+    z-index: 0; /* Set a lower z-index */
+    margin-left: -4%;
+  }
+  .dashboard_header{
+    background-color: #E2C17B;
+    width: 100%;
+    margin-left: -25px;
+    margin-top: -35px;
+    height: 7%;
+    display: grid;
+    grid-template-columns: 0fr auto;
+    gap: 65px;
+  }
+   
+  .GroupmembersContainer{
+  position: absolute;
+  left: 0;
+  top: calc(100% + .25rem);
+  background-color: white;
+  padding: .75rem;
+  border-radius:.25rem ;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out;
+  width: 300px;
+  }
+  .PanelistContainer{
+    position: absolute;
+    left: 0;
+    top: calc(100% + .25rem);
+    background-color: white;
+    padding: .75rem;
+    border-radius:.25rem ;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out;
+    width: 300px;
+    }
+     
+  .Rep-FilesBtn:hover{
+    background-color: #958f87;
+  }
+   
+  .Submission-Btn:hover{
+    background-color: #958f87;
+  }
+  .Rep-FilesBtn, .Submission-Btn, .Members-Btn, .Panelist-Btn {
+    width: auto;
+    height: 25px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  .Rep-FilesBtn {
+    width: 66px;
+  }
+  .Members-Btn {
+    width: 80px;
+    margin-right: 10px;
+  }
+  .Submission-Btn {
+    width: 120px;
+    height: 25px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+  }
+  .Members-Btn{
+  border: none;
+  width: 125px;
+  height: 25x;
+  margin-right: 10px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  transition:backround-color .3s ease;
+  }
+  .Members-Btn:hover {
+  background-color: #958f87;
+  }
+  */
+  button:hover{
+    background-color:#958f87;
+  }
+  .mDropdown{
+    position: relative;
+  }
+  .mDropdown > .Members-Btn:focus + .GroupmembersContainer{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  }
+   
+  .Panelist-Btn{
+    border: none;
+    width: 125px;
+    height: 35x;
+    margin-right: 10px;
+    background-color: #F8EFE3;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    transition:backround-color .3s ease;
+    }
+    .Panelist-Btn:hover {
+    background-color: #958f87;
+    }
+    */
+    button:hover{
+      background-color:#958f87;
+    }
+    .pDropdown{
+      position: relative;
+    }
+    .pDropdown > .Panelist-Btn:focus + .PanelistContainer{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    }
+   
+  .submissionFrame, .professorFilesR {
+  display: none;
+  background-color: #ffffff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  width: 1000px;
+  height: 600px;
+  margin-left: -25px;
+  margin-top: 0px;
+  }
+  .groupname_container{
+  margin-top: 18px;
+  margin-left: 25px;
+  width: 350px;
+  height: 25px;  
+  text-align: center;
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+  }
+  .group_name{
+  width: 350px;
+  height: 35px;
+  background-color: #F8EFE3;
+  position: relative;
+  border-radius: 20px;
+  margin-top: 40px;
+  outline: none;
+  text-align: center;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+   
+  }
+  .button-group{
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0px;
+    transition: backround-color 0.5s ease;
+    text-align: center;
+    margin-top: -2px;
+    margin-right: 600px;
+    transition: backround-color .3s ease;
+  }
+  /* setrequirements */
+  .setrequirements{
+  position: relative;  
+  top: -0px;
+  width: 700px;
+  height: 300px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow:hidden;
+  display: none;
+  transition:1s;
+  }
+  .createdReq{
+    position: relative;
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      border: 1px solid #000000;
+      margin-left: 380px;
+      margin-top: -180px;
+      background-color: #F8EFE3;
+  }
+  .inputRequirements{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+  width: 330px;  
+  border: 1px solid #000000;
+  height: 35px;
+  border-radius: 10px;
+  background-color: #F8EFE3;
+  }
+  .inputRequirementsDescription{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+  width: 330px;  
+  border: 1px solid #000000;
+  height: 35px;
+  border-radius: 10px;
+  background-color: #F8EFE3;
+  }
+  .addreqbtn{
+  margin-top: 10px;
+  padding: 10px 10px;
+  width: 150px;
+  background-color: #F8EFE3;
+  color: #030303;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 15px;
+  }
+  .addreqbtn:hover{
+  background-color: #aeaeaeae;
+  }
+  /* addmember */
+  .addmember{
+  position: relative;  
+  top: 0px;
+  width: 500px;
+  height: 520px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow:hidden;
+  display: none;
+  transition:1s;  
+  }
+  .inputName{
+    width: 220px;
+    height: 50px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .flex-container{
+    padding: 10px;
+  }
+   
+  /* pinagawa ni ian na temporary rubric */
+  .rubricinput {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 600px;
+    height: 100px;
+    margin-top: 35px;
+    margin-left: 31px;
+    padding: 20px;
+    background-color: #ffffff;
+    transition: 1s;
+    border: 1px solid black;
+  }
+   
+  .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+   
+  .inputRubric {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 220px;
+    border: 1px solid #000000;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #F8EFE3;
+    margin-right: 10px; /* Added margin-right for spacing */
+  }
+   
+  .selectedRub {
+    position: relative;
+    width: 220px;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    background-color: #F8EFE3;
+    padding: 5px;
+    margin-right: 20px;  
+    margin-bottom: 10px;
+  }
+   
+  .addRubric {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100px;
+    background-color: #F8EFE3;
+    color: #030303;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+   
+   
+   
+  /* rubric */
+   
+  .rubriccontainer {
+    position: relative;
+    top: 0px;
+    width: 1300px;
+    max-width: none; /* Remove max-width */
+    height: 700px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 1s;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+   
+  .select-box{
+  background-color: #F8EFE3;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  width: 380px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  }
+  .selected-options{
+  display: flex;
+  flex-wrap: wrap ;
+  margin-top: 0px;
+  }
+  .tag{
+  background-color: #f2f2f2;
+  color: #000000;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 6px 14p;
+  display: flex;
+  align-items: center;
+  }
+  .remove-tag{
+  margin-left: 6px;
+  }
+  .arrow{
+  margin: 0 10px;
+  }
+  .fa-fangle-down{
+  color: #404040;
+  font-size: 20px;
+  }
+  .options{
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #000000;
+  border-top: none;
+  max-height: 225px;
+  overflow-y: auto;
+  z-index: 1;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .open .options{
+  display: block;
+  }
+  .option-search-tag{
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+  padding: 8px 0;
+  margin: 8px;
+  }
+  .search-tags{
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px;
+  font: 15px;
+  }
+  .clear{
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  color: #000000;
+  top: 26px;
+  left: auto;
+  right: 15px;
+  }
+  .options{
+  padding: 12px;
+  cursor: pointer;
+  }
+  .option.action{
+  color: #000000;
+  background-color: #f2f2f2f2;
+  border-bottom: 1px solid #aeaeaeae;
+  }
+  .tag:hover{
+  background-color: #aeaeaeae;
+   
+  }
+  .no-result-message{
+  padding: 0px 0px 12px;
+  }
+  .error{
+  color:#b13232 ;
+  margin-top: 8px;
+  }
+  .btn_submit{
+  padding: 17px 24px;
+  background-color: #F8EFE3;
+  border: none;
+  cursor: pointer;
+  border: 1px solid #000000;
+  font-size: 16px;
+  border-radius: 15px;
+  }
+  .btn_submit:hover{
+  background-color: #dbd3c9;
+  }      
+   
+  /* start of group file,submission, and member css  */
+  .requirement-name{
+    position: relative;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+    width: 250px;
+    height: 55px  ;
+    margin-left: 50px;
+    text-align  : center;
+    padding-top: 40px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .req-nameCont{
+    width: 350px;
+    height: 580px;
+    display: flex;  
+    flex-direction: column;
+    margin-top: 25px;
+  }
+  .requirement-list{
+    background-color: white;
+    border-radius: 35px;
+    width: 350px;
+    height: 580px;
+    margin-top: 8px;
+  }
+  .submissionscontainer{
+    width: 1000px;
+    height: 600px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: row; /* Display children elements in a row */
+  }
+  .flsDropdown{
+    position: relative;
+  }
+  .flsDropdown.active{
+    position: relative;
+    display: block;
+  }
+  /* filesContainer start */
+  .flsDropdown.active> .Rep-FilesBtn + .filesContainer{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .filesContainer{
+    position: absolute;
+    width: 470px;
+    height: 325px;
+    left: -250px;
+    top: calc(100% + .25rem);
+    background-color: white;
+    padding: .75rem;
+    border-radius:.45rem ;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out;
+    z-index: 1000;
+    text-align: left;
+  }
+  .fileLogsPopup {
+      display: none;
+      position: absolute;
+      left: 0;
+      z-index: 1000;
+      background-color: #f9f9f9;
+      min-width: 300px;
+      max-height: 150px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      overflow-y: auto;
+     
+  }
+  #DocuReqrmntLogs {
+    bottom: 73%;
+    left: 20%;
+  }
+   
+  .fileLogsPopup .logItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+   
+  }
+   
+  .fileLogsPopup .logItem:last-child {
+    border-bottom: none;
+  }
+   
+  .fileLogsPopup .logItem img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+   
+  .fileLogsPopup .logItem .fileName {
+    flex: 1;
+  }
+   
+  .fileLogsPopup .logItem:hover {
+    background-color: #f0f0f0;
+  }
+  .documentationCont{
+    margin: 10px;
+    margin-top: 30px;
+    width: 455px;
+    height: 125px;
+    background-color:white;
+  }
+  .ReqDocumentation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    width: 461px;
+    height: 55px;
+    background-color: #F8EFE3;
+    border-radius: 25px;
+  }
+  .attachedAdvRecom,
+    .divAdvLogs,
+    .attachedDocumentation,
+    .divDocuReqLogs {
+        display: flex;
+        flex-direction: row; /* Display as rows */
+        align-items: center; /* Center items vertically */
+        height: 30px;
+       
+    }
+    .divDocuReqLogs{
+      width: 40px;
+    }
+    .attachedDocumentation{
+      width: 350px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #F8EFE3;
+      border-radius: 25px;
+      padding: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .attachedAdvRecom{
+      width: 150px;
+      margin-left: 10px;
+    }
+    .Recent-fileName{
+      margin-left: 26px;
+      width: 289px;
+    }
+    .DocuReqLogs{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      padding: 6px;
+      margin-left: 39px;
+      background-color: transparent;
+      border: none;
+    }.AdvCont {
+      margin: 10px;
+      width: 455px;
+      height: 125px;
+      background-color: white;
+  }
+   
+  .advRecomendation {
+      margin-top: 15px;
+      height: 55px;
+      width: 100%;
+      background-color: #F8EFE3;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  }
+   
+  .fileLogsPopup {
+      display: none;
+      position: absolute;
+      left: 0;
+      z-index: 1000;
+      background-color: #f9f9f9;
+      min-width: 300px;
+      max-height: 150px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      overflow-y: auto;
+     
+  }
+   
+  #DocuReqrmntLogs {
+    bottom: 50%;
+    left: 37%;
+  }
+   
+  #AdvReqrmntLogs {
+      bottom: -30px;
+  }
+   
+  .fileLogsPopup .logItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+   
+  }
+   
+  .fileLogsPopup .logItem:last-child {
+    border-bottom: none;
+  }
+   
+  .fileLogsPopup .logItem img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+   
+  .fileLogsPopup .logItem .fileName {
+    flex: 1;
+  }
+   
+  .fileLogsPopup .logItem:hover {
+    background-color: #f0f0f0;
+  }
+   
+  .defaultBody{
+    background-color: #ffffff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    width: 1370px;
+    height: 700px;
+    margin-left: -25px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+   
+   
+  .recentFiles {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+   .sender{
+    width: 280px; /* Adjust spacing between sender and file info */
+   
+  }
+  #sentbyme{
+    margin-right: -195px; /* Adjust spacing between sender and file info */
+   
+  }
+  .fileMessage {
+    background-color: #f0f0f0;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 215px;
+      cursor: pointer;
+      flex-direction: row;
+      overflow: auto;
+      width: 99%;
+      border: 2px black;
+  }
+   
+  .fileMessage.left {
+    align-self: flex-start;
+  }
+   
+  .fileMessage.right {
+    align-self: flex-end;
+    background-color: #e0f7fa;
+  }
+   
+  .fileInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+    width: 50%;}
+   
+  .fileIcon {
+    width: 40px;
+    height: 40px;
+  }
+   
+  .fileDetails {
+    display: flex;
+    flex-direction: column;
+  }
+   
+  .fileDetails strong {
+    font-size: 16px;
+  }
+   
+  .fileDetails span {
+    font-size: 12px;
+    color: #666;
+  }
+  /* filesContainer end*/
+   
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 90%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1500 ;
+  }
+   
+  .secondaryRubriccont {
+    background-color: #fff;
+    margin: 30px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 1200px;
+      height: 430px;
+    position: relative;
+    z-index: 500 ;
+    overflow: auto;
+  }
+   
+  .closeButton {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 500 ;
+  }
+   
+  .closeButton:hover,
+  .closeButton:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 500 ;
+  }
+   
+  #fileFrame {
+    width: 100%;
+    height: 96%;
+    z-index: 500 ;
+  }
+   
+  /* end of fucing css */
+   
+   
+  /* ewna ko sino gumawa neto brt yata */
+  body{
+    background: #CBC4BA;
+    overflow-x: hidden;
+   overflow: hidden;
+   }
+   #error-message {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       padding: 15px;
+       background-color: #ffcccc;
+       color: #ff0000;
+       border-radius: 10px;
+       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+       z-index: 1000;
+       display: none;
+   }
+   
+   #error-message.show {
+       display: block;
+   }
+   
+   #error-message button {
+       margin-top: 10px;
+       padding: 5px 10px;
+       background-color: #ff0000;
+       color: #fff;
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+   }
+   
+  /* notif */
+  .hero{
+    margin-left: 80px;
+    height: 200%;
+    width: 100%;
+  }
+  .notificationContainer{
+    width: 350px;
+  }
+  .single-box{
+    width: 330px;
+    padding: 30px;
+    margin: 40px 0 0 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  a.read{
+    text-decoration: none;
+    color: hsl(0, 0%, 0%);
+    font-size: 18px;
+  }
+  .single-box:hover {
+    background-color: #0056b3;
+  }
+  .single-box:active {
+    background-color: #004080;
+  }  
+   
+  .single-box.unseen{
+    width: 330px;
+    padding: 30px;
+    margin: 40px 0 0 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .unseen:hover {
+    background-color: #0056b3;  
+  }
+  .unseen:active {
+    background-color: #495057;  
+  }
+  .post{
+    color: hsl(219, 12%, 42%);
+    font-weight: 800;
+  }
+  span.dot{
+    display: inline-block;
+    background-color: hsl(1, 90%, 64%);
+    height: 9px;
+    width: 9px;
+    border-radius: 50%;
+    margin-left: 7px;
+  }
+   
+   
+   
+   .close {
+   background-color: transparent;
+   height: 30px;
+   width:  30px;
+   border: none;
+   padding: 5px;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-left: 350px;
+   overflow: hidden;
+  }
+  .close i {
+   color: black;
+   font-size: 25px;
+   transition: opacity 0.3s ease;
+   margin:-3px
+  }
+  .close i:hover {
+   opacity: 50%;
+   border-radius:25px;
+  }
+   
+  /* admin course create addition */
+  .Users{
+    top: -65px;
+    left: 20px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/users-icon.png);
+    background-repeat: no-repeat;
+    /* color: white; */
+  }
+  .Defense-Reports{
+    top: -85px;
+    left: 20px;
+    width:50px;
+    height:30px;
+    padding: 60px 0px;
+    cursor: pointer;
+    
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    background-image: url(menu_assets/defense-icon.png);
+    background-repeat: no-repeat;
+    font-size:small;
+    /* color: white; */
+  }
+   
+  /* viewmembers */
+  .closeViewGroup{
+    margin-left: 90%;
+    background-color: transparent; /* Example background color */
+    height: 25px;
+    width:  25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .viewgroup{
+    position: relative;
+    width: 250px;
+    height: 350px;
+    top: 0px;
+    overflow: hidden;
+    padding: 30px;
+    display: none;
+    background-color: #ffffff;
+    border-radius: 15px;
+  }
+  .membersContainer{
+    padding: 8px;
+    width: 230px;
+    border: 1px solid #000000;
+    height: 275px;
+    border-radius: 10px;
+    background-color: #f8efe3;
+    overflow: auto;
+   
+  }
+  .adminClass{
+    position: relative;
+    margin-left: 475px;
+    width: 1000px;
+    height: 600px;
+    padding: 25px;
+    margin-top: 0px;
+    top: -890px;
+    display: block;
+    z-index: 0;
+   
+  }
+   
+   
+  .table_selectrubric {
+    padding: 20px;
+  }
+   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+   
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+   
+  th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+   
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+   
+  .rubric-description {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+  }
+   
+  .rubric-description:hover {
+    background-color: #585c61;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1000;
+  }
+   
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    z-index: 1000;
+  }
+  .modalContent{
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 62%;
+    height: 75%;
+    position: relative;
+    z-index: 500;
+    padding: 2%;
+  }
+   
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+  }
+   
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+   
+  .description-column {
+    width: 60%;
+  }
+  .grades-column{
+    align-items: center;
+  }
+  .grades-column, .remarks-column {
+    width: 5%;
+   
+  }
+  .score-column{
+  text-align: center;
+  } 
