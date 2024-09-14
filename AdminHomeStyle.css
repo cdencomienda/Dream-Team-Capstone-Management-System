@@ -33,7 +33,7 @@ body{
   width:280px;
   bottom: 75px;
   left: 84%;
-  z-index: 0;
+  z-index: 1;
 }
 
 .editoverlay{
@@ -1388,8 +1388,8 @@ background-color: #dbd3c9;
    
 }
 #DocuReqrmntLogs {
-  bottom: 50%;
-  left: 37%;
+  bottom: 80%;
+  left: 15%;
 }
 
 .fileLogsPopup .logItem {
