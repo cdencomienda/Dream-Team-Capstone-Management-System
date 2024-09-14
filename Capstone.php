@@ -2114,11 +2114,13 @@ summaryBtn.addEventListener('click', function() {
 function fetchResults() {
     Promise.all([
         fetch('fetchDisplayRubric.php').then(response => response.json()),
-        fetch('fetchPanelistGrade.php').then(response => response.json())
+        fetch('fetchPanelistGrade.php').then(response => response.json()),
+        fetch('test.php').then(response => response.json()) // Fetch validated comments
     ])
-    .then(([rubricData, testData]) => {
+    .then(([rubricData, testData, validatedData]) => {
         console.log('Fetched Rubric Data:', rubricData);
         console.log('Fetched Test Data:', testData);
+        console.log('Fetched Validated Data:', validatedData);
 
         const container = document.querySelector('.chairPgrade');
         container.innerHTML = ''; // Clear existing content
@@ -2140,7 +2142,6 @@ function fetchResults() {
             const rubricContainerDiv = document.createElement('div');
             rubricContainerDiv.classList.add('rubric-container');
             rubricContainerDiv.style.background = '#FFFFFF'; // New background color
-
 
             const table = document.createElement('table');
             const thead = document.createElement('thead');
@@ -2187,17 +2188,20 @@ function fetchResults() {
             rubricContainerDiv.appendChild(table);
             defensePageDiv.appendChild(rubricContainerDiv);
 
-            // Adding comments section
+            // Adding comments section with checkboxes
             const commentsDiv = document.createElement('div');
             commentsDiv.classList.add('CommentsDiv2');
-            commentsDiv.innerHTML = professor.remarkType.map((remarkType, i) => `
+            commentsDiv.innerHTML = professor.remarkType.map((remarkType, i) => {
+                const isChecked = validatedData[professor.panelRole] && validatedData[professor.panelRole][i] === '1' ? 'checked' : '';
+                return `
                 <div class="comments-section" id="commentsSection">
                     <div class="feedback-type-label">${remarkType}</div>
                     <div class="comment-sent" style="width: 95%;">
                         <textarea class="comments-input" disabled="">${professor.remarks[i]}</textarea>
+                        <input type="checkbox" class="validate-comment" data-panel-role="${professor.panelRole}" data-index="${i}" ${isChecked}> Validate
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
 
             defensePageDiv.appendChild(commentsDiv);
 
@@ -2206,73 +2210,34 @@ function fetchResults() {
             container.appendChild(chairPgradeDiv);
         });
 
-        // Existing code for handling the gradeTable
-        const gradeTable = document.getElementById('gradeTable');
-        gradeTable.innerHTML = ''; // Clear existing content
+        // Checkbox event listener to update validation status
+        document.querySelectorAll('.validate-comment').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const panelRole = this.getAttribute('data-panel-role');
+                const index = this.getAttribute('data-index');
+                const isChecked = this.checked ? 1 : 0;
 
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-
-        const criteriaHeader = document.createElement('th');
-        criteriaHeader.textContent = 'Panelist';
-        const gradeHeader = document.createElement('th');
-        gradeHeader.textContent = 'Grade';
-
-        headerRow.appendChild(criteriaHeader);
-        headerRow.appendChild(gradeHeader);
-        thead.appendChild(headerRow);
-        gradeTable.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
-        if (!testData.error) {
-            testData.professorsData.forEach(professor => {
-                const row = document.createElement('tr');
-                const criteriaCell = document.createElement('td');
-                criteriaCell.textContent = professor.panelRole;
-                const gradeCell = document.createElement('td');
-                const averageGrade = parseFloat(professor.averageWeightedGrade);
-                gradeCell.textContent = isNaN(averageGrade) ? 'N/A' : averageGrade.toFixed(2);
-                row.appendChild(criteriaCell);
-                row.appendChild(gradeCell);
-                tbody.appendChild(row);
+                fetch('test2.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        groupID: sessionStorage.getItem('student_group_id'), // Assuming this is set in session storage
+                        panelRole,
+                        index,
+                        isChecked
+                    })
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                }).catch(error => {
+                    console.error('Error updating validation:', error);
+                });
             });
-        }
-        gradeTable.appendChild(tbody);
-
-        // Update totalPercentage
-        const totalPercentage = document.querySelector('.totalAverage');
-        const h2Element = document.createElement('h2');
-        if (!testData.error) {
-            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2);
-            h2Element.textContent = `Total Average: ${formattedAverage}%`;
-        } else {
-            h2Element.textContent = 'Total Average: N/A';
-        }
-        totalPercentage.innerHTML = '';
-        totalPercentage.appendChild(h2Element);
-
-        // Populate verdictDropdown
-        const verdictDropdown = document.getElementById('verdictDropdown');
-        verdictDropdown.innerHTML = '';
-        const verdictOptions = [
-            { value: 'Pass', text: 'Pass' },
-            { value: 'Conditional Pass', text: 'Conditional Pass' },
-            { value: 'Re-Defense', text: 'Re-Defense' },
-            { value: 'Repeat', text: 'Repeat' }
-        ];
-        verdictOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option.value;
-            optionElement.textContent = option.text;
-            verdictDropdown.appendChild(optionElement);
         });
-
-        // Rename modal-content to Grade Summary
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.querySelector('h2').textContent = 'Grade Summary';
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
 
 
 

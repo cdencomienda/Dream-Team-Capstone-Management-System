@@ -438,6 +438,7 @@ body{
     margin-right: 10px;
     width: 60%;
 }
+
 .defense-main{
   background-color: #ffffff;
   border-bottom-left-radius: 15px;
@@ -470,6 +471,22 @@ body{
     justify-content: space-between;
    
   }
+  #submitGrade{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17%;
+    padding: 8px;
+    background-color:#FFE2BF;
+    border: none;
+    border-radius: 15px;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 16px;
+    
+    margin-left: 27%;
+    margin-top: -35px;
+  }
+
   .addComment, .sendComment {
     display: flex;
     justify-content: center;
@@ -485,7 +502,7 @@ body{
     margin: 5px;
 }
 
-  .addComment, .sendComment {
+  .addComment, .sendComment  {
     flex: 1;
     margin: 5px;
     padding: 10px;
@@ -495,7 +512,9 @@ body{
   .addComment:hover {
     background-color: #e6d9c3; /* Change background color on hover */
   }
-    
+  #submitGrade:hover {
+    background-color: #e6d9c3; /* Change background color on hover */
+  }
   .sendComment:hover {
     background-color: #e6d9c3; /* Change background color on hover */
   }
@@ -578,6 +597,7 @@ body{
   width: 85%;
   height: auto;
   margin: 2% auto;
+  margin-left: 0%;
   background: #FFEBCF;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -652,18 +672,33 @@ td select {
   border-radius: 5px;
   font-size:20px;
 }
+
+th{
+  font-size: 28px;
+}
+td{
+  font-size: 23px;
+
+}
 .description-column {
   width: 55%;
+  font-size: 23px;
+
 }
 .grades-column{
   align-items: center;
+  font-size: 23px;
+
 }
 .grades-column, .remarks-column {
   width: 5%;
+  font-size: 23px;
 
 }
 .score-column{
 text-align: center;
+font-size: 23px;
+
 }
 .remarks-box {
   width: 100%;
