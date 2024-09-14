@@ -521,182 +521,6 @@
                     </div>
                         
                 </div>
-<!--                   
-                Lead Panel Dropdown -->
-                <!-- <div class="leadPanelContent">
-                    <div class = "lead-panelName"><h2>LEAD PANEL: </h2></span></div>
-                        <div class="Defense-Page" id="leadSummaryGrade">
-                            <div class="rubric-container">
-                              <div class="rubric-header">
-                                <h1>Oral Communication</h1>
-                              </div>
-                              <table>
-                            
-                                <thead>
-                                
-                                    <tr>
-                                        <th class="description-column">Description</th>
-                                        <th class="grade-Desc">Score Description</th>
-                                        <th class="grades-column">Grades</th>
-                                    </tr>
-                                
-                                </thead>
-                                
-                                <tbody>
-                                  
-                                    <tr class="criteria">
-                                    
-                                        <td class="description">
-                                        
-                                            <strong>B1. Executive Summary</strong><br>
-                                            The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                                    
-                                        </td>
-                                        
-                                        <td class="grade_description">example description</td>
-                                        <td class="score-column"><span class="score"></span></td>
-                                    
-                                    </tr> -->
-                                  
-                                    <!-- More rows as needed -->
-                                
-                                <!-- </tbody>
-                                
-                                <tbody>
-                                  
-                                  <tr class="criteria">
-                                  
-                                      <td class="description">
-                                      
-                                          <strong>B1. Executive Summary</strong><br>
-                                          The project summary includes: a clear, coherent, easily readable & accurate paragraph; consists of complete sentences free from grammatical and factual errors and biases; and includes the right amount of detail.
-                                  
-                                      </td>
-                                      
-                                      <td class="grade_description">example description</td>
-                                      <td class="score-column"><span class="score"></span></td>
-                                  
-                                  </tr>
-                                 -->
-                                  <!-- More rows as needed -->
-                              
-                              <!-- </tbody>
-
-                            </table>
-                            </div>
-                    </div>
-                </div> -->
-                  
-                <!-- Panel Member 1 Dropdown
-                
-
-            <div class="panelMemberContent">
-
-                <div class = "panel-memberName"><h2>PANEL MEMBER: </h2></span></div>
-
-                          <div class="Defense-Page" id="panelMemberSummaryGrade">
-                            <div class="rubric-container">
-                              <div class="rubric-header">
-                                <h1>Project Evaluation</h1>
-                              </div>
-                              <table>
-                                <thead>
-                                  <tr>
-                                    <th class="description-column">Description</th>
-                                    <th class="grade-Desc">Score Description</th>
-                                    <th class="grades-column">Grades</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B3. Project Impact</strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                  More rows as needed
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B3. Project Impact</strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B3. Project Impact</strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-            -->
-            <!-- Panel Member 2 Dropdown             
-
-            <div class="panelMember2Content">
-                
-                <div class = "panel-member2Name"><h2>PANEL MEMBER 2: </h2></span></div>
-
-                    <div class="Defense-Page" id="panelMember2SummaryGrade">
-                        <div class="rubric-container">
-                            <div class="rubric-header">
-                                <h1>Project Evaluation</h1>
-                              </div>
-                              <table>
-                                <thead>
-                                  <tr>
-                                    <th class="description-column">Description</th>
-                                    <th class="grade-Desc">Score Description</th>
-                                    <th class="grades-column">Grades</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B4. Jollibee Burger Steak </strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr> -->
-                                  <!-- More rows as needed -->
-                                  <!-- <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B4. Jollibee Burger Steak </strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B4. Jollibee Burger Steak </strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                  <tr class="criteria">
-                                    <td class="description">
-                                      <strong>B4. Jollibee Burger Steak </strong><br>
-                                      The project evaluation includes: assessing the project's impact on the community and its potential for future development.
-                                    </td>
-                                    <td class="grade_description">example description</td>
-                                    <td class="score-column"><span class="score"></span></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div> -->
                   
                         <!-- Compute Button -->
                         <button class="compute-button" onclick="computeGrades()">Compute</button>
@@ -2290,112 +2114,137 @@ summaryBtn.addEventListener('click', function() {
 function fetchResults() {
     Promise.all([
         fetch('fetchDisplayRubric.php').then(response => response.json()),
-        fetch('fetchPanelistGrade.php').then(response => response.json())
+        fetch('fetchPanelistGrade.php').then(response => response.json()),
+        fetch('test.php').then(response => response.json()) // Fetch validated comments
     ])
-    .then(([rubricData, testData]) => {
-        // Log the entire data fetched from the server
+    .then(([rubricData, testData, validatedData]) => {
         console.log('Fetched Rubric Data:', rubricData);
         console.log('Fetched Test Data:', testData);
+        console.log('Fetched Validated Data:', validatedData);
 
-        
+        const container = document.querySelector('.chairPgrade');
+        container.innerHTML = ''; // Clear existing content
 
-        // Clear existing content in gradeTable
-        const gradeTable = document.getElementById('gradeTable');
-        gradeTable.innerHTML = ''; // Clear existing content
+        testData.professorsData.forEach(professor => {
+            const chairPgradeDiv = document.createElement('div');
+            chairPgradeDiv.classList.add('chairPgrade');
 
-        // Create thead for table
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
+            const chairpanelNameDiv = document.createElement('div');
+            chairpanelNameDiv.classList.add('chairpanelName');
+            const h2 = document.createElement('h2');
+            h2.textContent = `Panelist: ${professor.panelRole}`;
+            chairpanelNameDiv.appendChild(h2);
 
-        // Add headers for criteria and grade
-        const criteriaHeader = document.createElement('th');
-        criteriaHeader.textContent = 'Panelist';
+            const defensePageDiv = document.createElement('div');
+            defensePageDiv.classList.add('Defense-Page');
+            defensePageDiv.id = 'summaryGrade';
 
-        const gradeHeader = document.createElement('th');
-        gradeHeader.textContent = 'Grade';
+            const rubricContainerDiv = document.createElement('div');
+            rubricContainerDiv.classList.add('rubric-container');
+            rubricContainerDiv.style.background = '#FFFFFF'; // New background color
 
-        // Append headers to header row
-        headerRow.appendChild(criteriaHeader);
-        headerRow.appendChild(gradeHeader);
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const descriptionHeader = document.createElement('th');
+            descriptionHeader.classList.add('description-column');
+            descriptionHeader.setAttribute('colspan', '3');
 
-        // Append header row to thead
-        thead.appendChild(headerRow);
+            const rubricName = (rubricData.length > 0 && rubricData[0].rubric_name) ? rubricData[0].rubric_name : '';
+            descriptionHeader.innerHTML = `<strong>${rubricName}</strong>`;
+            headerRow.appendChild(descriptionHeader);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
 
-        // Append thead to gradeTable
-        gradeTable.appendChild(thead);
+            const tbody = document.createElement('tbody');
+            const subHeaderRow = document.createElement('tr');
+            subHeaderRow.innerHTML = `
+                <th class="description-column">Criteria</th>
+                <th class="grade-Desc">Score Description</th>
+                <th class="grades-column">Grades</th>`;
+            tbody.appendChild(subHeaderRow);
 
-        // Create tbody for table
-        const tbody = document.createElement('tbody');
-
-        // Process testData for tbody content
-        if (testData.error) {
-            console.error('Error in testData:', testData.error);
-        } else {
-            // Loop through professorsData
-            testData.professorsData.forEach(professor => {
-                // Create a row for each professor
+            professor.criteria.forEach((criteria, index) => {
                 const row = document.createElement('tr');
 
-                // Create cells for panel role and grade
                 const criteriaCell = document.createElement('td');
-                criteriaCell.textContent = professor.panelRole; // Assuming panelRole represents criteria
+                criteriaCell.textContent = criteria;
+                row.appendChild(criteriaCell);
+
+                const gradeDescCell = document.createElement('td');
+                const rubricCriteria = rubricData[0].criteria.find(c => c.criteria_name.includes(criteria));
+                const gradeIndex = rubricData[0].level_percentage.indexOf(professor.weightedGrade[index]);
+                gradeDescCell.textContent = rubricCriteria ? rubricCriteria.criteria_details[gradeIndex] : '';
+                row.appendChild(gradeDescCell);
 
                 const gradeCell = document.createElement('td');
-                const averageGrade = parseFloat(professor.averageWeightedGrade); // Convert to number
-                gradeCell.textContent = isNaN(averageGrade) ? 'N/A' : averageGrade.toFixed(2); // Format as number with 2 decimals
-
-                // Append cells to row
-                row.appendChild(criteriaCell);
+                gradeCell.textContent = professor.weightedGrade[index];
                 row.appendChild(gradeCell);
 
-                // Append row to tbody
                 tbody.appendChild(row);
             });
-        }
 
-        // Append tbody to gradeTable
-        gradeTable.appendChild(tbody);
+            table.appendChild(tbody);
+            rubricContainerDiv.appendChild(table);
+            defensePageDiv.appendChild(rubricContainerDiv);
 
-        // Update totalPercentage
-        const totalPercentage = document.querySelector('.totalAverage'); // Select element by class name
-const h2Element = document.createElement('h2'); // Create an <h2> element
+            // Adding comments section with checkboxes
+            const commentsDiv = document.createElement('div');
+            commentsDiv.classList.add('CommentsDiv2');
+            commentsDiv.innerHTML = professor.remarkType.map((remarkType, i) => {
+                const isChecked = validatedData[professor.panelRole] && validatedData[professor.panelRole][i] === '1' ? 'checked' : '';
+                return `
+                <div class="comments-section" id="commentsSection">
+                    <div class="feedback-type-label">${remarkType}</div>
+                    <div class="comment-sent" style="width: 95%;">
+                        <textarea class="comments-input" disabled="">${professor.remarks[i]}</textarea>
+                        <input type="checkbox" class="validate-comment" data-panel-role="${professor.panelRole}" data-index="${i}" ${isChecked}> Validate
+                    </div>
+                </div>`;
+            }).join('');
 
-if (!testData.error) {
-    const formattedAverage = parseFloat(testData.overallAverage).toFixed(2); // Convert to number and format as 2 decimals
-    h2Element.textContent = `Total Average: ${formattedAverage}%`; // Display 'Total Average: <average>%'
-} else {
-    h2Element.textContent = 'Total Average: N/A'; // Display 'Total Average: N/A' if there's an error
-}
+            defensePageDiv.appendChild(commentsDiv);
 
-// Replace the existing content with the <h2> element
-totalPercentage.innerHTML = ''; // Clear existing content
-totalPercentage.appendChild(h2Element); // Append the <h2> element
-
-        // Populate verdictDropdown
-        const verdictDropdown = document.getElementById('verdictDropdown');
-        // Clear existing options
-        verdictDropdown.innerHTML = '';
-        // Define options
-        const verdictOptions = [
-            { value: 'Pass', text: 'Pass' },
-            { value: 'Conditional Pass', text: 'Conditional Pass' },
-            { value: 'Re-Defense', text: 'Re-Defense' },
-            { value: 'Repeat', text: 'Repeat' }
-        ];
-        // Create and append options
-        verdictOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option.value;
-            optionElement.textContent = option.text;
-            verdictDropdown.appendChild(optionElement);
+            chairPgradeDiv.appendChild(chairpanelNameDiv);
+            chairPgradeDiv.appendChild(defensePageDiv);
+            container.appendChild(chairPgradeDiv);
         });
 
-        // Rename modal-content to Grade Summary
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.querySelector('h2').textContent = 'Grade Summary';
+        // Checkbox event listener to update validation status
+        document.querySelectorAll('.validate-comment').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const panelRole = this.getAttribute('data-panel-role');
+                const index = this.getAttribute('data-index');
+                const isChecked = this.checked ? 1 : 0;
+
+                fetch('test2.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        groupID: sessionStorage.getItem('student_group_id'), // Assuming this is set in session storage
+                        panelRole,
+                        index,
+                        isChecked
+                    })
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                }).catch(error => {
+                    console.error('Error updating validation:', error);
+                });
+            });
+        });
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+
+
+
+
+
+
+
 
 
 </script>
