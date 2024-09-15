@@ -7,7 +7,67 @@
     <title>Capstone Defense</title>
     <link rel="stylesheet" href="AdminCapstone.css">
     
-    
+    <style>
+         
+         body{
+          background: #CBC4BA;
+          overflow-x: hidden;
+         overflow: hidden;
+         }
+         #error-message {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             padding: 15px;
+             background-color: #ffcccc;
+             color: #ff0000;
+             border-radius: 10px;
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+             z-index: 1000;
+             display: none;
+         }
+  
+         #error-message.show {
+             display: block;
+         }
+  
+         #error-message button {
+             margin-top: 10px;
+             padding: 5px 10px;
+             background-color: #ff0000;
+             color: #fff;
+             border: none;
+             border-radius: 5px;
+             cursor: pointer;
+         }
+         .close {
+         background-color: transparent; 
+         height: 30px;
+         width:  30px;
+         border: none;
+         padding: 5px;
+         border-radius: 5px;
+         cursor: pointer;
+         margin-left: 350px;
+         overflow: hidden; 
+         }
+     
+         .close i {
+             color: black; 
+             font-size: 25px;
+             margin:-3px
+             transition opacity 0.3s ease; 
+         }
+        
+         .close i:hover {
+             opacity: 50%; 
+             border-radius:25px;
+ 
+         }
+ 
+     </style>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -29,77 +89,74 @@
             </div>
      
             <div class="container">
-                <div class="action">
-                    <div class="profile">
-                        <img src="menu_assets/users-icon.png" alt="profile-img">
-                    </div>
-                    <div class="menu" id ="menuBtn">
-                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                        </h3>
-                        <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
-                        <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
-                    </div>
+            <div class="action">
+                <div class="profile" id="profilePic">
+                    <img src="menu_assets/prof.png" alt="profile-img">
                 </div>
-                <!-- editprofile --> 
-                <div id="editProfileOverlay" class="editoverlay">
-                    <div class="dropdown-profile">
-            
-                        <div>
-                            <button class = "close" onclick= "closeEditform()">  <i class="fa-regular fa-circle-xmark"></i> </button>
+                <div class="menu" id="menuBtn">
+                    <h3><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                    </h3>
+                    <button type="button" class="editprofileBtn" id="editProfileBtn">Edit Profile</button>
+                    <button type="button" class="logoutBtn" onclick="logOUT()">Logout</button>
+                </div>
+            </div>
+            <!-- editprofile --> 
+            <div id="editProfileOverlay" class="editoverlay">
+                <div class="dropdown-profile">
+                    <div>
+                        <button class="close" onclick="closeEditform()"><i class="fa-regular fa-circle-xmark"></i></button>
+                    </div>
+                    <form id="editProfileForm" action="editProfile.php" method="POST">
+                        <div class="profile">
+                            <img src="menu_assets/prof.png" alt="profile-img">
                         </div>
-                        
-                        <form id="editProfileForm" action="editProfile.php" method="POST">
-                            <div class="profile">
-                                <img src="menu_assets/prof.png" alt="profile-img">
-                            </div>
-                            <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
-                            <span><?php echo $_SESSION['user_email']; ?></span>
-                            </h5edit>
-                            <h3> <input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"> </h3>
-                            <h3> <input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"> </h3>
-                            <h3> <input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"> </h3>
-                            <h3> <input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"> </h3>
-                            <button type="submit" class="saveEditbtn"> Save Changes </button>
-                           
-                        </form>
-                       
-                        <?php if(isset($_SESSION['error_message'])) { ?>
+                        <h5edit><?php echo $_SESSION['fName'] . ' ' . $_SESSION['lname']; ?><br/>
+                        <span><?php echo $_SESSION['user_email']; ?></span>
+                        </h5edit>
+                        <h3><input type="text" id="profileemailID" class="inputEmail" name="userEmail" placeholder="Input your Email"></h3>
+                        <h3><input type="text" id="profileFnameID" class="inputname" name="newFname" placeholder="Input new First Name"></h3>
+                        <h3><input type="text" id="profileLnameID" class="inputname" name="newLname" placeholder="Input new Last Name"></h3>
+                        <h3><input type="text" id="profilepasswordID" class="inputPassword" name="newPassword" placeholder="Input new Password"></h3>
+                        <button type="submit" class="saveEditbtn">Save Changes</button>
+                    </form>
+                    <?php if(isset($_SESSION['error_message'])) { ?>
                     <div id="error-message" class="show">
                         <?php echo $_SESSION['error_message']; ?>
                         <button onclick="clearErrorMessage()">OK</button>
                     </div>
-                <?php
-                    unset($_SESSION['error_message']); // Clear the error message after displaying it
-                } ?>
-                
-            <script>
-                    window.onload = function() {
-                        var urlParams = new URLSearchParams(window.location.search);
-            
-                        if (urlParams.has('showOverlay')) {
-                            document.getElementById('editProfileOverlay').style.display = 'block';
-                        }
-                        window.onclick = function(event) {
-                            if (event.target == overlay) {
-                                overlay.style.display = 'none';
-                            }
-                        }
-                    }
-    
-            </script>
-                <script>
-                function clearErrorMessage() {
-                    var errorMessage = document.getElementById("error-message");
-                    errorMessage.classList.remove("show");
-                }
-                </script> 
-                    </div>
+                    <?php unset($_SESSION['error_message']); } ?>
                 </div>
             </div>
         </div>
-    </div> 
+            
+        <script>
+                window.onload = function() {
+                    var urlParams = new URLSearchParams(window.location.search);
+        
+                    if (urlParams.has('showOverlay')) {
+                        document.getElementById('editProfileOverlay').style.display = 'block';
+                    }
+                    window.onclick = function(event) {
+                        if (event.target == overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
+                }
+
+        </script>
+            <script>
+            function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+            }
+            </script> 
+                </div>
+            </div>
+        </div>
+    </div>
 </head>
+
 <body>
 
     <div class="Lsection">
