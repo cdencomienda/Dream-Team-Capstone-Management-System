@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"
+            integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +22,7 @@
         <?php include 'login.php'; ?>
         <?php include 'CourseCreated.php'; ?>
         <?php include 'editProfile.php'; ?>
+
         
         <div class="header">
             <div class="wrap">
@@ -2112,10 +2120,10 @@ summaryBtn.addEventListener('click', function() {
 });
 
 function fetchResults() {
-    Promise.all([
+    return Promise.all([
         fetch('fetchDisplayRubric.php').then(response => response.json()),
         fetch('fetchPanelistGrade.php').then(response => response.json()),
-        fetch('test.php').then(response => response.json()) // Fetch validated comments
+        fetch('fetchValidatedComments.php').then(response => response.json()) // Fetch validated comments
     ])
     .then(([rubricData, testData, validatedData]) => {
         console.log('Fetched Rubric Data:', rubricData);
@@ -2132,7 +2140,7 @@ function fetchResults() {
             const chairpanelNameDiv = document.createElement('div');
             chairpanelNameDiv.classList.add('chairpanelName');
             const h2 = document.createElement('h2');
-            h2.textContent = `Panelist: ${professor.panelRole}`;
+            h2.textContent = `Panelist: ${professor.panelName} (${professor.panelRole})`;
             chairpanelNameDiv.appendChild(h2);
 
             const defensePageDiv = document.createElement('div');
@@ -2164,21 +2172,21 @@ function fetchResults() {
                 <th class="grades-column">Grades</th>`;
             tbody.appendChild(subHeaderRow);
 
-            professor.criteria.forEach((criteria, index) => {
+            // Loop through all criteria from rubricData
+            rubricData[0].criteria.forEach((rubricCriteria, index) => {
                 const row = document.createElement('tr');
 
                 const criteriaCell = document.createElement('td');
-                criteriaCell.textContent = criteria;
+                criteriaCell.textContent = rubricCriteria.criteria_name;
                 row.appendChild(criteriaCell);
 
                 const gradeDescCell = document.createElement('td');
-                const rubricCriteria = rubricData[0].criteria.find(c => c.criteria_name.includes(criteria));
                 const gradeIndex = rubricData[0].level_percentage.indexOf(professor.weightedGrade[index]);
-                gradeDescCell.textContent = rubricCriteria ? rubricCriteria.criteria_details[gradeIndex] : '';
+                gradeDescCell.textContent = rubricCriteria.criteria_details[gradeIndex] || '';
                 row.appendChild(gradeDescCell);
 
                 const gradeCell = document.createElement('td');
-                gradeCell.textContent = professor.weightedGrade[index];
+                gradeCell.textContent = professor.weightedGrade[index] || 'N/A'; // Display 'N/A' if no grade available
                 row.appendChild(gradeCell);
 
                 tbody.appendChild(row);
@@ -2197,7 +2205,7 @@ function fetchResults() {
                 <div class="comments-section" id="commentsSection">
                     <div class="feedback-type-label">${remarkType}</div>
                     <div class="comment-sent" style="width: 95%;">
-                        <textarea class="comments-input" disabled="">${professor.remarks[i]}</textarea>
+                        <textarea class="comments-input" ${isChecked ? 'disabled' : ''}>${professor.remarks[i]}</textarea>
                         <input type="checkbox" class="validate-comment" data-panel-role="${professor.panelRole}" data-index="${i}" ${isChecked}> Validate
                     </div>
                 </div>`;
@@ -2217,7 +2225,11 @@ function fetchResults() {
                 const index = this.getAttribute('data-index');
                 const isChecked = this.checked ? 1 : 0;
 
-                fetch('test2.php', {
+                // Update the textarea based on checkbox state
+                const textarea = this.parentElement.querySelector('.comments-input');
+                textarea.disabled = this.checked;
+
+                fetch('updateValidatedComments.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -2234,9 +2246,206 @@ function fetchResults() {
                 });
             });
         });
+
+        // Display the total average
+        const totalPercentage = document.querySelector('.totalAverage');
+        const h2Element = document.createElement('h2');
+        if (!testData.error) {
+            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2);
+            h2Element.textContent = `Total Average: ${formattedAverage}%`;
+        } else {
+            h2Element.textContent = 'Total Average: N/A';
+        }
+        totalPercentage.innerHTML = ''; // Clear previous content
+        totalPercentage.appendChild(h2Element);
+
+        // Populate verdict dropdown
+        const verdictDropdown = document.getElementById('verdictDropdown');
+        verdictDropdown.innerHTML = ''; // Clear existing options
+        const verdictOptions = [
+            { value: 'Pass', text: 'Pass' },
+            { value: 'Conditional Pass', text: 'Conditional Pass' },
+            { value: 'Re-Defense', text: 'Re-Defense' },
+            { value: 'Repeat', text: 'Repeat' }
+        ];
+
+        verdictOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.textContent = option.text;
+            verdictDropdown.appendChild(optionElement);
+        });
+
+        // Rename modal-content header to "Grade Summary"
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.querySelector('h2').textContent = 'Grade Summary';
+
+        // Existing code for handling the gradeTable
+        const gradeTable = document.getElementById('gradeTable');
+        gradeTable.innerHTML = ''; // Clear existing content
+
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const criteriaHeader = document.createElement('th');
+        criteriaHeader.textContent = 'Panelist';
+        const gradeHeader = document.createElement('th');
+        gradeHeader.textContent = 'Grade';
+        headerRow.appendChild(criteriaHeader);
+        headerRow.appendChild(gradeHeader);
+        thead.appendChild(headerRow);
+        gradeTable.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        if (!testData.error) {
+            testData.professorsData.forEach(professor => {
+                const row = document.createElement('tr');
+
+                const criteriaCell = document.createElement('td');
+                criteriaCell.textContent = `${professor.panelName} (${professor.panelRole})`;
+
+                const gradeCell = document.createElement('td');
+                const averageGrade = parseFloat(professor.averageWeightedGrade);
+                gradeCell.textContent = isNaN(averageGrade) ? 'N/A' : averageGrade.toFixed(2);
+
+                row.appendChild(criteriaCell);
+                row.appendChild(gradeCell);
+                tbody.appendChild(row);
+            });
+        }
+        gradeTable.appendChild(tbody);
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+function generatePDF() {
+    try {
+        // Select all elements with the class 'panel-grades'
+        const panelGrades = document.querySelectorAll('.chairPgrade');
+        if (panelGrades.length === 0) {
+            throw new Error('No elements with class "panel-grades" found');
+        }
+
+        // Create a container to hold all the panel grades
+        const combinedElement = document.createElement('div');
+        panelGrades.forEach(element => combinedElement.appendChild(element.cloneNode(true)));
+
+        // Set html2pdf options
+        const options = {
+            margin: [10, 10, 10, 10], // Adjust margins as needed
+            filename: 'report.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, // Increase scale for better resolution
+                useCORS: true // Ensure CORS is used for better image handling
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: [210, 297], // A4 size in mm
+                orientation: 'landscape' // Change to 'portrait' if preferred
+            }
+        };
+
+        // Generate and save PDF
+        html2pdf().from(combinedElement).set(options).save().then(() => {
+            console.log('PDF successfully saved.');
+        }).catch(error => {
+            console.error('Error generating PDF:', error);
+        });
+
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('submitGrade').addEventListener('click', function() {
+    const chairID = sessionStorage.getItem('user_id'); // Make sure these are set correctly
+const groupID = sessionStorage.getItem('student_group_id');
+const totalAverage = parseFloat(document.querySelector('.totalAverage').textContent.replace('Total Average: ', '').replace('%', ''));
+const selectedVerdict = document.getElementById('verdictDropdown').value;
+
+console.log('Chair ID:', chairID);
+console.log('Group ID:', groupID);
+console.log('Total Average:', totalAverage);
+console.log('Selected Verdict:', selectedVerdict);
+
+fetch('insertVerdict.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        chairID,
+        groupID,
+        totalAverage,
+        verdict: selectedVerdict
+    })
+}).then(response => {
+    return response.text().then(text => {
+        try {
+            return JSON.parse(text);
+        } catch (error) {
+            throw new Error(`Invalid JSON: ${text}`);
+        }
+    });
+})
+.then(data => {
+    if (data.success) {
+        console.log('Verdict inserted successfully:', data.message);
+        generatePDF(); // Call the function to generate the PDF
+    } else {
+        console.error('Error inserting verdict:', data.message);
+    }
+})
+.catch(error => console.error('Error:', error));
+
+
+});
+
+
+// function generatePDF() {
+//     const { jsPDF } = window.jspdf;
+//     const doc = new jsPDF();
+
+//     // Function to add content to PDF
+//     function addContentToPDF() {
+//         // Add panel-grades class content excluding unchecked comments and checkboxes
+//         const panelGrades = document.querySelectorAll('.panel-grades');
+//         panelGrades.forEach((panelGrade, index) => {
+//             const content = panelGrade.innerText; // Simple text extraction, adjust if needed
+//             doc.text(content, 10, 10 + (index * 40)); // Adjust coordinates
+//         });
+
+//         // Add gradeTable content
+//         const gradeTable = document.getElementById('gradeTable');
+//         const gradeTableContent = gradeTable.innerText; // Simple text extraction, adjust if needed
+//         doc.text('Grade Table:', 10, 10 + (panelGrades.length * 40));
+//         doc.text(gradeTableContent, 10, 20 + (panelGrades.length * 40)); // Adjust coordinates
+//     }
+
+//     addContentToPDF();
+
+//     // Add total average and verdict at the bottom
+//     const totalAverage = document.querySelector('.totalAverage h2').textContent;
+//     const verdict = document.getElementById('verdictDropdown').value;
+
+//     doc.text(`Total Average: ${totalAverage}`, 10, 30 + (panelGrades.length * 40));
+//     doc.text(`Verdict: ${verdict}`, 10, 40 + (panelGrades.length * 40));
+
+//     // Save the PDF
+//     doc.save('panel-grades.pdf');
+// }
+
+
+
+
 
 
 

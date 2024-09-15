@@ -35,6 +35,19 @@ if (isset($_SESSION['user_id'], $_SESSION['student_group_id'], $_SESSION['course
             $professorID = $row['professorID'];
             $panelRole = $row['panelRole'];
 
+            // Fetch firstName and lastName from the users table using professorID
+            $stmt3 = $conn->prepare("SELECT firstName, lastName FROM users WHERE userID = ?");
+            $stmt3->bind_param("i", $professorID);
+            $stmt3->execute();
+            $result3 = $stmt3->get_result();
+
+            if ($result3->num_rows > 0) {
+                $row3 = $result3->fetch_assoc();
+                $panelName = $row3['firstName'] . ' ' . $row3['lastName'];
+            } else {
+                $panelName = "Unknown Panelist";
+            }
+
             // Prepare and execute the query to get the latest assessment entry for this professorID
             $stmt2 = $conn->prepare("
                 SELECT criteria, weightedGrade, remarkType, remarks
@@ -69,6 +82,7 @@ if (isset($_SESSION['user_id'], $_SESSION['student_group_id'], $_SESSION['course
                 $professorData = array(
                     'professorID' => $professorID,
                     'panelRole' => $panelRole,
+                    'panelName' => $panelName, // Adding panelist name
                     'criteria' => $criteriaArray,
                     'weightedGrade' => $weightedGradeArray,
                     'remarkType' => $remarkTypeArray,
