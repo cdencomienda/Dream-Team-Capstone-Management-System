@@ -91,19 +91,21 @@ left: 37%;
 
 /* header and search */
 .header{
-    background-color: #213B9A;
-    height: 30px;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-    color: white;
-    background-repeat: no-repeat;
+  background-color: #213B9A;
+  height: 90px;
+  padding: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  background-repeat: no-repeat;
 }
 .search {
-    width: 700px;
-    margin-left: 100px;
-    position: relative;
-    display: flex;
+  width: 700px;
+  margin-left: 130px;
+  margin-top: auto;
+  position: relative;
+  display: flex;
 }
 .wrap{
     position:absolute;
@@ -117,28 +119,29 @@ left: 37%;
     border-radius:50%;  
 }
 .searchTerm {
-    margin-left: 0;
-    margin-top: 0;
-    width: 600px;
-    border: 3px solid #d8b34d;
-    border-right: none;
-    padding: 5px 20px;
-    height: 30px;
-    border-radius: 20px 0 0 20px;
-    outline: none;
-    color: #000000;
+  margin-top: 20px;
+  width: 600px;
+  height: 30px;
+  border: 3px solid #d8b34d;
+  border-right: none;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+  color: #000000;
   }
 .searchButton {
-    margin-top: 0px;
-    width: 60px;
-    height: 44px;
-    border: 1px solid #d8b34d;
-    background: #d8b34d;
-    text-align: center;
-    color: #000000;
-    border-radius: 0 20px 20px 0;
-    cursor: pointer;
-    font-size: 20px;
+  margin-top: 20px;
+  width: 60px;
+  height: 45 px;
+  border: 3px solid #d8b34d;
+  background: #d8b34d;
+  text-align: center;
+  color: #000000;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  font-size: 20px;
   }
 .searchTerm:focus{
     color: #000000;
@@ -843,7 +846,7 @@ iframe {
   height: 195px;
 }
 .requirement-descBox{
-  width: 475px;
+  width: 100%;
   height: 140px;
   background-color: #F8EFE3;
   margin-left: 0;
@@ -877,7 +880,7 @@ iframe {
   border-radius: 10px;
   border: none;
   background-color: #FFEBCF; 
-  margin-top: 90%;
+  margin-top: 80%;
 }
 .reqbtn:hover{
   background-color: #aaaaaa;
@@ -942,8 +945,8 @@ label{
   justify-content:center;
   height:250px;
   width:280px;
-  bottom: 35px;
-  left: 84%;
+  bottom: 25px;
+    left: 84%;
   z-index: 1;
 }
 .editoverlay{
