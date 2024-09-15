@@ -18,12 +18,11 @@ overflow-x: hidden;
 }
 /* dropdown edit profile */
 .container{
-  position: relative;
-  display:flex;
+  position: relative; 
   align-items:center;
   justify-content:center;
-  height:280px;
-  width:280px;
+  height:0px;
+  width:0px;
   bottom: 35px;
   left: 84%;
 }

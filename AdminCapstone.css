@@ -25,13 +25,12 @@
   
   /* dropdown edit profile */
   .container{
-    position: relative;
-    display:flex;
+    position: relative; 
     align-items:center;
     justify-content:center;
-    height:280px;
-    width:280px;
-    bottom: 35px;
+    height:0px;
+    width:0px;
+    bottom: 75px;
     left: 84%;
     z-index:10;
   }
