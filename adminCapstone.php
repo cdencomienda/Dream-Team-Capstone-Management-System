@@ -7,67 +7,70 @@
     <title>Capstone Defense</title>
     <link rel="stylesheet" href="AdminCapstone.css">
     
+    
     <style>
          
-         body{
-          background: #CBC4BA;
-          overflow-x: hidden;
-         overflow: hidden;
-         }
-         #error-message {
-             position: absolute;
-             top: 50%;
-             left: 50%;
-             transform: translate(-50%, -50%);
-             padding: 15px;
-             background-color: #ffcccc;
-             color: #ff0000;
-             border-radius: 10px;
-             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-             z-index: 1000;
-             display: none;
-         }
-  
-         #error-message.show {
-             display: block;
-         }
-  
-         #error-message button {
-             margin-top: 10px;
-             padding: 5px 10px;
-             background-color: #ff0000;
-             color: #fff;
-             border: none;
-             border-radius: 5px;
-             cursor: pointer;
-         }
-         .close {
-         background-color: transparent; 
-         height: 30px;
-         width:  30px;
-         border: none;
-         padding: 5px;
-         border-radius: 5px;
-         cursor: pointer;
-         margin-left: 350px;
-         overflow: hidden; 
-         }
-     
-         .close i {
-             color: black; 
-             font-size: 25px;
-             margin:-3px
-             transition opacity 0.3s ease; 
-         }
-        
-         .close i:hover {
-             opacity: 50%; 
-             border-radius:25px;
+        body{
+         background: #CBC4BA;
+         overflow-x: hidden;
+        overflow: hidden;
+        }
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px;
+            background-color: #ffcccc;
+            color: #ff0000;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
  
-         }
+        #error-message.show {
+            display: block;
+        }
  
-     </style>
+        #error-message button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .close {
+        background-color: transparent; 
+        height: 30px;
+        width:  30px;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 350px;
+        overflow: hidden; 
+        }
+    
+        .close i {
+            color: black; 
+            font-size: 25px;
+            margin:-3px
+            transition opacity 0.3s ease; 
+        }
+       
+        .close i:hover {
+            opacity: 50%; 
+            border-radius:25px;
 
+        }
+
+    </style>
+
+
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -129,38 +132,49 @@
                 </div>
             </div>
         </div>
-            
-        <script>
-                window.onload = function() {
-                    var urlParams = new URLSearchParams(window.location.search);
-        
-                    if (urlParams.has('showOverlay')) {
-                        document.getElementById('editProfileOverlay').style.display = 'block';
-                    }
-                    window.onclick = function(event) {
-                        if (event.target == overlay) {
-                            overlay.style.display = 'none';
-                        }
-                    }
-                }
 
-        </script>
+ 
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+ 
+            if (urlParams.has('showOverlay')) {
+                document.getElementById('editProfileOverlay').style.display = 'block';
+            }
+            window.onclick = function(event) {
+                if (event.target == overlay) {
+                    overlay.style.display = 'none';
+                }
+            }
+
+            // Add event listener to the close button
+            var closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', closeEditform);
+        }
+
+        // Define closeEditform function
+        function closeEditform() {
+            document.getElementById('editProfileOverlay').style.display = 'none';
+            document.getElementById('menuBtn').style.display = 'none';
+            location.reload();
+        }
+    </script>
             <script>
             function clearErrorMessage() {
                 var errorMessage = document.getElementById("error-message");
                 errorMessage.classList.remove("show");
             }
-            </script> 
+            </script>
                 </div>
             </div>
         </div>
     </div>
 </head>
-
 <body>
 
-    <div class="Lsection">
-    <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
+<div class="Lsection">
+        <div id="sectionBtn"></div>
+        <button type="button" class="notif"  onclick="notifAuth()">Notification</button>
         <button type="button" class="class"  onclick="openClassPage()">Class</button>
         <button type="button" class="schedule"  onclick="Schedule()">Schedule</button>
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
@@ -168,6 +182,7 @@
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
         <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
     </div>
+ 
     <script>
         function Users(){
         window.location.assign("Adminuser.php")
@@ -1220,8 +1235,11 @@ function setDirectory(path) {
     .then(data => {
         if (data.exists) {
             console.log('Directory exists: ', data.path);
+            verdictDirectory(directorySteps);
         } else {
             console.log('Directory does not exist: ', data.path);
+            // Call the createDirectory function here
+
         }
     })
     .catch(error => {
@@ -2000,11 +2018,14 @@ function sendFeedback() {
     console.log('Feedback List:', feedbackList);
     console.log('Selected Options:', selectedOptions);
 
-    feedbackList.forEach(item => {
-        var panelCommentsDiv = document.createElement('div');
+    // Ensure feedbackList only contains non-empty entries
+    const filteredFeedbackList = feedbackList.filter(item => item.text.trim() !== '');
+
+    filteredFeedbackList.forEach(item => {
+        const panelCommentsDiv = document.createElement('div');
         panelCommentsDiv.classList.add('panel-comments');
 
-        var commentsSection = document.querySelector('.comments-section');
+        const commentsSection = document.querySelector('.comments-section');
         if (commentsSection) {
             commentsSection.appendChild(panelCommentsDiv);
         } else {
@@ -2012,18 +2033,17 @@ function sendFeedback() {
             return;
         }
 
-        var commentSentDiv = document.createElement('div');
+        const commentSentDiv = document.createElement('div');
         commentSentDiv.classList.add('comment-sent');
         commentSentDiv.style.width = '95%';
 
-        var textarea = document.createElement('textarea');
+        const textarea = document.createElement('textarea');
         textarea.classList.add('comments-input');
         textarea.setAttribute('disabled', '');
         textarea.textContent = item.text;
 
         commentSentDiv.appendChild(textarea);
-
-        commentsSection.appendChild(commentSentDiv);
+        panelCommentsDiv.appendChild(commentSentDiv);
     });
 
     printSelectedOptions();
@@ -2034,9 +2054,14 @@ function sendFeedback() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ feedbackList: feedbackList, selectedOptions: selectedOptions })
+        body: JSON.stringify({ feedbackList: filteredFeedbackList, selectedOptions: selectedOptions })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Feedback submitted successfully:', data);
     })
@@ -2047,6 +2072,7 @@ function sendFeedback() {
     // Clear feedback list after submission
     feedbackList = [];
 }
+
 
 
 
@@ -2315,10 +2341,10 @@ summaryBtn.addEventListener('click', function() {
 });
 
 function fetchResults() {
-    Promise.all([
+    return Promise.all([
         fetch('fetchDisplayRubric.php').then(response => response.json()),
         fetch('fetchPanelistGrade.php').then(response => response.json()),
-        fetch('test.php').then(response => response.json()) // Fetch validated comments
+        fetch('fetchValidatedComments.php').then(response => response.json()) // Fetch validated comments
     ])
     .then(([rubricData, testData, validatedData]) => {
         console.log('Fetched Rubric Data:', rubricData);
@@ -2335,7 +2361,7 @@ function fetchResults() {
             const chairpanelNameDiv = document.createElement('div');
             chairpanelNameDiv.classList.add('chairpanelName');
             const h2 = document.createElement('h2');
-            h2.textContent = `Panelist: ${professor.panelRole}`;
+            h2.textContent = `Panelist: ${professor.panelName} (${professor.panelRole})`;
             chairpanelNameDiv.appendChild(h2);
 
             const defensePageDiv = document.createElement('div');
@@ -2367,21 +2393,21 @@ function fetchResults() {
                 <th class="grades-column">Grades</th>`;
             tbody.appendChild(subHeaderRow);
 
-            professor.criteria.forEach((criteria, index) => {
+            // Loop through all criteria from rubricData
+            rubricData[0].criteria.forEach((rubricCriteria, index) => {
                 const row = document.createElement('tr');
 
                 const criteriaCell = document.createElement('td');
-                criteriaCell.textContent = criteria;
+                criteriaCell.textContent = rubricCriteria.criteria_name;
                 row.appendChild(criteriaCell);
 
                 const gradeDescCell = document.createElement('td');
-                const rubricCriteria = rubricData[0].criteria.find(c => c.criteria_name.includes(criteria));
                 const gradeIndex = rubricData[0].level_percentage.indexOf(professor.weightedGrade[index]);
-                gradeDescCell.textContent = rubricCriteria ? rubricCriteria.criteria_details[gradeIndex] : '';
+                gradeDescCell.textContent = rubricCriteria.criteria_details[gradeIndex] || '';
                 row.appendChild(gradeDescCell);
 
                 const gradeCell = document.createElement('td');
-                gradeCell.textContent = professor.weightedGrade[index];
+                gradeCell.textContent = professor.weightedGrade[index] || 'N/A'; // Display 'N/A' if no grade available
                 row.appendChild(gradeCell);
 
                 tbody.appendChild(row);
@@ -2399,9 +2425,9 @@ function fetchResults() {
                 return `
                 <div class="comments-section" id="commentsSection">
                     <div class="feedback-type-label">${remarkType}</div>
-                    <div class="comment-sent" style="width: 95%;">
-                        <textarea class="comments-input" disabled="">${professor.remarks[i]}</textarea>
-                        <input type="checkbox" class="validate-comment" data-panel-role="${professor.panelRole}" data-index="${i}" ${isChecked}> Validate
+                    <div class="comment-sent" style="width: 85%;">
+                        <textarea class="comments-input" ${isChecked ? 'disabled' : ''}>${professor.remarks[i]}</textarea>
+                        <input type="checkbox" class="validate-comment" data-panel-role="${professor.panelRole}" data-index="${i}" ${isChecked}>
                     </div>
                 </div>`;
             }).join('');
@@ -2420,7 +2446,11 @@ function fetchResults() {
                 const index = this.getAttribute('data-index');
                 const isChecked = this.checked ? 1 : 0;
 
-                fetch('test2.php', {
+                // Update the textarea based on checkbox state
+                const textarea = this.parentElement.querySelector('.comments-input');
+                textarea.disabled = this.checked;
+
+                fetch('updateValidatedComments.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -2437,9 +2467,271 @@ function fetchResults() {
                 });
             });
         });
+
+        // Display the total average
+        const totalPercentage = document.querySelector('.totalAverage');
+        const h2Element = document.createElement('h2');
+        if (!testData.error) {
+            const formattedAverage = parseFloat(testData.overallAverage).toFixed(2);
+            h2Element.textContent = `Total Average: ${formattedAverage}%`;
+        } else {
+            h2Element.textContent = 'Total Average: N/A';
+        }
+        totalPercentage.innerHTML = ''; // Clear previous content
+        totalPercentage.appendChild(h2Element);
+
+        // Populate verdict dropdown
+        const verdictDropdown = document.getElementById('verdictDropdown');
+        verdictDropdown.innerHTML = ''; // Clear existing options
+        const verdictOptions = [
+            { value: 'Pass', text: 'Pass' },
+            { value: 'Conditional Pass', text: 'Conditional Pass' },
+            { value: 'Re-Defense', text: 'Re-Defense' },
+            { value: 'Repeat', text: 'Repeat' }
+        ];
+
+        verdictOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.textContent = option.text;
+            verdictDropdown.appendChild(optionElement);
+        });
+
+        // Rename modal-content header to "Grade Summary"
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.querySelector('h2').textContent = 'Grade Summary';
+
+        // Existing code for handling the gradeTable
+        const gradeTable = document.getElementById('gradeTable');
+        gradeTable.innerHTML = ''; // Clear existing content
+
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const criteriaHeader = document.createElement('th');
+        criteriaHeader.textContent = 'Panelist';
+        const gradeHeader = document.createElement('th');
+        gradeHeader.textContent = 'Grade';
+        headerRow.appendChild(criteriaHeader);
+        headerRow.appendChild(gradeHeader);
+        thead.appendChild(headerRow);
+        gradeTable.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        if (!testData.error) {
+            testData.professorsData.forEach(professor => {
+                const row = document.createElement('tr');
+
+                const criteriaCell = document.createElement('td');
+                criteriaCell.textContent = `${professor.panelName} (${professor.panelRole})`;
+
+                const gradeCell = document.createElement('td');
+                const averageGrade = parseFloat(professor.averageWeightedGrade);
+                gradeCell.textContent = isNaN(averageGrade) ? 'N/A' : averageGrade.toFixed(2);
+
+                row.appendChild(criteriaCell);
+                row.appendChild(gradeCell);
+                tbody.appendChild(row);
+            });
+        }
+        gradeTable.appendChild(tbody);
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+function generatePDF(selectedVerdict) {
+    const panelGradesElement = document.querySelector('.panel-grades').cloneNode(true);
+
+    // Remove checkboxes and non-validated comments
+    const commentsSections = panelGradesElement.querySelectorAll('.comments-section');
+    commentsSections.forEach(section => {
+        const checkbox = section.querySelector('.validate-comment');
+        if (checkbox && !checkbox.checked) {
+            section.remove();
+        } else {
+            if (checkbox) checkbox.remove();
+        }
+    });
+
+    const computeButtons = panelGradesElement.querySelectorAll('.compute-button');
+    computeButtons.forEach(button => {
+        button.remove();
+    });
+
+    const chairPgrades = panelGradesElement.querySelectorAll('.chairPgrade');
+    chairPgrades.forEach(chairPgrade => {
+        const chairpanelName = chairPgrade.querySelector('.chairpanelName h2');
+        if (chairpanelName) {
+            const nameDiv = document.createElement('div');
+            nameDiv.innerHTML = `<h2>${chairpanelName.textContent}</h2>`;
+            const defensePage = chairPgrade.querySelector('.Defense-Page');
+
+            if (defensePage) {
+                console.log('Parent node:', chairPgrade);
+                console.log('Node to insert before:', defensePage);
+                console.log('New node to insert:', nameDiv);
+
+                // Verify if defensePage is a child of chairPgrade
+                if (chairPgrade.contains(defensePage)) {
+                    try {
+                        chairPgrade.insertBefore(nameDiv, defensePage);
+                    } catch (error) {
+                        console.error('Insertion failed:', error);
+                    }
+                } else {
+                    console.warn('Defense-Page element is not a child of chairPgrade.');
+                }
+            } else {
+                console.warn('Defense-Page element not found in chairPgrade.');
+            }
+        } else {
+            console.warn('ChairpanelName element not found in chairPgrade.');
+        }
+    });
+
+    // Locate the gradeTable and totalAverage
+    const gradeTable = document.querySelector('#gradeTable');
+    const totalAverageElement = document.querySelector('.totalAverage');
+
+    if (gradeTable) {
+        const gradeTableClone = gradeTable.cloneNode(true);
+        panelGradesElement.appendChild(gradeTableClone);
+    } else {
+        console.warn('GradeTable element not found.');
+    }
+
+    if (totalAverageElement) {
+        const totalAverageClone = totalAverageElement.cloneNode(true);
+        panelGradesElement.appendChild(totalAverageClone);
+    } else {
+        console.warn('TotalAverage element not found.');
+    }
+
+    if (selectedVerdict) {
+        const verdictDiv = document.createElement('div');
+        verdictDiv.innerHTML = `<h2>Selected Verdict: ${selectedVerdict}</h2>`;
+        panelGradesElement.appendChild(verdictDiv);
+    }
+
+    const opt = {
+        margin:       0.5,
+        filename:     'DefenseGrades.pdf', // Temporary name, will be updated after getting fileName and version
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+
+    html2pdf().from(panelGradesElement).set(opt).outputPdf('blob').then(pdfBlob => {
+        // First insert log entry to get fileName and version
+        fetch('insertLog.php', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const fileName = data.fileName;
+                const version = data.version;
+                const finalFileName = `${fileName} - V${version}.pdf`;
+                
+                const formData = new FormData();
+                formData.append('pdf', pdfBlob, finalFileName);
+
+                fetch('savePDF.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('PDF saved successfully:', data.message);
+                    } else {
+                        console.error('Error saving PDF:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                console.error('Error inserting log:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+function verdictDirectory(directoryPath) {
+    console.log('This is from set:', directoryPath);
+    directory = directoryPath;
+    console.log('verdict directory:', directory);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('submitGrade').addEventListener('click', function() {
+    const chairID = sessionStorage.getItem('user_id');
+    const groupID = sessionStorage.getItem('student_group_id');
+    const totalAverage = parseFloat(document.querySelector('.totalAverage').textContent.replace('Total Average: ', '').replace('%', ''));
+    const selectedVerdict = document.getElementById('verdictDropdown').value;
+
+    console.log('Chair ID:', chairID);
+    console.log('Group ID:', groupID);
+    console.log('Total Average:', totalAverage);
+    console.log('Selected Verdict:', selectedVerdict);
+
+    fetch('insertVerdict.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chairID,
+            groupID,
+            totalAverage,
+            verdict: selectedVerdict
+        })
+    })
+    .then(response => response.text()) // Read response as text
+    .then(text => {
+        try {
+            return JSON.parse(text); // Attempt to parse JSON
+        } catch (error) {
+            throw new Error(`Invalid JSON: ${text}`);
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Verdict inserted successfully:', data.message);
+            // Pass the selectedVerdict to generatePDF
+            generatePDF(selectedVerdict);
+        } else {
+            console.error('Error inserting verdict:', data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

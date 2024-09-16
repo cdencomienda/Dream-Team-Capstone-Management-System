@@ -5,8 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advisory</title>
-    <link rel="stylesheet" href="Capstone.css">
+    <link rel="stylesheet" href="AdminCapstone.css">
     
+    
+    <style>
+         
+        body{
+         background: #CBC4BA;
+         overflow-x: hidden;
+        overflow: hidden;
+        }
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px;
+            background-color: #ffcccc;
+            color: #ff0000;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+ 
+        #error-message.show {
+            display: block;
+        }
+ 
+        #error-message button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .close {
+        background-color: transparent; 
+        height: 30px;
+        width:  30px;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 350px;
+        overflow: hidden; 
+        }
+    
+        .close i {
+            color: black; 
+            font-size: 25px;
+            margin:-3px
+            transition opacity 0.3s ease; 
+        }
+       
+        .close i:hover {
+            opacity: 50%; 
+            border-radius:25px;
+
+        }
+
+    </style> 
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -69,32 +131,43 @@
                 </div>
             </div>
         </div>
-            <script>
-                    window.onload = function() {
-                        var urlParams = new URLSearchParams(window.location.search);
-            
-                        if (urlParams.has('showOverlay')) {
-                            document.getElementById('editProfileOverlay').style.display = 'block';
-                        }
-                        window.onclick = function(event) {
-                            if (event.target == overlay) {
-                                overlay.style.display = 'none';
-                            }
-                        }
-                    }
-    
-            </script>
-                <script>
-                function clearErrorMessage() {
-                    var errorMessage = document.getElementById("error-message");
-                    errorMessage.classList.remove("show");
+
+ 
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+ 
+            if (urlParams.has('showOverlay')) {
+                document.getElementById('editProfileOverlay').style.display = 'block';
+            }
+            window.onclick = function(event) {
+                if (event.target == overlay) {
+                    overlay.style.display = 'none';
                 }
-                </script> 
-                    </div>
+            }
+
+            // Add event listener to the close button
+            var closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', closeEditform);
+        }
+
+        // Define closeEditform function
+        function closeEditform() {
+            document.getElementById('editProfileOverlay').style.display = 'none';
+            document.getElementById('menuBtn').style.display = 'none';
+            location.reload();
+        }
+    </script>
+            <script>
+            function clearErrorMessage() {
+                var errorMessage = document.getElementById("error-message");
+                errorMessage.classList.remove("show");
+            }
+            </script>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </head>
 <body>
 
@@ -105,7 +178,7 @@
         <button type="button" class="capstone"  onclick="Capstone()">Capstone Defense</button>
         <button type="button" class="Users"  onclick="Users()">Users</button>
         <button type="button" class="Defense-Reports"  onclick="DefenseR()">Defense Results</button>
-        <button type="button" class="advisory"  onclick="advisoryProf()">Advisory</button>
+        <button type="button" class="advisory" id=adminsADV onclick="advisoryProf()">Advisory</button>
     </div>
     <script src="adminHome.js"></script>
     <div class="wrapper"><!-- start of wrapper scroll -->

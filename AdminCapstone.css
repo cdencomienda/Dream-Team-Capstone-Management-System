@@ -19,7 +19,7 @@
   }
   .wrapper {
     max-height: 100vh; /* Set a maximum height */
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: hidden; /* Enable vertical scrolling */
     overflow-x: hidden; /* Hide horizontal scrollbar */
   }
   
@@ -94,8 +94,7 @@
     border-radius: 10px;
     background-color: #ffffff;
     outline: none;
-  }
-   
+  } 
    
   .action {
     position: relative;  

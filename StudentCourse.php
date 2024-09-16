@@ -110,7 +110,7 @@
         <button type="button" class="notif"  onclick="studentnotifAuth()">Notification</button>
         <button type="button" class="class"  onclick="studentClass()">Class</button>
         <button type="button" class="schedule"  onclick="StudentSchedule()">Schedule</button>
-        <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button>
+        <!-- <button type="button" class="capstone"  onclick="StudentCapstone()">Capstone Defense</button> -->
     </div>
     <!-- Ian -->
      

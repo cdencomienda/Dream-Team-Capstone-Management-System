@@ -164,6 +164,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="useradmin.js"></script>
 <script>
+    var sessionUserType = '<?php echo $_SESSION['userType']; ?>'; // Get user type from session
+</script>
+<script>
     $(document).ready(function(){
         // Function to load users based on search query
         function loadUsers(searchQuery = '') {
@@ -172,11 +175,8 @@
                 type: 'GET',
                 data: {search: searchQuery},
                 success: function(response){
-                    // Parse JSON response
                     var users = JSON.parse(response);
-                    // Clear existing rows
                     $('#user_table_body').empty();
-                    // Append user data to the table
                     users.forEach(function(user){
                         var newRow = '<tr class="user-row" data-user-id="' + user.userID + '" data-user-type="' + user.userType + '">';
                         newRow += '<td class="user-id">' + user.userID + '</td>';
@@ -189,7 +189,6 @@
                     });
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors
                     console.error(xhr.responseText);
                 }
             });
@@ -206,72 +205,36 @@
 
         // Handle click on button to show modal
         $('#user_table_body').on('click', '.show-modal-btn', function(event) {
-            event.stopPropagation(); // Prevent row click event from triggering
-            var userId = $(this).closest('.user-row').data('user-id'); // Get user ID from closest '.user-row'
+            event.stopPropagation();
+            var userId = $(this).closest('.user-row').data('user-id');
+            var userType = $(this).closest('tr').find('td:eq(1)').text().trim();
             var modal = $('#editDeleteModal');
 
-            // Populate modal with user data
+            // Check if the current user has "Program Director" in session and the selected user is a "Program Director" or "Admin"
+            if (sessionUserType === 'Program Director' && (userType === 'Program Director' || userType === 'Admin')) {
+                alert('You cannot edit the role of a ' + userType + ' as a Program Director.');
+                return; // Stop the modal from opening
+            }
+
+            // If the user is allowed to edit
             modal.find('#userId').val(userId);
-            // Get user type for selected user
-            var userType = $(this).closest('tr').find('td:eq(1)').text().trim();
-            // Set selected option in dropdown
             modal.find('#userType').val(userType);
-            // Display the modal
+            modal.find('#userType').data('original-value', userType);
             modal.show();
         });
-
-        // Close modal/popup when close button is clicked
-        $('.close-modal-btn').click(function(){
-            var modal = $('#editDeleteModal');
-            var isChangesSaved = true; // Flag to track if changes are saved
-
-            // Check if changes are saved
-            // Example: Check if the user type has been modified
-            if ($('#userId').val() !== '' || $('#userType').val() !== modal.find('#userType').data('original-value')) {
-                isChangesSaved = confirm('You have unsaved changes. Are you sure you want to close the modal?');
-            }
-
-            if (isChangesSaved) {
-                $('#editDeleteModal').hide();
-            }
-        });
-
-        // Handle click on delete user button
-        $('#deleteUserBtn').click(function(){
-            var userId = $('#userId').val();
-            var userType = $('#user_table_body').find('tr[data-user-id="' + userId + '"]').data('user-type');
-
-            // Check if user is a Program Director
-            if (userType === 'Program Director') {
-                alert('Cannot delete a Program Director.');
-                return;
-            }
-
-            // Perform delete operation using AJAX
-            $.ajax({
-                url: 'delete&edituser.php',
-                type: 'POST',
-                data: {userId: userId},
-                success: function(response){
-                    // Reload users after successful deletion
-                    loadUsers(search.value);
-                    // Close modal
-                    $('#editDeleteModal').hide();
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-
-        // Remove click event handler for the user row
-        $('#user_table_body').off('click', '.user-row');
 
         // Handle click on save changes button
         $('#saveEditBtn').click(function(){
             var userId = $('#userId').val();
             var userType = $('#userType').val(); 
+            var originalUserType = $('#userType').data('original-value');
+
+            // Prevent changing the role if session user is "Program Director" and is editing another "Program Director" or "Admin"
+            if (sessionUserType === 'Program Director' && (originalUserType === 'Program Director' || originalUserType === 'Admin')) {
+                alert('You cannot change the role of a ' + originalUserType + ' as a Program Director.');
+                return;
+            }
+
             // Perform update operation using AJAX
             $.ajax({
                 url: 'delete&edituser.php',
@@ -281,19 +244,17 @@
                     userType: userType 
                 },
                 success: function(response){
-                    // Reload users after successful edit
                     loadUsers(search.value);
-                    // Close modal
                     $('#editDeleteModal').hide();
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors
                     console.error(xhr.responseText);
                 }
             });
         });
     });
 </script>
+
 
         </script>
         </div>

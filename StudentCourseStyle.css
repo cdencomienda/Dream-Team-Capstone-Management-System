@@ -203,7 +203,7 @@ left: 37%;
     background-image: url(menu_assets/schedule_icon.png);
     background-repeat: no-repeat;
 }
-.capstone{
+/* .capstone{
     top: -45px;
     left: 20px;
     width:50px;
@@ -216,7 +216,7 @@ left: 37%;
     position: relative;
     background-image: url(menu_assets/capstone_icon.png);
     background-repeat: no-repeat;
-}
+} */
 .logobtn{ 
   width:100px;
   height:100px; 
@@ -842,7 +842,7 @@ iframe {
 .requirement-descriptionCont{
   text-align: left;
   margin: 15px;
-  width: 495px;
+  width: 94%;
   height: 195px;
 }
 .requirement-descBox{
@@ -1148,7 +1148,7 @@ label{
   width: 340px;
   height: 1200px;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   padding: 3px;
 }
 .classListDropdown{

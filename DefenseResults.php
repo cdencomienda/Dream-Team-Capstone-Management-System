@@ -123,48 +123,47 @@
             </div>
             <table>
                 <thead>
-                    <tr>
-                        <th class="courseCode-column">Course Code</th>
+                    <tr> 
                         <th class="courseName-column">Course Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="criteria">
-                        <td class="courseCode">
+                        <!-- <td class="courseCode">
                             <strong>DATAMGT</strong><br>
-                        </td>
+                        </td> -->
                         <td class="courseName">
                             <a href="javascript:void(0);" onclick="showStats('DATAMGT-stats')">DATA MANAGEMENT</a><br>
                         </td>
                     </tr>
                     <tr class="criteria">
-                        <td class="courseCode">
+                        <!-- <td class="courseCode">
                             <strong>SOFTDES</strong><br>
-                        </td>
+                        </td> -->
                         <td class="courseName">
                             <a href="javascript:void(0);" onclick="showStats('SOFTDES-stats')">Software Design</a><br>
                         </td>
                     </tr>
                     <tr class="criteria">
-                        <td class="courseCode">
+                        <!-- <td class="courseCode">
                             <strong>CPEMETS</strong><br>
-                        </td>
+                        </td> -->
                         <td class="courseName">
                             <a href="javascript:void(0);" onclick="showStats('CPEMETS-stats')">CPE Methods of Research</a><br>
                         </td>
                     </tr>
                     <tr class="criteria">
-                        <td class="courseCode">
+                        <!-- <td class="courseCode">
                             <strong>CPEDES1</strong><br>
-                        </td>
+                        </td> -->
                         <td class="courseName">
                             <a href="javascript:void(0);" onclick="showStats('CPEDES1-stats')">CPE Design 1</a><br>
                         </td>
                     </tr>
                     <tr class="criteria">
-                        <td class="courseCode">
+                        <!-- <td class="courseCode">
                             <strong>CPEDES2</strong><br>
-                        </td>
+                        </td> -->
                         <td class="courseName">
                             <a href="javascript:void(0);" onclick="showStats('CPEDES2-stats')">CPE Design 2</a><br>
                         </td>
